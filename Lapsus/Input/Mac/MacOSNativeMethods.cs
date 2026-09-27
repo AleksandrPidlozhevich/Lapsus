@@ -142,6 +142,7 @@ internal static class MacOSNativeMethods
     public const int CommandKeyCode = 0x37;
     public const int RightCommandKeyCode = 0x36;
 
+    public const ulong EventFlagMaskAlphaShift = 1UL << 16;
     public const ulong EventFlagMaskShift = 1UL << 17;
     public const ulong EventFlagMaskControl = 1UL << 18;
     public const ulong EventFlagMaskAlternate = 1UL << 19;

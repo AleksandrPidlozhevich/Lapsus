@@ -115,6 +115,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     private void ForgetTypingContext()
     {
         ClearTypingContext(default);
+        _deadKeyState = 0;
         _lastForegroundPid = -1;
         _lastEventSourcePid = 0;
         lock (_procNameGate)
@@ -431,7 +432,11 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             or MacOSNativeMethods.EventOtherMouseDown)
         {
             NoteNonModifierInput();
-            Dispatcher.UIThread.Post(ResetTypingBuffer);
+            Dispatcher.UIThread.Post(() =>
+            {
+                _deadKeyState = 0;
+                ResetTypingBuffer();
+            });
             return @event;
         }
 
@@ -575,6 +580,10 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private void CaptureKey(ushort keyCode, ulong flags, string typed, int pid)
     {
+        // Only a plain keystroke on the same layout may complete a dead key; every other path drops it.
+        var pendingDeadKey = _deadKeyState;
+        _deadKeyState = 0;
+
         DiscardBufferIfFocusChanged(pid);
 
         DropTypingBufferIfIdle();
@@ -594,6 +603,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         }
 
         MacInstalledLayouts.ReadCurrentSource(out var isInputMethod, out var layoutToken);
+        if (layoutToken != _deadKeyLayout)
+            pendingDeadKey = 0;
+
         if (isInputMethod)
         {
             ResetTypingBuffer();
@@ -621,8 +633,30 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
         NoteKeystrokeLayout(layoutToken);
 
+        // The event's own string knows nothing of a pending dead key: after ; on Greek it reports α, not ά.
+        var state = pendingDeadKey;
+        if (MacInstalledLayouts.TranslateKeyDown(keyCode, flags, ref state, _translated, out var length))
+        {
+            if (length == 0 && state != 0)
+            {
+                _deadKeyState = state;
+                _deadKeyLayout = layoutToken;
+                return;
+            }
+
+            if (pendingDeadKey != 0)
+            {
+                AppendCapturedText(_translated.AsSpan(0, length));
+                return;
+            }
+        }
+
         AppendCapturedText(typed);
     }
+
+    private uint _deadKeyState;
+    private long _deadKeyLayout;
+    private readonly char[] _translated = new char[4];
 
     private readonly byte[] _typedTextScratch = new byte[8];
     private readonly char[] _typedTextChars = new char[4];

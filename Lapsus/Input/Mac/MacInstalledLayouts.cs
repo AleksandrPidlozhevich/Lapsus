@@ -20,6 +20,8 @@ internal static class MacInstalledLayouts
 
     private const uint ShiftModifierKeyState = 0x02;
 
+    private const uint AlphaLockModifierKeyState = 0x04;
+
     public static IReadOnlyList<InstalledLayout> Enumerate()
     {
         var list = MacOSNativeMethods.TISCreateInputSourceList(IntPtr.Zero, false);
@@ -161,6 +163,51 @@ internal static class MacInstalledLayouts
     private static bool ReadCurrentSource(out bool isInputMethod)
     {
         return ReadCurrentSource(out isInputMethod, out _);
+    }
+
+    // One key-down through the current layout, dead-key state carried across calls as the OS carries it.
+    public static bool TranslateKeyDown(
+        ushort keyCode, ulong eventFlags, ref uint deadKeyState, char[] buffer, out int length)
+    {
+        length = 0;
+
+        var source = MacOSNativeMethods.TISCopyCurrentKeyboardInputSource();
+        if (source == IntPtr.Zero)
+            return false;
+
+        try
+        {
+            var layoutData = MacOSNativeMethods.TISGetInputSourceProperty(
+                source, MacOSNativeMethods.PropertyUnicodeKeyLayoutData);
+            if (layoutData == IntPtr.Zero)
+                return false;
+
+            var modifiers = ((eventFlags & MacOSNativeMethods.EventFlagMaskShift) != 0 ? ShiftModifierKeyState : 0)
+                            | ((eventFlags & MacOSNativeMethods.EventFlagMaskAlphaShift) != 0 ? AlphaLockModifierKeyState : 0);
+            var state = deadKeyState;
+            ushort charCount = 0;
+            var status = MacOSNativeMethods.UCKeyTranslate(
+                MacOSNativeMethods.CFDataGetBytePtr(layoutData),
+                keyCode,
+                MacOSNativeMethods.UCKeyActionDown,
+                modifiers,
+                MacOSNativeMethods.LMGetKbdType(),
+                0,
+                ref state,
+                (uint)buffer.Length,
+                ref charCount,
+                buffer);
+            if (status != 0)
+                return false;
+
+            deadKeyState = state;
+            length = charCount;
+            return true;
+        }
+        finally
+        {
+            MacOSNativeMethods.CFRelease(source);
+        }
     }
 
     public static IntPtr ResolveInputSource(string layoutId)
@@ -326,9 +373,23 @@ internal static class MacInstalledLayouts
                     ref charCount,
                     buffer);
 
-                slots[i] = status == 0 && charCount == 1
-                    ? shifted ? buffer[0] : char.ToLowerInvariant(buffer[0])
-                    : '\0';
+                if (status != 0 || charCount == 0)
+                    continue;
+
+                // With NoDeadKeys a dead key displays its accent; it owns no character, as on Windows.
+                if (IsDeadKey(layoutPtr, keyboardType, KeyCodes[i], shifted))
+                {
+                    deadKeys.Add(new DeadKey(i, shifted, buffer[0]));
+                    continue;
+                }
+
+                if (charCount > 1)
+                {
+                    ligatures.Add(new Ligature(i, shifted, new string(buffer, 0, charCount)));
+                    continue;
+                }
+
+                slots[i] = shifted ? buffer[0] : char.ToLowerInvariant(buffer[0]);
             }
 
             return slots;
