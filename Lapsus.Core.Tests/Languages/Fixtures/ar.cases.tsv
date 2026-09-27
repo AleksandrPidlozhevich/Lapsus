@@ -1,0 +1,16 @@
+# typed	expected	status	note — what an Arabic speaker types with English (or Arabic) active
+lvpfh	مرحبا	ok	plain word
+a;vh	شكرا	ok	ك on the semicolon key inside the word; the list spells it with tanwin
+;jhf	كتاب	ok	leading semicolon is ك
+;dt phg;	كيف حالك	ok	ك at the start of one word and the end of the other
+l;jf	مكتب	ok	semicolon inside
+Hkh	أنا	ok	hamza on shifted h
+hkh	انا	ok	the same word without the hamza stays spelled as typed
+lvpfh.	مرحبا.	ok	a real full stop after a switched word
+lvpfh good morning	مرحبا good morning	ok	one Arabic word, then English
+good morning	good morning	ok	English stays English
+b	لا	pending	lam-alef alone: the key is also the English word "b", which every list has
+obg	خلال	ok	lam-alef inside a word: one key for لا
+hgw]dr	الصديق	ok	the list has صديق and not الصديق; ال is written as part of the word
+ؤشف	cat	ok	typed on the Arabic layout meaning English
+مرحبا بكم	مرحبا بكم	ok	real Arabic stays

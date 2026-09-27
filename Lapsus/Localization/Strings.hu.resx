@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — Beállítások</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>Javítsa a billentyűzetkiosztást és az elgépeléseket egyetlen billentyűvel</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>Rögzítés bekapcsolva</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>Rögzítés kikapcsolva</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>Automatikus javítás szóköz után</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>Elgépeléseket is javítson automatikusan</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>Ki: az automatikus javítás csak a rossz kiosztáson gépelt szó kiosztását cseréli. Az elgépelések a gyorsbillentyűre maradnak.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>Csak kiosztásváltás, szótárak nélkül</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>A karaktereket úgy cseréli, ahogy vannak, elgépeléseket nem javít. Letöltés nélkül működik; újabb lenyomásra a következő kiosztást kínálja.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>Rendszerkiosztás váltása javítás után</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>A gyorsbillentyű mindig váltja a nyelvet. Ez csak a Szóköz utáni automatikus javításra és a kijelölés javítására vonatkozik.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>Indítás bejelentkezéskor</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>Kiosztás megjelenítése a kurzornál</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>Jelvény az aktív kiosztással a szövegkurzor mellett. A böngészők nem mutatják.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>Gyorsbillentyű</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>Kijelölés javítása</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>Javítja a kijelölt szöveget — bármelyik ablakban, bármilyen régi is a szöveg.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>Műveletek a kijelölésen</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>Kis- és nagybetűk váltása</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>Végigjárja a kijelölést: NAGYBETŰK → kisbetűk → Mondatkezdő nagybetű.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>Átírás</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>Cirill vagy görög ⇄ latin. Újabb lenyomásra visszavált.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>Héber / arab irány helyreállítása</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>Helyreállít egy fordítva érkezett héber vagy arab sort.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>Előnyben részesített nyelv holtversenynél</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>Melyik nyelv nyer, ha egy szó többhöz is illik («молоток» ru és uk nyelven).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>A felület nyelve</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>Világos téma</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>Sötét téma</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>Rendszertéma</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>Nyelvek és szótárak</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>Egyszer letöltődnek, utána offline is működnek. Szótár nélkül a nyelvet rosszabbul javítja.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>Nyelv hozzáadása</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>Hozzáadás</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>Válasszon nyelvet</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>A kiválasztott nyelv letöltése és hozzáadása</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>Szótár eltávolítása</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>Automatikus (pontszám szerint, majd az előnyben részesített)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>Kikapcsolva.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>A billentyűzet rögzítése ezen a platformon még nem érhető el. A beállítások, a szótárak és az indítás bejelentkezéskor működnek.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>Aktív. A szavak szóköz után automatikusan javulnak (és a(z) „{0}” billentyűvel is).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>Aktív. Írjon be egy szót, és nyomja meg a(z) „{0}” billentyűt — a Lapsus helyben kijavítja.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>A rögzítés nem indult el: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Az indítás bejelentkezéskor nem frissült: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>A billentyűzet rögzítése nem indult el. Adjon a Lapsusnak kisegítő lehetőségek hozzáférést itt: Rendszerbeállítások → Adatvédelem és biztonság → Kisegítő lehetőségek (és Beviteli figyelés, ha szerepel), majd indítsa újra az alkalmazást.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>A Lapsusnak ezekre az engedélyekre van szüksége, hogy lássa és javítsa, amit gépel. Adja meg őket alább, majd térjen ide vissza.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Kisegítő lehetőségek engedélyezése</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Beviteli figyelés engedélyezése</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>Javítva: {0} → {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>„{0}” letöltése…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>„{0}” telepítve.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>„{0}” frissítve.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>A teljesebb szótár letöltése</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>A letöltés nem sikerült: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>„{0}” eltávolítva.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>A letöltött szótár üres.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>Kilépés</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — kiosztásjavítás</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>Elérhető frissítés — indítsa újra a telepítéshez</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>Újraindítás a frissítés telepítéséhez</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>Frissítések keresése</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>A Lapsus naprakész.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>A frissítéskeresés nem sikerült: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>Ez a példány nem frissíti magát — töltse le a legújabb kiadást.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>Gyorsbillentyű: semmi sem lett begépelve (ablak: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>Gyorsbillentyű: „{0}” — minden szó helyesnek tűnik, nincs mit változtatni.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>Kijelölés: nincs semmi kijelölve, vagy a(z) {0} nem válaszol a másolásra.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>Kijelölés: a vágólapot nem sikerült használni ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>A billentyűzetfigyelés rövid időre leállt, majd újraindult. Ha ez ismétlődik, zárjon be egy leterhelt Accessibility-klienst, vagy adja meg a Lapsusnak az Input Monitoring engedélyt.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>A kiosztás javítása előtt töltsön le legalább egy helyesírási szótárt a beállításokban.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>A SendInput nem sikerült (visszatörlés {0}/{1}, unicode {2}/{3}, hiba {4}, ablak: {5}). A célablak valószínűleg rendszergazdaként fut.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>Kiosztásváltás: a rendszer nem adott vissza kiosztáslistát.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>A(z) {0} kiosztás nincs telepítve a Windowsban (elérhető: {1}). Adja hozzá itt: Beállítások → Idő és nyelv → Nyelv és régió.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>A(z) {0} kiosztás nincs telepítve ezen a Macen (elérhető: {1}). Adja hozzá itt: Rendszerbeállítások → Billentyűzet → Beviteli források.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>A billentyűleütéseket nem sikerült elküldeni az aktív alkalmazásnak ({0}). Ellenőrizze a Lapsus kisegítő lehetőségek és beviteli figyelés engedélyeit.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>Gyorsbillentyű: figyelmen kívül hagyva — a fókusz másik ablakra vagy alkalmazásra került ({0}). Gépelje be újra a célmezőben.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>Gyorsbillentyű: a neurális javítás be van kapcsolva, de nincs betöltve modell. Töltsön le egyet a beállításokban.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>A neurális javítás nem sikerült: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>A javítás nem sikerült: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>Neurális javítás (helyi modell)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>Helyi modell, a szótárak támogatásával. Kapcsolja be, töltsön le egyet, nyomja meg a gyorsbillentyűt.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>Modell hozzáadása</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>Válasszon modellt…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>A kiválasztott modell letöltése</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>Nincs telepített modell</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>A kiválasztott modell eltávolítása</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>{0} letöltése… {1}%</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>{0} telepítve</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>A letöltés nem sikerült: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>{0} eltávolítva</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>A modell letöltése nem adott vissza használható fájlokat.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>A modellt nem sikerült betölteni: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>{0} betöltése a memóriába… (az első betöltés eltarthat egy ideig)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} kész — nyomja meg a gyorsbillentyűt az aktuális sor átírásához.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} kész ezen: {1} — nyomja meg a gyorsbillentyűt az aktuális sor átírásához.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>A neurális javítás be van kapcsolva, de nincs telepített modell. Töltsön le egyet fentebb.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>Itt csak az ONNX Runtime GenAI csomagot tartalmazó modellek futnak, és a keresés csak azokat tartja meg. Beillesztett org/name is működik.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>Neurális javítás bekapcsolva — nyomja meg a(z) {0} billentyűt az aktuális sor átírásához.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>A neurális javítás be van kapcsolva, de nincs betöltött modell — a „{0}” a szótárral javít, amíg be nem töltődik.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>A neurális javítás megszakadt — a sor megváltozott, miközben a modell futott («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>A modellt nem sikerült eltávolítani: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>Még nincs szótár — adjon hozzá fent egy nyelvet, hogy a javítások használhassák.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>Letöltés</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>Gyorsbillentyű: figyelmen kívül hagyva — az aktív beviteli nyelv (kínai/japán/koreai) IME-n keresztül gépel, így a Lapsus nem tudja a leütésekből visszaállítani a szöveget.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>Gyorsbillentyű: figyelmen kívül hagyva — ez egy jelszómező. A Lapsus soha nem tárolja és nem írja át, amit oda gépel.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>Jelszómezők kihagyása</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>A jelszómezők soha nem kerülnek pufferbe. Böngészőben ez bekapcsolja annak kisegítő motorját.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>Általános</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>Könyvtár</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>MI</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>Alkalmazások</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>Békén hagyandó szavak</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>Nevek, felhasználónevek és márkák, amelyekhez soha nem nyúlunk.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>szó</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>Még nincs kivétel.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>Eltávolítás a listáról</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Kihagyandó alkalmazások</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>Ezekben a Lapsus teljesen ki van kapcsolva: nincs puffer és nincsenek gyorsbillentyűk.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>folyamat neve</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>Válasszon futó alkalmazást</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Nincs kihagyott alkalmazás.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>Eltávolítás a listáról</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>Gyorsbillentyű: a Lapsus nem avatkozik bele ebbe: {0}.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>A modell futtatása ezen</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>Automatikus</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>Processzor (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>Videokártya (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>Neurális gyorsító (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>Itt elérhető: {0}. A más eszközre készült csomag is elfut — a processzoron.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>Nincs itt támogatott gyorsító, ezért a modell a processzoron fut.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Keressen a Hugging Face-en, vagy illesszen be egy org/name értéket</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>Keresés</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>ONNX Runtime GenAI csomagot tartalmazó modellek keresése a Hugging Face-en</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>Keresési találatok</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>Keresés a Hugging Face-en…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>Nem található ONNX Runtime GenAI csomagot tartalmazó modell.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>Találat: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>A keresés nem sikerült: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>Licenc</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>Ingyenes — személyes használat</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>Ingyenes magánszemélyeknek, a szabadúszókat is beleértve. Semmi sincs lezárva — a licenc a cégen belüli használatra vonatkozik.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} munkahely</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>Érvényes eddig: {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>Nincs lejárati dátum</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>Licenckulcs</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>Illeszd be a kulcsot a vásárlási e-mailből</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>Aktiválás</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>Eltávolítás</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>A Pro egy magánszemély. A Business munkahelyenként licencelt a cégnél.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Pro megvásárlása</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>Kereskedelmi licenc</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>Ez nem tűnik Lapsus-kulcsnak. Ellenőrizd, hogy a teljes sor át lett-e másolva.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>Ezt a kulcsot nem ehhez a buildhez adták ki.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>Ez a kulcs lejárt: {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>Ez a build nem tud licenckulcsot ellenőrizni.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>Kinek kell fizetnie?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>Ezt a gépet egy szervezet felügyeli — licenc szükséges.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Lapsus licenc</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>Cégnél a Lapsus munkahelyenként licencelt. Még {0} nap a kipróbálásra.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>Ezen a gépen a Lapsushoz licenc kell.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>Ezt a gépet egy szervezet felügyeli (tartomány, Entra ID vagy MDM-kiszolgáló). Magánszemélyeknek, a szabadúszókat is beleértve, a Lapsus ingyenes; a cégen belüli használat fizetős, munkahelyenként.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>Semmi nem kapcsol ki, és semmi nem kerül elküldésre — az ellenőrzés csak ezen a gépen fut.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>Van kulcsom</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>Később</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>Ennek a licencnek minden helye foglalt. Írj a {0} címre, hogy áthelyezz egy helyet erre a számítógépre, vagy vásárolj továbbiakat.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>A licencszerver nem volt elérhető. A kulcs mentve — az aktiválás újra megtörténik.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>Ezt a gépet nem sikerült azonosítani, így a licencet nincs mihez kötni.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>Aktiválás…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>A Lapsusról</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>A Lapsusról</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>Licenc</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>Magánszemélyeknek ingyenes. A cégek munkaállomásonként fizetnek. Semmi sem zárol és semmi sem jár le.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>Weboldal</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>Támogasd a fejlesztést</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>A Lapsus ingyenes neked, reklámok és követés nélkül. Ha időt spórol, hozzájárulhatsz.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>Támogatás</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>Nyílt forráskódú licencek</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>Összetevők</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>Szótárak</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Nem részei a Lapsusnak: mindegyik csak akkor töltődik le, amikor hozzáadja a nyelvet, és megtartja kiadója licencét.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>Minden forrás és szerző</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>A Lapsusban szállítva, mindegyik saját licenc alatt.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>Licencszöveg</value>
+  </data>
+</root>

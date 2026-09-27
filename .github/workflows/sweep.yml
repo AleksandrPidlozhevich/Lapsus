@@ -1,0 +1,121 @@
+# Guards the correction brain's measured accuracy.
+#
+# tools/Lapsus.Sweep is deliberately not a test: a sweep that silently passes when the
+# frequency lists are absent is the exact failure mode SpellChecker.CanRead guards against
+# (see CLAUDE.md). So it lives here, where the lists can be fetched, and `--compare` exits 2
+# when a guarded number moves more than 0.5 pp the wrong way.
+#
+# A full run of all seven priority baselines takes about four minutes, which is cheap enough
+# to gate pull requests that touch the brain.
+name: Sweep
+
+on:
+  pull_request:
+    paths:
+      - 'Lapsus.Core/Correction/**'
+      - 'Lapsus.Core/Spelling/**'
+      - 'Lapsus.Core/Layout/**'
+      - 'tools/Lapsus.Sweep/**'
+      - '.github/workflows/sweep.yml'
+  schedule:
+    # Nightly, so a drift in the upstream word lists is caught on its own rather than
+    # landing on whoever opens the next pull request.
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: sweep-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', 'Directory.Build.props') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      # The baselines were recorded against what the app installs. Every source but kaikki's
+      # weekly Hebrew extract is pinned to a commit in the catalog, so the cache is keyed on the
+      # catalog and this file and only re-downloads when one of them changes.
+      - name: Cache dictionaries
+        id: lists
+        uses: actions/cache@v4
+        with:
+          path: dictionaries
+          key: sweep-dictionaries-${{ hashFiles('Lapsus/Settings/DictionaryCatalog.cs', '.github/workflows/sweep.yml') }}
+
+      # The same pinned URLs DictionaryCatalog uses, and the same three steps DictionaryStore
+      # takes: the frequency list as published, the Hunspell dictionary beside it, and — built
+      # by tools/Lapsus.Lexicons, which calls the code the app calls — Hebrew's word forms and
+      # the Ukrainian list with its Russian words taken out. Keep it in step with the catalog.
+      - name: Download dictionaries
+        if: steps.lists.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p dictionaries staging
+          # Compressed on the wire, as DictionaryStore asks: kaikki's Hebrew extract is 56 MB as a file, 8.6 MB so.
+          get() { curl -fsSL --compressed --retry 3 --retry-delay 5 -o "$1" "$2"; }
+          fw=https://raw.githubusercontent.com/hermitdave/FrequencyWords/525f9b560de45753a5ea01069454e72e9aa541c6/content/2018
+          unilex=https://raw.githubusercontent.com/lingua-libre/unilex-extended/4ac902dd82cfc1cb727fdd7205c4b4c252bdbab6/frequency-sorted-count
+          lo=https://raw.githubusercontent.com/LibreOffice/dictionaries/32b006a2c22a4ac7e8ed3f03346f7b3d85a970a4
+          wooorm=https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries
+          unimorph=https://raw.githubusercontent.com/unimorph/heb/b2bff12338caa1922e6aeea128c617730f93d334/heb
+
+          for code in en bg el he ar; do get "dictionaries/$code.txt" "$fw/$code/${code}_50k.txt"; done
+          # FrequencyWords has no Belarusian pack.
+          get dictionaries/be.txt "$unilex/be.txt"
+          get staging/uk.txt "$fw/uk/uk_50k.txt"
+
+          hunspell() { get "dictionaries/$1.aff" "$2.aff"; get "dictionaries/$1.dic" "$2.dic"; }
+          get dictionaries/en.aff "$wooorm/en/index.aff"; get dictionaries/en.dic "$wooorm/en/index.dic"
+          hunspell uk "$lo/uk_UA/uk_UA"
+          hunspell be "$lo/be_BY/be-official"
+          hunspell el "$lo/el_GR/el_GR"
+          hunspell ar "$lo/ar/ar"
+          get staging/ru.aff "$lo/ru_RU/ru_RU.aff"; get staging/ru.dic "$lo/ru_RU/ru_RU.dic"
+
+          dotnet run --project tools/Lapsus.Lexicons -c Release -- \
+            --lang uk --list staging/uk.txt --own dictionaries/uk.dic --neighbour staging/ru.dic --out dictionaries
+          get staging/heb "$unimorph"
+          get staging/he.jsonl https://kaikki.org/dictionary/Hebrew/kaikki.org-dictionary-Hebrew.jsonl
+          dotnet run --project tools/Lapsus.Lexicons -c Release -- \
+            --lang he --kaikki staging/he.jsonl --unimorph staging/heb --out dictionaries
+
+          rm -rf staging
+          wc -l dictionaries/*.txt
+
+      - name: Build
+        run: dotnet build tools/Lapsus.Sweep/Lapsus.Sweep.csproj -c Release
+
+      # Every priority language: uk, he, ar, el, be and both Bulgarian keyboards.
+      # Exit 2 means a guarded metric regressed against tools/Lapsus.Sweep/baseline/.
+      - name: Compare against baselines
+        shell: bash
+        run: |
+          # pipefail is not the default here, and without it `tee` would hand the step a
+          # zero exit code — the gate would pass through every regression it just printed.
+          set -o pipefail
+          dotnet run --project tools/Lapsus.Sweep -c Release --no-build -- dictionaries --compare | tee sweep.log
+
+      - name: Upload sweep report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sweep-report
+          path: sweep.log
+          if-no-files-found: warn

@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Lapsus.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="440" d:DesignHeight="240"
+        x:Class="Lapsus.Views.LicenseReminderWindow"
+        x:DataType="vm:LicenseViewModel"
+        Title="{Binding L[LicRem_Title]}"
+        FlowDirection="{Binding FlowDirection}"
+        Width="440"
+        SizeToContent="Height"
+        CanResize="False"
+        ShowInTaskbar="True"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Styles>
+
+        <Style Selector="Button.notice">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource LapsusNoticeInkBrush}" />
+        </Style>
+        <Style Selector="Button.notice /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource LapsusAccentBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LapsusAccentBrush}" />
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource LapsusSurfaceBrush}" Padding="20"
+            BorderBrush="{DynamicResource LapsusAccentBrush}" BorderThickness="0,3,0,0">
+        <StackPanel Spacing="12">
+            <TextBlock Text="{Binding ReminderHeadline}" FontWeight="SemiBold" FontSize="14"
+                       TextWrapping="Wrap" />
+            <TextBlock Text="{Binding ReminderBody}" FontSize="12"
+                       TextWrapping="Wrap" />
+
+            <TextBlock Text="{Binding L[LicRem_Why]}" FontSize="11"
+                       Foreground="{DynamicResource LapsusHintBrush}"
+                       TextWrapping="Wrap" />
+
+            <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8" Margin="0,4,0,0">
+                <Button Classes="notice" Content="{Binding L[Lic_BuyBusiness]}"
+                        Command="{Binding BuyBusinessCommand}" />
+                <Button Content="{Binding L[LicRem_HaveKey]}"
+                        Command="{Binding OpenLicenseSettingsCommand}" />
+                <Button Content="{Binding L[LicRem_Later]}"
+                        Command="{Binding DismissReminderCommand}" />
+            </WrapPanel>
+        </StackPanel>
+    </Border>
+</Window>

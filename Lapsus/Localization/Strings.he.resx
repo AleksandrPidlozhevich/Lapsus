@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — הגדרות</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>תיקון פריסת מקלדת ושגיאות הקלדה במקש אחד</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>לכידה פעילה</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>לכידה כבויה</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>תיקון אוטומטי אחרי רווח</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>לתקן גם שגיאות הקלדה אוטומטית</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>כבוי: התיקון האוטומטי רק מחליף פריסה של מילה שהוקלדה בפריסה הלא נכונה. שגיאות הקלדה נשארות למקש הקיצור.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>החלפת פריסה בלבד, ללא מילונים</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>מחליף את התווים כפי שהם, בלי לתקן שגיאות הקלדה. עובד ללא הורדות; לחיצה נוספת מציעה את הפריסה הבאה.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>החלפת פריסת המערכת אחרי תיקון</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>מקש הקיצור תמיד מחליף את השפה. זה חל רק על תיקון אוטומטי אחרי רווח ועל תיקון הבחירה.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>הפעלה עם הכניסה למחשב</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>הצגת הפריסה ליד הסמן</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>תווית עם הפריסה הפעילה ליד סמן הטקסט. בדפדפנים היא לא מוצגת.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>מקש חם</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>תיקון הבחירה</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>מתקן את הטקסט המסומן — בכל חלון, ולא משנה מתי נכתב.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>פעולות על הבחירה</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>שינוי אותיות</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>מחזוריות על הבחירה: אותיות גדולות ← אותיות קטנות ← אות ראשונה גדולה.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>תעתיק</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>קירילית או יוונית ⇄ לטינית. לחיצה נוספת מחזירה.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>תיקון היפוך עברית / ערבית</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>מסדר שורה בעברית או בערבית שהגיעה הפוכה.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>שפה מועדפת בתיקו</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>איזו שפה מנצחת כשמילה מתאימה לכמה («молоток» ברוסית ובאוקראינית).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>שפת הממשק</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>ערכת נושא בהירה</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>ערכת נושא כהה</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>ערכת נושא של המערכת</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>שפות ומילונים</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>מורידים פעם אחת ואז הם עובדים גם בלי אינטרנט. בלי מילון השפה מתוקנת פחות טוב.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>הוספת שפה</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>הוספה</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>בחרו שפה</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>הורדה והוספה של השפה שנבחרה</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>הסרת מילון</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>אוטומטי (לפי ניקוד, ואז המועדפת)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>כבוי.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>לכידת מקלדת עדיין לא זמינה בפלטפורמה הזו. ההגדרות, המילונים וההפעלה עם הכניסה עובדים.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>פעיל. מילים מתוקנות אוטומטית אחרי רווח (וגם עם ״{0}״).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>פעיל. הקלידו מילה ולחצו ״{0}״ — Lapsus יתקן אותה במקום.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>לא הצלחנו להפעיל את הלכידה: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>לא הצלחנו לעדכן את ההפעלה עם הכניסה: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>לא הצלחנו להפעיל את לכידת המקלדת. תנו ל‑Lapsus גישת נגישות ב‑System Settings ← Privacy &amp; Security ← Accessibility (וגם Input Monitoring אם מופיע), ואז הפעילו מחדש את היישום.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsus זקוק להרשאות האלה כדי לראות ולתקן את מה שאתם מקלידים. אשרו אותן למטה וחזרו לכאן.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>מתן גישת נגישות</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>מתן גישת ניטור קלט</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>תוקן: {0} ← {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>מוריד ״{0}״…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>״{0}״ הותקן.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>״{0}״ עודכן.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>הורדת המילון המלא יותר</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>ההורדה נכשלה: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>״{0}״ הוסר.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>המילון שהורד ריק.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>הגדרות</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>יציאה</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — תיקון פריסה</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>יש עדכון — הפעילו מחדש כדי להתקין</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>הפעלה מחדש להתקנת העדכון</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>בדיקת עדכונים</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus מעודכן.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>בדיקת העדכונים נכשלה: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>עותק זה אינו מתעדכן מעצמו — הורידו את הגרסה האחרונה.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>מקש חם: לא הוקלד כלום (חלון: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>מקש חם: ״{0}״ — כל המילים נראות תקינות, אין מה לשנות.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>בחירה: לא נבחר כלום, או ש‑{0} לא מגיב להעתקה.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>בחירה: לא ניתן היה להשתמש בלוח ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>לכידת המקלדת נעצרה לרגע והופעלה מחדש. אם זה חוזר, סגרו לקוח Accessibility עמוס או העניקו ל‑Lapsus הרשאת Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>הורידו לפחות מילון איות אחד בהגדרות לפני תיקון פריסה.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput נכשל (מחיקות {0}/{1}, יוניקוד {2}/{3}, שגיאה {4}, חלון: {5}). קרוב לוודאי שחלון היעד רץ כמנהל.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>החלפת פריסה: המערכת לא החזירה רשימת פריסות.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>הפריסה {0} לא מותקנת ב‑Windows (זמינות: {1}). הוסיפו אותה ב‑Settings ← Time &amp; language ← Language &amp; region.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>הפריסה {0} לא מותקנת ב‑Mac הזה (זמינות: {1}). הוסיפו אותה ב‑System Settings ← Keyboard ← Input Sources.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>לא הצלחנו להזין הקשות ליישום הפעיל ({0}). בדקו את הרשאות הנגישות וניטור הקלט של Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>מקש חם: התעלמנו — המיקוד עבר לחלון או ליישום אחר ({0}). הקלידו שוב בשדה היעד.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>מקש חם: התיקון הנוירוני פעיל, אך לא נטען מודל. הורידו מודל בהגדרות.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>התיקון הנוירוני נכשל: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>התיקון נכשל: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>תיקון נוירוני (מודל מקומי)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>מודל מקומי בגיבוי המילונים. הפעילו, הורידו מודל ולחצו על המקש החם.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>הוספת מודל</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>בחרו מודל…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>הורדת המודל שנבחר</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>לא מותקן מודל</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>הסרת המודל שנבחר</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>מוריד {0}… {1}%</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>{0} הותקן</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>ההורדה נכשלה: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>{0} הוסר</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>הורדת המודל לא החזירה קבצים שמישים.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>לא ניתן לטעון את המודל: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>טוען את {0} לזיכרון… (הטעינה הראשונה עשויה לקחת זמן)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} מוכן — לחצו על המקש החם כדי לשכתב את השורה הנוכחית.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} מוכן על {1} — לחצו על המקש החם כדי לשכתב את השורה הנוכחית.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>התיקון הנוירוני פעיל, אך לא מותקן מודל. הורידו אחד למעלה.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>רק מודלים עם חבילת ONNX Runtime GenAI יכולים לרוץ כאן, והחיפוש משאיר רק אותם. אפשר גם להדביק org/name.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>התיקון הנוירוני פעיל — לחצו {0} כדי לשכתב את השורה הנוכחית.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>תיקון נוירוני פעיל, אך לא נטען מודל — ״{0}״ מתקן לפי המילון עד שייטען.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>התיקון הנוירוני בוטל — השורה השתנתה בזמן שהמודל רץ (״{0}״).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>לא ניתן להסיר את המודל: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>אין עדיין מילונים — הוסיפו שפה למעלה כדי שהתיקונים ישתמשו בה.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>הורדה</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>מקש חם: התעלמנו — שפת הקלט הפעילה (סינית/יפנית/קוריאנית) מקלידה דרך IME, ולכן Lapsus לא יכול לשחזר את הטקסט מההקשות.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>מקש חם: התעלמנו — זהו שדה סיסמה. Lapsus לעולם לא שומר ולא משכתב את מה שמוקלד בו.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>דילוג על שדות סיסמה</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>שדות סיסמה לעולם לא נשמרים במאגר. בדפדפן זה מפעיל את מנוע הנגישות שלו.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>כללי</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>ספרייה</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>בינה מלאכותית</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>יישומים</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>מילים שלא לגעת בהן</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>שמות, שמות משתמש ומותגים שלא לגעת בהם.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>מילה</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>עדיין אין חריגים.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>הסרה מהרשימה</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>יישומים לדלג עליהם</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>Lapsus כבוי לגמרי בהם: בלי מאגר ובלי מקשים חמים.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>שם תהליך</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>בחרו יישום פעיל</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>לא מדלגים על אף יישום.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>הסרה מהרשימה</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>מקש חם: Lapsus לא מתערב ב‑{0}.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>הרצת המודל על</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>אוטומטי</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>מעבד (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>כרטיס מסך (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>מאיץ נוירוני (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>זמין כאן: {0}. חבילה שנבנתה למכשיר אחר עדיין תרוץ — על המעבד.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>אין כאן מאיץ נתמך, ולכן המודל ירוץ על המעבד.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>חיפוש ב‑Hugging Face, או הדביקו org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>חיפוש</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>חיפוש מודלים ב‑Hugging Face שכוללים חבילת ONNX Runtime GenAI</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>תוצאות החיפוש</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>מחפש ב‑Hugging Face…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>לא נמצא דבר שכולל חבילת ONNX Runtime GenAI.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>נמצאו: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>החיפוש נכשל: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>רישיון</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>חינם — שימוש אישי</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>חינם לאנשים פרטיים, כולל פרילנסרים. שום יכולת אינה נעולה — הרישיון מכסה שימוש בתוך חברה.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} עמדות</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>בתוקף עד {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>ללא תאריך תפוגה</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>מפתח רישיון</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>הדבק את המפתח מהודעת הרכישה</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>הפעלה</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>הסרה</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>‏Pro הוא לאדם פרטי אחד. ‏Business מורשה לפי עמדה בחברה.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>רכישת Pro</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>רישיון מסחרי</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>זה לא נראה כמו מפתח של Lapsus. בדוק שהשורה כולה הועתקה.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>המפתח הזה לא הונפק עבור גרסה זו.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>תוקף המפתח פג בתאריך {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>גרסה זו אינה יכולה לבדוק מפתחות רישיון.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>מי צריך לשלם?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>מחשב זה מנוהל על ידי ארגון — נדרש רישיון.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>רישיון Lapsus</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>בחברה Lapsus מורשה לפי עמדה. נותרו {0} ימי התנסות.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>במחשב הזה נדרש רישיון ל‑Lapsus.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>מחשב זה מנוהל על ידי ארגון (דומיין, Entra ID או שרת MDM). לאנשים פרטיים, כולל פרילנסרים, Lapsus חינמי; שימוש בתוך חברה הוא בתשלום, לפי עמדה.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>שום דבר לא מושבת ושום דבר לא נשלח — הבדיקה מתבצעת במחשב הזה בלבד.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>יש לי מפתח</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>אחר כך</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>כל העמדות ברישיון הזה תפוסות. כתוב אל {0} כדי להעביר עמדה למחשב הזה או לרכוש נוספות.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>לא ניתן היה להגיע לשרת הרישיונות. המפתח נשמר — ההפעלה תנוסה שוב.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>לא ניתן היה לזהות את המחשב הזה, ולכן אין למה לקשור את הרישיון.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>מפעיל…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>אודות Lapsus</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>אודות Lapsus</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>רישיון</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>חינם לאנשים פרטיים. חברות משלמות לפי עמדה. שום דבר לא ננעל ושום דבר לא פג.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>אתר</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>תמכו בפיתוח</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus חינמי עבורכם, ללא פרסומות וללא מעקב. אם הוא חוסך לכם זמן, אפשר לתרום.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>תרומה</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>רישיונות קוד פתוח</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>רכיבים</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>מילונים</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>אינם כלולים ב-Lapsus: כל אחד יורד רק כשמוסיפים את השפה, ונשאר תחת הרישיון של המפרסם שלו.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>כל המקורות והמחברים</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>נכללים בתוך Lapsus, כל אחד ברישיון שלו.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>נוסח הרישיון</value>
+  </data>
+</root>

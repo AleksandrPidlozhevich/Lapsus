@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Package manifest for the Microsoft Store (MSIX) build; scripts/package-store.ps1 fills {{Version}} and
+  {{Architecture}} and packs it with the publish output. The three Identity values below are the app's
+  own and must match Partner Center → Product management → Product identity character for character
+  (Package/Identity/Name, Package/Identity/Publisher, Package/Properties/PublisherDisplayName), or the
+  upload is rejected. They are not secrets.
+-->
+<Package
+    xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+    xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+    xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+    xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+    IgnorableNamespaces="uap desktop rescap">
+
+  <Identity
+      Name="Pidlozhevich.Lapsus"
+      Publisher="CN=5F6C4E75-7149-4C11-AA1A-8E069F94B5C8"
+      Version="{{Version}}"
+      ProcessorArchitecture="{{Architecture}}" />
+
+  <Properties>
+    <DisplayName>Lapsus</DisplayName>
+    <PublisherDisplayName>Pidlozhevich</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <!-- The interface languages of Lapsus/Localization (Strings.resx is English; Serbian is Latin). -->
+  <Resources>
+    <Resource Language="en-US" />
+    <Resource Language="ar" />
+    <Resource Language="be" />
+    <Resource Language="bg" />
+    <Resource Language="cs" />
+    <Resource Language="da" />
+    <Resource Language="de" />
+    <Resource Language="el" />
+    <Resource Language="es" />
+    <Resource Language="fr" />
+    <Resource Language="he" />
+    <Resource Language="hu" />
+    <Resource Language="it" />
+    <Resource Language="ka" />
+    <Resource Language="mk" />
+    <Resource Language="nl" />
+    <Resource Language="pl" />
+    <Resource Language="pt" />
+    <Resource Language="ro" />
+    <Resource Language="ru" />
+    <Resource Language="sk" />
+    <Resource Language="sl" />
+    <Resource Language="sr-Latn" />
+    <Resource Language="sv" />
+    <Resource Language="tr" />
+    <Resource Language="uk" />
+  </Resources>
+
+  <Applications>
+    <Application Id="Lapsus" Executable="Lapsus.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+          DisplayName="Lapsus"
+          Description="Fixes text typed in the wrong keyboard layout, and the typos in it."
+          BackgroundColor="transparent"
+          Square150x150Logo="Assets\Square150x150Logo.png"
+          Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" />
+      </uap:VisualElements>
+
+      <Extensions>
+        <!-- "Run at startup": off until the user turns it on in settings. TaskId must match
+             WindowsStoreStartupRegistration.TaskId — the HKCU Run key does not work from a package. -->
+        <desktop:Extension Category="windows.startupTask">
+          <desktop:StartupTask TaskId="LapsusStartup" Enabled="false" DisplayName="Lapsus" />
+        </desktop:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <!-- A desktop app: the system-wide keyboard hook, SendInput and the tray all need full trust.
+         Partner Center asks for a justification for this capability on submission. -->
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

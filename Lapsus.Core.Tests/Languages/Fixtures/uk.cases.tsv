@@ -1,0 +1,16 @@
+# typed	expected	status	note — what a Ukrainian speaker types with English (or Ukrainian) active
+ghbdsn	привіт	ok	plain word
+lzre.	дякую	ok	trailing "." is ю on the Ukrainian layout, not a full stop
+nfr, lj,ht	так, добре	ok	a real comma after так, a б in the comma slot inside добре
+ghbdsn, cdsn	привіт, світ	ok	a real comma between two switched words
+]cnb	їсти	ok	leading "]" is ї
+hello ghbdsn	hello привіт	ok	English word beside a wrong-layout Ukrainian one
+hello world	hello world	ok	English stays English
+ghbdsn cdsn	привіт світ	ok	whole line crosses
+g`znm	п'ять	ok	apostrophe on the backtick key inside the word; the list knows only the parts "п" and "ять"
+pljhjd`z	здоров'я	ok	apostrophe before the last letter; the list knows only the parts
+j,`'rn	об'єкт	pending	apostrophe next to б and є, both on punctuation keys; neither part is in the list
+сфк	car	ok	typed on the Ukrainian layout meaning English
+ghjcnf	проста	ok	a form the list lacks, one slip from one it has (просто): the keys as they stand win
+ішеу	site	ok	і on the s key
+привіт світ	привіт світ	ok	real Ukrainian stays

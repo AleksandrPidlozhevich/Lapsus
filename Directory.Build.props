@@ -1,0 +1,28 @@
+<Project>
+    <!--
+      Single source of truth for the app version: the VERSION file next to this one. Every csproj in
+      the tree picks it up automatically (Version, and the AssemblyVersion/FileVersion the SDK derives
+      from it), so both the macOS packaging script and any future Windows installer can read the same
+      VERSION file instead of the number being duplicated per platform.
+    -->
+    <PropertyGroup>
+        <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)VERSION').Trim())</Version>
+        <!-- Otherwise the SDK appends "+<git-sha>" to InformationalVersion, which is what the UI
+             shows the user — a raw commit hash there is noise, not something a user reads. -->
+        <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+        <!-- The licence itself is LICENSE at the repository root: Business Source License 1.1, free
+             for private people, paid per seat inside an organisation. These properties only put the
+             same statement into the built assemblies, which otherwise carry no copyright at all. -->
+        <Copyright>Copyright (c) 2026 Aliaksandr Pidlazhevich</Copyright>
+        <Company>Aliaksandr Pidlazhevich</Company>
+        <Authors>Aliaksandr Pidlazhevich</Authors>
+        <!-- The public site; source stays on GitHub. Inert until something here is packed, same as
+             PackageLicenseExpression below. -->
+        <PackageProjectUrl>https://getlapsus.com/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/AleksandrPidlozhevich/Lapsus</RepositoryUrl>
+        <!-- Inert while nothing here is packed as a NuGet package, but BUSL-1.1 is a valid SPDX
+             identifier, so this is the machine-readable form of the line above. -->
+        <PackageLicenseExpression>BUSL-1.1</PackageLicenseExpression>
+    </PropertyGroup>
+</Project>

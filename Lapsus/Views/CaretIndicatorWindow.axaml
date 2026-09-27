@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Lapsus.Views.CaretIndicatorWindow"
+        WindowDecorations="None"
+        Background="Transparent"
+        TransparencyLevelHint="Transparent"
+        Topmost="True"
+        ShowActivated="False"
+        ShowInTaskbar="False"
+        CanResize="False"
+        IsHitTestVisible="False"
+        WindowStartupLocation="Manual"
+        SizeToContent="WidthAndHeight">
+
+    <Border Background="{DynamicResource LapsusCardBrush}"
+            BorderBrush="{DynamicResource LapsusBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="4"
+            Padding="5,1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+        <TextBlock x:Name="Label"
+                   FontSize="11"
+                   FontWeight="SemiBold"
+                   Text="EN" />
+    </Border>
+</Window>

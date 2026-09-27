@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — პარამეტრები</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>კლავიატურის განლაგებისა და შეცდომების გასწორება ერთი ღილაკით</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>აღბეჭდვა ჩართულია</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>აღბეჭდვა გამორთულია</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>ავტოგასწორება ჰარის შემდეგ</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>ბეჭდვითი შეცდომებიც ავტომატურად გასწორდეს</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>გამორთულია: ავტოშესწორება მხოლოდ არასწორ განლაგებაზე აკრეფილი სიტყვის განლაგებას ცვლის. ბეჭდვითი შეცდომები ცხელ კლავიშს რჩება.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>მხოლოდ განლაგების შეცვლა, ლექსიკონების გარეშე</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>ცვლის სიმბოლოებს როგორც არის, შეცდომებს არ ასწორებს. მუშაობს ჩამოტვირთვების გარეშე; ხელახლა დაჭერა შემდეგ განლაგებას შემოგთავაზებთ.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>სისტემის განლაგების გადართვა გასწორების შემდეგ</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>ცხელი ღილაკი ყოველთვის ცვლის ენას. ეს მხოლოდ გამოტოვების შემდეგ ავტოსა და მონიშნულის გასწორებას ეხება.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>გაშვება სისტემაში შესვლისას</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>განლაგების ჩვენება კურსორთან</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>აქტიური განლაგების ნიშანი ტექსტის კურსორის გვერდით. ბრაუზერებში არ ჩანს.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>ცხელი ღილაკი</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>მონიშნულის გასწორება</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>ასწორებს მონიშნულ ტექსტს — ნებისმიერ ფანჯარაში, რამდენად ძველიც არ უნდა იყოს.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>მოქმედებები მონიშნულზე</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>რეგისტრის შეცვლა</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>ციკლი მონიშნულზე: მთავრული ← პატარა ასოები ← წინადადების რეგისტრი.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>ტრანსლიტერაცია</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>კირილიცა ან ბერძნული ⇄ ლათინური. ხელახლა დაჭერით უკან ბრუნდება.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>ებრაულის / არაბულის მიმართულების გასწორება</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>აბრუნებს სწორად ებრაულ ან არაბულ სტრიქონს, რომელიც უკუღმა მოვიდა.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>სასურველი ენა დამთხვევისას</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>რომელი ენა იმარჯვებს, როცა სიტყვა რამდენიმეს უხდება («молоток» რუსულში და უკრაინულში).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>ინტერფეისის ენა</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>ღია თემა</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>მუქი თემა</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>სისტემის თემა</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>ენები და ლექსიკონები</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>ჩამოიტვირთება ერთხელ და შემდეგ ინტერნეტის გარეშეც მუშაობს. ლექსიკონის გარეშე ენა უარესად სწორდება.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>ენის დამატება</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>დამატება</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>აირჩიეთ ენა</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>არჩეული ენის ჩამოტვირთვა და დამატება</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>ლექსიკონის წაშლა</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>ავტომატური (ქულით, შემდეგ სასურველი)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>გამორთულია.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>კლავიატურის აღბეჭდვა ამ პლატფორმაზე ჯერ არ არის ხელმისაწვდომი. პარამეტრები, ლექსიკონები და ავტოგაშვება მუშაობს.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>აქტიურია. სიტყვები ავტომატურად სწორდება ჰარის შემდეგ (და „{0}“-ითაც).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>აქტიურია. აკრიფეთ სიტყვა და დააჭირეთ „{0}“ — Lapsus ადგილზევე გაასწორებს.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>აღბეჭდვის გაშვება ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>ავტოგაშვების განახლება ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>კლავიატურის აღბეჭდვა ვერ გაეშვა. მიეცით Lapsus-ს წვდომა: System Settings ← Privacy &amp; Security ← Accessibility (და Input Monitoring, თუ ჩამოთვლილია), შემდეგ გადატვირთეთ აპლიკაცია.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsus-ს ეს ნებართვები სჭირდება, რომ დაინახოს და გაასწოროს აკრეფილი. მიეცით ქვემოთ და დაბრუნდით აქ.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Accessibility წვდომის მიცემა</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Input Monitoring წვდომის მიცემა</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>გასწორდა: {0} ← {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>იტვირთება „{0}“…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>„{0}“ დაინსტალირდა.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>„{0}“ განახლდა.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>უფრო სრული ლექსიკონის ჩამოტვირთვა</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>ჩამოტვირთვა ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>„{0}“ წაიშალა.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>ჩამოტვირთული ლექსიკონი ცარიელია.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>პარამეტრები</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>გასვლა</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — განლაგების გასწორება</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>ხელმისაწვდომია განახლება — გადატვირთეთ დასაყენებლად</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>გადატვირთეთ ამ განახლების დასაყენებლად</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>განახლებების შემოწმება</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus განახლებულია.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>განახლებების შემოწმება ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>ეს ასლი თავად არ ახლდება — ჩამოტვირთეთ უახლესი ვერსია.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>ცხელი ღილაკი: არაფერია აკრეფილი (ფანჯარა: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>ცხელი ღილაკი: „{0}“ — ყველა სიტყვა სწორად გამოიყურება, შესაცვლელი არაფერია.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>მონიშვნა: არაფერია მონიშნული, ან {0} არ პასუხობს კოპირებას.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>მონიშვნა: ბუფერის გამოყენება ვერ მოხერხდა ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>კლავიატურის ჩაჭერა ხანმოკლედ შეჩერდა და თავიდან გაეშვა. თუ ეს მეორდება, დახურეთ დატვირთული Accessibility კლიენტი ან მიეცით Lapsus-ს Input Monitoring ნებართვა.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>განლაგების გასწორებამდე ჩამოტვირთეთ პარამეტრებში სულ მცირე ერთი მართლწერის ლექსიკონი.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput ჩავარდა (backspace {0}/{1}, unicode {2}/{3}, შეცდომა {4}, ფანჯარა: {5}). სამიზნე ფანჯარა სავარაუდოდ ადმინისტრატორის უფლებებით მუშაობს.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>განლაგების გადართვა: სისტემამ განლაგებების სია არ დააბრუნა.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>განლაგება {0} არ არის დაყენებული Windows-ში (ხელმისაწვდომია: {1}). დაამატეთ: Settings ← Time &amp; language ← Language &amp; region.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>განლაგება {0} არ არის დაყენებული ამ Mac-ზე (ხელმისაწვდომია: {1}). დაამატეთ: System Settings ← Keyboard ← Input Sources.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>აქტიურ აპლიკაციაში ღილაკების ჩასმა ვერ მოხერხდა ({0}). შეამოწმეთ Lapsus-ის Accessibility და Input Monitoring ნებართვები.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>ცხელი ღილაკი: იგნორირებულია — ფოკუსი სხვა ფანჯარაზე ან აპლიკაციაზე გადავიდა ({0}). აკრიფეთ ხელახლა სამიზნე ველში.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>ცხელი ღილაკი: ნეირონული გასწორება ჩართულია, მაგრამ მოდელი არ არის ჩატვირთული. ჩამოტვირთეთ მოდელი პარამეტრებში.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>ნეირონული გასწორება ჩავარდა: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>შესწორება ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>ნეირონული გასწორება (ლოკალური მოდელი)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>ლოკალური მოდელი ლექსიკონების მხარდაჭერით. ჩართეთ, ჩამოტვირთეთ და დააჭირეთ ცხელ ღილაკს.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>მოდელის დამატება</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>აირჩიეთ მოდელი…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>არჩეული მოდელის ჩამოტვირთვა</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>მოდელი დაყენებული არ არის</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>არჩეული მოდელის წაშლა</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>იტვირთება {0}… {1}%</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>დაინსტალირდა {0}</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>ჩამოტვირთვა ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>წაიშალა {0}</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>მოდელის ჩამოტვირთვამ გამოსადეგი ფაილები არ დააბრუნა.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>მოდელის ჩატვირთვა ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>{0} იტვირთება მეხსიერებაში… (პირველ ჯერზე შეიძლება დიდხანს გასტანოს)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} მზადაა — დააჭირეთ ცხელ ღილაკს მიმდინარე სტრიქონის გადასაწერად.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} მზადაა {1}-ზე — დააჭირეთ ცხელ ღილაკს მიმდინარე სტრიქონის გადასაწერად.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>ნეირონული გასწორება ჩართულია, მაგრამ მოდელი დაყენებული არ არის. ჩამოტვირთეთ ზემოთ.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>აქ მხოლოდ ONNX Runtime GenAI პაკეტის მქონე მოდელები მუშაობს და ძებნა მხოლოდ მათ ტოვებს. ჩასმული org/name-იც მუშაობს.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>ნეირონული გასწორება ჩართულია — დააჭირეთ {0} მიმდინარე სტრიქონის გადასაწერად.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>ნეირონული შესწორება ჩართულია, მაგრამ მოდელი ჩატვირთული არ არის — „{0}“ ლექსიკონით ასწორებს, სანამ ჩაიტვირთება.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>ნეირონული გასწორება გაუქმდა — სტრიქონი შეიცვალა, სანამ მოდელი მუშაობდა („{0}“).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>მოდელის წაშლა ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>ლექსიკონები ჯერ არ არის — დაამატეთ ენა ზემოთ, რომ გასწორებამ გამოიყენოს.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>ჩამოტვირთვა</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>ცხელი ღილაკი: იგნორირებულია — აქტიური შეყვანის ენა (ჩინური/იაპონური/კორეული) IME-ით იკრიფება, ამიტომ Lapsus ვერ აღადგენს ამ ტექსტს ღილაკებიდან.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>ცხელი ღილაკი: იგნორირებულია — ეს პაროლის ველია. Lapsus იქ აკრეფილს არასოდეს ინახავს და არ გადაწერს.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>პაროლის ველების გამოტოვება</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>პაროლის ველები არასოდეს ინახება. ბრაუზერში ეს მის accessibility ძრავას რთავს.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>ზოგადი</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>ბიბლიოთეკა</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>AI</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>აპლიკაციები</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>სიტყვები, რომლებსაც არ ვეხებით</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>სახელები, ლოგინები და ბრენდები, რომლებსაც არასოდეს ვეხებით.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>სიტყვა</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>გამონაკლისები ჯერ არ არის.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>სიიდან წაშლა</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>გამოსატოვებელი აპლიკაციები</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>Lapsus მათში სრულიად გამორთულია: არც ბუფერი, არც ცხელი ღილაკები.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>პროცესის სახელი</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>აირჩიეთ გაშვებული აპლიკაცია</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>აპლიკაციები არ გამოიტოვება.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>სიიდან წაშლა</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>ცხელი ღილაკი: Lapsus არ ერევა {0}-ში.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>მოდელის გაშვება</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>ავტომატური</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>პროცესორი (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>ვიდეობარათი (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>ნეირონული ამაჩქარებელი (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>აქ ხელმისაწვდომია: {0}. სხვა მოწყობილობისთვის აწყობილი პაკეტიც იმუშავებს — პროცესორზე.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>მხარდაჭერილი ამაჩქარებელი აქ არ არის, ამიტომ მოდელი პროცესორზე იმუშავებს.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>მოძებნეთ Hugging Face-ზე, ან ჩასვით org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>ძებნა</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>იპოვეთ Hugging Face-ზე მოდელები ONNX Runtime GenAI პაკეტით</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>ძებნის შედეგები</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>მიმდინარეობს ძებნა Hugging Face-ზე…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>ONNX Runtime GenAI პაკეტის მქონე არაფერი მოიძებნა.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>ნაპოვნია: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>ძებნა ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>ლიცენზია</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>უფასო — პირადი გამოყენება</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>უფასოა კერძო პირებისთვის, ფრილანსერების ჩათვლით. არაფერია დაბლოკილი — ლიცენზია ფარავს კომპანიაში გამოყენებას.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} სამუშაო ადგილი</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>ძალაშია {0}-მდე</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>ვადის გარეშე</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>ლიცენზიის გასაღები</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>ჩასვით გასაღები შესყიდვის წერილიდან</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>გააქტიურება</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>წაშლა</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>Pro ერთი კერძო პირისთვისაა. Business ლიცენზირდება სამუშაო ადგილზე კომპანიაში.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Pro-ს ყიდვა</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>კომერციული ლიცენზია</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>ეს Lapsus-ის გასაღებს არ ჰგავს. შეამოწმეთ, მთლიანი ხაზი დაკოპირდა თუ არა.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>ეს გასაღები ამ ბილდისთვის არ გაცემულა.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>გასაღების ვადა ამოიწურა {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>ეს ბილდი ვერ ამოწმებს ლიცენზიის გასაღებებს.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>ვინ უნდა გადაიხადოს?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>ამ კომპიუტერს ორგანიზაცია მართავს — საჭიროა ლიცენზია.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Lapsus-ის ლიცენზია</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>კომპანიაში Lapsus ლიცენზირდება სამუშაო ადგილზე. დარჩა {0} დღე გასაცნობად.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>ამ კომპიუტერზე Lapsus-ს ლიცენზია სჭირდება.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>ამ კომპიუტერს ორგანიზაცია მართავს (დომენი, Entra ID ან MDM სერვერი). კერძო პირებისთვის, ფრილანსერების ჩათვლით, Lapsus უფასოა; კომპანიაში გამოყენება ფასიანია, სამუშაო ადგილზე.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>არაფერი ითიშება და არსად არაფერი იგზავნება — შემოწმება მხოლოდ ამ კომპიუტერზე ხდება.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>მაქვს გასაღები</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>მოგვიანებით</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>ამ ლიცენზიის ყველა სამუშაო ადგილი დაკავებულია. მიწერეთ {0}-ს, რომ სამუშაო ადგილი ამ კომპიუტერზე გადაიტანოთ ან დამატებით შეიძინოთ.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>ლიცენზიების სერვერთან დაკავშირება ვერ მოხერხდა. გასაღები შენახულია — აქტივაცია გამეორდება.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>ამ კომპიუტერის იდენტიფიცირება ვერ მოხერხდა, ამიტომ ლიცენზიის მიბმა ვერ ხდება.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>აქტივაცია…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>Lapsus-ის შესახებ</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>Lapsus-ის შესახებ</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>ლიცენზია</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>უფასოა კერძო პირებისთვის. კომპანიები იხდიან თითო სამუშაო ადგილზე. არაფერი იბლოკება და არაფერს ვადა ეწურება.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>ვებსაიტი</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>დაუჭირეთ მხარი განვითარებას</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus თქვენთვის უფასოა, რეკლამისა და თვალთვალის გარეშე. თუ ის დროს გიზოგავთ, შეგიძლიათ შემოწიროთ.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>შემოწირულობა</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>ღია კოდის ლიცენზიები</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>კომპონენტები</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>ლექსიკონები</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Lapsus-ში არ შედის: თითოეული მხოლოდ ენის დამატებისას ჩამოიტვირთება და ინარჩუნებს გამომცემლის ლიცენზიას.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>ყველა წყარო და ავტორი</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>მოყვება Lapsus-ს, თითოეული საკუთარი ლიცენზიით.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>ლიცენზიის ტექსტი</value>
+  </data>
+</root>

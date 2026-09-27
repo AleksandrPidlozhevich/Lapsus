@@ -1,0 +1,81 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Lapsus.App"
+             RequestedThemeVariant="Default">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Styles/ScrollBar.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="LapsusSurfaceColor">#f4f1ea</Color>
+                    <SolidColorBrush x:Key="LapsusSurfaceBrush" Color="{StaticResource LapsusSurfaceColor}" />
+                    <SolidColorBrush x:Key="LapsusCardBrush" Color="#fbf9f4" />
+                    <SolidColorBrush x:Key="LapsusRowBrush" Color="#efebe0" />
+                    <SolidColorBrush x:Key="LapsusBorderBrush" Color="#ded7c8" />
+
+                    <SolidColorBrush x:Key="LapsusAccentBrush" Color="#df5338" />
+
+                    <SolidColorBrush x:Key="LapsusSelectionBrush" Color="#2563eb" />
+
+                    <SolidColorBrush x:Key="LapsusHintBrush" Color="#5f5a51" />
+
+                    <SolidColorBrush x:Key="LapsusNoticeInkBrush" Color="#1a1916" />
+                    <SolidColorBrush x:Key="LapsusNoticeSurfaceBrush" Color="#f7e7de" />
+                    <SolidColorBrush x:Key="LapsusScrollThumbBrush" Color="#c4bcac" />
+                    <SolidColorBrush x:Key="LapsusScrollThumbHoverBrush" Color="#9c9382" />
+                    <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush" Color="#f4f1ea" />
+                    <SolidColorBrush x:Key="SystemControlBackgroundListLowBrush" Color="#f4f1ea" />
+                    <SolidColorBrush x:Key="SystemControlBackgroundChromeLowBrush" Color="#f4f1ea" />
+                    <SolidColorBrush x:Key="SystemControlPageBackgroundAltHighBrush" Color="#f4f1ea" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="LapsusSurfaceColor">#1a1916</Color>
+                    <SolidColorBrush x:Key="LapsusSurfaceBrush" Color="{StaticResource LapsusSurfaceColor}" />
+                    <SolidColorBrush x:Key="LapsusCardBrush" Color="#232220" />
+                    <SolidColorBrush x:Key="LapsusRowBrush" Color="#2c2a26" />
+                    <SolidColorBrush x:Key="LapsusBorderBrush" Color="#38352f" />
+                    <SolidColorBrush x:Key="LapsusAccentBrush" Color="#df5338" />
+                    <SolidColorBrush x:Key="LapsusSelectionBrush" Color="#5b9cff" />
+
+                    <SolidColorBrush x:Key="LapsusHintBrush" Color="#a49a88" />
+
+                    <SolidColorBrush x:Key="LapsusNoticeInkBrush" Color="#1a1916" />
+                    <SolidColorBrush x:Key="LapsusNoticeSurfaceBrush" Color="#2f2119" />
+                    <SolidColorBrush x:Key="LapsusScrollThumbBrush" Color="#46433c" />
+                    <SolidColorBrush x:Key="LapsusScrollThumbHoverBrush" Color="#6b6559" />
+                    <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush" Color="#1a1916" />
+                    <SolidColorBrush x:Key="SystemControlBackgroundListLowBrush" Color="#1a1916" />
+                    <SolidColorBrush x:Key="SystemControlBackgroundChromeLowBrush" Color="#1a1916" />
+                    <SolidColorBrush x:Key="SystemControlPageBackgroundAltHighBrush" Color="#1a1916" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme>
+            <FluentTheme.Palettes>
+                <ColorPaletteResources x:Key="Light"
+                                       RegionColor="#f4f1ea"
+                                       ListLow="#f4f1ea"
+                                       ListMedium="#f4f1ea"
+                                       AltLow="#f4f1ea"
+                                       AltMediumLow="#f4f1ea"
+                                       BaseLow="#f4f1ea"
+                                       ChromeLow="#f4f1ea" />
+                <ColorPaletteResources x:Key="Dark"
+                                       RegionColor="#1a1916"
+                                       ListLow="#1a1916"
+                                       ListMedium="#1a1916"
+                                       AltLow="#1a1916"
+                                       AltMediumLow="#1a1916"
+                                       BaseLow="#1a1916"
+                                       ChromeLow="#1a1916" />
+            </FluentTheme.Palettes>
+        </FluentTheme>
+    </Application.Styles>
+</Application>

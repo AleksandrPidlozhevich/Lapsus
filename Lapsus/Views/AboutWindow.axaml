@@ -1,0 +1,151 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Lapsus.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="460" d:DesignHeight="600"
+        x:Class="Lapsus.Views.AboutWindow"
+        x:DataType="vm:AboutViewModel"
+        Title="{Binding L[About_Title]}"
+        FlowDirection="{Binding FlowDirection}"
+        Width="460"
+        SizeToContent="Height"
+        CanResize="False"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Styles>
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{DynamicResource LapsusCardBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LapsusBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="14" />
+        </Style>
+        <Style Selector="TextBlock.sectionTitle">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style Selector="TextBlock.hint">
+            <Setter Property="Foreground" Value="{DynamicResource LapsusHintBrush}" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style Selector="TabItem">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+        </Style>
+        <Style Selector="Button.link">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="6,2" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource LapsusSelectionBrush}" />
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource LapsusSurfaceBrush}" Padding="20">
+        <StackPanel Spacing="12">
+
+            <StackPanel Spacing="2">
+                <TextBlock Text="Lapsus" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Classes="hint" Text="{Binding AppVersion, StringFormat=v{0}}" />
+                <TextBlock Classes="hint" Text="{Binding L[Subtitle]}" Margin="0,6,0,0" />
+            </StackPanel>
+
+            <Border Classes="card">
+                <StackPanel Spacing="6">
+                    <TextBlock Classes="sectionTitle" Text="{Binding L[About_License]}" />
+                    <TextBlock Classes="hint" Text="{Binding L[About_License_Text]}" />
+
+                    <WrapPanel Orientation="Horizontal" Margin="0,4,0,0" ItemSpacing="8" LineSpacing="8">
+                        <Button Content="{Binding L[About_Website]}"
+                                Command="{Binding OpenWebsiteCommand}" />
+                        <Button Content="GitHub"
+                                Command="{Binding OpenRepoCommand}" />
+                        <Button Content="{Binding L[About_LicenseText]}"
+                                Command="{Binding OpenLicenseTextCommand}" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Classes="card" IsVisible="{Binding ShowDonate}">
+                <StackPanel Spacing="6">
+                    <TextBlock Classes="sectionTitle" Text="{Binding L[About_Donate]}" />
+                    <TextBlock Classes="hint" Text="{Binding L[About_Donate_Hint]}" />
+
+                    <Button Command="{Binding DonateCommand}"
+                            HorizontalAlignment="Left" Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Svg Path="/Assets/ko-fi.svg" Width="18" Height="18"
+                                 VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding L[About_Donate_Button]}" FontWeight="SemiBold"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+
+            <Border Classes="card">
+                <StackPanel Spacing="4">
+                    <TextBlock Classes="sectionTitle" Text="{Binding L[About_OpenSource]}" />
+                    <TabControl Padding="0" Margin="-12,0,0,0">
+                        <TabItem Header="{Binding L[About_Tab_Components]}">
+                            <StackPanel Spacing="8" Margin="12,4,0,0">
+                                <TextBlock Classes="hint" Text="{Binding L[About_Components_Hint]}" />
+                                <ScrollViewer MaxHeight="220" Padding="0,0,4,0"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl ItemsSource="{Binding Components}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:ComponentCredit">
+                                                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+                                                    <StackPanel Grid.Column="0" Spacing="1" Margin="0,0,8,0">
+                                                        <TextBlock Text="{Binding Name}" FontSize="12" TextWrapping="Wrap" />
+                                                        <TextBlock Classes="hint" Text="{Binding License}" />
+                                                    </StackPanel>
+                                                    <Button Grid.Column="1" Classes="link" Content="↗"
+                                                            VerticalAlignment="Center"
+                                                            ToolTip.Tip="{Binding Url}"
+                                                            Command="{Binding ((vm:AboutViewModel)DataContext).OpenComponentCommand,
+                                                                      RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                            CommandParameter="{Binding Url}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem Header="{Binding L[About_Tab_Dictionaries]}">
+                            <StackPanel Spacing="8" Margin="12,4,0,0">
+                                <TextBlock Classes="hint" Text="{Binding L[About_Dictionaries_Hint]}" />
+
+                                <ScrollViewer MaxHeight="220" Padding="0,0,4,0"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl ItemsSource="{Binding Dictionaries}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:DictionaryCredit">
+                                                <StackPanel Spacing="1" Margin="0,0,0,8">
+                                                    <TextBlock Text="{Binding Name}" FontSize="12" TextWrapping="Wrap" />
+                                                    <TextBlock Classes="hint" Text="{Binding License}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                                <Button Content="{Binding L[About_Dictionaries_All]}"
+                                        Command="{Binding OpenThirdPartyNoticesCommand}"
+                                        HorizontalAlignment="Left" />
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

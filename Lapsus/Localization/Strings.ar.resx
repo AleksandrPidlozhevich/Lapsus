@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — الإعدادات</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>تصحيح تخطيط لوحة المفاتيح والأخطاء المطبعية بمفتاح واحد</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>الالتقاط مفعّل</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>الالتقاط متوقف</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>تصحيح تلقائي بعد المسافة</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>تصحيح الأخطاء المطبعية تلقائيًا أيضًا</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>متوقف: التصحيح التلقائي يبدّل فقط تخطيط كلمة كُتبت على التخطيط الخطأ. تبقى الأخطاء المطبعية لمفتاح الاختصار.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>تبديل التخطيط فقط، بدون قواميس</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>يبدّل الحروف كما هي، دون تصحيح الأخطاء المطبعية. يعمل بدون أي تنزيل؛ اضغط مرة أخرى للتخطيط التالي.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>تبديل تخطيط النظام بعد التصحيح</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>مفتاح الاختصار يبدّل اللغة دائماً. هذا ينطبق فقط على التصحيح التلقائي بعد المسافة وتصحيح التحديد.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>التشغيل عند بدء الجلسة</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>إظهار التخطيط عند المؤشر</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>شارة بالتخطيط النشط بجوار مؤشر النص. المتصفحات لا تُظهرها.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>مفتاح الاختصار</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>تصحيح التحديد</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>يصحّح النص المحدد — في أي نافذة، مهما كان النص قديمًا.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>إجراءات على التحديد</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>تغيير حالة الأحرف</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>يتنقّل بالتحديد: أحرف كبيرة ← أحرف صغيرة ← أول حرف كبير.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>كتابة صوتية</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>سيريلية أو يونانية ⇄ لاتينية. اضغط مرة أخرى للعودة.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>عكس اتجاه العبرية / العربية</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>يعيد ترتيب سطر عربي أو عبري وصل مقلوبًا.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>اللغة المفضّلة عند التعادل</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>أي لغة تفوز عندما تصلح الكلمة لأكثر من واحدة («молоток» بالروسية والأوكرانية).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>لغة الواجهة</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>سمة فاتحة</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>سمة داكنة</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>سمة النظام</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>اللغات والقواميس</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>تُنزَّل مرة واحدة ثم تعمل دون إنترنت. بدون قاموس تُصحَّح اللغة بشكل أسوأ.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>إضافة لغة</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>إضافة</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>اختر لغة</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>تنزيل اللغة المحددة وإضافتها</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>إزالة القاموس</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>تلقائي (حسب التقييم، ثم المفضّلة)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>متوقف.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>التقاط لوحة المفاتيح غير متاح بعد على هذه المنصة. الإعدادات والقواميس والتشغيل عند بدء الجلسة تعمل.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>نشط. تُصحَّح الكلمات تلقائيًا بعد المسافة (وبمفتاح «{0}» أيضًا).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>نشط. اكتب كلمة واضغط «{0}» — يصحّحها Lapsus في مكانها.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>تعذّر بدء الالتقاط: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>تعذّر تحديث التشغيل عند بدء الجلسة: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>تعذّر بدء التقاط لوحة المفاتيح. امنح Lapsus صلاحية إمكانية الوصول من System Settings ← Privacy &amp; Security ← Accessibility (و‑Input Monitoring إن ظهر)، ثم أعد تشغيل التطبيق.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>يحتاج Lapsus إلى هذه الأذونات ليرى ما تكتبه ويصحّحه. امنحها بالأسفل ثم عُد إلى هنا.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>منح صلاحية إمكانية الوصول</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>منح صلاحية مراقبة الإدخال</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>تم التصحيح: {0} ← {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>جارٍ تنزيل «{0}»…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>تم تثبيت «{0}».</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>تم تحديث «{0}».</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>تنزيل القاموس الأكمل</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>فشل التنزيل: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>تمت إزالة «{0}».</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>القاموس الذي جرى تنزيله فارغ.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — تصحيح التخطيط</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>يتوفر تحديث — أعد التشغيل للتثبيت</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>أعد التشغيل لتثبيت هذا التحديث</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>التحقق من التحديثات</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus محدَّث.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>فشل التحقق من التحديثات: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>لا يمكن لهذه النسخة تحديث نفسها — نزّل أحدث إصدار.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>مفتاح الاختصار: لم تُكتب أي حروف (النافذة: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>مفتاح الاختصار: «{0}» — كل الكلمات تبدو صحيحة، لا شيء لتغييره.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>التحديد: لا شيء محدد، أو أن {0} لا يستجيب للنسخ.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>التحديد: تعذّر استخدام الحافظة ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>توقّف التقاط لوحة المفاتيح للحظة ثم أُعيد تشغيله. إذا تكرّر ذلك، أغلق تطبيق Accessibility مُثقلًا أو امنح Lapsus صلاحية Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>نزّل قاموسًا إملائيًا واحدًا على الأقل في الإعدادات قبل تصحيح التخطيط.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>فشل SendInput (مسافات للخلف {0}/{1}، يونيكود {2}/{3}، خطأ {4}، النافذة: {5}). على الأرجح تعمل النافذة الهدف بصلاحيات المسؤول.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>تبديل التخطيط: لم يُعِد النظام أي قائمة تخطيطات.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>التخطيط {0} غير مثبّت في Windows (المتاح: {1}). أضفه من Settings ← Time &amp; language ← Language &amp; region.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>التخطيط {0} غير مثبّت على هذا الـ Mac (المتاح: {1}). أضفه من System Settings ← Keyboard ← Input Sources.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>تعذّر إدخال ضغطات المفاتيح إلى التطبيق النشط ({0}). تحقّق من أذونات إمكانية الوصول ومراقبة الإدخال لـ Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>مفتاح الاختصار: تم التجاهل — انتقل التركيز إلى نافذة أو تطبيق آخر ({0}). اكتب من جديد في الحقل الهدف.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>مفتاح الاختصار: التصحيح العصبي مفعّل، لكن لم يُحمَّل أي نموذج. نزّل نموذجًا من الإعدادات.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>فشل التصحيح العصبي: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>فشل التصحيح: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>التصحيح العصبي (نموذج محلي)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>نموذج محلي تدعمه القواميس. فعّله، نزّل نموذجًا، ثم اضغط مفتاح الاختصار.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>إضافة نموذج</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>اختر نموذجًا…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>تنزيل النموذج المحدد</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>لا يوجد نموذج مثبّت</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>إزالة النموذج المحدد</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>جارٍ تنزيل {0}… {1}%</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>تم تثبيت {0}</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>فشل التنزيل: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>تمت إزالة {0}</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>لم يُعِد تنزيل النموذج أي ملفات صالحة.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>تعذّر تحميل النموذج: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>جارٍ تحميل {0} إلى الذاكرة… (قد يستغرق التحميل الأول وقتًا)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} جاهز — اضغط مفتاح الاختصار لإعادة كتابة السطر الحالي.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} جاهز على {1} — اضغط مفتاح الاختصار لإعادة كتابة السطر الحالي.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>التصحيح العصبي مفعّل، لكن لا يوجد نموذج مثبّت. نزّل واحدًا من الأعلى.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>النماذج التي تتضمن حزمة ONNX Runtime GenAI فقط تعمل هنا، والبحث يُبقي عليها وحدها. يمكن أيضًا لصق org/name.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>التصحيح العصبي مفعّل — اضغط {0} لإعادة كتابة السطر الحالي.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>التصحيح العصبي مفعّل، لكن لم يُحمَّل أي نموذج — «{0}» يصحّح بالقاموس حتى يُحمَّل.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>أُلغي التصحيح العصبي — تغيّر السطر أثناء عمل النموذج («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>تعذّرت إزالة النموذج: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>لا قواميس بعد — أضف لغة بالأعلى كي تستفيد منها التصحيحات.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>تنزيل</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>مفتاح الاختصار: تم التجاهل — لغة الإدخال النشطة (الصينية/اليابانية/الكورية) تكتب عبر محرّر IME، لذا لا يستطيع Lapsus إعادة بناء ذلك النص من ضغطات المفاتيح.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>مفتاح الاختصار: تم التجاهل — هذا حقل كلمة مرور. لا يخزّن Lapsus ما تكتبه فيه ولا يعيد كتابته أبدًا.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>تخطّي حقول كلمات المرور</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>لا تُخزَّن حقول كلمات المرور أبدًا. في المتصفح يؤدي ذلك إلى تشغيل محرّك إمكانية الوصول لديه.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>عام</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>المكتبة</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>الذكاء الاصطناعي</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>التطبيقات</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>كلمات لا تُمَس</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>أسماء وحسابات وعلامات تجارية لا تُمَس أبدًا.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>كلمة</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>لا استثناءات بعد.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>إزالة من القائمة</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>تطبيقات يجري تخطّيها</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>‏Lapsus متوقف تمامًا فيها: لا ذاكرة مؤقتة ولا مفاتيح اختصار.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>اسم العملية</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>اختر تطبيقًا قيد التشغيل</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>لا تطبيقات يجري تخطّيها.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>إزالة من القائمة</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>مفتاح الاختصار: يبقى Lapsus خارج {0}.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>تشغيل النموذج على</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>تلقائي</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>المعالج (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>بطاقة الرسوميات (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>مسرّع عصبي (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>المتاح هنا: {0}. الحزمة المبنية لجهاز آخر ستعمل أيضًا — على المعالج.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>لا يوجد مسرّع مدعوم هنا، لذا سيعمل النموذج على المعالج.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>ابحث في Hugging Face، أو الصق org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>ابحث في Hugging Face عن نماذج تتضمن حزمة ONNX Runtime GenAI</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>نتائج البحث</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>جارٍ البحث في Hugging Face…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>لم يُعثر على أي نموذج يتضمن حزمة ONNX Runtime GenAI.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>تم العثور على: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>فشل البحث: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>الترخيص</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>مجاني — للاستخدام الشخصي</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>مجاني للأفراد، ومنهم العاملون المستقلون. لا شيء مقفل — الترخيص يغطي الاستخدام داخل شركة.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} مقعدًا</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>صالح حتى {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>بدون تاريخ انتهاء</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>مفتاح الترخيص</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>الصق المفتاح من رسالة الشراء</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>تفعيل</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>إزالة</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>‏Pro لفرد واحد. ‏Business يُرخَّص لكل مقعد داخل شركة.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>شراء Pro</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>ترخيص تجاري</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>هذا لا يبدو مفتاح Lapsus. تأكد من نسخ السطر بالكامل.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>لم يُصدر هذا المفتاح لهذه النسخة.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>انتهت صلاحية هذا المفتاح في {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>هذه النسخة لا تستطيع التحقق من مفاتيح الترخيص.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>من الذي يجب أن يدفع؟</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>يدير هذا الحاسوب جهةٌ تنظيمية — يلزم ترخيص.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>ترخيص Lapsus</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>داخل الشركة يُرخَّص Lapsus لكل مقعد. بقي {0} يومًا للتجربة.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>يحتاج Lapsus إلى ترخيص على هذا الحاسوب.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>هذا الحاسوب تديره جهة تنظيمية (نطاق أو Entra ID أو خادم MDM). للأفراد، ومنهم العاملون المستقلون، يظل Lapsus مجانيًا؛ أما الاستخدام داخل شركة فمدفوع، لكل مقعد.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>لا يُعطَّل شيء ولا يُرسَل شيء إلى أي مكان — الفحص يجري على هذا الجهاز فقط.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>لديّ مفتاح</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>لاحقًا</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>جميع المقاعد في هذا الترخيص مستخدمة. اكتب إلى {0} لنقل مقعد إلى هذا الحاسوب أو شراء المزيد.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>تعذّر الوصول إلى خادم التراخيص. حُفظ المفتاح وستُعاد محاولة التفعيل.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>تعذّر التعرّف على هذا الحاسوب، لذا لا يمكن ربط الترخيص بشيء.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>جارٍ التفعيل…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>حول Lapsus</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>حول Lapsus</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>الترخيص</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>مجاني للأفراد. تدفع الشركات لكل مقعد. لا شيء مقفل ولا شيء تنتهي صلاحيته.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>الموقع الإلكتروني</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>ادعم التطوير</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus مجاني لك، بلا إعلانات ولا تتبع. إذا كان يوفر وقتك، يمكنك المساهمة.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>تبرع</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>تراخيص مفتوحة المصدر</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>المكونات</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>القواميس</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>غير مضمّنة في Lapsus: يُنزَّل كل قاموس فقط عند إضافة لغته، ويبقى بترخيص ناشره.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>جميع المصادر والمؤلفين</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>تأتي داخل Lapsus، كل منها بترخيصه الخاص.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>نص الترخيص</value>
+  </data>
+</root>

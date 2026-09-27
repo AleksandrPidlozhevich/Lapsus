@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — Podešavanja</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>Ispravite raspored tastature i greške u kucanju jednim tasterom</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>Praćenje uključeno</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>Praćenje isključeno</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>Automatska ispravka posle razmaka</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>Ispravljaj i greške u kucanju automatski</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>Isključeno: automatska ispravka samo menja raspored reči otkucane na pogrešnom. Greške u kucanju ostaju prečici.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>Samo promena rasporeda, bez rečnika</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>Zamenjuje znakove kakvi jesu, greške u kucanju ne ispravlja. Radi bez preuzimanja; novi pritisak nudi sledeći raspored.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>Prebaci sistemski raspored posle ispravke</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>Prečica uvek menja jezik. Ovo važi samo za auto posle razmaka i ispravku označenog.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>Pokreni pri prijavljivanju</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>Prikaži raspored uz kursor</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>Oznaka sa aktivnim rasporedom pored kursora za tekst. Pregledači je ne prikazuju.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>Prečica</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>Ispravi izbor</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>Ispravlja izabrani tekst — u bilo kom prozoru, ma koliko tekst bio star.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>Radnje nad izborom</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>Promeni veličinu slova</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>Kruži kroz izbor: VELIKA SLOVA → mala slova → Prvo slovo veliko.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>Preslovi</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>Ćirilica ili grčko pismo ⇄ latinica. Ponovni pritisak vraća nazad.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>Ispravi smer hebrejskog / arapskog</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>Vraća u pravi smer hebrejski ili arapski red koji je stigao obrnuto.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>Željeni jezik pri izjednačenju</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>Koji jezik pobeđuje kada reč odgovara većem broju njih («молоток» na ru i uk).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>Jezik interfejsa</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>Svetla tema</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>Tamna tema</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>Sistemska tema</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>Jezici i rečnici</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>Preuzimaju se jednom, a zatim rade bez interneta. Bez rečnika se jezik ispravlja lošije.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>Dodaj jezik</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>Izaberite jezik</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>Preuzmi i dodaj izabrani jezik</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>Ukloni rečnik</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>Automatski (po oceni, pa željeni)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>Isključeno.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>Praćenje tastature još nije dostupno na ovoj platformi. Podešavanja, rečnici i pokretanje pri prijavljivanju rade.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>Aktivno. Reči se automatski ispravljaju posle razmaka (i tasterom „{0}“).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>Aktivno. Otkucajte reč i pritisnite „{0}“ — Lapsus je ispravlja na mestu.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>Praćenje nije moglo da se pokrene: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Pokretanje pri prijavljivanju nije moglo da se ažurira: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>Praćenje tastature nije moglo da se pokrene. Dodelite Lapsusu pristup pristupačnosti u Sistemska podešavanja → Privatnost i bezbednost → Pristupačnost (i Nadzor unosa ako je naveden), pa ponovo pokrenite aplikaciju.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsusu su potrebne ove dozvole da vidi i ispravlja ono što kucate. Dodelite ih ispod, pa se vratite ovde.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Dodeli pristup pristupačnosti</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Dodeli nadzor unosa</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>Ispravljeno: {0} → {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>Preuzimanje „{0}“…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>„{0}“ instalirano.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>„{0}“ ažurirano.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>Preuzmi potpuniji rečnik</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>Preuzimanje nije uspelo: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>„{0}“ uklonjeno.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>Preuzeti rečnik je prazan.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>Podešavanja</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>Izlaz</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — ispravka rasporeda</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>Dostupna je ispravka — ponovo pokrenite radi instalacije</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>Ponovo pokreni i instaliraj ovu ispravku</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>Proveri ispravke</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus je ažuran.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>Provera ispravki nije uspela: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>Ova kopija se ne ažurira sama — preuzmite najnoviju verziju.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>Prečica: ništa nije otkucano (prozor: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>Prečica: „{0}“ — sve reči izgledaju ispravno, nema šta da se menja.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>Izbor: ništa nije izabrano ili {0} ne odgovara na kopiranje.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>Izbor: ostava nije mogla da se upotrebi ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>Hvatanje tastature se nakratko zaustavilo i ponovo je pokrenuto. Ako se ponavlja, zatvorite zauzet Accessibility klijent ili dodelite Lapsusu dozvolu Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>Pre ispravljanja rasporeda preuzmite u podešavanjima bar jedan pravopisni rečnik.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput nije uspeo (brisanja unazad {0}/{1}, unicode {2}/{3}, greška {4}, prozor: {5}). Ciljni prozor verovatno radi kao administrator.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>Promena rasporeda: sistem nije vratio nijednu listu rasporeda.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>Raspored {0} nije instaliran u Windowsu (dostupni: {1}). Dodajte ga u Podešavanja → Vreme i jezik → Jezik i region.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>Raspored {0} nije instaliran na ovom Macu (dostupni: {1}). Dodajte ga u Sistemska podešavanja → Tastatura → Izvori unosa.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>Pritisci tastera nisu mogli da se pošalju aktivnoj aplikaciji ({0}). Proverite dozvole za pristupačnost i nadzor unosa za Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>Prečica: zanemareno — fokus je prešao na drugi prozor ili aplikaciju ({0}). Otkucajte ponovo u ciljnom polju.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>Prečica: neuronska ispravka je uključena, ali nijedan model nije učitan. Preuzmite model u podešavanjima.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>Neuronska ispravka nije uspela: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>Ispravka nije uspela: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>Neuronska ispravka (lokalni model)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>Lokalni model uz podršku rečnika. Uključite, preuzmite model i pritisnite prečicu.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>Dodaj model</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>Izaberite model…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>Preuzmi izabrani model</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>Nijedan model nije instaliran</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>Ukloni izabrani model</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>Preuzimanje {0}… {1}%</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>{0} instaliran</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>Preuzimanje nije uspelo: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>{0} uklonjen</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>Preuzimanje modela nije vratilo upotrebljive datoteke.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>Model nije mogao da se učita: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>Učitavanje {0} u memoriju… (prvo učitavanje može da potraje)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} spreman — pritisnite prečicu da se trenutni red prepiše.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} spreman na {1} — pritisnite prečicu da se trenutni red prepiše.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>Neuronska ispravka je uključena, ali nijedan model nije instaliran. Preuzmite ga iznad.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>Ovde rade samo modeli sa ONNX Runtime GenAI paketom, a pretraga zadržava upravo njih. Nalepljeno org/name takođe radi.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>Neuronska ispravka uključena — pritisnite {0} da se trenutni red prepiše.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>Neuronska ispravka je uključena, ali model nije učitan — „{0}“ ispravlja pomoću rečnika dok se ne učita.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>Neuronska ispravka otkazana — red se promenio dok je model radio («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>Model nije mogao da se ukloni: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>Još nema rečnika — dodajte jezik iznad da bi ispravke mogle da ga koriste.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>Preuzmi</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>Prečica: zanemareno — aktivni jezik unosa (kineski/japanski/korejski) kuca preko IME-a, pa Lapsus taj tekst ne može da obnovi iz pritisaka tastera.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>Prečica: zanemareno — ovo je polje za lozinku. Lapsus tu nikada ništa ne pamti niti prepisuje.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>Preskoči polja za lozinku</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>Polja za lozinku se nikada ne pamte. U pregledaču to uključuje njegov mehanizam pristupačnosti.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>Opšte</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>Biblioteka</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>VI</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>Aplikacije</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>Reči koje se ne diraju</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>Imena, korisnička imena i brendovi koji se nikada ne menjaju.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>reč</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>Još nema izuzetaka.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>Ukloni sa liste</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Aplikacije koje se preskaču</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>U njima je Lapsus potpuno isključen: bez bafera i bez prečica.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>ime procesa</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>Izaberite pokrenutu aplikaciju</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Nijedna aplikacija se ne preskače.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>Ukloni sa liste</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>Prečica: Lapsus se ne meša u {0}.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>Pokreni model na</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>Automatski</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>Procesor (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>Grafička kartica (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>Neuronski ubrzivač (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>Dostupno ovde: {0}. Paket napravljen za drugi uređaj takođe radi — na procesoru.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>Ovde nema podržanog ubrzivača, pa model radi na procesoru.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Pretražite Hugging Face ili nalepite org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>Pretraga</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>Pronađite na Hugging Face modele sa ONNX Runtime GenAI paketom</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>Rezultati pretrage</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>Pretraga po Hugging Face…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>Nije pronađeno ništa sa ONNX Runtime GenAI paketom.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>Pronađeno: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>Pretraga nije uspela: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>Лиценца</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>Бесплатно — лична употреба</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>Бесплатно за приватна лица, укључујући фрилансере. Ништа није закључано — лиценца покрива употребу у фирми.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · радних места: {1}</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>Важи до {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>Без датума истека</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>Лиценцни кључ</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>Налепите кључ из имејла о куповини</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>Активирај</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>Уклони</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>Pro је једно приватно лице. Business се лиценцира по радном месту у фирми.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Купи Pro</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>Комерцијална лиценца</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>Ово не личи на Lapsus кључ. Проверите да ли је копиран цео ред.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>Овај кључ није издат за ову верзију.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>Овај кључ је истекао {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>Ова верзија не уме да провери лиценцне кључеве.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>Ко мора да плати?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>Овим рачунаром управља организација — потребна је лиценца.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Lapsus лиценца</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>У фирми се Lapsus лиценцира по радном месту. Остало је {0} дана за пробу.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>На овом рачунару Lapsus захтева лиценцу.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>Овим рачунаром управља организација (домен, Entra ID или MDM сервер). За приватна лица, укључујући фрилансере, Lapsus је бесплатан; употреба у фирми се плаћа, по радном месту.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>Ништа се не искључује и ништа се не шаље — провера се обавља само на овом рачунару.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>Имам кључ</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>Касније</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>Сва радна места по овој лиценци су заузета. Пишите на {0} да преместите радно место на овај рачунар или купите још.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>Сервер лиценци није био доступан. Кључ је сачуван — активација ће бити поновљена.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>Овај рачунар није могао да буде идентификован, па лиценца нема за шта да се веже.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>Активација…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>O Lapsusu</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>O Lapsusu</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>Licenca</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>Besplatno za privatna lica. Kompanije plaćaju po radnom mestu. Ništa se ne zaključava i ništa ne ističe.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>Veb-sajt</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>Podržite razvoj</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus je besplatan za vas, bez reklama i praćenja. Ako vam štedi vreme, možete pomoći.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>Donirajte</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>Licence otvorenog koda</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>Komponente</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>Rečnici</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Nisu deo Lapsusa: svaki se preuzima tek kada dodate jezik i zadržava licencu svog izdavača.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>Svi izvori i autori</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>Isporučene u Lapsusu, svaka pod svojom licencom.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>Tekst licence</value>
+  </data>
+</root>

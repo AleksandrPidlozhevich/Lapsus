@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — Nastavení</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>Opravte rozložení klávesnice a překlepy jednou klávesou</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>Zachytávání zapnuto</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>Zachytávání vypnuto</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>Automatická oprava po mezerníku</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>Opravovat automaticky i překlepy</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>Vypnuto: automatická oprava jen přepne rozložení slova napsaného na špatném. Překlepy zůstávají klávesové zkratce.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>Jen přepnutí rozložení, bez slovníků</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>Zamění znaky tak, jak jsou, překlepy neopravuje. Funguje bez stahování; dalším stiskem nabídne další rozložení.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>Po opravě přepnout rozložení systému</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>Klávesová zkratka vždy přepne jazyk. Toto platí jen pro auto po mezerníku a opravu výběru.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>Spouštět po přihlášení</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>Zobrazovat rozložení u kurzoru</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>Odznak s aktivním rozložením vedle textového kurzoru. Prohlížeče jej nezobrazují.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>Klávesová zkratka</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>Opravit výběr</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>Opraví vybraný text — v jakémkoli okně, ať je text jakkoli starý.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>Akce nad výběrem</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>Změnit velikost písmen</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>Prochází výběr: VELKÁ PÍSMENA → malá písmena → Velké první písmeno.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>Přepsat do latinky</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>Cyrilice nebo řečtina ⇄ latinka. Dalším stiskem se to vrátí zpět.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>Otočit hebrejštinu / arabštinu</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>Srovná hebrejský nebo arabský řádek, který dorazil obráceně.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>Preferovaný jazyk při shodě</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>Který jazyk vyhraje, když slovo sedí do několika («молоток» v ru a uk).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>Jazyk rozhraní</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>Světlý motiv</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>Tmavý motiv</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>Motiv systému</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>Jazyky a slovníky</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>Stáhnou se jednou a pak fungují offline. Bez slovníku se jazyk opravuje hůř.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>Přidat jazyk</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>Přidat</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>Vyberte jazyk</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>Stáhnout a přidat vybraný jazyk</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>Odebrat slovník</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>Automaticky (podle skóre, pak preferovaný)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>Vypnuto.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>Zachytávání klávesnice na této platformě zatím není k dispozici. Nastavení, slovníky i spouštění po přihlášení fungují.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>Aktivní. Slova se opravují automaticky po mezerníku (a klávesou „{0}“).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>Aktivní. Napište slovo a stiskněte „{0}“ — Lapsus je opraví na místě.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>Zachytávání se nepodařilo spustit: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Spouštění po přihlášení se nepodařilo změnit: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>Zachytávání klávesnice se nepodařilo spustit. Udělte Lapsusu přístup k Zpřístupnění v Nastavení systému → Soukromí a zabezpečení → Zpřístupnění (a Sledování vstupu, pokud je uvedeno), a aplikaci restartujte.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsus potřebuje tato oprávnění, aby viděl a opravoval, co píšete. Udělte je níže a pak se sem vraťte.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Udělit přístup k Zpřístupnění</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Udělit Sledování vstupu</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>Opraveno: {0} → {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>Stahuje se „{0}“…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>„{0}“ nainstalováno.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>„{0}“ aktualizováno.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>Stáhnout úplnější slovník</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>Stahování selhalo: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>„{0}“ odebráno.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>Stažený slovník je prázdný.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>Ukončit</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — oprava rozložení</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>Je k dispozici aktualizace — restartujte pro instalaci</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>Restartovat a nainstalovat tuto aktualizaci</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>Zkontrolovat aktualizace</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus je aktuální.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>Kontrola aktualizací selhala: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>Tato kopie se sama neaktualizuje — stáhněte si nejnovější verzi.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>Zkratka: nic nebylo napsáno (okno: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>Zkratka: „{0}“ — všechna slova vypadají správně, není co měnit.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>Výběr: nic není vybráno, nebo {0} nereaguje na kopírování.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>Výběr: schránku se nepodařilo použít ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>Zachytávání klávesnice se na chvíli zastavilo a bylo restartováno. Pokud se to opakuje, zavřete vytížený klient Accessibility nebo udělte Lapsusu oprávnění Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>Než začnete opravovat rozložení, stáhněte v nastavení aspoň jeden pravopisný slovník.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput selhal (backspace {0}/{1}, unicode {2}/{3}, chyba {4}, okno: {5}). Cílové okno nejspíš běží jako správce.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>Přepnutí rozložení: systém nevrátil žádný seznam rozložení.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>Rozložení {0} není ve Windows nainstalováno (dostupná: {1}). Přidejte je v Nastavení → Čas a jazyk → Jazyk a oblast.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>Rozložení {0} není na tomto Macu nainstalováno (dostupná: {1}). Přidejte je v Nastavení systému → Klávesnice → Zdroje vstupu.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>Stisky kláves se nepodařilo poslat do aktivní aplikace ({0}). Zkontrolujte oprávnění Zpřístupnění a Sledování vstupu pro Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>Zkratka: ignorováno — zaměření přešlo do jiného okna nebo aplikace ({0}). Napište text znovu v cílovém poli.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>Zkratka: neuronová oprava je zapnutá, ale není načten žádný model. Stáhněte si model v nastavení.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>Neuronová oprava selhala: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>Oprava selhala: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>Neuronová oprava (místní model)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>Místní model podpořený slovníky. Zapněte, stáhněte model a stiskněte zkratku.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>Přidat model</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>Vyberte model…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>Stáhnout vybraný model</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>Není nainstalován žádný model</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>Odebrat vybraný model</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>Stahuje se {0}… {1} %</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>{0} nainstalován</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>Stahování selhalo: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>{0} odebrán</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>Stažení modelu nevrátilo žádné použitelné soubory.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>Model se nepodařilo načíst: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>{0} se načítá do paměti… (první načtení může chvíli trvat)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} připraven — stiskněte zkratku a aktuální řádek se přepíše.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} připraven na {1} — stiskněte zkratku a aktuální řádek se přepíše.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>Neuronová oprava je zapnutá, ale není nainstalován žádný model. Stáhněte si jej výše.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>Zde fungují jen modely s balíčkem ONNX Runtime GenAI a hledání ponechá právě je. Vložené org/name funguje také.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>Neuronová oprava zapnuta — stiskněte {0} a aktuální řádek se přepíše.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>Neuronová oprava je zapnutá, ale model není načten — „{0}“ opravuje podle slovníku, dokud se nenačte.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>Neuronová oprava zrušena — řádek se během běhu modelu změnil («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>Model se nepodařilo odebrat: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>Zatím žádné slovníky — přidejte výše jazyk, aby jej opravy mohly použít.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>Stáhnout</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>Zkratka: ignorováno — aktivní jazyk vstupu (čínština/japonština/korejština) píše přes IME, takže Lapsus nedokáže ten text ze stisků kláves obnovit.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>Zkratka: ignorováno — tohle je pole pro heslo. Lapsus si tam nikdy nic neukládá ani nepřepisuje.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>Přeskakovat pole s heslem</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>Pole s heslem se nikdy neukládají do vyrovnávací paměti. V prohlížeči tím zapnete jeho engine zpřístupnění.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>Obecné</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>Knihovna</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>AI</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>Aplikace</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>Slova, kterých se nedotýkat</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>Jména, přihlašovací jména a značky, kterých se nikdy nedotýkat.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>slovo</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>Zatím žádné výjimky.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>Odebrat ze seznamu</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Aplikace k přeskočení</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>V nich je Lapsus zcela vypnutý: žádná paměť, žádné zkratky.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>název procesu</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>Vyberte spuštěnou aplikaci</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Žádné aplikace se nepřeskakují.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>Odebrat ze seznamu</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>Zkratka: Lapsus se do {0} neplete.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>Spustit model na</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>Automaticky</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>Procesor (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>Grafická karta (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>Neuronový akcelerátor (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>Dostupné zde: {0}. Balíček sestavený pro jiné zařízení také poběží — na procesoru.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>Není zde podporovaný akcelerátor, model tedy poběží na procesoru.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Hledat na Hugging Face nebo vložit org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>Hledat</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>Najít na Hugging Face modely s balíčkem ONNX Runtime GenAI</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>Výsledky hledání</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>Hledá se na Hugging Face…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>Nenalezeno nic s balíčkem ONNX Runtime GenAI.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>Nalezeno: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>Hledání selhalo: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>Zdarma — osobní použití</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>Zdarma pro soukromé osoby včetně freelancerů. Nic není zamčené — licence pokrývá použití ve firmě.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} míst</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>Platná do {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>Bez data vypršení</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>Licenční klíč</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>Vložte klíč z e-mailu o nákupu</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>Aktivovat</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>Odebrat</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>Pro je jedna soukromá osoba. Business se licencuje na místo ve firmě.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Koupit Pro</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>Komerční licence</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>Tohle nevypadá jako klíč Lapsus. Zkontrolujte, že se zkopíroval celý řádek.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>Tento klíč nebyl vydán pro toto sestavení.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>Platnost klíče skončila {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>Toto sestavení neumí ověřovat licenční klíče.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>Kdo musí platit?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>Tento počítač spravuje organizace — je potřeba licence.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Licence Lapsus</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>Ve firmě se Lapsus licencuje na místo. Zbývá {0} dní na vyzkoušení.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>Na tomto počítači Lapsus potřebuje licenci.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>Tento počítač spravuje organizace (doména, Entra ID nebo server MDM). Pro soukromé osoby včetně freelancerů je Lapsus zdarma; použití ve firmě je placené, na místo.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>Nic se nevypíná a nic se nikam neodesílá — kontrola probíhá jen na tomto počítači.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>Mám klíč</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>Později</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>Všechna místa této licence jsou obsazena. Napište na {0}, chcete-li přenést místo na tento počítač nebo dokoupit další.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>Licenční server nebyl dostupný. Klíč je uložen — aktivace se zopakuje.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>Tento počítač se nepodařilo identifikovat, licenci tedy není k čemu navázat.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>Aktivace…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>O aplikaci Lapsus</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>O aplikaci Lapsus</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>Zdarma pro soukromé osoby. Firmy platí za každé místo. Nic se nezamyká a nic nevyprší.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>Web</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>Podpořte vývoj</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus je pro vás zdarma, bez reklam a sledování. Pokud vám šetří čas, můžete přispět.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>Přispět</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>Open-source licence</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>Komponenty</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>Slovníky</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Nejsou součástí Lapsusu: každý se stáhne, až když přidáte jazyk, a zůstává pod licencí svého vydavatele.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>Všechny zdroje a autoři</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>Dodávané uvnitř Lapsusu, každá pod vlastní licencí.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>Text licence</value>
+  </data>
+</root>

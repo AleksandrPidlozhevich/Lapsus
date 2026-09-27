@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Lapsus.Core.Tests"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- A language's neighbour words its own dictionary cannot rule out (NeighbourWords.IsListed). -->
+        <EmbeddedResource Include="Spelling\Data\*.neighbour.txt" LogicalName="Lapsus.Core.Spelling.Data.%(Filename)%(Extension)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- ExcludeAssets=contentfiles drops SymSpell's bundled English frequency_*.txt dictionaries:
+             we never load them (the user downloads dictionaries at runtime), so they must not ship. -->
+        <PackageReference Include="SymSpell" Version="6.7.3" ExcludeAssets="contentfiles"/>
+        <!-- Reads the Hunspell dictionaries the user downloads (every word form, no frequencies). Used under the
+             MPL 1.1 side of its MPL/LGPL/GPL tri-licence, unmodified — see THIRD-PARTY-NOTICES.md. -->
+        <PackageReference Include="WeCantSpell.Hunspell" Version="7.0.1"/>
+    </ItemGroup>
+
+</Project>

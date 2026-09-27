@@ -1,0 +1,244 @@
+# ============================================================
+#  .gitignore — C# / .NET  (Visual Studio + JetBrains Rider)
+# ============================================================
+
+# ----- User-specific files ----------------------------------
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.env
+mono_crash.*
+
+# ----- Build results ----------------------------------------
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Aa][Rr][Mm]64[Ee][Cc]/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# ----- .NET Core / build artifacts --------------------------
+project.lock.json
+project.fragment.lock.json
+artifacts/
+.artifacts/
+Generated\ Files/
+ScaffoldingReadMe.txt
+
+# ----- Files built by Visual Studio -------------------------
+*_i.c
+*_p.c
+*_i.h
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+!Directory.Build.rsp
+
+# ----- Test results -----------------------------------------
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+*.received.*
+
+# ----- Code coverage ----------------------------------------
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+*.dotCover
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+OpenCover/
+
+# ----- Visual Studio cache / options ------------------------
+.vs/
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+*.[Cc]ache
+!?*.[Cc]ache/
+*.psess
+*.vsp
+*.vspx
+*.sap
+*.e2e
+
+# ----- ReSharper / DotSettings ------------------------------
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ----- NuGet ------------------------------------------------
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# ----- Publish ----------------------------------------------
+publish/
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+PublishScripts/
+
+# ----- Azure ------------------------------------------------
+csx/
+*.build.csdef
+ecf/
+rcf/
+
+# ----- Windows Store / packaging ----------------------------
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+*.appx
+*.appxbundle
+*.appxupload
+
+# ----- SQL Server -------------------------------------------
+*.mdf
+*.ldf
+*.ndf
+
+# ----- Misc -------------------------------------------------
+ClientBin/
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+healthchecksdb
+*.GhostDoc.xml
+StyleCopReport.xml
+FakesAssemblies/
+BenchmarkDotNet.Artifacts/
+
+# Strong name files — раскомментируй, если нужно игнорировать
+#*.snk
+
+# ----- Backup / migration -----------------------------------
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+*.rptproj.bak
+MigrationBackup/
+
+# ----- Fody -------------------------------------------------
+FodyWeavers.xsd
+
+# ============================================================
+#  JetBrains Rider / IntelliJ
+# ============================================================
+.idea/
+*.sln.iml
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+out/
+cmake-build-*/
+atlassian-ide-plugin.xml
+
+# ============================================================
+#  Visual Studio Code (на случай смешанной команды)
+# ============================================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+*.code-workspace
+.history/
+*.vsix
+
+# ============================================================
+#  Node / Angular  (фронт, например NikaMotion)
+# ============================================================
+node_modules/
+/wwwroot/node_modules
+.sass-cache/
+npm-debug.log*
+yarn-error.log*
+.angular/
+dist/
+
+# ----- Python (PTVS) ----------------------------------------
+__pycache__/
+*.pyc
+
+# ----- OS ---------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# ----- Portable downloads (next to the executable when run from repo) ----------
+/dictionaries/
+/models/
+
+# ----- Installer outputs ------------------------------------
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.dmg
+/build/
+
+# ----- Working drafts that must not be published ----------
+/docs/COMMERCIAL-TERMS-DRAFT.md

@@ -1,0 +1,72 @@
+# Build and test on both desktop OSes.
+#
+# The macOS job matters more than it looks: Lapsus/Input/Mac/* has no tests at all and is
+# compiled nowhere but a developer's machine, so a [SupportedOSPlatform] break there is
+# invisible until someone packages a release. Building is most of the value; the tests are
+# OS-independent and run on both anyway.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # No packages.lock.json in the tree, so setup-dotnet's own cache has nothing to key on.
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', 'Directory.Build.props') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      - name: Restore
+        run: dotnet restore Lapsus.slnx
+
+      - name: Build
+        run: dotnet build Lapsus.slnx --no-restore -c Release
+
+      # Lapsus.Tests disables parallelization (Dispatcher.UIThread is process-wide); both
+      # suites together run in about a second, so there is nothing to tune here.
+      # The trx logger is left to name its own file: a fixed LogFileName makes the second
+      # test project overwrite the first one's results.
+      - name: Test
+        run: >
+          dotnet test Lapsus.slnx --no-build -c Release
+          --collect:"XPlat Code Coverage"
+          --logger "trx"
+          --results-directory TestResults
+
+      # No threshold yet — the point is to start seeing the number.
+      - name: Upload test results and coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ runner.os }}
+          path: TestResults/
+          if-no-files-found: warn

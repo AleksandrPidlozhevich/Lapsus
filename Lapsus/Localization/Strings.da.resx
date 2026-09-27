@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — Indstillinger</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>Ret tastaturlayout og tastefejl med én genvejstast</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>Opsamling til</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>Opsamling fra</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>Ret automatisk efter mellemrum</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>Ret også tastefejl automatisk</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>Fra: autoretning skifter kun layoutet for et ord skrevet på det forkerte. Tastefejl bliver ved genvejstasten.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>Kun layoutskift, uden ordbøger</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>Bytter tegnene, som de er, og retter ikke stavefejl. Virker uden downloads; tryk igen for næste layout.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>Skift systemets layout efter en rettelse</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>Genvejen skifter altid sprog. Dette gælder kun auto efter Mellemrum og rettelse af markeringen.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>Start ved login</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>Vis layoutet ved markøren</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>Et mærke med det aktive layout ved siden af tekstmarkøren. Browsere viser det ikke.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>Genvejstast</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>Ret markeringen</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>Retter den markerede tekst — i ethvert vindue, uanset hvor gammel teksten er.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>Handlinger på markeringen</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>Skift store/små bogstaver</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>Skifter markeringen: STORE BOGSTAVER → små bogstaver → Stort begyndelsesbogstav.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>Translitterér</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>Kyrillisk eller græsk ⇄ latinsk. Tryk igen for at gå tilbage.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>Vend hebraisk / arabisk tilbage</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>Retter en hebraisk eller arabisk linje, der kom omvendt.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>Foretrukket sprog ved uafgjort</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>Hvilket sprog vinder, når et ord passer til flere («молоток» på ru og uk).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>Sprog i brugerfladen</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>Lyst tema</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>Mørkt tema</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>Systemets tema</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>Sprog og ordbøger</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>Hentes én gang og virker derefter offline. Uden en ordbog rettes et sprog dårligere.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>Tilføj sprog</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>Tilføj</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>Vælg et sprog</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>Hent og tilføj det valgte sprog</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>Fjern ordbog</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>Automatisk (efter score, derefter det foretrukne)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>Slået fra.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>Tastaturopsamling er endnu ikke tilgængelig på denne platform. Indstillinger, ordbøger og start ved login virker.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>Aktiv. Ord rettes automatisk efter mellemrum (og med „{0}“).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>Aktiv. Skriv et ord og tryk „{0}“ — Lapsus retter det på stedet.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>Kunne ikke starte opsamlingen: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Kunne ikke opdatere start ved login: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>Kunne ikke starte tastaturopsamlingen. Giv Lapsus adgang til Tilgængelighed under Systemindstillinger → Anonymitet og sikkerhed → Tilgængelighed (og Inputovervågning, hvis den er nævnt), og genstart derefter appen.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsus har brug for disse tilladelser for at se og rette det, du skriver. Giv dem nedenfor, og kom så tilbage hertil.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Giv adgang til Tilgængelighed</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Giv adgang til Inputovervågning</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>Rettet: {0} → {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>Henter „{0}“…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>„{0}“ installeret.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>„{0}“ opdateret.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>Hent den fyldigere ordbog</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>Hentningen mislykkedes: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>„{0}“ fjernet.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>Den hentede ordbog er tom.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>Indstillinger</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>Afslut</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — layoutrettelse</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>Opdatering klar — genstart for at installere</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>Genstart for at installere denne opdatering</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>Søg efter opdateringer</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus er opdateret.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>Søgning efter opdateringer mislykkedes: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>Denne kopi opdaterer ikke sig selv — hent den nyeste udgivelse.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>Genvejstast: der er ikke skrevet noget (vindue: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>Genvejstast: „{0}“ — alle ord ser rigtige ud, der er intet at ændre.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>Markering: intet er markeret, eller {0} svarer ikke på en kopiering.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>Markering: udklipsholderen kunne ikke bruges ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>Tastaturopfangningen gik kortvarigt i stå og blev genstartet. Hvis det bliver ved, så luk en travl Accessibility-klient, eller giv Lapsus tilladelsen Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>Hent mindst én stavekontrolordbog i indstillingerne, før du retter layoutet.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput mislykkedes (tilbagetast {0}/{1}, unicode {2}/{3}, fejl {4}, vindue: {5}). Målvinduet kører sandsynligvis som administrator.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>Layoutskift: systemet returnerede ingen layoutliste.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>Layoutet {0} er ikke installeret i Windows (tilgængelige: {1}). Tilføj det under Indstillinger → Klokkeslæt og sprog → Sprog og område.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>Layoutet {0} er ikke installeret på denne Mac (tilgængelige: {1}). Tilføj det under Systemindstillinger → Tastatur → Inputkilder.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>Kunne ikke sende tastetryk til den aktive app ({0}). Tjek tilladelserne Tilgængelighed og Inputovervågning for Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>Genvejstast: ignoreret — fokus flyttede til et andet vindue eller program ({0}). Skriv igen i det ønskede felt.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>Genvejstast: neural rettelse er slået til, men ingen model er indlæst. Hent en model i indstillingerne.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>Neural rettelse mislykkedes: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>Rettelsen mislykkedes: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>Neural rettelse (lokal model)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>En lokal model med ordbøgerne som støtte. Slå til, hent en, og tryk på genvejstasten.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>Tilføj model</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>Vælg en model…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>Hent den valgte model</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>Ingen model installeret</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>Fjern den valgte model</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>Henter {0}… {1} %</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>{0} installeret</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>Hentningen mislykkedes: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>{0} fjernet</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>Modelhentningen gav ingen brugbare filer.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>Kunne ikke indlæse modellen: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>Indlæser {0} i hukommelsen… (første indlæsning kan tage tid)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} klar — tryk på genvejstasten for at omskrive den aktuelle linje.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} klar på {1} — tryk på genvejstasten for at omskrive den aktuelle linje.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>Neural rettelse er slået til, men ingen model er installeret. Hent en ovenfor.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>Kun modeller med en ONNX Runtime GenAI-pakke kører her, og søgningen beholder netop dem. Et indsat org/name virker også.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>Neural rettelse slået til — tryk {0} for at omskrive den aktuelle linje.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>Neural rettelse er slået til, men ingen model er indlæst — “{0}” retter med ordbogen, indtil en er indlæst.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>Neural rettelse annulleret — linjen ændrede sig, mens modellen kørte («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>Kunne ikke fjerne modellen: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>Ingen ordbøger endnu — tilføj et sprog ovenfor, så rettelserne kan bruge det.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>Hent</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>Genvejstast: ignoreret — det aktive inputsprog (kinesisk/japansk/koreansk) skriver gennem en IME, så Lapsus kan ikke genskabe den tekst ud fra tastetrykkene.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>Genvejstast: ignoreret — dette er et adgangskodefelt. Lapsus gemmer og omskriver aldrig det, du skriver dér.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>Spring adgangskodefelter over</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>Adgangskodefelter gemmes aldrig i bufferen. I en browser slår det dens tilgængelighedsmotor til.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>Generelt</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>Bibliotek</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>AI</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>Ord der skal stå urørt</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>Navne, logins og mærker der aldrig må ændres.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>ord</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>Ingen undtagelser endnu.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>Fjern fra listen</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Programmer der springes over</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>I disse er Lapsus helt slået fra: ingen buffer, ingen genvejstaster.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>procesnavn</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>Vælg et kørende program</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Ingen programmer springes over.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>Fjern fra listen</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>Genvejstast: Lapsus blander sig ikke i {0}.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>Kør modellen på</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>Automatisk</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>Processor (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>Grafikkort (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>Neural accelerator (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>Tilgængeligt her: {0}. En pakke bygget til en anden enhed kører alligevel — på processoren.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>Der er ingen understøttet accelerator her, så modellen kører på processoren.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Søg på Hugging Face, eller indsæt org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>Søg</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>Find modeller på Hugging Face der leveres med en ONNX Runtime GenAI-pakke</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>Søgeresultater</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>Søger på Hugging Face…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>Fandt intet med en ONNX Runtime GenAI-pakke.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>Fundet: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>Søgningen mislykkedes: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>Licens</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>Gratis — personlig brug</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>Gratis for private, freelancere inklusive. Intet er låst — en licens dækker brug inde i en virksomhed.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} pladser</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>Gyldig til {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>Ingen udløbsdato</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>Licensnøgle</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>Indsæt nøglen fra købsmailen</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>Aktivér</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>Fjern</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>Pro er én privatperson. Business licenseres pr. plads i en virksomhed.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Køb Pro</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>Kommerciel licens</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>Det ligner ikke en Lapsus-nøgle. Kontrollér, at hele linjen blev kopieret.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>Denne nøgle er ikke udstedt til denne build.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>Denne nøgle udløb den {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>Denne build kan ikke kontrollere licensnøgler.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>Hvem skal betale?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>Denne computer administreres af en organisation — der kræves en licens.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Lapsus-licens</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>I en virksomhed licenseres Lapsus pr. plads. Der er {0} dage tilbage af prøveperioden.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>På denne computer kræver Lapsus en licens.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>Denne computer administreres af en organisation (et domæne, Entra ID eller en MDM-server). For private, freelancere inklusive, er Lapsus gratis; brug inde i en virksomhed er betalt, pr. plads.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>Intet slås fra, og intet sendes nogen steder hen — kontrollen kører kun på denne maskine.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>Jeg har en nøgle</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>Senere</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>Alle pladser på denne licens er i brug. Skriv til {0} for at flytte en plads til denne computer eller købe flere.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>Licensserveren kunne ikke nås. Nøglen er gemt — aktiveringen forsøges igen.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>Denne computer kunne ikke identificeres, så licensen kan ikke bindes til noget.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>Aktiverer…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>Om Lapsus</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>Om Lapsus</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>Licens</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>Gratis for private. Virksomheder betaler pr. plads. Intet er låst, og intet udløber.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>Websted</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>Støt udviklingen</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus er gratis for dig, uden reklamer og sporing. Hvis det sparer dig tid, kan du give et bidrag.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>Donér</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>Open source-licenser</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>Komponenter</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>Ordbøger</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Følger ikke med Lapsus: hver hentes først, når du tilføjer sproget, og beholder udgiverens licens.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>Alle kilder og forfattere</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>Leveres i Lapsus, hver under sin egen licens.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>Licenstekst</value>
+  </data>
+</root>

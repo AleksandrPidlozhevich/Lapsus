@@ -1,0 +1,14 @@
+# typed	expected	status	note — what a Hebrew speaker types with English (or Hebrew) active
+akuo	שלום	ok	plain word
+,usv	תודה	ok	leading comma is ת
+cuer yuc	בוקר טוב	ok	two words
+tbh	אני	ok	three letters that look like an English abbreviation
+t,v	אתה	ok	ת on the comma key inside the word
+ju.	חוץ	ok	trailing "." is the final tsadi
+akuo.	שלום.	ok	a real full stop after a switched word
+akuo how are you	שלום how are you	ok	one Hebrew word, then English
+see you soon	see you soon	ok	English stays English
+akuo mv"k ,usv	שלום צה"ל תודה	pending	gershayim inside an acronym: the keys and the line are right, but 1500 words teach the model too little of צהל for it to read as Hebrew
+urumv	ורוצה	ok	the list has רוצה and not ורוצה; the ו is a word of its own glued on
+יקךךם	hello	ok	typed on the Hebrew layout meaning English
+שלום עולם	שלום עולם	ok	real Hebrew stays

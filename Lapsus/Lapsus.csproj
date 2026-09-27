@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <!--
+      The .ico is a compile input on Windows (it is embedded in Lapsus.exe by the resource step), so
+      unlike the macOS .icns — which only the packaging script needs and generates on the fly — it is
+      committed. Generated from Assets/icon-light.svg; see scripts/package-windows.ps1 for how.
+    -->
+    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+        <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+        <CFBundleIdentifier>com.lapsus.app</CFBundleIdentifier>
+        <CFBundleName>Lapsus</CFBundleName>
+        <CFBundleDisplayName>Lapsus</CFBundleDisplayName>
+        <LSUIElement>true</LSUIElement>
+        <NSAccessibilityUsageDescription>Lapsus needs Accessibility access to capture keystrokes, find the text cursor, and inject corrected text in other apps.</NSAccessibilityUsageDescription>
+        <NSInputMonitoringUsageDescription>Lapsus needs Input Monitoring to receive keystrokes system-wide via CGEventTap.</NSInputMonitoringUsageDescription>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="12.1.2" />
+        <PackageReference Include="Avalonia.Desktop" Version="12.1.2" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.2" />
+        <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
+            <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+            <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
+        <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="12.0.0.17" />
+        <PackageReference Include="Velopack" Version="1.2.0"/>
+    </ItemGroup>
+
+    <!--
+      ONNX Runtime GenAI native package, chosen per platform because the execution providers a
+      build carries are baked into it — this is what decides which devices Neural/ComputeDeviceProbe
+      may offer, so the two must be read together.
+
+      Windows takes the DirectML build (dml + CPU): any DX12 GPU, NVIDIA / AMD / Intel alike.
+      macOS and Linux take the base build, whose ONNX Runtime 1.28 carries the WebGPU provider with
+      Dawn on top of Metal — that is what makes an Apple M-series GPU usable at all, since no
+      publisher ships DirectML packs for it. The same build has no Dawn on Linux, which is CPU-only
+      for now. The managed API is identical across the packages, so the C# builds unchanged, and the
+      version split is only because the DirectML flavour lags the base one.
+
+      Two things stay out of reach and are not offered anywhere in the UI: CUDA (a third package we
+      do not ship) and every NPU — GenAI reaches those through qnn / vitisai / ryzenai, none of them
+      compiled in here, and the Apple Neural Engine is behind CoreML, which ONNX Runtime has on
+      macOS but GenAI has no provider name for.
+    -->
+    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+        <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI.DirectML" Version="0.14.1"/>
+    </ItemGroup>
+    <ItemGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+        <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI" Version="0.15.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj"/>
+    </ItemGroup>
+
+    <!--
+      The input backends and their machinery are internal on purpose — nothing outside this assembly
+      has any business calling them — but the parts that are pure decision-making (what a hotkey press
+      means, when the typing buffer is stale, what a rejected correction leaves behind) are worth
+      pinning down, and they do not need an OS to run.
+    -->
+    <ItemGroup>
+        <InternalsVisibleTo Include="Lapsus.Tests"/>
+    </ItemGroup>
+</Project>

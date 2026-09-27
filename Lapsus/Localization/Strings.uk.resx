@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — Налаштування</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>Виправляє розкладку та опечатки за гарячою клавішею</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>Перехоплення увімкнено</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>Перехоплення вимкнено</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>Автовиправлення після пробілу</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>Також виправляти одруки автоматично</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>Вимк.: автовиправлення лише змінює розкладку слова, набраного не в тій. Одруки виправляє гаряча клавіша.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>Лише зміна розкладки, без словників</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>Переставляє символи як є, друкарські помилки не виправляє. Працює без завантажень; повторне натискання пропонує наступну розкладку.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>Перемикати розкладку системи після виправлення</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>Гаряча клавіша завжди змінює мову. Цей перемикач лише для авто після пробілу і виправлення виділеного.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>Запускати при вході</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>Показувати розкладку біля курсора</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>Значок активної розкладки біля текстового курсора. У браузерах не показується.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>Гаряча клавіша</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>Виправити виділене</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>Виправляє виділений текст — у будь-якому вікні й будь-якої давності.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>Дії над виділеним</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>Змінити регістр</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>По колу: ВЕРХНІЙ РЕГІСТР → нижній регістр → Як у реченні.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>Транслітерація</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>Кирилиця або грецька ⇄ латиниця. Натисніть ще раз, щоб повернути назад.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>Розгорнути іврит / арабську</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>Розвертає рядок івритом або арабською, що прийшов задом наперед.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>Бажана мова за нічиєї</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>Яку мову обрати, коли слово пасує кільком одразу («молоток» в ru і uk).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>Мова інтерфейсу</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>Світла тема</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>Темна тема</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>Системна тема</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>Мови та словники</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>Завантажуються один раз і працюють офлайн. Без словника мова виправляється гірше.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>Додати мову</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>Додати</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>Оберіть мову</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>Завантажити й додати обрану мову</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>Видалити словник</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>Авто (за оцінкою, потім уподобанням)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>Вимкнено.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>Перехоплення клавіатури на цій платформі ще недоступне. Налаштування, словники та автозапуск працюють.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>Активно. Слова виправляються автоматично після пробілу (та за «{0}»).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>Активно. Наберіть слово й натисніть «{0}» — Lapsus виправить його на місці.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>Не вдалося запустити перехоплення: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Не вдалося оновити автозапуск: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>Не вдалося запустити перехоплення клавіатури. Надайте Lapsus доступ у Системні налаштування → Конфіденційність і безпека → Універсальний доступ (і Моніторинг введення, якщо є в списку), потім перезапустіть застосунок.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsus потрібні ці дозволи, щоб бачити та виправляти те, що ви друкуєте. Надайте їх нижче, а потім поверніться сюди.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Надати доступ: Універсальний доступ</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Надати доступ: Моніторинг введення</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>Виправлено: {0} → {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>Завантаження «{0}»…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>«{0}» встановлено.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>«{0}» оновлено.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>Завантажити повніший словник</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>Не вдалося завантажити: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>«{0}» видалено.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>Завантажений словник порожній.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>Вихід</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — виправлення розкладки</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>Доступне оновлення — перезапустіть, щоб установити</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>Перезапустити, щоб установити це оновлення</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>Перевірити оновлення</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>У Lapsus найновіша версія.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>Не вдалося перевірити оновлення: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>Ця копія не оновлюється сама — завантажте останню версію.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>Гаряча клавіша: нічого не набрано (вікно: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>Гаряча клавіша: «{0}» — усі слова виглядають правильно, змінювати нема чого.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>Виділення: нічого не виділено, або {0} не відповідає на копіювання.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>Виділення: не вдалося скористатися буфером обміну ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>Захоплення клавіатури ненадовго зупинилося та було перезапущено. Якщо це повторюється, закрийте завантажений клієнт Accessibility або надайте Lapsus дозвіл Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>Завантажте принаймні один орфографічний словник у Налаштуваннях, перш ніж виправляти розкладку.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput не пройшов (backspace {0}/{1}, unicode {2}/{3}, помилка {4}, вікно: {5}). Імовірно, цільове вікно запущено від імені адміністратора.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>Зміна розкладки: система не повернула список розкладок.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>Розкладка {0} не встановлена у Windows (є: {1}). Додайте її в Налаштування → Час і мова → Мова й регіон.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>Розкладка {0} не встановлена на цьому Mac (є: {1}). Додайте її в Системні налаштування → Клавіатура → Джерела введення.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>Не вдалося надіслати натискання клавіш у активний застосунок ({0}). Перевірте дозволи Універсальний доступ і Моніторинг введення для Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>Гаряча клавіша: проігноровано — фокус перейшов до іншого вікна чи застосунку ({0}). Наберіть текст ще раз у потрібному полі.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>Гаряча клавіша: нейромережеве виправлення увімкнено, але модель не завантажено. Завантажте модель у налаштуваннях.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>Нейромережеве виправлення не вдалося: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>Виправлення не вдалося: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>Нейромережеве виправлення (локальна модель)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>Локальна модель з опорою на словники. Увімкніть, завантажте модель, натисніть клавішу.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>Додати модель</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>Виберіть модель…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>Завантажити вибрану модель</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>Немає встановлених моделей</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>Видалити вибрану модель</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>Завантаження {0}… {1}%</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>Встановлено {0}</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>Не вдалося завантажити: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>Видалено {0}</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>Завантаження моделі не повернуло придатних файлів.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>Не вдалося завантажити модель: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>Завантаження {0} у пам&apos;ять… (перший раз може тривати довго)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} готова — натисніть гарячу клавішу, щоб переписати поточний рядок.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} готова на {1} — натисніть гарячу клавішу, щоб переписати поточний рядок.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>Нейромережеве виправлення увімкнено, але жодної моделі не встановлено. Завантажте модель вище.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>Тут працюють лише моделі з паком ONNX Runtime GenAI — пошук залишає саме їх. Можна вставити й org/name.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>Нейромережеве виправлення увімкнено — натисніть {0}, щоб переписати поточний рядок.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>Нейромережеве виправлення увімкнено, але модель не завантажена — «{0}» виправляє за словником, доки вона не завантажиться.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>Нейромережеве виправлення скасовано — рядок змінився, поки працювала модель («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>Не вдалося видалити модель: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>Словників поки немає — додайте мову вище, щоб виправлення її враховували.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>Завантажити</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>Гаряча клавіша: проігноровано — активна мова введення (китайська/японська/корейська) використовує IME, і Lapsus не може відновити такий текст за натисканнями клавіш.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>Гаряча клавіша: проігноровано — це поле пароля. Lapsus не зберігає й не переписує те, що ви в ньому набираєте.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>Не читати поля паролів</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>Поля пароля не запам&apos;ятовуються. У браузері задля цього вмикається рушій доступності.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>Загальні</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>Бібліотека</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>ШІ</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>Програми</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>Слова, які не чіпати</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>Імена, логіни та бренди, які не можна виправляти.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>слово</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>Список порожній.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>Прибрати зі списку</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Застосунки-винятки</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>Lapsus у них повністю вимкнений: ні буфера, ні гарячих клавіш.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>ім&apos;я процесу</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>Виберіть запущену програму</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Винятків немає.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>Прибрати зі списку</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>Гаряча клавіша: у {0} Lapsus не втручається.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>Запускати модель на</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>Автоматично</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>Процесорі (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>Відеокарті (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>Нейроприскорювачі (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>Доступно: {0}. Пак для іншого пристрою все одно запуститься — на процесорі.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>Підтримуваного прискорювача немає, модель працює на процесорі.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Пошук на Hugging Face або org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>Знайти</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>Шукати на Hugging Face моделі з паком ONNX Runtime GenAI</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>Результати пошуку</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>Шукаю на Hugging Face…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>Нічого з паком ONNX Runtime GenAI не знайдено.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>Знайдено: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>Пошук не вдався: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>Ліцензія</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>Безкоштовно — особисте використання</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>Безкоштовно для приватних осіб, включно з фрилансерами. Нічого не заблоковано — ліцензія потрібна для використання в компанії.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · робочих місць: {1}</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>Діє до {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>Без терміну дії</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>Ліцензійний ключ</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>Вставте ключ із листа про покупку</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>Активувати</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>Pro — одна приватна особа. Business — за робочими місцями в компанії.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Купити Pro</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>Комерційна ліцензія</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>Це не схоже на ключ Lapsus. Перевірте, чи скопійовано весь рядок.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>Цей ключ видано не для цієї збірки.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>Термін дії ключа сплив {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>Ця збірка не вміє перевіряти ключі.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>Кому потрібно платити?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>Цим комп’ютером керує організація — потрібна ліцензія.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Ліцензія Lapsus</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>У компанії Lapsus ліцензується за робочими місцями. Залишилося днів на ознайомлення: {0}.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>На цьому комп’ютері Lapsus потрібна ліцензія.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>Цим комп’ютером керує організація (домен, Entra ID або сервер MDM). Для приватних осіб, включно з фрилансерами, Lapsus безкоштовний; використання в компанії — платне, за робочими місцями.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>Нічого не вимикається і нікуди не надсилається — перевірка йде лише на цьому комп’ютері.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>У мене є ключ</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>Пізніше</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>Усі місця за цією ліцензією зайняті. Напишіть на {0}, щоб перенести місце на цей комп’ютер або придбати ще.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>Не вдалося зв’язатися із сервером ліцензій. Ключ збережено — активацію буде повторено.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>Не вдалося визначити цей комп’ютер, тому ліцензію нема до чого прив’язати.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>Активація…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>Про Lapsus</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>Про Lapsus</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>Ліцензія</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>Безкоштовно для приватних осіб. Компанії платять за робоче місце. Нічого не блокується й не спливає.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>Сайт</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>Підтримати розробку</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus безкоштовний для вас, без реклами та стеження. Якщо він заощаджує ваш час, можна підтримати автора.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>Підтримати</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>Ліцензії відкритого коду</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>Компоненти</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>Словники</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Не постачаються всередині Lapsus: кожен завантажується, лише коли ви додаєте мову, і зберігає ліцензію свого видавця.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>Усі джерела та автори</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>Постачаються всередині Lapsus, кожен під власною ліцензією.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>Текст ліцензії</value>
+  </data>
+</root>

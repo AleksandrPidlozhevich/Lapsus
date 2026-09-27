@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — Einstellungen</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>Tastaturlayout und Tippfehler per Tastenkürzel korrigieren</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>Erfassung aktiv</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>Erfassung aus</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>Automatisch nach Leertaste korrigieren</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>Auch Tippfehler automatisch korrigieren</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>Aus: Die Autokorrektur wechselt nur das Layout eines auf dem falschen getippten Worts. Tippfehler bleiben dem Hotkey.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>Nur Layoutwechsel, ohne Wörterbücher</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>Tauscht die Zeichen wie getippt, ohne Tippfehler zu korrigieren. Funktioniert ohne Downloads; erneut drücken für das nächste Layout.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>Systemlayout nach einer Korrektur umschalten</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>Die Tastenkombination wechselt die Sprache immer. Dies gilt nur für Auto nach Leertaste und die Korrektur der Auswahl.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>Beim Anmelden starten</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>Layout am Cursor anzeigen</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>Ein Hinweis mit dem aktiven Layout neben dem Textcursor. Browser zeigen ihn nicht.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>Tastenkürzel</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>Auswahl korrigieren</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>Korrigiert den markierten Text — in jedem Fenster, egal wie alt der Text ist.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>Aktionen für die Auswahl</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>Groß-/Kleinschreibung ändern</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>Wechselt die Auswahl: GROSSBUCHSTABEN → kleinbuchstaben → Satzanfang groß.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>Transliterieren</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>Kyrillisch oder Griechisch ⇄ Lateinisch. Nochmals drücken kehrt zurück.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>Hebräisch / Arabisch entspiegeln</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>Dreht eine hebräische oder arabische Zeile, die verkehrt herum ankam, wieder richtig.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>Bevorzugte Sprache bei Gleichstand</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>Welche Sprache gewinnt, wenn ein Wort zu mehreren passt («молоток» in ru und uk).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>Sprache der Oberfläche</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>Helles Design</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>Dunkles Design</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>Systemdesign</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>Sprachen und Wörterbücher</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>Einmal heruntergeladen, dann offline nutzbar. Ohne Wörterbuch wird eine Sprache schlechter korrigiert.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>Sprache hinzufügen</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>Sprache wählen</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>Ausgewählte Sprache herunterladen und hinzufügen</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>Wörterbuch entfernen</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>Automatisch (nach Bewertung, dann bevorzugt)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>Deaktiviert.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>Tastaturerfassung ist auf dieser Plattform noch nicht verfügbar. Einstellungen, Wörterbücher und Autostart funktionieren weiterhin.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>Aktiv. Wörter werden nach der Leertaste automatisch korrigiert (und mit „{0}“).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>Aktiv. Wort tippen und „{0}“ drücken — Lapsus korrigiert es an Ort und Stelle.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>Erfassung konnte nicht gestartet werden: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Autostart konnte nicht aktualisiert werden: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>Tastaturerfassung konnte nicht gestartet werden. Erteilen Sie Lapsus den Bedienungshilfen-Zugriff unter Systemeinstellungen → Datenschutz &amp; Sicherheit → Bedienungshilfen (und Eingabeüberwachung, falls aufgeführt), und starten Sie die App neu.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsus braucht diese Berechtigungen, um Ihre Eingaben zu sehen und zu korrigieren. Erteilen Sie sie unten und kommen Sie dann hierher zurück.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Bedienungshilfen-Zugriff erteilen</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Eingabeüberwachung erlauben</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>Korrigiert: {0} → {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>„{0}“ wird heruntergeladen …</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>„{0}“ installiert.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>„{0}“ aktualisiert.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>Umfangreicheres Wörterbuch herunterladen</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>Download fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>„{0}“ entfernt.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>Das heruntergeladene Wörterbuch ist leer.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — Layoutkorrektur</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>Update verfügbar — zum Installieren neu starten</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>Neu starten, um dieses Update zu installieren</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>Nach Updates suchen</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus ist auf dem neuesten Stand.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>Updatesuche fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>Diese Kopie aktualisiert sich nicht selbst — laden Sie die neueste Version herunter.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>Tastenkürzel: nichts getippt (Fenster: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>Tastenkürzel: „{0}“ — alle Wörter sehen korrekt aus, nichts zu ändern.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>Auswahl: nichts markiert, oder {0} antwortet nicht auf Kopieren.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>Auswahl: Die Zwischenablage konnte nicht verwendet werden ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>Die Tastaturerfassung stockte kurz und wurde neu gestartet. Wenn das häufiger vorkommt, schließen Sie einen ausgelasteten Accessibility-Client oder erteilen Sie Lapsus die Berechtigung Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>Laden Sie in den Einstellungen mindestens ein Rechtschreibwörterbuch herunter, bevor Sie das Layout korrigieren.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput fehlgeschlagen (Rückschritte {0}/{1}, Unicode {2}/{3}, Fehler {4}, Fenster: {5}). Das Zielfenster läuft vermutlich als Administrator.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>Layoutwechsel: Das System hat keine Layoutliste zurückgegeben.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>Layout {0} ist in Windows nicht installiert (verfügbar: {1}). Fügen Sie es unter Einstellungen → Zeit und Sprache → Sprache und Region hinzu.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>Layout {0} ist auf diesem Mac nicht installiert (verfügbar: {1}). Fügen Sie es unter Systemeinstellungen → Tastatur → Eingabequellen hinzu.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>Tastenanschläge konnten nicht an die aktive App gesendet werden ({0}). Prüfen Sie die Berechtigungen für Bedienungshilfen und Eingabeüberwachung von Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>Tastenkürzel: ignoriert — der Fokus ist zu einem anderen Fenster oder Programm gewechselt ({0}). Tippen Sie im Zielfeld erneut.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>Tastenkürzel: Neuronale Korrektur ist an, aber kein Modell geladen. Laden Sie in den Einstellungen ein Modell herunter.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>Neuronale Korrektur fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>Korrektur fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>Neuronale Korrektur (lokales Modell)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>Ein lokales Modell, gestützt auf die Wörterbücher. Einschalten, eines laden, Tastenkürzel drücken.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>Modell hinzufügen</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>Modell wählen …</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>Ausgewähltes Modell herunterladen</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>Kein Modell installiert</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>Ausgewähltes Modell entfernen</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>{0} wird heruntergeladen … {1} %</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>{0} installiert</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>Download fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>{0} entfernt</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>Der Modell-Download enthielt keine brauchbaren Dateien.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>Modell konnte nicht geladen werden: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>{0} wird in den Speicher geladen … (das erste Laden kann dauern)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} bereit — Tastenkürzel drücken, um die aktuelle Zeile neu zu schreiben.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} bereit auf {1} — Tastenkürzel drücken, um die aktuelle Zeile neu zu schreiben.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>Neuronale Korrektur ist an, aber kein Modell installiert. Laden Sie oben eines herunter.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>Nur Modelle mit einem ONNX-Runtime-GenAI-Paket laufen hier, und die Suche behält nur diese. Ein eingefügtes org/name funktioniert auch.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>Neuronale Korrektur an — {0} drücken, um die aktuelle Zeile neu zu schreiben.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>Neuronale Korrektur ist an, aber kein Modell ist geladen — „{0}“ korrigiert mit dem Wörterbuch, bis eines geladen ist.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>Neuronale Korrektur abgebrochen — die Zeile hat sich geändert, während das Modell lief («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>Modell konnte nicht entfernt werden: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>Noch keine Wörterbücher — fügen Sie oben eine Sprache hinzu, damit Korrekturen sie nutzen können.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>Tastenkürzel: ignoriert — die aktive Eingabesprache (Chinesisch/Japanisch/Koreanisch) schreibt über ein IME, daher kann Lapsus diesen Text nicht aus den Tastenanschlägen rekonstruieren.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>Tastenkürzel: ignoriert — das ist ein Passwortfeld. Lapsus puffert und überschreibt dort niemals etwas.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>Passwortfelder überspringen</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>Passwortfelder werden nie gepuffert. Im Browser schaltet das dessen Barrierefreiheits-Engine ein.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>Bibliothek</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>KI</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>Wörter, die unangetastet bleiben</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>Namen, Logins und Marken, die nie angefasst werden.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>Wort</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>Noch nichts ausgenommen.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>Aus der Liste entfernen</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Zu überspringende Programme</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>In diesen ist Lapsus vollständig aus: kein Puffer, keine Tastenkürzel.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>Prozessname</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>Laufendes Programm auswählen</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Keine Programme übersprungen.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>Aus der Liste entfernen</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>Tastenkürzel: Lapsus hält sich aus {0} heraus.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>Modell ausführen auf</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>Automatisch</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>Prozessor (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>Grafikkarte (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>Neuronaler Beschleuniger (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>Hier verfügbar: {0}. Ein für ein anderes Gerät gebautes Paket läuft trotzdem — auf dem Prozessor.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>Kein unterstützter Beschleuniger vorhanden, das Modell läuft daher auf dem Prozessor.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Hugging Face durchsuchen oder org/name einfügen</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>Modelle auf Hugging Face finden, die ein ONNX-Runtime-GenAI-Paket mitbringen</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>Suchergebnisse</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>Hugging Face wird durchsucht …</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>Nichts gefunden, das ein ONNX-Runtime-GenAI-Paket mitbringt.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>Gefunden: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>Suche fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>Lizenz</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>Kostenlos — private Nutzung</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>Kostenlos für Privatpersonen, Freiberufler eingeschlossen. Nichts ist gesperrt — eine Lizenz deckt die Nutzung im Unternehmen ab.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} Arbeitsplätze</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>Gültig bis {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>Kein Ablaufdatum</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>Lizenzschlüssel</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>Schlüssel aus der Kaufbestätigung einfügen</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>Aktivieren</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>Pro ist eine Privatperson. Business wird pro Arbeitsplatz im Unternehmen lizenziert.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Pro kaufen</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>Kommerzielle Lizenz</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>Das sieht nicht nach einem Lapsus-Schlüssel aus. Prüfen Sie, ob die ganze Zeile kopiert wurde.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>Dieser Schlüssel wurde nicht für diesen Build ausgestellt.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>Dieser Schlüssel ist am {0} abgelaufen.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>Dieser Build kann keine Lizenzschlüssel prüfen.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>Wer muss zahlen?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>Diesen Rechner verwaltet eine Organisation — eine Lizenz ist erforderlich.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Lapsus-Lizenz</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>Im Unternehmen wird Lapsus pro Arbeitsplatz lizenziert. Noch {0} Tage zum Ausprobieren.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>Auf diesem Rechner braucht Lapsus eine Lizenz.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>Dieser Rechner wird von einer Organisation verwaltet (Domäne, Entra ID oder MDM-Server). Für Privatpersonen einschließlich Freiberuflern ist Lapsus kostenlos; die Nutzung im Unternehmen ist kostenpflichtig, pro Arbeitsplatz.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>Es wird nichts abgeschaltet und nichts versendet — die Prüfung läuft nur auf diesem Rechner.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>Ich habe einen Schlüssel</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>Später</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>Alle Plätze dieser Lizenz sind belegt. Schreiben Sie an {0}, um einen Platz auf diesen Computer zu übertragen oder weitere zu kaufen.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>Der Lizenzserver war nicht erreichbar. Der Schlüssel ist gespeichert — die Aktivierung wird wiederholt.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>Dieser Rechner konnte nicht identifiziert werden, die Lizenz lässt sich also an nichts binden.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>Aktivierung…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>Über Lapsus</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>Über Lapsus</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>Lizenz</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>Kostenlos für Privatpersonen. Firmen zahlen pro Arbeitsplatz. Nichts wird gesperrt und nichts läuft ab.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>Entwicklung unterstützen</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus ist für Sie kostenlos, ohne Werbung und ohne Tracking. Wenn es Ihnen Zeit spart, können Sie etwas beitragen.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>Spenden</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>Open-Source-Lizenzen</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>Komponenten</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>Wörterbücher</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Nicht in Lapsus enthalten: Jedes wird erst heruntergeladen, wenn Sie die Sprache hinzufügen, und behält die Lizenz seines Herausgebers.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>Alle Quellen und Autoren</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>In Lapsus enthalten, jede unter ihrer eigenen Lizenz.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>Lizenztext</value>
+  </data>
+</root>

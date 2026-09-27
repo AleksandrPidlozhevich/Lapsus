@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="Window_Title" xml:space="preserve">
+    <value>Lapsus — Setări</value>
+  </data>
+    <data name="Subtitle" xml:space="preserve">
+    <value>Corectează aranjamentul tastaturii și greșelile de tastare cu o singură tastă</value>
+  </data>
+    <data name="Capture_On" xml:space="preserve">
+    <value>Captură activă</value>
+  </data>
+    <data name="Capture_Off" xml:space="preserve">
+    <value>Captură oprită</value>
+  </data>
+    <data name="AutoCorrect" xml:space="preserve">
+    <value>Corectare automată după spațiu</value>
+  </data>
+  <data name="AutoFixTypos" xml:space="preserve">
+    <value>Corectează automat și greșelile de tastare</value>
+  </data>
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
+    <value>Oprit: corectarea automată doar schimbă aranjamentul unui cuvânt tastat pe cel greșit. Greșelile de tastare rămân tastei rapide.</value>
+  </data>
+    <data name="PlainSwitch" xml:space="preserve">
+    <value>Doar schimbarea aranjamentului, fără dicționare</value>
+  </data>
+    <data name="PlainSwitch_Hint" xml:space="preserve">
+    <value>Schimbă caracterele așa cum sunt, fără a corecta greșelile de tastare. Funcționează fără descărcări; apasă din nou pentru următorul aranjament.</value>
+  </data>
+    <data name="SwitchLayout" xml:space="preserve">
+    <value>Comută aranjamentul sistemului după o corectare</value>
+  </data>
+    <data name="SwitchLayout_Hint" xml:space="preserve">
+    <value>Scurtătura schimbă întotdeauna limba. Aceasta se aplică doar la auto după Spațiu și la corectarea selecției.</value>
+  </data>
+    <data name="StartAtLogin" xml:space="preserve">
+    <value>Pornește la autentificare</value>
+  </data>
+    <data name="Indicator_Label" xml:space="preserve">
+    <value>Arată aranjamentul lângă cursor</value>
+  </data>
+    <data name="Indicator_Hint" xml:space="preserve">
+    <value>O etichetă cu aranjamentul activ lângă cursorul de text. Browserele nu o afișează.</value>
+  </data>
+    <data name="Hotkey_Label" xml:space="preserve">
+    <value>Tastă rapidă</value>
+  </data>
+    <data name="SelectionHotkey_Label" xml:space="preserve">
+    <value>Corectează selecția</value>
+  </data>
+    <data name="SelectionHotkey_Hint" xml:space="preserve">
+    <value>Corectează textul selectat — în orice fereastră, oricât de vechi ar fi textul.</value>
+  </data>
+    <data name="SelectionActions_Label" xml:space="preserve">
+    <value>Acțiuni asupra selecției</value>
+  </data>
+    <data name="SelectionCase_Label" xml:space="preserve">
+    <value>Schimbă majusculele</value>
+  </data>
+    <data name="SelectionCase_Hint" xml:space="preserve">
+    <value>Parcurge selecția: MAJUSCULE → minuscule → Prima literă mare.</value>
+  </data>
+    <data name="SelectionTranslit_Label" xml:space="preserve">
+    <value>Transliterează</value>
+  </data>
+    <data name="SelectionTranslit_Hint" xml:space="preserve">
+    <value>Chirilic sau grec ⇄ latin. Apasă din nou pentru a reveni.</value>
+  </data>
+    <data name="SelectionRtl_Label" xml:space="preserve">
+    <value>Îndreaptă ebraica / araba</value>
+  </data>
+    <data name="SelectionRtl_Hint" xml:space="preserve">
+    <value>Îndreaptă o linie în ebraică sau arabă care a sosit invers.</value>
+  </data>
+    <data name="Pref_Label" xml:space="preserve">
+    <value>Limba preferată la egalitate</value>
+  </data>
+    <data name="Pref_Hint" xml:space="preserve">
+    <value>Ce limbă câștigă atunci când un cuvânt se potrivește mai multora («молоток» în ru și uk).</value>
+  </data>
+    <data name="Lang_Label" xml:space="preserve">
+    <value>Limba interfeței</value>
+  </data>
+    <data name="Theme_Light" xml:space="preserve">
+    <value>Temă deschisă</value>
+  </data>
+    <data name="Theme_Dark" xml:space="preserve">
+    <value>Temă întunecată</value>
+  </data>
+    <data name="Theme_System" xml:space="preserve">
+    <value>Tema sistemului</value>
+  </data>
+    <data name="Dict_Label" xml:space="preserve">
+    <value>Limbi și dicționare</value>
+  </data>
+    <data name="Dict_Hint" xml:space="preserve">
+    <value>Se descarcă o dată, apoi funcționează offline. Fără dicționar, o limbă este corectată mai slab.</value>
+  </data>
+    <data name="AddLang_Label" xml:space="preserve">
+    <value>Adaugă o limbă</value>
+  </data>
+    <data name="Add_Label" xml:space="preserve">
+    <value>Adaugă</value>
+  </data>
+    <data name="AddLang_Placeholder" xml:space="preserve">
+    <value>Alege o limbă</value>
+  </data>
+    <data name="AddLang_Tooltip" xml:space="preserve">
+    <value>Descarcă și adaugă limba selectată</value>
+  </data>
+    <data name="RemoveDict_Tooltip" xml:space="preserve">
+    <value>Elimină dicționarul</value>
+  </data>
+    <data name="Pref_Auto" xml:space="preserve">
+    <value>Automat (după scor, apoi cea preferată)</value>
+  </data>
+    <data name="Status_Disabled" xml:space="preserve">
+    <value>Dezactivat.</value>
+  </data>
+    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+    <value>Captura tastaturii nu este încă disponibilă pe această platformă. Setările, dicționarele și pornirea la autentificare funcționează.</value>
+  </data>
+    <data name="Status_AutoActive" xml:space="preserve">
+    <value>Activ. Cuvintele sunt corectate automat după spațiu (și cu „{0}”).</value>
+  </data>
+    <data name="Status_HotkeyActive" xml:space="preserve">
+    <value>Activ. Scrie un cuvânt și apasă „{0}” — Lapsus îl corectează pe loc.</value>
+  </data>
+    <data name="Status_StartFailed" xml:space="preserve">
+    <value>Captura nu a putut porni: {0}</value>
+  </data>
+    <data name="Status_StartupFailed" xml:space="preserve">
+    <value>Pornirea la autentificare nu a putut fi actualizată: {0}</value>
+  </data>
+    <data name="Status_AccessibilityRequired" xml:space="preserve">
+    <value>Captura tastaturii nu a putut porni. Acordă-i lui Lapsus acces la Accesibilitate în Setări sistem → Confidențialitate și securitate → Accesibilitate (și Monitorizarea introducerii, dacă apare), apoi repornește aplicația.</value>
+  </data>
+    <data name="Perm_Explain" xml:space="preserve">
+    <value>Lapsus are nevoie de aceste permisiuni ca să vadă și să corecteze ce scrii. Acordă-le mai jos, apoi revino aici.</value>
+  </data>
+    <data name="Perm_OpenAccessibility" xml:space="preserve">
+    <value>Acordă acces la Accesibilitate</value>
+  </data>
+    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
+    <value>Acordă Monitorizarea introducerii</value>
+  </data>
+    <data name="Status_Corrected" xml:space="preserve">
+    <value>Corectat: {0} → {1}</value>
+  </data>
+    <data name="Dict_Downloading" xml:space="preserve">
+    <value>Se descarcă „{0}”…</value>
+  </data>
+    <data name="Dict_Installed" xml:space="preserve">
+    <value>„{0}” instalat.</value>
+  </data>
+    <data name="Dict_Updated" xml:space="preserve">
+    <value>„{0}” actualizat.</value>
+  </data>
+    <data name="UpdateDict_Tooltip" xml:space="preserve">
+    <value>Descarcă dicționarul mai complet</value>
+  </data>
+    <data name="Dict_DownloadFailed" xml:space="preserve">
+    <value>Descărcarea a eșuat: {0}</value>
+  </data>
+    <data name="Dict_Removed" xml:space="preserve">
+    <value>„{0}” eliminat.</value>
+  </data>
+    <data name="Dict_DownloadEmpty" xml:space="preserve">
+    <value>Dicționarul descărcat este gol.</value>
+  </data>
+    <data name="Tray_Settings" xml:space="preserve">
+    <value>Setări</value>
+  </data>
+    <data name="Tray_Exit" xml:space="preserve">
+    <value>Ieșire</value>
+  </data>
+    <data name="Tray_Tooltip" xml:space="preserve">
+    <value>Lapsus — corectarea aranjamentului</value>
+  </data>
+    <data name="Tray_UpdateAvailable" xml:space="preserve">
+    <value>Actualizare disponibilă — repornește pentru instalare</value>
+  </data>
+    <data name="Update_Tooltip" xml:space="preserve">
+    <value>Repornește pentru a instala această actualizare</value>
+  </data>
+    <data name="Update_CheckTooltip" xml:space="preserve">
+    <value>Caută actualizări</value>
+  </data>
+    <data name="Status_UpToDate" xml:space="preserve">
+    <value>Lapsus este la zi.</value>
+  </data>
+    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+    <value>Căutarea actualizărilor a eșuat: {0}</value>
+  </data>
+    <data name="Status_UpdateNotSupported" xml:space="preserve">
+    <value>Această copie nu se actualizează singură — descărcați cea mai recentă versiune.</value>
+  </data>
+    <data name="Diag_Empty" xml:space="preserve">
+    <value>Tastă rapidă: nu s-a scris nimic (fereastră: {0}).</value>
+  </data>
+    <data name="Diag_NoChange" xml:space="preserve">
+    <value>Tastă rapidă: „{0}” — toate cuvintele par corecte, nu e nimic de schimbat.</value>
+  </data>
+    <data name="Diag_NoSelection" xml:space="preserve">
+    <value>Selecție: nu este nimic selectat sau {0} nu răspunde la copiere.</value>
+  </data>
+    <data name="Diag_ClipboardFailed" xml:space="preserve">
+    <value>Selecție: clipboardul nu a putut fi folosit ({0}).</value>
+  </data>
+    <data name="Diag_TapReenabled" xml:space="preserve">
+    <value>Capturarea tastaturii s-a oprit pentru o clipă și a fost repornită. Dacă se repetă, închide un client Accessibility supraîncărcat sau acordă-i lui Lapsus permisiunea Input Monitoring.</value>
+  </data>
+    <data name="Diag_NoDictionaries" xml:space="preserve">
+    <value>Descarcă în setări cel puțin un dicționar ortografic înainte de a corecta aranjamentul.</value>
+  </data>
+    <data name="Diag_SendFailed" xml:space="preserve">
+    <value>SendInput a eșuat (backspace {0}/{1}, unicode {2}/{3}, eroare {4}, fereastră: {5}). Fereastra țintă rulează probabil ca administrator.</value>
+  </data>
+    <data name="Diag_NoLayoutList" xml:space="preserve">
+    <value>Comutarea aranjamentului: sistemul nu a returnat nicio listă de aranjamente.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>Aranjamentul {0} nu este instalat în Windows (disponibile: {1}). Adaugă-l din Setări → Oră și limbă → Limbă și regiune.</value>
+  </data>
+    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>Aranjamentul {0} nu este instalat pe acest Mac (disponibile: {1}). Adaugă-l din Setări sistem → Tastatură → Surse de introducere.</value>
+  </data>
+    <data name="Diag_InjectFailed" xml:space="preserve">
+    <value>Tastele nu au putut fi trimise aplicației active ({0}). Verifică permisiunile de Accesibilitate și Monitorizare a introducerii pentru Lapsus.</value>
+  </data>
+    <data name="Diag_FocusChanged" xml:space="preserve">
+    <value>Tastă rapidă: ignorată — focalizarea a trecut la altă fereastră sau aplicație ({0}). Scrie din nou în câmpul dorit.</value>
+  </data>
+    <data name="Diag_NoModel" xml:space="preserve">
+    <value>Tastă rapidă: corectarea neuronală este pornită, dar niciun model nu este încărcat. Descarcă un model din setări.</value>
+  </data>
+    <data name="Diag_NeuralFailed" xml:space="preserve">
+    <value>Corectarea neuronală a eșuat: {0}</value>
+  </data>
+    <data name="Diag_CorrectionFailed" xml:space="preserve">
+    <value>Corectarea a eșuat: {0}</value>
+  </data>
+    <data name="Neural_Toggle" xml:space="preserve">
+    <value>Corectare neuronală (model local)</value>
+  </data>
+    <data name="Neural_Hint" xml:space="preserve">
+    <value>Un model local, sprijinit de dicționare. Pornește-l, descarcă unul, apasă tasta rapidă.</value>
+  </data>
+    <data name="Model_AddLabel" xml:space="preserve">
+    <value>Adaugă un model</value>
+  </data>
+    <data name="Model_AddPlaceholder" xml:space="preserve">
+    <value>Alege un model…</value>
+  </data>
+    <data name="Model_AddTooltip" xml:space="preserve">
+    <value>Descarcă modelul selectat</value>
+  </data>
+    <data name="Model_SelectPlaceholder" xml:space="preserve">
+    <value>Niciun model instalat</value>
+  </data>
+    <data name="Model_RemoveTooltip" xml:space="preserve">
+    <value>Elimină modelul selectat</value>
+  </data>
+    <data name="Model_Downloading" xml:space="preserve">
+    <value>Se descarcă {0}… {1}%</value>
+  </data>
+    <data name="Model_Installed" xml:space="preserve">
+    <value>{0} instalat</value>
+  </data>
+    <data name="Model_DownloadFailed" xml:space="preserve">
+    <value>Descărcarea a eșuat: {0}</value>
+  </data>
+    <data name="Model_Removed" xml:space="preserve">
+    <value>{0} eliminat</value>
+  </data>
+    <data name="Model_DownloadEmpty" xml:space="preserve">
+    <value>Descărcarea modelului nu a returnat fișiere utilizabile.</value>
+  </data>
+    <data name="Model_LoadFailed" xml:space="preserve">
+    <value>Modelul nu a putut fi încărcat: {0}</value>
+  </data>
+    <data name="Model_Loading" xml:space="preserve">
+    <value>Se încarcă {0} în memorie… (prima încărcare poate dura)</value>
+  </data>
+    <data name="Model_Ready" xml:space="preserve">
+    <value>{0} gata — apasă tasta rapidă pentru a rescrie linia curentă.</value>
+  </data>
+    <data name="Model_ReadyOn" xml:space="preserve">
+    <value>{0} gata pe {1} — apasă tasta rapidă pentru a rescrie linia curentă.</value>
+  </data>
+    <data name="Model_NeedsDownload" xml:space="preserve">
+    <value>Corectarea neuronală este pornită, dar niciun model nu este instalat. Descarcă unul mai sus.</value>
+  </data>
+    <data name="Model_CustomHint" xml:space="preserve">
+    <value>Aici rulează doar modelele cu un pachet ONNX Runtime GenAI, iar căutarea le păstrează exact pe acelea. Un org/name lipit funcționează de asemenea.</value>
+  </data>
+    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+    <value>Corectare neuronală pornită — apasă {0} pentru a rescrie linia curentă.</value>
+  </data>
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
+    <value>Corectarea neuronală este pornită, dar niciun model nu este încărcat — „{0}” corectează cu dicționarul până atunci.</value>
+  </data>
+    <data name="Diag_BufferChanged" xml:space="preserve">
+    <value>Corectare neuronală anulată — linia s-a schimbat în timp ce modelul rula («{0}»).</value>
+  </data>
+    <data name="Model_RemoveFailed" xml:space="preserve">
+    <value>Modelul nu a putut fi eliminat: {0}</value>
+  </data>
+    <data name="Dict_Empty" xml:space="preserve">
+    <value>Încă niciun dicționar — adaugă o limbă mai sus ca să poată fi folosită la corectări.</value>
+  </data>
+    <data name="Action_Download" xml:space="preserve">
+    <value>Descarcă</value>
+  </data>
+    <data name="Diag_ImeActive" xml:space="preserve">
+    <value>Tastă rapidă: ignorată — limba de introducere activă (chineză/japoneză/coreeană) scrie printr-un IME, așa că Lapsus nu poate reconstitui acel text din apăsările de taste.</value>
+  </data>
+    <data name="Diag_SecureField" xml:space="preserve">
+    <value>Tastă rapidă: ignorată — acesta este un câmp de parolă. Lapsus nu reține și nu rescrie niciodată ce scrii acolo.</value>
+  </data>
+    <data name="SkipPasswords" xml:space="preserve">
+    <value>Sari peste câmpurile de parolă</value>
+  </data>
+    <data name="SkipPasswords_Hint" xml:space="preserve">
+    <value>Câmpurile de parolă nu sunt niciodată reținute. Într-un browser, asta pornește motorul lui de accesibilitate.</value>
+  </data>
+    <data name="Tab_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+    <data name="Tab_Library" xml:space="preserve">
+    <value>Bibliotecă</value>
+  </data>
+    <data name="Tab_Ai" xml:space="preserve">
+    <value>IA</value>
+  </data>
+    <data name="Tab_Apps" xml:space="preserve">
+    <value>Aplicații</value>
+  </data>
+    <data name="Excluded_Label" xml:space="preserve">
+    <value>Cuvinte de lăsat în pace</value>
+  </data>
+    <data name="Excluded_Hint" xml:space="preserve">
+    <value>Nume, conturi și mărci care nu se ating niciodată.</value>
+  </data>
+    <data name="Excluded_Placeholder" xml:space="preserve">
+    <value>cuvânt</value>
+  </data>
+    <data name="Excluded_Empty" xml:space="preserve">
+    <value>Încă nicio excepție.</value>
+  </data>
+    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+    <value>Elimină din listă</value>
+  </data>
+    <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Aplicații de ignorat</value>
+  </data>
+    <data name="ExcludedApps_Hint" xml:space="preserve">
+    <value>În acestea Lapsus este complet oprit: fără memorie, fără taste rapide.</value>
+  </data>
+    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+    <value>nume de proces</value>
+  </data>
+    <data name="ExcludedApps_Pick" xml:space="preserve">
+    <value>Alege o aplicație pornită</value>
+  </data>
+    <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Nicio aplicație ignorată.</value>
+  </data>
+    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+    <value>Elimină din listă</value>
+  </data>
+    <data name="Diag_AppExcluded" xml:space="preserve">
+    <value>Tastă rapidă: Lapsus nu intervine în {0}.</value>
+  </data>
+    <data name="Model_DeviceLabel" xml:space="preserve">
+    <value>Rulează modelul pe</value>
+  </data>
+    <data name="Model_DeviceAuto" xml:space="preserve">
+    <value>Automat</value>
+  </data>
+    <data name="Model_DeviceCpu" xml:space="preserve">
+    <value>Procesor (CPU)</value>
+  </data>
+    <data name="Model_DeviceGpu" xml:space="preserve">
+    <value>Placă video (GPU)</value>
+  </data>
+    <data name="Model_DeviceNpu" xml:space="preserve">
+    <value>Accelerator neuronal (NPU)</value>
+  </data>
+    <data name="Model_DeviceHint" xml:space="preserve">
+    <value>Disponibil aici: {0}. Un pachet construit pentru alt dispozitiv rulează totuși — pe procesor.</value>
+  </data>
+    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+    <value>Nu există aici un accelerator acceptat, așa că modelul rulează pe procesor.</value>
+  </data>
+    <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Caută pe Hugging Face sau lipește org/name</value>
+  </data>
+    <data name="Model_SearchLabel" xml:space="preserve">
+    <value>Caută</value>
+  </data>
+    <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>Găsește pe Hugging Face modele care includ un pachet ONNX Runtime GenAI</value>
+  </data>
+    <data name="Model_FoundPlaceholder" xml:space="preserve">
+    <value>Rezultatele căutării</value>
+  </data>
+    <data name="Model_Searching" xml:space="preserve">
+    <value>Se caută pe Hugging Face…</value>
+  </data>
+    <data name="Model_SearchEmpty" xml:space="preserve">
+    <value>Nu s-a găsit nimic care să includă un pachet ONNX Runtime GenAI.</value>
+  </data>
+    <data name="Model_SearchFound" xml:space="preserve">
+    <value>Găsit: {0}.</value>
+  </data>
+    <data name="Model_SearchFailed" xml:space="preserve">
+    <value>Căutarea a eșuat: {0}</value>
+  </data>
+    <data name="Tab_License" xml:space="preserve">
+    <value>Licență</value>
+  </data>
+    <data name="Lic_Free_Title" xml:space="preserve">
+    <value>Gratuit — uz personal</value>
+  </data>
+    <data name="Lic_Free_Hint" xml:space="preserve">
+    <value>Gratuit pentru persoane fizice, inclusiv freelanceri. Nimic nu este blocat — licența acoperă folosirea într-o firmă.</value>
+  </data>
+    <data name="Lic_Status_Pro" xml:space="preserve">
+    <value>Pro · {0}</value>
+  </data>
+    <data name="Lic_Status_Business" xml:space="preserve">
+    <value>Business · {0} · {1} posturi</value>
+  </data>
+    <data name="Lic_Expires" xml:space="preserve">
+    <value>Valabilă până la {0}</value>
+  </data>
+    <data name="Lic_NoExpiry" xml:space="preserve">
+    <value>Fără dată de expirare</value>
+  </data>
+    <data name="Lic_Key_Label" xml:space="preserve">
+    <value>Cheie de licență</value>
+  </data>
+    <data name="Lic_Key_Watermark" xml:space="preserve">
+    <value>Lipește cheia din e-mailul de achiziție</value>
+  </data>
+    <data name="Lic_Apply" xml:space="preserve">
+    <value>Activează</value>
+  </data>
+    <data name="Lic_Remove" xml:space="preserve">
+    <value>Elimină</value>
+  </data>
+    <data name="Lic_Buy_Hint" xml:space="preserve">
+    <value>Pro este pentru o persoană fizică. Business se licențiază pe post într-o firmă.</value>
+  </data>
+    <data name="Lic_BuyPro" xml:space="preserve">
+    <value>Cumpără Pro</value>
+  </data>
+    <data name="Lic_BuyBusiness" xml:space="preserve">
+    <value>Licență comercială</value>
+  </data>
+    <data name="Lic_Err_Malformed" xml:space="preserve">
+    <value>Nu pare a fi o cheie Lapsus. Verifică dacă a fost copiat rândul întreg.</value>
+  </data>
+    <data name="Lic_Err_Signature" xml:space="preserve">
+    <value>Această cheie nu a fost emisă pentru această versiune.</value>
+  </data>
+    <data name="Lic_Err_Expired" xml:space="preserve">
+    <value>Această cheie a expirat pe {0}.</value>
+  </data>
+    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+    <value>Această versiune nu poate verifica cheile de licență.</value>
+  </data>
+    <data name="Lic_Ask_Terms" xml:space="preserve">
+    <value>Cine trebuie să plătească?</value>
+  </data>
+    <data name="Lic_Free_Managed" xml:space="preserve">
+    <value>Acest calculator este administrat de o organizație — este necesară o licență.</value>
+  </data>
+    <data name="LicRem_Title" xml:space="preserve">
+    <value>Licență Lapsus</value>
+  </data>
+    <data name="LicRem_TrialHeadline" xml:space="preserve">
+    <value>Într-o firmă Lapsus se licențiază pe post. Au mai rămas {0} zile de încercare.</value>
+  </data>
+    <data name="LicRem_DueHeadline" xml:space="preserve">
+    <value>Pe acest calculator Lapsus are nevoie de licență.</value>
+  </data>
+    <data name="LicRem_Body" xml:space="preserve">
+    <value>Acest calculator este administrat de o organizație (domeniu, Entra ID sau server MDM). Pentru persoane fizice, inclusiv freelanceri, Lapsus este gratuit; folosirea într-o firmă este cu plată, pe post.</value>
+  </data>
+    <data name="LicRem_Why" xml:space="preserve">
+    <value>Nu se dezactivează nimic și nu se trimite nimic — verificarea are loc doar pe acest calculator.</value>
+  </data>
+    <data name="LicRem_HaveKey" xml:space="preserve">
+    <value>Am o cheie</value>
+  </data>
+    <data name="LicRem_Later" xml:space="preserve">
+    <value>Mai târziu</value>
+  </data>
+    <data name="Lic_Err_Seats" xml:space="preserve">
+    <value>Toate posturile acestei licențe sunt ocupate. Scrie la {0} pentru a muta un post pe acest computer sau pentru a cumpăra altele.</value>
+  </data>
+    <data name="Lic_Err_Offline" xml:space="preserve">
+    <value>Serverul de licențe nu a putut fi contactat. Cheia este salvată — activarea va fi reîncercată.</value>
+  </data>
+    <data name="Lic_Err_NoMachine" xml:space="preserve">
+    <value>Acest calculator nu a putut fi identificat, deci licența nu are de ce să fie legată.</value>
+  </data>
+    <data name="Lic_Activating" xml:space="preserve">
+    <value>Se activează…</value>
+  </data>
+    <data name="About_Title" xml:space="preserve">
+    <value>Despre Lapsus</value>
+  </data>
+    <data name="About_Tooltip" xml:space="preserve">
+    <value>Despre Lapsus</value>
+  </data>
+    <data name="About_License" xml:space="preserve">
+    <value>Licență</value>
+  </data>
+    <data name="About_License_Text" xml:space="preserve">
+    <value>Gratuit pentru persoane fizice. Companiile plătesc pe post. Nimic nu se blochează și nimic nu expiră.</value>
+  </data>
+    <data name="About_Website" xml:space="preserve">
+    <value>Site web</value>
+  </data>
+    <data name="About_Donate" xml:space="preserve">
+    <value>Sprijiniți dezvoltarea</value>
+  </data>
+    <data name="About_Donate_Hint" xml:space="preserve">
+    <value>Lapsus este gratuit pentru dvs., fără reclame și fără urmărire. Dacă vă economisește timp, puteți contribui.</value>
+  </data>
+    <data name="About_Donate_Button" xml:space="preserve">
+    <value>Donați</value>
+  </data>
+    <data name="About_OpenSource" xml:space="preserve">
+    <value>Licențe open source</value>
+  </data>
+    <data name="About_Tab_Components" xml:space="preserve">
+    <value>Componente</value>
+  </data>
+    <data name="About_Tab_Dictionaries" xml:space="preserve">
+    <value>Dicționare</value>
+  </data>
+    <data name="About_Dictionaries_Hint" xml:space="preserve">
+    <value>Nu sunt incluse în Lapsus: fiecare se descarcă doar când adăugați limba și își păstrează licența editorului.</value>
+  </data>
+    <data name="About_Dictionaries_All" xml:space="preserve">
+    <value>Toate sursele și autorii</value>
+  </data>
+    <data name="About_Components_Hint" xml:space="preserve">
+    <value>Livrate în Lapsus, fiecare sub licența proprie.</value>
+  </data>
+    <data name="About_LicenseText" xml:space="preserve">
+    <value>Textul licenței</value>
+  </data>
+</root>

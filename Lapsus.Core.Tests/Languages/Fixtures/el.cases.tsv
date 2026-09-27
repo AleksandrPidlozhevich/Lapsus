@@ -1,0 +1,15 @@
+# typed	expected	status	note — what a Greek speaker types with English (or Greek) active
+kalhmera	καλημέρα	ok	accent left out; the list has the accented word one edit away
+nero	νερό	ok	accent left out
+ti kaneiw	τι κάνεις	ok	final sigma on the w key
+kal;ow	καλός	ok	tonos through the dead key
+kal;o	καλό	ok	tonos through the dead key; without it καλό and καλά are one edit away each
+kalhm;era	καλημέρα	ok	tonos through the dead key
+eyxarist;v	ευχαριστώ	ok	tonos on the last letter
+ti k;aneiw;	τι κάνεις;	ok	tonos inside, a Greek question mark (";" key is not the dead key: q is) left as typed
+;exv	έχω	ok	the word opens with the dead key
+p;vw e;isai	πώς είσαι	ok	two accented words, the dead key inside each
+the water	the water	ok	English stays English
+kalhmera the water	καλημέρα the water	ok	one Greek word, then English
+τηε	the	ok	typed on the Greek layout meaning English
+καλημέρα σε όλους	καλημέρα σε όλους	ok	real Greek stays

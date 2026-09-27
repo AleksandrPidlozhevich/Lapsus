@@ -1,0 +1,113 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTheme x:Key="LapsusScrollThumb" TargetType="Thumb">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}" />
+            </ControlTemplate>
+        </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <DoubleTransition Property="Width" Duration="0:0:0.12" />
+                <DoubleTransition Property="Height" Duration="0:0:0.12" />
+                <BrushTransition Property="Background" Duration="0:0:0.12" />
+            </Transitions>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="LapsusScrollPage" TargetType="RepeatButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <ControlTheme x:Key="{x:Type ScrollBar}" TargetType="ScrollBar">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Arrow" />
+
+        <Style Selector="^:vertical">
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}">
+                        <Track Name="PART_Track"
+                               Orientation="Vertical"
+                               IsDirectionReversed="True"
+                               Minimum="{TemplateBinding Minimum}"
+                               Maximum="{TemplateBinding Maximum}"
+                               Value="{TemplateBinding Value, Mode=TwoWay}"
+                               ViewportSize="{TemplateBinding ViewportSize}">
+                            <Track.DecreaseButton>
+                                <RepeatButton Name="PART_PageUpButton"
+                                              Theme="{StaticResource LapsusScrollPage}" />
+                            </Track.DecreaseButton>
+                            <Track.IncreaseButton>
+                                <RepeatButton Name="PART_PageDownButton"
+                                              Theme="{StaticResource LapsusScrollPage}" />
+                            </Track.IncreaseButton>
+                            <Track.Thumb>
+                                <Thumb Theme="{StaticResource LapsusScrollThumb}"
+                                       Background="{DynamicResource LapsusScrollThumbBrush}"
+                                       CornerRadius="3"
+                                       Width="6"
+                                       MinHeight="32"
+                                       HorizontalAlignment="Center" />
+                            </Track.Thumb>
+                        </Track>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^:horizontal">
+            <Setter Property="Height" Value="12" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}">
+                        <Track Name="PART_Track"
+                               Orientation="Horizontal"
+                               Minimum="{TemplateBinding Minimum}"
+                               Maximum="{TemplateBinding Maximum}"
+                               Value="{TemplateBinding Value, Mode=TwoWay}"
+                               ViewportSize="{TemplateBinding ViewportSize}">
+                            <Track.DecreaseButton>
+                                <RepeatButton Name="PART_PageUpButton"
+                                              Theme="{StaticResource LapsusScrollPage}" />
+                            </Track.DecreaseButton>
+                            <Track.IncreaseButton>
+                                <RepeatButton Name="PART_PageDownButton"
+                                              Theme="{StaticResource LapsusScrollPage}" />
+                            </Track.IncreaseButton>
+                            <Track.Thumb>
+                                <Thumb Theme="{StaticResource LapsusScrollThumb}"
+                                       Background="{DynamicResource LapsusScrollThumbBrush}"
+                                       CornerRadius="3"
+                                       Height="6"
+                                       MinWidth="32"
+                                       VerticalAlignment="Center" />
+                            </Track.Thumb>
+                        </Track>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^:vertical:pointerover /template/ Thumb">
+            <Setter Property="Width" Value="10" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="{DynamicResource LapsusScrollThumbHoverBrush}" />
+        </Style>
+        <Style Selector="^:horizontal:pointerover /template/ Thumb">
+            <Setter Property="Height" Value="10" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="{DynamicResource LapsusScrollThumbHoverBrush}" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

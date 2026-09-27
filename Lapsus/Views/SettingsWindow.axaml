@@ -1,0 +1,895 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Lapsus.ViewModels"
+        xmlns:settings="using:Lapsus.Settings"
+        xmlns:input="using:Lapsus.Input"
+        xmlns:models="using:Lapsus.Core.Models"
+        xmlns:loc="using:Lapsus.Localization"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="560" d:DesignHeight="720"
+        x:Class="Lapsus.Views.SettingsWindow"
+        x:DataType="vm:SettingsViewModel"
+        Title="{Binding L[Window_Title]}"
+        FlowDirection="{Binding FlowDirection}"
+        Width="560"
+        MinHeight="360"
+        SizeToContent="Height"
+        CanResize="False"
+        ShowInTaskbar="True"
+        WindowStartupLocation="CenterScreen">
+
+    <!-- CanResize="False" is what keeps SizeToContent working. -->
+
+    <Window.Resources>
+
+        <StreamGeometry x:Key="TabIconGeneral">M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z</StreamGeometry>
+        <StreamGeometry x:Key="TabIconLibrary">M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z</StreamGeometry>
+
+        <StreamGeometry x:Key="TabIconApps">M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z</StreamGeometry>
+        <StreamGeometry x:Key="TabIconAi">M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z</StreamGeometry>
+
+        <StreamGeometry x:Key="TabIconLicense">M12.65 10A5.99 5.99 0 0 0 7 6a6 6 0 0 0 0 12 5.99 5.99 0 0 0 5.65-4H17v4h4v-4h2v-4H12.65zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z</StreamGeometry>
+    </Window.Resources>
+
+    <Window.Styles>
+
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="{DynamicResource LapsusCardBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LapsusBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="14" />
+        </Style>
+        <Style Selector="Border.row">
+            <Setter Property="Background" Value="{DynamicResource LapsusRowBrush}" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10,7" />
+        </Style>
+        <Style Selector="TextBlock.sectionTitle">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style Selector="TextBlock.rowTitle">
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <Style Selector="TextBlock.hint">
+            <Setter Property="Foreground" Value="{DynamicResource LapsusHintBrush}" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="TextBlock.status">
+            <Setter Property="Foreground" Value="{DynamicResource LapsusHintBrush}" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style Selector="ToggleSwitch.bare">
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="OnContent" Value="" />
+            <Setter Property="OffContent" Value="" />
+        </Style>
+
+        <Style Selector="ComboBox TextBlock">
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+
+        <Style Selector="Button.notice">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource LapsusNoticeInkBrush}" />
+        </Style>
+        <Style Selector="Button.notice /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource LapsusAccentBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LapsusAccentBrush}" />
+        </Style>
+        <Style Selector="Button.icon">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="ToggleButton.segment">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="8,5" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="MinWidth" Value="0" />
+        </Style>
+        <Style Selector="ToggleButton.segment /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+        <Style Selector="ToggleButton.segment:checked /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource LapsusCardBrush}" />
+        </Style>
+
+        <Style Selector="Ellipse.statusDot">
+            <Setter Property="Fill" Value="#8f8a83" />
+        </Style>
+        <Style Selector="Ellipse.statusDot.on">
+            <Setter Property="Fill" Value="#3fb950" />
+        </Style>
+
+        <Style Selector="TabControl.settings">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <Border DockPanel.Dock="Top"
+                                Background="{DynamicResource LapsusCardBrush}"
+                                BorderBrush="{DynamicResource LapsusBorderBrush}"
+                                BorderThickness="1" CornerRadius="8" Padding="4">
+                            <ItemsPresenter Name="PART_ItemsPresenter"
+                                            ItemsPanel="{TemplateBinding ItemsPanel}" />
+                        </Border>
+                        <ContentPresenter Name="PART_SelectedContentHost"
+                                          Content="{TemplateBinding SelectedContent}"
+                                          ContentTemplate="{TemplateBinding SelectedContentTemplate}" />
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="TabControl.settings > TabItem">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Padding" Value="6,8" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="6" Padding="{TemplateBinding Padding}">
+
+                        <ContentPresenter Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="TabControl.settings > TabItem">
+            <Setter Property="Opacity" Value="0.55" />
+        </Style>
+        <Style Selector="TabControl.settings > TabItem:pointerover">
+            <Setter Property="Opacity" Value="0.8" />
+        </Style>
+        <Style Selector="TabControl.settings > TabItem:selected">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <Style Selector="TabControl.settings > TabItem:selected PathIcon.tabIcon">
+            <Setter Property="Foreground" Value="{DynamicResource LapsusSelectionBrush}" />
+        </Style>
+
+        <Style Selector="TextBlock.tabLabel">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+        <Style Selector="TabControl.settings > TabItem:selected TextBlock.tabLabel">
+            <Setter Property="Foreground" Value="{DynamicResource LapsusSelectionBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+
+        <Style Selector="ComboBox.langPicker /template/ Popup#PART_Popup">
+            <Setter Property="Placement" Value="BottomEdgeAlignedRight" />
+        </Style>
+
+        <Style Selector="ScrollViewer">
+            <Setter Property="AllowAutoHide" Value="False" />
+        </Style>
+    </Window.Styles>
+
+    <LayoutTransformControl x:Name="Root">
+    <DockPanel LastChildFill="True">
+
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="6"
+                    HorizontalAlignment="Right" Margin="20,8,20,0">
+            <TextBlock Text="{Binding AppVersion, StringFormat=v{0}}"
+                       Classes="hint" VerticalAlignment="Center" />
+
+            <Button Classes="icon" Width="20" Height="20"
+                    Click="OnAboutClick"
+                    ToolTip.Tip="{Binding L[About_Tooltip]}">
+                <TextBlock Text="&#x24D8;" FontSize="13"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Button>
+            <Button Classes="icon" Width="20" Height="20"
+                    Command="{Binding CheckOrInstallUpdateCommand}"
+                    IsEnabled="{Binding !IsCheckingForUpdate}"
+                    IsVisible="{Binding CanSelfUpdate}"
+                    ToolTip.Tip="{Binding UpdateButtonTooltip}">
+                <TextBlock Text="{Binding UpdateButtonGlyph}" FontSize="12"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Button>
+        </StackPanel>
+
+        <Grid DockPanel.Dock="Top" ColumnDefinitions="Auto,*,Auto" Margin="20,10,20,12">
+            <Viewbox Grid.Column="0" Stretch="Uniform" MaxHeight="52"
+                     HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Svg x:Name="AppLogo" Width="320" Height="124" Path="/Assets/theme-dark.svg" />
+            </Viewbox>
+
+            <TextBlock Grid.Column="1" Classes="hint" Text="{Binding L[Subtitle]}"
+                       Margin="16,0" VerticalAlignment="Center" />
+            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6"
+                        HorizontalAlignment="Right" VerticalAlignment="Center">
+
+                <Border Background="{DynamicResource LapsusRowBrush}" CornerRadius="6" Padding="2">
+                    <StackPanel Orientation="Horizontal" Spacing="2">
+                        <ToggleButton Classes="segment"
+                                      IsChecked="{Binding IsLightTheme, Mode=OneWay}"
+                                      Command="{Binding SetThemeCommand}" CommandParameter="Light"
+                                      ToolTip.Tip="{Binding L[Theme_Light]}">
+                            <Svg Path="{Binding SunIconPath}" Width="16" Height="16" />
+                        </ToggleButton>
+                        <ToggleButton Classes="segment"
+                                      IsChecked="{Binding IsDarkTheme, Mode=OneWay}"
+                                      Command="{Binding SetThemeCommand}" CommandParameter="Dark"
+                                      ToolTip.Tip="{Binding L[Theme_Dark]}">
+                            <Svg Path="{Binding MoonIconPath}" Width="16" Height="16" />
+                        </ToggleButton>
+                        <ToggleButton Classes="segment"
+                                      IsChecked="{Binding IsSystemTheme, Mode=OneWay}"
+                                      Command="{Binding SetThemeCommand}" CommandParameter="System"
+                                      ToolTip.Tip="{Binding L[Theme_System]}">
+                            <Svg Path="{Binding SystemIconPath}" Width="16" Height="16" />
+                        </ToggleButton>
+                    </StackPanel>
+                </Border>
+
+                <ComboBox Classes="langPicker" MinWidth="0" Padding="8,4"
+                          ItemsSource="{Binding Languages}"
+                          SelectedItem="{Binding SelectedInterfaceLanguage}"
+                          ToolTip.Tip="{Binding L[Lang_Label]}">
+                    <ComboBox.SelectionBoxItemTemplate>
+                        <DataTemplate x:DataType="loc:LanguageOption">
+                            <TextBlock Text="{Binding Abbreviation}" />
+                        </DataTemplate>
+                    </ComboBox.SelectionBoxItemTemplate>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="loc:LanguageOption">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Text="{Binding Abbreviation}" MinWidth="24"
+                                           Foreground="{DynamicResource LapsusHintBrush}" />
+                                <TextBlock Text="{Binding NativeName}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <Border DockPanel.Dock="Bottom"
+                Background="{DynamicResource LapsusRowBrush}"
+                BorderBrush="{DynamicResource LapsusBorderBrush}" BorderThickness="0,1,0,0"
+                Padding="20,10">
+            <Grid ColumnDefinitions="Auto,*">
+
+                <Ellipse Grid.Column="0" Classes="statusDot" Classes.on="{Binding Enabled}"
+                         Width="8" Height="8" Margin="0,0,10,0" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="{Binding StatusText}"
+                           ToolTip.Tip="{Binding StatusText}"
+                           FontSize="11" Opacity="0.8" VerticalAlignment="Center"
+                           TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+            </Grid>
+        </Border>
+
+        <Border DockPanel.Dock="Bottom"
+                IsVisible="{Binding License.ShowLicenseNotice}"
+                Background="{DynamicResource LapsusNoticeSurfaceBrush}"
+                BorderBrush="{DynamicResource LapsusAccentBrush}" BorderThickness="0,2,0,0"
+                Padding="20,10">
+            <StackPanel Spacing="8">
+
+                <TextBlock Text="{Binding License.ReminderHeadline}" FontSize="12"
+                           FontWeight="SemiBold" TextWrapping="Wrap" />
+                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
+                    <Button Classes="notice" Content="{Binding L[Lic_BuyBusiness]}"
+                            Command="{Binding License.BuyBusinessCommand}" />
+                    <Button Content="{Binding L[Lic_Ask_Terms]}"
+                            Command="{Binding License.ReadTermsCommand}" />
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+
+        <Border DockPanel.Dock="Bottom"
+                IsVisible="{Binding PermissionsNeeded}"
+                Background="{DynamicResource LapsusRowBrush}"
+                BorderBrush="{DynamicResource LapsusBorderBrush}" BorderThickness="0,1,0,0"
+                Padding="20,10">
+            <StackPanel Spacing="8">
+                <TextBlock Text="{Binding L[Perm_Explain]}" FontSize="11" Opacity="0.8"
+                           TextWrapping="Wrap" />
+
+                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
+                    <Button Content="{Binding L[Perm_OpenAccessibility]}"
+                            Command="{Binding OpenAccessibilitySettingsCommand}"
+                            IsVisible="{Binding !AccessibilityGranted}" />
+                    <Button Content="{Binding L[Perm_OpenInputMonitoring]}"
+                            Command="{Binding OpenInputMonitoringSettingsCommand}"
+                            IsVisible="{Binding !InputMonitoringGranted}" />
+                </WrapPanel>
+            </StackPanel>
+        </Border>
+
+        <TabControl x:Name="Tabs" Classes="settings" Margin="20,0,20,0">
+            <TabControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1" />
+                </ItemsPanelTemplate>
+            </TabControl.ItemsPanel>
+
+            <TabItem IsSelected="True">
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconGeneral}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_General]}" />
+                    </StackPanel>
+                </TabItem.Header>
+
+                <ScrollViewer x:Name="GeneralScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+
+                    <StackPanel x:Name="GeneralList" Spacing="12" Margin="0,12">
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="4">
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
+                                    <TextBlock Grid.Column="0" Text="{Binding CaptureLabel}"
+                                               VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding Enabled}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding AutoModeSwitchEnabled}">
+                                    <TextBlock Grid.Column="0" Text="{Binding L[AutoCorrect]}"
+                                               VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding AutoMode}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding AutoFixTyposSwitchEnabled}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[AutoFixTypos]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[AutoFixTypos_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding AutoFixTypos}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[PlainSwitch]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[PlainSwitch_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding PlainLayoutSwitch}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[SwitchLayout]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[SwitchLayout_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding SwitchSystemLayout}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[SkipPasswords]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[SkipPasswords_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding SkipPasswordFields}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto"
+                                      IsVisible="{Binding IsLayoutIndicatorSupported}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[Indicator_Label]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[Indicator_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding ShowLayoutIndicator}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsStartupSupported}">
+                                    <TextBlock Grid.Column="0" Text="{Binding L[StartAtLogin]}"
+                                               VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding RunAtStartup}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="6">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Hotkey_Label]}" />
+                                <ComboBox ItemsSource="{Binding Hotkeys}"
+                                          SelectedItem="{Binding SelectedHotkey, Mode=TwoWay}"
+                                          HorizontalAlignment="Stretch">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:HotkeyOption">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+
+                                <TextBlock Classes="sectionTitle" Margin="0,14,0,0"
+                                           Text="{Binding L[SelectionActions_Label]}" />
+                                <ItemsControl ItemsSource="{Binding SelectionActions}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:SelectionHotkeyViewModel">
+                                            <StackPanel Spacing="4" Margin="0,0,0,10">
+                                                <TextBlock Classes="rowTitle" Text="{Binding Label}" />
+                                                <TextBlock Classes="hint" TextWrapping="Wrap"
+                                                           Text="{Binding Hint}" />
+                                                <ComboBox ItemsSource="{Binding Options}"
+                                                          SelectedItem="{Binding Selected, Mode=TwoWay}"
+                                                          HorizontalAlignment="Stretch">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate x:DataType="vm:HotkeyOption">
+                                                            <TextBlock Text="{Binding Name}" />
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconApps}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Apps]}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="AppsScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="AppsList" Spacing="12" Margin="0,12">
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[ExcludedApps_Label]}" />
+                                <TextBlock Classes="hint" TextWrapping="Wrap"
+                                           Text="{Binding L[ExcludedApps_Hint]}" />
+
+                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding CanPickRunningApps}">
+                                    <ComboBox x:Name="RunningAppsPicker" Grid.Column="0"
+                                              HorizontalAlignment="Stretch"
+                                              PlaceholderText="{Binding L[ExcludedApps_Pick]}"
+                                              ItemsSource="{Binding RunningApps}"
+                                              SelectedItem="{Binding SelectedRunningApp, Mode=TwoWay}"
+                                              DropDownOpened="OnRunningAppsDropDownOpened">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="input:RunningApp">
+
+                                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                                    <TextBlock Text="{Binding Title}" />
+                                                    <TextBlock Classes="hint" Text="{Binding ProcessName}"
+                                                               VerticalAlignment="Center" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Grid.Column="1" Content="{Binding L[Add_Label]}"
+                                            Margin="8,0,0,0" Command="{Binding AddRunningAppCommand}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                                    <TextBox Grid.Column="0" Text="{Binding NewExcludedApp, Mode=TwoWay}"
+                                             PlaceholderText="{Binding L[ExcludedApps_Placeholder]}"
+                                             HorizontalAlignment="Stretch" />
+                                    <Button Grid.Column="1" Content="{Binding L[Add_Label]}"
+                                            Margin="8,0,0,0" Command="{Binding AddExcludedAppCommand}" />
+                                </Grid>
+
+                                <TextBlock Classes="hint" Text="{Binding L[ExcludedApps_Empty]}"
+                                           IsVisible="{Binding !HasExcludedApps}" />
+
+                                <ScrollViewer MaxHeight="210" Padding="0,0,4,0"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl ItemsSource="{Binding ExcludedApps}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="x:String">
+                                                <Border Classes="row" Margin="0,2">
+                                                    <Grid ColumnDefinitions="*,Auto">
+                                                        <TextBlock Grid.Column="0" Text="{Binding}"
+                                                                   VerticalAlignment="Center"
+                                                                   TextTrimming="CharacterEllipsis" />
+                                                        <Button Grid.Column="1" Classes="icon"
+                                                                ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[ExcludedApps_RemoveTooltip],
+                                                                             RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).RemoveExcludedAppCommand,
+                                                                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                CommandParameter="{Binding}">
+                                                            <Svg
+                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).TrashIconPath,
+                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                Width="16" Height="16" />
+                                                        </Button>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconLibrary}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Library]}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="LibraryScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="LibraryList" Spacing="12" Margin="0,12">
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="6">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Pref_Label]}" />
+                                <TextBlock Classes="hint" Text="{Binding L[Pref_Hint]}" />
+                                <ComboBox ItemsSource="{Binding Preferences}"
+                                          SelectedItem="{Binding SelectedPreference}"
+                                          IsEnabled="{Binding IsSupported}"
+                                          HorizontalAlignment="Stretch">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:PreferenceOption">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Dict_Label]}" />
+                                <TextBlock Classes="hint" Text="{Binding L[Dict_Hint]}" />
+
+                                <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                                    <ComboBox Grid.Column="0"
+                                              ItemsSource="{Binding Dictionaries.Available}"
+                                              SelectedItem="{Binding Dictionaries.SelectedAvailable}"
+                                              PlaceholderText="{Binding L[AddLang_Placeholder]}"
+                                              HorizontalAlignment="Stretch"
+                                              IsEnabled="{Binding !Dictionaries.Busy}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="settings:DictionaryDescriptor">
+                                                <TextBlock Text="{Binding Title}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Grid.Column="1" Content="{Binding L[AddLang_Label]}"
+                                            Margin="8,0,0,0"
+                                            Command="{Binding Dictionaries.AddCommand}"
+                                            ToolTip.Tip="{Binding L[AddLang_Tooltip]}" />
+                                </Grid>
+
+                                <ProgressBar IsIndeterminate="True" Height="3"
+                                             IsVisible="{Binding Dictionaries.Busy}" />
+
+                                <TextBlock Classes="hint" Text="{Binding L[Dict_Empty]}"
+                                           IsVisible="{Binding !Dictionaries.HasInstalled}" />
+
+                                <ScrollViewer MaxHeight="210" Padding="0,0,4,0"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl ItemsSource="{Binding Dictionaries.Installed}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:InstalledDictionary">
+                                                <Border Classes="row" Margin="0,2">
+                                                    <Grid ColumnDefinitions="*,Auto,Auto">
+
+                                                        <TextBlock Grid.Column="0" Text="{Binding Title}"
+                                                                   ToolTip.Tip="{Binding License}"
+                                                                   VerticalAlignment="Center"
+                                                                   TextTrimming="CharacterEllipsis" />
+
+                                                        <Button Grid.Column="1" Classes="icon"
+                                                                IsVisible="{Binding IsOutdated}"
+                                                                ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[UpdateDict_Tooltip],
+                                                                             RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).Dictionaries.UpdateCommand,
+                                                                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                CommandParameter="{Binding}">
+                                                            <TextBlock Text="↓" FontSize="13"
+                                                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                        </Button>
+                                                        <Button Grid.Column="2" Classes="icon"
+                                                                ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[RemoveDict_Tooltip],
+                                                                             RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).Dictionaries.RemoveCommand,
+                                                                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                CommandParameter="{Binding}">
+                                                            <Svg
+                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).TrashIconPath,
+                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                Width="16" Height="16" />
+                                                        </Button>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+
+                                <TextBlock Classes="status" Text="{Binding Dictionaries.Status}"
+                                           IsVisible="{Binding Dictionaries.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Excluded_Label]}" />
+                                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding L[Excluded_Hint]}" />
+
+                                <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                                    <TextBox Grid.Column="0" Text="{Binding NewExcludedWord, Mode=TwoWay}"
+                                             PlaceholderText="{Binding L[Excluded_Placeholder]}"
+                                             HorizontalAlignment="Stretch" />
+                                    <Button Grid.Column="1" Content="{Binding L[Add_Label]}"
+                                            Margin="8,0,0,0" Command="{Binding AddExcludedWordCommand}" />
+                                </Grid>
+
+                                <TextBlock Classes="hint" Text="{Binding L[Excluded_Empty]}"
+                                           IsVisible="{Binding !HasExcludedWords}" />
+
+                                <ScrollViewer MaxHeight="210" Padding="0,0,4,0"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl ItemsSource="{Binding ExcludedWords}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="x:String">
+                                                <Border Classes="row" Margin="0,2">
+                                                    <Grid ColumnDefinitions="*,Auto">
+                                                        <TextBlock Grid.Column="0" Text="{Binding}"
+                                                                   VerticalAlignment="Center"
+                                                                   TextTrimming="CharacterEllipsis" />
+                                                        <Button Grid.Column="1" Classes="icon"
+                                                                ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[Excluded_RemoveTooltip],
+                                                                             RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).RemoveExcludedWordCommand,
+                                                                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                CommandParameter="{Binding}">
+                                                            <Svg
+                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).TrashIconPath,
+                                                                   RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                Width="16" Height="16" />
+                                                        </Button>
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconAi}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Ai]}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="AiScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="AiList" Spacing="12" Margin="0,12">
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
+                                    <TextBlock Grid.Column="0" Classes="sectionTitle" Text="{Binding L[Neural_Toggle]}"
+                                               VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding NeuralCorrectionEnabled}" />
+                                </Grid>
+                                <TextBlock Classes="hint" Text="{Binding L[Neural_Hint]}" />
+
+                                <Grid IsVisible="{Binding NeuralCorrectionEnabled}"
+                                      IsEnabled="{Binding IsSupported}"
+                                      ColumnDefinitions="*,Auto" ColumnSpacing="8"
+                                      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+                                    <Separator Grid.Row="0" Grid.ColumnSpan="2" Margin="0,2,0,10"
+                                               Background="{DynamicResource LapsusBorderBrush}" />
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Classes="rowTitle"
+                                               VerticalAlignment="Center" Margin="0,0,0,8"
+                                               Text="{Binding L[Model_DeviceLabel]}" />
+                                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,8" MinWidth="160"
+                                              ItemsSource="{Binding Models.DeviceOptions}"
+                                              SelectedItem="{Binding Models.SelectedDevice}"
+                                              IsEnabled="{Binding !Models.Busy}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:ComputeDeviceOption">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,10"
+                                               Text="{Binding Models.DeviceHint}" />
+
+                                    <ComboBox Grid.Row="3" Grid.Column="0" Margin="0,0,0,8"
+                                              ItemsSource="{Binding Models.Available}"
+                                              SelectedItem="{Binding Models.SelectedAvailable}"
+                                              PlaceholderText="{Binding L[Model_AddPlaceholder]}"
+                                              HorizontalAlignment="Stretch"
+                                              IsEnabled="{Binding !Models.Busy}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="models:ModelDescriptor">
+                                                <TextBlock Text="{Binding Title}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Grid.Row="3" Grid.Column="1" Content="{Binding L[Model_AddLabel]}"
+                                            Margin="0,0,0,8"
+                                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                            Command="{Binding Models.AddCommand}"
+                                            ToolTip.Tip="{Binding L[Model_AddTooltip]}" />
+
+                                    <TextBox Grid.Row="4" Grid.Column="0" Margin="0,0,0,8"
+                                             Text="{Binding Models.SearchQuery}"
+                                             PlaceholderText="{Binding L[Model_SearchPlaceholder]}"
+                                             HorizontalAlignment="Stretch"
+                                             IsEnabled="{Binding !Models.Busy}" />
+                                    <Button Grid.Row="4" Grid.Column="1" Content="{Binding L[Model_SearchLabel]}"
+                                            Margin="0,0,0,8"
+                                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                            Command="{Binding Models.SearchCommand}"
+                                            ToolTip.Tip="{Binding L[Model_SearchTooltip]}" />
+
+                                    <ComboBox Grid.Row="5" Grid.Column="0" Margin="0,0,0,8"
+                                              ItemsSource="{Binding Models.Found}"
+                                              SelectedItem="{Binding Models.SelectedFound}"
+                                              PlaceholderText="{Binding L[Model_FoundPlaceholder]}"
+                                              HorizontalAlignment="Stretch"
+                                              IsVisible="{Binding Models.HasFound}"
+                                              IsEnabled="{Binding !Models.Busy}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="models:ModelDescriptor">
+                                                <TextBlock Text="{Binding Title}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Grid.Row="5" Grid.Column="1" Content="{Binding L[Action_Download]}"
+                                            Margin="0,0,0,8"
+                                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                            IsVisible="{Binding Models.HasFound}"
+                                            Command="{Binding Models.AddFoundCommand}" />
+
+                                    <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                               Text="{Binding L[Model_CustomHint]}" />
+
+                                    <ProgressBar Grid.Row="7" Grid.ColumnSpan="2" Height="3" Margin="0,0,0,8"
+                                                 Minimum="0" Maximum="1"
+                                                 Value="{Binding Models.DownloadProgress}"
+                                                 IsVisible="{Binding Models.Busy}" />
+
+                                    <ComboBox Grid.Row="8" Grid.Column="0"
+                                              ItemsSource="{Binding Models.Installed}"
+                                              SelectedItem="{Binding Models.SelectedInstalled}"
+                                              PlaceholderText="{Binding L[Model_SelectPlaceholder]}"
+                                              HorizontalAlignment="Stretch"
+                                              IsEnabled="{Binding !Models.Busy}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="models:ModelDescriptor">
+                                                <TextBlock Text="{Binding Title}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Grid.Row="8" Grid.Column="1" Classes="icon"
+                                            HorizontalAlignment="Right"
+                                            ToolTip.Tip="{Binding L[Model_RemoveTooltip]}"
+                                            Command="{Binding Models.RemoveCommand}">
+                                        <Svg Path="{Binding TrashIconPath}" Width="16" Height="16" />
+                                    </Button>
+
+                                    <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Classes="status"
+                                               Text="{Binding Models.Status}"
+                                               IsVisible="{Binding Models.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconLicense}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_License]}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="LicenseScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="LicenseList" Spacing="12" Margin="0,12">
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="6">
+                                <TextBlock Classes="sectionTitle" Text="{Binding License.StatusTitle}" />
+                                <TextBlock Classes="hint" Text="{Binding License.StatusDetail}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Lic_Key_Label]}" />
+                                <TextBox Text="{Binding License.KeyInput, Mode=TwoWay}"
+                                         PlaceholderText="{Binding L[Lic_Key_Watermark]}"
+                                         AcceptsReturn="True" TextWrapping="Wrap"
+                                         MinHeight="64" MaxHeight="96" />
+                                <TextBlock Classes="status" Foreground="{DynamicResource LapsusAccentBrush}"
+                                           Text="{Binding License.ErrorText}"
+                                           IsVisible="{Binding License.ErrorText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
+
+                                    <Button IsEnabled="{Binding !License.Busy}"
+                                            Command="{Binding License.ApplyCommand}"
+                                            Content="{Binding L[Lic_Apply]}" />
+                                    <TextBlock Classes="hint" VerticalAlignment="Center"
+                                               IsVisible="{Binding License.Busy}"
+                                               Text="{Binding L[Lic_Activating]}" />
+                                    <Button Content="{Binding L[Lic_Remove]}"
+                                            IsVisible="{Binding License.HasLicense}"
+                                            Command="{Binding License.RemoveCommand}" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="hint" Text="{Binding L[Lic_Buy_Hint]}" />
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
+                                    <Button Content="{Binding L[Lic_BuyPro]}"
+                                            Command="{Binding License.BuyProCommand}" />
+                                    <Button Content="{Binding L[Lic_BuyBusiness]}"
+                                            Command="{Binding License.BuyBusinessCommand}" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+    </DockPanel>
+    </LayoutTransformControl>
+
+</Window>

@@ -1,0 +1,11 @@
+# typed	expected	status	note — what a Bulgarian speaker types on the BDS layout with English (or Bulgarian) active
+po,dlex	здравей	ok	р on the comma key inside the word
+ucoe	къде	ok	ъ on the c key
+mcj	път	ok	three letters, ъ the only vowel
+/.dhfod,s	благодаря	ok	leading "/" is б, "." is л, "," is р
+/,dj	брат	ok	four letters, two of them on punctuation keys
+r /,dj ;r	и брат ми	ok	one- and two-letter words beside a whole one
+udulf m,dlrt	какво правиш	ok	whole line crosses
+the cat	the cat	ok	English stays English
+ъьш	cat	ok	typed on the BDS layout meaning English
+добър ден	добър ден	ok	real Bulgarian stays

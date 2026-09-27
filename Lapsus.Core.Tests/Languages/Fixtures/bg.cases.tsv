@@ -1,0 +1,13 @@
+# typed	expected	status	note — what a Bulgarian speaker types on the phonetic layout with English (or Bulgarian) active
+zdravej	здравей	ok	plain word
+blagodar[	благодаря	ok	trailing "[" is я
+kyde	къде	ok	ъ on the y key
+pyt	път	ok	three letters, ъ the only vowel
+vednyx	веднъж	ok	ъ and ж on the y and x keys
+pyrvo	първо	ok	ъ after the first letter
+]astie	щастие	ok	leading "]" is щ
+kakvo praviw	какво правиш	ok	whole line crosses
+the cat	the cat	ok	English stays English
+dobre the cat	добре the cat	ok	one Bulgarian word at the front of an English line
+цат	cat	ok	typed on the phonetic layout meaning English
+добър ден	добър ден	ok	real Bulgarian stays
