@@ -75,5 +75,34 @@ vpk pack \
   --signAppIdentity "-" \
   --yes
 
+echo "==> Building disk image"
+# The drag-to-Applications .dmg most Mac users expect, beside vpk's .pkg. The .app comes out of the
+# portable zip rather than $PUBLISH_DIR: that bundle is the one vpk signed and gave its update
+# metadata, so a copy installed from the image updates itself like one installed from the .pkg.
+# ditto, not unzip: it keeps the bundle's extended attributes and signature intact.
+DMG_STAGE="$BUILD_DIR/dmg"
+DMG="$OUTPUT_DIR/$APP_NAME-osx.dmg"
+rm -rf "$DMG_STAGE" "$DMG"
+mkdir -p "$DMG_STAGE"
+ditto -x -k "$OUTPUT_DIR/$APP_NAME-osx-Portable.zip" "$DMG_STAGE"
+APP_BUNDLE="$(find "$DMG_STAGE" -maxdepth 2 -name '*.app' -type d | head -n 1)"
+if [ -z "$APP_BUNDLE" ]; then
+  echo "No .app bundle inside $APP_NAME-osx-Portable.zip" >&2
+  exit 1
+fi
+if [ "$(dirname "$APP_BUNDLE")" != "$DMG_STAGE" ]; then
+  mv "$APP_BUNDLE" "$DMG_STAGE/"
+fi
+ln -s /Applications "$DMG_STAGE/Applications"
+# hdiutil now and then fails with "Resource busy" on CI runners; a retry is the usual cure.
+for attempt in 1 2 3; do
+  if hdiutil create -volname "$APP_NAME" -srcfolder "$DMG_STAGE" -ov -format UDZO "$DMG" >/dev/null; then
+    break
+  fi
+  [ "$attempt" = 3 ] && { echo "hdiutil create failed" >&2; exit 1; }
+  sleep 5
+done
+rm -rf "$DMG_STAGE"
+
 echo "==> Done: $OUTPUT_DIR"
 echo "    Upload every file in that folder to a GitHub Release tagged v$VERSION."

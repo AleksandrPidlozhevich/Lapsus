@@ -38,8 +38,9 @@ When it finishes, you'll find the installer and related files in:
 ```
 build/macos/Releases/
 ```
-The file you hand to someone to install the app is `Lapsus-osx-Setup.pkg` (or
-`Lapsus-osx-Portable.zip` for a copy-and-run version, no installer needed).
+The file you hand to someone to install the app is `Lapsus-osx.dmg` — the familiar window
+where you drag Lapsus into Applications. `Lapsus-osx-Setup.pkg` is the same app as a
+step-through installer, and `Lapsus-osx-Portable.zip` a copy-and-run version.
 
 **Note:** this build is not notarized by Apple, so macOS Gatekeeper may warn that the app
 is from an "unidentified developer" the first time it's opened on another Mac. That's
