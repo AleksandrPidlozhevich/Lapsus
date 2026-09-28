@@ -14,7 +14,7 @@ jobs:
     name: ${{ matrix.rid }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         include:
           - os: windows-latest
@@ -38,7 +38,7 @@ jobs:
           [ "${GITHUB_REF_NAME}" = "v$v" ] || { echo "Tag ${GITHUB_REF_NAME} != VERSION $v"; exit 1; }
 
       - name: Install vpk
-        run: dotnet tool install -g vpk
+        run: dotnet tool install -g vpk --version 1.2.0
 
       - name: Package (Windows)
         if: runner.os == 'Windows'
@@ -47,7 +47,7 @@ jobs:
 
       - name: Package (macOS)
         if: runner.os == 'macOS'
-        run: ./scripts/package-macos.sh ${{ matrix.rid }}
+        run: bash ./scripts/package-macos.sh ${{ matrix.rid }}
 
       - uses: actions/upload-artifact@v4
         with:
