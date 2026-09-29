@@ -219,7 +219,14 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     protected override string? TypingBlockedReason()
     {
         if (DiscardBufferIfFocusChanged(_lastEventSourcePid))
+        {
+            _deadKeyState = 0;
             return Localizer.Instance.Format("Diag_FocusChanged", ForegroundAppName());
+        }
+
+        // The app still holds the accent as marked text; no injection path is known to replace around it safely.
+        if (_deadKeyState != 0)
+            return Localizer.Instance["Diag_DeadKeyPending"];
 
         return InputBlockedReason();
     }
@@ -501,7 +508,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         }
 
         var typed = TypedText(@event);
-        Dispatcher.UIThread.Post(() => CaptureKey(keyCode, flags, typed, pid));
+        var autoRepeat = MacOSNativeMethods.CGEventGetIntegerValueField(
+            @event, MacOSNativeMethods.EventKeyboardAutorepeat) != 0;
+        Dispatcher.UIThread.Post(() => CaptureKey(keyCode, flags, autoRepeat, typed, pid));
         return @event;
     }
 
@@ -578,13 +587,14 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
                          | MacOSNativeMethods.EventFlagMaskCommand)) != 0;
     }
 
-    private void CaptureKey(ushort keyCode, ulong flags, string typed, int pid)
+    private void CaptureKey(ushort keyCode, ulong flags, bool autoRepeat, string typed, int pid)
     {
         // Only a plain keystroke on the same layout may complete a dead key; every other path drops it.
         var pendingDeadKey = _deadKeyState;
         _deadKeyState = 0;
 
-        DiscardBufferIfFocusChanged(pid);
+        if (DiscardBufferIfFocusChanged(pid))
+            pendingDeadKey = 0;
 
         DropTypingBufferIfIdle();
         EndCorrectionCycle();
@@ -620,6 +630,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
         if (keyCode == MacOSNativeMethods.DeleteKeyCode)
         {
+            if (pendingDeadKey != 0 && !HasMeaningfulModifiers(flags))
+                return;
 
             BackspaceTypingBuffer(HasMeaningfulModifiers(flags));
             return;
@@ -635,7 +647,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
         // The event's own string knows nothing of a pending dead key: after ; on Greek it reports α, not ά.
         var state = pendingDeadKey;
-        if (MacInstalledLayouts.TranslateKeyDown(keyCode, flags, ref state, _translated, out var length))
+        if (MacInstalledLayouts.TranslateKeyDown(keyCode, flags, autoRepeat, ref state, _translated, out var length))
         {
             if (length == 0 && state != 0)
             {

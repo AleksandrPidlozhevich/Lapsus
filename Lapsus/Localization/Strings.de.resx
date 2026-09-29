@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Tastenkürzel: ignoriert — die aktive Eingabesprache (Chinesisch/Japanisch/Koreanisch) schreibt über ein IME, daher kann Lapsus diesen Text nicht aus den Tastenanschlägen rekonstruieren.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Tastenkürzel: ignoriert — eine Tottaste (Akzent) wartet noch auf ihren Buchstaben. Tippen Sie den Buchstaben oder drücken Sie ⌫ und versuchen Sie es erneut.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Tastenkürzel: ignoriert — das ist ein Passwortfeld. Lapsus puffert und überschreibt dort niemals etwas.</value>
   </data>

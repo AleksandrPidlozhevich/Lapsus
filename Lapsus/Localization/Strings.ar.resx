@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>مفتاح الاختصار: تم التجاهل — لغة الإدخال النشطة (الصينية/اليابانية/الكورية) تكتب عبر محرّر IME، لذا لا يستطيع Lapsus إعادة بناء ذلك النص من ضغطات المفاتيح.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>مفتاح الاختصار: تم التجاهل — مفتاح ميت (علامة تشكيل) لا يزال ينتظر حرفه. اكتب الحرف أو اضغط ⌫، ثم حاول مرة أخرى.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>مفتاح الاختصار: تم التجاهل — هذا حقل كلمة مرور. لا يخزّن Lapsus ما تكتبه فيه ولا يعيد كتابته أبدًا.</value>
   </data>

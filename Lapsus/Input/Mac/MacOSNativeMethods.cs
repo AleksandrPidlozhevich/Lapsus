@@ -116,6 +116,8 @@ internal static class MacOSNativeMethods
 
     public const ushort UCKeyActionDown = 0;
 
+    public const ushort UCKeyActionAutoKey = 2;
+
     public const uint UCKeyTranslateNoDeadKeys = 1U << 0;
 
     public const int SpaceKeyCode = 0x31;
@@ -165,6 +167,7 @@ internal static class MacOSNativeMethods
     public const int EventRightMouseDown = 3;
     public const int EventOtherMouseDown = 25;
 
+    public const int EventKeyboardAutorepeat = 8;
     public const int EventKeyboardKeycode = 9;
     public const int EventSourceUnixProcessId = 41;
     public const int EventSourceUserData = 42;

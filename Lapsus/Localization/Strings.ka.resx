@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>ცხელი ღილაკი: იგნორირებულია — აქტიური შეყვანის ენა (ჩინური/იაპონური/კორეული) IME-ით იკრიფება, ამიტომ Lapsus ვერ აღადგენს ამ ტექსტს ღილაკებიდან.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>ცხელი ღილაკი: იგნორირებულია — მკვდარი ღილაკი (მახვილი) ჯერ კიდევ ელოდება თავის ასოს. აკრიფეთ ასო ან დააჭირეთ ⌫ და სცადეთ ხელახლა.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>ცხელი ღილაკი: იგნორირებულია — ეს პაროლის ველია. Lapsus იქ აკრეფილს არასოდეს ინახავს და არ გადაწერს.</value>
   </data>

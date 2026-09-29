@@ -175,6 +175,17 @@ public class LayoutTranscoderTests
     }
 
     [Fact]
+    public void A_dead_key_named_by_its_combining_mark_still_accents()
+    {
+        var slots = BundledKeyboardMaps.CreateElSlots();
+        var deadSlot = Array.IndexOf(BundledKeyboardMaps.CreateEnSlots(), ';');
+        slots[deadSlot] = '\0';
+        var greek = new KeyboardMap(slots, null, [new DeadKey(deadSlot, false, '́')]);
+
+        Assert.Equal("καλός", LayoutTranscoder.Transcode("kal;ow", BundledKeyboardMaps.En, greek));
+    }
+
+    [Fact]
     public void Several_source_maps_still_find_the_dead_key()
     {
         Assert.Equal("τι κάνεις", LayoutTranscoder.Transcode(

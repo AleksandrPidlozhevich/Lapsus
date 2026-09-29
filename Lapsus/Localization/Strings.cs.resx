@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Zkratka: ignorováno — aktivní jazyk vstupu (čínština/japonština/korejština) píše přes IME, takže Lapsus nedokáže ten text ze stisků kláves obnovit.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Zkratka: ignorováno — mrtvá klávesa (diakritika) ještě čeká na své písmeno. Napište písmeno nebo stiskněte ⌫ a zkuste to znovu.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Zkratka: ignorováno — tohle je pole pro heslo. Lapsus si tam nikdy nic neukládá ani nepřepisuje.</value>
   </data>

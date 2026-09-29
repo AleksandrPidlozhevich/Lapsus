@@ -335,6 +335,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Hotkey: ignored — the active input language (Chinese/Japanese/Korean) types through an IME, so Lapsus cannot rebuild that text from keystrokes.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Hotkey: ignored — a dead key is still waiting for its letter. Type the letter or press ⌫, then try again.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Hotkey: ignored — password / secure input. Lapsus never buffers or rewrites what you type there.</value>
   </data>

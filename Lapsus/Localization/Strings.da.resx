@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Genvejstast: ignoreret — det aktive inputsprog (kinesisk/japansk/koreansk) skriver gennem en IME, så Lapsus kan ikke genskabe den tekst ud fra tastetrykkene.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Genvejstast: ignoreret — en dødtast (accent) venter stadig på sit bogstav. Skriv bogstavet, eller tryk på ⌫, og prøv igen.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Genvejstast: ignoreret — dette er et adgangskodefelt. Lapsus gemmer og omskriver aldrig det, du skriver dér.</value>
   </data>

@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Sneltoets: genegeerd — de actieve invoertaal (Chinees/Japans/Koreaans) typt via een IME, dus Lapsus kan die tekst niet uit de toetsaanslagen reconstrueren.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Sneltoets: genegeerd — een dode toets (accent) wacht nog op zijn letter. Typ de letter of druk op ⌫ en probeer het opnieuw.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Sneltoets: genegeerd — dit is een wachtwoordveld. Lapsus bewaart of herschrijft daar nooit iets.</value>
   </data>

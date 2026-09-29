@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Бърз клавиш: пренебрегнат — активният език за въвеждане (китайски/японски/корейски) пише през IME, затова Lapsus не може да възстанови този текст от натисканията.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Бърз клавиш: пренебрегнат — мъртъв клавиш (ударение) още чака своята буква. Въведете буквата или натиснете ⌫ и опитайте отново.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Бърз клавиш: пренебрегнат — това е поле за парола. Lapsus никога не запазва и не пренаписва каквото пишете там.</value>
   </data>

@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Atajo: ignorado — el idioma de entrada activo (chino/japonés/coreano) usa un IME, así que Lapsus no puede reconstruir ese texto a partir de las pulsaciones.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Atajo: ignorado — una tecla muerta (acento) sigue esperando su letra. Escribe la letra o pulsa ⌫ y vuelve a intentarlo.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Atajo: ignorado — es un campo de contraseña. Lapsus no guarda ni reescribe lo que escribes ahí.</value>
   </data>

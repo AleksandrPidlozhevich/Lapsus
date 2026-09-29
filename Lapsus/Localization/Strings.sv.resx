@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Snabbtangent: ignorerad — det aktiva inmatningsspråket (kinesiska/japanska/koreanska) skriver via en IME, så Lapsus kan inte återskapa den texten från tangenttryckningarna.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Snabbtangent: ignorerad — en dödtangent (accent) väntar fortfarande på sin bokstav. Skriv bokstaven eller tryck på ⌫ och försök igen.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Snabbtangent: ignorerad — det här är ett lösenordsfält. Lapsus sparar och skriver aldrig om det du skriver där.</value>
   </data>

@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Tastă rapidă: ignorată — limba de introducere activă (chineză/japoneză/coreeană) scrie printr-un IME, așa că Lapsus nu poate reconstitui acel text din apăsările de taste.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Tastă rapidă: ignorată — o tastă moartă (accent) încă își așteaptă litera. Tastează litera sau apasă ⌫, apoi încearcă din nou.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Tastă rapidă: ignorată — acesta este un câmp de parolă. Lapsus nu reține și nu rescrie niciodată ce scrii acolo.</value>
   </data>

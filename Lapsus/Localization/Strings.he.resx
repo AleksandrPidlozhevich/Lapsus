@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>מקש חם: התעלמנו — שפת הקלט הפעילה (סינית/יפנית/קוריאנית) מקלידה דרך IME, ולכן Lapsus לא יכול לשחזר את הטקסט מההקשות.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>מקש חם: התעלמנו — מקש מת (סימן הטעמה) עדיין ממתין לאות שלו. הקלידו את האות או הקישו ⌫, ונסו שוב.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>מקש חם: התעלמנו — זהו שדה סיסמה. Lapsus לעולם לא שומר ולא משכתב את מה שמוקלד בו.</value>
   </data>

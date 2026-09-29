@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Bližnjica: prezrto — aktivni jezik vnosa (kitajščina/japonščina/korejščina) tipka prek IME, zato Lapsus tega besedila iz pritiskov tipk ne more obnoviti.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Bližnjica: prezrto — mrtva tipka (naglas) še čaka na svojo črko. Vtipkajte črko ali pritisnite ⌫ in poskusite znova.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Bližnjica: prezrto — to je polje za geslo. Lapsus tam nikoli ničesar ne shranjuje in ne prepisuje.</value>
   </data>

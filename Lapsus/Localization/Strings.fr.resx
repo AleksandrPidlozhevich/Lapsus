@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Raccourci : ignoré — la langue de saisie active (chinois/japonais/coréen) passe par un IME, Lapsus ne peut donc pas reconstruire ce texte à partir des frappes.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Raccourci : ignoré — une touche morte (accent) attend encore sa lettre. Tapez la lettre ou appuyez sur ⌫, puis réessayez.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Raccourci : ignoré — c&apos;est un champ de mot de passe. Lapsus n&apos;y met jamais rien en mémoire tampon et n&apos;y réécrit rien.</value>
   </data>

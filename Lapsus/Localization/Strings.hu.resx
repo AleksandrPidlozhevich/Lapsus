@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Gyorsbillentyű: figyelmen kívül hagyva — az aktív beviteli nyelv (kínai/japán/koreai) IME-n keresztül gépel, így a Lapsus nem tudja a leütésekből visszaállítani a szöveget.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Gyorsbillentyű: figyelmen kívül hagyva — egy holtbillentyű (ékezet) még a betűjére vár. Írja be a betűt, vagy nyomja meg a ⌫ billentyűt, majd próbálja újra.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Gyorsbillentyű: figyelmen kívül hagyva — ez egy jelszómező. A Lapsus soha nem tárolja és nem írja át, amit oda gépel.</value>
   </data>

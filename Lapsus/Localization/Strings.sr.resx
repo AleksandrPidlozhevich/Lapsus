@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Prečica: zanemareno — aktivni jezik unosa (kineski/japanski/korejski) kuca preko IME-a, pa Lapsus taj tekst ne može da obnovi iz pritisaka tastera.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Prečica: zanemareno — mrtav taster (akcenat) još čeka svoje slovo. Otkucajte slovo ili pritisnite ⌫, pa pokušajte ponovo.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Prečica: zanemareno — ovo je polje za lozinku. Lapsus tu nikada ništa ne pamti niti prepisuje.</value>
   </data>

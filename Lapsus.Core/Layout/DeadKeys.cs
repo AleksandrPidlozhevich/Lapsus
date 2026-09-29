@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 
 namespace Lapsus.Core.Layout;
@@ -25,6 +26,7 @@ public static class DeadKeys
             '¸' => "̧",
             '˛' => "̨",
             '˙' => "̇",
+            _ when CharUnicodeInfo.GetUnicodeCategory(accent) == UnicodeCategory.NonSpacingMark => accent.ToString(),
             _ => null
         };
     }

@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Kısayol: yok sayıldı — etkin giriş dili (Çince/Japonca/Korece) bir IME üzerinden yazıyor, bu yüzden Lapsus o metni tuş vuruşlarından yeniden oluşturamaz.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Kısayol: yok sayıldı — bir ölü tuş (vurgu işareti) hâlâ harfini bekliyor. Harfi yazın ya da ⌫ tuşuna basın, sonra yeniden deneyin.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Kısayol: yok sayıldı — burası bir parola alanı. Lapsus orada yazdıklarınızı asla tutmaz ve yeniden yazmaz.</value>
   </data>

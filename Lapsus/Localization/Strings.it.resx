@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Scorciatoia: ignorata — la lingua di input attiva (cinese/giapponese/coreano) usa un IME, quindi Lapsus non può ricostruire quel testo dai tasti premuti.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Scorciatoia: ignorata — un tasto morto (accento) attende ancora la sua lettera. Digita la lettera o premi ⌫, poi riprova.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Scorciatoia: ignorata — è un campo password. Lapsus non memorizza né riscrive ciò che ci digiti.</value>
   </data>

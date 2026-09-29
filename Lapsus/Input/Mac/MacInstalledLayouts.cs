@@ -167,7 +167,7 @@ internal static class MacInstalledLayouts
 
     // One key-down through the current layout, dead-key state carried across calls as the OS carries it.
     public static bool TranslateKeyDown(
-        ushort keyCode, ulong eventFlags, ref uint deadKeyState, char[] buffer, out int length)
+        ushort keyCode, ulong eventFlags, bool autoRepeat, ref uint deadKeyState, char[] buffer, out int length)
     {
         length = 0;
 
@@ -189,7 +189,7 @@ internal static class MacInstalledLayouts
             var status = MacOSNativeMethods.UCKeyTranslate(
                 MacOSNativeMethods.CFDataGetBytePtr(layoutData),
                 keyCode,
-                MacOSNativeMethods.UCKeyActionDown,
+                autoRepeat ? MacOSNativeMethods.UCKeyActionAutoKey : MacOSNativeMethods.UCKeyActionDown,
                 modifiers,
                 MacOSNativeMethods.LMGetKbdType(),
                 0,

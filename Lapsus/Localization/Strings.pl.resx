@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Skrót: zignorowano — aktywny język wprowadzania (chiński/japoński/koreański) korzysta z IME, więc Lapsus nie odtworzy tego tekstu z naciśnięć klawiszy.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Skrót: zignorowano — martwy klawisz (akcent) wciąż czeka na swoją literę. Wpisz literę lub naciśnij ⌫ i spróbuj ponownie.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Skrót: zignorowano — to pole hasła. Lapsus niczego w nim nie zapamiętuje ani nie przepisuje.</value>
   </data>

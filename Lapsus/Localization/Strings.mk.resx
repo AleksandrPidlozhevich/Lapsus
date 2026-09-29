@@ -331,6 +331,9 @@
     <data name="Diag_ImeActive" xml:space="preserve">
     <value>Кратенка: игнорирана — активниот јазик за внес (кинески/јапонски/корејски) пишува преку IME, па Lapsus не може да го обнови тој текст од притисоците.</value>
   </data>
+    <data name="Diag_DeadKeyPending" xml:space="preserve">
+    <value>Кратенка: игнорирана — мртво копче (акцент) сè уште ја чека својата буква. Внесете ја буквата или притиснете ⌫, па обидете се повторно.</value>
+  </data>
     <data name="Diag_SecureField" xml:space="preserve">
     <value>Кратенка: игнорирана — ова е поле за лозинка. Lapsus никогаш не го чува ниту го преработува тоа што го пишувате таму.</value>
   </data>
