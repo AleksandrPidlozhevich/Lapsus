@@ -13,19 +13,19 @@ public class LayoutTranscoderTests
     [Fact]
     public void Transcodes_a_phrase_en_to_ukrainian()
     {
-        Assert.Equal("привіт світ", LayoutTranscoder.Transcode("ghbdsn cdsn", En, Uk));
+        Assert.Equal("вітання світ", LayoutTranscoder.Transcode("dsnfyyz cdsn", En, Uk));
     }
 
     [Fact]
     public void Transcodes_back_to_latin()
     {
-        Assert.Equal("ghbdsn", LayoutTranscoder.Transcode("привіт", Uk, En));
+        Assert.Equal("dsnfyyz", LayoutTranscoder.Transcode("вітання", Uk, En));
     }
 
     [Fact]
     public void Preserves_case()
     {
-        Assert.Equal("Привіт", LayoutTranscoder.Transcode("Ghbdsn", En, Uk));
+        Assert.Equal("Вітання", LayoutTranscoder.Transcode("Dsnfyyz", En, Uk));
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class LayoutTranscoderTests
     [Fact]
     public void Digits_and_spaces_survive()
     {
-        Assert.Equal("привіт 42", LayoutTranscoder.Transcode("ghbdsn 42", En, Uk));
+        Assert.Equal("вітання 42", LayoutTranscoder.Transcode("dsnfyyz 42", En, Uk));
     }
 
     [Fact]
@@ -49,7 +49,7 @@ public class LayoutTranscoderTests
 
         Assert.Equal(":", LayoutTranscoder.Transcode(":", declared, En));
 
-        Assert.Equal("Привіт", LayoutTranscoder.Transcode("Ghbdsn", En, Uk));
+        Assert.Equal("Вітання", LayoutTranscoder.Transcode("Dsnfyyz", En, Uk));
     }
 
     [Fact]
@@ -62,17 +62,17 @@ public class LayoutTranscoderTests
     [Fact]
     public void Two_source_maps_re_type_both_halves_of_a_line()
     {
-        Assert.Equal("привіт текст", LayoutTranscoder.Transcode("привіт ntrcn", [Uk, En], Uk));
-        Assert.Equal("ghbdsn ntrcn", LayoutTranscoder.Transcode("привіт ntrcn", [Uk, En], En));
+        Assert.Equal("вітання текст", LayoutTranscoder.Transcode("вітання ntrcn", [Uk, En], Uk));
+        Assert.Equal("dsnfyyz ntrcn", LayoutTranscoder.Transcode("вітання ntrcn", [Uk, En], En));
 
-        Assert.Equal("привіт ntrcn", LayoutTranscoder.Transcode("привіт ntrcn", Uk, Uk));
+        Assert.Equal("вітання ntrcn", LayoutTranscoder.Transcode("вітання ntrcn", Uk, Uk));
     }
 
     [Fact]
     public void The_first_map_claims_a_character_they_share()
     {
         Assert.Equal("-", LayoutTranscoder.Transcode("-", [Uk, En], Uk));
-        Assert.Equal("Привіт", LayoutTranscoder.Transcode("Ghbdsn", [En, Uk], Uk));
+        Assert.Equal("Вітання", LayoutTranscoder.Transcode("Dsnfyyz", [En, Uk], Uk));
     }
 
     [Fact]
@@ -80,11 +80,11 @@ public class LayoutTranscoderTests
     {
         var sourceMaps = new[] { BundledKeyboardMaps.Uk, BundledKeyboardMaps.En };
 
-        Assert.Equal("привыт мир текст", LayoutTranscoder.Transcode(
-            "привіт мир ntrcn", sourceMaps, BundledKeyboardMaps.Ru));
+        Assert.Equal("вытання мир текст", LayoutTranscoder.Transcode(
+            "вітання мир ntrcn", sourceMaps, BundledKeyboardMaps.Ru));
 
-        Assert.Equal("привіт мир текст", LayoutTranscoder.TranscodeIntoScript(
-            "привіт мир ntrcn", sourceMaps, BundledKeyboardMaps.Ru, Script.Cyrillic));
+        Assert.Equal("вітання мир текст", LayoutTranscoder.TranscodeIntoScript(
+            "вітання мир ntrcn", sourceMaps, BundledKeyboardMaps.Ru, Script.Cyrillic));
     }
 
     [Fact]
@@ -101,8 +101,8 @@ public class LayoutTranscoderTests
     {
         var sourceMaps = new[] { BundledKeyboardMaps.Uk, BundledKeyboardMaps.En };
 
-        Assert.Equal("привіт cat", LayoutTranscoder.TranscodeIntoScript(
-            "ghbdsn cat", sourceMaps, BundledKeyboardMaps.Uk, Script.Cyrillic, [new TextSpan(7, 3)]));
+        Assert.Equal("вітання cat", LayoutTranscoder.TranscodeIntoScript(
+            "dsnfyyz cat", sourceMaps, BundledKeyboardMaps.Uk, Script.Cyrillic, [new TextSpan(8, 3)]));
     }
 
     [Fact]
@@ -117,8 +117,8 @@ public class LayoutTranscoderTests
     [Fact]
     public void With_nothing_kept_it_matches_the_plain_overload()
     {
-        Assert.Equal("привіт мир текст", LayoutTranscoder.TranscodeIntoScript(
-            "привіт мир ntrcn", [BundledKeyboardMaps.Uk, BundledKeyboardMaps.En],
+        Assert.Equal("вітання мир текст", LayoutTranscoder.TranscodeIntoScript(
+            "вітання мир ntrcn", [BundledKeyboardMaps.Uk, BundledKeyboardMaps.En],
             BundledKeyboardMaps.Ru, Script.Cyrillic, []));
 
         Assert.Equal("руддщ цщкдв", LayoutTranscoder.TranscodeIntoScript(

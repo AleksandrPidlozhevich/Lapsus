@@ -19,13 +19,13 @@ public class SpellCheckerTests
     public void Loads_a_downloaded_dictionary_from_disk()
     {
         var path = Path.Combine(Path.GetTempPath(), $"lapsus-uk-{Guid.NewGuid():N}.txt");
-        File.WriteAllText(path, "привіт 500\nдякую 300\nмісто 200\n");
+        File.WriteAllText(path, "вітання 500\nдякую 300\nмісто 200\n");
         try
         {
             var spell = new SpellChecker(new[] { new DictionarySource("uk", path, Script.Cyrillic) });
 
             Assert.True(spell.Has(Script.Cyrillic));
-            Assert.True(spell.IsKnownWord("привіт", Script.Cyrillic));
+            Assert.True(spell.IsKnownWord("вітання", Script.Cyrillic));
             Assert.True(spell.TryCorrect("дяку", Script.Cyrillic, out var fixedWord, out _));
             Assert.Equal("дякую", fixedWord);
         }
@@ -88,7 +88,7 @@ public class SpellCheckerTests
     {
         var ukPath = Path.Combine(Path.GetTempPath(), $"lapsus-uk-pool-{Guid.NewGuid():N}.txt");
         var ruPath = Path.Combine(Path.GetTempPath(), $"lapsus-ru-pool-{Guid.NewGuid():N}.txt");
-        File.WriteAllText(ukPath, "привіт 500\n");
+        File.WriteAllText(ukPath, "вітання 500\n");
         File.WriteAllText(ruPath, "привет 500\n");
         try
         {
@@ -99,9 +99,9 @@ public class SpellCheckerTests
             ]);
 
             Assert.True(spell.IsKnownWord("привет", Script.Cyrillic, "uk"));
-            Assert.True(spell.IsKnownWord("привіт", Script.Cyrillic, "ru"));
+            Assert.True(spell.IsKnownWord("вітання", Script.Cyrillic, "ru"));
             Assert.True(spell.IsKnownWord("привет", Script.Cyrillic));
-            Assert.True(spell.IsKnownWord("привіт", Script.Cyrillic));
+            Assert.True(spell.IsKnownWord("вітання", Script.Cyrillic));
         }
         finally
         {
@@ -222,12 +222,12 @@ public class SpellCheckerTests
     public void A_word_of_the_neighbouring_language_is_not_this_language_s_word()
     {
         var path = Path.Combine(Path.GetTempPath(), $"lapsus-alphabet-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(path, ["привіт 900", "это 800", "ты 700", "всё 600", "об'єкт 500", "the 400", "що 300"]);
+        File.WriteAllLines(path, ["вітання 900", "это 800", "ты 700", "всё 600", "об'єкт 500", "the 400", "що 300"]);
         try
         {
             var uk = new SpellChecker([new DictionarySource("uk", path, Script.Cyrillic)]);
 
-            Assert.True(uk.IsKnownWord("привіт", Script.Cyrillic));
+            Assert.True(uk.IsKnownWord("вітання", Script.Cyrillic));
             Assert.True(uk.IsKnownWord("об'єкт", Script.Cyrillic));
             Assert.True(uk.IsKnownWord("що", Script.Cyrillic));
             Assert.False(uk.IsKnownWord("это", Script.Cyrillic));

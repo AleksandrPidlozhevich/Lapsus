@@ -21,7 +21,7 @@ public sealed class GeorgianCorrectionTests : IDisposable
 
     private static readonly string[] EnglishWords = ["hello 900", "text 800", "world 700", "man 600"];
 
-    private static readonly string[] UkrainianWords = ["привіт 900", "дякую 800", "будинок 700"];
+    private static readonly string[] UkrainianWords = ["вітання 900", "дякую 800", "будинок 700"];
 
     private static readonly List<LayoutCandidate> ToGeorgian =
         [new(Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka, "ka")];
@@ -153,14 +153,14 @@ public sealed class GeorgianCorrectionTests : IDisposable
     [Fact]
     public void Georgian_keystrokes_switch_back_to_cyrillic()
     {
-        var typed = LayoutTranscoder.Transcode("привіт", BundledKeyboardMaps.Uk, BundledKeyboardMaps.Ka);
-        Assert.Equal("გჰბდსნ", typed);
+        var typed = LayoutTranscoder.Transcode("вітання", BundledKeyboardMaps.Uk, BundledKeyboardMaps.Ka);
+        Assert.Equal("დსნფყყზ", typed);
 
         var result = CorrectorWith(_georgian, _ukrainian)
             .CorrectPhrase(typed, Script.Georgian, BundledKeyboardMaps.Ka, ToUkrainian);
 
         Assert.True(result.Changed);
-        Assert.Equal("привіт", result.Corrected);
+        Assert.Equal("вітання", result.Corrected);
         Assert.Equal(KeyboardLayout.Uk, result.TargetLayout);
     }
 
@@ -199,10 +199,10 @@ public sealed class GeorgianCorrectionTests : IDisposable
     public void Real_ukrainian_is_not_dragged_into_georgian()
     {
         var result = CorrectorWith(_georgian, _ukrainian)
-            .CorrectPhrase("привіт", Script.Cyrillic, BundledKeyboardMaps.Uk, ToGeorgian);
+            .CorrectPhrase("вітання", Script.Cyrillic, BundledKeyboardMaps.Uk, ToGeorgian);
 
         Assert.False(result.Changed);
-        Assert.Equal("привіт", result.Corrected);
+        Assert.Equal("вітання", result.Corrected);
     }
 
     [Fact]
@@ -236,13 +236,13 @@ public sealed class GeorgianCorrectionTests : IDisposable
     [Fact]
     public void With_no_georgian_dictionary_cyrillic_is_still_reachable()
     {
-        var typed = LayoutTranscoder.Transcode("привіт", BundledKeyboardMaps.Uk, BundledKeyboardMaps.Ka);
+        var typed = LayoutTranscoder.Transcode("вітання", BundledKeyboardMaps.Uk, BundledKeyboardMaps.Ka);
         var ukrainianOnly = CorrectorWith(_ukrainian);
 
         var result = ukrainianOnly.CorrectPhrase(typed, Script.Georgian, BundledKeyboardMaps.Ka, ToUkrainian);
 
         Assert.True(result.Changed);
-        Assert.Equal("привіт", result.Corrected);
+        Assert.Equal("вітання", result.Corrected);
     }
 
     [Fact]

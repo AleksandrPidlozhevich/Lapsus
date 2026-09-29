@@ -27,7 +27,7 @@ public sealed class MixedLanguageTests : IDisposable
         [
             new DictionarySource("en", Temp("en", "cat 900", "server 800", "the 950"), Script.Latin),
             new DictionarySource("pl", Temp("pl", "dobry 850", "dzień 900", "mleko 800"), Script.Latin),
-            new DictionarySource("uk", Temp("uk", "привіт 900", "кава 800", "молоко 800"), Script.Cyrillic),
+            new DictionarySource("uk", Temp("uk", "вітання 900", "кава 800", "молоко 800"), Script.Cyrillic),
             new DictionarySource("ru", Temp("ru", "привет 900", "кофе 800", "молоко 800"), Script.Cyrillic),
             new DictionarySource("el", Temp("el", "καλημέρα 900", "κόσμος 800"), Script.Greek)
         ]));
@@ -64,9 +64,9 @@ public sealed class MixedLanguageTests : IDisposable
     ];
 
     [Theory]
-    [InlineData("привіт cat")]
+    [InlineData("вітання cat")]
     [InlineData("кава dobry")]
-    [InlineData("привіт καλημέρα")]
+    [InlineData("вітання καλημέρα")]
     [InlineData("кава καλημέρα cat")]
     public void A_correct_line_of_several_scripts_is_left_alone(string text)
     {
@@ -79,10 +79,10 @@ public sealed class MixedLanguageTests : IDisposable
     [Fact]
     public void A_real_word_beside_a_wrong_layout_one_survives_the_fix()
     {
-        var result = _corrector.CorrectPhrase("ghbdsn cat", ActiveEnglish, InstalledUkrainian, ToUkrainian);
+        var result = _corrector.CorrectPhrase("dsnfyyz cat", ActiveEnglish, InstalledUkrainian, ToUkrainian);
 
         Assert.True(result.Changed);
-        Assert.Equal("привіт cat", result.Corrected);
+        Assert.Equal("вітання cat", result.Corrected);
         Assert.Equal("uk-id", result.TargetLayoutId);
     }
 
@@ -90,10 +90,10 @@ public sealed class MixedLanguageTests : IDisposable
     public void A_real_word_survives_a_run_of_wrong_layout_words()
     {
         var result = _corrector.CorrectPhrase(
-            "ghbdsn rfdf server", ActiveEnglish, InstalledUkrainian, ToUkrainian);
+            "dsnfyyz rfdf server", ActiveEnglish, InstalledUkrainian, ToUkrainian);
 
         Assert.True(result.Changed);
-        Assert.Equal("привіт кава server", result.Corrected);
+        Assert.Equal("вітання кава server", result.Corrected);
         Assert.Equal("uk-id", result.TargetLayoutId);
     }
 
@@ -117,7 +117,7 @@ public sealed class MixedLanguageTests : IDisposable
     }
 
     [Theory]
-    [InlineData("ghbdsn", "привіт", "uk-id")]
+    [InlineData("dsnfyyz", "вітання", "uk-id")]
     [InlineData("ghbdtn", "привет", "ru-id")]
     public void Two_cyrillic_languages_are_told_apart_by_whichever_owns_the_word(
         string typed, string expected, string expectedLayoutId)
@@ -147,10 +147,10 @@ public sealed class MixedLanguageTests : IDisposable
     public void A_line_of_two_cyrillic_languages_corrects_every_word()
     {
         var result = _corrector.CorrectPhrase(
-            "ghbdsn ghbdtn", ActiveEnglish, InstalledBothCyrillic, ToBothCyrillic);
+            "dsnfyyz ghbdtn", ActiveEnglish, InstalledBothCyrillic, ToBothCyrillic);
 
         Assert.True(result.Changed);
-        Assert.Equal("привіт привет", result.Corrected);
+        Assert.Equal("вітання привет", result.Corrected);
     }
 
     private string Temp(string tag, params string[] lines)

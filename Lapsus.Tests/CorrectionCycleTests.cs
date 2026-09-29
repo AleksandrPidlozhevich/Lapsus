@@ -197,11 +197,11 @@ public sealed class CorrectionCycleTests : IDisposable
     public void A_half_and_half_line_is_finished_in_the_script_it_was_started_in()
     {
         var backend = new FakeInputBackend(new PlainLayoutSwitcher()).Listening();
-        backend.Type("привіт мир ntrcn");
+        backend.Type("вітання мир ntrcn");
 
         backend.PressHotkey();
 
-        Assert.Equal("привіт мир текст", backend.Injected[^1].Text);
+        Assert.Equal("вітання мир текст", backend.Injected[^1].Text);
         Assert.Equal(KeyboardLayout.Uk, backend.LayoutSwitches[^1].Target);
     }
 
@@ -209,12 +209,12 @@ public sealed class CorrectionCycleTests : IDisposable
     public void The_typed_text_is_one_press_away_on_a_half_and_half_line()
     {
         var backend = new FakeInputBackend(new PlainLayoutSwitcher()).Listening();
-        backend.Type("привіт мир ntrcn");
+        backend.Type("вітання мир ntrcn");
 
         backend.PressHotkey();
         backend.PressHotkey();
 
-        Assert.Equal("привіт мир ntrcn", backend.Injected[^1].Text);
+        Assert.Equal("вітання мир ntrcn", backend.Injected[^1].Text);
     }
 
     [Fact]
@@ -225,7 +225,7 @@ public sealed class CorrectionCycleTests : IDisposable
             InstalledLayouts = [FakeInputBackend.En, FakeInputBackend.Uk, FakeInputBackend.Ru]
         }.Listening();
 
-        backend.Type("привіт мир ntrcn");
+        backend.Type("вітання мир ntrcn");
 
         var seen = new List<string>();
         for (var i = 0; i < 4; i++)
@@ -234,9 +234,9 @@ public sealed class CorrectionCycleTests : IDisposable
             seen.Add(backend.Injected[^1].Text);
         }
 
-        Assert.DoesNotContain("привыт мир текст", seen);
-        Assert.Contains("привіт мир текст", seen);
-        Assert.Contains("привіт мир ntrcn", seen);
+        Assert.DoesNotContain("вытання мир текст", seen);
+        Assert.Contains("вітання мир текст", seen);
+        Assert.Contains("вітання мир ntrcn", seen);
     }
 
     [Fact]

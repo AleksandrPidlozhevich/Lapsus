@@ -85,7 +85,7 @@ public class ScriptsTests
 
     [Theory]
     [InlineData("hello world", Script.Latin)]
-    [InlineData("привіт світ", Script.Cyrillic)]
+    [InlineData("вітання світ", Script.Cyrillic)]
     [InlineData("καλημέρα κόσμε", Script.Greek)]
     [InlineData("שלום עולם", Script.Hebrew)]
     [InlineData("გამარჯობა მსოფლიო", Script.Georgian)]
@@ -122,7 +122,7 @@ public class ScriptsTests
     [Fact]
     public void Folding_a_plain_word_returns_the_same_instance()
     {
-        const string word = "привіт";
+        const string word = "вітання";
         Assert.Same(word, Scripts.FoldMarks(word, Script.Cyrillic));
     }
 
@@ -132,8 +132,8 @@ public class ScriptsTests
     [InlineData("'ять", Script.Cyrillic, false)]
     [InlineData("п'", Script.Cyrillic, false)]
     [InlineData("п''ять", Script.Cyrillic, false)]
-    [InlineData("привіт", Script.Cyrillic, true)]
-    [InlineData("привіт.", Script.Cyrillic, false)]
+    [InlineData("вітання", Script.Cyrillic, true)]
+    [InlineData("вітання.", Script.Cyrillic, false)]
     [InlineData("צה\"ל", Script.Hebrew, true)]
     [InlineData("וכו'", Script.Hebrew, false)]
     [InlineData("don't", Script.Latin, false)]

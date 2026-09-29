@@ -33,19 +33,19 @@ public class BundledKeyboardMapsTests
     }
 
     [Fact]
-    public void Ukrainian_pc_transcodes_pryvit_from_latin()
+    public void Ukrainian_pc_transcodes_vitannia_from_latin()
     {
-        Assert.Equal("привіт", LayoutTranscoder.Transcode("ghbdsn", BundledKeyboardMaps.En, BundledKeyboardMaps.Uk));
-        Assert.Equal("ghbdsn", LayoutTranscoder.Transcode("привіт", BundledKeyboardMaps.Uk, BundledKeyboardMaps.En));
+        Assert.Equal("вітання", LayoutTranscoder.Transcode("dsnfyyz", BundledKeyboardMaps.En, BundledKeyboardMaps.Uk));
+        Assert.Equal("dsnfyyz", LayoutTranscoder.Transcode("вітання", BundledKeyboardMaps.Uk, BundledKeyboardMaps.En));
     }
 
     [Fact]
-    public void Ukrainian_apple_transcodes_pryvit_with_swapped_vowels()
+    public void Ukrainian_apple_transcodes_vitannia_with_swapped_vowels()
     {
-        Assert.Equal("привіт",
-            LayoutTranscoder.Transcode("ghsdbn", BundledKeyboardMaps.En, BundledKeyboardMaps.UkApple));
-        Assert.Equal("ghsdbn",
-            LayoutTranscoder.Transcode("привіт", BundledKeyboardMaps.UkApple, BundledKeyboardMaps.En));
+        Assert.Equal("вітання",
+            LayoutTranscoder.Transcode("dbnfyyz", BundledKeyboardMaps.En, BundledKeyboardMaps.UkApple));
+        Assert.Equal("dbnfyyz",
+            LayoutTranscoder.Transcode("вітання", BundledKeyboardMaps.UkApple, BundledKeyboardMaps.En));
     }
 
     [Fact]

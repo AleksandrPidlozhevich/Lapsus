@@ -12,7 +12,7 @@ public sealed class LatinCorrectionTests : IDisposable
     {
         _corrector = _harness
             .With("en", Script.Latin, "car 900", "cat 850", "milk 700", "with 950", "server 600")
-            .With("uk", Script.Cyrillic, "кава 900", "молоко 800", "привіт 850")
+            .With("uk", Script.Cyrillic, "кава 900", "молоко 800", "вітання 850")
             .Corrector();
     }
 

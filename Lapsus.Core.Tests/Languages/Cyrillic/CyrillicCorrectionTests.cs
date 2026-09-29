@@ -12,7 +12,7 @@ public sealed class CyrillicCorrectionTests : IDisposable
     {
         _corrector = _harness
             .With("uk", Script.Cyrillic,
-                "кава 900", "привіт 850", "молоко 800", "дякую 700", "п'ять 600", "я 950", "здоров 300", "здорово 250")
+                "кава 900", "вітання 850", "молоко 800", "дякую 700", "п'ять 600", "я 950", "здоров 300", "здорово 250")
             .With("ru", Script.Cyrillic, "привет 900", "кофе 800", "молоко 800", "спасибо 700")
             .With("en", Script.Latin, "car 900", "cat 850", "server 700")
             .Corrector();
@@ -25,7 +25,7 @@ public sealed class CyrillicCorrectionTests : IDisposable
 
     [Theory]
     [InlineData("rfdf", "кава")]
-    [InlineData("ghbdsn", "привіт")]
+    [InlineData("dsnfyyz", "вітання")]
     public void Latin_keystrokes_switch_to_ukrainian(string typed, string expected)
     {
         var result = _corrector.CorrectPhrase(
@@ -61,11 +61,11 @@ public sealed class CyrillicCorrectionTests : IDisposable
     public void A_typo_is_fixed_on_top_of_the_layout_swap()
     {
         var result = _corrector.CorrectPhrase(
-            "ghbdsm", Script.Latin, Layouts.Map(KeyboardLayout.En),
+            "dsnfyyx", Script.Latin, Layouts.Map(KeyboardLayout.En),
             Layouts.ToOnly(KeyboardLayout.Uk, "uk"));
 
         Assert.True(result.Changed);
-        Assert.Equal("привіт", result.Corrected);
+        Assert.Equal("вітання", result.Corrected);
         Assert.Equal(KeyboardLayout.Uk, result.TargetLayout);
     }
 
@@ -82,7 +82,7 @@ public sealed class CyrillicCorrectionTests : IDisposable
 
     [Theory]
     [InlineData("кава")]
-    [InlineData("привіт кава")]
+    [InlineData("вітання кава")]
     public void Real_ukrainian_is_left_alone(string text)
     {
         var result = _corrector.CorrectPhrase(
@@ -104,7 +104,7 @@ public sealed class CyrillicCorrectionTests : IDisposable
     }
 
     [Theory]
-    [InlineData("ghbdsn", "привіт", KeyboardLayout.Uk)]
+    [InlineData("dsnfyyz", "вітання", KeyboardLayout.Uk)]
     [InlineData("ghbdtn", "привет", KeyboardLayout.Ru)]
     public void The_language_that_owns_the_word_wins_the_layout(
         string typed, string expected, KeyboardLayout expectedLayout)
@@ -174,10 +174,10 @@ public sealed class CyrillicCorrectionTests : IDisposable
     public void A_real_english_word_survives_a_wrong_layout_run_beside_it()
     {
         var result = _corrector.CorrectPhrase(
-            "ghbdsn rfdf server", Script.Latin, Layouts.Map(KeyboardLayout.En),
+            "dsnfyyz rfdf server", Script.Latin, Layouts.Map(KeyboardLayout.En),
             Layouts.ToOnly(KeyboardLayout.Uk, "uk"));
 
         Assert.True(result.Changed);
-        Assert.Equal("привіт кава server", result.Corrected);
+        Assert.Equal("вітання кава server", result.Corrected);
     }
 }

@@ -145,6 +145,60 @@ Settings → Apps before installing Lapsus from the Store — the two cannot sit
 A Store release needs a new `VERSION` like any other — the Store rejects a package whose
 version is not higher than the one already published.
 
+## Issuing license keys
+
+Keys and activation tokens are ECDSA P-256 signatures, verified offline against the public key
+compiled into the app. **Signing happens only on the server** — three Supabase Edge Functions, whose
+source lives in the Supabase dashboard and not in this repository:
+
+| Function | Called by | Guard | Issues |
+|---|---|---|---|
+| `lapsus-issue` | the [trial form](https://getlapsus.com/en/trial/) | none, by design | pro, 1 seat, 30 days — hard-coded, request fields ignored |
+| `lapsus-admin-issue` | you, from a terminal | `x-lapsus-admin` header | any edition, seat count and expiry, taken from the request |
+| `lapsus-activate` | the app | none needed | a 35-day activation token, after checking the key's signature and claiming a seat |
+
+`lapsus-activate` needs no guard because the request proves itself: it carries a key that only the
+private half could have signed. `lapsus-admin-issue` can prove nothing of the sort — "issue a license
+for Acme" says nothing about who is asking — so it needs a shared secret, `LAPSUS_ADMIN_SECRET`, held
+in Supabase secrets and nowhere else. Without it that endpoint is an open Business-key generator, and
+the trial limits become pointless: why take thirty days when the next URL along grants forever?
+
+Issuing a paid key, in Git Bash:
+
+```bash
+curl -X POST "https://<project>.supabase.co/functions/v1/lapsus-admin-issue" -H "content-type: application/json" -H "x-lapsus-admin: $LAPSUS_ADMIN_SECRET" -d '{"email":"buyer@example.com","name":"Acme","edition":"business","seats":25}'
+```
+
+`edition` is `pro` or `business`; `seats` defaults to 1. Business defaults to one year and Pro to no
+expiry at all, and either is overridden by `"years": 3` or `"expires": "2030-01-01"`.
+
+### Creating or rotating the signing pair
+
+In **Git Bash** (it ships with OpenSSL; PowerShell does not), somewhere outside the repository:
+
+```bash
+openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 | openssl pkcs8 -topk8 -nocrypt -outform DER -out priv.der && openssl pkey -in priv.der -inform DER -pubout -outform DER -out pub.der && echo "PUBLIC : $(base64 -w0 pub.der)" && echo "PRIVATE: $(base64 -w0 priv.der)"
+```
+
+`-topk8` is not optional. Without it OpenSSL writes a SEC1 key, which starts `MHcCAQEE`, and the app
+rejects it. A correct private key starts `MIGH`; the public one starts
+`MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE`.
+
+A rotation touches **three** places, and missing the third is the failure that looks like a bug:
+
+1. `LAPSUS_PRIVATE_KEY` in Supabase secrets — signs keys and tokens.
+2. `LAPSUS_PUBLIC_KEY` in Supabase secrets — `lapsus-activate` checks pasted keys with it.
+3. `LicenseVerifier.EmbeddedPublicKey` in this repository — the app checks everything with it.
+
+Change the first two and not the third, and the app rejects keys the server has just minted. Change
+the pair at all after the first sale, and every key already issued stops verifying.
+
+Verify a new public key took:
+
+```bash
+dotnet test Lapsus.Core.Tests --filter TheShippedVerifierNeverThrows
+```
+
 ## Troubleshooting
 
 - **"vpk not found"** — you skipped the `dotnet tool install -g vpk` step above, or opened
