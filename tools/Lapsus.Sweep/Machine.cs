@@ -72,6 +72,9 @@ internal sealed class Machine
 
     public TargetLanguage Target { get; }
 
+    // The dictionary brain with phrase context, as the app builds it and hands to the neural one as adviser.
+    public LayoutCorrector Brain => _with;
+
     public LayoutSource TargetSource { get; }
 
     public LayoutSource[] Installed { get; }
@@ -103,6 +106,11 @@ internal sealed class Machine
     public string AsEnglishKeystrokes(string text)
     {
         return LayoutTranscoder.Transcode(text, Target.Map, BundledKeyboardMaps.En);
+    }
+
+    public string AsTargetKeystrokes(string text)
+    {
+        return LayoutTranscoder.Transcode(text, BundledKeyboardMaps.En, Target.Map);
     }
 
     public static string[] Words(string line)

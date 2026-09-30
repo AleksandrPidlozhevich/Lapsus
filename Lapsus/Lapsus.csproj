@@ -42,32 +42,10 @@
         <PackageReference Include="Velopack" Version="1.2.0"/>
     </ItemGroup>
 
-    <!--
-      ONNX Runtime GenAI native package, chosen per platform because the execution providers a
-      build carries are baked into it — this is what decides which devices Neural/ComputeDeviceProbe
-      may offer, so the two must be read together.
-
-      Windows takes the DirectML build (dml + CPU): any DX12 GPU, NVIDIA / AMD / Intel alike.
-      macOS and Linux take the base build, whose ONNX Runtime 1.28 carries the WebGPU provider with
-      Dawn on top of Metal — that is what makes an Apple M-series GPU usable at all, since no
-      publisher ships DirectML packs for it. The same build has no Dawn on Linux, which is CPU-only
-      for now. The managed API is identical across the packages, so the C# builds unchanged, and the
-      version split is only because the DirectML flavour lags the base one.
-
-      Two things stay out of reach and are not offered anywhere in the UI: CUDA (a third package we
-      do not ship) and every NPU — GenAI reaches those through qnn / vitisai / ryzenai, none of them
-      compiled in here, and the Apple Neural Engine is behind CoreML, which ONNX Runtime has on
-      macOS but GenAI has no provider name for.
-    -->
-    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
-        <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI.DirectML" Version="0.14.1"/>
-    </ItemGroup>
-    <ItemGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
-        <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI" Version="0.15.2"/>
-    </ItemGroup>
-
+    <!-- The ONNX Runtime GenAI package, and which one each OS takes, lives in Lapsus.Neural. -->
     <ItemGroup>
         <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj"/>
+        <ProjectReference Include="..\Lapsus.Neural\Lapsus.Neural.csproj"/>
     </ItemGroup>
 
     <!--

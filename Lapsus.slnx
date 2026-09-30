@@ -1,6 +1,7 @@
 <Solution>
     <Project Path="Lapsus/Lapsus.csproj"/>
     <Project Path="Lapsus.Core/Lapsus.Core.csproj"/>
+    <Project Path="Lapsus.Neural/Lapsus.Neural.csproj"/>
     <Project Path="Lapsus.Core.Tests/Lapsus.Core.Tests.csproj"/>
     <Project Path="Lapsus.Tests/Lapsus.Tests.csproj"/>
     <Project Path="tools/Lapsus.Sweep/Lapsus.Sweep.csproj"/>
