@@ -30,11 +30,12 @@ internal static class NeuralRun
         return new LoadedModel(llm, Path.GetFileName(Path.TrimEndingDirectorySeparator(modelDirectory)), llm.ExecutionProvider);
     }
 
-    public static void Measure(Machine machine, ILocalLlm llm, FrequencyList en, FrequencyList target, int lines)
+    public static void Measure(
+        Machine machine, ILocalLlm llm, FrequencyList en, FrequencyList target, int lines, string? blocks = null)
     {
         var recorder = new RecordingLlm(llm);
         var brain = new NeuralPhraseRewriter(recorder, machine.Brain);
-        var run = new Run(machine, brain, recorder);
+        var run = new Run(machine, brain, recorder, blocks);
         var name = machine.Target.Name;
 
         var random = new Random(20260929);
@@ -72,6 +73,80 @@ internal static class NeuralRun
             return new Case(line, line, Machine.En);
         });
 
+        random = new Random(20261004);
+        run.Measure($"Neural — a {name} line with one typo", lines, () =>
+        {
+            var words = target.SampleLine(random, 3, 6);
+            var (typed, slip) = WithTypo(random, words, machine.Target.Map, machine.Knows);
+            return new Case(typed, string.Join(' ', words), machine.TargetSource, slip);
+        });
+
+        random = new Random(20261005);
+        run.Measure("Neural — an English line with one typo", lines, () =>
+        {
+            var words = en.SampleLine(random, 3, 6);
+            var (typed, slip) = WithTypo(random, words, BundledKeyboardMaps.En, machine.KnowsEnglish);
+            return new Case(typed, string.Join(' ', words), Machine.En, slip);
+        });
+
+        // Real sentences, where the model has context to read — the frequency-list lines above are words
+        // drawn at random, and no reader can tell "whn" meant "when" among them.
+        var own = Sentences(machine.Target.Code);
+        var english = Sentences("en");
+        if (own.Count > 0)
+        {
+            random = new Random(20261006);
+            var at = 0;
+            run.Measure($"Neural — a natural {name} sentence with one typo", Math.Min(lines, own.Count * 3), () =>
+            {
+                var words = Machine.Words(own[at++ % own.Count]);
+                var (typed, slip) = WithTypo(random, words, machine.Target.Map, machine.Knows);
+                return new Case(typed, string.Join(' ', words), machine.TargetSource, slip);
+            });
+
+            var kept = 0;
+            run.Measure($"Neural — a natural {name} sentence, to be left alone", own.Count, () =>
+            {
+                var sentence = own[kept++];
+                return new Case(sentence, sentence, machine.TargetSource);
+            });
+
+            // Only what the layout can type in full; a hamza form it lacks would stay Arabic in the keys.
+            var typeable = own.Where(sentence => Machine.Words(sentence).All(machine.Target.CanType)).ToList();
+            var next = 0;
+            run.Measure($"Neural — a natural {name} sentence typed on the English layout", typeable.Count, () =>
+            {
+                var sentence = typeable[next++];
+                return new Case(machine.AsEnglishKeystrokes(sentence), sentence, Machine.En);
+            });
+        }
+
+        if (english.Count > 0)
+        {
+            random = new Random(20261007);
+            var at = 0;
+            run.Measure("Neural — a natural English sentence with one typo", Math.Min(lines, english.Count * 3), () =>
+            {
+                var words = Machine.Words(english[at++ % english.Count]);
+                var (typed, slip) = WithTypo(random, words, BundledKeyboardMaps.En, machine.KnowsEnglish);
+                return new Case(typed, string.Join(' ', words), Machine.En, slip);
+            });
+
+            var kept = 0;
+            run.Measure("Neural — a natural English sentence, to be left alone", english.Count, () =>
+            {
+                var sentence = english[kept++];
+                return new Case(sentence, sentence, Machine.En);
+            });
+
+            var next = 0;
+            run.Measure($"Neural — a natural English sentence typed on the {name} layout", english.Count, () =>
+            {
+                var sentence = english[next++];
+                return new Case(machine.AsTargetKeystrokes(sentence), sentence, machine.TargetSource);
+            });
+        }
+
         var fixtures = Fixtures(machine).ToList();
         foreach (var (status, rows) in fixtures.GroupBy(f => f.Status).Select(g => (g.Key, g.ToList())))
         {
@@ -82,14 +157,55 @@ internal static class NeuralRun
         run.Latency();
     }
 
-    private sealed class Run(Machine machine, NeuralPhraseRewriter brain, RecordingLlm recorder)
+    // One slip of the fingers in a word of four letters or more, that does not happen to spell another word:
+    // a neighbouring key hit instead (the commonest), two letters swapped, one dropped, or a neighbour
+    // hit as well. The line stays as it is if no word allows one.
+    private static (string Typed, Slip? Slip) WithTypo(
+        Random random, string[] words, KeyboardMap map, Func<string, bool> isWord)
+    {
+        var longWords = Enumerable.Range(0, words.Length).Where(i => words[i].Length >= 4).ToArray();
+        for (var attempt = 0; attempt < 20 && longWords.Length > 0; attempt++)
+        {
+            var at = longWords[random.Next(longWords.Length)];
+            var word = words[at];
+            var pos = random.Next(1, word.Length - 1);
+            var near = KeyNeighbours.Of(word[pos], map);
+            var roll = random.Next(10);
+            var typo = roll switch
+            {
+                < 4 when near.Count > 0 => word[..pos] + near[random.Next(near.Count)] + word[(pos + 1)..],
+                < 6 => word[..pos] + word[pos + 1] + word[pos] + word[(pos + 2)..],
+                < 8 => word.Remove(pos, 1),
+                _ when near.Count > 0 => word.Insert(pos, near[random.Next(near.Count)].ToString()),
+                _ => word.Insert(pos, word[pos].ToString())
+            };
+
+            if (typo == word || isWord(typo))
+                continue;
+
+            var copy = (string[])words.Clone();
+            copy[at] = typo;
+            return (string.Join(' ', copy), new Slip(at, typo, word));
+        }
+
+        return (string.Join(' ', words), null);
+    }
+
+    private sealed class Run(Machine machine, NeuralPhraseRewriter brain, RecordingLlm recorder, string? blocks)
     {
         public void Measure(string heading, int count, Func<Case> next)
         {
+            if (blocks is not null && !heading.Contains(blocks, StringComparison.OrdinalIgnoreCase))
+                return;
+
             Report.Heading(heading);
 
             var dictionaryRight = 0;
             var neuralRight = 0;
+            var won = 0;
+            var lost = 0;
+            var slips = 0;
+            var offered = 0;
             var modelRight = 0;
             var modelCalls = 0;
             var sources = new Dictionary<string, int>();
@@ -97,26 +213,44 @@ internal static class NeuralRun
 
             for (var i = 0; i < count; i++)
             {
-                var (typed, expected, active) = next();
+                var (typed, expected, active, slip) = next();
 
                 var alone = machine.Brain.CorrectPhrase(typed, active, machine.Installed, machine.Candidates).Corrected;
 
                 recorder.Reply = null;
+                recorder.Scored = false;
+                var clock = Stopwatch.StartNew();
                 var got = brain.CorrectPhrase(typed, active, machine.Installed, machine.Candidates).Corrected;
+                if (recorder.Reply is not null || recorder.Scored)
+                    recorder.Elapsed.Add(clock.Elapsed.TotalMilliseconds);
                 var reply = recorder.Reply is { } raw ? NeuralPhraseRewriter.SanitizeModelOutput(raw, typed) : null;
 
                 if (alone == expected) dictionaryRight++;
                 if (got == expected) neuralRight++;
+                if (got == expected && alone != expected) won++;
+                if (alone == expected && got != expected) lost++;
+                var missed = false;
+                if (slip is { } s)
+                {
+                    slips++;
+                    if (Offered(s, alone, typed)) offered++;
+                    else missed = true;
+                }
                 if (reply is not null)
                 {
                     modelCalls++;
                     if (reply == expected.Trim()) modelRight++;
                 }
 
-                var source = SourceOf(typed, got, alone, reply);
+                var source = SourceOf(typed, got, alone, reply, recorder.Scored);
                 sources[source] = sources.GetValueOrDefault(source) + 1;
 
-                if (got != expected && examples.Count < 8)
+                // Losses to the dictionary first: those are what the neural path has to answer for.
+                if (alone == expected && got != expected && examples.Count < 8)
+                    examples.Insert(0, $"LOST {typed} → {got}   wanted {expected}");
+                else if (missed && examples.Count < 8)
+                    examples.Add($"NOT OFFERED {slip!.Value.Typo} → {slip.Value.Meant}   in {typed}");
+                else if (got != expected && examples.Count < 8)
                     examples.Add($"{typed} → {got}   wanted {expected}   ({source}{(reply is null || reply == got.Trim() ? "" : $"; model said “{reply}”")})");
             }
 
@@ -124,6 +258,10 @@ internal static class NeuralRun
                 return;
 
             Report.Row("right (dictionary alone → neural)", (double)dictionaryRight / count, (double)neuralRight / count, Better.Higher);
+            Report.Cells("against the dictionary", ["won", "lost"],
+                [(double)won / count, (double)lost / count], Better.Either);
+            if (slips > 0)
+                Report.Value("the meant word among the spellings offered", (double)offered / slips, Better.Higher);
             if (modelCalls > 0)
                 Report.Value($"model's own answer right, of {modelCalls} asked", (double)modelRight / modelCalls, Better.Higher);
 
@@ -135,21 +273,33 @@ internal static class NeuralRun
                 Report.Line(string.Empty, example);
         }
 
-        private static string SourceOf(string typed, string got, string alone, string? reply)
+        // Whether the neural path could have got the slip right at all: the dictionary's own answer, or
+        // one of the spellings it offers for the mistyped word.
+        private bool Offered(Slip slip, string alone, string typed)
+        {
+            var aloneWords = Machine.Words(alone);
+            if (aloneWords.Length == Machine.Words(typed).Length && aloneWords[slip.At] == slip.Meant)
+                return true;
+
+            var script = Scripts.Dominant(slip.Typo) ?? Script.Latin;
+            return machine.Brain.SpellSuggestions(slip.Typo, script).Any(s => s.Word == slip.Meant);
+        }
+
+        private static string SourceOf(string typed, string got, string alone, string? reply, bool scored)
         {
             if (got == typed)
                 return Source.AsTyped;
-            if (reply is null)
+            if (reply is null && !scored)
                 return Source.Shortcut;
-            if (got.Trim() == reply)
-                return Source.Model;
-            return got == alone ? Source.Adviser : Source.Remap;
+            if (got == alone)
+                return Source.Adviser;
+            return scored || got.Trim() == reply ? Source.Model : Source.Remap;
         }
 
         public void Latency()
         {
             var times = recorder.Elapsed.Order().ToList();
-            Report.Heading("Neural — time per model call");
+            Report.Heading("Neural — time per correction that asked the model");
             if (times.Count == 0)
             {
                 Report.Line("no model calls", string.Empty);
@@ -157,7 +307,7 @@ internal static class NeuralRun
             }
 
             // Printed, not recorded: milliseconds depend on the machine, not on the change under test.
-            Report.Line("calls", times.Count.ToString());
+            Report.Line("corrections", times.Count.ToString());
             Report.Line("median / p95 / max",
                 $"{Percentile(times, 0.5):F0} / {Percentile(times, 0.95):F0} / {times[^1]:F0} ms");
             recorder.Elapsed.Clear();
@@ -178,7 +328,18 @@ internal static class NeuralRun
         public const string Shortcut = "no model call";
     }
 
-    private readonly record struct Case(string Typed, string Expected, LayoutSource Active);
+    private readonly record struct Slip(int At, string Typo, string Meant);
+
+    // tools/Lapsus.Sweep/sentences/{code}.txt: everyday sentences written for this, one per line.
+    private static List<string> Sentences(string code)
+    {
+        var path = Path.Combine(Baseline.RepositoryRoot() ?? ".", "tools", "Lapsus.Sweep", "sentences", $"{code}.txt");
+        return File.Exists(path)
+            ? File.ReadLines(path).Select(l => l.Trim()).Where(l => l.Length > 0).ToList()
+            : [];
+    }
+
+    private readonly record struct Case(string Typed, string Expected, LayoutSource Active, Slip? Slip = null);
 
     private readonly record struct Fixture(Case Case, string Status);
 
@@ -209,6 +370,8 @@ internal static class NeuralRun
     {
         public string? Reply { get; set; }
 
+        public bool Scored { get; set; }
+
         public List<double> Elapsed { get; } = [];
 
         public bool IsLoaded => inner.IsLoaded;
@@ -218,11 +381,16 @@ internal static class NeuralRun
         public async Task<string> CompleteAsync(
             string systemPrompt, string userText, int answerChars, CancellationToken cancellationToken = default)
         {
-            var clock = Stopwatch.StartNew();
             var reply = await inner.CompleteAsync(systemPrompt, userText, answerChars, cancellationToken).ConfigureAwait(false);
-            Elapsed.Add(clock.Elapsed.TotalMilliseconds);
             Reply = reply;
             return reply;
+        }
+
+        public Task<IReadOnlyList<double>?> ScoreAsync(
+            string context, IReadOnlyList<string> texts, bool ends, CancellationToken cancellationToken = default)
+        {
+            Scored = true;
+            return inner.ScoreAsync(context, texts, ends, cancellationToken);
         }
 
         public void Dispose()

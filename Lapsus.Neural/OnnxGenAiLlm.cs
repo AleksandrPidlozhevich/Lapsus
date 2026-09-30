@@ -124,6 +124,18 @@ public sealed class OnnxGenAiLlm : ILocalLlm
             cancellationToken);
     }
 
+    public async Task<IReadOnlyList<double>?> ScoreAsync(
+        string context, IReadOnlyList<string> texts, bool ends, CancellationToken cancellationToken = default)
+    {
+        if (texts.Count == 0)
+            return [];
+
+        return await RunAsync(
+                (generator, ct) => generator.Score(context, texts, ends, ct),
+                cancellationToken)
+            .ConfigureAwait(false);
+    }
+
     public async Task<bool> WarmUpAsync(
         string systemPrompt,
         string userText,

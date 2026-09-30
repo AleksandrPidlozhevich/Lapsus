@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -61,6 +63,122 @@ internal sealed class OnnxTextGenerator : IDisposable
             }
 
         return CompleteOnce(tokens, budget, answerChars, cancellationToken);
+    }
+
+    // Each text is fed after the context as plain text, no chat template: small models read which of
+    // several spellings is natural far better than they follow a rewrite instruction. Tokens the texts
+    // share stay in the KV cache; only the rest is run per text.
+    public double[] Score(string context, IReadOnlyList<string> texts, bool ends, CancellationToken cancellationToken)
+    {
+        var sequences = new int[texts.Count][];
+        for (var i = 0; i < texts.Count; i++)
+            sequences[i] = EncodeRaw(context + texts[i]);
+
+        // The first scored token needs the row of the one before it, so that one is run again.
+        var shared = sequences[0].Length;
+        foreach (var sequence in sequences)
+            shared = Math.Min(shared, Math.Min(SharedPrefix(sequences[0], sequence), sequence.Length - 1));
+        var kept = Math.Max(shared - 1, 0);
+        var eos = _tokenizer.GetEosTokenIds().ToArray();
+
+        var scores = new double[texts.Count];
+        var reusable = !_reuseRefused && sequences.Max(s => s.Length) + 1 <= ReusableMaxLength;
+        for (var i = 0; i < sequences.Length; i++)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (reusable)
+                try
+                {
+                    var generator = Keep(sequences[i], kept);
+                    generator.AppendTokens(sequences[i].AsSpan(kept));
+                    _cached = sequences[i];
+                    scores[i] = LogProbability(generator, sequences[i], kept, ends, eos);
+                    continue;
+                }
+                catch (Exception ex) when (ex is not OperationCanceledException)
+                {
+                    RefuseReuse();
+                    reusable = false;
+                }
+
+            using var generatorParams = NewParams(sequences[i].Length + 1);
+            using var once = new Generator(_model, generatorParams);
+            once.AppendTokens(sequences[i]);
+            scores[i] = LogProbability(once, sequences[i], kept, ends, eos);
+        }
+
+        return scores;
+    }
+
+    // A generator holding exactly the first `count` tokens of the sequence in its cache.
+    private Generator Keep(int[] sequence, int count)
+    {
+        if (_generator is not null && SharedPrefix(_cached, sequence) >= count)
+        {
+            _generator.RewindTo((ulong)count);
+            _cached = sequence[..count];
+            return _generator;
+        }
+
+        if (count == 0)
+        {
+            DropGenerator();
+            _params = NewParams(ReusableMaxLength);
+            _generator = new Generator(_model, _params);
+            return _generator;
+        }
+
+        return Prefill(sequence[..count], CancellationToken.None);
+    }
+
+    // Rows of the last append: row r was fed sequence[from + r] and predicts sequence[from + r + 1].
+    private static double LogProbability(Generator generator, int[] sequence, int from, bool ends, int[] eos)
+    {
+        using var logits = generator.GetOutput("logits");
+        var shape = logits.Shape();
+        var rows = (int)shape[1];
+        var vocabulary = (int)shape[2];
+        var data = logits.Type() == ElementType.float16
+            ? Array.ConvertAll(logits.GetData<Half>().ToArray(), h => (float)h)
+            : logits.GetData<float>().ToArray();
+
+        // Rows cover only the tokens appended last; a cache hit may have skipped the head.
+        var first = sequence.Length - rows;
+        var total = 0.0;
+        for (var r = 0; r < rows - 1; r++)
+            if (first + r + 1 > from)
+                total += LogSoftmaxAt(data.AsSpan(r * vocabulary, vocabulary), sequence[first + r + 1]);
+
+        if (ends && eos.Length > 0)
+        {
+            var last = data.AsSpan((rows - 1) * vocabulary, vocabulary);
+            var best = double.NegativeInfinity;
+            foreach (var id in eos)
+                best = Math.Max(best, LogSoftmaxAt(last, id));
+            total += best;
+        }
+
+        return total;
+    }
+
+    private static double LogSoftmaxAt(ReadOnlySpan<float> row, int id)
+    {
+        var max = float.NegativeInfinity;
+        foreach (var value in row)
+            if (value > max)
+                max = value;
+
+        var sum = 0.0;
+        foreach (var value in row)
+            sum += Math.Exp(value - max);
+
+        return row[id] - max - Math.Log(sum);
+    }
+
+    private int[] EncodeRaw(string text)
+    {
+        using var sequences = _tokenizer.Encode(text);
+        return sequences[0].ToArray();
     }
 
     public void WarmUp(

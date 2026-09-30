@@ -9,31 +9,27 @@
       "Better": "Higher"
     },
     "Neural — a Arabic line typed on the English layout · right (dictionary alone → neural) · with": {
-      "Value": 0.8867,
-      "Better": "Higher"
-    },
-    "Neural — a Arabic line typed on the English layout · model's own answer right, of 150 asked": {
-      "Value": 0,
+      "Value": 0.98,
       "Better": "Higher"
     },
     "Neural — a Arabic line typed on the English layout · whose answer went out · model": {
-      "Value": 0,
+      "Value": 0.1267,
       "Better": "Either"
     },
     "Neural — a Arabic line typed on the English layout · whose answer went out · dictionary": {
-      "Value": 0.9933,
+      "Value": 0.68,
       "Better": "Either"
     },
     "Neural — a Arabic line typed on the English layout · whose answer went out · remap": {
-      "Value": 0.0067,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Arabic line typed on the English layout · whose answer went out · as typed": {
-      "Value": 0,
+      "Value": 0.0067,
       "Better": "Either"
     },
     "Neural — a Arabic line typed on the English layout · whose answer went out · no model call": {
-      "Value": 0,
+      "Value": 0.1867,
       "Better": "Either"
     },
     "Neural — one Arabic word typed on the English layout · right (dictionary alone → neural) · without": {
@@ -42,10 +38,6 @@
     },
     "Neural — one Arabic word typed on the English layout · right (dictionary alone → neural) · with": {
       "Value": 0.84,
-      "Better": "Higher"
-    },
-    "Neural — one Arabic word typed on the English layout · model's own answer right, of 24 asked": {
-      "Value": 0,
       "Better": "Higher"
     },
     "Neural — one Arabic word typed on the English layout · whose answer went out · model": {
@@ -73,19 +65,15 @@
       "Better": "Higher"
     },
     "Neural — an English line typed on the Arabic layout · right (dictionary alone → neural) · with": {
-      "Value": 0.8133,
-      "Better": "Higher"
-    },
-    "Neural — an English line typed on the Arabic layout · model's own answer right, of 150 asked": {
-      "Value": 0,
+      "Value": 0.8867,
       "Better": "Higher"
     },
     "Neural — an English line typed on the Arabic layout · whose answer went out · model": {
-      "Value": 0.0067,
+      "Value": 0.14,
       "Better": "Either"
     },
     "Neural — an English line typed on the Arabic layout · whose answer went out · dictionary": {
-      "Value": 0.9933,
+      "Value": 0.7733,
       "Better": "Either"
     },
     "Neural — an English line typed on the Arabic layout · whose answer went out · remap": {
@@ -97,7 +85,7 @@
       "Better": "Either"
     },
     "Neural — an English line typed on the Arabic layout · whose answer went out · no model call": {
-      "Value": 0,
+      "Value": 0.0867,
       "Better": "Either"
     },
     "Neural — a correct Arabic line, to be left alone · right (dictionary alone → neural) · without": {
@@ -106,10 +94,6 @@
     },
     "Neural — a correct Arabic line, to be left alone · right (dictionary alone → neural) · with": {
       "Value": 1,
-      "Better": "Higher"
-    },
-    "Neural — a correct Arabic line, to be left alone · model's own answer right, of 150 asked": {
-      "Value": 0.4333,
       "Better": "Higher"
     },
     "Neural — a correct Arabic line, to be left alone · whose answer went out · model": {
@@ -140,10 +124,6 @@
       "Value": 1,
       "Better": "Higher"
     },
-    "Neural — a correct English line, to be left alone · model's own answer right, of 150 asked": {
-      "Value": 0.6933,
-      "Better": "Higher"
-    },
     "Neural — a correct English line, to be left alone · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -164,6 +144,62 @@
       "Value": 0,
       "Better": "Either"
     },
+    "Neural — a Arabic line with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.4467,
+      "Better": "Higher"
+    },
+    "Neural — a Arabic line with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.44,
+      "Better": "Higher"
+    },
+    "Neural — a Arabic line with one typo · whose answer went out · model": {
+      "Value": 0.08,
+      "Better": "Either"
+    },
+    "Neural — a Arabic line with one typo · whose answer went out · dictionary": {
+      "Value": 0.4733,
+      "Better": "Either"
+    },
+    "Neural — a Arabic line with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a Arabic line with one typo · whose answer went out · as typed": {
+      "Value": 0.1533,
+      "Better": "Either"
+    },
+    "Neural — a Arabic line with one typo · whose answer went out · no model call": {
+      "Value": 0.2933,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8667,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.8667,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · whose answer went out · model": {
+      "Value": 0.0133,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · dictionary": {
+      "Value": 0.6,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · as typed": {
+      "Value": 0.0467,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · no model call": {
+      "Value": 0.34,
+      "Better": "Either"
+    },
     "Neural — typing fixtures marked ok · right (dictionary alone → neural) · without": {
       "Value": 1,
       "Better": "Higher"
@@ -172,16 +208,12 @@
       "Value": 1,
       "Better": "Higher"
     },
-    "Neural — typing fixtures marked ok · model's own answer right, of 4 asked": {
-      "Value": 0.5,
-      "Better": "Higher"
-    },
     "Neural — typing fixtures marked ok · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · dictionary": {
-      "Value": 0.1429,
+      "Value": 0.0714,
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · remap": {
@@ -193,7 +225,7 @@
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · no model call": {
-      "Value": 0.7143,
+      "Value": 0.7857,
       "Better": "Either"
     },
     "Neural — typing fixtures marked pending · right (dictionary alone → neural) · without": {
@@ -201,10 +233,6 @@
       "Better": "Higher"
     },
     "Neural — typing fixtures marked pending · right (dictionary alone → neural) · with": {
-      "Value": 0,
-      "Better": "Higher"
-    },
-    "Neural — typing fixtures marked pending · model's own answer right, of 1 asked": {
       "Value": 0,
       "Better": "Higher"
     },

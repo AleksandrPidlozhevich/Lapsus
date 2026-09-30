@@ -42,6 +42,21 @@ internal sealed class WordScorer(SpellChecker? spell)
         return core.Length == 0 ? 0.0 : spell?.Frequency(core, script, languageCode) ?? 0.0;
     }
 
+    // On the frequency list or a known stem of one. A form only Hunspell affixes build does not count:
+    // the Georgian affixes accept transliterated English such as ტჰატ.
+    public bool IsListedWord(string word, Script script)
+    {
+        var core = WordScanner.TrimToLetters(word, script);
+        return core.Length > 0 && spell is not null &&
+               (spell.IsKnownWord(core, script) || spell.IsKnownStem(core, script, null, out _));
+    }
+
+    public bool IsLexiconForm(string word, Script script)
+    {
+        var core = WordScanner.TrimToLetters(word, script);
+        return core.Length > 0 && spell is not null && spell.IsLexiconWord(core, script);
+    }
+
     public static bool IsDictionaryHit(double score)
     {
         return score >= ScriptPoolHitScore;
@@ -68,17 +83,32 @@ internal sealed class WordScorer(SpellChecker? spell)
 
     public (string Text, int Edits) SpellFix(string word, Script script, string? languageCode = null)
     {
-        // Lexicon word is never spell-fixed into a commoner neighbour.
-        if (spell is null || word.Length < 2 || !WordScanner.IsAllLetters(word, script) ||
-            HasInternalMark(word, script) || spell.IsKnownWord(word, script, languageCode) ||
-            spell.IsLexiconWord(word, script, languageCode))
+        if (!CanSpellFixWord(word, script, languageCode))
             return (word, 0);
 
-        return spell.TryCorrect(word, script, out var corrected, out var distance, languageCode)
+        return spell!.TryCorrect(word, script, out var corrected, out var distance, languageCode)
                && distance > 0
                && corrected != word
             ? (corrected, distance)
             : (word, 0);
+    }
+
+    // Unlike SpellFix, a form only Hunspell knows ("мнут", "lave") still gets spellings to weigh: a reader
+    // of the context decides, not a frequency. A word on the list gets none.
+    public IReadOnlyList<(string Word, int Edits)> SpellSuggestions(string word, Script script, int max)
+    {
+        return spell is not null && word.Length >= 2 && WordScanner.IsAllLetters(word, script) &&
+               !HasInternalMark(word, script) && !spell.IsKnownWord(word, script)
+            ? spell.Suggestions(word, script, max)
+            : [];
+    }
+
+    // Lexicon word is never spell-fixed into a commoner neighbour.
+    private bool CanSpellFixWord(string word, Script script, string? languageCode)
+    {
+        return spell is not null && word.Length >= 2 && WordScanner.IsAllLetters(word, script) &&
+               !HasInternalMark(word, script) && !spell.IsKnownWord(word, script, languageCode) &&
+               !spell.IsLexiconWord(word, script, languageCode);
     }
 
     private static bool HasInternalMark(string word, Script script)

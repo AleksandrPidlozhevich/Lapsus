@@ -458,6 +458,9 @@ public class NeuralPhraseRewriterTests
             new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en")
         ];
 
+        private static readonly LayoutCandidate Georgian =
+            new(Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka, "ka", "ka");
+
         [Fact]
         public void An_echo_falls_back_to_the_dictionary_rather_than_to_a_raw_remap()
         {
@@ -542,7 +545,7 @@ public class NeuralPhraseRewriterTests
             var llm = new FakeLlm("გამარჯობა");
             var rewriter = new NeuralPhraseRewriter(llm, new FakeAdviser(unchanged, Script.Cyrillic));
 
-            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], Candidates);
+            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], [..Candidates, Georgian]);
 
             Assert.Equal("გამარჯობა", result.Corrected);
             Assert.NotEqual("", llm.LastUserPrompt);
@@ -580,10 +583,69 @@ public class NeuralPhraseRewriterTests
             var rewriter = new NeuralPhraseRewriter(
                 new FakeLlm("გამარჯობა"), new FakeAdviser(unchanged, Script.Cyrillic, Script.Latin));
 
-            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], Candidates);
+            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], [..Candidates, Georgian]);
 
             Assert.True(result.Changed);
             Assert.Equal("გამარჯობა", result.Corrected);
+        }
+
+        [Fact]
+        public void An_answer_in_a_script_the_user_cannot_type_is_not_applied()
+        {
+            var hebrew = new LayoutSource(Script.Hebrew, "he", BundledKeyboardMaps.He, "he");
+            LayoutCandidate[] candidates =
+            [
+                new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en"),
+                new(Script.Hebrew, KeyboardLayout.He, BundledKeyboardMaps.He, "he", "he")
+            ];
+            var unchanged = new PhraseCorrection("מה הגוף", "מה הגוף", false, null);
+            var rewriter = new NeuralPhraseRewriter(
+                new FakeLlm("מה العضوية"), new FakeAdviser(unchanged, Script.Hebrew, Script.Latin));
+
+            var result = rewriter.CorrectPhrase("מה הגוף", hebrew, [hebrew], candidates);
+
+            Assert.False(result.Changed);
+            Assert.Equal("מה הגוף", result.Corrected);
+        }
+
+        [Fact]
+        public void Without_an_adviser_a_translation_into_another_script_is_still_refused()
+        {
+            var rewriter = new NeuralPhraseRewriter(new FakeLlm("если важны"));
+            var hebrew = new LayoutSource(Script.Hebrew, "he", BundledKeyboardMaps.He, "he");
+
+            var result = rewriter.CorrectPhrase("ואם חשובים", hebrew, [hebrew], [Candidate(Script.Hebrew)]);
+
+            Assert.False(result.Changed);
+        }
+
+        [Fact]
+        public void A_remap_the_dictionary_reads_as_no_words_is_not_applied()
+        {
+            // On the phonetic Georgian layout the remap of correct English is its transliteration.
+            var english = new PhraseCorrection("were that", "were that", false, null);
+            var rewriter = new NeuralPhraseRewriter(
+                new FakeLlm("წერე ტჰატ"), new FakeAdviser(english, Script.Latin, Script.Georgian));
+
+            var result = rewriter.CorrectPhrase("were that", Active, [Active], [Georgian]);
+
+            Assert.False(result.Changed);
+            Assert.Equal("were that", result.Corrected);
+        }
+
+        [Fact]
+        public void A_remap_the_dictionary_knows_is_applied_though_it_kept_the_text()
+        {
+            var bulgarian = new LayoutCandidate(Script.Cyrillic, KeyboardLayout.Bg, BundledKeyboardMaps.Bg, "bg", "bg");
+            var unchanged = new PhraseCorrection("sirena", "sirena", false, null);
+            var rewriter = new NeuralPhraseRewriter(
+                new FakeLlm("сирена"),
+                new FakeAdviser(unchanged, Script.Latin, Script.Cyrillic) { Words = ["сирена"] });
+
+            var result = rewriter.CorrectPhrase("sirena", Active, [Active], [bulgarian]);
+
+            Assert.True(result.Changed);
+            Assert.Equal("сирена", result.Corrected);
         }
 
         [Fact]
@@ -659,7 +721,11 @@ public class NeuralPhraseRewriterTests
 
             public bool PreferAsync => false;
 
+            public string[] Words { get; init; } = [];
+
             public bool Knows(Script script) => Array.IndexOf(known, script) >= 0;
+
+            public bool KnowsWord(string word, Script script) => Array.IndexOf(Words, word) >= 0;
 
             public PhraseCorrection CorrectPhrase(
                 string text,
@@ -669,6 +735,157 @@ public class NeuralPhraseRewriterTests
                 KeyboardLayout? preferred = null)
             {
                 return answer;
+            }
+        }
+    }
+
+    public class WithAModelThatScores
+    {
+        private static readonly LayoutSource English = new(Script.Latin, "en", BundledKeyboardMaps.En, "en");
+
+        private static readonly LayoutSource Russian = new(Script.Cyrillic, "ru", BundledKeyboardMaps.Ru, "ru");
+
+        private static readonly LayoutCandidate[] Candidates =
+        [
+            new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en"),
+            new(Script.Cyrillic, KeyboardLayout.Ru, BundledKeyboardMaps.Ru, "ru", "ru")
+        ];
+
+        [Fact]
+        public void Each_word_is_read_in_the_layout_it_was_meant_in()
+        {
+            var llm = new ScoringLlm("возьми", "данные", "из", "api");
+            var rewriter = new NeuralPhraseRewriter(llm);
+
+            var result = rewriter.CorrectPhrase("djpmvb lfyyst bp api", English, [English, Russian], Candidates);
+
+            Assert.True(result.Changed);
+            Assert.Equal("возьми данные из api", result.Corrected);
+            Assert.Equal(KeyboardLayout.Ru, result.TargetLayout);
+        }
+
+        [Fact]
+        public void A_slip_on_the_wrong_layout_is_switched_and_spell_fixed_together()
+        {
+            // n for the m beside it: the keys spell "возтми", the dictionary knows "возьми".
+            var dictionary = new Dictionary(Script.Cyrillic, "возьми", "данные", "из")
+            {
+                Suggestions = { ["возтми"] = [("возьми", 1)] }
+            };
+            var rewriter = new NeuralPhraseRewriter(new ScoringLlm("возьми", "данные", "из", "api"), dictionary);
+
+            var result = rewriter.CorrectPhrase("djpnvb lfyyst bp api", English, [English, Russian], Candidates);
+
+            Assert.Equal("возьми данные из api", result.Corrected);
+        }
+
+        [Fact]
+        public void A_line_the_model_reads_best_as_typed_stays()
+        {
+            var rewriter = new NeuralPhraseRewriter(new ScoringLlm("were", "that"));
+
+            var result = rewriter.CorrectPhrase("were that", English, [English, Russian], Candidates);
+
+            Assert.False(result.Changed);
+            Assert.Equal("were that", result.Corrected);
+        }
+
+        [Fact]
+        public void A_typo_takes_the_spelling_the_model_reads_in_context()
+        {
+            var dictionary = new Dictionary(Script.Cyrillic, "как", "дела", "привет")
+            {
+                Suggestions = { ["превет"] = [("привет", 1)] }
+            };
+            var rewriter = new NeuralPhraseRewriter(new ScoringLlm("привет", "как", "дела"), dictionary);
+
+            var result = rewriter.CorrectPhrase("превет как дела", Russian, [English, Russian], Candidates);
+
+            Assert.Equal("привет как дела", result.Corrected);
+        }
+
+        [Fact]
+        public void A_listed_word_is_never_read_another_way()
+        {
+            var rewriter = new NeuralPhraseRewriter(
+                new ScoringLlm("возьми", "данные", "из", "api"), exceptions: new WordExceptions(["bp"]));
+
+            var result = rewriter.CorrectPhrase("djpmvb lfyyst bp api", English, [English, Russian], Candidates);
+
+            Assert.Equal("возьми данные bp api", result.Corrected);
+        }
+
+        [Fact]
+        public void A_line_the_dictionary_kept_and_knows_never_reaches_the_model()
+        {
+            var llm = new ScoringLlm("ye", "ys");
+            var rewriter = new NeuralPhraseRewriter(llm, new Dictionary(Script.Cyrillic, "ну", "ні", "є"));
+
+            var result = rewriter.CorrectPhrase("ну ні є", Russian, [English, Russian], Candidates);
+
+            Assert.False(result.Changed);
+            Assert.Equal(0, llm.Calls);
+        }
+
+        // Scores a text by how many of its words are in the list: the "model" reads those as natural.
+        private sealed class ScoringLlm(params string[] natural) : ILocalLlm
+        {
+            public int Calls { get; private set; }
+
+            public bool IsLoaded => true;
+
+            public void Unload()
+            {
+            }
+
+            public Task<string> CompleteAsync(string systemPrompt, string userText, int answerChars,
+                CancellationToken cancellationToken = default)
+            {
+                return Task.FromResult("текст");
+            }
+
+            public Task<IReadOnlyList<double>?> ScoreAsync(string context, IReadOnlyList<string> texts, bool ends,
+                CancellationToken cancellationToken = default)
+            {
+                Calls++;
+                IReadOnlyList<double> scores = texts
+                    .Select(t => 10.0 * t.Split(' ', StringSplitOptions.RemoveEmptyEntries).Count(natural.Contains))
+                    .ToList();
+                return Task.FromResult<IReadOnlyList<double>?>(scores);
+            }
+
+            public void Dispose()
+            {
+            }
+        }
+
+        private sealed class Dictionary(Script script, params string[] words) : IPhraseCorrector
+        {
+            public Dictionary<string, (string Word, int Edits)[]> Suggestions { get; } = [];
+
+            public bool IsReady => true;
+
+            public bool SupportsLayoutCycle => true;
+
+            public bool PreferAsync => false;
+
+            public bool Knows(Script other) => other == script;
+
+            public bool KnowsWord(string word, Script other) => other == script && words.Contains(word);
+
+            public IReadOnlyList<(string Word, int Edits)> SpellSuggestions(string word, Script other)
+            {
+                return Suggestions.TryGetValue(word, out var found) ? found : [];
+            }
+
+            public PhraseCorrection CorrectPhrase(
+                string text,
+                LayoutSource active,
+                IReadOnlyList<LayoutSource> installed,
+                IReadOnlyList<LayoutCandidate> candidates,
+                KeyboardLayout? preferred = null)
+            {
+                return new PhraseCorrection(text, text, false, null);
             }
         }
     }

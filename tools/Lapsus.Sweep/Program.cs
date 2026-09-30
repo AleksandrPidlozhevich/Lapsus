@@ -24,7 +24,7 @@ var baselineDir = baselineDirIndex >= 0 && baselineDirIndex + 1 < args.Length
 
 var directory = args.Where((a, i) => !a.StartsWith('-') && (i == 0 || args[i - 1] is not
                         ("--lang" or "--baseline-dir" or "--auto-min" or "--punct-head-start" or "--sample-dir" or "--index-size" or "--lexicon-min"
-                            or "--neural" or "--device")))
+                            or "--neural" or "--device" or "--blocks")))
                     .FirstOrDefault()
                 ?? Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Lapsus", "dictionaries");
@@ -53,6 +53,10 @@ if (neuralIndex >= 0)
         return 1;
     }
 }
+
+// --blocks <text>: only the neural blocks whose heading contains it, e.g. "typo".
+var blocksIndex = Array.IndexOf(args, "--blocks");
+var blocks = blocksIndex >= 0 && blocksIndex + 1 < args.Length ? args[blocksIndex + 1] : null;
 
 var deviceIndex = Array.IndexOf(args, "--device");
 var device = ComputeDevicePreference.Auto;
@@ -164,7 +168,7 @@ try
         Report.Reset();
         if (neural is { } model)
         {
-            NeuralRun.Measure(machine, model.Llm, known, foreign, lines);
+            NeuralRun.Measure(machine, model.Llm, known, foreign, lines, blocks);
         }
         else
         {

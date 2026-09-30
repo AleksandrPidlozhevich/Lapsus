@@ -9,19 +9,15 @@
       "Better": "Higher"
     },
     "Neural — a Bulgarian line typed on the English layout · right (dictionary alone → neural) · with": {
-      "Value": 0.5533,
-      "Better": "Higher"
-    },
-    "Neural — a Bulgarian line typed on the English layout · model's own answer right, of 150 asked": {
-      "Value": 0.0133,
+      "Value": 0.86,
       "Better": "Higher"
     },
     "Neural — a Bulgarian line typed on the English layout · whose answer went out · model": {
-      "Value": 0.0267,
+      "Value": 0.3333,
       "Better": "Either"
     },
     "Neural — a Bulgarian line typed on the English layout · whose answer went out · dictionary": {
-      "Value": 0.9067,
+      "Value": 0.3933,
       "Better": "Either"
     },
     "Neural — a Bulgarian line typed on the English layout · whose answer went out · remap": {
@@ -29,11 +25,11 @@
       "Better": "Either"
     },
     "Neural — a Bulgarian line typed on the English layout · whose answer went out · as typed": {
-      "Value": 0.0667,
+      "Value": 0.0733,
       "Better": "Either"
     },
     "Neural — a Bulgarian line typed on the English layout · whose answer went out · no model call": {
-      "Value": 0,
+      "Value": 0.2,
       "Better": "Either"
     },
     "Neural — one Bulgarian word typed on the English layout · right (dictionary alone → neural) · without": {
@@ -41,15 +37,11 @@
       "Better": "Higher"
     },
     "Neural — one Bulgarian word typed on the English layout · right (dictionary alone → neural) · with": {
-      "Value": 0.6867,
-      "Better": "Higher"
-    },
-    "Neural — one Bulgarian word typed on the English layout · model's own answer right, of 65 asked": {
-      "Value": 0.2769,
+      "Value": 0.5667,
       "Better": "Higher"
     },
     "Neural — one Bulgarian word typed on the English layout · whose answer went out · model": {
-      "Value": 0.12,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — one Bulgarian word typed on the English layout · whose answer went out · dictionary": {
@@ -61,7 +53,7 @@
       "Better": "Either"
     },
     "Neural — one Bulgarian word typed on the English layout · whose answer went out · as typed": {
-      "Value": 0.3133,
+      "Value": 0.4333,
       "Better": "Either"
     },
     "Neural — one Bulgarian word typed on the English layout · whose answer went out · no model call": {
@@ -73,19 +65,15 @@
       "Better": "Higher"
     },
     "Neural — an English line typed on the Bulgarian layout · right (dictionary alone → neural) · with": {
-      "Value": 0.7333,
-      "Better": "Higher"
-    },
-    "Neural — an English line typed on the Bulgarian layout · model's own answer right, of 150 asked": {
-      "Value": 0,
+      "Value": 0.9467,
       "Better": "Higher"
     },
     "Neural — an English line typed on the Bulgarian layout · whose answer went out · model": {
-      "Value": 0,
+      "Value": 0.22,
       "Better": "Either"
     },
     "Neural — an English line typed on the Bulgarian layout · whose answer went out · dictionary": {
-      "Value": 0.9867,
+      "Value": 0.6533,
       "Better": "Either"
     },
     "Neural — an English line typed on the Bulgarian layout · whose answer went out · remap": {
@@ -97,7 +85,7 @@
       "Better": "Either"
     },
     "Neural — an English line typed on the Bulgarian layout · whose answer went out · no model call": {
-      "Value": 0,
+      "Value": 0.1133,
       "Better": "Either"
     },
     "Neural — a correct Bulgarian line, to be left alone · right (dictionary alone → neural) · without": {
@@ -106,10 +94,6 @@
     },
     "Neural — a correct Bulgarian line, to be left alone · right (dictionary alone → neural) · with": {
       "Value": 1,
-      "Better": "Higher"
-    },
-    "Neural — a correct Bulgarian line, to be left alone · model's own answer right, of 150 asked": {
-      "Value": 0.1133,
       "Better": "Higher"
     },
     "Neural — a correct Bulgarian line, to be left alone · whose answer went out · model": {
@@ -140,10 +124,6 @@
       "Value": 1,
       "Better": "Higher"
     },
-    "Neural — a correct English line, to be left alone · model's own answer right, of 150 asked": {
-      "Value": 0.02,
-      "Better": "Higher"
-    },
     "Neural — a correct English line, to be left alone · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -164,6 +144,62 @@
       "Value": 0,
       "Better": "Either"
     },
+    "Neural — a Bulgarian line with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.88,
+      "Better": "Higher"
+    },
+    "Neural — a Bulgarian line with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.8,
+      "Better": "Higher"
+    },
+    "Neural — a Bulgarian line with one typo · whose answer went out · model": {
+      "Value": 0.1067,
+      "Better": "Either"
+    },
+    "Neural — a Bulgarian line with one typo · whose answer went out · dictionary": {
+      "Value": 0.2667,
+      "Better": "Either"
+    },
+    "Neural — a Bulgarian line with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a Bulgarian line with one typo · whose answer went out · as typed": {
+      "Value": 0.0333,
+      "Better": "Either"
+    },
+    "Neural — a Bulgarian line with one typo · whose answer went out · no model call": {
+      "Value": 0.5933,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8733,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.8733,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · whose answer went out · model": {
+      "Value": 0.0067,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · dictionary": {
+      "Value": 0.6,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · as typed": {
+      "Value": 0.0533,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · whose answer went out · no model call": {
+      "Value": 0.34,
+      "Better": "Either"
+    },
     "Neural — typing fixtures marked ok · right (dictionary alone → neural) · without": {
       "Value": 0.9167,
       "Better": "Higher"
@@ -172,16 +208,12 @@
       "Value": 0.9167,
       "Better": "Higher"
     },
-    "Neural — typing fixtures marked ok · model's own answer right, of 4 asked": {
-      "Value": 0,
-      "Better": "Higher"
-    },
     "Neural — typing fixtures marked ok · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · dictionary": {
-      "Value": 0.1667,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · remap": {
@@ -193,7 +225,7 @@
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · no model call": {
-      "Value": 0.6667,
+      "Value": 0.8333,
       "Better": "Either"
     }
   }
