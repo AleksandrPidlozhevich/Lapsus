@@ -278,7 +278,10 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
                     Add(LayoutTranscoder.Transcode(typed[..^1], source, candidate.Map) + typed[^1], 0.0);
             }
 
-        if (source is not null)
+        // A spelling the dictionary accepts is not respelled: in Georgian or Belarusian the model reads a
+        // commoner neighbour as far likelier ("ტორტი" → "პორტი", "напішы" → "напіша"), and the dictionary
+        // brain never respells one either.
+        if (source is not null && !Accepts(typed))
             AddSpellFixes(typed, source);
 
         // A remap of keys that are not all letters would spell-fix a comma away.

@@ -93,14 +93,11 @@ internal sealed class WordScorer(SpellChecker? spell)
             : (word, 0);
     }
 
-    // Unlike SpellFix, a form only Hunspell knows ("мнут", "lave") still gets spellings to weigh: a reader
-    // of the context decides, not a frequency. A word on the list gets none.
+    // Every spelling SpellFix would weigh rather than just its pick; none for a word the list or Hunspell
+    // accepts, as with SpellFix.
     public IReadOnlyList<(string Word, int Edits)> SpellSuggestions(string word, Script script, int max)
     {
-        return spell is not null && word.Length >= 2 && WordScanner.IsAllLetters(word, script) &&
-               !HasInternalMark(word, script) && !spell.IsKnownWord(word, script)
-            ? spell.Suggestions(word, script, max)
-            : [];
+        return CanSpellFixWord(word, script, null) ? spell!.Suggestions(word, script, max) : [];
     }
 
     // Lexicon word is never spell-fixed into a commoner neighbour.
