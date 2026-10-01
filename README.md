@@ -229,8 +229,6 @@ them in its own package folder and deletes them when it is uninstalled. Full pol
 - `Lapsus` — the Avalonia tray UI, the Windows / macOS input backends, the ONNX GenAI host
 - `Lapsus.Tests` — the app-layer decisions that need no OS
 
-Contributor notes: [CLAUDE.md](CLAUDE.md).
-
 ## Free for private people, paid for companies
 
 **Private people use Lapsus for free — freelancers included.** Companies pay, per seat, after thirty
