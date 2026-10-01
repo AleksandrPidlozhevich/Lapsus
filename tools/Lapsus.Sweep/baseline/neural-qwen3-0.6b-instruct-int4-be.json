@@ -9,15 +9,23 @@
       "Better": "Higher"
     },
     "Neural — a Belarusian line typed on the English layout · right (dictionary alone → neural) · with": {
-      "Value": 0.9667,
+      "Value": 0.9467,
       "Better": "Higher"
     },
+    "Neural — a Belarusian line typed on the English layout · against the dictionary · won": {
+      "Value": 0.12,
+      "Better": "Either"
+    },
+    "Neural — a Belarusian line typed on the English layout · against the dictionary · lost": {
+      "Value": 0.04,
+      "Better": "Either"
+    },
     "Neural — a Belarusian line typed on the English layout · whose answer went out · model": {
-      "Value": 0.14,
+      "Value": 0.16,
       "Better": "Either"
     },
     "Neural — a Belarusian line typed on the English layout · whose answer went out · dictionary": {
-      "Value": 0.54,
+      "Value": 0.52,
       "Better": "Either"
     },
     "Neural — a Belarusian line typed on the English layout · whose answer went out · remap": {
@@ -39,6 +47,14 @@
     "Neural — one Belarusian word typed on the English layout · right (dictionary alone → neural) · with": {
       "Value": 0.8867,
       "Better": "Higher"
+    },
+    "Neural — one Belarusian word typed on the English layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — one Belarusian word typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — one Belarusian word typed on the English layout · whose answer went out · model": {
       "Value": 0,
@@ -65,15 +81,23 @@
       "Better": "Higher"
     },
     "Neural — an English line typed on the Belarusian layout · right (dictionary alone → neural) · with": {
-      "Value": 0.9867,
+      "Value": 0.9933,
       "Better": "Higher"
     },
+    "Neural — an English line typed on the Belarusian layout · against the dictionary · won": {
+      "Value": 0.0333,
+      "Better": "Either"
+    },
+    "Neural — an English line typed on the Belarusian layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — an English line typed on the Belarusian layout · whose answer went out · model": {
-      "Value": 0.04,
+      "Value": 0.0333,
       "Better": "Either"
     },
     "Neural — an English line typed on the Belarusian layout · whose answer went out · dictionary": {
-      "Value": 0.8533,
+      "Value": 0.86,
       "Better": "Either"
     },
     "Neural — an English line typed on the Belarusian layout · whose answer went out · remap": {
@@ -95,6 +119,14 @@
     "Neural — a correct Belarusian line, to be left alone · right (dictionary alone → neural) · with": {
       "Value": 1,
       "Better": "Higher"
+    },
+    "Neural — a correct Belarusian line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct Belarusian line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — a correct Belarusian line, to be left alone · whose answer went out · model": {
       "Value": 0,
@@ -124,6 +156,14 @@
       "Value": 1,
       "Better": "Higher"
     },
+    "Neural — a correct English line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct English line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — a correct English line, to be left alone · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -145,11 +185,23 @@
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.8933,
+      "Value": 0.92,
       "Better": "Higher"
     },
     "Neural — a Belarusian line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8467,
+      "Value": 0.8933,
+      "Better": "Higher"
+    },
+    "Neural — a Belarusian line with one typo · against the dictionary · won": {
+      "Value": 0.0133,
+      "Better": "Either"
+    },
+    "Neural — a Belarusian line with one typo · against the dictionary · lost": {
+      "Value": 0.04,
+      "Better": "Either"
+    },
+    "Neural — a Belarusian line with one typo · the meant word among the spellings offered": {
+      "Value": 0.9799,
       "Better": "Higher"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · model": {
@@ -157,7 +209,7 @@
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · dictionary": {
-      "Value": 0.14,
+      "Value": 0.1133,
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · remap": {
@@ -165,27 +217,39 @@
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · as typed": {
-      "Value": 0.0467,
-      "Better": "Either"
-    },
-    "Neural — a Belarusian line with one typo · whose answer went out · no model call": {
-      "Value": 0.7533,
-      "Better": "Either"
-    },
-    "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.8667,
-      "Better": "Higher"
-    },
-    "Neural — an English line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8667,
-      "Better": "Higher"
-    },
-    "Neural — an English line with one typo · whose answer went out · model": {
       "Value": 0.0133,
       "Better": "Either"
     },
+    "Neural — a Belarusian line with one typo · whose answer went out · no model call": {
+      "Value": 0.8133,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.9067,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.9133,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · against the dictionary · won": {
+      "Value": 0.02,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · against the dictionary · lost": {
+      "Value": 0.0133,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · the meant word among the spellings offered": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · whose answer went out · model": {
+      "Value": 0.04,
+      "Better": "Either"
+    },
     "Neural — an English line with one typo · whose answer went out · dictionary": {
-      "Value": 0.6,
+      "Value": 0.4733,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · remap": {
@@ -193,11 +257,235 @@
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · as typed": {
-      "Value": 0.0467,
+      "Value": 0.08,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · no model call": {
-      "Value": 0.34,
+      "Value": 0.4067,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8167,
+      "Better": "Higher"
+    },
+    "Neural — a natural Belarusian sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.7917,
+      "Better": "Higher"
+    },
+    "Neural — a natural Belarusian sentence with one typo · against the dictionary · won": {
+      "Value": 0.0333,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence with one typo · against the dictionary · lost": {
+      "Value": 0.0583,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence with one typo · the meant word among the spellings offered": {
+      "Value": 0.9667,
+      "Better": "Higher"
+    },
+    "Neural — a natural Belarusian sentence with one typo · whose answer went out · model": {
+      "Value": 0.15,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.425,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence with one typo · whose answer went out · as typed": {
+      "Value": 0.0333,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.3917,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · whose answer went out · dictionary": {
+      "Value": 0.875,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Belarusian sentence typed on the English layout · whose answer went out · no model call": {
+      "Value": 0.125,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8417,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.9583,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · won": {
+      "Value": 0.1167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · the meant word among the spellings offered": {
+      "Value": 0.975,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · model": {
+      "Value": 0.125,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.45,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · as typed": {
+      "Value": 0.0167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.4083,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · whose answer went out · dictionary": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Belarusian layout · whose answer went out · no model call": {
+      "Value": 0,
       "Better": "Either"
     }
   }

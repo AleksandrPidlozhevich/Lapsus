@@ -41,8 +41,11 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
     // Per word in a script the rest of the line is not written in.
     internal const double MixedScriptPenalty = 4.0;
 
-    // Longer lines cost a model call per doubtful word; past this the dictionary answers alone.
+    // A longer text is ranked a window at a time, cut after a sentence where one ends in reach: the model
+    // reads a window as one line, and a paragraph in one piece would cost a long prompt per doubtful word.
     private const int MaxWords = 24;
+
+    private static readonly char[] SentenceEnds = ['.', '!', '?', '…'];
 
     private const int MaxReadingsPerWord = 10;
 
@@ -75,11 +78,69 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         LayoutSource active,
         IReadOnlyList<LayoutSource> installed,
         IReadOnlyList<LayoutCandidate> candidates,
-        string? advice)
+        string? advice,
+        CancellationToken cancellationToken = default)
     {
         var chunks = NeuralPhraseRewriter.Chunks(text);
-        if (chunks.Count == 0 || chunks.Count > MaxWords)
+        if (chunks.Count == 0)
             return null;
+
+        if (chunks.Count <= MaxWords)
+            return RankWindow(text, active, installed, candidates, advice, cancellationToken);
+
+        var advised = Advised(advice, chunks.Count);
+        var sb = new System.Text.StringBuilder(text.Length + 16);
+        var at = 0;
+        var asked = false;
+        foreach (var (from, to) in Windows(text, chunks))
+        {
+            var start = chunks[from].Start;
+            var end = chunks[to - 1].Start + chunks[to - 1].Length;
+            var window = text[start..end];
+            var windowAdvice = advised is null
+                ? null
+                : Replace(window, NeuralPhraseRewriter.Chunks(window), advised[from..to]);
+
+            if (RankWindow(window, active, installed, candidates, windowAdvice, cancellationToken) is not { } ranked)
+                return null;
+
+            sb.Append(text, at, start - at).Append(ranked.Text);
+            at = end;
+            asked |= ranked.AskedModel;
+        }
+
+        return new Ranked(sb.Append(text, at, text.Length - at).ToString(), asked);
+    }
+
+    // Chunk ranges of at most MaxWords, each ending after the last sentence end it reaches if it has one.
+    private static IEnumerable<(int From, int To)> Windows(string text, List<(int Start, int Length)> chunks)
+    {
+        var from = 0;
+        while (from < chunks.Count)
+        {
+            var to = Math.Min(from + MaxWords, chunks.Count);
+            if (to < chunks.Count)
+                for (var i = to - 1; i > from; i--)
+                    if (Array.IndexOf(SentenceEnds, text[chunks[i].Start + chunks[i].Length - 1]) >= 0)
+                    {
+                        to = i + 1;
+                        break;
+                    }
+
+            yield return (from, to);
+            from = to;
+        }
+    }
+
+    private Ranked? RankWindow(
+        string text,
+        LayoutSource active,
+        IReadOnlyList<LayoutSource> installed,
+        IReadOnlyList<LayoutCandidate> candidates,
+        string? advice,
+        CancellationToken cancellationToken)
+    {
+        var chunks = NeuralPhraseRewriter.Chunks(text);
 
         var typed = chunks.Select(c => text.Substring(c.Start, c.Length)).ToArray();
         var advised = Advised(advice, typed.Length);
@@ -130,7 +191,7 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         if (starts.Count > 1)
         {
             var lines = starts.Select(words => Join(text, chunks, words, 0, words.Length)).ToList();
-            if (Scores(lines, ends: true) is not { } lineScores)
+            if (Scores(lines, ends: true, cancellationToken) is not { } lineScores)
                 return null;
 
             var best = 0;
@@ -158,7 +219,7 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
             var texts = options.Select(r => head + r.Text + tail).ToList();
             var line = LineScript(current, i);
 
-            if (Scores(texts, ends: last >= typed.Length - 1) is not { } scores)
+            if (Scores(texts, ends: last >= typed.Length - 1, cancellationToken) is not { } scores)
                 return null;
 
             double Total(int r) => scores[r] + options[r].Prior + MixPenalty(options[r].Text, line);
@@ -174,9 +235,10 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         return new Ranked(Replace(text, chunks, current), true);
     }
 
-    private IReadOnlyList<double>? Scores(List<string> texts, bool ends)
+    private IReadOnlyList<double>? Scores(List<string> texts, bool ends, CancellationToken cancellationToken)
     {
-        var scores = llm.ScoreAsync(Context, texts, ends).GetAwaiter().GetResult();
+        cancellationToken.ThrowIfCancellationRequested();
+        var scores = llm.ScoreAsync(Context, texts, ends, cancellationToken).GetAwaiter().GetResult();
         return scores is not null && scores.Count == texts.Count ? scores : null;
     }
 

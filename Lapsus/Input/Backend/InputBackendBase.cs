@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using Lapsus.Core.Correction;
@@ -30,6 +31,9 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
     private int _bufferGeneration;
 
     private int _neuralRewriteInFlight;
+
+    // The request a model is working on; the next one, or a brain swap, cancels it so the model is free.
+    private CancellationTokenSource? _modelRequest;
 
     private bool _selectionActionRunning;
 
@@ -105,6 +109,21 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         Corrector = corrector;
         _cycle = null;
         _asyncCorrectionGeneration++;
+        _modelRequest?.Cancel();
+    }
+
+    private CancellationTokenSource BeginModelRequest()
+    {
+        _modelRequest?.Cancel();
+        _modelRequest = new CancellationTokenSource();
+        return _modelRequest;
+    }
+
+    private void EndModelRequest(CancellationTokenSource request)
+    {
+        if (ReferenceEquals(_modelRequest, request))
+            _modelRequest = null;
+        request.Dispose();
     }
 
     public IReadOnlyList<LayoutCandidate> LayoutCandidates()
@@ -493,9 +512,23 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
 
                 var layouts = ReadLayouts();
                 var generation = _asyncCorrectionGeneration;
-                var result = await Task.Run(
-                    () => (Phrase: CorrectWith(selection, layouts.Active, layouts.All),
-                        Source: layouts.Active)).ConfigureAwait(true);
+                var request = BeginModelRequest();
+                var hints = new CorrectionHints(Cancellation: request.Token);
+                (PhraseCorrection Phrase, InstalledLayout? Source) result;
+                try
+                {
+                    result = await Task.Run(
+                        () => (Phrase: CorrectWith(selection, layouts.Active, layouts.All, hints),
+                            Source: layouts.Active)).ConfigureAwait(true);
+                }
+                catch (OperationCanceledException)
+                {
+                    return;
+                }
+                finally
+                {
+                    EndModelRequest(request);
+                }
 
                 if (generation != _asyncCorrectionGeneration)
                     return;
@@ -601,6 +634,8 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         var generation = ++_asyncCorrectionGeneration;
         var bufferAtStart = _bufferGeneration;
         var ownerAtStart = BufferOwner;
+        var request = BeginModelRequest();
+        var hints = new CorrectionHints(Cancellation: request.Token);
         _neuralRewriteInFlight++;
         (PhraseCorrection Phrase, InstalledLayout? Source) result;
         try
@@ -608,8 +643,13 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
             // Snapshot layouts before hopping off the UI thread; Layouts is UI-thread state.
             var layouts = ReadLayouts();
             result = await Task.Run(
-                () => (CorrectWith(segment, layouts.Active, layouts.All), layouts.Active))
+                () => (CorrectWith(segment, layouts.Active, layouts.All, hints), layouts.Active))
                 .ConfigureAwait(true);
+        }
+        catch (OperationCanceledException)
+        {
+            // A newer request replaced this one; it reports for both.
+            return;
         }
         catch (Exception ex)
         {
@@ -619,6 +659,7 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         finally
         {
             _neuralRewriteInFlight--;
+            EndModelRequest(request);
         }
 
         if (generation != _asyncCorrectionGeneration)

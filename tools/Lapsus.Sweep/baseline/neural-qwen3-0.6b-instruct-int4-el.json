@@ -12,6 +12,14 @@
       "Value": 0.9333,
       "Better": "Higher"
     },
+    "Neural — a Greek line typed on the English layout · against the dictionary · won": {
+      "Value": 0.16,
+      "Better": "Either"
+    },
+    "Neural — a Greek line typed on the English layout · against the dictionary · lost": {
+      "Value": 0.0067,
+      "Better": "Either"
+    },
     "Neural — a Greek line typed on the English layout · whose answer went out · model": {
       "Value": 0.1667,
       "Better": "Either"
@@ -39,6 +47,14 @@
     "Neural — one Greek word typed on the English layout · right (dictionary alone → neural) · with": {
       "Value": 0.6533,
       "Better": "Higher"
+    },
+    "Neural — one Greek word typed on the English layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — one Greek word typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — one Greek word typed on the English layout · whose answer went out · model": {
       "Value": 0,
@@ -68,6 +84,14 @@
       "Value": 0.9933,
       "Better": "Higher"
     },
+    "Neural — an English line typed on the Greek layout · against the dictionary · won": {
+      "Value": 0.3267,
+      "Better": "Either"
+    },
+    "Neural — an English line typed on the Greek layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — an English line typed on the Greek layout · whose answer went out · model": {
       "Value": 0.3333,
       "Better": "Either"
@@ -95,6 +119,14 @@
     "Neural — a correct Greek line, to be left alone · right (dictionary alone → neural) · with": {
       "Value": 1,
       "Better": "Higher"
+    },
+    "Neural — a correct Greek line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct Greek line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — a correct Greek line, to be left alone · whose answer went out · model": {
       "Value": 0,
@@ -124,6 +156,14 @@
       "Value": 1,
       "Better": "Higher"
     },
+    "Neural — a correct English line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct English line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — a correct English line, to be left alone · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -145,19 +185,31 @@
       "Better": "Either"
     },
     "Neural — a Greek line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.9133,
+      "Value": 0.92,
       "Better": "Higher"
     },
     "Neural — a Greek line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8733,
+      "Value": 0.86,
+      "Better": "Higher"
+    },
+    "Neural — a Greek line with one typo · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a Greek line with one typo · against the dictionary · lost": {
+      "Value": 0.06,
+      "Better": "Either"
+    },
+    "Neural — a Greek line with one typo · the meant word among the spellings offered": {
+      "Value": 0.9931,
       "Better": "Higher"
     },
     "Neural — a Greek line with one typo · whose answer went out · model": {
-      "Value": 0.04,
+      "Value": 0.0667,
       "Better": "Either"
     },
     "Neural — a Greek line with one typo · whose answer went out · dictionary": {
-      "Value": 0.3,
+      "Value": 0.2267,
       "Better": "Either"
     },
     "Neural — a Greek line with one typo · whose answer went out · remap": {
@@ -165,27 +217,39 @@
       "Better": "Either"
     },
     "Neural — a Greek line with one typo · whose answer went out · as typed": {
-      "Value": 0.0267,
+      "Value": 0.04,
       "Better": "Either"
     },
     "Neural — a Greek line with one typo · whose answer went out · no model call": {
-      "Value": 0.6333,
+      "Value": 0.6667,
       "Better": "Either"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.8667,
+      "Value": 0.9,
       "Better": "Higher"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8733,
+      "Value": 0.9133,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · against the dictionary · won": {
+      "Value": 0.0267,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · against the dictionary · lost": {
+      "Value": 0.0133,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · the meant word among the spellings offered": {
+      "Value": 1,
       "Better": "Higher"
     },
     "Neural — an English line with one typo · whose answer went out · model": {
-      "Value": 0.0067,
+      "Value": 0.0467,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · dictionary": {
-      "Value": 0.6,
+      "Value": 0.4733,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · remap": {
@@ -193,11 +257,235 @@
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · as typed": {
-      "Value": 0.0533,
+      "Value": 0.08,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · no model call": {
-      "Value": 0.34,
+      "Value": 0.4,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.9667,
+      "Better": "Higher"
+    },
+    "Neural — a natural Greek sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.95,
+      "Better": "Higher"
+    },
+    "Neural — a natural Greek sentence with one typo · against the dictionary · won": {
+      "Value": 0.0333,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence with one typo · against the dictionary · lost": {
+      "Value": 0.05,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence with one typo · the meant word among the spellings offered": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Greek sentence with one typo · whose answer went out · model": {
+      "Value": 0.0833,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.3333,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence with one typo · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.5833,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Greek sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Greek sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · whose answer went out · dictionary": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Greek sentence typed on the English layout · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.85,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.9667,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · won": {
+      "Value": 0.1167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · the meant word among the spellings offered": {
+      "Value": 0.9833,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · model": {
+      "Value": 0.125,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.45,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · as typed": {
+      "Value": 0.0167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.4083,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · right (dictionary alone → neural) · without": {
+      "Value": 0.675,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · right (dictionary alone → neural) · with": {
+      "Value": 0.975,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · against the dictionary · won": {
+      "Value": 0.3,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · whose answer went out · model": {
+      "Value": 0.3,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · whose answer went out · dictionary": {
+      "Value": 0.7,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Greek layout · whose answer went out · no model call": {
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · right (dictionary alone → neural) · without": {
@@ -207,6 +495,14 @@
     "Neural — typing fixtures marked ok · right (dictionary alone → neural) · with": {
       "Value": 0.7143,
       "Better": "Higher"
+    },
+    "Neural — typing fixtures marked ok · against the dictionary · won": {
+      "Value": 0.0714,
+      "Better": "Either"
+    },
+    "Neural — typing fixtures marked ok · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · model": {
       "Value": 0.1429,

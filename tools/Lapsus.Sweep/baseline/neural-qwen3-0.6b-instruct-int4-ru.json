@@ -12,6 +12,14 @@
       "Value": 0.9533,
       "Better": "Higher"
     },
+    "Neural — a Russian line typed on the English layout · against the dictionary · won": {
+      "Value": 0.1133,
+      "Better": "Either"
+    },
+    "Neural — a Russian line typed on the English layout · against the dictionary · lost": {
+      "Value": 0.0133,
+      "Better": "Either"
+    },
     "Neural — a Russian line typed on the English layout · whose answer went out · model": {
       "Value": 0.1267,
       "Better": "Either"
@@ -40,6 +48,14 @@
       "Value": 0.86,
       "Better": "Higher"
     },
+    "Neural — one Russian word typed on the English layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — one Russian word typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — one Russian word typed on the English layout · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -65,15 +81,23 @@
       "Better": "Higher"
     },
     "Neural — an English line typed on the Russian layout · right (dictionary alone → neural) · with": {
-      "Value": 0.9867,
+      "Value": 0.9933,
       "Better": "Higher"
     },
+    "Neural — an English line typed on the Russian layout · against the dictionary · won": {
+      "Value": 0.0533,
+      "Better": "Either"
+    },
+    "Neural — an English line typed on the Russian layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — an English line typed on the Russian layout · whose answer went out · model": {
-      "Value": 0.06,
+      "Value": 0.0533,
       "Better": "Either"
     },
     "Neural — an English line typed on the Russian layout · whose answer went out · dictionary": {
-      "Value": 0.8333,
+      "Value": 0.84,
       "Better": "Either"
     },
     "Neural — an English line typed on the Russian layout · whose answer went out · remap": {
@@ -95,6 +119,14 @@
     "Neural — a correct Russian line, to be left alone · right (dictionary alone → neural) · with": {
       "Value": 1,
       "Better": "Higher"
+    },
+    "Neural — a correct Russian line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct Russian line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — a correct Russian line, to be left alone · whose answer went out · model": {
       "Value": 0,
@@ -124,6 +156,14 @@
       "Value": 1,
       "Better": "Higher"
     },
+    "Neural — a correct English line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct English line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — a correct English line, to be left alone · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -145,19 +185,31 @@
       "Better": "Either"
     },
     "Neural — a Russian line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.8667,
+      "Value": 0.88,
       "Better": "Higher"
     },
     "Neural — a Russian line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8467,
+      "Value": 0.86,
       "Better": "Higher"
     },
-    "Neural — a Russian line with one typo · whose answer went out · model": {
+    "Neural — a Russian line with one typo · against the dictionary · won": {
+      "Value": 0.0067,
+      "Better": "Either"
+    },
+    "Neural — a Russian line with one typo · against the dictionary · lost": {
       "Value": 0.0267,
       "Better": "Either"
     },
+    "Neural — a Russian line with one typo · the meant word among the spellings offered": {
+      "Value": 0.9795,
+      "Better": "Higher"
+    },
+    "Neural — a Russian line with one typo · whose answer went out · model": {
+      "Value": 0.0467,
+      "Better": "Either"
+    },
     "Neural — a Russian line with one typo · whose answer went out · dictionary": {
-      "Value": 0.26,
+      "Value": 0.2867,
       "Better": "Either"
     },
     "Neural — a Russian line with one typo · whose answer went out · remap": {
@@ -165,27 +217,39 @@
       "Better": "Either"
     },
     "Neural — a Russian line with one typo · whose answer went out · as typed": {
-      "Value": 0.06,
+      "Value": 0.0467,
       "Better": "Either"
     },
     "Neural — a Russian line with one typo · whose answer went out · no model call": {
-      "Value": 0.6533,
+      "Value": 0.62,
       "Better": "Either"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.8733,
+      "Value": 0.9,
       "Better": "Higher"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8733,
+      "Value": 0.9133,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · against the dictionary · won": {
+      "Value": 0.0267,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · against the dictionary · lost": {
+      "Value": 0.0133,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · the meant word among the spellings offered": {
+      "Value": 1,
       "Better": "Higher"
     },
     "Neural — an English line with one typo · whose answer went out · model": {
-      "Value": 0.0067,
+      "Value": 0.0467,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · dictionary": {
-      "Value": 0.6067,
+      "Value": 0.4667,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · remap": {
@@ -193,11 +257,235 @@
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · as typed": {
-      "Value": 0.0467,
+      "Value": 0.08,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · no model call": {
-      "Value": 0.34,
+      "Value": 0.4067,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8667,
+      "Better": "Higher"
+    },
+    "Neural — a natural Russian sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.9667,
+      "Better": "Higher"
+    },
+    "Neural — a natural Russian sentence with one typo · against the dictionary · won": {
+      "Value": 0.1,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence with one typo · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence with one typo · the meant word among the spellings offered": {
+      "Value": 0.9833,
+      "Better": "Higher"
+    },
+    "Neural — a natural Russian sentence with one typo · whose answer went out · model": {
+      "Value": 0.1,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.45,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence with one typo · whose answer went out · as typed": {
+      "Value": 0.0167,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.4333,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Russian sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Russian sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · whose answer went out · dictionary": {
+      "Value": 0.825,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Russian sentence typed on the English layout · whose answer went out · no model call": {
+      "Value": 0.175,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8417,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.9583,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · won": {
+      "Value": 0.1167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · the meant word among the spellings offered": {
+      "Value": 0.975,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · model": {
+      "Value": 0.125,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.45,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · as typed": {
+      "Value": 0.0167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.4083,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · whose answer went out · dictionary": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Russian layout · whose answer went out · no model call": {
+      "Value": 0,
       "Better": "Either"
     }
   }

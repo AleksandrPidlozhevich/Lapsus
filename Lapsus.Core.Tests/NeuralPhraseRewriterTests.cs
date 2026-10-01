@@ -780,6 +780,19 @@ public class NeuralPhraseRewriterTests
         }
 
         [Fact]
+        public void A_text_too_long_for_one_window_is_read_a_sentence_at_a_time()
+        {
+            var llm = new ScoringLlm("возьми", "данные", "из", "api.");
+            var rewriter = new NeuralPhraseRewriter(llm);
+            var typed = string.Join(' ', Enumerable.Repeat("djpmvb lfyyst bp api.", 7));
+
+            var result = rewriter.CorrectPhrase(typed, English, [English, Russian], Candidates);
+
+            Assert.Equal(string.Join(' ', Enumerable.Repeat("возьми данные из api.", 7)), result.Corrected);
+            Assert.InRange(llm.LongestText, 1, 24);
+        }
+
+        [Fact]
         public void A_line_the_model_reads_best_as_typed_stays()
         {
             var rewriter = new NeuralPhraseRewriter(new ScoringLlm("were", "that"));
@@ -827,10 +840,67 @@ public class NeuralPhraseRewriterTests
             Assert.Equal(0, llm.Calls);
         }
 
+        [Fact]
+        public void A_second_press_cancels_the_first_request_instead_of_waiting_it_out()
+        {
+            using var cancelled = new CancellationTokenSource();
+            cancelled.Cancel();
+            var rewriter = new NeuralPhraseRewriter(new StuckLlm());
+
+            Assert.ThrowsAny<OperationCanceledException>(() => rewriter.CorrectPhrase(
+                "djpmvb lfyyst", English, [English, Russian], Candidates, null,
+                new CorrectionHints(Cancellation: cancelled.Token)));
+        }
+
+        [Fact]
+        public void A_model_past_its_time_gives_way_to_the_dictionary()
+        {
+            var dictionary = new Dictionary(Script.Cyrillic)
+            {
+                Answer = new PhraseCorrection("djpmvb lfyyst", "возьми данные", true, KeyboardLayout.Ru, "ru")
+            };
+            var rewriter = new NeuralPhraseRewriter(new StuckLlm(), dictionary, budget: TimeSpan.FromMilliseconds(50));
+
+            var result = rewriter.CorrectPhrase("djpmvb lfyyst", English, [English, Russian], Candidates);
+
+            Assert.Equal("возьми данные", result.Corrected);
+            Assert.Equal(KeyboardLayout.Ru, result.TargetLayout);
+        }
+
+        // Never answers until told to stop.
+        private sealed class StuckLlm : ILocalLlm
+        {
+            public bool IsLoaded => true;
+
+            public void Unload()
+            {
+            }
+
+            public async Task<string> CompleteAsync(string systemPrompt, string userText, int answerChars,
+                CancellationToken cancellationToken = default)
+            {
+                await Task.Delay(Timeout.Infinite, cancellationToken);
+                return "";
+            }
+
+            public async Task<IReadOnlyList<double>?> ScoreAsync(string context, IReadOnlyList<string> texts,
+                bool ends, CancellationToken cancellationToken = default)
+            {
+                await Task.Delay(Timeout.Infinite, cancellationToken);
+                return null;
+            }
+
+            public void Dispose()
+            {
+            }
+        }
+
         // Scores a text by how many of its words are in the list: the "model" reads those as natural.
         private sealed class ScoringLlm(params string[] natural) : ILocalLlm
         {
             public int Calls { get; private set; }
+
+            public int LongestText { get; private set; }
 
             public bool IsLoaded => true;
 
@@ -848,6 +918,8 @@ public class NeuralPhraseRewriterTests
                 CancellationToken cancellationToken = default)
             {
                 Calls++;
+                LongestText = Math.Max(LongestText,
+                    texts.Max(t => t.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length));
                 IReadOnlyList<double> scores = texts
                     .Select(t => 10.0 * t.Split(' ', StringSplitOptions.RemoveEmptyEntries).Count(natural.Contains))
                     .ToList();
@@ -862,6 +934,8 @@ public class NeuralPhraseRewriterTests
         private sealed class Dictionary(Script script, params string[] words) : IPhraseCorrector
         {
             public Dictionary<string, (string Word, int Edits)[]> Suggestions { get; } = [];
+
+            public PhraseCorrection? Answer { get; init; }
 
             public bool IsReady => true;
 
@@ -885,7 +959,7 @@ public class NeuralPhraseRewriterTests
                 IReadOnlyList<LayoutCandidate> candidates,
                 KeyboardLayout? preferred = null)
             {
-                return new PhraseCorrection(text, text, false, null);
+                return Answer ?? new PhraseCorrection(text, text, false, null);
             }
         }
     }

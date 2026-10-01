@@ -9,8 +9,16 @@
       "Better": "Higher"
     },
     "Neural — a Ukrainian line typed on the English layout · right (dictionary alone → neural) · with": {
-      "Value": 0.9467,
+      "Value": 0.94,
       "Better": "Higher"
+    },
+    "Neural — a Ukrainian line typed on the English layout · against the dictionary · won": {
+      "Value": 0.0933,
+      "Better": "Either"
+    },
+    "Neural — a Ukrainian line typed on the English layout · against the dictionary · lost": {
+      "Value": 0.0267,
+      "Better": "Either"
     },
     "Neural — a Ukrainian line typed on the English layout · whose answer went out · model": {
       "Value": 0.1267,
@@ -40,6 +48,14 @@
       "Value": 0.8133,
       "Better": "Higher"
     },
+    "Neural — one Ukrainian word typed on the English layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — one Ukrainian word typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — one Ukrainian word typed on the English layout · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -65,15 +81,23 @@
       "Better": "Higher"
     },
     "Neural — an English line typed on the Ukrainian layout · right (dictionary alone → neural) · with": {
-      "Value": 0.98,
+      "Value": 0.9867,
       "Better": "Higher"
     },
+    "Neural — an English line typed on the Ukrainian layout · against the dictionary · won": {
+      "Value": 0.1,
+      "Better": "Either"
+    },
+    "Neural — an English line typed on the Ukrainian layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — an English line typed on the Ukrainian layout · whose answer went out · model": {
-      "Value": 0.1067,
+      "Value": 0.1,
       "Better": "Either"
     },
     "Neural — an English line typed on the Ukrainian layout · whose answer went out · dictionary": {
-      "Value": 0.78,
+      "Value": 0.7867,
       "Better": "Either"
     },
     "Neural — an English line typed on the Ukrainian layout · whose answer went out · remap": {
@@ -95,6 +119,14 @@
     "Neural — a correct Ukrainian line, to be left alone · right (dictionary alone → neural) · with": {
       "Value": 1,
       "Better": "Higher"
+    },
+    "Neural — a correct Ukrainian line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct Ukrainian line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — a correct Ukrainian line, to be left alone · whose answer went out · model": {
       "Value": 0,
@@ -124,6 +156,14 @@
       "Value": 1,
       "Better": "Higher"
     },
+    "Neural — a correct English line, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a correct English line, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
     "Neural — a correct English line, to be left alone · whose answer went out · model": {
       "Value": 0,
       "Better": "Either"
@@ -145,15 +185,27 @@
       "Better": "Either"
     },
     "Neural — a Ukrainian line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.9,
+      "Value": 0.8933,
       "Better": "Higher"
     },
     "Neural — a Ukrainian line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8733,
+      "Value": 0.8667,
+      "Better": "Higher"
+    },
+    "Neural — a Ukrainian line with one typo · against the dictionary · won": {
+      "Value": 0.0133,
+      "Better": "Either"
+    },
+    "Neural — a Ukrainian line with one typo · against the dictionary · lost": {
+      "Value": 0.04,
+      "Better": "Either"
+    },
+    "Neural — a Ukrainian line with one typo · the meant word among the spellings offered": {
+      "Value": 0.9655,
       "Better": "Higher"
     },
     "Neural — a Ukrainian line with one typo · whose answer went out · model": {
-      "Value": 0.0733,
+      "Value": 0.06,
       "Better": "Either"
     },
     "Neural — a Ukrainian line with one typo · whose answer went out · dictionary": {
@@ -165,27 +217,39 @@
       "Better": "Either"
     },
     "Neural — a Ukrainian line with one typo · whose answer went out · as typed": {
-      "Value": 0.06,
+      "Value": 0.0667,
       "Better": "Either"
     },
     "Neural — a Ukrainian line with one typo · whose answer went out · no model call": {
-      "Value": 0.62,
+      "Value": 0.6267,
       "Better": "Either"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
-      "Value": 0.8667,
+      "Value": 0.9,
       "Better": "Higher"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8667,
+      "Value": 0.9133,
       "Better": "Higher"
     },
-    "Neural — an English line with one typo · whose answer went out · model": {
+    "Neural — an English line with one typo · against the dictionary · won": {
+      "Value": 0.0267,
+      "Better": "Either"
+    },
+    "Neural — an English line with one typo · against the dictionary · lost": {
       "Value": 0.0133,
       "Better": "Either"
     },
+    "Neural — an English line with one typo · the meant word among the spellings offered": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — an English line with one typo · whose answer went out · model": {
+      "Value": 0.0467,
+      "Better": "Either"
+    },
     "Neural — an English line with one typo · whose answer went out · dictionary": {
-      "Value": 0.6,
+      "Value": 0.4667,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · remap": {
@@ -193,11 +257,235 @@
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · as typed": {
-      "Value": 0.0467,
+      "Value": 0.08,
       "Better": "Either"
     },
     "Neural — an English line with one typo · whose answer went out · no model call": {
-      "Value": 0.34,
+      "Value": 0.4067,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8333,
+      "Better": "Higher"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.9167,
+      "Better": "Higher"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · against the dictionary · won": {
+      "Value": 0.1,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · against the dictionary · lost": {
+      "Value": 0.0167,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · the meant word among the spellings offered": {
+      "Value": 0.9833,
+      "Better": "Higher"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · whose answer went out · model": {
+      "Value": 0.1333,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.3417,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · whose answer went out · as typed": {
+      "Value": 0.0167,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.5083,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · right (dictionary alone → neural) · without": {
+      "Value": 0.975,
+      "Better": "Higher"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · against the dictionary · won": {
+      "Value": 0.025,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · whose answer went out · model": {
+      "Value": 0.025,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · whose answer went out · dictionary": {
+      "Value": 0.8,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural Ukrainian sentence typed on the English layout · whose answer went out · no model call": {
+      "Value": 0.175,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · without": {
+      "Value": 0.8417,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · right (dictionary alone → neural) · with": {
+      "Value": 0.9583,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · won": {
+      "Value": 0.1167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · the meant word among the spellings offered": {
+      "Value": 0.975,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · model": {
+      "Value": 0.125,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · dictionary": {
+      "Value": 0.45,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · as typed": {
+      "Value": 0.0167,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence with one typo · whose answer went out · no model call": {
+      "Value": 0.4083,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · dictionary": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · as typed": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence, to be left alone · whose answer went out · no model call": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · right (dictionary alone → neural) · without": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · right (dictionary alone → neural) · with": {
+      "Value": 1,
+      "Better": "Higher"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · whose answer went out · model": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · whose answer went out · dictionary": {
+      "Value": 1,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · whose answer went out · remap": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · whose answer went out · as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — a natural English sentence typed on the Ukrainian layout · whose answer went out · no model call": {
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — typing fixtures marked ok · right (dictionary alone → neural) · without": {
@@ -207,6 +495,14 @@
     "Neural — typing fixtures marked ok · right (dictionary alone → neural) · with": {
       "Value": 1,
       "Better": "Higher"
+    },
+    "Neural — typing fixtures marked ok · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — typing fixtures marked ok · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — typing fixtures marked ok · whose answer went out · model": {
       "Value": 0,
@@ -235,6 +531,14 @@
     "Neural — typing fixtures marked pending · right (dictionary alone → neural) · with": {
       "Value": 1,
       "Better": "Higher"
+    },
+    "Neural — typing fixtures marked pending · against the dictionary · won": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Neural — typing fixtures marked pending · against the dictionary · lost": {
+      "Value": 0,
+      "Better": "Either"
     },
     "Neural — typing fixtures marked pending · whose answer went out · model": {
       "Value": 0,
