@@ -189,7 +189,7 @@
       "Better": "Higher"
     },
     "Neural — a Bulgarian line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8267,
+      "Value": 0.9133,
       "Better": "Higher"
     },
     "Neural — a Bulgarian line with one typo · against the dictionary · won": {
@@ -197,7 +197,7 @@
       "Better": "Either"
     },
     "Neural — a Bulgarian line with one typo · against the dictionary · lost": {
-      "Value": 0.0867,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Bulgarian line with one typo · the meant word among the spellings offered": {
@@ -205,11 +205,11 @@
       "Better": "Higher"
     },
     "Neural — a Bulgarian line with one typo · whose answer went out · model": {
-      "Value": 0.1067,
+      "Value": 0.0067,
       "Better": "Either"
     },
     "Neural — a Bulgarian line with one typo · whose answer went out · dictionary": {
-      "Value": 0.3067,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Bulgarian line with one typo · whose answer went out · remap": {
@@ -221,7 +221,7 @@
       "Better": "Either"
     },
     "Neural — a Bulgarian line with one typo · whose answer went out · no model call": {
-      "Value": 0.56,
+      "Value": 0.9667,
       "Better": "Either"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
@@ -269,15 +269,15 @@
       "Better": "Higher"
     },
     "Neural — a natural Bulgarian sentence with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.775,
+      "Value": 0.8083,
       "Better": "Higher"
     },
     "Neural — a natural Bulgarian sentence with one typo · against the dictionary · won": {
-      "Value": 0.025,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Bulgarian sentence with one typo · against the dictionary · lost": {
-      "Value": 0.0583,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Bulgarian sentence with one typo · the meant word among the spellings offered": {
@@ -285,11 +285,11 @@
       "Better": "Higher"
     },
     "Neural — a natural Bulgarian sentence with one typo · whose answer went out · model": {
-      "Value": 0.1083,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Bulgarian sentence with one typo · whose answer went out · dictionary": {
-      "Value": 0.35,
+      "Value": 0.0083,
       "Better": "Either"
     },
     "Neural — a natural Bulgarian sentence with one typo · whose answer went out · remap": {
@@ -301,7 +301,7 @@
       "Better": "Either"
     },
     "Neural — a natural Bulgarian sentence with one typo · whose answer went out · no model call": {
-      "Value": 0.5167,
+      "Value": 0.9667,
       "Better": "Either"
     },
     "Neural — a natural Bulgarian sentence, to be left alone · right (dictionary alone → neural) · without": {

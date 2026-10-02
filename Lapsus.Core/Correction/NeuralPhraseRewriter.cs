@@ -17,19 +17,27 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
 
     private static readonly TimeSpan BudgetPerWord = TimeSpan.FromMilliseconds(100);
 
+    // spellingLanguages: where the model may choose among spellings of a slip (SpellingLanguages.For);
+    // null for every language.
     public NeuralPhraseRewriter(
-        ILocalLlm llm, IPhraseCorrector? adviser = null, WordExceptions? exceptions = null, TimeSpan? budget = null)
+        ILocalLlm llm,
+        IPhraseCorrector? adviser = null,
+        WordExceptions? exceptions = null,
+        TimeSpan? budget = null,
+        IReadOnlySet<string>? spellingLanguages = null)
     {
         _llm = llm ?? throw new ArgumentNullException(nameof(llm));
         _adviser = adviser;
         _exceptions = exceptions;
-        _ranker = new ReadingRanker(llm, adviser, exceptions);
+        _ranker = new ReadingRanker(llm, adviser, exceptions, spellingLanguages);
         _baseBudget = budget ?? DefaultBudget;
     }
 
     public bool IsReady => _llm.IsLoaded || AdviserStandsIn;
 
-    public bool SupportsLayoutCycle => !_llm.IsLoaded && _adviser is { SupportsLayoutCycle: true };
+    // The answer is built from per-layout readings, so pressing again walks the same circle the dictionary
+    // brain offers — the line through each other layout, then the text as typed — without asking again.
+    public bool SupportsLayoutCycle => _llm.IsLoaded || _adviser is { SupportsLayoutCycle: true };
 
     public bool PreferAsync => true;
 

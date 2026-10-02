@@ -176,7 +176,8 @@ public partial class App : Application
                             WarmUpNeural(_backend.PreferredLayout);
                         }
 
-                        corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), _exceptions);
+                        corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), _exceptions,
+                            spellingLanguages: SpellingLanguages.For(modelId));
                         _settingsViewModel.Models.ReportReady(display, _llm.ExecutionProvider);
                     }
                     catch (Exception ex)

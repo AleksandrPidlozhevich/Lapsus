@@ -6,7 +6,8 @@ namespace Lapsus.Core.Correction;
 // dictionary's pick, through each layout, spell-fixed — and the model, reading them in context as plain
 // text, picks one. A small model cannot be trusted to write the answer ("djpnvb lfyyst bp api" comes back
 // as "текст"), but it reliably tells "возьми данные из api" from "возьми данные bp api".
-internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, WordExceptions? exceptions)
+internal sealed class ReadingRanker(
+    ILocalLlm llm, IPhraseCorrector? adviser, WordExceptions? exceptions, IReadOnlySet<string>? spellingLanguages = null)
 {
     // Plain text after a line break: nothing for the model to misread as an instruction.
     private const string Context = "\n";
@@ -61,7 +62,8 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
 
     // Every reading of one word, which of them each candidate layout gives, and whether they are only
     // spellings of a slip (then the whole rest of the line is context worth reading).
-    private sealed record WordReadings(List<Reading> All, string?[] ByLayout, bool Spellings = false)
+    private sealed record WordReadings(
+        List<Reading> All, string?[] ByLayout, bool Spellings = false, string?[]? ByLigature = null)
     {
         public double PriorOf(string text)
         {
@@ -146,6 +148,12 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         var advised = Advised(advice, typed.Length);
         var listed = exceptions?.ChunkSpans(text);
 
+        // Once the dictionary moved a word to another script the line is on the wrong layout: a known word
+        // agreeing with its neighbours ("ის" among "ანდ", "ნიგჰტს") proves nothing, and a word it spell-fixed
+        // in place ("لاشؤن" → "لان" among English) is more likely a remap it could not see.
+        var switchedAny = advised is not null &&
+                          typed.Where((word, i) => Scripts.Dominant(advised[i]) != Scripts.Dominant(word)).Any();
+
         var current = new string[typed.Length];
         var readings = new WordReadings[typed.Length];
         var doubtful = new bool[typed.Length];
@@ -155,13 +163,8 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
             var isListed = listed?.Exists(span => span.Start == chunks[i].Start) ?? false;
             readings[i] = isListed
                 ? new WordReadings([new Reading(typed[i], KeepBias)], new string?[candidates.Count])
-                : Readings(typed[i], advised?[i], active, installed, candidates);
+                : Readings(typed[i], advised?[i], active, installed, candidates, switchedAny);
         }
-
-        // Once the dictionary moved a word to another script the line is on the wrong layout, and a known
-        // word agreeing with its neighbours ("ის" among "ანდ", "ნიგჰტს") proves nothing.
-        var switchedAny = advised is not null &&
-                          typed.Where((word, i) => Scripts.Dominant(advised[i]) != Scripts.Dominant(word)).Any();
         for (var i = 0; i < typed.Length; i++)
             doubtful[i] = readings[i].All.Count > 1 &&
                           !Settled(current[i], typed[i], switchedAny ? null : LineScript(current, i));
@@ -178,15 +181,19 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         // weigh it switched as a whole first.
         var starts = new List<string[]> { current };
         for (var c = 0; c < candidates.Count; c++)
-        {
-            var switched = (string[])current.Clone();
-            for (var i = 0; i < typed.Length; i++)
-                if (doubtful[i] && readings[i].ByLayout[c] is { } remap)
-                    switched[i] = remap;
+            foreach (var asKeys in new[] { false, true })
+            {
+                var switched = (string[])current.Clone();
+                for (var i = 0; i < typed.Length; i++)
+                {
+                    var remap = (asKeys ? readings[i].ByLigature?[c] : null) ?? readings[i].ByLayout[c];
+                    if (doubtful[i] && remap is not null)
+                        switched[i] = remap;
+                }
 
-            if (!starts.Exists(s => s.SequenceEqual(switched)))
-                starts.Add(switched);
-        }
+                if (!starts.Exists(s => s.SequenceEqual(switched)))
+                    starts.Add(switched);
+            }
 
         if (starts.Count > 1)
         {
@@ -265,7 +272,8 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         string? advised,
         LayoutSource active,
         IReadOnlyList<LayoutSource> installed,
-        IReadOnlyList<LayoutCandidate> candidates)
+        IReadOnlyList<LayoutCandidate> candidates,
+        bool lineSwitched)
     {
         var readings = new List<Reading>();
         var byLayout = new string?[candidates.Count];
@@ -282,10 +290,10 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
                 readings[at] = new Reading(reading, prior);
         }
 
-        void AddSpellFixes(string word, KeyboardMap map)
+        void AddSpellFixes(string word, KeyboardMap map, string? language)
         {
             var (lead, core, trail) = Split(word);
-            if (core.Length == 0 || Scripts.Dominant(core) is not { } script ||
+            if (core.Length == 0 || Scripts.Dominant(core) is not { } script || !ModelSpellsIn(language) ||
                 adviser is not { IsReady: true } dictionary || !dictionary.Knows(script))
                 return;
 
@@ -300,9 +308,16 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         // An unknown word the dictionary spell-fixed in its own script is a slip, not a layout: the model
         // picks among spellings, and may neither keep the non-word nor carry it off to another script — it
         // reads Greek and Ukrainian less well than English, and would take "πρόεδε" or "днллю" → "look.".
-        var fixedInPlace = advised is not null && advised != typed && !Knows(typed) &&
-                           Scripts.Dominant(advised) == Scripts.Dominant(typed);
+        // Only a plain word: "config.json" is no slip, whatever the dictionary makes of "json".
+        var fixedInPlace = !lineSwitched && advised is not null && advised != typed && !Knows(typed) &&
+                           Scripts.Dominant(advised) == Scripts.Dominant(typed) &&
+                           Split(typed).Core.All(char.IsLetter);
         var source = MapFor(typed, active, installed, candidates);
+        var language = LanguageOf(typed, active, installed);
+
+        // Where the model reads too poorly to choose a spelling, the dictionary's stands without asking.
+        if (fixedInPlace && !ModelSpellsIn(language))
+            return new WordReadings([new Reading(advised!, AdviserBias)], byLayout);
         if (!fixedInPlace)
             Add(typed, KeepBias + (Knows(typed) ? KnownBiasOf(typed)
                 : Accepts(typed) ? LexiconBias
@@ -317,7 +332,8 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
                 : AdviserBias);
 
         var remaps = new List<string>();
-        var remapMaps = new List<KeyboardMap>();
+        var remapMaps = new List<(KeyboardMap Map, string? Language)>();
+        string?[]? byLigature = null;
         if (!fixedInPlace && source is not null)
             for (var c = 0; c < candidates.Count; c++)
             {
@@ -332,8 +348,20 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
 
                 byLayout[c] = remap;
                 remaps.Add(remap);
-                remapMaps.Add(candidate.Map);
+                remapMaps.Add((candidate.Map, candidate.LanguageCode));
                 Add(remap, 0.0);
+
+                // The Arabic b key types "لا", which reads back as g then h; "لاعل" is "bug" too.
+                if (source.HasLigatures &&
+                    LayoutTranscoder.TranscodeLigaturesAsKeys(typed, source, candidate.Map) is var keyed &&
+                    keyed != remap && HasLetter(keyed))
+                {
+                    byLigature ??= new string?[candidates.Count];
+                    byLigature[c] = keyed;
+                    remaps.Add(keyed);
+                    remapMaps.Add((candidate.Map, candidate.LanguageCode));
+                    Add(keyed, 0.0);
+                }
 
                 // "nfr," is "так," as often as it is "такб".
                 if (typed.Length > 1 && Array.IndexOf(GluedPunctuation, typed[^1]) >= 0)
@@ -344,14 +372,34 @@ internal sealed class ReadingRanker(ILocalLlm llm, IPhraseCorrector? adviser, Wo
         // commoner neighbour as far likelier ("ტორტი" → "პორტი", "напішы" → "напіша"), and the dictionary
         // brain never respells one either.
         if (source is not null && !Accepts(typed))
-            AddSpellFixes(typed, source);
+            AddSpellFixes(typed, source, language);
 
         // A remap of keys that are not all letters would spell-fix a comma away.
         if (typed.All(char.IsLetter))
             for (var r = 0; r < remaps.Count; r++)
-                AddSpellFixes(remaps[r], remapMaps[r]);
+                AddSpellFixes(remaps[r], remapMaps[r].Map, remapMaps[r].Language);
 
-        return new WordReadings(readings, byLayout, fixedInPlace);
+        return new WordReadings(readings, byLayout, fixedInPlace, byLigature);
+    }
+
+    private bool ModelSpellsIn(string? language)
+    {
+        return spellingLanguages is null ||
+               (language is not null && spellingLanguages.Contains(language.Split('-')[0]));
+    }
+
+    // The language of the layout the word was typed on: the active one, or an installed one of its script.
+    private static string? LanguageOf(string word, LayoutSource active, IReadOnlyList<LayoutSource> installed)
+    {
+        var script = Scripts.Dominant(word);
+        if (script is null || script == active.Script)
+            return active.LanguageCode;
+
+        foreach (var layout in installed)
+            if (layout.Script == script)
+                return layout.LanguageCode;
+
+        return null;
     }
 
     private double KnownBiasOf(string word)

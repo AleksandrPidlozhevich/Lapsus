@@ -31,10 +31,12 @@ internal static class NeuralRun
     }
 
     public static void Measure(
-        Machine machine, ILocalLlm llm, FrequencyList en, FrequencyList target, int lines, string? blocks = null)
+        Machine machine, ILocalLlm llm, FrequencyList en, FrequencyList target, int lines, string? blocks = null,
+        string? modelId = null)
     {
         var recorder = new RecordingLlm(llm);
-        var brain = new NeuralPhraseRewriter(recorder, machine.Brain);
+        var brain = new NeuralPhraseRewriter(
+            recorder, machine.Brain, spellingLanguages: SpellingLanguages.For(modelId));
         var run = new Run(machine, brain, recorder, blocks);
         var name = machine.Target.Name;
 
@@ -225,10 +227,14 @@ internal static class NeuralRun
                     recorder.Elapsed.Add(clock.Elapsed.TotalMilliseconds);
                 var reply = recorder.Reply is { } raw ? NeuralPhraseRewriter.SanitizeModelOutput(raw, typed) : null;
 
-                if (alone == expected) dictionaryRight++;
-                if (got == expected) neuralRight++;
-                if (got == expected && alone != expected) won++;
-                if (alone == expected && got != expected) lost++;
+                // Keys typed in a script without capitals cannot carry them: "I will" comes back "i will".
+                var caseBlind = Scripts.Dominant(typed) is Script.Hebrew or Script.Arabic or Script.Georgian;
+                var aloneRight = string.Equals(alone, expected, caseBlind ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                var gotRight = string.Equals(got, expected, caseBlind ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                if (aloneRight) dictionaryRight++;
+                if (gotRight) neuralRight++;
+                if (gotRight && !aloneRight) won++;
+                if (aloneRight && !gotRight) lost++;
                 var missed = false;
                 if (slip is { } s)
                 {
@@ -246,11 +252,11 @@ internal static class NeuralRun
                 sources[source] = sources.GetValueOrDefault(source) + 1;
 
                 // Losses to the dictionary first: those are what the neural path has to answer for.
-                if (alone == expected && got != expected && examples.Count < 8)
+                if (aloneRight && !gotRight && examples.Count < 8)
                     examples.Insert(0, $"LOST {typed} → {got}   wanted {expected}");
                 else if (missed && examples.Count < 8)
                     examples.Add($"NOT OFFERED {slip!.Value.Typo} → {slip.Value.Meant}   in {typed}");
-                else if (got != expected && examples.Count < 8)
+                else if (!gotRight && examples.Count < 8)
                     examples.Add($"{typed} → {got}   wanted {expected}   ({source}{(reply is null || reply == got.Trim() ? "" : $"; model said “{reply}”")})");
             }
 

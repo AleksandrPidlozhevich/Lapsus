@@ -453,11 +453,11 @@
       "Better": "Either"
     },
     "Neural — a natural English sentence typed on the Hebrew layout · right (dictionary alone → neural) · without": {
-      "Value": 0.775,
+      "Value": 0.95,
       "Better": "Higher"
     },
     "Neural — a natural English sentence typed on the Hebrew layout · right (dictionary alone → neural) · with": {
-      "Value": 0.8,
+      "Value": 0.975,
       "Better": "Higher"
     },
     "Neural — a natural English sentence typed on the Hebrew layout · against the dictionary · won": {

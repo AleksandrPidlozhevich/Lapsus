@@ -140,6 +140,17 @@ public sealed class ArabicCorrectionTests : IDisposable
     }
 
     [Fact]
+    public void Read_as_the_key_that_types_it_lam_alef_is_b()
+    {
+        // The other reading of the same letters, for a judge that weighs both: "bug", not "ghug".
+        Assert.Equal("bug", LayoutTranscoder.TranscodeLigaturesAsKeys("لاعل", BundledKeyboardMaps.Ar, BundledKeyboardMaps.En));
+        Assert.Equal("about", LayoutTranscoder.TranscodeLigaturesAsKeys(
+            LayoutTranscoder.Transcode("about", BundledKeyboardMaps.En, BundledKeyboardMaps.Ar),
+            BundledKeyboardMaps.Ar, BundledKeyboardMaps.En));
+        Assert.Equal("ghug", LayoutTranscoder.Transcode("لاعل", BundledKeyboardMaps.Ar, BundledKeyboardMaps.En));
+    }
+
+    [Fact]
     public void Offline_phrase_path_offers_the_arabic_candidate()
     {
         var result = _corrector.CorrectPhrase("lvpfh");

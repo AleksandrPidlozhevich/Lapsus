@@ -189,15 +189,15 @@
       "Better": "Higher"
     },
     "Neural — a Belarusian line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8933,
+      "Value": 0.92,
       "Better": "Higher"
     },
     "Neural — a Belarusian line with one typo · against the dictionary · won": {
-      "Value": 0.0133,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · against the dictionary · lost": {
-      "Value": 0.04,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · the meant word among the spellings offered": {
@@ -205,11 +205,11 @@
       "Better": "Higher"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · model": {
-      "Value": 0.06,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · dictionary": {
-      "Value": 0.1133,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · remap": {
@@ -221,7 +221,7 @@
       "Better": "Either"
     },
     "Neural — a Belarusian line with one typo · whose answer went out · no model call": {
-      "Value": 0.8133,
+      "Value": 0.9867,
       "Better": "Either"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
@@ -269,15 +269,15 @@
       "Better": "Higher"
     },
     "Neural — a natural Belarusian sentence with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.7917,
+      "Value": 0.8167,
       "Better": "Higher"
     },
     "Neural — a natural Belarusian sentence with one typo · against the dictionary · won": {
-      "Value": 0.0333,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Belarusian sentence with one typo · against the dictionary · lost": {
-      "Value": 0.0583,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Belarusian sentence with one typo · the meant word among the spellings offered": {
@@ -285,11 +285,11 @@
       "Better": "Higher"
     },
     "Neural — a natural Belarusian sentence with one typo · whose answer went out · model": {
-      "Value": 0.15,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Belarusian sentence with one typo · whose answer went out · dictionary": {
-      "Value": 0.425,
+      "Value": 0.3167,
       "Better": "Either"
     },
     "Neural — a natural Belarusian sentence with one typo · whose answer went out · remap": {
@@ -297,11 +297,11 @@
       "Better": "Either"
     },
     "Neural — a natural Belarusian sentence with one typo · whose answer went out · as typed": {
-      "Value": 0.0333,
+      "Value": 0.0667,
       "Better": "Either"
     },
     "Neural — a natural Belarusian sentence with one typo · whose answer went out · no model call": {
-      "Value": 0.3917,
+      "Value": 0.6167,
       "Better": "Either"
     },
     "Neural — a natural Belarusian sentence, to be left alone · right (dictionary alone → neural) · without": {

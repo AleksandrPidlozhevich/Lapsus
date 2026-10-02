@@ -93,11 +93,11 @@
       "Better": "Either"
     },
     "Neural — an English line typed on the Georgian layout · whose answer went out · model": {
-      "Value": 0.3,
+      "Value": 0.2867,
       "Better": "Either"
     },
     "Neural — an English line typed on the Georgian layout · whose answer went out · dictionary": {
-      "Value": 0.5867,
+      "Value": 0.6,
       "Better": "Either"
     },
     "Neural — an English line typed on the Georgian layout · whose answer went out · remap": {
@@ -189,15 +189,15 @@
       "Better": "Higher"
     },
     "Neural — a Georgian line with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.8533,
+      "Value": 0.9267,
       "Better": "Higher"
     },
     "Neural — a Georgian line with one typo · against the dictionary · won": {
-      "Value": 0.0133,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Georgian line with one typo · against the dictionary · lost": {
-      "Value": 0.0867,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Georgian line with one typo · the meant word among the spellings offered": {
@@ -205,11 +205,11 @@
       "Better": "Higher"
     },
     "Neural — a Georgian line with one typo · whose answer went out · model": {
-      "Value": 0.1133,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Georgian line with one typo · whose answer went out · dictionary": {
-      "Value": 0.1533,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a Georgian line with one typo · whose answer went out · remap": {
@@ -217,11 +217,11 @@
       "Better": "Either"
     },
     "Neural — a Georgian line with one typo · whose answer went out · as typed": {
-      "Value": 0.0267,
+      "Value": 0.0333,
       "Better": "Either"
     },
     "Neural — a Georgian line with one typo · whose answer went out · no model call": {
-      "Value": 0.7067,
+      "Value": 0.9667,
       "Better": "Either"
     },
     "Neural — an English line with one typo · right (dictionary alone → neural) · without": {
@@ -269,15 +269,15 @@
       "Better": "Higher"
     },
     "Neural — a natural Georgian sentence with one typo · right (dictionary alone → neural) · with": {
-      "Value": 0.6833,
+      "Value": 0.7417,
       "Better": "Higher"
     },
     "Neural — a natural Georgian sentence with one typo · against the dictionary · won": {
-      "Value": 0.0167,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence with one typo · against the dictionary · lost": {
-      "Value": 0.075,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence with one typo · the meant word among the spellings offered": {
@@ -285,11 +285,11 @@
       "Better": "Higher"
     },
     "Neural — a natural Georgian sentence with one typo · whose answer went out · model": {
-      "Value": 0.1583,
+      "Value": 0,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence with one typo · whose answer went out · dictionary": {
-      "Value": 0.4,
+      "Value": 0.225,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence with one typo · whose answer went out · remap": {
@@ -297,11 +297,11 @@
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence with one typo · whose answer went out · as typed": {
-      "Value": 0.05,
+      "Value": 0.0667,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence with one typo · whose answer went out · no model call": {
-      "Value": 0.3917,
+      "Value": 0.7083,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence, to be left alone · right (dictionary alone → neural) · without": {
@@ -325,7 +325,7 @@
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence, to be left alone · whose answer went out · dictionary": {
-      "Value": 0.05,
+      "Value": 0.025,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence, to be left alone · whose answer went out · remap": {
@@ -337,7 +337,7 @@
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence, to be left alone · whose answer went out · no model call": {
-      "Value": 0.025,
+      "Value": 0.05,
       "Better": "Either"
     },
     "Neural — a natural Georgian sentence typed on the English layout · right (dictionary alone → neural) · without": {

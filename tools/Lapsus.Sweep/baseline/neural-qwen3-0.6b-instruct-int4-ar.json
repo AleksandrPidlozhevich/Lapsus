@@ -81,11 +81,11 @@
       "Better": "Higher"
     },
     "Neural — an English line typed on the Arabic layout · right (dictionary alone → neural) · with": {
-      "Value": 0.8867,
+      "Value": 0.9533,
       "Better": "Higher"
     },
     "Neural — an English line typed on the Arabic layout · against the dictionary · won": {
-      "Value": 0.0733,
+      "Value": 0.14,
       "Better": "Either"
     },
     "Neural — an English line typed on the Arabic layout · against the dictionary · lost": {
@@ -93,11 +93,11 @@
       "Better": "Either"
     },
     "Neural — an English line typed on the Arabic layout · whose answer went out · model": {
-      "Value": 0.14,
+      "Value": 0.1667,
       "Better": "Either"
     },
     "Neural — an English line typed on the Arabic layout · whose answer went out · dictionary": {
-      "Value": 0.78,
+      "Value": 0.7533,
       "Better": "Either"
     },
     "Neural — an English line typed on the Arabic layout · whose answer went out · remap": {
@@ -453,15 +453,15 @@
       "Better": "Either"
     },
     "Neural — a natural English sentence typed on the Arabic layout · right (dictionary alone → neural) · without": {
-      "Value": 0.45,
+      "Value": 0.475,
       "Better": "Higher"
     },
     "Neural — a natural English sentence typed on the Arabic layout · right (dictionary alone → neural) · with": {
-      "Value": 0.675,
+      "Value": 1,
       "Better": "Higher"
     },
     "Neural — a natural English sentence typed on the Arabic layout · against the dictionary · won": {
-      "Value": 0.225,
+      "Value": 0.525,
       "Better": "Either"
     },
     "Neural — a natural English sentence typed on the Arabic layout · against the dictionary · lost": {
@@ -469,11 +469,11 @@
       "Better": "Either"
     },
     "Neural — a natural English sentence typed on the Arabic layout · whose answer went out · model": {
-      "Value": 0.35,
+      "Value": 0.525,
       "Better": "Either"
     },
     "Neural — a natural English sentence typed on the Arabic layout · whose answer went out · dictionary": {
-      "Value": 0.65,
+      "Value": 0.475,
       "Better": "Either"
     },
     "Neural — a natural English sentence typed on the Arabic layout · whose answer went out · remap": {

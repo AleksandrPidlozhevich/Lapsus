@@ -687,14 +687,14 @@ public class NeuralPhraseRewriterTests
         }
 
         [Fact]
-        public void A_loaded_model_gives_one_rewrite_and_no_circle()
+        public void A_loaded_model_offers_the_layout_circle_after_its_answer()
         {
             var advice = new PhraseCorrection("ntrcn", "текст", true, KeyboardLayout.Uk, "uk");
             var rewriter = new NeuralPhraseRewriter(
                 new FakeLlm("текст"), new FakeAdviser(advice, Script.Cyrillic, Script.Latin));
 
             Assert.True(rewriter.IsReady);
-            Assert.False(rewriter.SupportsLayoutCycle);
+            Assert.True(rewriter.SupportsLayoutCycle);
         }
 
         [Fact]
@@ -793,6 +793,59 @@ public class NeuralPhraseRewriterTests
         }
 
         [Fact]
+        public void The_arabic_lam_alef_is_offered_as_the_b_key_that_types_it()
+        {
+            var arabic = new LayoutSource(Script.Arabic, "ar", BundledKeyboardMaps.Ar, "ar");
+            LayoutCandidate[] candidates =
+            [
+                new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en"),
+                new(Script.Arabic, KeyboardLayout.Ar, BundledKeyboardMaps.Ar, "ar", "ar")
+            ];
+            var typed = LayoutTranscoder.Transcode("fix the bug", BundledKeyboardMaps.En, BundledKeyboardMaps.Ar);
+            var rewriter = new NeuralPhraseRewriter(new ScoringLlm("fix", "the", "bug"));
+
+            var result = rewriter.CorrectPhrase(typed, arabic, [English, arabic], candidates);
+
+            Assert.Equal("fix the bug", result.Corrected);
+        }
+
+        [Fact]
+        public void A_word_spell_fixed_in_place_on_a_switched_line_may_still_switch()
+        {
+            // The dictionary moved "fix the" to English but read "لاعل" as an Arabic slip for "لاعب".
+            var arabic = new LayoutSource(Script.Arabic, "ar", BundledKeyboardMaps.Ar, "ar");
+            LayoutCandidate[] candidates =
+            [
+                new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en"),
+                new(Script.Arabic, KeyboardLayout.Ar, BundledKeyboardMaps.Ar, "ar", "ar")
+            ];
+            var typed = LayoutTranscoder.Transcode("fix the bug", BundledKeyboardMaps.En, BundledKeyboardMaps.Ar);
+            var dictionary = new Dictionary(Script.Arabic)
+            {
+                Answer = new PhraseCorrection(typed, "fix the لاعب", true, KeyboardLayout.En, "en")
+            };
+            var rewriter = new NeuralPhraseRewriter(new ScoringLlm("fix", "the", "bug"), dictionary);
+
+            var result = rewriter.CorrectPhrase(typed, arabic, [English, arabic], candidates);
+
+            Assert.Equal("fix the bug", result.Corrected);
+        }
+
+        [Fact]
+        public void A_file_name_the_dictionary_respells_is_still_weighed_as_typed()
+        {
+            var dictionary = new Dictionary(Script.Cyrillic, "открой", "файл")
+            {
+                Answer = new PhraseCorrection("открой файл config.json", "открой файл config.son", true, null)
+            };
+            var rewriter = new NeuralPhraseRewriter(new ScoringLlm("открой", "файл", "config.json"), dictionary);
+
+            var result = rewriter.CorrectPhrase("открой файл config.json", Russian, [English, Russian], Candidates);
+
+            Assert.Equal("открой файл config.json", result.Corrected);
+        }
+
+        [Fact]
         public void A_line_the_model_reads_best_as_typed_stays()
         {
             var rewriter = new NeuralPhraseRewriter(new ScoringLlm("were", "that"));
@@ -837,6 +890,23 @@ public class NeuralPhraseRewriterTests
             var result = rewriter.CorrectPhrase("ну ні є", Russian, [English, Russian], Candidates);
 
             Assert.False(result.Changed);
+            Assert.Equal(0, llm.Calls);
+        }
+
+        [Fact]
+        public void Where_the_model_reads_poorly_the_dictionary_spelling_stands_unasked()
+        {
+            var dictionary = new Dictionary(Script.Cyrillic, "как", "дела", "привет", "предмет")
+            {
+                Answer = new PhraseCorrection("превет как дела", "привет как дела", true, null),
+                Suggestions = { ["превет"] = [("предмет", 1)] }
+            };
+            var llm = new ScoringLlm("предмет", "как", "дела");
+            var rewriter = new NeuralPhraseRewriter(llm, dictionary, spellingLanguages: new HashSet<string> { "en" });
+
+            var result = rewriter.CorrectPhrase("превет как дела", Russian, [English, Russian], Candidates);
+
+            Assert.Equal("привет как дела", result.Corrected);
             Assert.Equal(0, llm.Calls);
         }
 

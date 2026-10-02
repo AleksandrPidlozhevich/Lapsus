@@ -168,7 +168,7 @@ try
         Report.Reset();
         if (neural is { } model)
         {
-            NeuralRun.Measure(machine, model.Llm, known, foreign, lines, blocks);
+            NeuralRun.Measure(machine, model.Llm, known, foreign, lines, blocks, model.Name);
         }
         else
         {
