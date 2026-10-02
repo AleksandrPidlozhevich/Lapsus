@@ -26,6 +26,9 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
     private const double MinNaturalnessToFollowTheLine = 0.7;
 
+    // A pool for the neural brain to price by keyboard; frequency alone ranks "утрам" fourth for "утрм".
+    private const int MaxSpellSuggestions = 12;
+
     private readonly double _switchThreshold;
     private readonly double _punctuationHeadStart;
     private readonly WordScorer _scorer;
@@ -54,6 +57,21 @@ public sealed class LayoutCorrector : IPhraseCorrector
     public bool Knows(Script script)
     {
         return _scorer.HasDictionaryFor(script);
+    }
+
+    public bool KnowsWord(string word, Script script)
+    {
+        return _scorer.IsListedWord(word, script);
+    }
+
+    public bool AcceptsSpelling(string word, Script script)
+    {
+        return _scorer.IsListedWord(word, script) || _scorer.IsLexiconForm(word, script);
+    }
+
+    public IReadOnlyList<(string Word, int Edits)> SpellSuggestions(string word, Script script)
+    {
+        return _scorer.SpellSuggestions(word, script, MaxSpellSuggestions);
     }
 
     public PhraseCorrection CorrectPhrase(string text)

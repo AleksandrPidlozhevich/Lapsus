@@ -230,6 +230,51 @@ internal sealed class GatedAsyncCorrector(string from, string to) : IPhraseCorre
     }
 }
 
+// Holds each request until it is cancelled, keeping every token it was handed.
+internal sealed class CancellableAsyncCorrector : IPhraseCorrector, IDisposable
+{
+    public SemaphoreSlim Entered { get; } = new(0);
+
+    public List<CancellationToken> Tokens { get; } = [];
+
+    public bool IsReady => true;
+
+    public bool SupportsLayoutCycle => false;
+
+    public bool PreferAsync => true;
+
+    public PhraseCorrection CorrectPhrase(
+        string text,
+        LayoutSource active,
+        IReadOnlyList<LayoutSource> installed,
+        IReadOnlyList<LayoutCandidate> candidates,
+        KeyboardLayout? preferred = null)
+    {
+        return CorrectPhrase(text, active, installed, candidates, preferred, default);
+    }
+
+    public PhraseCorrection CorrectPhrase(
+        string text,
+        LayoutSource active,
+        IReadOnlyList<LayoutSource> installed,
+        IReadOnlyList<LayoutCandidate> candidates,
+        KeyboardLayout? preferred,
+        CorrectionHints hints)
+    {
+        lock (Tokens)
+            Tokens.Add(hints.Cancellation);
+        Entered.Release();
+        hints.Cancellation.WaitHandle.WaitOne(TimeSpan.FromSeconds(5));
+        hints.Cancellation.ThrowIfCancellationRequested();
+        return new PhraseCorrection(text, text, false, null);
+    }
+
+    public void Dispose()
+    {
+        Entered.Dispose();
+    }
+}
+
 internal sealed class ScriptedCorrector(string from, string to) : IPhraseCorrector
 {
     public string To { get; set; } = to;

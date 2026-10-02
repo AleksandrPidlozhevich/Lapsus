@@ -290,6 +290,44 @@ public class StaleLineStateTests
         Assert.Empty(backend.Injected);
     }
 
+    [Fact]
+    public void A_second_press_cancels_the_model_request_still_running_for_the_first()
+    {
+        WithoutSyncContext(() =>
+        {
+            using var brain = new CancellableAsyncCorrector();
+            var backend = new FakeInputBackend(brain).Listening().Focused();
+            backend.Type("ghbdtn");
+
+            backend.PressHotkey();
+            Assert.True(brain.Entered.Wait(TimeSpan.FromSeconds(5)));
+            backend.PressHotkey();
+            Assert.True(brain.Entered.Wait(TimeSpan.FromSeconds(5)));
+
+            Assert.True(brain.Tokens[0].IsCancellationRequested);
+            Assert.False(brain.Tokens[1].IsCancellationRequested);
+            Assert.Empty(backend.Injected);
+
+            backend.SetCorrector(new ScriptedCorrector("x", "y"));
+            Assert.True(brain.Tokens[1].IsCancellationRequested);
+            Assert.True(backend.PendingNeuralRewrite!.Wait(TimeSpan.FromSeconds(5)));
+        });
+    }
+
+    private static void WithoutSyncContext(Action body)
+    {
+        var previous = SynchronizationContext.Current;
+        SynchronizationContext.SetSynchronizationContext(null);
+        try
+        {
+            body();
+        }
+        finally
+        {
+            SynchronizationContext.SetSynchronizationContext(previous);
+        }
+    }
+
     private static FakeInputBackend RunNeuralRewrite(
         Action<FakeInputBackend> whileRunning, Action<FakeInputBackend, GatedAsyncCorrector>? afterwards = null)
     {

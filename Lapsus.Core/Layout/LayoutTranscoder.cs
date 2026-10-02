@@ -17,6 +17,34 @@ public static class LayoutTranscoder
         return from.Count == 1 ? TranscodeKeys(text, from[0], null, to) : TranscodeKeys(text, null, from, to);
     }
 
+    // Like Transcode, but each ligature of the source layout is read as the one key that types it: Arabic
+    // "لا" is the b key as often as it is g then h, so "لاعل" can be "bug". Transcode keeps the two-key
+    // reading; this gives the other.
+    public static string TranscodeLigaturesAsKeys(string text, KeyboardMap from, KeyboardMap to)
+    {
+        if (string.IsNullOrEmpty(text) || !from.HasLigatures)
+            return Transcode(text, from, to);
+
+        var sb = new StringBuilder(text.Length);
+        var run = 0;
+        for (var i = 0; i < text.Length;)
+        {
+            if (from.TryMatchLigature(text, i, out var slot, out var shift, out var length) &&
+                to.CharAtSlot(slot, shift) is var key and not '\0')
+            {
+                sb.Append(Transcode(text[run..i], from, to)).Append(key);
+                i += length;
+                run = i;
+            }
+            else
+            {
+                i++;
+            }
+        }
+
+        return sb.Append(Transcode(text[run..], from, to)).ToString();
+    }
+
     private static string TranscodeKeys(string text, KeyboardMap? single, IReadOnlyList<KeyboardMap>? many, KeyboardMap to)
     {
         var sb = new StringBuilder(text.Length);

@@ -120,6 +120,26 @@ public sealed class KeyboardMap
             : null;
     }
 
+    // The key whose ligature starts at text[at], if one does; the longest wins.
+    public bool TryMatchLigature(string text, int at, out int slot, out KeyShift shift, out int length)
+    {
+        slot = 0;
+        shift = KeyShift.None;
+        length = 0;
+        if (_ligatures is null)
+            return false;
+
+        foreach (var ((keySlot, shifted), ligature) in _ligatures)
+            if (ligature.Length > length && string.CompareOrdinal(text, at, ligature, 0, ligature.Length) == 0)
+            {
+                slot = keySlot;
+                shift = shifted ? KeyShift.Case : KeyShift.None;
+                length = ligature.Length;
+            }
+
+        return length > 0;
+    }
+
     public bool IsDeadKey(int slot, KeyShift shift)
     {
         return _deadKeys is not null && _deadKeys.Contains((slot, shift != KeyShift.None));

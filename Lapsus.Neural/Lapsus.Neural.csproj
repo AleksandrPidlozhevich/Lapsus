@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <!--
+      The ONNX Runtime GenAI host, kept free of Avalonia so tools/Lapsus.Sweep can run the same
+      model code the app runs. Model download and the catalog stay in Lapsus/Neural.
+    -->
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <!--
+      ONNX Runtime GenAI native package, chosen per platform because the execution providers a
+      build carries are baked into it — this is what decides which devices ComputeDeviceProbe
+      may offer, so the two must be read together.
+
+      Windows takes the DirectML build (dml + CPU): any DX12 GPU, NVIDIA / AMD / Intel alike.
+      macOS and Linux take the base build, whose ONNX Runtime 1.28 carries the WebGPU provider with
+      Dawn on top of Metal — that is what makes an Apple M-series GPU usable at all, since no
+      publisher ships DirectML packs for it. The same build has no Dawn on Linux, which is CPU-only
+      for now. The managed API is identical across the packages, so the C# builds unchanged, and the
+      version split is only because the DirectML flavour lags the base one.
+
+      Two things stay out of reach and are not offered anywhere in the UI: CUDA (a third package we
+      do not ship) and every NPU — GenAI reaches those through qnn / vitisai / ryzenai, none of them
+      compiled in here, and the Apple Neural Engine is behind CoreML, which ONNX Runtime has on
+      macOS but GenAI has no provider name for.
+    -->
+    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+        <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI.DirectML" Version="0.14.1"/>
+    </ItemGroup>
+    <ItemGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+        <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI" Version="0.15.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Lapsus.Tests"/>
+    </ItemGroup>
+</Project>

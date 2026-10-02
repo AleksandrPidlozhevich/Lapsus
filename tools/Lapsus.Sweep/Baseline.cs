@@ -26,13 +26,18 @@ internal sealed record Baseline(string Lang, int Lines, string Scoring, int Targ
     public static string DefaultDirectory()
     {
         // Baselines live beside source; the tool runs from bin/.
+        return RepositoryRoot() is { } root
+            ? Path.Combine(root, "tools", "Lapsus.Sweep", "baseline")
+            : Path.Combine(Environment.CurrentDirectory, "baseline");
+    }
+
+    public static string? RepositoryRoot()
+    {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir is not null && !File.Exists(Path.Combine(dir.FullName, "Lapsus.slnx")))
             dir = dir.Parent;
 
-        return dir is null
-            ? Path.Combine(Environment.CurrentDirectory, "baseline")
-            : Path.Combine(dir.FullName, "tools", "Lapsus.Sweep", "baseline");
+        return dir?.FullName;
     }
 
     public static string PathFor(string directory, string lang)

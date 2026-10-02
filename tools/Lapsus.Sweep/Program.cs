@@ -1,5 +1,6 @@
 using Lapsus.Core.Correction;
 using Lapsus.Core.Layout;
+using Lapsus.Core.Models;
 using Lapsus.Core.Spelling;
 using Lapsus.Sweep;
 
@@ -22,7 +23,8 @@ var baselineDir = baselineDirIndex >= 0 && baselineDirIndex + 1 < args.Length
     : Baseline.DefaultDirectory();
 
 var directory = args.Where((a, i) => !a.StartsWith('-') && (i == 0 || args[i - 1] is not
-                        ("--lang" or "--baseline-dir" or "--auto-min" or "--punct-head-start" or "--sample-dir" or "--index-size" or "--lexicon-min")))
+                        ("--lang" or "--baseline-dir" or "--auto-min" or "--punct-head-start" or "--sample-dir" or "--index-size" or "--lexicon-min"
+                            or "--neural" or "--device" or "--blocks")))
                     .FirstOrDefault()
                 ?? Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Lapsus", "dictionaries");
@@ -35,7 +37,38 @@ var indexSize = indexSizeIndex >= 0 && indexSizeIndex + 1 < args.Length && int.T
     ? size
     : SpellChecker.DefaultSuggestionIndexSize;
 
-var lines = args.Contains("--quick") ? 2000 : 20000;
+// --neural <model folder or installed model id>: measure the neural brain instead. A model call costs
+// hundreds of milliseconds, so it runs on far fewer lines, and the rules below are not run.
+var neuralIndex = Array.IndexOf(args, "--neural");
+string? modelDirectory = null;
+if (neuralIndex >= 0)
+{
+    var model = neuralIndex + 1 < args.Length ? args[neuralIndex + 1] : string.Empty;
+    modelDirectory = Directory.Exists(model)
+        ? model
+        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Lapsus", "models", model);
+    if (model.Length == 0 || model.StartsWith('-') || !Directory.Exists(modelDirectory))
+    {
+        Console.Error.WriteLine($"--neural needs a model folder or the id of a model installed in the app; no model at \"{modelDirectory}\".");
+        return 1;
+    }
+}
+
+// --blocks <text>: only the neural blocks whose heading contains it, e.g. "typo".
+var blocksIndex = Array.IndexOf(args, "--blocks");
+var blocks = blocksIndex >= 0 && blocksIndex + 1 < args.Length ? args[blocksIndex + 1] : null;
+
+var deviceIndex = Array.IndexOf(args, "--device");
+var device = ComputeDevicePreference.Auto;
+if (deviceIndex >= 0 && (deviceIndex + 1 >= args.Length || !Enum.TryParse(args[deviceIndex + 1], true, out device)))
+{
+    Console.Error.WriteLine($"--device takes one of: {string.Join(", ", Enum.GetNames<ComputeDevicePreference>())}.");
+    return 1;
+}
+
+var lines = modelDirectory is not null
+    ? args.Contains("--quick") ? 25 : 150
+    : args.Contains("--quick") ? 2000 : 20000;
 var ngrams = !args.Contains("--vowels");
 var clitics = !args.Contains("--no-clitics");
 var scoring = (ngrams ? "trigrams" : "vowel ratio") + (clitics ? string.Empty : ", no clitics");
@@ -102,6 +135,13 @@ else
 
 var known = FrequencyList.FromWords(kept);
 
+var neural = modelDirectory is null ? null : NeuralRun.Load(modelDirectory, device);
+if (neural is { } loaded)
+{
+    scoring += $", neural {loaded.Name} on {loaded.Device}";
+    Console.WriteLine($"Model: {Path.GetFullPath(modelDirectory!)} on {loaded.Device}");
+}
+
 var regressed = new List<string>();
 try
 {
@@ -125,53 +165,63 @@ try
 
         var machine = new Machine(new SpellChecker(sources, ngrams, clitics, indexSize, lexicon, lexiconMin), target, headStart);
 
-        var (keptTarget, heldOutTarget) = foreign.HoldOutEveryNth(100);
-        var trimmedTarget = Path.Combine(scratch, $"{target.Key}-trimmed.txt");
-        if (sampleDirectory == directory)
-            File.WriteAllLines(trimmedTarget, keptTarget.Select(w => $"{w.Word} {w.Count}"));
-        else
-            WithoutHeldOut(targetPath, heldOutTarget, trimmedTarget);
-        var shortOfWords = new Machine(
-            new SpellChecker(
-                [
-                    new DictionarySource("en", trimmedEn, Script.Latin, WordForms("en")),
-                    new DictionarySource(target.Code, trimmedTarget, target.Script, WordForms(target.Code))
-                ],
-                ngrams, clitics, indexSize, lexicon, lexiconMin),
-            target, headStart);
-
         Report.Reset();
-        RuleB.Recall(machine, foreign, lines);
-        RuleB.FalsePositives(machine, known, foreign, lines);
-        RuleA.Recall(machine, known, heldOut, lines);
-        RuleA.RecallInMixedLine(machine, foreign, heldOut, lines);
-        RuleA.FalsePositives(machine, foreign, lines);
-        RuleC.Targets(machine, known, foreign, lines);
-        RuleD.TyposStayEnglish(machine, known, lines);
-        RuleE.AutoMode(machine, known, foreign, lines / 4, autoMin);
-        RuleF.HeldOutWords(shortOfWords, FrequencyList.FromWords(keptTarget), heldOutTarget, lines);
+        if (neural is { } model)
+        {
+            NeuralRun.Measure(machine, model.Llm, known, foreign, lines, blocks, model.Name);
+        }
+        else
+        {
+            var (keptTarget, heldOutTarget) = foreign.HoldOutEveryNth(100);
+            var trimmedTarget = Path.Combine(scratch, $"{target.Key}-trimmed.txt");
+            if (sampleDirectory == directory)
+                File.WriteAllLines(trimmedTarget, keptTarget.Select(w => $"{w.Word} {w.Count}"));
+            else
+                WithoutHeldOut(targetPath, heldOutTarget, trimmedTarget);
+            var shortOfWords = new Machine(
+                new SpellChecker(
+                    [
+                        new DictionarySource("en", trimmedEn, Script.Latin, WordForms("en")),
+                        new DictionarySource(target.Code, trimmedTarget, target.Script, WordForms(target.Code))
+                    ],
+                    ngrams, clitics, indexSize, lexicon, lexiconMin),
+                target, headStart);
 
-        var current = new Baseline(target.Key, lines, scoring, foreign.Count, new Dictionary<string, Metric>(Report.Metrics));
+            RuleB.Recall(machine, foreign, lines);
+            RuleB.FalsePositives(machine, known, foreign, lines);
+            RuleA.Recall(machine, known, heldOut, lines);
+            RuleA.RecallInMixedLine(machine, foreign, heldOut, lines);
+            RuleA.FalsePositives(machine, foreign, lines);
+            RuleC.Targets(machine, known, foreign, lines);
+            RuleD.TyposStayEnglish(machine, known, lines);
+            RuleE.AutoMode(machine, known, foreign, lines / 4, autoMin);
+            RuleF.HeldOutWords(shortOfWords, FrequencyList.FromWords(keptTarget), heldOutTarget, lines);
+        }
+
+        // Neural baselines are per model: one model's numbers say nothing about another's.
+        var key = neural is { } measured ? $"neural-{measured.Name}-{target.Key}" : target.Key;
+        var current = new Baseline(key, lines, scoring, foreign.Count, new Dictionary<string, Metric>(Report.Metrics));
 
         if (compare)
         {
-            var previous = Baseline.Read(baselineDir, target.Key);
+            var previous = Baseline.Read(baselineDir, key);
             if (previous is null)
-                Report.Line("no baseline", Baseline.PathFor(baselineDir, target.Key));
+                Report.Line("no baseline", Baseline.PathFor(baselineDir, key));
             else if (!previous.Compare(current))
-                regressed.Add(target.Key);
+                regressed.Add(key);
         }
 
         if (writeBaseline)
         {
             current.Write(baselineDir);
-            Report.Line("baseline written", Baseline.PathFor(baselineDir, target.Key));
+            Report.Line("baseline written", Baseline.PathFor(baselineDir, key));
         }
     }
 }
 finally
 {
     Directory.Delete(scratch, true);
+    neural?.Llm.Dispose();
 }
 
 if (regressed.Count == 0)

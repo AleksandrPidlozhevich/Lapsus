@@ -396,6 +396,69 @@ public sealed class SpellChecker
         return true;
     }
 
+    // Every list word at the closest edit distance, commonest first — for a judge that reads context,
+    // where TryCorrect has to commit to one.
+    public IReadOnlyList<(string Word, int Distance)> Suggestions(
+        string word, Script script, int max, string? languageCode = null)
+    {
+        if (word.Length < 2 || max <= 0)
+            return [];
+
+        var found = new List<(string Term, int Distance, double Frequency)>();
+        foreach (var loaded in EnginesFor(languageCode, script))
+            foreach (var hit in loaded.Engine.Lookup(LookupKey(word, loaded), SymSpellEngine.Verbosity.Closest,
+                         MaxEditDistance))
+                if (hit.distance > 0 && !found.Exists(f => f.Term == hit.term))
+                    found.Add((hit.term, hit.distance, Normalise(hit.count, loaded.LogMaxCount)));
+
+        // A frequency list of a few tens of thousands words misses most inflected forms ("вихідними",
+        // "налаштування"); the Hunspell affixes build them. Asked only when the list has nothing one edit
+        // away, since a Ukrainian lookup costs up to a fifth of a second.
+        if (!found.Exists(f => f.Distance == 1) && _lexiconsByScript.TryGetValue(script, out var lexicons))
+        {
+            var lower = word.ToLowerInvariant();
+            foreach (var lexicon in lexicons)
+                foreach (var suggestion in lexicon.Suggest(lower).Take(max))
+                {
+                    var term = suggestion.ToLowerInvariant();
+                    if (term.Contains(' ') || term.Contains('-') || found.Exists(f => f.Term == term))
+                        continue;
+
+                    var distance = Distance(lower, term);
+                    if (distance is > 0 and <= MaxEditDistance)
+                        found.Add((term, distance, 0.0));
+                }
+        }
+
+        return found
+            .OrderBy(f => f.Distance)
+            .ThenByDescending(f => f.Frequency)
+            .Take(max)
+            .Select(f => (RestoreLeadingCase(word, f.Term), f.Distance))
+            .ToList();
+    }
+
+    // Edits with adjacent swaps, as SymSpell counts them.
+    private static int Distance(string a, string b)
+    {
+        var d = new int[a.Length + 1, b.Length + 1];
+        for (var i = 0; i <= a.Length; i++)
+            d[i, 0] = i;
+        for (var j = 0; j <= b.Length; j++)
+            d[0, j] = j;
+
+        for (var i = 1; i <= a.Length; i++)
+            for (var j = 1; j <= b.Length; j++)
+            {
+                var cost = a[i - 1] == b[j - 1] ? 0 : 1;
+                d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
+                if (i > 1 && j > 1 && a[i - 1] == b[j - 2] && a[i - 2] == b[j - 1])
+                    d[i, j] = Math.Min(d[i, j], d[i - 2, j - 2] + 1);
+            }
+
+        return d[a.Length, b.Length];
+    }
+
     private IEnumerable<LoadedDictionary> EnginesFor(string? languageCode, Script script)
     {
         if (languageCode is not null && _byLanguage.TryGetValue(languageCode, out var preferred))

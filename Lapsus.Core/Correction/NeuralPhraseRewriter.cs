@@ -7,23 +7,48 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
     private readonly ILocalLlm _llm;
     private readonly IPhraseCorrector? _adviser;
     private readonly WordExceptions? _exceptions;
+    private readonly ReadingRanker _ranker;
+    private readonly TimeSpan _baseBudget;
 
-    public NeuralPhraseRewriter(ILocalLlm llm, IPhraseCorrector? adviser = null, WordExceptions? exceptions = null)
+    // Past its time budget the model is cut off and the dictionary's answer goes out instead: a hotkey
+    // that hangs is worse than one that does what the dictionary brain would. The budget grows with the
+    // text, so a selected paragraph still gets read.
+    private static readonly TimeSpan DefaultBudget = TimeSpan.FromSeconds(2);
+
+    private static readonly TimeSpan BudgetPerWord = TimeSpan.FromMilliseconds(100);
+
+    // spellingLanguages: where the model may choose among spellings of a slip (SpellingLanguages.For);
+    // null for every language.
+    public NeuralPhraseRewriter(
+        ILocalLlm llm,
+        IPhraseCorrector? adviser = null,
+        WordExceptions? exceptions = null,
+        TimeSpan? budget = null,
+        IReadOnlySet<string>? spellingLanguages = null)
     {
         _llm = llm ?? throw new ArgumentNullException(nameof(llm));
         _adviser = adviser;
         _exceptions = exceptions;
+        _ranker = new ReadingRanker(llm, adviser, exceptions, spellingLanguages);
+        _baseBudget = budget ?? DefaultBudget;
     }
 
     public bool IsReady => _llm.IsLoaded || AdviserStandsIn;
 
-    public bool SupportsLayoutCycle => !_llm.IsLoaded && _adviser is { SupportsLayoutCycle: true };
+    // The answer is built from per-layout readings, so pressing again walks the same circle the dictionary
+    // brain offers — the line through each other layout, then the text as typed — without asking again.
+    public bool SupportsLayoutCycle => _llm.IsLoaded || _adviser is { SupportsLayoutCycle: true };
 
     public bool PreferAsync => true;
 
     public bool Knows(Script script)
     {
         return _adviser?.Knows(script) ?? false;
+    }
+
+    public bool KnowsWord(string word, Script script)
+    {
+        return _adviser?.KnowsWord(word, script) ?? false;
     }
 
     private bool AdviserStandsIn => !_llm.IsLoaded && _adviser is { IsReady: true };
@@ -55,8 +80,7 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         if (!_llm.IsLoaded)
             return new PhraseCorrection(text, text, false, null);
 
-        var sourceMap = active.Map;
-        var remaps = NeuralRewritePrompt.CollectRemaps(text, sourceMap, candidates, preferred);
+        var remaps = NeuralRewritePrompt.CollectRemaps(text, active.Map, candidates, preferred);
         var advice = Advice(text, active, installed, candidates, preferred);
         var judgesEverything = JudgesEveryReading(active, candidates);
 
@@ -68,11 +92,38 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         if (trusted is { } certain && IsOneWord(text) && judgesEverything)
             return certain.Correction;
 
+        using var budget = CancellationTokenSource.CreateLinkedTokenSource(hints.Cancellation);
+        budget.CancelAfter(_baseBudget + BudgetPerWord * Chunks(text).Count);
+        try
+        {
+            return AskTheModel(text, active, installed, candidates, preferred, advice, trusted, remaps, budget.Token);
+        }
+        catch (OperationCanceledException) when (!hints.Cancellation.IsCancellationRequested)
+        {
+            return advice?.Correction ?? new PhraseCorrection(text, text, false, null);
+        }
+    }
+
+    private PhraseCorrection AskTheModel(
+        string text,
+        LayoutSource active,
+        IReadOnlyList<LayoutSource> installed,
+        IReadOnlyList<LayoutCandidate> candidates,
+        KeyboardLayout? preferred,
+        (PhraseCorrection Correction, string Text)? advice,
+        (PhraseCorrection Correction, string Text)? trusted,
+        IReadOnlyList<string> remaps,
+        CancellationToken cancellationToken)
+    {
+        var ranked = _ranker.Rank(text, active, installed, candidates, advice?.Correction.Corrected, cancellationToken);
+        if (ranked is { } answered)
+            return FromRanking(text, answered.Text, active, candidates, preferred, advice, trusted);
+
         var offered = Offer(advice, remaps);
 
         var system = NeuralRewritePrompt.BuildSystem(preferred);
-        var user = NeuralRewritePrompt.BuildUser(text, sourceMap, candidates, preferred, offered);
-        var rewritten = _llm.CompleteAsync(system, user, text.Length).GetAwaiter().GetResult();
+        var user = NeuralRewritePrompt.BuildUser(text, active.Map, candidates, preferred, offered);
+        var rewritten = _llm.CompleteAsync(system, user, text.Length, cancellationToken).GetAwaiter().GetResult();
         rewritten = SanitizeModelOutput(rewritten, text);
 
         Answer? answer;
@@ -95,11 +146,36 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
 
         restored = kept;
 
+        if (!WritesOnlyTypableScripts(text, restored, active, candidates) || !MovesOnlyIntoKnownWords(text, restored))
+            return trusted?.Correction ?? new PhraseCorrection(text, text, false, null);
+
         if (string.Equals(restored, text, StringComparison.Ordinal))
             return new PhraseCorrection(text, text, false, null);
 
         var (target, targetId) = ResolveTarget(text, restored, active, candidates, preferred);
         return new PhraseCorrection(text, restored, true, target, targetId);
+    }
+
+    private PhraseCorrection FromRanking(
+        string text,
+        string ranked,
+        LayoutSource active,
+        IReadOnlyList<LayoutCandidate> candidates,
+        KeyboardLayout? preferred,
+        (PhraseCorrection Correction, string Text)? advice,
+        (PhraseCorrection Correction, string Text)? trusted)
+    {
+        if (advice is { } dictionary && ranked == dictionary.Correction.Corrected)
+            return dictionary.Correction;
+
+        if (ranked == text)
+            return new PhraseCorrection(text, text, false, null);
+
+        if (!WritesOnlyTypableScripts(text, ranked, active, candidates) || !MovesOnlyIntoKnownWords(text, ranked))
+            return trusted?.Correction ?? new PhraseCorrection(text, text, false, null);
+
+        var (target, targetId) = ResolveTarget(text, ranked, active, candidates, preferred);
+        return new PhraseCorrection(text, ranked, true, target, targetId);
     }
 
     // Listed chunks the model moved go back as typed; chunk-count mismatch → null.
@@ -128,7 +204,50 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         return sb.Append(rewritten, at, rewritten.Length - at).ToString();
     }
 
-    private static List<(int Start, int Length)> Chunks(string text)
+    // A letter in a script the user neither typed nor has a layout for is a translation, not a repair.
+    private static bool WritesOnlyTypableScripts(
+        string text, string rewritten, LayoutSource active, IReadOnlyList<LayoutCandidate> candidates)
+    {
+        foreach (var ch in rewritten)
+        {
+            if (Scripts.Of(ch) is not { } script || script == active.Script)
+                continue;
+
+            if (!candidates.Any(c => c.ScoringScript == script) && !text.Any(c => Scripts.Of(c) == script))
+                return false;
+        }
+
+        return true;
+    }
+
+    // A word moved into a script the dictionary reads must be a word it knows; on a phonetic layout the
+    // remap of correct English is a transliteration, and the model is happy to pick it.
+    private bool MovesOnlyIntoKnownWords(string text, string rewritten)
+    {
+        if (_adviser is not { IsReady: true } adviser)
+            return true;
+
+        var typed = Chunks(text);
+        var answered = Chunks(rewritten);
+        var whole = Scripts.Dominant(text);
+        for (var i = 0; i < answered.Count; i++)
+        {
+            var word = rewritten.Substring(answered[i].Start, answered[i].Length);
+            var from = typed.Count == answered.Count
+                ? Scripts.Dominant(text.Substring(typed[i].Start, typed[i].Length))
+                : whole;
+
+            if (Scripts.Dominant(word) is not { } into || into == from || !adviser.Knows(into))
+                continue;
+
+            if (!adviser.KnowsWord(word, into))
+                return false;
+        }
+
+        return true;
+    }
+
+    internal static List<(int Start, int Length)> Chunks(string text)
     {
         var chunks = new List<(int Start, int Length)>();
         var i = 0;
