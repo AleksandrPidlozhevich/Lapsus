@@ -45,11 +45,11 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Greek · without": {
-      "Value": 0.0538,
+      "Value": 0.0496,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Greek · with": {
-      "Value": 0.0157,
+      "Value": 0.0156,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
@@ -65,19 +65,19 @@
       "Better": "Higher"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · pulled across into Greek · without": {
-      "Value": 0.0562,
+      "Value": 0.0521,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · pulled across into Greek · with": {
-      "Value": 0.0264,
+      "Value": 0.0223,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · spell-fixed in place, still English · without": {
-      "Value": 0.2939,
+      "Value": 0.298,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · spell-fixed in place, still English · with": {
-      "Value": 0.2939,
+      "Value": 0.298,
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Greek line · typo'd word still crossed into Greek · without": {
@@ -113,19 +113,19 @@
       "Better": "Higher"
     },
     "Rule D — an English typo stays English · typo alone crossed into Greek": {
-      "Value": 0.041,
+      "Value": 0.0364,
       "Better": "Lower"
     },
     "Rule D — an English typo stays English · typo alone fixed back to its word": {
-      "Value": 0.6271,
+      "Value": 0.6315,
       "Better": "Higher"
     },
     "Rule D — an English typo stays English · typo in an English line crossed into Greek · without": {
-      "Value": 0.041,
+      "Value": 0.0364,
       "Better": "Lower"
     },
     "Rule D — an English typo stays English · typo in an English line crossed into Greek · with": {
-      "Value": 0.0014,
+      "Value": 0.0013,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Greek words recovered · alone": {
@@ -161,19 +161,19 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Greek · alone": {
-      "Value": 0.0528,
+      "Value": 0.052,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Greek · keys only": {
-      "Value": 0.0186,
+      "Value": 0.0161,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Greek · sticky": {
-      "Value": 0.0528,
+      "Value": 0.052,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Greek · sticky keys only": {
-      "Value": 0.0186,
+      "Value": 0.0161,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · two-letter chunks English does not use, sent to Greek (264 of 676)": {
@@ -186,6 +186,110 @@
     },
     "Rule F — a wrong-layout Greek word the list does not have · the word ending a line of its language, recovered": {
       "Value": 0.9132,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed back to the meant word": {
+      "Value": 0.9177,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · changed into another word": {
+      "Value": 0.0681,
+      "Better": "Lower"
+    },
+    "Rule G — a Greek word with one typo, on its own · crossed into another layout": {
+      "Value": 0.0142,
+      "Better": "Lower"
+    },
+    "Rule G — a Greek word with one typo, on its own · left as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by slip · neighbour": {
+      "Value": 0.9183,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by slip · swapped": {
+      "Value": 0.9429,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by slip · dropped": {
+      "Value": 0.7406,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by slip · extra": {
+      "Value": 0.9815,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by slip · doubled": {
+      "Value": 0.995,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by word length · 4": {
+      "Value": 0.8264,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by word length · 5-6": {
+      "Value": 0.9153,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by word length · 7-9": {
+      "Value": 0.9784,
+      "Better": "Higher"
+    },
+    "Rule G — a Greek word with one typo, on its own · fixed, by word length · 10+": {
+      "Value": 0.9926,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed back to the meant word": {
+      "Value": 0.9324,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · changed into another word": {
+      "Value": 0.0556,
+      "Better": "Lower"
+    },
+    "Rule G — a typo inside a natural Greek sentence · crossed into another layout": {
+      "Value": 0,
+      "Better": "Lower"
+    },
+    "Rule G — a typo inside a natural Greek sentence · left as typed": {
+      "Value": 0.0121,
+      "Better": "Either"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by slip · neighbour": {
+      "Value": 0.9444,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by slip · swapped": {
+      "Value": 0.9486,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by slip · dropped": {
+      "Value": 0.8155,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by slip · extra": {
+      "Value": 0.979,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by slip · doubled": {
+      "Value": 0.9778,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 4": {
+      "Value": 0.8791,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 5-6": {
+      "Value": 0.9474,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 7-9": {
+      "Value": 0.9826,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 10+": {
+      "Value": 0.8559,
       "Better": "Higher"
     }
   }

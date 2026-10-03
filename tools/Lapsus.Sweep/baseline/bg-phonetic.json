@@ -113,19 +113,19 @@
       "Better": "Higher"
     },
     "Rule D — an English typo stays English · typo alone crossed into Cyrillic": {
-      "Value": 0.0373,
+      "Value": 0.036,
       "Better": "Lower"
     },
     "Rule D — an English typo stays English · typo alone fixed back to its word": {
-      "Value": 0.6266,
+      "Value": 0.6278,
       "Better": "Higher"
     },
     "Rule D — an English typo stays English · typo in an English line crossed into Cyrillic · without": {
-      "Value": 0.0373,
+      "Value": 0.036,
       "Better": "Lower"
     },
     "Rule D — an English typo stays English · typo in an English line crossed into Cyrillic · with": {
-      "Value": 0.0012,
+      "Value": 0.001,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Bulgarian words recovered · alone": {
@@ -165,7 +165,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · keys only": {
-      "Value": 0.0231,
+      "Value": 0.0227,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · sticky": {
@@ -173,7 +173,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · sticky keys only": {
-      "Value": 0.0231,
+      "Value": 0.0227,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · two-letter chunks English does not use, sent to Cyrillic (264 of 676)": {
@@ -181,11 +181,115 @@
       "Better": "Lower"
     },
     "Rule F — a wrong-layout Bulgarian word the list does not have · the word on its own, recovered": {
-      "Value": 0.7322,
+      "Value": 0.73,
       "Better": "Higher"
     },
     "Rule F — a wrong-layout Bulgarian word the list does not have · the word ending a line of its language, recovered": {
-      "Value": 0.7337,
+      "Value": 0.7316,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed back to the meant word": {
+      "Value": 0.8689,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · changed into another word": {
+      "Value": 0.0733,
+      "Better": "Lower"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · crossed into another layout": {
+      "Value": 0.0578,
+      "Better": "Lower"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · left as typed": {
+      "Value": 0,
+      "Better": "Either"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · neighbour": {
+      "Value": 0.9077,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · swapped": {
+      "Value": 0.8636,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · dropped": {
+      "Value": 0.6091,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · extra": {
+      "Value": 0.9673,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · doubled": {
+      "Value": 0.9675,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 4": {
+      "Value": 0.761,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 5-6": {
+      "Value": 0.8792,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 7-9": {
+      "Value": 0.9124,
+      "Better": "Higher"
+    },
+    "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 10+": {
+      "Value": 0.9727,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed back to the meant word": {
+      "Value": 0.9045,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · changed into another word": {
+      "Value": 0.0832,
+      "Better": "Lower"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · crossed into another layout": {
+      "Value": 0,
+      "Better": "Lower"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · left as typed": {
+      "Value": 0.0122,
+      "Better": "Either"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · neighbour": {
+      "Value": 0.9401,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · swapped": {
+      "Value": 0.8882,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · dropped": {
+      "Value": 0.7308,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · extra": {
+      "Value": 0.976,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · doubled": {
+      "Value": 0.9759,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 4": {
+      "Value": 0.837,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 5-6": {
+      "Value": 0.9093,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 7-9": {
+      "Value": 0.9356,
+      "Better": "Higher"
+    },
+    "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 10+": {
+      "Value": 0.8533,
       "Better": "Higher"
     }
   }
