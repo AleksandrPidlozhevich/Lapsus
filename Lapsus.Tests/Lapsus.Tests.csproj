@@ -24,6 +24,12 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <!-- Mints keys for LicenseStoreTests. Linked, rather than a reference to Lapsus.Core.Tests,
+         so this project does not take that test assembly as a dependency. -->
+    <ItemGroup>
+        <Compile Include="..\Lapsus.Core.Tests\LicenseIssuer.cs" Link="LicenseIssuer.cs"/>
+    </ItemGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\Lapsus\Lapsus.csproj"/>
     </ItemGroup>

@@ -25,7 +25,7 @@ public sealed partial class LicenseViewModel : ObservableObject
         _status = status;
         _openLicenseSettings = openLicenseSettings;
         _closeReminder = closeReminder;
-        _keyInput = store.KeyText;
+        _keyInput = string.Empty;
 
         Localizer.Instance.LanguageChanged += (_, _) => Dispatcher.UIThread.Post(RefreshText);
     }
@@ -81,7 +81,7 @@ public sealed partial class LicenseViewModel : ObservableObject
     [RelayCommand]
     private async Task ApplyAsync()
     {
-        if (!_store.Install(KeyInput, out var error))
+        if (!StageKey(out var error))
         {
             ErrorText = Describe(error);
             RefreshText();
@@ -102,7 +102,20 @@ public sealed partial class LicenseViewModel : ObservableObject
         RefreshText();
 
         if (ErrorText.Length == 0 && HasLicense)
+        {
+            KeyInput = string.Empty;
             _closeReminder();
+        }
+    }
+
+    private bool StageKey(out LicenseKeyError error)
+    {
+        if (!string.IsNullOrWhiteSpace(KeyInput))
+            return _store.Install(KeyInput, out error);
+
+        var licensed = _store.IsLicensed;
+        error = licensed ? LicenseKeyError.None : LicenseKeyError.Empty;
+        return licensed;
     }
 
     [RelayCommand]
