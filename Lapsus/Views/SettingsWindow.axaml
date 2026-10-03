@@ -852,6 +852,7 @@
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[Lic_Key_Label]}" />
                                 <TextBox Text="{Binding License.KeyInput, Mode=TwoWay}"
                                          PlaceholderText="{Binding L[Lic_Key_Watermark]}"
+                                         PasswordChar="•"
                                          AcceptsReturn="True" TextWrapping="Wrap"
                                          MinHeight="64" MaxHeight="96" />
                                 <TextBlock Classes="status" Foreground="{DynamicResource LapsusAccentBrush}"
