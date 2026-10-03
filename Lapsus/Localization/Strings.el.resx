@@ -32,10 +32,16 @@
     <value>Αυτόματη διόρθωση μετά το κενό</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Διόρθωση και τυπογραφικών λαθών αυτόματα</value>
+    <value>Διόρθωση τυπογραφικών λαθών μετά το κενό</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Ανενεργό: η αυτόματη διόρθωση αλλάζει μόνο τη διάταξη μιας λέξης που γράφτηκε στη λάθος. Τα τυπογραφικά μένουν στη συντόμευση.</value>
+    <value>Λειτουργεί και χωρίς την αυτόματη διόρθωση διάταξης: τότε διορθώνονται μόνο τα τυπογραφικά λάθη. Η συντόμευση διορθώνει πάντα και τα δύο.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Η αυτόματη διόρθωση δεν είναι διαθέσιμη όσο είναι ενεργή η νευρωνική διόρθωση: το μοντέλο λειτουργεί μόνο με τη συντόμευση.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Η αυτόματη διόρθωση δεν είναι διαθέσιμη στη λειτουργία «Μόνο αλλαγή διάταξης»: χωρίς λεξικά δεν υπάρχει με τι να ελεγχθούν οι λέξεις.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Μόνο αλλαγή διάταξης, χωρίς λεξικά</value>

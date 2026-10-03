@@ -32,10 +32,16 @@
     <value>Автоматска поправка по празно место</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Поправај и печатни грешки автоматски</value>
+    <value>Поправај печатни грешки по празно место</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Искл.: автокорекцијата само го менува распоредот на збор напишан на погрешниот. Печатните грешки остануваат за кратенката.</value>
+    <value>Работи и без автокорекција на распоредот: тогаш се поправаат само печатните грешки. Кратенката секогаш ги поправа двете.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Автокорекцијата не е достапна додека е вклучена невронската поправка: моделот работи само со кратенката.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Автокорекцијата не е достапна во режимот „само промена на распоредот“: без речници нема со што да се проверат зборовите.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Само промена на распоредот, без речници</value>

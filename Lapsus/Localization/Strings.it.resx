@@ -32,10 +32,16 @@
     <value>Correzione automatica dopo lo spazio</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Correggi automaticamente anche gli errori di battitura</value>
+    <value>Correggi gli errori di battitura dopo lo spazio</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Disattivo: la correzione automatica cambia solo il layout di una parola digitata su quello sbagliato. Gli errori di battitura restano alla scorciatoia.</value>
+    <value>Funziona anche senza la correzione automatica del layout: allora si correggono solo gli errori di battitura. La scorciatoia corregge sempre entrambi.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>La correzione automatica non è disponibile finché è attiva la correzione neurale: il modello funziona solo con la scorciatoia.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>La correzione automatica non è disponibile in modalità «solo cambio di layout»: senza dizionari non c’è nulla con cui verificare le parole.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Solo cambio di layout, senza dizionari</value>

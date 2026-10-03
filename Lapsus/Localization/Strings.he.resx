@@ -32,10 +32,16 @@
     <value>תיקון אוטומטי אחרי רווח</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>לתקן גם שגיאות הקלדה אוטומטית</value>
+    <value>לתקן שגיאות הקלדה אחרי רווח</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>כבוי: התיקון האוטומטי רק מחליף פריסה של מילה שהוקלדה בפריסה הלא נכונה. שגיאות הקלדה נשארות למקש הקיצור.</value>
+    <value>עובד גם בלי תיקון הפריסה האוטומטי: אז מתוקנות רק שגיאות הקלדה. מקש הקיצור תמיד מתקן את שניהם.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>התיקון האוטומטי אינו זמין כל עוד התיקון הנוירוני פעיל: המודל עובד רק דרך מקש הקיצור.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>התיקון האוטומטי אינו זמין במצב „החלפת פריסה בלבד“: בלי מילונים אין מול מה לבדוק את המילים.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>החלפת פריסה בלבד, ללא מילונים</value>

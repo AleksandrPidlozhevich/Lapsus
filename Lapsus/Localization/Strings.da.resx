@@ -32,10 +32,16 @@
     <value>Ret automatisk efter mellemrum</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Ret også tastefejl automatisk</value>
+    <value>Ret tastefejl efter mellemrum</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Fra: autoretning skifter kun layoutet for et ord skrevet på det forkerte. Tastefejl bliver ved genvejstasten.</value>
+    <value>Virker også uden automatisk layoutretning: så rettes kun tastefejl. Genvejstasten retter altid begge dele.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Autoretning er ikke tilgængelig, mens neural rettelse er slået til: modellen virker kun via genvejstasten.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Autoretning er ikke tilgængelig i tilstanden »Kun layoutskift«: uden ordbøger er der intet at tjekke ordene mod.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Kun layoutskift, uden ordbøger</value>

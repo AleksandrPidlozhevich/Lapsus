@@ -32,10 +32,16 @@
     <value>Automatisch nach Leertaste korrigieren</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Auch Tippfehler automatisch korrigieren</value>
+    <value>Tippfehler nach der Leertaste korrigieren</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Aus: Die Autokorrektur wechselt nur das Layout eines auf dem falschen getippten Worts. Tippfehler bleiben dem Hotkey.</value>
+    <value>Funktioniert auch ohne die Layout-Autokorrektur: dann werden nur Tippfehler korrigiert. Der Hotkey korrigiert immer beides.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Die Autokorrektur ist nicht verfügbar, solange die neuronale Korrektur aktiv ist: Das Modell arbeitet nur per Hotkey.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Die Autokorrektur ist im Modus „Nur Layoutwechsel“ nicht verfügbar: Ohne Wörterbücher gibt es nichts, woran Wörter geprüft werden könnten.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Nur Layoutwechsel, ohne Wörterbücher</value>

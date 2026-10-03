@@ -32,10 +32,16 @@
     <value>Аўтавыпраўленне пасля прабелу</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Таксама выпраўляць абдрукоўкі аўтаматычна</value>
+    <value>Выпраўляць абдрукоўкі пасля прабелу</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Выкл.: аўтавыпраўленне толькі мяняе раскладку слова, набранага не ў той. Абдрукоўкі выпраўляе гарачая клавіша.</value>
+    <value>Працуе і без аўтавыпраўлення раскладкі: тады выпраўляюцца толькі абдрукоўкі. Гарачая клавіша заўсёды выпраўляе і тое, і другое.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Аўтавыпраўленне недаступнае, пакуль уключана нейрасеткавае выпраўленне: мадэль працуе толькі па гарачай клавішы.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Аўтавыпраўленне недаступнае ў рэжыме «толькі змена раскладкі»: без слоўнікаў няма з чым звяраць словы.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Толькі змена раскладкі, без слоўнікаў</value>

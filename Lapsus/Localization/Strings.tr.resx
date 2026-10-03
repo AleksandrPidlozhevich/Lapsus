@@ -32,10 +32,16 @@
     <value>Boşluktan sonra otomatik düzelt</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Yazım hatalarını da otomatik düzelt</value>
+    <value>Yazım hatalarını boşluktan sonra düzelt</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Kapalı: otomatik düzeltme yalnızca yanlış düzende yazılan sözcüğün düzenini değiştirir. Yazım hataları kısayola kalır.</value>
+    <value>Düzen otomatik düzeltmesi olmadan da çalışır: o zaman yalnızca yazım hataları düzeltilir. Kısayol her zaman ikisini de düzeltir.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Sinirsel düzeltme açıkken otomatik düzeltme kullanılamaz: model yalnızca kısayolla çalışır.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>“Yalnızca düzen değişimi” modunda otomatik düzeltme kullanılamaz: sözlükler olmadan sözcükleri denetleyecek bir şey yok.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Yalnızca düzen değişimi, sözlüksüz</value>

@@ -33,10 +33,16 @@
     <value>Auto-correct after Space</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Also fix typos automatically</value>
+    <value>Fix typos automatically after space</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Off: auto-correct only switches the layout of a word typed on the wrong one. Typo fixes stay on the hotkey.</value>
+    <value>Works without the layout auto-correct too: then only typos are fixed. The hotkey always fixes both.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Automatic fixes are unavailable while neural correction is on: the model works only on the hotkey.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Automatic fixes are unavailable in layout-switch-only mode: without dictionaries there is nothing to check words against.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Layout switch only, no dictionaries</value>

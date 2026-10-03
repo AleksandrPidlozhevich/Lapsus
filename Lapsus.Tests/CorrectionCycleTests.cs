@@ -152,6 +152,24 @@ public sealed class CorrectionCycleTests : IDisposable
     }
 
     [Fact]
+    public void Typo_fixes_on_space_work_without_auto_layout_switching()
+    {
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();
+        backend.AutoMode = false;
+        backend.AutoFixTypos = true;
+
+        backend.Type("helo ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Equal("hello ", Assert.Single(backend.Injected).Text);
+
+        backend.DiscardLine();
+        backend.Type("ghbdtn ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Single(backend.Injected);
+        Assert.Empty(backend.LayoutSwitches);
+    }
+
+    [Fact]
     public void A_phrase_with_a_leading_oem_letter_rewrites_the_whole_line()
     {
         var ukPath = WriteTemp("uk-phrase", "я 100", "хочу 100");
