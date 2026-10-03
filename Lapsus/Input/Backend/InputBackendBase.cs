@@ -320,7 +320,7 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
             return;
         }
 
-        if (AutoMode && Corrector.SupportsAutoMode && ch == ' ' && !_layoutChangedMidWord)
+        if ((AutoMode || AutoFixTypos) && Corrector.SupportsAutoMode && ch == ' ' && !_layoutChangedMidWord)
         {
 
             var completed = _buffer.CurrentChunk;
@@ -364,6 +364,10 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
             RaiseDiagnosticFormat("Diag_CorrectionFailed", ex.Message);
             return;
         }
+
+        // Typos only: a reading that needs another layout stays as typed.
+        if (!AutoMode && (phrase.TargetLayout is not null || !string.IsNullOrEmpty(phrase.TargetLayoutId)))
+            return;
 
         NoteLineDirection(word, phrase);
         if (!phrase.Changed)

@@ -32,10 +32,16 @@
     <value>Samodejni popravek po preslednici</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Samodejno popravljaj tudi tipkarske napake</value>
+    <value>Popravljaj tipkarske napake po presledku</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Izklopljeno: samodejni popravek le zamenja razporeditev besede, napisane na napačni. Tipkarske napake ostanejo bližnjici.</value>
+    <value>Deluje tudi brez samodejnega popravka razporeditve: takrat se popravijo samo tipkarske napake. Bližnjica vedno popravi oboje.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Samodejni popravek ni na voljo, dokler je vklopljeno nevronsko popravljanje: model deluje samo z bližnjico.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Samodejni popravek ni na voljo v načinu »samo zamenjava razporeda«: brez slovarjev ni s čim preveriti besed.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Samo zamenjava razporeda, brez slovarjev</value>

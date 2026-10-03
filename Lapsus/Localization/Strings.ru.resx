@@ -32,10 +32,16 @@
     <value>Исправлять автоматически после пробела</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Также исправлять опечатки автоматически</value>
+    <value>Исправлять опечатки после пробела</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Выкл.: автоисправление только меняет раскладку слова, набранного не в той. Опечатки исправляет хоткей.</value>
+    <value>Работает и без автоисправления раскладки: тогда исправляются только опечатки. Хоткей всегда исправляет и то, и другое.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Автоисправление недоступно, пока включено нейросетевое исправление: модель работает только по хоткею.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Автоисправление недоступно в режиме «только смена раскладки»: без словарей не с чем сверять слова.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Только смена раскладки, без словарей</value>

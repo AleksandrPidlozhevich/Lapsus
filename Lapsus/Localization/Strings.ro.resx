@@ -32,10 +32,16 @@
     <value>Corectare automată după spațiu</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Corectează automat și greșelile de tastare</value>
+    <value>Corectează greșelile de tastare după spațiu</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Oprit: corectarea automată doar schimbă aranjamentul unui cuvânt tastat pe cel greșit. Greșelile de tastare rămân tastei rapide.</value>
+    <value>Funcționează și fără corectarea automată a aranjamentului: atunci se corectează doar greșelile de tastare. Tasta rapidă corectează mereu ambele.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Corectarea automată nu este disponibilă cât timp corectarea neuronală este activă: modelul funcționează doar cu tasta rapidă.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Corectarea automată nu este disponibilă în modul „doar schimbarea aranjamentului”: fără dicționare nu există cu ce verifica cuvintele.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Doar schimbarea aranjamentului, fără dicționare</value>

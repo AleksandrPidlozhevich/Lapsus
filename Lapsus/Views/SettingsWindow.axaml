@@ -364,6 +364,9 @@
                                     <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding AutoFixTypos}" />
                                 </Grid>
 
+                                <TextBlock Classes="hint" Text="{Binding AutoModeBlockedHint}"
+                                           IsVisible="{Binding AutoModeBlockedHint, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
                                 <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
                                     <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
                                         <TextBlock Text="{Binding L[PlainSwitch]}"

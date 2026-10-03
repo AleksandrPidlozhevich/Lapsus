@@ -32,10 +32,16 @@
     <value>Corrigir automaticamente após o espaço</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Corrigir também erros de digitação automaticamente</value>
+    <value>Corrigir erros de digitação após o espaço</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Desligado: a correção automática só troca o layout de uma palavra digitada no errado. Erros de digitação ficam para o atalho.</value>
+    <value>Funciona também sem a correção automática de layout: nesse caso só os erros de digitação são corrigidos. O atalho corrige sempre os dois.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>A correção automática não está disponível enquanto a correção neuronal estiver ativada: o modelo só funciona com o atalho.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>A correção automática não está disponível no modo «apenas troca de esquema»: sem dicionários não há com que verificar as palavras.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Apenas troca de esquema, sem dicionários</value>

@@ -32,10 +32,16 @@
     <value>Automatická oprava po mezerníku</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Opravovat automaticky i překlepy</value>
+    <value>Opravovat překlepy po mezerníku</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Vypnuto: automatická oprava jen přepne rozložení slova napsaného na špatném. Překlepy zůstávají klávesové zkratce.</value>
+    <value>Funguje i bez automatické opravy rozložení: pak se opravují jen překlepy. Klávesová zkratka vždy opraví obojí.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Automatická oprava není dostupná, dokud je zapnutá neuronová oprava: model pracuje jen na klávesovou zkratku.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Automatická oprava není dostupná v režimu „jen přepnutí rozložení“: bez slovníků není s čím slova porovnat.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Jen přepnutí rozložení, bez slovníků</value>

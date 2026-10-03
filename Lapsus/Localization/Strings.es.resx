@@ -32,10 +32,16 @@
     <value>Autocorrección tras el espacio</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Corregir también las erratas automáticamente</value>
+    <value>Corregir erratas después del espacio</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Desactivado: la autocorrección solo cambia la distribución de una palabra escrita en la equivocada. Las erratas quedan para el atajo.</value>
+    <value>Funciona también sin la autocorrección de distribución: entonces solo se corrigen las erratas. El atajo siempre corrige ambas cosas.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>La autocorrección no está disponible mientras la corrección neuronal esté activada: el modelo solo funciona con el atajo.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>La autocorrección no está disponible en el modo «solo cambio de distribución»: sin diccionarios no hay con qué comprobar las palabras.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Solo cambio de distribución, sin diccionarios</value>

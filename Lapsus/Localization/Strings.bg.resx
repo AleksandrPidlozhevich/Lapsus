@@ -32,10 +32,16 @@
     <value>Автоматична поправка след интервал</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Поправяй и печатни грешки автоматично</value>
+    <value>Поправяй печатни грешки след интервал</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Изкл.: автокорекцията само сменя подредбата на дума, написана на грешната. Печатните грешки остават за клавишната комбинация.</value>
+    <value>Работи и без автокорекцията на подредбата: тогава се поправят само печатните грешки. Клавишната комбинация винаги поправя и двете.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Автокорекцията не е достъпна, докато е включена невронната поправка: моделът работи само с клавишната комбинация.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Автокорекцията не е достъпна в режим „само смяна на подредбата“: без речници няма с какво да се сверят думите.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Само смяна на подредбата, без речници</value>

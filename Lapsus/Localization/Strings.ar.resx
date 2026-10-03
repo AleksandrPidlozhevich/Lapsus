@@ -32,10 +32,16 @@
     <value>تصحيح تلقائي بعد المسافة</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>تصحيح الأخطاء المطبعية تلقائيًا أيضًا</value>
+    <value>تصحيح الأخطاء المطبعية بعد المسافة</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>متوقف: التصحيح التلقائي يبدّل فقط تخطيط كلمة كُتبت على التخطيط الخطأ. تبقى الأخطاء المطبعية لمفتاح الاختصار.</value>
+    <value>يعمل أيضًا دون التصحيح التلقائي للتخطيط: عندها تُصحَّح الأخطاء المطبعية فقط. مفتاح الاختصار يصحّح الاثنين دائمًا.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>التصحيح التلقائي غير متاح ما دام التصحيح العصبي مفعّلًا: النموذج يعمل بمفتاح الاختصار فقط.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>التصحيح التلقائي غير متاح في وضع «تبديل التخطيط فقط»: بلا قواميس لا يوجد ما تُقارَن به الكلمات.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>تبديل التخطيط فقط، بدون قواميس</value>

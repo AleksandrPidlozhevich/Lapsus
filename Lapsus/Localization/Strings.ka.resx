@@ -32,10 +32,16 @@
     <value>ავტოგასწორება ჰარის შემდეგ</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>ბეჭდვითი შეცდომებიც ავტომატურად გასწორდეს</value>
+    <value>ბეჭდვითი შეცდომების გასწორება ჰარის შემდეგ</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>გამორთულია: ავტოშესწორება მხოლოდ არასწორ განლაგებაზე აკრეფილი სიტყვის განლაგებას ცვლის. ბეჭდვითი შეცდომები ცხელ კლავიშს რჩება.</value>
+    <value>მუშაობს განლაგების ავტოშესწორების გარეშეც: მაშინ მხოლოდ ბეჭდვითი შეცდომები სწორდება. ცხელი კლავიში ყოველთვის ორივეს ასწორებს.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>ავტოშესწორება მიუწვდომელია, სანამ ნეირონული გასწორება ჩართულია: მოდელი მხოლოდ ცხელი კლავიშით მუშაობს.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>ავტოშესწორება მიუწვდომელია რეჟიმში „მხოლოდ განლაგების შეცვლა“: ლექსიკონების გარეშე სიტყვების შესამოწმებელი არაფერია.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>მხოლოდ განლაგების შეცვლა, ლექსიკონების გარეშე</value>

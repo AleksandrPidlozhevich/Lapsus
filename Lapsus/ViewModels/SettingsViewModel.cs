@@ -539,8 +539,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private HotkeyOption _selectedHotkey;
 
-    [ObservableProperty] [NotifyPropertyChangedFor(nameof(AutoFixTyposSwitchEnabled))]
-    private bool _autoMode;
+    [ObservableProperty] private bool _autoMode;
 
     [ObservableProperty] private bool _autoFixTypos;
 
@@ -572,9 +571,15 @@ public partial class SettingsViewModel : ViewModelBase
 
     public bool AutoModeSwitchEnabled => IsSupported && AutoModeAllowed;
 
-    public bool AutoFixTyposSwitchEnabled => AutoModeSwitchEnabled && AutoMode;
+    public bool AutoFixTyposSwitchEnabled => AutoModeSwitchEnabled;
 
     private bool AutoModeAllowed => !NeuralCorrectionEnabled && !PlainLayoutSwitch;
+
+    public string? AutoModeBlockedHint =>
+        !IsSupported ? null
+        : NeuralCorrectionEnabled ? L["AutoCorrect_Blocked_Neural"]
+        : PlainLayoutSwitch ? L["AutoCorrect_Blocked_Plain"]
+        : null;
 
     public string CaptureLabel => L[Enabled ? "Capture_On" : "Capture_Off"];
 
@@ -657,6 +662,7 @@ public partial class SettingsViewModel : ViewModelBase
         _backend.AutoMode = AutoMode;
         OnPropertyChanged(nameof(AutoModeSwitchEnabled));
         OnPropertyChanged(nameof(AutoFixTyposSwitchEnabled));
+        OnPropertyChanged(nameof(AutoModeBlockedHint));
         UpdateStatus();
         if (!_skipBrainRebuild)
             _ = _rebuildBrain();
@@ -744,6 +750,7 @@ public partial class SettingsViewModel : ViewModelBase
             row.RefreshLabels();
         Models.RefreshLabels();
         OnPropertyChanged(nameof(UpdateButtonTooltip));
+        OnPropertyChanged(nameof(AutoModeBlockedHint));
 
         UpdateStatus();
     }

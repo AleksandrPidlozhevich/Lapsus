@@ -32,10 +32,16 @@
     <value>Automatska ispravka posle razmaka</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Ispravljaj i greške u kucanju automatski</value>
+    <value>Ispravljaj greške u kucanju posle razmaka</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Isključeno: automatska ispravka samo menja raspored reči otkucane na pogrešnom. Greške u kucanju ostaju prečici.</value>
+    <value>Radi i bez automatske ispravke rasporeda: tada se ispravljaju samo greške u kucanju. Prečica uvek ispravlja oboje.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Automatska ispravka nije dostupna dok je uključena neuronska ispravka: model radi samo na prečicu.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Automatska ispravka nije dostupna u režimu „samo promena rasporeda“: bez rečnika nema sa čim da se provere reči.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Samo promena rasporeda, bez rečnika</value>

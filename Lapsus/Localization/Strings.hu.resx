@@ -32,10 +32,16 @@
     <value>Automatikus javítás szóköz után</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Elgépeléseket is javítson automatikusan</value>
+    <value>Elgépelések javítása szóköz után</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Ki: az automatikus javítás csak a rossz kiosztáson gépelt szó kiosztását cseréli. Az elgépelések a gyorsbillentyűre maradnak.</value>
+    <value>A kiosztás automatikus javítása nélkül is működik: ilyenkor csak az elgépeléseket javítja. A gyorsbillentyű mindig mindkettőt javítja.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Az automatikus javítás nem érhető el, amíg a neurális javítás be van kapcsolva: a modell csak a gyorsbillentyűre működik.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Az automatikus javítás nem érhető el „Csak kiosztásváltás” módban: szótárak nélkül nincs mihez ellenőrizni a szavakat.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Csak kiosztásváltás, szótárak nélkül</value>

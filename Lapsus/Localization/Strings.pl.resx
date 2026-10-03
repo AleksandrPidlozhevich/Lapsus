@@ -32,10 +32,16 @@
     <value>Autopoprawa po spacji</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Poprawiaj automatycznie także literówki</value>
+    <value>Poprawiaj literówki po spacji</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Wył.: autokorekta tylko zmienia układ słowa wpisanego na złym. Literówki zostają skrótowi klawiszowemu.</value>
+    <value>Działa też bez autokorekty układu: wtedy poprawiane są tylko literówki. Skrót klawiszowy zawsze poprawia jedno i drugie.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Autokorekta jest niedostępna, gdy włączona jest korekta neuronowa: model działa tylko na skrót klawiszowy.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Autokorekta jest niedostępna w trybie „tylko zmiana układu”: bez słowników nie ma z czym porównać słów.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Tylko zmiana układu, bez słowników</value>

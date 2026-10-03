@@ -32,10 +32,16 @@
     <value>Rätta automatiskt efter mellanslag</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Rätta även stavfel automatiskt</value>
+    <value>Rätta stavfel efter mellanslag</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Av: autorättning byter bara layout på ett ord skrivet på fel. Stavfel lämnas åt snabbtangenten.</value>
+    <value>Fungerar även utan automatisk layouträttning: då rättas bara stavfel. Snabbtangenten rättar alltid båda.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Autorättning är inte tillgänglig medan neural rättning är på: modellen fungerar bara via snabbtangenten.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Autorättning är inte tillgänglig i läget ”Endast layoutbyte”: utan ordlistor finns inget att kontrollera orden mot.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Endast layoutbyte, utan ordlistor</value>

@@ -32,10 +32,16 @@
     <value>Automatisch corrigeren na spatie</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Ook typefouten automatisch corrigeren</value>
+    <value>Typefouten na de spatie corrigeren</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Uit: autocorrectie wisselt alleen de indeling van een woord dat op de verkeerde is getypt. Typefouten blijven voor de sneltoets.</value>
+    <value>Werkt ook zonder de automatische indelingscorrectie: dan worden alleen typefouten gecorrigeerd. De sneltoets corrigeert altijd beide.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Automatische correctie is niet beschikbaar zolang neurale correctie aan staat: het model werkt alleen via de sneltoets.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Automatische correctie is niet beschikbaar in de modus ‘Alleen indelingswissel’: zonder woordenboeken is er niets om woorden mee te controleren.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Alleen indelingswissel, zonder woordenboeken</value>

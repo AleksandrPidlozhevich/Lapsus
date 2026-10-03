@@ -32,10 +32,16 @@
     <value>Correction automatique après l&apos;espace</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Corriger aussi les fautes de frappe automatiquement</value>
+    <value>Corriger les fautes de frappe après l’espace</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Désactivé : la correction automatique ne fait que changer la disposition d’un mot tapé sur la mauvaise. Les fautes de frappe restent au raccourci.</value>
+    <value>Fonctionne aussi sans la correction automatique de disposition : seules les fautes de frappe sont alors corrigées. Le raccourci corrige toujours les deux.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>La correction automatique est indisponible tant que la correction neuronale est activée : le modèle ne fonctionne qu’avec le raccourci.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>La correction automatique est indisponible en mode « changement de disposition seul » : sans dictionnaires, rien ne permet de vérifier les mots.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Changement de disposition seul, sans dictionnaires</value>

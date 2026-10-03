@@ -32,10 +32,16 @@
     <value>Автовиправлення після пробілу</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
-    <value>Також виправляти одруки автоматично</value>
+    <value>Виправляти одруки після пробілу</value>
   </data>
   <data name="AutoFixTypos_Hint" xml:space="preserve">
-    <value>Вимк.: автовиправлення лише змінює розкладку слова, набраного не в тій. Одруки виправляє гаряча клавіша.</value>
+    <value>Працює і без автовиправлення розкладки: тоді виправляються лише одруки. Гаряча клавіша завжди виправляє і те, і те.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+    <value>Автовиправлення недоступне, поки ввімкнено нейромережеве виправлення: модель працює лише за гарячою клавішею.</value>
+  </data>
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+    <value>Автовиправлення недоступне в режимі «лише зміна розкладки»: без словників нема з чим звіряти слова.</value>
   </data>
     <data name="PlainSwitch" xml:space="preserve">
     <value>Лише зміна розкладки, без словників</value>
