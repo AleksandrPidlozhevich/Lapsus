@@ -691,10 +691,13 @@ public sealed class LayoutCorrector : IPhraseCorrector
                 candidate.LayoutId, edits);
         }
 
-        // Skip same-script spell-fix once a keys-alone cross-script switch clears the threshold.
+        // Skip same-script spell-fix once a keys-alone cross-script switch clears the threshold — but only
+        // for a dictionary word: an unknown typo scores near zero, so mere naturalness ("apartmnt" as
+        // фзфкеьте) would clear it too and lock out the one-edit fix.
         var crossScriptSwitch = best.Changed && best.Edits == 0 &&
                                 (best.Target is not null || !string.IsNullOrEmpty(best.TargetLayoutId)) &&
-                                best.Score > baseline + _switchThreshold;
+                                best.Score > baseline + _switchThreshold &&
+                                WordScorer.IsDictionaryHit(best.Score);
 
         if (_scorer.CanSpellFix && !crossScriptSwitch)
         {

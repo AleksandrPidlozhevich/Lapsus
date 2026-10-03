@@ -196,6 +196,7 @@ try
             RuleD.TyposStayEnglish(machine, known, lines);
             RuleE.AutoMode(machine, known, foreign, lines / 4, autoMin);
             RuleF.HeldOutWords(shortOfWords, FrequencyList.FromWords(keptTarget), heldOutTarget, lines);
+            RuleG.Typos(machine, foreign, lines);
         }
 
         // Neural baselines are per model: one model's numbers say nothing about another's.

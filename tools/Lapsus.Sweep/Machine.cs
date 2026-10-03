@@ -98,6 +98,12 @@ internal sealed class Machine
         return _spell.IsKnownStem(word, Target.Script, Target.Code, out _);
     }
 
+    // A slip that spells a real word of the language (list or Hunspell) is no typo a spell-fix can see.
+    public bool IsAnyWord(string word)
+    {
+        return _spell.IsKnownWord(word, Target.Script) || _spell.IsLexiconWord(word, Target.Script);
+    }
+
     public bool KnowsEnglish(string word)
     {
         return _spell.IsKnownWord(word, Script.Latin, "en");

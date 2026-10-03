@@ -337,7 +337,7 @@ internal static class NeuralRun
     private readonly record struct Slip(int At, string Typo, string Meant);
 
     // tools/Lapsus.Sweep/sentences/{code}.txt: everyday sentences written for this, one per line.
-    private static List<string> Sentences(string code)
+    internal static List<string> Sentences(string code)
     {
         var path = Path.Combine(Baseline.RepositoryRoot() ?? ".", "tools", "Lapsus.Sweep", "sentences", $"{code}.txt");
         return File.Exists(path)
