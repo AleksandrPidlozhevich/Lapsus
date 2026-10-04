@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Klavye yakalama kısa süreliğine durdu ve yeniden başlatıldı. Bu tekrarlanıyorsa yoğun bir Accessibility istemcisini kapatın veya Lapsus'a Input Monitoring izni verin.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Klavye yakalama yeniden çalışıyor.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Düzeni düzeltmeden önce ayarlardan en az bir yazım sözlüğü indirin.</value>
   </data>

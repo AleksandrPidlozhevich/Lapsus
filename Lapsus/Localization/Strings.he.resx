@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>לכידת המקלדת נעצרה לרגע והופעלה מחדש. אם זה חוזר, סגרו לקוח Accessibility עמוס או העניקו ל‑Lapsus הרשאת Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>לכידת המקלדת פועלת שוב.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>הורידו לפחות מילון איות אחד בהגדרות לפני תיקון פריסה.</value>
   </data>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
@@ -34,6 +35,8 @@ internal static class MacCaretProbe
             || focused == IntPtr.Zero)
             return default;
 
+        EnsureEnhancedAccessibility(focused);
+
         try
         {
             MacOSNativeMethods.AXUIElementSetMessagingTimeout(focused, AxTimeoutSeconds);
@@ -45,6 +48,49 @@ internal static class MacCaretProbe
         }
     }
 
+    private static readonly HashSet<int> EnhancedPids = new();
+
+    private static readonly object EnhancedGate = new();
+
+    private static void EnsureEnhancedAccessibility(IntPtr focused)
+    {
+        if (MacOSNativeMethods.AXUIElementGetPid(focused, out var pid) != 0 || pid <= 0)
+            return;
+
+        lock (EnhancedGate)
+        {
+            if (!EnhancedPids.Add(pid))
+                return;
+
+            if (EnhancedPids.Count > 512)
+            {
+                EnhancedPids.Clear();
+                EnhancedPids.Add(pid);
+            }
+        }
+
+        if (!ChromiumApps.IsChromiumExecutable(MacProcessNames.ExecutablePath(pid)))
+            return;
+
+        var app = MacOSNativeMethods.AXUIElementCreateApplication(pid);
+        if (app == IntPtr.Zero)
+            return;
+
+        try
+        {
+            if (MacOSNativeMethods.AXUIElementSetAttributeValue(
+                    app, MacOSNativeMethods.AxManualAccessibilityAttribute, MacOSNativeMethods.CFBooleanTrue) != 0)
+            {
+                lock (EnhancedGate)
+                    EnhancedPids.Remove(pid);
+            }
+        }
+        finally
+        {
+            MacOSNativeMethods.CFRelease(app);
+        }
+    }
+
     public static string? ForegroundProcessName()
     {
         var pid = FocusedPid();
@@ -53,7 +99,7 @@ internal static class MacCaretProbe
 
     private static int FocusedPid()
     {
-        var focus = MacTypingFocusWatcher.ReadFocus(out _);
+        var focus = MacTypingFocusWatcher.ReadFocusUncached(out _);
         return focus.IsEmpty ? 0 : focus.Pid;
     }
 

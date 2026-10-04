@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Zajem tipkovnice se je za hip ustavil in se je znova zagnal. Če se to ponavlja, zaprite obremenjenega odjemalca Accessibility ali Lapsusu dodelite dovoljenje Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Zajemanje tipkovnice spet deluje.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Preden začnete popravljati razporeditev, v nastavitvah prenesite vsaj en črkovalni slovar.</value>
   </data>

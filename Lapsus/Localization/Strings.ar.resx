@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>توقّف التقاط لوحة المفاتيح للحظة ثم أُعيد تشغيله. إذا تكرّر ذلك، أغلق تطبيق Accessibility مُثقلًا أو امنح Lapsus صلاحية Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>عاد التقاط لوحة المفاتيح للعمل.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>نزّل قاموسًا إملائيًا واحدًا على الأقل في الإعدادات قبل تصحيح التخطيط.</value>
   </data>

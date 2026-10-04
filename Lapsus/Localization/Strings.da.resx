@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Tastaturopfangningen gik kortvarigt i stå og blev genstartet. Hvis det bliver ved, så luk en travl Accessibility-klient, eller giv Lapsus tilladelsen Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Tastaturregistreringen kører igen.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Hent mindst én stavekontrolordbog i indstillingerne, før du retter layoutet.</value>
   </data>

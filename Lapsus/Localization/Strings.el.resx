@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Η καταγραφή πληκτρολογίου σταμάτησε στιγμιαία και επανεκκινήθηκε. Αν επαναλαμβάνεται, κλείστε έναν απαιτητικό πελάτη Accessibility ή δώστε στο Lapsus την άδεια Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Η καταγραφή πληκτρολογίου λειτουργεί ξανά.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Πριν διορθώσετε τη διάταξη, κατεβάστε τουλάχιστον ένα ορθογραφικό λεξικό στις ρυθμίσεις.</value>
   </data>

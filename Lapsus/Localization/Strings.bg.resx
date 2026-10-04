@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Прихващането на клавиатурата спря за кратко и беше рестартирано. Ако се повтаря, затворете натоварен клиент на Accessibility или дайте на Lapsus разрешението Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Записът на клавиатурата отново работи.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Преди да поправяте подредбата, свалете поне един правописен речник в настройките.</value>
   </data>

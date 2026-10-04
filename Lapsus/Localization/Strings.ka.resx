@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>კლავიატურის ჩაჭერა ხანმოკლედ შეჩერდა და თავიდან გაეშვა. თუ ეს მეორდება, დახურეთ დატვირთული Accessibility კლიენტი ან მიეცით Lapsus-ს Input Monitoring ნებართვა.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>კლავიატურის დაფიქსირება ისევ მუშაობს.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>განლაგების გასწორებამდე ჩამოტვირთეთ პარამეტრებში სულ მცირე ერთი მართლწერის ლექსიკონი.</value>
   </data>

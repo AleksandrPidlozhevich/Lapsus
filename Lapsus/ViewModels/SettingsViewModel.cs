@@ -781,18 +781,19 @@ public partial class SettingsViewModel : ViewModelBase
         _backend.PreferredLayout = SelectedPreference.Layout;
     }
 
-    private void ApplyEnabled()
+    private async void ApplyEnabled()
     {
         try
         {
+            // Start can take seconds while the OS creates the event tap, so it runs on a worker.
+            // Stop touches UI-owned typing state and stays on this thread.
             if (Enabled)
-                _backend.Start();
+                await Task.Run(() => _backend.Start()).ConfigureAwait(true);
             else
                 _backend.Stop();
         }
         catch (Exception ex)
         {
-
             var detail = ex is TypeInitializationException { InnerException: { } inner } ? inner.Message : ex.Message;
             StatusText = L.Format("Status_StartFailed", detail);
             RefreshPermissionState();
@@ -884,6 +885,10 @@ public partial class SettingsViewModel : ViewModelBase
 
     private void OnDiagnostic(object? sender, string message)
     {
-        Dispatcher.UIThread.Post(() => StatusText = message);
+        Dispatcher.UIThread.Post(() =>
+        {
+            StatusText = message;
+            RefreshPermissionState();
+        });
     }
 }

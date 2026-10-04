@@ -236,6 +236,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Keyboard capture briefly stalled and was restarted. If this keeps happening, close a busy Accessibility client or grant Lapsus Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Keyboard capture is running again.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Download at least one spelling dictionary in Settings before correcting layout.</value>
   </data>

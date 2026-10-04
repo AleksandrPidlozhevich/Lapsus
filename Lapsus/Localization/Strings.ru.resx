@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Захват клавиатуры кратко остановился и был перезапущен. Если повторяется — закройте тяжёлого клиента Accessibility или выдайте Lapsus Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Захват клавиатуры снова работает.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Скачайте хотя бы один словарь в настройках, прежде чем исправлять раскладку.</value>
   </data>
