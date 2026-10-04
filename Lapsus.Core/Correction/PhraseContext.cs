@@ -158,13 +158,14 @@ internal sealed class PhraseContext(
         if (fixInOwnScript(token) is not { } fix)
             return null;
 
-        // A keys-alone crossing that reads as nothing in its own script, into a commoner word than the fix,
-        // is a word of the other language: σονγ is "song", not σον. Restoring a dropped letter lengthens
-        // the word (хеб → хлеб); that is the typo, and the other language must not keep it.
+        // A keys-alone crossing whose own-script fix only gets there by deleting a letter is a word of the
+        // other language: σονγ is "song", not σον. A same-length fix is a slip (дуеж → дуже). Restoring a
+        // dropped letter lengthens the word (хеб → хлеб); that is the typo, and the other language must
+        // not keep it.
         var typedLetters = WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length;
         var fixedLetters = WordScanner.TrimToLetters(fix.Text, token.Source.Script).Length;
         if (token.Edits == 0 &&
-            fixedLetters <= typedLetters &&
+            fixedLetters < typedLetters &&
             scorer.NaturalnessOf(token.Typed, token.Source.Script, token.Source.LanguageCode) < MinNaturalnessOfATypo &&
             scorer.FrequencyOf(token.Chosen.Text, into) > scorer.FrequencyOf(fix.Text, token.Source.Script))
             return null;
