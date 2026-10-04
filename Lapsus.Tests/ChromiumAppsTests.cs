@@ -25,12 +25,14 @@ public class ChromiumAppsTests : IDisposable
         Assert.Equal(expected, ChromiumApps.IsChromiumFrameworkName(name));
     }
 
-    [Fact]
-    public void The_frameworks_folder_is_found_from_an_app_executable()
+    [Theory]
+    [InlineData("/Applications/Slack.app/Contents/MacOS/Slack", "/Applications/Slack.app")]
+    [InlineData(@"C:\Apps\Slack.app\Contents\MacOS\Slack", @"C:\Apps\Slack.app")]
+    public void The_frameworks_folder_is_found_from_an_app_executable(string executable, string appRoot)
     {
         Assert.Equal(
-            Path.Combine("/Applications/Slack.app", "Contents", "Frameworks"),
-            ChromiumApps.AppBundleFrameworks("/Applications/Slack.app/Contents/MacOS/Slack"));
+            Path.Combine(appRoot, "Contents", "Frameworks"),
+            ChromiumApps.AppBundleFrameworks(executable));
     }
 
     [Fact]
