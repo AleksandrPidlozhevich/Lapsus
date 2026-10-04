@@ -323,11 +323,58 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     protected override bool TryInject(int backspaces, string text)
     {
+        if (ForegroundNeedsClipboardPaste())
+            return TryPasteOverTrailing(backspaces, text);
+
         if (MacTextInjection.ReplaceTrailing(backspaces, text))
             return true;
 
         RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
         return false;
+    }
+
+    private int _clipboardPastePid;
+    private bool _clipboardPastePidIsChromium;
+
+    // Chromium and Electron ignore a synthetic Unicode key, so the corrected text is pasted.
+    private bool ForegroundNeedsClipboardPaste()
+    {
+        if (SelectionActionInProgress)
+            return false;
+
+        var pid = ResolveForegroundPid();
+        if (pid <= 0)
+            return false;
+
+        if (pid == _clipboardPastePid)
+            return _clipboardPastePidIsChromium;
+
+        _clipboardPastePid = pid;
+        _clipboardPastePidIsChromium = ChromiumApps.IsChromiumExecutable(
+            MacProcessNames.ExecutablePath(pid));
+        return _clipboardPastePidIsChromium;
+    }
+
+    private bool TryPasteOverTrailing(int count, string text)
+    {
+        if (!_clipboardDirty)
+            _savedClipboard = MacClipboard.CaptureSnapshot();
+
+        if (!MacTextInjection.SelectBackward(count))
+        {
+            RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
+            return false;
+        }
+
+        if (!PasteText(text))
+        {
+            if (_clipboardDirty)
+                _ = RestoreClipboardAsync();
+            return false;
+        }
+
+        _ = RestoreClipboardAsync();
+        return true;
     }
 
     protected override void ApplyLayoutSwitch(KeyboardLayout? target, string? layoutId)
@@ -414,10 +461,14 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private bool _clipboardDirty;
 
+    private int _clipboardEpoch;
+
     protected override async Task<string?> CopySelectionAsync()
     {
-        _savedClipboard = MacClipboard.CaptureSnapshot();
-        _clipboardDirty = false;
+        // A correction may already be holding the user's clipboard for a delayed restore.
+        _clipboardEpoch++;
+        if (!_clipboardDirty)
+            _savedClipboard = MacClipboard.CaptureSnapshot();
 
         MacClipboard.WasModified();
         if (!MacTextInjection.SendCommandChord(MacOSNativeMethods.CKeyCode))
@@ -456,6 +507,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         // Swallow our own write so that only a later, foreign change counts when restoring.
         MacClipboard.WasModified();
         _clipboardDirty = true;
+        _clipboardEpoch++;
         if (MacTextInjection.SendCommandChord(MacOSNativeMethods.VKeyCode))
             return true;
 
@@ -466,16 +518,18 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     protected override async Task RestoreClipboardAsync()
     {
         if (!_clipboardDirty)
-        {
-            _savedClipboard = null;
             return;
-        }
+
+        var epoch = _clipboardEpoch;
+        var saved = _savedClipboard;
+        await Task.Delay(RestoreDelayMs).ConfigureAwait(true);
+
+        // A newer correction or a selection copy took over the clipboard.
+        if (epoch != _clipboardEpoch || !_clipboardDirty)
+            return;
 
         _clipboardDirty = false;
-        var saved = _savedClipboard;
         _savedClipboard = null;
-
-        await Task.Delay(RestoreDelayMs).ConfigureAwait(true);
 
         // The user copied something while we waited; that copy is newer than our snapshot.
         if (MacClipboard.WasModified())

@@ -37,6 +37,8 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
 
     private bool _selectionActionRunning;
 
+    protected bool SelectionActionInProgress => _selectionActionRunning;
+
     protected List<InstalledLayout>? Layouts;
 
     private LayoutCorrectionCycle? _cycle;

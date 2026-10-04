@@ -14,7 +14,7 @@ internal static class MacTextInjection
         if (TryReplaceViaAccessibility(count, text))
             return true;
 
-        if (count > 0 && SendSelectLeft(count))
+        if (count > 0 && SelectBackward(count))
             return SendUnicode(text);
 
         return SendBackspaces(count) && SendUnicode(text);
@@ -131,8 +131,11 @@ internal static class MacTextInjection
         return true;
     }
 
-    private static bool SendSelectLeft(int count)
+    public static bool SelectBackward(int count)
     {
+        if (count <= 0)
+            return true;
+
         var shift = MacOSNativeMethods.EventFlagMaskShift;
         for (var i = 0; i < count; i++)
         {
@@ -165,20 +168,15 @@ internal static class MacTextInjection
 
     public static bool SendCommandChord(ushort keyCode)
     {
-        return PostChordKey(keyCode, true) && PostChordKey(keyCode, false);
-    }
-
-    private static bool PostChordKey(ushort keyCode, bool keyDown)
-    {
-        var ev = MacOSNativeMethods.CGEventCreateKeyboardEvent(IntPtr.Zero, keyCode, keyDown);
-        if (ev == IntPtr.Zero)
-            return false;
-
-        MacOSNativeMethods.CGEventSetFlags(ev, MacOSNativeMethods.EventFlagMaskCommand);
-        MarkInjected(ev);
-        MacOSNativeMethods.CGEventPost(0, ev);
-        MacOSNativeMethods.CFRelease(ev);
-        return true;
+        // Electron records Command from the modifier key's own flags. A letter event that
+        // only carries the Command flag matches neither the shortcut nor a plain key there,
+        // so the chord is dropped. Native text views read the letter event's flags and still paste.
+        var command = (ushort)MacOSNativeMethods.CommandKeyCode;
+        var flags = MacOSNativeMethods.EventFlagMaskCommand;
+        return PostKey(command, true, flags)
+               && PostKey(keyCode, true, flags)
+               && PostKey(keyCode, false, flags)
+               && PostKey(command, false);
     }
 
     private static bool PostKey(ushort keyCode, bool keyDown, ulong flags = 0)
