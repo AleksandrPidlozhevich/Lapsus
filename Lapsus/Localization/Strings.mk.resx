@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Снимањето на тастатурата накратко застана и беше рестартирано. Ако се повторува, затворете зафатен клиент на Accessibility или дајте му на Lapsus дозвола Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Снимањето на тастатурата повторно работи.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Пред да го поправате распоредот, преземете барем еден правописен речник во поставките.</value>
   </data>

@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>La capture du clavier s'est brièvement interrompue et a été relancée. Si cela se reproduit, fermez un client Accessibility surchargé ou accordez à Lapsus l'autorisation Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>La capture du clavier fonctionne à nouveau.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Téléchargez au moins un dictionnaire orthographique dans les réglages avant de corriger la disposition.</value>
   </data>

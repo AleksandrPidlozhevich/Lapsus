@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>La captura de teclado se detuvo un instante y se reinició. Si se repite, cierra un cliente de Accessibility saturado o concede a Lapsus el permiso Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>La captura del teclado vuelve a funcionar.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Descarga al menos un diccionario ortográfico en Ajustes antes de corregir la distribución.</value>
   </data>

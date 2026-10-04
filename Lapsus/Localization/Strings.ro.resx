@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Capturarea tastaturii s-a oprit pentru o clipă și a fost repornită. Dacă se repetă, închide un client Accessibility supraîncărcat sau acordă-i lui Lapsus permisiunea Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Captarea tastaturii rulează din nou.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Descarcă în setări cel puțin un dicționar ortografic înainte de a corecta aranjamentul.</value>
   </data>

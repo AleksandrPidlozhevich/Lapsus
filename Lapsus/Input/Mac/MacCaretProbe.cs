@@ -53,7 +53,7 @@ internal static class MacCaretProbe
 
     private static int FocusedPid()
     {
-        var focus = MacTypingFocusWatcher.ReadFocus(out _);
+        var focus = MacTypingFocusWatcher.ReadFocusUncached(out _);
         return focus.IsEmpty ? 0 : focus.Pid;
     }
 

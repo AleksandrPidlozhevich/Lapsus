@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Platform;
@@ -31,6 +32,7 @@ public sealed class LayoutIndicator : IDisposable
     private bool _enabled;
     private bool _hostIsMoving;
     private string? _shownText;
+    private bool _macSampleInFlight;
 
     public LayoutIndicator(AppExclusions excludedApps)
     {
@@ -136,13 +138,41 @@ public sealed class LayoutIndicator : IDisposable
         if (!IsSupported)
             return;
 
-        if (_excludedApps.Contains(ForegroundProcessName()))
+        if (OperatingSystem.IsMacOS())
+        {
+            SampleMacOffThread();
+            return;
+        }
+
+        Apply(ForegroundProcessName(), ReadCaret());
+    }
+
+    // Accessibility calls can block for up to their timeout when the target app is busy, so on macOS
+    // they run on a worker and the UI thread only applies the result. One sample is in flight at a time.
+    [System.Runtime.Versioning.SupportedOSPlatform("macos")]
+    private void SampleMacOffThread()
+    {
+        if (_macSampleInFlight)
+            return;
+
+        _macSampleInFlight = true;
+        _ = Task.Run(() => new MacSample(MacCaretProbe.ForegroundProcessName(), MacCaretProbe.Read()))
+            .ContinueWith(t => Dispatcher.UIThread.Post(() =>
+            {
+                _macSampleInFlight = false;
+                if (_enabled && t.IsCompletedSuccessfully)
+                    Apply(t.Result.ProcessName, t.Result.Caret);
+            }), TaskScheduler.Default);
+    }
+
+    private void Apply(string? processName, CaretBounds caret)
+    {
+        if (_excludedApps.Contains(processName))
         {
             Hide();
             return;
         }
 
-        var caret = ReadCaret();
         if (caret.IsEmpty)
         {
 
@@ -161,6 +191,8 @@ public sealed class LayoutIndicator : IDisposable
 
         Show(text, caret);
     }
+
+    private readonly record struct MacSample(string? ProcessName, CaretBounds Caret);
 
     private string? ForegroundProcessName()
     {

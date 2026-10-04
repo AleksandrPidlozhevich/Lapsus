@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Het onderscheppen van het toetsenbord haperde even en is opnieuw gestart. Als dit blijft gebeuren, sluit dan een zwaarbelaste Accessibility-client of geef Lapsus de machtiging Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Toetsenbordregistratie draait weer.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Download eerst ten minste één spellingwoordenboek in de instellingen voordat u de indeling corrigeert.</value>
   </data>

@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Przechwytywanie klawiatury na chwilę się zatrzymało i zostało uruchomione ponownie. Jeśli to się powtarza, zamknij obciążonego klienta Accessibility albo przyznaj Lapsusowi uprawnienie Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Przechwytywanie klawiatury działa ponownie.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Pobierz przynajmniej jeden słownik ortograficzny w Ustawieniach, zanim poprawisz układ.</value>
   </data>

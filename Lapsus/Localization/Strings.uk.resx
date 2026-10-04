@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Захоплення клавіатури ненадовго зупинилося та було перезапущено. Якщо це повторюється, закрийте завантажений клієнт Accessibility або надайте Lapsus дозвіл Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Захоплення клавіатури знову працює.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Завантажте принаймні один орфографічний словник у Налаштуваннях, перш ніж виправляти розкладку.</value>
   </data>

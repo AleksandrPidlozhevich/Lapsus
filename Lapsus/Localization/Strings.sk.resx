@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Zachytávanie klávesnice sa nakrátko zastavilo a bolo reštartované. Ak sa to opakuje, zavrite vyťažený klient Accessibility alebo udeľte Lapsusu povolenie Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Zachytávanie klávesnice znovu beží.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Skôr než začnete opravovať rozloženie, stiahnite si v nastaveniach aspoň jeden pravopisný slovník.</value>
   </data>

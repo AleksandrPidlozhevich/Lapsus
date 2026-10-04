@@ -20,6 +20,10 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private static readonly TimeSpan TapThreadJoin = TimeSpan.FromSeconds(2);
 
+    private const int WatchdogPeriodMs = 2000;
+
+    private const long RestartBackoffMs = 10_000;
+
     private readonly MacOSNativeMethods.EventTapCallback _callback;
 
     private GCHandle _callbackHandle;
@@ -37,70 +41,158 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private bool _capturing;
 
+    // Set by the user's intent (Start/Stop), read by the watchdog from its own thread.
+    private volatile bool _wantCapture;
+
+    // Serializes start attempts; never held by Stop, so disabling capture never waits on a start.
+    private readonly SemaphoreSlim _startGate = new(1, 1);
+
+    // Guards _tapThread and the flags that Start and Stop change together.
+    private readonly object _lifecycle = new();
+
+    // Re-checks Accessibility and Input Monitoring while the user wants capture running.
+    private readonly System.Threading.Timer _watchdog;
+
+    private int _restarting;
+
+    private long _nextRestartAt;
+
     public MacOSInputBackend(IPhraseCorrector corrector, AppExclusions? excludedApps = null)
         : base(corrector, excludedApps)
     {
         HotkeyVirtualKey = MacHotkeys.CtrlOptionSpace;
         _callback = EventTapHandler;
         _callbackHandle = GCHandle.Alloc(_callback);
+        _watchdog = new System.Threading.Timer(_ => CheckPermissions(), null, Timeout.Infinite, Timeout.Infinite);
     }
 
     public override bool IsRunning => Volatile.Read(ref _capturing);
 
     public override bool SkipPasswordFields { get; set; } = true;
 
+    // Called by the UI on a worker thread (see SettingsViewModel.ApplyEnabled): creating the tap
+    // can take seconds when the OS is slow to answer, and must not freeze the settings window.
     public override void Start()
     {
-        if (IsRunning)
-            return;
+        StartCapture(userInitiated: true);
+    }
 
-        MacAccessibility.PromptIfNeeded();
-        MacAccessibility.RequestInputMonitoringIfNeeded();
-
-        _tapReady.Reset();
-        _startError = null;
-        _tapThread = new Thread(RunTapThread)
+    // Returns true when this call started capture, false when it was already running or not wanted.
+    private bool StartCapture(bool userInitiated)
+    {
+        _startGate.Wait();
+        try
         {
-            IsBackground = true,
-            Name = "Lapsus CGEventTap"
-        };
-        _tapThread.Start();
+            lock (_lifecycle)
+            {
+                if (userInitiated)
+                    _wantCapture = true;
 
-        if (!_tapReady.Wait(TimeSpan.FromSeconds(3)))
-            throw new InvalidOperationException(Localizer.Instance["Status_AccessibilityRequired"]);
+                if (!_wantCapture)
+                    return false;
 
-        if (_startError is { } error)
-            throw error;
+                if (IsRunning)
+                {
+                    ArmWatchdog();
+                    return false;
+                }
+            }
 
-        if (Volatile.Read(ref _eventTap) == IntPtr.Zero)
-            throw new InvalidOperationException(Localizer.Instance["Status_AccessibilityRequired"]);
+            // A previous tap thread may still be winding down after a stop or a watchdog stop.
+            var previous = CurrentTapThread();
+            if (previous is { IsAlive: true } && !previous.Join(TapThreadJoin))
+                throw new InvalidOperationException("The previous keyboard capture thread did not exit in time.");
 
-        Volatile.Write(ref _capturing, true);
+            lock (_lifecycle)
+            {
+                _tapReady.Reset();
+                _startError = null;
+                _tapThread = new Thread(RunTapThread)
+                {
+                    IsBackground = true,
+                    Name = "Lapsus CGEventTap"
+                };
+                _tapThread.Start();
+            }
+
+            CaptureLog.Write(userInitiated ? "Capture start requested." : "Capture restart requested.");
+
+            if (!_tapReady.Wait(TimeSpan.FromSeconds(3)))
+            {
+                StopCapture();
+                throw new InvalidOperationException(Localizer.Instance["Status_AccessibilityRequired"]);
+            }
+
+            lock (_lifecycle)
+            {
+                if (_startError is { } error)
+                    throw error;
+
+                if (Volatile.Read(ref _eventTap) == IntPtr.Zero)
+                    throw new InvalidOperationException(Localizer.Instance["Status_AccessibilityRequired"]);
+
+                // A stop may have arrived while the tap was being created.
+                if (!_wantCapture)
+                {
+                    StopCapture();
+                    return false;
+                }
+
+                Volatile.Write(ref _capturing, true);
+                ArmWatchdog();
+                CaptureLog.Write("Capture running.");
+                return true;
+            }
+        }
+        finally
+        {
+            _startGate.Release();
+        }
     }
 
     public override void Stop()
     {
-        StopCapture();
+        Thread? thread;
+        lock (_lifecycle)
+        {
+            _wantCapture = false;
+            DisarmWatchdog();
+            StopCapture();
+            thread = _tapThread;
+        }
 
-        _tapThread?.Join(TapThreadJoin);
-        _tapThread = null;
+        thread?.Join(TapThreadJoin);
+
+        lock (_lifecycle)
+        {
+            if (thread is { IsAlive: false } && ReferenceEquals(_tapThread, thread))
+                _tapThread = null;
+        }
+
         _swallowedKeyDown = null;
         _pendingHotkeyAction = null;
         ForgetTypingContext();
+        CaptureLog.Write("Capture stopped.");
     }
 
     public override void Dispose()
     {
+        Stop();
+        _watchdog.Dispose();
 
-        StopCapture();
-        _tapThread = null;
-        ForgetTypingContext();
+        // The native callback may still run while its thread lives; only release the handle after that.
+        if (_callbackHandle.IsAllocated && CurrentTapThread() is not { IsAlive: true })
+            _callbackHandle.Free();
+    }
 
+    private Thread? CurrentTapThread()
+    {
+        lock (_lifecycle)
+            return _tapThread;
     }
 
     private void StopCapture()
     {
-
         var tap = Volatile.Read(ref _eventTap);
         if (tap != IntPtr.Zero)
             MacOSNativeMethods.CGEventTapEnable(tap, false);
@@ -110,6 +202,61 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         var runLoop = Volatile.Read(ref _runLoop);
         if (runLoop != IntPtr.Zero)
             MacOSNativeMethods.CFRunLoopStop(runLoop);
+    }
+
+    private void ArmWatchdog()
+    {
+        _watchdog.Change(WatchdogPeriodMs, WatchdogPeriodMs);
+    }
+
+    private void DisarmWatchdog()
+    {
+        _watchdog.Change(Timeout.Infinite, Timeout.Infinite);
+    }
+
+    // Runs on a timer thread. Stops capture when a permission disappears and restarts it when the
+    // user grants it again, so the app does not need a relaunch after the permission dialog.
+    private void CheckPermissions()
+    {
+        if (!_wantCapture)
+            return;
+
+        var granted = MacAccessibility.IsProcessTrusted() && MacAccessibility.IsInputMonitoringGranted();
+
+        if (IsRunning)
+        {
+            if (granted)
+                return;
+
+            CaptureLog.Write("Permission revoked while capturing; capture stopped until it is granted again.");
+            StopCapture();
+            Dispatcher.UIThread.Post(() => RaiseDiagnostic(Localizer.Instance["Status_AccessibilityRequired"]));
+            return;
+        }
+
+        if (!granted || Environment.TickCount64 < Volatile.Read(ref _nextRestartAt))
+            return;
+
+        if (Interlocked.Exchange(ref _restarting, 1) != 0)
+            return;
+
+        _ = Task.Run(() =>
+        {
+            try
+            {
+                if (StartCapture(userInitiated: false))
+                    Dispatcher.UIThread.Post(() => RaiseDiagnostic(Localizer.Instance["Diag_CaptureRestored"]));
+            }
+            catch (Exception ex)
+            {
+                Volatile.Write(ref _nextRestartAt, Environment.TickCount64 + RestartBackoffMs);
+                CaptureLog.Write($"Restart after permission change failed: {ex.Message}");
+            }
+            finally
+            {
+                Volatile.Write(ref _restarting, 0);
+            }
+        });
     }
 
     private void ForgetTypingContext()
@@ -239,8 +386,6 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private const int RestoreDelayMs = 500;
 
-    private const int RestoreSettleMs = 150;
-
     private MacClipboard.Snapshot? _savedClipboard;
 
     private bool _clipboardDirty;
@@ -284,6 +429,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             return false;
         }
 
+        // Swallow our own write so that only a later, foreign change counts when restoring.
+        MacClipboard.WasModified();
         _clipboardDirty = true;
         if (MacTextInjection.SendCommandChord(MacOSNativeMethods.VKeyCode))
             return true;
@@ -305,12 +452,16 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         _savedClipboard = null;
 
         await Task.Delay(RestoreDelayMs).ConfigureAwait(true);
-        MacClipboard.RestoreSnapshot(saved);
 
-        MacClipboard.WasModified();
-        await Task.Delay(RestoreSettleMs).ConfigureAwait(true);
+        // The user copied something while we waited; that copy is newer than our snapshot.
         if (MacClipboard.WasModified())
-            MacClipboard.RestoreSnapshot(saved);
+        {
+            CaptureLog.Write("Clipboard changed during a correction; the newer copy is kept.");
+            return;
+        }
+
+        MacClipboard.RestoreSnapshot(saved);
+        MacClipboard.WasModified();
     }
 
     protected override bool IsSameContainer(MacTypingFocus owner, MacTypingFocus focus)
@@ -358,6 +509,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             if (Volatile.Read(ref _runLoop) == runLoop)
                 Volatile.Write(ref _runLoop, IntPtr.Zero);
 
+            CaptureLog.Write(
+                $"Event tap could not be created (accessibility={MacAccessibility.IsProcessTrusted()}, " +
+                $"input monitoring={MacAccessibility.IsInputMonitoringGranted()}).");
             _startError = new InvalidOperationException(Localizer.Instance["Status_AccessibilityRequired"]);
             _tapReady.Set();
             return;
@@ -370,7 +524,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         MacOSNativeMethods.CGEventTapEnable(tap, true);
 
         var watcher = new MacTypingFocusWatcher(OnAccessibilityFocusChanged);
-        watcher.TryStart(runLoop);
+        if (!watcher.TryStart(runLoop))
+            CaptureLog.Write("Focus observer did not start; focus changes are detected late.");
 
         _tapReady.Set();
 
@@ -428,6 +583,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             if (tap != IntPtr.Zero && IsRunning)
             {
                 MacOSNativeMethods.CGEventTapEnable(tap, true);
+                var reason = type;
+                _ = Task.Run(() => CaptureLog.Write($"Event tap disabled by the system (reason {reason}); re-enabled."));
                 Dispatcher.UIThread.Post(() => RaiseDiagnostic(Localizer.Instance["Diag_TapReenabled"]));
             }
 

@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Hvatanje tastature se nakratko zaustavilo i ponovo je pokrenuto. Ako se ponavlja, zatvorite zauzet Accessibility klijent ili dodelite Lapsusu dozvolu Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Снимање тастатуре поново ради.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Pre ispravljanja rasporeda preuzmite u podešavanjima bar jedan pravopisni rečnik.</value>
   </data>

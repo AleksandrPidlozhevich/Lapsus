@@ -154,7 +154,8 @@ internal sealed class MacTypingFocusWatcher : IDisposable
         }
     }
 
-    private static MacTypingFocus ReadFocusUncached(out bool isTransient)
+    // Lock-free: safe to call from the caret sampler without delaying the event tap.
+    internal static MacTypingFocus ReadFocusUncached(out bool isTransient)
     {
         isTransient = false;
         var systemWide = SystemWideElement;

@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Die Tastaturerfassung stockte kurz und wurde neu gestartet. Wenn das häufiger vorkommt, schließen Sie einen ausgelasteten Accessibility-Client oder erteilen Sie Lapsus die Berechtigung Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Die Tastaturerfassung läuft wieder.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Laden Sie in den Einstellungen mindestens ein Rechtschreibwörterbuch herunter, bevor Sie das Layout korrigieren.</value>
   </data>

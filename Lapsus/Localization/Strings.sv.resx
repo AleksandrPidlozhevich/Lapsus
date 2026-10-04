@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Tangentbordsavlyssningen stannade upp en kort stund och startades om. Om det fortsätter, stäng en hårt belastad Accessibility-klient eller ge Lapsus behörigheten Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>Tangentbordsfångsten körs igen.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Hämta minst en stavningsordlista i inställningarna innan du rättar layouten.</value>
   </data>

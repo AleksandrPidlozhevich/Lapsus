@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>L'acquisizione della tastiera si è interrotta per un istante ed è stata riavviata. Se continua a succedere, chiudi un client Accessibility sovraccarico o concedi a Lapsus il permesso Input Monitoring.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>La cattura della tastiera è di nuovo attiva.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Scarica almeno un dizionario ortografico in Impostazioni prima di correggere il layout.</value>
   </data>

@@ -232,6 +232,9 @@
     <data name="Diag_TapReenabled" xml:space="preserve">
     <value>A billentyűzetfigyelés rövid időre leállt, majd újraindult. Ha ez ismétlődik, zárjon be egy leterhelt Accessibility-klienst, vagy adja meg a Lapsusnak az Input Monitoring engedélyt.</value>
   </data>
+  <data name="Diag_CaptureRestored" xml:space="preserve">
+    <value>A billentyűzet-rögzítés ismét fut.</value>
+  </data>
     <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>A kiosztás javítása előtt töltsön le legalább egy helyesírási szótárt a beállításokban.</value>
   </data>
