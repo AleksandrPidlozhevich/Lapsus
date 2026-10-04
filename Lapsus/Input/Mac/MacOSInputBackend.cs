@@ -223,38 +223,44 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         _watchdog.Change(Timeout.Infinite, Timeout.Infinite);
     }
 
-    // Runs on a timer thread. Stops capture when a permission disappears and restarts it when the
-    // user grants it again, so the app does not need a relaunch after the permission dialog.
+    // Runs on a timer thread. The decision is in CaptureWatchdogPolicy; this method only observes and acts.
     private void CheckPermissions()
     {
-        if (!_wantCapture)
-            return;
-
+        var wanted = _wantCapture;
         var now = Environment.TickCount64;
         var gap = now - Interlocked.Exchange(ref _lastWatchdogTick, now);
-        if (gap > WatchdogPeriodMs * 3 && IsRunning)
-        {
-            CaptureLog.Write($"Watchdog gap of {gap} ms (sleep or wake); restarting capture.");
-            StopCapture();
-            return;
-        }
-
         var granted = MacAccessibility.IsProcessTrusted() && MacAccessibility.IsInputMonitoringGranted();
 
-        if (IsRunning)
+        var action = CaptureWatchdogPolicy.Decide(new WatchdogObservation(
+            WantCapture: wanted,
+            Running: IsRunning,
+            PermissionsGranted: granted,
+            GapMs: gap,
+            NowMs: now,
+            RestartNotBeforeMs: Volatile.Read(ref _nextRestartAt),
+            RestartInFlight: Volatile.Read(ref _restarting) != 0));
+
+        switch (action)
         {
-            if (granted)
-                return;
+            case WatchdogAction.StopForSleep:
+                CaptureLog.Write($"Watchdog gap of {gap} ms (sleep or wake); restarting capture.");
+                StopCapture();
+                break;
 
-            CaptureLog.Write("Permission revoked while capturing; capture stopped until it is granted again.");
-            StopCapture();
-            Dispatcher.UIThread.Post(() => RaiseDiagnostic(Localizer.Instance["Status_AccessibilityRequired"]));
-            return;
+            case WatchdogAction.StopForRevoke:
+                CaptureLog.Write("Permission revoked while capturing; capture stopped until it is granted again.");
+                StopCapture();
+                Dispatcher.UIThread.Post(() => RaiseDiagnostic(Localizer.Instance["Status_AccessibilityRequired"]));
+                break;
+
+            case WatchdogAction.Restart:
+                RestartInBackground();
+                break;
         }
+    }
 
-        if (!granted || Environment.TickCount64 < Volatile.Read(ref _nextRestartAt))
-            return;
-
+    private void RestartInBackground()
+    {
         if (Interlocked.Exchange(ref _restarting, 1) != 0)
             return;
 

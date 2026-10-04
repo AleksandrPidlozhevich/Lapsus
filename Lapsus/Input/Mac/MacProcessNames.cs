@@ -12,6 +12,16 @@ internal static class MacProcessNames
         return Read(pid, buffer);
     }
 
+    public static string? ExecutablePath(int pid)
+    {
+        if (pid <= 0)
+            return null;
+
+        var buffer = new StringBuilder(4096);
+        var written = MacOSNativeMethods.proc_pidpath(pid, buffer, (uint)buffer.Capacity);
+        return written > 0 && buffer.Length > 0 ? buffer.ToString() : null;
+    }
+
     public static string? Read(int pid, StringBuilder buffer)
     {
         if (pid <= 0)

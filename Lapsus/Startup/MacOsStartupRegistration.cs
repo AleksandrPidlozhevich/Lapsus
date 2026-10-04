@@ -35,19 +35,13 @@ internal sealed class MacOsStartupRegistration : IStartupRegistration
         TryBootstrapBestEffort(path);
     }
 
+    // The plist stores the executable path, which changes after an update or a move. Rewriting it on
+    // each launch keeps the login item pointing at the running copy. launchctl is not called here: a
+    // login item that is running would be stopped by its own bootout.
     public static void RefreshIfEnabled()
     {
-        var path = PlistFilePath();
-        var exe = Environment.ProcessPath;
-        if (!File.Exists(path) || string.IsNullOrWhiteSpace(exe))
-            return;
-
-        var wanted = StartupRegistrationFiles.BuildMacOsPlistContent(exe);
-        if (File.ReadAllText(path) == wanted)
-            return;
-
-        File.WriteAllText(path, wanted, new UTF8Encoding(true));
-        CaptureLog.Write("Login item updated to the current app path.");
+        if (StartupRegistrationFiles.RefreshMacOsPlist(PlistFilePath(), Environment.ProcessPath ?? string.Empty))
+            CaptureLog.Write("Login item updated to the current app path.");
     }
 
     internal static string PlistFilePath()

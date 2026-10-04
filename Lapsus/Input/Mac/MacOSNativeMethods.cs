@@ -375,6 +375,9 @@ internal static class MacOSNativeMethods
     [DllImport("/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices")]
     public static extern IntPtr AXUIElementCreateApplication(int pid);
 
+    [DllImport("/usr/lib/libproc.dylib")]
+    public static extern int proc_pidpath(int pid, StringBuilder buffer, uint buffersize);
+
     [DllImport("/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices")]
     public static extern int AXUIElementCopyParameterizedAttributeValue(
         IntPtr element, IntPtr parameterizedAttribute, IntPtr parameter, out IntPtr value);

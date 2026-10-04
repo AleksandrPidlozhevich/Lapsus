@@ -26,6 +26,8 @@ internal static class MacDisplayChanges
     private static extern int CGDisplayRemoveReconfigurationCallback(
         ReconfigurationCallback callback, IntPtr userInfo);
 
+    internal static bool IsSubscribed => _callback is not null;
+
     public static void Subscribe(Action onChanged)
     {
         _onChanged = onChanged;

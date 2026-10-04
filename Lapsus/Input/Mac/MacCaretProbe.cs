@@ -69,6 +69,9 @@ internal static class MacCaretProbe
             }
         }
 
+        if (!ChromiumApps.IsChromiumExecutable(MacProcessNames.ExecutablePath(pid)))
+            return;
+
         var app = MacOSNativeMethods.AXUIElementCreateApplication(pid);
         if (app == IntPtr.Zero)
             return;

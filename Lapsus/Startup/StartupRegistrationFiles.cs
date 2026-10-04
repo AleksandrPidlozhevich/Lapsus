@@ -47,6 +47,21 @@ internal static class StartupRegistrationFiles
         return exe.Contains(' ') ? $"\"{exe}\"" : exe;
     }
 
+    // Rewrites an existing login item whose stored executable differs from the running one.
+    // Returns true only when it wrote the file.
+    public static bool RefreshMacOsPlist(string path, string exe)
+    {
+        if (!File.Exists(path) || string.IsNullOrWhiteSpace(exe))
+            return false;
+
+        var wanted = BuildMacOsPlistContent(exe);
+        if (File.ReadAllText(path) == wanted)
+            return false;
+
+        File.WriteAllText(path, wanted, new UTF8Encoding(true));
+        return true;
+    }
+
     public static string BuildMacOsPlistContent(string exe)
     {
         var plist = new XDocument(

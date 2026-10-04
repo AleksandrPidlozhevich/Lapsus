@@ -21,6 +21,8 @@ internal static class MacActivity
 
     private static IntPtr _token;
 
+    internal static bool IsActive => _token != IntPtr.Zero;
+
     public static void Begin()
     {
         if (_token != IntPtr.Zero)
