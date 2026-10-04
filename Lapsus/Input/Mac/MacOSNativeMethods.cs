@@ -29,6 +29,7 @@ internal static class MacOSNativeMethods
 
         AxFocusedUiElementChangedNotification = CreateCFString("AXFocusedUIElementChanged");
         AxFocusedWindowChangedNotification = CreateCFString("AXFocusedWindowChanged");
+        AxManualAccessibilityAttribute = CreateCFString("AXManualAccessibility");
         AxFocusedUiElementAttribute = CreateCFString("AXFocusedUIElement");
         AxRoleAttribute = CreateCFString("AXRole");
         AxSelectedTextRangeAttribute = CreateCFString("AXSelectedTextRange");
@@ -63,6 +64,8 @@ internal static class MacOSNativeMethods
     public static IntPtr AxFocusedUiElementChangedNotification { get; }
 
     public static IntPtr AxFocusedWindowChangedNotification { get; }
+
+    public static IntPtr AxManualAccessibilityAttribute { get; }
 
     public static IntPtr AxFocusedUiElementAttribute { get; }
 
@@ -368,6 +371,9 @@ internal static class MacOSNativeMethods
     [DllImport("/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices")]
     public static extern int AXUIElementSetAttributeValue(
         IntPtr element, IntPtr attribute, IntPtr value);
+
+    [DllImport("/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices")]
+    public static extern IntPtr AXUIElementCreateApplication(int pid);
 
     [DllImport("/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices")]
     public static extern int AXUIElementCopyParameterizedAttributeValue(

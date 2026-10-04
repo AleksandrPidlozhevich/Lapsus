@@ -55,6 +55,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private int _restarting;
 
+    private long _lastWatchdogTick;
+
     private long _nextRestartAt;
 
     public MacOSInputBackend(IPhraseCorrector corrector, AppExclusions? excludedApps = null)
@@ -141,6 +143,11 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
                 Volatile.Write(ref _capturing, true);
                 ArmWatchdog();
                 CaptureLog.Write("Capture running.");
+                Dispatcher.UIThread.Post(() =>
+                {
+                    if (_wantCapture)
+                        MacActivity.Begin();
+                });
                 return true;
             }
         }
@@ -172,6 +179,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         _swallowedKeyDown = null;
         _pendingHotkeyAction = null;
         ForgetTypingContext();
+        MacActivity.End();
         CaptureLog.Write("Capture stopped.");
     }
 
@@ -206,6 +214,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private void ArmWatchdog()
     {
+        Volatile.Write(ref _lastWatchdogTick, Environment.TickCount64);
         _watchdog.Change(WatchdogPeriodMs, WatchdogPeriodMs);
     }
 
@@ -220,6 +229,15 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     {
         if (!_wantCapture)
             return;
+
+        var now = Environment.TickCount64;
+        var gap = now - Interlocked.Exchange(ref _lastWatchdogTick, now);
+        if (gap > WatchdogPeriodMs * 3 && IsRunning)
+        {
+            CaptureLog.Write($"Watchdog gap of {gap} ms (sleep or wake); restarting capture.");
+            StopCapture();
+            return;
+        }
 
         var granted = MacAccessibility.IsProcessTrusted() && MacAccessibility.IsInputMonitoringGranted();
 

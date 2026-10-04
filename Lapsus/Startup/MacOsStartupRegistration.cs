@@ -35,6 +35,21 @@ internal sealed class MacOsStartupRegistration : IStartupRegistration
         TryBootstrapBestEffort(path);
     }
 
+    public static void RefreshIfEnabled()
+    {
+        var path = PlistFilePath();
+        var exe = Environment.ProcessPath;
+        if (!File.Exists(path) || string.IsNullOrWhiteSpace(exe))
+            return;
+
+        var wanted = StartupRegistrationFiles.BuildMacOsPlistContent(exe);
+        if (File.ReadAllText(path) == wanted)
+            return;
+
+        File.WriteAllText(path, wanted, new UTF8Encoding(true));
+        CaptureLog.Write("Login item updated to the current app path.");
+    }
+
     internal static string PlistFilePath()
     {
         return Path.Combine(

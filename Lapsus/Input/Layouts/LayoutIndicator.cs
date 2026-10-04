@@ -60,11 +60,15 @@ public sealed class LayoutIndicator : IDisposable
             if (value && IsSupported)
             {
                 HookMoveSize();
+                if (OperatingSystem.IsMacOS())
+                    MacDisplayChanges.Subscribe(OnDisplaysChanged);
                 _timer.Start();
             }
             else
             {
                 UnhookMoveSize();
+                if (OperatingSystem.IsMacOS())
+                    MacDisplayChanges.Unsubscribe();
                 _timer.Stop();
                 _refreshRetry.Stop();
                 _timer.Interval = Interval;
@@ -124,6 +128,15 @@ public sealed class LayoutIndicator : IDisposable
         Tick();
         _refreshRetry.Stop();
         _refreshRetry.Start();
+    }
+
+    private void OnDisplaysChanged()
+    {
+        if (!_enabled)
+            return;
+
+        _shownText = null;
+        Refresh();
     }
 
     private void OnRefreshRetry(object? sender, EventArgs e)

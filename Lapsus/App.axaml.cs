@@ -16,6 +16,7 @@ using Lapsus.Licensing;
 using Lapsus.Localization;
 using Lapsus.Neural;
 using Lapsus.Settings;
+using Lapsus.Startup;
 using Lapsus.Updates;
 using Lapsus.ViewModels;
 using Lapsus.Views;
@@ -66,6 +67,9 @@ public partial class App : Application
             base.OnFrameworkInitializationCompleted();
             return;
         }
+
+        if (OperatingSystem.IsMacOS())
+            _ = Task.Run(MacOsStartupRegistration.RefreshIfEnabled);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
