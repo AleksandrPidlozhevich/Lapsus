@@ -153,6 +153,103 @@ public sealed class MixedLanguageTests : IDisposable
         Assert.Equal("вітання привет", result.Corrected);
     }
 
+    // Real-keyboard lines where the language changes mid-way; counts follow the fixture lists.
+    private static readonly string[] English =
+    [
+        "you 28787591", "the 22761659", "to 17099834", "me 6444985", "this 5739788", "know 3892394",
+        "see 1781493", "let 1705262", "please 842120", "check 176507", "send 131999", "song 86877",
+        "report 77824", "code 35711", "review 30000", "s 110199",
+        "gia 3000", "ola 2500", "sto 2000"
+    ];
+
+    private static readonly string[] Greek =
+    [
+        "να 9569246", "το 7460197", "μου 3566240", "με 3186744", "για 3083034", "αυτό 2360488",
+        "στο 1831681", "είσαι 1001826", "όλα 415449", "ευχαριστώ 408824", "αρέσει 159218", "αύριο 94465",
+        "πότε 85776", "πρωί 72211", "σον 2000"
+    ];
+
+    private static readonly string[] Ukrainian =
+    [
+        "і 900000", "мені 300000", "завтра 60000", "напиши 5000"
+    ];
+
+    private static readonly LayoutSource RealEnglish = new(Script.Latin, "en", BundledKeyboardMaps.En, "en-US");
+
+    private static PhraseCorrection CorrectMixed(
+        string text, string code, KeyboardLayout layout, string[] words, bool activeIsTheOther = false)
+    {
+        using var harness = new ScriptHarness()
+            .With("en", Script.Latin, English)
+            .With(code, ScriptLayouts.ScriptOf(layout), words);
+
+        var other = new LayoutSource(ScriptLayouts.ScriptOf(layout), code, Layouts.Map(layout), code + "-id");
+        var candidates = new List<LayoutCandidate>
+        {
+            new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en-US"),
+            Layouts.To(layout, code)
+        };
+
+        return harness.Corrector().CorrectPhrase(
+            text, activeIsTheOther ? other : RealEnglish, [RealEnglish, other], candidates);
+    }
+
+    [Fact]
+    public void A_word_both_languages_know_goes_with_the_crossed_words_around_it()
+    {
+        var result = CorrectMixed("send the report a;yrio to prv;i", "el", KeyboardLayout.El, Greek);
+
+        Assert.Equal("send the report αύριο το πρωί", result.Corrected);
+    }
+
+    [Fact]
+    public void A_short_word_at_the_seam_of_a_mostly_english_line_stays_english()
+    {
+        var result = CorrectMixed("send the report to a;yrio prv;i", "el", KeyboardLayout.El, Greek);
+
+        Assert.Equal("send the report to αύριο πρωί", result.Corrected);
+    }
+
+    [Fact]
+    public void A_short_word_between_two_real_english_words_keeps_its_english()
+    {
+        var result = CorrectMixed("let me know p;ote e;isai", "el", KeyboardLayout.El, Greek);
+
+        Assert.Equal("let me know πότε είσαι", result.Corrected);
+    }
+
+    [Fact]
+    public void Words_after_one_crossing_follow_it_when_the_other_reading_is_far_commoner()
+    {
+        var result = CorrectMixed("see you eyxarist;v gia ;ola", "el", KeyboardLayout.El, Greek);
+
+        Assert.Equal("see you ευχαριστώ για όλα", result.Corrected);
+    }
+
+    [Fact]
+    public void A_greek_word_typed_in_greek_stays_between_english_ones()
+    {
+        var result = CorrectMixed("ρεωιες στο ψοδε", "el", KeyboardLayout.El, Greek, activeIsTheOther: true);
+
+        Assert.Equal("review στο code", result.Corrected);
+    }
+
+    [Fact]
+    public void An_english_word_typed_on_the_greek_layout_is_not_taken_for_a_greek_typo()
+    {
+        var result = CorrectMixed("μου αρέσει αυτό το σονγ", "el", KeyboardLayout.El, Greek, activeIsTheOther: true);
+
+        Assert.Equal("μου αρέσει αυτό το song", result.Corrected);
+    }
+
+    [Fact]
+    public void A_one_letter_word_joins_the_ukrainian_half_of_the_line()
+    {
+        var result = CorrectMixed("check this s yfgbib vtys pfdnhf", "uk", KeyboardLayout.Uk, Ukrainian);
+
+        Assert.Equal("check this і напиши мені завтра", result.Corrected);
+    }
+
     private string Temp(string tag, params string[] lines)
     {
         var path = Path.Combine(Path.GetTempPath(), $"lapsus-{tag}-{Guid.NewGuid():N}.txt");

@@ -33,11 +33,11 @@ public sealed class PhraseContextTests : IDisposable
     {
         _enPath = WriteTemp("en",
             "her 90000", "world 5000", "hello 900", "text 900", "milk 700", "car 600", "cat 500",
-            "z 40", "d 40", "b 30");
+            "let 900000", "vjkjj 900000", "z 40", "d 40", "b 30");
 
         _ruPath = WriteTemp("ru",
             "в 9000", "и 8000", "я 5000", "привет 4000", "мир 3500", "хочу 3000", "уже 2500", "текст 2000",
-            "ж 1500", "кофе 1000", "молоко 800", "тень 500", "рука 400", "рук 300");
+            "ж 1500", "кофе 1000", "молоко 800", "дуже 800", "тень 500", "рука 400", "рук 300");
 
         var spell = new SpellChecker(
         [
@@ -105,6 +105,24 @@ public sealed class PhraseContextTests : IDisposable
         Assert.Equal("рука", Correct("herf").Corrected);
 
         Assert.Equal("hello world her", Correct("hello world herf").Corrected);
+    }
+
+    [Fact]
+    public void A_dropped_letter_is_restored_when_the_other_layout_reads_a_commoner_word()
+    {
+        // "молоо" is молоко with к dropped; those keys alone are the common English word "vjkjj".
+        var result = Correct("привет мир молоо", active: RuSource);
+
+        Assert.Equal("привет мир молоко", result.Corrected);
+    }
+
+    [Fact]
+    public void A_swapped_pair_is_restored_when_the_other_layout_reads_a_commoner_word()
+    {
+        // "дуеж" is дуже with е/ж swapped; those keys alone are the common English word "let".
+        var result = Correct("привет мир дуеж", active: RuSource);
+
+        Assert.Equal("привет мир дуже", result.Corrected);
     }
 
     [Fact]
@@ -228,6 +246,14 @@ public sealed class PhraseContextTests : IDisposable
         Assert.False(result.Changed);
         Assert.Equal("привет мир npm", result.Corrected);
         Assert.Null(result.TargetLayout);
+    }
+
+    [Fact]
+    public void A_two_edit_guess_beside_english_words_is_not_carried_by_crossings_elsewhere()
+    {
+        var result = Correct("ghbdtn vbh hello world npm");
+
+        Assert.Equal("привет мир hello world npm", result.Corrected);
     }
 
     [Fact]
