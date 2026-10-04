@@ -35,7 +35,7 @@ internal static class MacOSNativeMethods
         AxSelectedTextRangeAttribute = CreateCFString("AXSelectedTextRange");
         AxSelectedTextAttribute = CreateCFString("AXSelectedText");
         AxValueAttribute = CreateCFString("AXValue");
-        AxBoundsForRangeParameterizedAttribute = CreateCFString("AXBoundsForRangeParameterized");
+        AxBoundsForRangeParameterizedAttribute = CreateCFString("AXBoundsForRange");
     }
 
     private static IntPtr ReadGlobalConstant(IntPtr library, string symbolName)
