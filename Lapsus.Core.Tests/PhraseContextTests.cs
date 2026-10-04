@@ -33,7 +33,7 @@ public sealed class PhraseContextTests : IDisposable
     {
         _enPath = WriteTemp("en",
             "her 90000", "world 5000", "hello 900", "text 900", "milk 700", "car 600", "cat 500",
-            "z 40", "d 40", "b 30");
+            "vjkjj 900000", "z 40", "d 40", "b 30");
 
         _ruPath = WriteTemp("ru",
             "в 9000", "и 8000", "я 5000", "привет 4000", "мир 3500", "хочу 3000", "уже 2500", "текст 2000",
@@ -105,6 +105,15 @@ public sealed class PhraseContextTests : IDisposable
         Assert.Equal("рука", Correct("herf").Corrected);
 
         Assert.Equal("hello world her", Correct("hello world herf").Corrected);
+    }
+
+    [Fact]
+    public void A_dropped_letter_is_restored_when_the_other_layout_reads_a_commoner_word()
+    {
+        // "молоо" is молоко with к dropped; those keys alone are the common English word "vjkjj".
+        var result = Correct("привет мир молоо", active: RuSource);
+
+        Assert.Equal("привет мир молоко", result.Corrected);
     }
 
     [Fact]

@@ -159,8 +159,12 @@ internal sealed class PhraseContext(
             return null;
 
         // A keys-alone crossing that reads as nothing in its own script, into a commoner word than the fix,
-        // is a word of the other language: σονγ is "song", not σον.
+        // is a word of the other language: σονγ is "song", not σον. Restoring a dropped letter lengthens
+        // the word (хеб → хлеб); that is the typo, and the other language must not keep it.
+        var typedLetters = WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length;
+        var fixedLetters = WordScanner.TrimToLetters(fix.Text, token.Source.Script).Length;
         if (token.Edits == 0 &&
+            fixedLetters <= typedLetters &&
             scorer.NaturalnessOf(token.Typed, token.Source.Script, token.Source.LanguageCode) < MinNaturalnessOfATypo &&
             scorer.FrequencyOf(token.Chosen.Text, into) > scorer.FrequencyOf(fix.Text, token.Source.Script))
             return null;
