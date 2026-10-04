@@ -231,6 +231,14 @@ public sealed class PhraseContextTests : IDisposable
     }
 
     [Fact]
+    public void A_two_edit_guess_beside_english_words_is_not_carried_by_crossings_elsewhere()
+    {
+        var result = Correct("ghbdtn vbh hello world npm");
+
+        Assert.Equal("привет мир hello world npm", result.Corrected);
+    }
+
+    [Fact]
     public void The_same_foreign_word_alone_is_still_corrected()
     {
         var result = Correct("npm");
