@@ -302,7 +302,7 @@ public partial class SettingsViewModel : ViewModelBase
         {
             var saved = SavedSelectionHotkey(action);
             var option = options.FirstOrDefault(o => o.VirtualKey == saved);
-            if (option is null && HotkeyCombo.IsCombo(saved))
+            if (option is null && (HotkeyCombo.IsCombo(saved) || HotkeyNames.IsNamedKey(saved)))
                 option = AddRecordedOption(saved);
 
             if (saved == 0 || option is null || !taken.Add(saved))
@@ -510,7 +510,7 @@ public partial class SettingsViewModel : ViewModelBase
         if (match is not null)
             return match;
 
-        if (HotkeyCombo.IsCombo(savedVirtualKey))
+        if (HotkeyCombo.IsCombo(savedVirtualKey) || HotkeyNames.IsNamedKey(savedVirtualKey))
             return AddRecordedOption(savedVirtualKey);
 
         var fallback = Hotkeys[0];

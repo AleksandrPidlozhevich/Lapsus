@@ -19,6 +19,21 @@ internal static class HotkeyNames
         return string.Join('+', ModifierLabels(modifiers).Append(WindowsKeyName(key)));
     }
 
+    // A key that may be recorded on its own (F-keys, Home, Page Up...), the same set the backends accept while capturing.
+    // Saved values are checked against it on load, so a recorded standalone key survives a restart.
+    public static bool IsNamedKey(int key)
+    {
+        if (OperatingSystem.IsMacOS())
+        {
+            return key is 0x39 or 0x72 or 0x73 or 0x74 or 0x75 or 0x77 or 0x79
+                or 0x7A or 0x78 or 0x63 or 0x76 or 0x60 or 0x61 or 0x62 or 0x64 or 0x65 or 0x6D or 0x67 or 0x6F
+                or 0x69 or 0x6B or 0x71 or 0x6A or 0x40 or 0x4F or 0x50 or 0x5A;
+        }
+
+        return key is 0x13 or 0x14 or 0x91 or 0x2D or 0x2E or 0x24 or 0x23 or 0x21 or 0x22
+            or (>= 0x70 and <= 0x87);
+    }
+
     // The modifiers held right now, shown as chips while a shortcut is being recorded.
     public static IReadOnlyList<string> ModifierLabels(HotkeyModifiers modifiers)
     {
