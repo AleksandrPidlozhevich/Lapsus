@@ -26,27 +26,27 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <AvaloniaResource Include="Assets\**"/>
+        <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="12.1.2" />
-        <PackageReference Include="Avalonia.Desktop" Version="12.1.2" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.2" />
+        <PackageReference Include="Avalonia" Version="12.1.3" />
+        <PackageReference Include="Avalonia.Desktop" Version="12.1.3" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.3" />
         <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
         <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="12.0.0.17" />
-        <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.12"/>
-        <PackageReference Include="Velopack" Version="1.2.0"/>
+        <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.12" />
+        <PackageReference Include="Velopack" Version="1.2.161" />
     </ItemGroup>
 
     <!-- The ONNX Runtime GenAI package, and which one each OS takes, lives in Lapsus.Neural. -->
     <ItemGroup>
-        <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj"/>
-        <ProjectReference Include="..\Lapsus.Neural\Lapsus.Neural.csproj"/>
+        <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj" />
+        <ProjectReference Include="..\Lapsus.Neural\Lapsus.Neural.csproj" />
     </ItemGroup>
 
     <!--
@@ -56,6 +56,6 @@
       pinning down, and they do not need an OS to run.
     -->
     <ItemGroup>
-        <InternalsVisibleTo Include="Lapsus.Tests"/>
+        <InternalsVisibleTo Include="Lapsus.Tests" />
     </ItemGroup>
 </Project>

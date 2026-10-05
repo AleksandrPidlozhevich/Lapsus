@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector" Version="10.0.1">
+        <PackageReference Include="coverlet.collector" Version="10.1.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0"/>
-        <PackageReference Include="xunit" Version="2.9.3"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+        <PackageReference Include="xunit" Version="2.9.3" />
         <PackageReference Include="xunit.runner.visualstudio" Version="4.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,17 +21,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Xunit"/>
+        <Using Include="Xunit" />
     </ItemGroup>
 
     <!-- Mints keys for LicenseStoreTests. Linked, rather than a reference to Lapsus.Core.Tests,
          so this project does not take that test assembly as a dependency. -->
     <ItemGroup>
-        <Compile Include="..\Lapsus.Core.Tests\LicenseIssuer.cs" Link="LicenseIssuer.cs"/>
+        <Compile Include="..\Lapsus.Core.Tests\LicenseIssuer.cs" Link="LicenseIssuer.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Lapsus\Lapsus.csproj"/>
+        <ProjectReference Include="..\Lapsus\Lapsus.csproj" />
     </ItemGroup>
 
 </Project>
