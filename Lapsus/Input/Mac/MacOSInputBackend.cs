@@ -20,8 +20,6 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private static readonly TimeSpan TapThreadJoin = TimeSpan.FromSeconds(2);
 
-    private const int WatchdogPeriodMs = 2000;
-
     private const long RestartBackoffMs = 10_000;
 
     private readonly MacOSNativeMethods.EventTapCallback _callback;
@@ -34,6 +32,13 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     private Exception? _startError;
     private readonly ManualResetEventSlim _tapReady = new(false);
     private int _lastForegroundPid = -1;
+
+    // Bumped on every capture stop so a key posted by the tap cannot land in a later session.
+    private int _tapEpoch;
+
+    // UI thread publishes which pid it has classified; the tap only reads this and fails open.
+    // Packed so the pid and the excluded flag are published together: high 32 bits are the pid.
+    private long _excludedSnapshot;
 
     private ushort? _swallowedKeyDown;
 
@@ -201,6 +206,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private void StopCapture()
     {
+        // Before capturing goes false, so a callback that already passed IsRunning still posts the old epoch.
+        Interlocked.Increment(ref _tapEpoch);
+
         var tap = Volatile.Read(ref _eventTap);
         if (tap != IntPtr.Zero)
             MacOSNativeMethods.CGEventTapEnable(tap, false);
@@ -212,10 +220,33 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             MacOSNativeMethods.CFRunLoopStop(runLoop);
     }
 
+    private int _watchdogPeriodMs = CaptureWatchdogPolicy.PeriodMs;
+
     private void ArmWatchdog()
     {
+        ArmWatchdog(CaptureWatchdogPolicy.PeriodMs);
+    }
+
+    private void ArmWatchdog(int periodMs)
+    {
+        Volatile.Write(ref _watchdogPeriodMs, periodMs);
         Volatile.Write(ref _lastWatchdogTick, Environment.TickCount64);
-        _watchdog.Change(WatchdogPeriodMs, WatchdogPeriodMs);
+        _watchdog.Change(periodMs, periodMs);
+    }
+
+    // Only retune while the user still wants capture. The lock is the same one Stop holds across
+    // Disarm, so a tick already in flight cannot Change() the timer back on after capture stops.
+    private void RetuneWatchdog(bool running, bool permissionsGranted)
+    {
+        var period = CaptureWatchdogPolicy.NextPeriodMs(running, permissionsGranted);
+        lock (_lifecycle)
+        {
+            if (!_wantCapture || Volatile.Read(ref _watchdogPeriodMs) == period)
+                return;
+
+            Volatile.Write(ref _watchdogPeriodMs, period);
+            _watchdog.Change(period, period);
+        }
     }
 
     private void DisarmWatchdog()
@@ -231,25 +262,29 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         var gap = now - Interlocked.Exchange(ref _lastWatchdogTick, now);
         var granted = MacAccessibility.IsProcessTrusted() && MacAccessibility.IsInputMonitoringGranted();
 
+        var running = IsRunning;
         var action = CaptureWatchdogPolicy.Decide(new WatchdogObservation(
             WantCapture: wanted,
-            Running: IsRunning,
+            Running: running,
             PermissionsGranted: granted,
             GapMs: gap,
             NowMs: now,
             RestartNotBeforeMs: Volatile.Read(ref _nextRestartAt),
-            RestartInFlight: Volatile.Read(ref _restarting) != 0));
+            RestartInFlight: Volatile.Read(ref _restarting) != 0,
+            ArmedPeriodMs: Volatile.Read(ref _watchdogPeriodMs)));
 
         switch (action)
         {
             case WatchdogAction.StopForSleep:
                 CaptureLog.Write($"Watchdog gap of {gap} ms (sleep or wake); restarting capture.");
                 StopCapture();
+                running = false;
                 break;
 
             case WatchdogAction.StopForRevoke:
                 CaptureLog.Write("Permission revoked while capturing; capture stopped until it is granted again.");
                 StopCapture();
+                running = false;
                 Dispatcher.UIThread.Post(() => RaiseDiagnostic(Localizer.Instance["Status_AccessibilityRequired"]));
                 break;
 
@@ -257,6 +292,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
                 RestartInBackground();
                 break;
         }
+
+        if (_wantCapture)
+            RetuneWatchdog(running, granted);
     }
 
     private void RestartInBackground()
@@ -287,8 +325,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     {
         ClearTypingContext(default);
         _deadKeyState = 0;
-        _lastForegroundPid = -1;
-        _lastEventSourcePid = 0;
+        Interlocked.Exchange(ref _lastForegroundPid, -1);
+        Interlocked.Exchange(ref _lastEventSourcePid, 0);
+        Volatile.Write(ref _excludedSnapshot, 0);
         lock (_procNameGate)
         {
             _procNameCachedPid = 0;
@@ -383,7 +422,11 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     protected override string ForegroundAppName()
     {
-        var pid = ResolveForegroundPid();
+        return ProcessName(ResolveForegroundPid());
+    }
+
+    private string ProcessName(int pid)
+    {
         if (pid <= 0)
             return "?";
 
@@ -400,14 +443,36 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private int ResolveForegroundPid()
     {
-        if (_lastForegroundPid > 0)
-            return _lastForegroundPid;
+        var known = Volatile.Read(ref _lastForegroundPid);
+        if (known > 0)
+            return known;
 
         var pid = MacTypingFocusWatcher.ReadFocus(out _).Pid;
         if (pid > 0)
-            _lastForegroundPid = pid;
+            Interlocked.Exchange(ref _lastForegroundPid, pid);
 
         return pid;
+    }
+
+    private void RememberExclusion(int pid)
+    {
+        if (pid <= 0)
+            return;
+
+        var name = ProcessName(pid);
+        if (name == "?")
+            return;
+
+        var packed = ((long)pid << 32) | (ExcludedApps.Contains(name) ? 1L : 0L);
+        Volatile.Write(ref _excludedSnapshot, packed);
+    }
+
+    private bool ShouldSwallowHotkey(int eventPid)
+    {
+        var packed = Volatile.Read(ref _excludedSnapshot);
+        var snapshotPid = (int)(packed >> 32);
+        var excluded = (packed & 1L) != 0;
+        return TapUiGate.SwallowHotkey(eventPid, snapshotPid, excluded);
     }
 
     protected override string? ForegroundProcessName()
@@ -418,7 +483,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     protected override string? PlatformInputBlockedReason()
     {
-        if (SkipPasswordFields && MacOSNativeMethods.IsSecureEventInputEnabled())
+        if (SkipPasswordFields && IsSecureInputEnabled())
             return Localizer.Instance["Diag_SecureField"];
 
         if (MacInstalledLayouts.CurrentSourceIsInputMethod())
@@ -427,9 +492,28 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         return null;
     }
 
+    private const int SecureInputCacheMs = 200;
+
+    private long _secureInputCheckedAt;
+
+    private bool _secureInputEnabled;
+
+    // UI thread only. Secure Event Input flips when focus enters or leaves a password field, so a
+    // short cache is enough and the tap does not ask the system on every key.
+    private bool IsSecureInputEnabled()
+    {
+        var now = Environment.TickCount64;
+        if (now - _secureInputCheckedAt < SecureInputCacheMs)
+            return _secureInputEnabled;
+
+        _secureInputEnabled = MacOSNativeMethods.IsSecureEventInputEnabled();
+        _secureInputCheckedAt = now;
+        return _secureInputEnabled;
+    }
+
     protected override string? TypingBlockedReason()
     {
-        if (DiscardBufferIfFocusChanged(_lastEventSourcePid))
+        if (DiscardBufferIfFocusChanged(Volatile.Read(ref _lastEventSourcePid)))
         {
             _deadKeyState = 0;
             return Localizer.Instance.Format("Diag_FocusChanged", ForegroundAppName());
@@ -649,7 +733,12 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private void OnAccessibilityFocusChanged()
     {
-        Dispatcher.UIThread.Post(() => DiscardBufferIfFocusChanged());
+        var epoch = Volatile.Read(ref _tapEpoch);
+        PostFromTap(epoch, () =>
+        {
+            DiscardBufferIfFocusChanged();
+            RememberExclusion(Volatile.Read(ref _lastForegroundPid));
+        });
     }
 
     private void ReleaseTapResources(
@@ -681,9 +770,12 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         }
     }
 
-    // Tap thread: swallow only; mutate shared buffer state on the UI thread.
+    // Tap thread: swallow only. Shared buffer state is posted to the UI thread with the epoch captured
+    // at the start of this call, so a stop that lands mid-callback cannot apply the key to a new session.
     private IntPtr EventTapHandlerCore(IntPtr proxy, int type, IntPtr @event, IntPtr userInfo)
     {
+        var epoch = Volatile.Read(ref _tapEpoch);
+
         if (type is MacOSNativeMethods.EventTapDisabledByTimeout
             or MacOSNativeMethods.EventTapDisabledByUserInput)
         {
@@ -693,19 +785,22 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
                 MacOSNativeMethods.CGEventTapEnable(tap, true);
                 var reason = type;
                 _ = Task.Run(() => CaptureLog.Write($"Event tap disabled by the system (reason {reason}); re-enabled."));
-                Dispatcher.UIThread.Post(() => RaiseDiagnostic(Localizer.Instance["Diag_TapReenabled"]));
+                PostFromTap(epoch, () => RaiseDiagnostic(Localizer.Instance["Diag_TapReenabled"]));
             }
 
             return @event;
         }
 
+        if (!IsRunning)
+            return PassThrough(@event);
+
         if (type is MacOSNativeMethods.EventLeftMouseDown
             or MacOSNativeMethods.EventRightMouseDown
             or MacOSNativeMethods.EventOtherMouseDown)
         {
-            NoteNonModifierInput();
-            Dispatcher.UIThread.Post(() =>
+            PostFromTap(epoch, () =>
             {
+                NoteNonModifierInput();
                 _deadKeyState = 0;
                 ResetTypingBuffer();
             });
@@ -737,7 +832,10 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         if (type == MacOSNativeMethods.EventFlagsChanged)
         {
             if (ModifierOf(keyCode) is { } modifier)
-                NoteModifierKey(modifier, (flags & FlagMaskOf(modifier)) != 0);
+            {
+                var down = (flags & FlagMaskOf(modifier)) != 0;
+                PostFromTap(epoch, () => NoteModifierKey(modifier, down, defer: false));
+            }
 
             return @event;
         }
@@ -751,16 +849,14 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             var run = _pendingHotkeyAction;
             _pendingHotkeyAction = null;
             if (run is not null)
-                Dispatcher.UIThread.Post(run);
+                PostFromTap(epoch, run);
             return IntPtr.Zero;
         }
 
-        NoteNonModifierInput();
-
         if (IsCorrectionHotkey(keyCode, flags))
         {
-
-            if (IsExcludedApp(out _))
+            PostFromTap(epoch, NoteNonModifierInput);
+            if (!ShouldSwallowHotkey(pid))
                 return @event;
 
             _swallowedKeyDown = keyCode;
@@ -770,7 +866,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
         if (!HasMeaningfulModifiers(flags) && SelectionActionFor(keyCode) is { } action)
         {
-            if (IsExcludedApp(out _))
+            PostFromTap(epoch, NoteNonModifierInput);
+            if (!ShouldSwallowHotkey(pid))
                 return @event;
 
             _swallowedKeyDown = keyCode;
@@ -781,7 +878,36 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         var typed = TypedText(@event);
         var autoRepeat = MacOSNativeMethods.CGEventGetIntegerValueField(
             @event, MacOSNativeMethods.EventKeyboardAutorepeat) != 0;
-        Dispatcher.UIThread.Post(() => CaptureKey(keyCode, flags, autoRepeat, typed, pid));
+        PostFromTap(epoch, () =>
+        {
+            NoteNonModifierInput();
+            CaptureKey(keyCode, flags, autoRepeat, typed, pid);
+        });
+        return @event;
+    }
+
+    private void PostFromTap(int epoch, Action action)
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            if (!TapUiGate.Accept(epoch, Volatile.Read(ref _tapEpoch), IsRunning))
+                return;
+
+            action();
+        });
+    }
+
+    // Capture is off, but an in-flight injection must still lose its marker or Chromium drops the key.
+    private static IntPtr PassThrough(IntPtr @event)
+    {
+        if (@event != IntPtr.Zero
+            && MacOSNativeMethods.CGEventGetIntegerValueField(@event, MacOSNativeMethods.EventSourceUserData)
+                == MacOSNativeMethods.InjectedMarker)
+        {
+            MacOSNativeMethods.CGEventSetIntegerValueField(
+                @event, MacOSNativeMethods.EventSourceUserData, 0);
+        }
+
         return @event;
     }
 
@@ -792,9 +918,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         var pid = (int)MacOSNativeMethods.CGEventGetIntegerValueField(
             @event, MacOSNativeMethods.EventSourceUnixProcessId);
 
-        _lastEventSourcePid = pid;
+        Interlocked.Exchange(ref _lastEventSourcePid, pid);
         if (pid > 0)
-            _lastForegroundPid = pid;
+            Interlocked.Exchange(ref _lastForegroundPid, pid);
 
         return pid;
     }
@@ -867,6 +993,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         if (DiscardBufferIfFocusChanged(pid))
             pendingDeadKey = 0;
 
+        RememberExclusion(pid);
+
         DropTypingBufferIfIdle();
         EndCorrectionCycle();
 
@@ -877,7 +1005,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         }
 
         // Skip when Secure Event Input is on (password fields / Terminal); tap sees no keys.
-        if (SkipPasswordFields && MacOSNativeMethods.IsSecureEventInputEnabled())
+        if (SkipPasswordFields && IsSecureInputEnabled())
         {
             ResetTypingBuffer();
             return;
@@ -967,7 +1095,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             focus = new MacTypingFocus(pidFallback, 0);
 
         if (focus.Pid > 0)
-            _lastForegroundPid = focus.Pid;
+            Interlocked.Exchange(ref _lastForegroundPid, focus.Pid);
 
         return ApplyFocusSnapshot(focus, isTransient);
     }
