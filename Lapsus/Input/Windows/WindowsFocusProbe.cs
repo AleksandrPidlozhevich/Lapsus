@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
+using System.Threading.Tasks;
 using static Lapsus.Input.NativeMethods;
 
 namespace Lapsus.Input;
@@ -17,21 +18,24 @@ internal sealed class WindowsFocusProbe
 {
     private readonly StringBuilder _classNameBuffer = new(256);
 
+    // Secure-field checks run on worker threads. Until one finishes, the field counts as protected:
+    // the hook must never wait on another process, and an unknown field must not get typed text captured.
     private IntPtr _passwordCheckedFocus = IntPtr.Zero;
-    private bool _focusIsPassword;
+    private Task<bool>? _focusCheck;
+    private Task<bool>? _eventCheck;
+    private (IntPtr Hwnd, int Object, int Child) _eventKey;
 
     private IntPtr _processCheckedWindow = IntPtr.Zero;
     private string? _processName;
-
-    private bool _focusIsProtected;
 
     public bool SkipPasswordFields { get; set; } = true;
 
     public void Reset()
     {
-        _focusIsProtected = false;
+        _eventKey = default;
+        _eventCheck = null;
         _passwordCheckedFocus = IntPtr.Zero;
-        _focusIsPassword = false;
+        _focusCheck = null;
         _processCheckedWindow = IntPtr.Zero;
         _processName = null;
     }
@@ -67,34 +71,47 @@ internal sealed class WindowsFocusProbe
     public void NoteWinEvent(uint eventType, IntPtr hwnd, int idObject, int idChild)
     {
         if (eventType == EVENT_OBJECT_FOCUS)
-            _focusIsProtected = SkipPasswordFields
-                                && WindowsSecureInput.IsProtectedAccessibleObject(hwnd, idObject, idChild);
-        else if (eventType == EVENT_SYSTEM_FOREGROUND)
-            _focusIsProtected = false;
-        else
+        {
+            // Focus events repeat for the element already being typed in. Re-checking it would make the
+            // field pending mid-word, and a pending field clears the typing buffer, so keep the verdict.
+            var key = (hwnd, idObject, idChild);
+            if (key == _eventKey && _eventCheck is not null)
+                return;
+
+            _eventKey = key;
+            _eventCheck = SkipPasswordFields
+                ? WindowsSecureInput.IsProtectedAccessibleObject(hwnd, idObject, idChild)
+                : null;
+            return;
+        }
+
+        if (eventType != EVENT_SYSTEM_FOREGROUND)
             return;
 
+        _eventKey = default;
+        _eventCheck = null;
         _passwordCheckedFocus = IntPtr.Zero;
-        _focusIsPassword = false;
+        _focusCheck = null;
     }
 
+    // Called from the keyboard hook and the WinEvent handler, so it never blocks: an unfinished check reads as protected.
     public bool IsPassword(IntPtr focus)
     {
         if (!SkipPasswordFields)
             return false;
 
-        if (_focusIsProtected)
+        if (_eventCheck is { } eventCheck && (!eventCheck.IsCompleted || eventCheck.Result))
             return true;
 
-        if (focus != _passwordCheckedFocus)
+        if (_focusCheck is null || focus != _passwordCheckedFocus)
         {
             _passwordCheckedFocus = focus;
-
-            _focusIsPassword = WindowsSecureInput.IsPasswordField(focus)
-                               || WindowsSecureInput.IsProtectedFocusedElement(focus);
+            _focusCheck = WindowsSecureInput.IsPasswordField(focus)
+                ? Task.FromResult(true)
+                : WindowsSecureInput.IsProtectedFocusedElement(focus);
         }
 
-        return _focusIsPassword;
+        return !_focusCheck.IsCompleted || _focusCheck.Result;
     }
 
     public string? ForegroundProcessName()

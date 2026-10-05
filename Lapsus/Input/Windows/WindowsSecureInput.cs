@@ -28,9 +28,10 @@ internal static class WindowsSecureInput
         return (GetWindowLong(hwnd, GwlStyle) & EsPassword) != 0;
     }
 
-    public static bool IsProtectedAccessibleObject(IntPtr hwnd, int idObject, int idChild)
+    // Off the calling thread: MSAA/COM calls into other processes can take hundreds of milliseconds.
+    public static Task<bool> IsProtectedAccessibleObject(IntPtr hwnd, int idObject, int idChild)
     {
-        return RunWithTimeout(() =>
+        return Task.Run(() =>
         {
             try
             {
@@ -49,12 +50,12 @@ internal static class WindowsSecureInput
         });
     }
 
-    public static bool IsProtectedFocusedElement(IntPtr hwnd)
+    public static Task<bool> IsProtectedFocusedElement(IntPtr hwnd)
     {
         if (hwnd == IntPtr.Zero)
-            return false;
+            return Task.FromResult(false);
 
-        return RunWithTimeout(() =>
+        return Task.Run(() =>
         {
             try
             {
@@ -78,14 +79,6 @@ internal static class WindowsSecureInput
                 return false;
             }
         });
-    }
-
-    private static readonly TimeSpan ComCallTimeout = TimeSpan.FromMilliseconds(300);
-
-    private static bool RunWithTimeout(Func<bool> work)
-    {
-        var task = Task.Run(work);
-        return task.Wait(ComCallTimeout) && task.Result;
     }
 
     private static bool IsProtected(IAccessible accessible, object childId)

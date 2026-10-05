@@ -120,7 +120,7 @@ public partial class App : Application
             _singleInstance?.StartWatching(ShowWindow);
 
             _updater.UpdateReadyToInstall += (_, _) => ShowUpdateAvailable();
-            _ = _updater.CheckSilentlyAsync();
+            _ = CheckForUpdateLaterAsync();
 
             _ = CheckLicenseAsync();
 
@@ -132,6 +132,14 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    // A silent update downloads a whole package. Wait until startup (dictionary load, hook install)
+    // has settled so the download does not compete with it and make the machine stutter.
+    private async Task CheckForUpdateLaterAsync()
+    {
+        await Task.Delay(TimeSpan.FromMinutes(3)).ConfigureAwait(true);
+        await _updater.CheckSilentlyAsync().ConfigureAwait(true);
     }
 
     private async Task RebuildBrainAsync()

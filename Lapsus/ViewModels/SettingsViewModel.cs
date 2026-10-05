@@ -790,10 +790,14 @@ public partial class SettingsViewModel : ViewModelBase
     {
         try
         {
-            // Start can take seconds while the OS creates the event tap, so it runs on a worker.
+            // macOS: Start can take seconds while the OS creates the event tap, so it runs on a worker.
+            // Windows: the WH_KEYBOARD_LL hook must be installed on a thread that pumps messages (the UI
+            // thread). On a pool thread Windows times out every key event and silently drops the hook.
             // Stop touches UI-owned typing state and stays on this thread.
-            if (Enabled)
+            if (Enabled && OperatingSystem.IsMacOS())
                 await Task.Run(() => _backend.Start()).ConfigureAwait(true);
+            else if (Enabled)
+                _backend.Start();
             else
                 _backend.Stop();
         }
