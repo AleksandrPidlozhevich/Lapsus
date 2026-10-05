@@ -67,6 +67,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Gyorsbillentyű</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>Rögzítés</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>Nyomja meg a kívánt kombinációt</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>Módosítóbillentyűvel együtt · Esc: mégse</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>Adjon hozzá módosítóbillentyűt</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>Mégse</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Kijelölés javítása</value>
   </data>
@@ -363,6 +378,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>Alkalmazások</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>Gombok</value>
   </data>
     <data name="Excluded_Label" xml:space="preserve">
     <value>Békén hagyandó szavak</value>

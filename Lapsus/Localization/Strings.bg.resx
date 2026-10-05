@@ -67,6 +67,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Бърз клавиш</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>Запиши</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>Натиснете желаната комбинация</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>С клавиш-модификатор · Esc — отказ</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>Добавете клавиш-модификатор</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>Отказ</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Поправяне на избраното</value>
   </data>
@@ -363,6 +378,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>Приложения</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>Клавиши</value>
   </data>
     <data name="Excluded_Label" xml:space="preserve">
     <value>Думи, които да не се пипат</value>

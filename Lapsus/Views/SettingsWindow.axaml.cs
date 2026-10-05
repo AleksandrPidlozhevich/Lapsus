@@ -20,6 +20,7 @@ public partial class SettingsWindow : Window
         _designMinHeight = MinHeight;
         ApplyThemedAssets();
         PinToViewport(GeneralScroll, GeneralList);
+        PinToViewport(HotkeysScroll, HotkeysList);
         PinToViewport(AppsScroll, AppsList);
         PinToViewport(LibraryScroll, LibraryList);
         PinToViewport(AiScroll, AiList);
@@ -45,6 +46,9 @@ public partial class SettingsWindow : Window
                 application.ActualThemeVariantChanged -= OnThemeChanged;
             Localizer.Instance.LanguageChanged -= OnLanguageChanged;
         };
+
+        // A recording swallows key presses system-wide, so it ends as soon as the window stops being the active one.
+        Deactivated += (_, _) => ViewModel?.CancelHotkeyRecording();
     }
 
     private readonly double _designWidth;

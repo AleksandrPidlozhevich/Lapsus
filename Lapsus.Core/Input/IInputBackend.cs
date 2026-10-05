@@ -12,6 +12,11 @@ public interface IInputBackend : IDisposable
 
     void SetSelectionHotkey(SelectionAction action, int trigger);
 
+    // Hands the next shortcut the user presses to sink instead of the app, until it is captured or cancelled.
+    void BeginHotkeyCapture(Action<HotkeyCaptureEvent> sink);
+
+    void CancelHotkeyCapture();
+
     bool AutoMode { get; set; }
 
     bool AutoFixTypos { get; set; }

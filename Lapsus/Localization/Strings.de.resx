@@ -67,6 +67,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tastenkürzel</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>Aufnehmen</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>Gewünschte Tastenkombination drücken</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>Mit einer Zusatztaste · Esc bricht ab</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>Zusatztaste hinzufügen</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Auswahl korrigieren</value>
   </data>
@@ -363,6 +378,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>Apps</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>Tasten</value>
   </data>
     <data name="Excluded_Label" xml:space="preserve">
     <value>Wörter, die unangetastet bleiben</value>

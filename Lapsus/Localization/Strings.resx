@@ -68,6 +68,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Hotkey</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>Record</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>Press the keys you want to use</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>Hold a modifier key with it · Esc cancels</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>Add a modifier key to this one</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Correct the selection</value>
   </data>
@@ -367,6 +382,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>Apps</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>Hotkeys</value>
   </data>
 
     <data name="Excluded_Label" xml:space="preserve">

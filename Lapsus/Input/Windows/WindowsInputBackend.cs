@@ -323,6 +323,9 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
 
         TrackModifiers(vk, isDown, isUp);
 
+        if (IsCapturingHotkey && FeedHotkeyCapture((int)vk, isDown, KeyKindOf(vk), HeldModifiers()))
+            return 1;
+
         if (ModifierOf(vk) is { } modifier)
         {
             if (isDown || isUp)
@@ -420,16 +423,16 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
 
     private bool TryDispatchHotkey(uint vk)
     {
+        var held = HeldModifiers();
+        var plainAllowed = !IsShortcutModifierDown;
+
         Action? run = null;
-        if ((int)vk == HotkeyVirtualKey)
+        if (TriggerMatches(HotkeyVirtualKey, (int)vk, held, plainAllowed))
             run = ApplyCorrection;
-        else if (SelectionActionFor((int)vk) is { } action)
+        else if (SelectionActionForKey((int)vk, held, plainAllowed) is { } action)
             run = () => _ = ApplySelectionActionAsync(action);
 
         if (run is null)
-            return false;
-
-        if (IsShortcutModifierDown)
             return false;
 
         if (IsExcludedApp(out _))
@@ -437,6 +440,37 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
 
         _pendingHotkeyAction = run;
         return true;
+    }
+
+    private HotkeyModifiers HeldModifiers()
+    {
+        var held = HotkeyModifiers.None;
+        if (_shiftDown)
+            held |= HotkeyModifiers.Shift;
+
+        // AltGr arrives as Ctrl with RightAlt; that Ctrl was not pressed by the user.
+        if (_ctrlDown && !_rightAltDown)
+            held |= HotkeyModifiers.Control;
+        if (_altDown)
+            held |= HotkeyModifiers.Alt;
+        if (_winDown)
+            held |= HotkeyModifiers.Meta;
+
+        return held;
+    }
+
+    private static HotkeyKeyKind KeyKindOf(uint vk)
+    {
+        if (ModifierOf(vk) is not null || vk is VK_LWIN or VK_RWIN)
+            return HotkeyKeyKind.Modifier;
+
+        if (vk == VK_ESCAPE)
+            return HotkeyKeyKind.Escape;
+
+        // Pause, Caps Lock, Scroll Lock, Insert, Delete, Home, End, Page Up/Down, F1-F24.
+        var named = vk is 0x13 or 0x14 or 0x91 or 0x2D or 0x2E or 0x24 or 0x23 or 0x21 or 0x22
+                    or (>= 0x70 and <= 0x87);
+        return named ? HotkeyKeyKind.Named : HotkeyKeyKind.Typing;
     }
 
     private static TapModifier? ModifierOf(uint vk)

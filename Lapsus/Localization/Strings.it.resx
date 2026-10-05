@@ -67,6 +67,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tasto di scelta rapida</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>Registra</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>Premi la combinazione desiderata</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>Con un tasto modificatore · Esc annulla</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>Aggiungi un tasto modificatore</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Correggi la selezione</value>
   </data>
@@ -363,6 +378,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>App</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>Tasti</value>
   </data>
     <data name="Excluded_Label" xml:space="preserve">
     <value>Parole da non toccare</value>

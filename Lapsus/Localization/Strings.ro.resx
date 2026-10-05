@@ -67,6 +67,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tastă rapidă</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>Înregistrează</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>Apăsați combinația dorită</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>Împreună cu o tastă de modificare · Esc anulează</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>Adăugați o tastă de modificare</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Corectează selecția</value>
   </data>
@@ -363,6 +378,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>Aplicații</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>Taste</value>
   </data>
     <data name="Excluded_Label" xml:space="preserve">
     <value>Cuvinte de lăsat în pace</value>

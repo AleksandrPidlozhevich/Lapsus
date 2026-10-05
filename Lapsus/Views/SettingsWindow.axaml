@@ -30,6 +30,48 @@
         <StreamGeometry x:Key="TabIconAi">M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z</StreamGeometry>
 
         <StreamGeometry x:Key="TabIconLicense">M12.65 10A5.99 5.99 0 0 0 7 6a6 6 0 0 0 0 12 5.99 5.99 0 0 0 5.65-4H17v4h4v-4h2v-4H12.65zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z</StreamGeometry>
+
+        <StreamGeometry x:Key="TabIconHotkeys">M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z</StreamGeometry>
+
+        <!-- The Record button sits beside the combo; the panel below it appears only while recording. -->
+        <DataTemplate x:Key="HotkeyRecordButtonTemplate" x:DataType="vm:HotkeyRecorderViewModel">
+            <Button Content="{Binding RecordLabel}" Command="{Binding StartCommand}"
+                    IsVisible="{Binding !IsRecording}" />
+        </DataTemplate>
+
+        <!-- The prompt, the held keys as keycaps and a pulse while recording. -->
+        <DataTemplate x:Key="HotkeyRecorderPanelTemplate" x:DataType="vm:HotkeyRecorderViewModel">
+            <Border Classes="recorder" Classes.rejected="{Binding IsRejected}">
+                <StackPanel Spacing="6">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <Ellipse Grid.Column="0" Classes="pulse" VerticalAlignment="Center" />
+
+                        <StackPanel Grid.Column="1" Spacing="4">
+                            <TextBlock Text="{Binding PromptText}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                            <ItemsControl ItemsSource="{Binding HeldKeys}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" Spacing="4" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="x:String">
+                                        <Border Classes="keycap">
+                                            <TextBlock Text="{Binding}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+
+                        <Button Grid.Column="2" VerticalAlignment="Center"
+                                Content="{Binding CancelLabel}" Command="{Binding CancelCommand}" />
+                    </Grid>
+
+                    <TextBlock Classes="hint" Text="{Binding HintText}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
     </Window.Resources>
 
     <Window.Styles>
@@ -183,6 +225,60 @@
 
         <Style Selector="ScrollViewer">
             <Setter Property="AllowAutoHide" Value="False" />
+        </Style>
+
+        <Style Selector="Border.recorder">
+            <Setter Property="Background" Value="{DynamicResource LapsusRowBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LapsusSelectionBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="Margin" Value="0,4,0,0" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.3" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="Border.recorder.rejected">
+            <Setter Property="BorderBrush" Value="#e5534b" />
+        </Style>
+
+        <Style Selector="Border.keycap">
+            <Setter Property="Background" Value="{DynamicResource LapsusCardBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LapsusBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Padding" Value="8,2" />
+            <Style.Animations>
+                <Animation Duration="0:0:0.2" FillMode="Forward">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <Style Selector="Ellipse.pulse">
+            <Setter Property="Width" Value="9" />
+            <Setter Property="Height" Value="9" />
+            <Setter Property="Fill" Value="{DynamicResource LapsusSelectionBrush}" />
+            <Style.Animations>
+                <Animation Duration="0:0:1.2" IterationCount="INFINITE">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Opacity" Value="1" />
+                    </KeyFrame>
+                    <KeyFrame Cue="50%">
+                        <Setter Property="Opacity" Value="0.25" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Opacity" Value="1" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
         </Style>
     </Window.Styles>
 
@@ -416,37 +512,72 @@
                             </StackPanel>
                         </Border>
 
-                        <Border Classes="card">
-                            <StackPanel Spacing="6">
-                                <TextBlock Classes="sectionTitle" Text="{Binding L[Hotkey_Label]}" />
-                                <ComboBox ItemsSource="{Binding Hotkeys}"
-                                          SelectedItem="{Binding SelectedHotkey, Mode=TwoWay}"
-                                          HorizontalAlignment="Stretch">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate x:DataType="vm:HotkeyOption">
-                                            <TextBlock Text="{Binding Name}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
 
-                                <TextBlock Classes="sectionTitle" Margin="0,14,0,0"
-                                           Text="{Binding L[SelectionActions_Label]}" />
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconHotkeys}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Hotkeys]}" />
+                    </StackPanel>
+                </TabItem.Header>
+
+                <ScrollViewer x:Name="HotkeysScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="HotkeysList" Spacing="12" Margin="0,12">
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Hotkey_Label]}" />
+
+                                <!-- Row 0: combo + Record button. Row 1: the recording panel, shown only while recording. -->
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
+                                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Hotkeys}"
+                                              SelectedItem="{Binding SelectedHotkey, Mode=TwoWay}"
+                                              HorizontalAlignment="Stretch">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:HotkeyOption">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding MainRecorder}"
+                                                    ContentTemplate="{StaticResource HotkeyRecordButtonTemplate}" />
+                                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding MainRecorder}"
+                                                    ContentTemplate="{StaticResource HotkeyRecorderPanelTemplate}"
+                                                    IsVisible="{Binding MainRecorder.IsRecording}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card">
+                            <StackPanel Spacing="10">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[SelectionActions_Label]}" />
                                 <ItemsControl ItemsSource="{Binding SelectionActions}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate x:DataType="vm:SelectionHotkeyViewModel">
                                             <StackPanel Spacing="4" Margin="0,0,0,10">
                                                 <TextBlock Classes="rowTitle" Text="{Binding Label}" />
-                                                <TextBlock Classes="hint" TextWrapping="Wrap"
-                                                           Text="{Binding Hint}" />
-                                                <ComboBox ItemsSource="{Binding Options}"
-                                                          SelectedItem="{Binding Selected, Mode=TwoWay}"
-                                                          HorizontalAlignment="Stretch">
-                                                    <ComboBox.ItemTemplate>
-                                                        <DataTemplate x:DataType="vm:HotkeyOption">
-                                                            <TextBlock Text="{Binding Name}" />
-                                                        </DataTemplate>
-                                                    </ComboBox.ItemTemplate>
-                                                </ComboBox>
+                                                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding Hint}" />
+                                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
+                                                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Options}"
+                                                              SelectedItem="{Binding Selected, Mode=TwoWay}"
+                                                              HorizontalAlignment="Stretch">
+                                                        <ComboBox.ItemTemplate>
+                                                            <DataTemplate x:DataType="vm:HotkeyOption">
+                                                                <TextBlock Text="{Binding Name}" />
+                                                            </DataTemplate>
+                                                        </ComboBox.ItemTemplate>
+                                                    </ComboBox>
+                                                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding Recorder}"
+                                                                    ContentTemplate="{StaticResource HotkeyRecordButtonTemplate}" />
+                                                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding Recorder}"
+                                                                    ContentTemplate="{StaticResource HotkeyRecorderPanelTemplate}"
+                                                                    IsVisible="{Binding Recorder.IsRecording}" />
+                                                </Grid>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
