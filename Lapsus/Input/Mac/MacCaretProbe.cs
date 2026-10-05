@@ -29,20 +29,21 @@ internal static class MacCaretProbe
         if (!MacAccessibility.IsProcessTrusted())
             return default;
 
-        var systemWide = SystemWideElement;
-        if (systemWide == IntPtr.Zero)
+        if (!TryCopyFocused(out var focused))
             return default;
-
-        if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
-                systemWide, MacOSNativeMethods.AxFocusedUiElementAttribute, out var focused) != 0
-            || focused == IntPtr.Zero)
-            return default;
-
-        EnsureEnhancedAccessibility(focused);
 
         try
         {
+            EnsureEnhancedAccessibility(focused);
             var chromium = IsChromiumElement(focused);
+            // The element copied above was built before the manual-accessibility bit. Electron only
+            // fills in the document tree after that, so the focused element has to be read again.
+            if (chromium && TryCopyFocused(out var refreshed))
+            {
+                MacOSNativeMethods.CFRelease(focused);
+                focused = refreshed;
+            }
+
             MacOSNativeMethods.AXUIElementSetMessagingTimeout(
                 focused, chromium ? ChromiumAxTimeoutSeconds : AxTimeoutSeconds);
             var caret = CaretOf(focused);
@@ -54,6 +55,27 @@ internal static class MacCaretProbe
         {
             MacOSNativeMethods.CFRelease(focused);
         }
+    }
+
+    private static bool TryCopyFocused(out IntPtr focused)
+    {
+        focused = IntPtr.Zero;
+        var systemWide = SystemWideElement;
+        if (systemWide == IntPtr.Zero)
+            return false;
+
+        if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
+                systemWide, MacOSNativeMethods.AxFocusedUiElementAttribute, out focused) != 0
+            || focused == IntPtr.Zero)
+        {
+            if (focused != IntPtr.Zero)
+                MacOSNativeMethods.CFRelease(focused);
+
+            focused = IntPtr.Zero;
+            return false;
+        }
+
+        return true;
     }
 
     private static readonly HashSet<int> EnhancedPids = new();
@@ -216,84 +238,100 @@ internal static class MacCaretProbe
     }
 
     // Monaco keeps the editable text below the focused group. A native field already answered above.
+    // Depth-first into the document, not across the first children: those are the sidebar.
     private static CaretBounds CaretInTextDescendants(IntPtr root)
     {
-        var pending = new Queue<IntPtr>();
-        var depths = new Queue<int>();
-        EnqueueChildren(root, 1, pending, depths);
-
         var seen = 0;
-        while (pending.Count > 0 && seen < MaxCaretNodes)
-        {
-            var element = pending.Dequeue();
-            var depth = depths.Dequeue();
-            seen++;
-            try
-            {
-                MacOSNativeMethods.AXUIElementSetMessagingTimeout(element, 0.15f);
-                var role = ReadRole(element);
-                if (role is "AXTextArea" or "AXTextField" or "AXComboBox" or "AXSearchField" or "AXWebArea")
-                {
-                    var caret = CaretOf(element);
-                    if (!caret.IsEmpty)
-                    {
-                        Drain(pending);
-                        return caret;
-                    }
-                }
-
-                if (depth < MaxCaretDepth
-                    && role is "AXGroup" or "AXScrollArea" or "AXSplitGroup" or "AXWebArea" or "AXWindow" or "")
-                    EnqueueChildren(element, depth + 1, pending, depths);
-            }
-            finally
-            {
-                MacOSNativeMethods.CFRelease(element);
-            }
-        }
-
-        Drain(pending);
-        return default;
+        return SearchDescendants(root, 1, ref seen);
     }
 
-    private const int MaxCaretNodes = 40;
+    private const int MaxCaretNodes = 48;
 
-    private const int MaxCaretDepth = 5;
+    private const int MaxCaretDepth = 8;
 
-    private static void EnqueueChildren(IntPtr element, int depth, Queue<IntPtr> pending, Queue<int> depths)
+    private const int MaxChildrenPerNode = 48;
+
+    private readonly record struct RankedChild(int Rank, int Index, IntPtr Child, string Role);
+
+    private static CaretBounds SearchDescendants(IntPtr element, int depth, ref int seen)
     {
+        var children = CopyRankedChildren(element);
+        try
+        {
+            foreach (var child in children)
+            {
+                if (seen >= MaxCaretNodes)
+                    return default;
+
+                seen++;
+                MacOSNativeMethods.AXUIElementSetMessagingTimeout(child.Child, 0.15f);
+                if (CaretSearchOrder.IsText(child.Role))
+                {
+                    var caret = CaretOf(child.Child);
+                    if (!caret.IsEmpty)
+                        return caret;
+                }
+
+                if (depth < MaxCaretDepth && CaretSearchOrder.IsContainer(child.Role))
+                {
+                    var nested = SearchDescendants(child.Child, depth + 1, ref seen);
+                    if (!nested.IsEmpty)
+                        return nested;
+                }
+            }
+
+            return default;
+        }
+        finally
+        {
+            foreach (var child in children)
+                MacOSNativeMethods.CFRelease(child.Child);
+        }
+    }
+
+    private static List<RankedChild> CopyRankedChildren(IntPtr element)
+    {
+        var ranked = new List<RankedChild>();
         if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
                 element, MacOSNativeMethods.AxChildrenAttribute, out var children) != 0
             || children == IntPtr.Zero)
-            return;
+            return ranked;
 
         try
         {
             var count = MacOSNativeMethods.CFArrayGetCount(children);
-            if (count > 20)
-                count = 20;
+            if (count > MaxChildrenPerNode)
+                count = MaxChildrenPerNode;
 
-            for (long i = 0; i < count && pending.Count < MaxCaretNodes; i++)
+            for (long i = 0; i < count; i++)
             {
                 var child = MacOSNativeMethods.CFArrayGetValueAtIndex(children, i);
                 if (child == IntPtr.Zero)
                     continue;
 
                 MacOSNativeMethods.CFRetain(child);
-                pending.Enqueue(child);
-                depths.Enqueue(depth);
+                MacOSNativeMethods.AXUIElementSetMessagingTimeout(child, 0.05f);
+                var role = ReadRole(child);
+                if (!CaretSearchOrder.IsText(role) && !CaretSearchOrder.IsContainer(role))
+                {
+                    MacOSNativeMethods.CFRelease(child);
+                    continue;
+                }
+
+                ranked.Add(new RankedChild(CaretSearchOrder.Rank(role), (int)i, child, role));
             }
         }
         finally
         {
             MacOSNativeMethods.CFRelease(children);
         }
-    }
 
-    private static void Drain(Queue<IntPtr> pending)
-    {
-        while (pending.Count > 0)
-            MacOSNativeMethods.CFRelease(pending.Dequeue());
+        ranked.Sort(static (a, b) =>
+        {
+            var rank = a.Rank.CompareTo(b.Rank);
+            return rank != 0 ? rank : a.Index.CompareTo(b.Index);
+        });
+        return ranked;
     }
 
     private static string ReadRole(IntPtr element)

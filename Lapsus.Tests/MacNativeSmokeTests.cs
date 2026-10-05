@@ -96,4 +96,27 @@ public class MacNativeSmokeTests
         if (File.Exists(native))
             Assert.False(ChromiumApps.IsChromiumExecutable(native));
     }
+
+    [Fact]
+    public void A_synthesized_key_accepts_an_uptime_timestamp()
+    {
+        if (!OperatingSystem.IsMacOS())
+            return;
+
+        var ev = MacOSNativeMethods.CGEventCreateKeyboardEvent(IntPtr.Zero, 0x33, true);
+        Assert.NotEqual(IntPtr.Zero, ev);
+
+        try
+        {
+            var now = MacOSNativeMethods.clock_gettime_nsec_np(MacOSNativeMethods.ClockUptimeRaw);
+            Assert.True(now > 0);
+
+            MacOSNativeMethods.CGEventSetTimestamp(ev, now);
+            Assert.Equal(now, MacOSNativeMethods.CGEventGetTimestamp(ev));
+        }
+        finally
+        {
+            MacOSNativeMethods.CFRelease(ev);
+        }
+    }
 }
