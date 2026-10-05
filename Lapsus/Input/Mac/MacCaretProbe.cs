@@ -82,15 +82,20 @@ internal static class MacCaretProbe
 
     private static readonly object EnhancedGate = new();
 
-    private static void EnsureEnhancedAccessibility(IntPtr focused)
+    internal static WebEngineKind PrepareWebEngine(IntPtr focused)
     {
         if (MacOSNativeMethods.AXUIElementGetPid(focused, out var pid) != 0 || pid <= 0)
-            return;
+            return WebEngineKind.None;
+
+        var path = MacProcessNames.ExecutablePath(pid);
+        var kind = WebEngineKindOf(path);
+        if (kind == WebEngineKind.None)
+            return kind;
 
         lock (EnhancedGate)
         {
             if (!EnhancedPids.Add(pid))
-                return;
+                return kind;
 
             if (EnhancedPids.Count > 512)
             {
@@ -99,26 +104,56 @@ internal static class MacCaretProbe
             }
         }
 
-        if (!ChromiumApps.IsChromiumExecutable(MacProcessNames.ExecutablePath(pid)))
-            return;
+        var enabled = kind switch
+        {
+            WebEngineKind.Chromium => SetAppFlag(pid, MacOSNativeMethods.AxManualAccessibilityAttribute),
+            WebEngineKind.WebKit => SetAppFlag(pid, MacOSNativeMethods.AxEnhancedUserInterfaceAttribute),
+            _ => false
+        };
+        if (!enabled)
+        {
+            lock (EnhancedGate)
+                EnhancedPids.Remove(pid);
+        }
 
+        return kind;
+    }
+
+    internal enum WebEngineKind
+    {
+        None,
+        Chromium,
+        WebKit
+    }
+
+    private static WebEngineKind WebEngineKindOf(string? path)
+    {
+        if (ChromiumApps.IsChromiumExecutable(path))
+            return WebEngineKind.Chromium;
+
+        return MacAppIdentity.IsWebKitHost(path) ? WebEngineKind.WebKit : WebEngineKind.None;
+    }
+
+    private static bool SetAppFlag(int pid, IntPtr attribute)
+    {
         var app = MacOSNativeMethods.AXUIElementCreateApplication(pid);
         if (app == IntPtr.Zero)
-            return;
+            return false;
 
         try
         {
-            if (MacOSNativeMethods.AXUIElementSetAttributeValue(
-                    app, MacOSNativeMethods.AxManualAccessibilityAttribute, MacOSNativeMethods.CFBooleanTrue) != 0)
-            {
-                lock (EnhancedGate)
-                    EnhancedPids.Remove(pid);
-            }
+            return MacOSNativeMethods.AXUIElementSetAttributeValue(
+                       app, attribute, MacOSNativeMethods.CFBooleanTrue) == 0;
         }
         finally
         {
             MacOSNativeMethods.CFRelease(app);
         }
+    }
+
+    private static void EnsureEnhancedAccessibility(IntPtr focused)
+    {
+        PrepareWebEngine(focused);
     }
 
     public static string? ForegroundProcessName()
@@ -245,6 +280,12 @@ internal static class MacCaretProbe
         return SearchDescendants(root, 1, ref seen);
     }
 
+    internal static IntPtr CopyNestedTextField(IntPtr root)
+    {
+        var seen = 0;
+        return FindTextField(root, 1, ref seen);
+    }
+
     private const int MaxCaretNodes = 48;
 
     private const int MaxCaretDepth = 8;
@@ -281,6 +322,40 @@ internal static class MacCaretProbe
             }
 
             return default;
+        }
+        finally
+        {
+            foreach (var child in children)
+                MacOSNativeMethods.CFRelease(child.Child);
+        }
+    }
+
+    private static IntPtr FindTextField(IntPtr element, int depth, ref int seen)
+    {
+        var children = CopyRankedChildren(element);
+        try
+        {
+            foreach (var child in children)
+            {
+                if (seen >= MaxCaretNodes)
+                    return IntPtr.Zero;
+
+                seen++;
+                if (child.Role is "AXTextArea" or "AXTextField" or "AXComboBox" or "AXSearchField")
+                {
+                    MacOSNativeMethods.CFRetain(child.Child);
+                    return child.Child;
+                }
+
+                if (depth < MaxCaretDepth && CaretSearchOrder.IsContainer(child.Role))
+                {
+                    var nested = FindTextField(child.Child, depth + 1, ref seen);
+                    if (nested != IntPtr.Zero)
+                        return nested;
+                }
+            }
+
+            return IntPtr.Zero;
         }
         finally
         {

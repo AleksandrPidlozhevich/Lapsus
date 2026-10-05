@@ -9,29 +9,29 @@ internal static class MacTextInjection
 {
     private const float AxTimeoutSeconds = 0.15f;
 
-    public static bool ReplaceTrailing(int count, string text)
+    internal readonly record struct AccessibilityReplacement(AxReplace Result, MacCaretProbe.WebEngineKind Engine);
+
+    public static AccessibilityReplacement ReplaceTrailing(int count, string text)
     {
-        switch (TryReplaceViaAccessibility(count, text))
-        {
-            case AxReplace.Replaced:
-                return true;
-            // The trailing characters are highlighted. Backspacing would delete that whole run
-            // on the first key and then keep going. A Unicode event replaces the highlight.
-            case AxReplace.Selected:
-                return SendUnicode(text, Route.Session);
-            default:
-                return SendBackspaces(count) && SendUnicode(text, Route.Session);
-        }
+        return TryReplaceViaAccessibility(count, text);
     }
 
-    private static AxReplace TryReplaceViaAccessibility(int count, string text)
+    public static bool TypeOver(int count, string text)
+    {
+        if (count == 0)
+            return SendUnicode(text, Route.Session);
+
+        return SendBackspaces(count) && SendUnicode(text, Route.Session);
+    }
+
+    private static AccessibilityReplacement TryReplaceViaAccessibility(int count, string text)
     {
         if (!MacAccessibility.IsProcessTrusted())
-            return AxReplace.Miss;
+            return new AccessibilityReplacement(AxReplace.Miss, MacCaretProbe.WebEngineKind.None);
 
         var systemWide = MacOSNativeMethods.AXUIElementCreateSystemWide();
         if (systemWide == IntPtr.Zero)
-            return AxReplace.Miss;
+            return new AccessibilityReplacement(AxReplace.Miss, MacCaretProbe.WebEngineKind.None);
 
         try
         {
@@ -39,12 +39,38 @@ internal static class MacTextInjection
             if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
                     systemWide, MacOSNativeMethods.AxFocusedUiElementAttribute, out var focused) != 0
                 || focused == IntPtr.Zero)
-                return AxReplace.Miss;
+            {
+                if (focused != IntPtr.Zero)
+                    MacOSNativeMethods.CFRelease(focused);
+
+                return new AccessibilityReplacement(AxReplace.Miss, MacCaretProbe.WebEngineKind.None);
+            }
 
             try
             {
-                MacOSNativeMethods.AXUIElementSetMessagingTimeout(focused, AxTimeoutSeconds);
-                return ReplaceFocusedTrailing(focused, count, text);
+                var engine = MacCaretProbe.PrepareWebEngine(focused);
+                if (engine != MacCaretProbe.WebEngineKind.None)
+                {
+                    var copied = MacOSNativeMethods.AXUIElementCopyAttributeValue(
+                        systemWide, MacOSNativeMethods.AxFocusedUiElementAttribute, out var refreshed);
+                    if (copied == 0 && refreshed != IntPtr.Zero)
+                    {
+                        MacOSNativeMethods.CFRelease(focused);
+                        focused = refreshed;
+                    }
+                    else if (refreshed != IntPtr.Zero)
+                    {
+                        MacOSNativeMethods.CFRelease(refreshed);
+                    }
+                }
+
+                var timeout = engine == MacCaretProbe.WebEngineKind.None ? AxTimeoutSeconds : 0.6f;
+                MacOSNativeMethods.AXUIElementSetMessagingTimeout(focused, timeout);
+                var result = ReplaceFocusedTrailing(focused, count, text);
+                if (result == AxReplace.Miss && engine == MacCaretProbe.WebEngineKind.WebKit)
+                    result = ReplaceNestedField(focused, count, text);
+
+                return new AccessibilityReplacement(result, engine);
             }
             finally
             {
@@ -54,6 +80,23 @@ internal static class MacTextInjection
         finally
         {
             MacOSNativeMethods.CFRelease(systemWide);
+        }
+    }
+
+    private static AxReplace ReplaceNestedField(IntPtr focused, int count, string text)
+    {
+        var nested = MacCaretProbe.CopyNestedTextField(focused);
+        if (nested == IntPtr.Zero)
+            return AxReplace.Miss;
+
+        try
+        {
+            MacOSNativeMethods.AXUIElementSetMessagingTimeout(nested, 0.6f);
+            return ReplaceFocusedTrailing(nested, count, text);
+        }
+        finally
+        {
+            MacOSNativeMethods.CFRelease(nested);
         }
     }
 
@@ -160,9 +203,9 @@ internal static class MacTextInjection
         }
     }
 
-    // Delete posted straight to the process is a private-source key. Electron drops it and still
-    // honors Cmd+V, so the word that should have been removed stays and the correction is appended.
-    // Backspaces and the paste chord share the annotated session tap, downstream of our HID tap.
+    // Delete posted to a pid without an HID source is a private key. Electron drops it and still
+    // honors Cmd+V, so the word that should have been removed stays in front of the correction.
+    // Backspaces and the paste chord are ordinary HID keys, and the tap lets them through unmarked.
     public static bool SendBackspaces(int count)
     {
         if (count <= 0)
@@ -191,7 +234,8 @@ internal static class MacTextInjection
 
         MacOSNativeMethods.CGEventSetFlags(ev, 0);
         MacOSNativeMethods.CGEventKeyboardSetUnicodeString(ev, text.Length, bytes);
-        MarkInjected(ev);
+        if (route != Route.Process)
+            MarkInjected(ev);
         Deliver(route, 0, ev);
         MacOSNativeMethods.CFRelease(ev);
         return true;
@@ -200,9 +244,9 @@ internal static class MacTextInjection
     public static bool SendCommandChord(ushort keyCode, int pid = 0)
     {
         // Electron records modifiers from flagsChanged, and only on the modifier key itself.
-        // A letter event that merely carries the Command flag is dropped. Delivering straight
-        // to the app avoids the process-wide event tap, which sits in front of every HID event.
-        return SendChord(keyCode, pid > 0 ? Route.Process : Route.Hid, pid, hidSource: false);
+        // A letter event that merely carries the Command flag is dropped. The HID source keeps the
+        // chord from looking like a private-source key, which Electron drops.
+        return SendChord(keyCode, pid > 0 ? Route.Process : Route.Hid, pid, hidSource: true);
     }
 
     public static bool SendSessionCommandChord(ushort keyCode)
@@ -230,7 +274,8 @@ internal static class MacTextInjection
         MacOSNativeMethods.CGEventSetFlags(ev, flags);
         if (hidSource)
             StampHidSource(ev);
-        MarkInjected(ev);
+        if (route != Route.Process)
+            MarkInjected(ev);
         Deliver(route, pid, ev);
         MacOSNativeMethods.CFRelease(ev);
         return true;
@@ -247,7 +292,8 @@ internal static class MacTextInjection
         MacOSNativeMethods.CGEventSetFlags(ev, flags);
         if (hidSource)
             StampHidSource(ev);
-        MarkInjected(ev);
+        if (route != Route.Process)
+            MarkInjected(ev);
         Deliver(route, pid, ev);
         MacOSNativeMethods.CFRelease(ev);
         return true;
@@ -285,14 +331,14 @@ internal static class MacTextInjection
 
     private static void Deliver(Route route, int pid, IntPtr ev)
     {
-        // A new keyboard event has timestamp 0. Chromium drops that as older than the last real key,
-        // so Electron (Cursor, Notion) ignores the deletes and the paste.
+        // A fresh event is timestamped 0, which Chromium treats as older than the last real key.
+        // Posted at the HID tap so the window server routes them into the key window. WebKit and
+        // Chromium ignore keys that only reach the session tap. Our tap strips the marker before
+        // the app sees the event.
         MacOSNativeMethods.CGEventSetTimestamp(ev, NextStamp());
 
         if (route == Route.Process && pid > 0)
             MacOSNativeMethods.CGEventPostToPid(pid, ev);
-        else if (route == Route.Session)
-            MacOSNativeMethods.CGEventPost(MacOSNativeMethods.AnnotatedSessionEventTap, ev);
         else
             MacOSNativeMethods.CGEventPost(0, ev);
     }
@@ -318,7 +364,7 @@ internal static class MacTextInjection
             ev, MacOSNativeMethods.EventSourceUserData, MacOSNativeMethods.InjectedMarker);
     }
 
-    private enum AxReplace
+    internal enum AxReplace
     {
         Miss,
         Replaced,

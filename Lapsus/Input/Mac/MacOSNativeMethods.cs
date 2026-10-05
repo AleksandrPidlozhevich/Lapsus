@@ -30,6 +30,7 @@ internal static class MacOSNativeMethods
         AxFocusedUiElementChangedNotification = CreateCFString("AXFocusedUIElementChanged");
         AxFocusedWindowChangedNotification = CreateCFString("AXFocusedWindowChanged");
         AxManualAccessibilityAttribute = CreateCFString("AXManualAccessibility");
+        AxEnhancedUserInterfaceAttribute = CreateCFString("AXEnhancedUserInterface");
         AxFocusedUiElementAttribute = CreateCFString("AXFocusedUIElement");
         AxRoleAttribute = CreateCFString("AXRole");
         AxSelectedTextRangeAttribute = CreateCFString("AXSelectedTextRange");
@@ -67,6 +68,8 @@ internal static class MacOSNativeMethods
     public static IntPtr AxFocusedWindowChangedNotification { get; }
 
     public static IntPtr AxManualAccessibilityAttribute { get; }
+
+    public static IntPtr AxEnhancedUserInterfaceAttribute { get; }
 
     public static IntPtr AxFocusedUiElementAttribute { get; }
 

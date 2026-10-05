@@ -8,8 +8,8 @@ public class CaptureWatchdogPolicyTests
 
     private static WatchdogObservation Observe(
         bool want = true, bool running = false, bool granted = true, long gap = Period,
-        long now = 100_000, long notBefore = 0, bool inFlight = false) =>
-        new(want, running, granted, gap, now, notBefore, inFlight);
+        long now = 100_000, long notBefore = 0, bool inFlight = false, int armedPeriodMs = (int)Period) =>
+        new(want, running, granted, gap, now, notBefore, inFlight, armedPeriodMs);
 
     [Fact]
     public void Nothing_happens_when_the_user_does_not_want_capture()
@@ -68,5 +68,32 @@ public class CaptureWatchdogPolicyTests
     public void A_restart_already_in_flight_is_not_repeated()
     {
         Assert.Equal(WatchdogAction.Nothing, CaptureWatchdogPolicy.Decide(Observe(inFlight: true)));
+    }
+
+    [Fact]
+    public void A_healthy_slow_tick_is_not_treated_as_sleep()
+    {
+        var period = CaptureWatchdogPolicy.HealthyPeriodMs;
+        Assert.Equal(WatchdogAction.Nothing,
+            CaptureWatchdogPolicy.Decide(Observe(running: true, gap: period, armedPeriodMs: period)));
+    }
+
+    [Fact]
+    public void A_gap_beyond_three_slow_periods_is_still_sleep()
+    {
+        var period = CaptureWatchdogPolicy.HealthyPeriodMs;
+        Assert.Equal(WatchdogAction.StopForSleep,
+            CaptureWatchdogPolicy.Decide(Observe(running: true, gap: (long)period * 3 + 1, armedPeriodMs: period)));
+    }
+
+    [Fact]
+    public void The_watchdog_polls_slowly_only_while_capture_is_healthy()
+    {
+        Assert.Equal(CaptureWatchdogPolicy.HealthyPeriodMs,
+            CaptureWatchdogPolicy.NextPeriodMs(running: true, permissionsGranted: true));
+        Assert.Equal(CaptureWatchdogPolicy.PeriodMs,
+            CaptureWatchdogPolicy.NextPeriodMs(running: true, permissionsGranted: false));
+        Assert.Equal(CaptureWatchdogPolicy.PeriodMs,
+            CaptureWatchdogPolicy.NextPeriodMs(running: false, permissionsGranted: true));
     }
 }

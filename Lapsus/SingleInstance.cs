@@ -59,7 +59,7 @@ internal sealed class SingleInstance : IDisposable
             try
             {
                 while (!_cts.IsCancellationRequested)
-                    if (WaitForShowSignal(500))
+                    if (WaitForShowSignal(OperatingSystem.IsWindows() ? 500 : 2_000))
                         Dispatcher.UIThread.Post(onShowRequested);
             }
             catch (ObjectDisposedException)
