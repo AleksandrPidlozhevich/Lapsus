@@ -45,4 +45,28 @@ public class ElectronInjectionTests
         Assert.True(CaretSearchOrder.IsContainer("AXWebArea"));
         Assert.True(CaretSearchOrder.IsText("AXWebArea"));
     }
+
+    [Fact]
+    public void A_helper_process_belongs_to_the_same_app_as_its_bundle()
+    {
+        const string main = "/Applications/Cursor.app/Contents/MacOS/Cursor";
+        const string helper =
+            "/Applications/Cursor.app/Contents/Frameworks/Cursor Helper (Renderer).app/Contents/MacOS/Cursor Helper (Renderer)";
+
+        Assert.True(MacAppIdentity.SameBundle(main, helper));
+        Assert.False(MacAppIdentity.SameBundle(main, "/Applications/Notion.app/Contents/MacOS/Notion"));
+    }
+
+    [Fact]
+    public void Safari_web_content_is_not_inside_the_Safari_bundle()
+    {
+        const string safari = "/Applications/Safari.app/Contents/MacOS/Safari";
+        const string page =
+            "/System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc/Contents/MacOS/com.apple.WebKit.WebContent";
+
+        Assert.True(MacAppIdentity.IsWebContent(page));
+        Assert.True(MacAppIdentity.IsWebKitHost(safari));
+        Assert.False(MacAppIdentity.SameBundle(safari, page));
+        Assert.False(MacAppIdentity.IsWebContent(safari));
+    }
 }

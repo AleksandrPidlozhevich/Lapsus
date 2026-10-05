@@ -323,39 +323,27 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     protected override bool TryInject(int backspaces, string text)
     {
-        if (ForegroundNeedsClipboardPaste())
-            return TryPasteOverTrailing(backspaces, text);
+        var replacement = MacTextInjection.ReplaceTrailing(backspaces, text);
+        switch (replacement.Result)
+        {
+            case MacTextInjection.AxReplace.Replaced:
+                return true;
+            // The trailing characters are already highlighted. Backspacing would delete that whole
+            // run on the first key. A paste or a Unicode event replaces the highlight.
+            case MacTextInjection.AxReplace.Selected:
+                return replacement.Engine == MacCaretProbe.WebEngineKind.None
+                    ? MacTextInjection.TypeOver(0, text)
+                    : TryPasteOverTrailing(0, text);
+            default:
+                if (replacement.Engine != MacCaretProbe.WebEngineKind.None)
+                    return TryPasteOverTrailing(backspaces, text);
 
-        if (MacTextInjection.ReplaceTrailing(backspaces, text))
-            return true;
+                if (MacTextInjection.TypeOver(backspaces, text))
+                    return true;
 
-        RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
-        return false;
-    }
-
-    private int _clipboardPastePid;
-    private bool _clipboardPastePidIsChromium;
-
-    // Chromium and Electron ignore a synthetic Unicode key, so the corrected text is pasted.
-    private bool ForegroundNeedsClipboardPaste()
-    {
-        if (SelectionActionInProgress)
-            return false;
-
-        var pid = MacFrontmost.ProcessId();
-        if (pid <= 0)
-            pid = ResolveForegroundPid();
-
-        if (pid <= 0)
-            return false;
-
-        if (pid == _clipboardPastePid)
-            return _clipboardPastePidIsChromium;
-
-        _clipboardPastePid = pid;
-        _clipboardPastePidIsChromium = ChromiumApps.IsChromiumExecutable(
-            MacProcessNames.ExecutablePath(pid));
-        return _clipboardPastePidIsChromium;
+                RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
+                return false;
+        }
     }
 
     private bool TryPasteOverTrailing(int count, string text)
@@ -363,8 +351,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         if (!_clipboardDirty)
             _savedClipboard = MacClipboard.CaptureSnapshot();
 
-        // Deletes and the paste chord share the session tap. A Delete posted to the pid is dropped,
-        // and Cmd+V still inserts, which leaves the old word in front of the correction.
+        // Deletes and Cmd+V are one HID sequence. A Delete posted to the pid is dropped, and the
+        // paste still inserts, which leaves the old word in front of the correction.
         if (count > 0 && !MacTextInjection.SendBackspaces(count))
         {
             RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
@@ -555,9 +543,38 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         MacClipboard.WasModified();
     }
 
+    private readonly Dictionary<int, string?> _executableByPid = new();
+
     protected override bool IsSameContainer(MacTypingFocus owner, MacTypingFocus focus)
     {
-        return owner.Pid == focus.Pid;
+        if (owner.Pid == focus.Pid)
+            return true;
+
+        var ownerPath = ExecutablePath(owner.Pid);
+        var focusPath = ExecutablePath(focus.Pid);
+        if (MacAppIdentity.SameBundle(ownerPath, focusPath))
+            return true;
+
+        var front = MacFrontmost.ProcessId();
+        if (front <= 0)
+            return false;
+
+        // Safari's page lives in a WebContent process whose path is not inside Safari.app.
+        return (MacAppIdentity.IsWebContent(ownerPath) && focus.Pid == front)
+               || (MacAppIdentity.IsWebContent(focusPath) && owner.Pid == front);
+    }
+
+    private string? ExecutablePath(int pid)
+    {
+        if (_executableByPid.TryGetValue(pid, out var path))
+            return path;
+
+        path = MacProcessNames.ExecutablePath(pid);
+        if (_executableByPid.Count > 64)
+            _executableByPid.Clear();
+
+        _executableByPid[pid] = path;
+        return path;
     }
 
     protected override bool IsStillFocused(MacTypingFocus ownerAtStart)
@@ -703,7 +720,13 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
         if (MacOSNativeMethods.CGEventGetIntegerValueField(@event, MacOSNativeMethods.EventSourceUserData)
             == MacOSNativeMethods.InjectedMarker)
+        {
+            // The target app must see a normal key. WebKit and Chromium drop an event that still
+            // carries our marker, and the marker is what keeps the key out of the typing buffer.
+            MacOSNativeMethods.CGEventSetIntegerValueField(
+                @event, MacOSNativeMethods.EventSourceUserData, 0);
             return @event;
+        }
 
         var keyCode = (ushort)MacOSNativeMethods.CGEventGetIntegerValueField(
             @event, MacOSNativeMethods.EventKeyboardKeycode);
