@@ -35,6 +35,7 @@ internal static class MacOSNativeMethods
         AxSelectedTextRangeAttribute = CreateCFString("AXSelectedTextRange");
         AxSelectedTextAttribute = CreateCFString("AXSelectedText");
         AxValueAttribute = CreateCFString("AXValue");
+        AxChildrenAttribute = CreateCFString("AXChildren");
         AxBoundsForRangeParameterizedAttribute = CreateCFString("AXBoundsForRange");
     }
 
@@ -76,6 +77,8 @@ internal static class MacOSNativeMethods
     public static IntPtr AxSelectedTextAttribute { get; }
 
     public static IntPtr AxValueAttribute { get; }
+
+    public static IntPtr AxChildrenAttribute { get; }
 
     public static IntPtr AxBoundsForRangeParameterizedAttribute { get; }
 
@@ -174,6 +177,12 @@ internal static class MacOSNativeMethods
     public const int EventKeyboardKeycode = 9;
     public const int EventSourceUnixProcessId = 41;
     public const int EventSourceUserData = 42;
+    public const int EventSourceStateId = 45;
+
+    // Posted here, events skip the HID tap this process installs and still arrive in order.
+    public const uint SessionEventTap = 1;
+
+    public const int EventSourceStateHidSystem = 1;
 
     public const long InjectedMarker = 0x4C50_5355;
 
@@ -195,6 +204,9 @@ internal static class MacOSNativeMethods
     public static extern bool CGEventTapEnable(IntPtr tap, bool enable);
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
+    public static extern IntPtr CGEventSourceCreate(int stateID);
+
+    [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
     public static extern IntPtr CGEventCreateKeyboardEvent(IntPtr source, ushort virtualKey, bool keyDown);
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
@@ -214,6 +226,12 @@ internal static class MacOSNativeMethods
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
     public static extern void CGEventPost(uint tap, IntPtr @event);
+
+    [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
+    public static extern void CGEventPostToPid(int pid, IntPtr @event);
+
+    [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
+    public static extern void CGEventSetType(IntPtr @event, uint type);
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
     public static extern void CGEventKeyboardGetUnicodeString(
@@ -257,6 +275,9 @@ internal static class MacOSNativeMethods
 
     [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
     public static extern IntPtr CFStringCreateWithCString(IntPtr allocator, string cStr, uint encoding);
+
+    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
+    public static extern long CFStringGetLength(IntPtr theString);
 
     [DllImport("/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices")]
     public static extern int PasteboardCreate(IntPtr name, out IntPtr outPasteboard);

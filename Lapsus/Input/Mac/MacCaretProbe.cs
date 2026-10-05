@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
+using System.Text;
 
 namespace Lapsus.Input;
 
@@ -9,6 +10,8 @@ internal static class MacCaretProbe
 {
 
     private const float AxTimeoutSeconds = 0.12f;
+
+    private const float ChromiumAxTimeoutSeconds = 0.6f;
 
     private static readonly IntPtr SystemWideElement = CreateTimedOutSystemWide();
 
@@ -39,8 +42,13 @@ internal static class MacCaretProbe
 
         try
         {
-            MacOSNativeMethods.AXUIElementSetMessagingTimeout(focused, AxTimeoutSeconds);
-            return CaretOf(focused);
+            var chromium = IsChromiumElement(focused);
+            MacOSNativeMethods.AXUIElementSetMessagingTimeout(
+                focused, chromium ? ChromiumAxTimeoutSeconds : AxTimeoutSeconds);
+            var caret = CaretOf(focused);
+            if (caret.IsEmpty && chromium)
+                caret = CaretInTextDescendants(focused);
+            return caret;
         }
         finally
         {
@@ -189,5 +197,123 @@ internal static class MacCaretProbe
         var x = atRight ? right : left;
         var caret = new CaretBounds(x, top, x + 1, bottom);
         return CaretScreenMapping.IsPlausibleSliver(caret) ? caret : default;
+    }
+
+    private static int _chromiumCheckPid;
+    private static bool _chromiumCheck;
+
+    private static bool IsChromiumElement(IntPtr element)
+    {
+        if (MacOSNativeMethods.AXUIElementGetPid(element, out var pid) != 0 || pid <= 0)
+            return false;
+
+        if (pid == _chromiumCheckPid)
+            return _chromiumCheck;
+
+        _chromiumCheckPid = pid;
+        _chromiumCheck = ChromiumApps.IsChromiumExecutable(MacProcessNames.ExecutablePath(pid));
+        return _chromiumCheck;
+    }
+
+    // Monaco keeps the editable text below the focused group. A native field already answered above.
+    private static CaretBounds CaretInTextDescendants(IntPtr root)
+    {
+        var pending = new Queue<IntPtr>();
+        var depths = new Queue<int>();
+        EnqueueChildren(root, 1, pending, depths);
+
+        var seen = 0;
+        while (pending.Count > 0 && seen < MaxCaretNodes)
+        {
+            var element = pending.Dequeue();
+            var depth = depths.Dequeue();
+            seen++;
+            try
+            {
+                MacOSNativeMethods.AXUIElementSetMessagingTimeout(element, 0.15f);
+                var role = ReadRole(element);
+                if (role is "AXTextArea" or "AXTextField" or "AXComboBox" or "AXSearchField" or "AXWebArea")
+                {
+                    var caret = CaretOf(element);
+                    if (!caret.IsEmpty)
+                    {
+                        Drain(pending);
+                        return caret;
+                    }
+                }
+
+                if (depth < MaxCaretDepth
+                    && role is "AXGroup" or "AXScrollArea" or "AXSplitGroup" or "AXWebArea" or "AXWindow" or "")
+                    EnqueueChildren(element, depth + 1, pending, depths);
+            }
+            finally
+            {
+                MacOSNativeMethods.CFRelease(element);
+            }
+        }
+
+        Drain(pending);
+        return default;
+    }
+
+    private const int MaxCaretNodes = 40;
+
+    private const int MaxCaretDepth = 5;
+
+    private static void EnqueueChildren(IntPtr element, int depth, Queue<IntPtr> pending, Queue<int> depths)
+    {
+        if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
+                element, MacOSNativeMethods.AxChildrenAttribute, out var children) != 0
+            || children == IntPtr.Zero)
+            return;
+
+        try
+        {
+            var count = MacOSNativeMethods.CFArrayGetCount(children);
+            if (count > 20)
+                count = 20;
+
+            for (long i = 0; i < count && pending.Count < MaxCaretNodes; i++)
+            {
+                var child = MacOSNativeMethods.CFArrayGetValueAtIndex(children, i);
+                if (child == IntPtr.Zero)
+                    continue;
+
+                MacOSNativeMethods.CFRetain(child);
+                pending.Enqueue(child);
+                depths.Enqueue(depth);
+            }
+        }
+        finally
+        {
+            MacOSNativeMethods.CFRelease(children);
+        }
+    }
+
+    private static void Drain(Queue<IntPtr> pending)
+    {
+        while (pending.Count > 0)
+            MacOSNativeMethods.CFRelease(pending.Dequeue());
+    }
+
+    private static string ReadRole(IntPtr element)
+    {
+        if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
+                element, MacOSNativeMethods.AxRoleAttribute, out var role) != 0
+            || role == IntPtr.Zero)
+            return string.Empty;
+
+        try
+        {
+            var sb = new StringBuilder(64);
+            return MacOSNativeMethods.CFStringGetCString(
+                role, sb, sb.Capacity, MacOSNativeMethods.CFStringEncodingUtf8)
+                ? sb.ToString()
+                : string.Empty;
+        }
+        finally
+        {
+            MacOSNativeMethods.CFRelease(role);
+        }
     }
 }

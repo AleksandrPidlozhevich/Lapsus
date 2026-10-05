@@ -342,7 +342,10 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         if (SelectionActionInProgress)
             return false;
 
-        var pid = ResolveForegroundPid();
+        var pid = MacFrontmost.ProcessId();
+        if (pid <= 0)
+            pid = ResolveForegroundPid();
+
         if (pid <= 0)
             return false;
 
@@ -360,13 +363,15 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         if (!_clipboardDirty)
             _savedClipboard = MacClipboard.CaptureSnapshot();
 
-        if (!MacTextInjection.SelectBackward(count))
+        // Deletes and the paste chord share the session tap. A Delete posted to the pid is dropped,
+        // and Cmd+V still inserts, which leaves the old word in front of the correction.
+        if (count > 0 && !MacTextInjection.SendBackspaces(count))
         {
             RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
             return false;
         }
 
-        if (!PasteText(text))
+        if (!PasteInto(0, text, onSession: true))
         {
             if (_clipboardDirty)
                 _ = RestoreClipboardAsync();
@@ -471,7 +476,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             _savedClipboard = MacClipboard.CaptureSnapshot();
 
         MacClipboard.WasModified();
-        if (!MacTextInjection.SendCommandChord(MacOSNativeMethods.CKeyCode))
+        if (!MacTextInjection.SendCommandChord(MacOSNativeMethods.CKeyCode, MacFrontmost.ProcessId()))
             return null;
 
         for (var waited = 0; waited < CopyTimeoutMs; waited += CopyPollMs)
@@ -498,6 +503,11 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     protected override bool PasteText(string text)
     {
+        return PasteInto(MacFrontmost.ProcessId(), text);
+    }
+
+    private bool PasteInto(int pid, string text, bool onSession = false)
+    {
         if (!MacClipboard.SetText(text))
         {
             RaiseDiagnosticFormat("Diag_ClipboardFailed", ForegroundAppName());
@@ -508,7 +518,10 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         MacClipboard.WasModified();
         _clipboardDirty = true;
         _clipboardEpoch++;
-        if (MacTextInjection.SendCommandChord(MacOSNativeMethods.VKeyCode))
+        var pasted = onSession
+            ? MacTextInjection.SendSessionCommandChord(MacOSNativeMethods.VKeyCode)
+            : MacTextInjection.SendCommandChord(MacOSNativeMethods.VKeyCode, pid);
+        if (pasted)
             return true;
 
         RaiseDiagnosticFormat("Diag_ClipboardFailed", ForegroundAppName());
