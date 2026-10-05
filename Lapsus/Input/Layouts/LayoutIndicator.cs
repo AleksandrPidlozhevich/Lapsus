@@ -17,6 +17,10 @@ public sealed class LayoutIndicator : IDisposable
 
     private static readonly TimeSpan MovingInterval = TimeSpan.FromMilliseconds(16);
 
+    private static readonly TimeSpan MacIdleInterval = TimeSpan.FromMilliseconds(500);
+
+    private const int MacIdleAfterEmpty = 4;
+
     private const double MaxBadgeDip = 80;
 
     private readonly AppExclusions _excludedApps;
@@ -33,6 +37,7 @@ public sealed class LayoutIndicator : IDisposable
     private bool _hostIsMoving;
     private string? _shownText;
     private bool _macSampleInFlight;
+    private int _macEmptySamples;
 
     public LayoutIndicator(AppExclusions excludedApps)
     {
@@ -72,6 +77,7 @@ public sealed class LayoutIndicator : IDisposable
                 _timer.Stop();
                 _refreshRetry.Stop();
                 _timer.Interval = Interval;
+                _macEmptySamples = 0;
                 _hostIsMoving = false;
                 Hide();
             }
@@ -180,6 +186,9 @@ public sealed class LayoutIndicator : IDisposable
 
     private void Apply(string? processName, CaretBounds caret)
     {
+        if (OperatingSystem.IsMacOS())
+            NoteMacCaret(!caret.IsEmpty);
+
         if (_excludedApps.Contains(processName))
         {
             Hide();
@@ -203,6 +212,24 @@ public sealed class LayoutIndicator : IDisposable
         }
 
         Show(text, caret);
+    }
+
+    // Empty carets are the common case (no focused field). After a few of them, poll slower until one appears.
+    private void NoteMacCaret(bool found)
+    {
+        if (found)
+        {
+            _macEmptySamples = 0;
+            if (_timer.Interval != Interval)
+                _timer.Interval = Interval;
+            return;
+        }
+
+        if (_macEmptySamples < MacIdleAfterEmpty)
+            _macEmptySamples++;
+
+        if (_macEmptySamples >= MacIdleAfterEmpty && _timer.Interval != MacIdleInterval)
+            _timer.Interval = MacIdleInterval;
     }
 
     private readonly record struct MacSample(string? ProcessName, CaretBounds Caret);

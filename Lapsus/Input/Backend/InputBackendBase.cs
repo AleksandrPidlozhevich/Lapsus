@@ -186,16 +186,28 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         Diagnostic?.Invoke(this, Localizer.Instance.Format(key, args));
     }
 
-    protected void NoteModifierKey(TapModifier modifier, bool isDown)
+    // defer is for a hook that is already on the UI thread (Windows): the correction must not run
+    // before the hook returns. macOS posts the note itself and then runs the correction inline,
+    // still inside the tap epoch gate, so a stop cannot apply a stale double-tap afterwards.
+    protected void NoteModifierKey(TapModifier modifier, bool isDown, bool defer = true)
     {
         if (_tapDetector.Note(modifier, isDown, Environment.TickCount64) is not { } tapped)
             return;
 
         var trigger = HotkeyTriggers.DoubleTap(tapped);
+        Action? apply = null;
         if (trigger == HotkeyVirtualKey)
-            Dispatcher.UIThread.Post(ApplyCorrection);
+            apply = ApplyCorrection;
         else if (SelectionActionFor(trigger) is { } action)
-            Dispatcher.UIThread.Post(() => _ = ApplySelectionActionAsync(action));
+            apply = () => _ = ApplySelectionActionAsync(action);
+
+        if (apply is null)
+            return;
+
+        if (defer)
+            Dispatcher.UIThread.Post(apply);
+        else
+            apply();
     }
 
     protected void NoteNonModifierInput()
