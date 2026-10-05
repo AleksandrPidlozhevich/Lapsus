@@ -162,7 +162,7 @@ internal static class MacTextInjection
 
     // Delete posted straight to the process is a private-source key. Electron drops it and still
     // honors Cmd+V, so the word that should have been removed stays and the correction is appended.
-    // The session tap is downstream of our HID tap, and these events share it with the paste chord.
+    // Backspaces and the paste chord share the annotated session tap, downstream of our HID tap.
     public static bool SendBackspaces(int count)
     {
         if (count <= 0)
@@ -281,14 +281,35 @@ internal static class MacTextInjection
             ev, MacOSNativeMethods.EventSourceStateId, MacOSNativeMethods.EventSourceStateHidSystem);
     }
 
+    private static ulong _lastStamp;
+
     private static void Deliver(Route route, int pid, IntPtr ev)
     {
+        // A new keyboard event has timestamp 0. Chromium drops that as older than the last real key,
+        // so Electron (Cursor, Notion) ignores the deletes and the paste.
+        MacOSNativeMethods.CGEventSetTimestamp(ev, NextStamp());
+
         if (route == Route.Process && pid > 0)
             MacOSNativeMethods.CGEventPostToPid(pid, ev);
         else if (route == Route.Session)
-            MacOSNativeMethods.CGEventPost(MacOSNativeMethods.SessionEventTap, ev);
+            MacOSNativeMethods.CGEventPost(MacOSNativeMethods.AnnotatedSessionEventTap, ev);
         else
             MacOSNativeMethods.CGEventPost(0, ev);
+    }
+
+    private static ulong NextStamp()
+    {
+        var now = MacOSNativeMethods.clock_gettime_nsec_np(MacOSNativeMethods.ClockUptimeRaw);
+        ulong previous, stamp;
+        do
+        {
+            previous = System.Threading.Volatile.Read(ref _lastStamp);
+            var cursor = previous;
+            stamp = InjectedEventTime.Next(now, ref cursor);
+        }
+        while (System.Threading.Interlocked.CompareExchange(ref _lastStamp, stamp, previous) != previous);
+
+        return stamp;
     }
 
     private static void MarkInjected(IntPtr ev)

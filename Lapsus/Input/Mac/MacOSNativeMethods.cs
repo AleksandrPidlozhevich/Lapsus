@@ -179,10 +179,16 @@ internal static class MacOSNativeMethods
     public const int EventSourceUserData = 42;
     public const int EventSourceStateId = 45;
 
-    // Posted here, events skip the HID tap this process installs and still arrive in order.
+    // kCGSessionEventTap. Keys posted here are not routed to the front app, so Electron never sees them.
     public const uint SessionEventTap = 1;
 
+    // kCGAnnotatedSessionEventTap. Still downstream of our HID tap, and delivered to the front app.
+    public const uint AnnotatedSessionEventTap = 2;
+
     public const int EventSourceStateHidSystem = 1;
+
+    // CLOCK_UPTIME_RAW. Matches CGEvent timestamps (nanoseconds since boot, paused while asleep).
+    public const int ClockUptimeRaw = 8;
 
     public const long InjectedMarker = 0x4C50_5355;
 
@@ -223,6 +229,15 @@ internal static class MacOSNativeMethods
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
     public static extern void CGEventKeyboardSetUnicodeString(IntPtr @event, long stringLength, byte[] unicodeString);
+
+    [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
+    public static extern void CGEventSetTimestamp(IntPtr @event, ulong timestamp);
+
+    [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
+    public static extern ulong CGEventGetTimestamp(IntPtr @event);
+
+    [DllImport("/usr/lib/libSystem.dylib")]
+    public static extern ulong clock_gettime_nsec_np(int clockId);
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
     public static extern void CGEventPost(uint tap, IntPtr @event);
