@@ -10,6 +10,20 @@ string? Option(string name)
 var code = Option("--lang");
 var outDir = Option("--out");
 
+// The app's own cleaning (FrequencyListCleaner), for lists built or downloaded outside DictionaryStore.
+if (Option("--clean") is { } listToClean)
+{
+    if (Option("--script") is not { } scriptName || !Enum.TryParse<Script>(scriptName, ignoreCase: true, out var cleanScript))
+    {
+        Console.Error.WriteLine("Usage: --clean LIST.txt --script Cyrillic|Latin|Greek|...");
+        return 1;
+    }
+
+    var removed = FrequencyListCleaner.CleanFile(listToClean, cleanScript);
+    Console.WriteLine($"{listToClean}: removed {removed} misspellings");
+    return 0;
+}
+
 if (Option("--russian-in") is { } oldList)
 {
     var reference = Option("--reference");

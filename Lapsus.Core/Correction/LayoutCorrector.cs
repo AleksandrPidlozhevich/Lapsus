@@ -143,8 +143,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
         // Match listed chunks before WordScanner; it would split "we-on" at a non-letter key.
         var excluded = _exceptions.IsEmpty ? null : _exceptions.ChunkSpans(text);
 
-        IReadOnlyList<TokenReading> readings =
-            ReadTokens(text, preferred, phraseSourceLanguageCode, sourceFor, installed, excluded, hints.KeysOnly);
+        IReadOnlyList<TokenReading> readings = ReadTokens(
+            text, preferred, phraseSourceLanguageCode, sourceFor, installed, excluded, hints.KeysOnly, hints.TypoOnly);
         if (_phraseContext)
         {
             foreach (var reading in readings)
@@ -231,12 +231,14 @@ public sealed class LayoutCorrector : IPhraseCorrector
         return null;
     }
 
+    // typoOnly leaves every word without other layouts to read it as, so no switch can be chosen at all.
     private List<TokenReading> ReadTokens(
         string text, KeyboardLayout? preferred, string? phraseSourceLanguageCode,
         Func<char, WordSource> sourceFor,
         IReadOnlyList<LayoutSource>? installed,
         IReadOnlyList<TextSpan>? excluded,
-        bool keysOnly)
+        bool keysOnly,
+        bool typoOnly)
     {
         var readings = new List<TokenReading>();
         var excludedMask = excluded is null ? null : TextSpans.BuildMask(text.Length, excluded);
@@ -268,7 +270,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
             // Whole letterless chunk whose keys are letters elsewhere; only the line may pull it in.
             var atChunkStart = i == 0 || char.IsWhiteSpace(text[i - 1]);
-            if (atChunkStart && LetterlessChunkEnd(text, i, sourceFor, installed, excludedMask) is { } chunkEnd)
+            if (!typoOnly && atChunkStart &&
+                LetterlessChunkEnd(text, i, sourceFor, installed, excludedMask) is { } chunkEnd)
             {
                 CloseVerbatim(i);
                 var chunk = text[i..chunkEnd];
@@ -293,7 +296,9 @@ public sealed class LayoutCorrector : IPhraseCorrector
             var raw = sourceFor(text[firstLetter]);
             var source = raw with
             {
-                Candidates = EnsureOppositeScriptCandidates(raw.Script, raw.Candidates, installed),
+                Candidates = typoOnly
+                    ? Array.Empty<LayoutCandidate>()
+                    : EnsureOppositeScriptCandidates(raw.Script, raw.Candidates, installed),
                 LanguageCode = raw.LanguageCode ?? phraseSourceLanguageCode
             };
 
@@ -324,6 +329,16 @@ public sealed class LayoutCorrector : IPhraseCorrector
             else
             {
                 best = CorrectWord(text[wordStart..i], source, preferred, keysOnly);
+
+                // Typos only: a fix must land on a word the dictionaries know. Without other layouts to read,
+                // a guessed or split spelling would otherwise turn a Ukrainian word into Latin noise.
+                if (typoOnly && best.Changed &&
+                    !WordScorer.IsDictionaryHit(_scorer.Score(best.Text, source.Script, source.LanguageCode)))
+                {
+                    var typedAsIs = text[wordStart..i];
+                    best = ScoredWord.AsTyped(typedAsIs, _scorer.Score(typedAsIs, source.Script, source.LanguageCode));
+                }
+
                 (best, i) = ExtendOverTrailingRun(text, wordStart, i, best, source, preferred);
             }
 

@@ -22,7 +22,7 @@ internal sealed record TargetLanguage(
     ];
 
     public static readonly TargetLanguage[] Priority =
-        [.. All.Where(l => l.Code is "uk" or "he" or "ar" or "el" or "bg" or "be")];
+        [.. All.Where(l => l.Code is "uk" or "he" or "ar" or "el" or "bg" or "be" or "ru")];
 
     public string Key => Variant is null ? Code : $"{Code}-{Variant}";
 

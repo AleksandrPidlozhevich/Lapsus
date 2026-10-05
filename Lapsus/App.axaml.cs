@@ -151,6 +151,9 @@ public partial class App : Application
         await _brainGate.WaitAsync().ConfigureAwait(true);
         try
         {
+            // Lists installed before cleaning existed are cleaned before any brain reads them. Gated by version: no-op after the first run.
+            await Task.Run(_dictionaryStore.CleanOutdatedLists).ConfigureAwait(true);
+
             var settings = _settingsViewModel.SettingsSnapshot();
             IPhraseCorrector corrector;
 

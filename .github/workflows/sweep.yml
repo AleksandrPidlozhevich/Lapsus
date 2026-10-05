@@ -76,7 +76,7 @@ jobs:
           wooorm=https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries
           unimorph=https://raw.githubusercontent.com/unimorph/heb/b2bff12338caa1922e6aeea128c617730f93d334/heb
 
-          for code in en bg el he ar; do get "dictionaries/$code.txt" "$fw/$code/${code}_50k.txt"; done
+          for code in en bg el he ar ru; do get "dictionaries/$code.txt" "$fw/$code/${code}_50k.txt"; done
           # FrequencyWords has no Belarusian pack.
           get dictionaries/be.txt "$unilex/be.txt"
           get staging/uk.txt "$fw/uk/uk_50k.txt"
@@ -87,14 +87,19 @@ jobs:
           hunspell be "$lo/be_BY/be-official"
           hunspell el "$lo/el_GR/el_GR"
           hunspell ar "$lo/ar/ar"
-          get staging/ru.aff "$lo/ru_RU/ru_RU.aff"; get staging/ru.dic "$lo/ru_RU/ru_RU.dic"
+          hunspell ru "$lo/ru_RU/ru_RU"
 
           dotnet run --project tools/Lapsus.Lexicons -c Release -- \
-            --lang uk --list staging/uk.txt --own dictionaries/uk.dic --neighbour staging/ru.dic --out dictionaries
+            --lang uk --list staging/uk.txt --own dictionaries/uk.dic --neighbour dictionaries/ru.dic --out dictionaries
           get staging/heb "$unimorph"
           get staging/he.jsonl https://kaikki.org/dictionary/Hebrew/kaikki.org-dictionary-Hebrew.jsonl
           dotnet run --project tools/Lapsus.Lexicons -c Release -- \
             --lang he --kaikki staging/he.jsonl --unimorph staging/heb --out dictionaries
+
+          # The app's own cleaning (FrequencyListCleaner), as DictionaryStore runs it on install. Latin and abjads are exempt.
+          clean() { dotnet run --project tools/Lapsus.Lexicons -c Release -- --clean "dictionaries/$1.txt" --script "$2"; }
+          for code in uk ru be bg; do clean "$code" Cyrillic; done
+          clean el Greek
 
           rm -rf staging
           wc -l dictionaries/*.txt

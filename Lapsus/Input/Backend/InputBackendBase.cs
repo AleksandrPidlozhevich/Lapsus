@@ -45,6 +45,9 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
 
     private int _committedLength;
 
+    // Words ended by a space whose auto-correction is queued on the UI thread, oldest first.
+    private readonly List<PendingAutoFix> _pendingAutoFixes = [];
+
     protected TFocus BufferOwner;
 
     private Script? _lineDirection;
@@ -207,6 +210,7 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
     {
         _bufferGeneration++;
         _buffer.Reset();
+        _pendingAutoFixes.Clear();
         _cycle = null;
         _committedLength = 0;
         _lineDirection = null;
@@ -239,6 +243,7 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
 
         _bufferGeneration++;
         _buffer.Backspace();
+        TrimPendingAutoFixes();
         _committedLength = Math.Min(_committedLength, _buffer.Length);
 
         _atWordStart = !_buffer.EndsInsideChunk;
@@ -322,15 +327,18 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
             return;
         }
 
+        // Keystrokes typed after a queued word's space are its tail; its correction rewrites the word and the tail.
+        foreach (var pending in _pendingAutoFixes)
+            pending.Tail += ch;
+
         if ((AutoMode || AutoFixTypos) && Corrector.SupportsAutoMode && ch == ' ' && !_layoutChangedMidWord)
         {
-
             var completed = _buffer.CurrentChunk;
             if (completed.Length > 0 && completed.Length <= _buffer.Length - _committedLength)
             {
-                var originalSegment = _buffer.Segment + ch;
-                var owner = BufferOwner;
-                Dispatcher.UIThread.Post(() => AutoCorrect(completed, originalSegment, owner));
+                var pending = new PendingAutoFix(completed, BufferOwner);
+                _pendingAutoFixes.Add(pending);
+                Dispatcher.UIThread.Post(() => AutoCorrect(pending));
             }
         }
 
@@ -342,24 +350,50 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
             _layoutChangedMidWord = false;
     }
 
-    private void AutoCorrect(string word, string originalSegment, TFocus owner)
+    // A backspace removes the last character: from a tail it shortens the tail; from a queued word's space it
+    // removes that word, since its correction no longer has the space it was queued for.
+    private void TrimPendingAutoFixes()
     {
+        for (var i = _pendingAutoFixes.Count - 1; i >= 0; i--)
+        {
+            var pending = _pendingAutoFixes[i];
+            if (pending.Tail.Length > 0)
+                pending.Tail = pending.Tail[..^1];
+            else
+                _pendingAutoFixes.RemoveAt(i);
+        }
+    }
 
-        if (!IsStillFocused(owner))
+    private void AutoCorrect(PendingAutoFix fix)
+    {
+        // Gone when a reset, a backspace into it, or a focus change ran after its space.
+        if (!_pendingAutoFixes.Remove(fix))
             return;
 
-        if (!Corrector.IsReady || !string.Equals(_buffer.Segment, originalSegment, StringComparison.Ordinal))
+        var word = fix.Word;
+        var tail = fix.Tail;
+
+        if (!IsStillFocused(fix.Owner))
+            return;
+
+        // The line must still read "word<space>tail"; a hotkey or a neural rewrite since the space changes it.
+        if (!Corrector.IsReady || !_buffer.Segment.EndsWith(word + " " + tail, StringComparison.Ordinal))
             return;
 
         if (!AutoCorrectPolicy.IsEligible(word, _lineDirection is not null))
             return;
 
+        // Typos only asks the brain for spelling inside the typed layout. A brain that ignores the hint can still
+        // answer with another layout, so the result is checked below as well.
+        var hints = AutoMode
+            ? new CorrectionHints(_lineDirection, KeysOnly: !AutoFixTypos)
+            : new CorrectionHints(TypoOnly: true);
+
         PhraseCorrection phrase;
         InstalledLayout? source;
         try
         {
-
-            phrase = TryCorrectInstalled(word, new CorrectionHints(_lineDirection, KeysOnly: !AutoFixTypos), out source);
+            phrase = TryCorrectInstalled(word, hints, out source);
         }
         catch (Exception ex)
         {
@@ -367,7 +401,7 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
             return;
         }
 
-        // Typos only: a reading that needs another layout stays as typed.
+        // Typos only keeps a word as typed when the answer still names another layout.
         if (!AutoMode && (phrase.TargetLayout is not null || !string.IsNullOrEmpty(phrase.TargetLayoutId)))
             return;
 
@@ -375,15 +409,18 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         if (!phrase.Changed)
             return;
 
-        if (!TryInject(word.Length + 1, phrase.Corrected + " "))
+        // The tail was typed into the field already; it is retyped after the corrected word so the caret ends where it was.
+        var replacement = phrase.Corrected + " " + tail;
+        if (!TryInject(word.Length + 1 + tail.Length, replacement))
             return;
 
         _bufferGeneration++;
-        if (_buffer.TryReplaceTrailing(word + " ", phrase.Corrected + " "))
+        if (_buffer.TryReplaceTrailing(word + " " + tail, replacement))
         {
+            _committedLength = _buffer.Length - replacement.Length;
 
-            _committedLength = _buffer.Length - phrase.Corrected.Length - 1;
-            if (source is not null && Layouts is not null)
+            // A cycle walks the corrected word alone, which is only the whole segment while nothing followed it.
+            if (tail.Length == 0 && source is not null && Layouts is not null)
                 _cycle = LayoutCorrectionCycle.StartAuto(word, phrase, source, Layouts, Corrector.SupportsLayoutCycle);
         }
         else
@@ -393,6 +430,16 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
 
         RaiseCorrected(word, phrase.Corrected, source?.Target, phrase.TargetLayout);
         SwitchLayoutIfRequested(phrase.TargetLayout, phrase.TargetLayoutId);
+    }
+
+    private sealed class PendingAutoFix(string word, TFocus owner)
+    {
+        public string Word { get; } = word;
+
+        public TFocus Owner { get; } = owner;
+
+        // What was typed after the word's space while its correction waited for the UI thread.
+        public string Tail { get; set; } = string.Empty;
     }
 
     private void NoteLineDirection(string word, in PhraseCorrection phrase)

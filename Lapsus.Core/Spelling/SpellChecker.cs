@@ -242,7 +242,7 @@ public sealed class SpellChecker
         return false;
     }
 
-    private static bool Check(WordList lexicon, string word)
+    internal static bool Check(WordList lexicon, string word)
     {
         // Keyboard apostrophe / cedilla variants must match dictionary spellings.
         return lexicon.Check(word) ||
@@ -406,10 +406,18 @@ public sealed class SpellChecker
 
         var found = new List<(string Term, int Distance, double Frequency)>();
         foreach (var loaded in EnginesFor(languageCode, script))
-            foreach (var hit in loaded.Engine.Lookup(LookupKey(word, loaded), SymSpellEngine.Verbosity.Closest,
+            // "All", not "Closest": for a word the list already holds, Closest returns only the word itself (distance 0).
+            foreach (var hit in loaded.Engine.Lookup(LookupKey(word, loaded), SymSpellEngine.Verbosity.All,
                          MaxEditDistance))
                 if (hit.distance > 0 && !found.Exists(f => f.Term == hit.term))
                     found.Add((hit.term, hit.distance, Normalise(hit.count, loaded.LogMaxCount)));
+
+        // Only the nearest spellings, as Closest gave for a word the list does not hold.
+        if (found.Count > 0)
+        {
+            var nearest = found.Min(f => f.Distance);
+            found.RemoveAll(f => f.Distance > nearest);
+        }
 
         // A frequency list of a few tens of thousands words misses most inflected forms ("вихідними",
         // "налаштування"); the Hunspell affixes build them. Asked only when the list has nothing one edit

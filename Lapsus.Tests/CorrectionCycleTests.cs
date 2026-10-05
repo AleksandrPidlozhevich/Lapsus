@@ -170,6 +170,66 @@ public sealed class CorrectionCycleTests : IDisposable
     }
 
     [Fact]
+    public void Typo_fix_still_lands_when_another_layout_also_reads_the_word_as_a_word()
+    {
+        // "wnt" read through the Ukrainian layout is "це", a word; the typo fix "want" must still win in typo-only mode.
+        var enPath = WriteTemp("en-want", "want 900");
+        var ukPath = WriteTemp("uk-te", "це 900");
+        try
+        {
+            var brain = new LayoutCorrector(new SpellChecker(
+            [
+                new DictionarySource("en", enPath, Script.Latin),
+                new DictionarySource("uk", ukPath, Script.Cyrillic)
+            ]));
+            var backend = new FakeInputBackend(brain).Listening().Focused();
+            backend.AutoMode = false;
+            backend.AutoFixTypos = true;
+
+            backend.Type("wnt ");
+            Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+            Assert.Equal("want ", Assert.Single(backend.Injected).Text);
+            Assert.Empty(backend.LayoutSwitches);
+        }
+        finally
+        {
+            File.Delete(enPath);
+            File.Delete(ukPath);
+        }
+    }
+
+    [Fact]
+    public void Typo_only_never_turns_a_layout_word_into_latin_noise()
+    {
+        // "ghbdsn" is "привіт" typed on the English layout: typo-only must leave it alone, not respell it in Latin.
+        var enPath = WriteTemp("en-hello", "hello 900", "help 800");
+        var ukPath = WriteTemp("uk-hi", "привіт 900");
+        try
+        {
+            var brain = new LayoutCorrector(new SpellChecker(
+            [
+                new DictionarySource("en", enPath, Script.Latin),
+                new DictionarySource("uk", ukPath, Script.Cyrillic)
+            ]));
+            var backend = new FakeInputBackend(brain).Listening().Focused();
+            backend.AutoMode = false;
+            backend.AutoFixTypos = true;
+
+            backend.Type("ghbdsn ");
+            Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+            Assert.Empty(backend.Injected);
+            Assert.Empty(backend.LayoutSwitches);
+        }
+        finally
+        {
+            File.Delete(enPath);
+            File.Delete(ukPath);
+        }
+    }
+
+    [Fact]
     public void A_phrase_with_a_leading_oem_letter_rewrites_the_whole_line()
     {
         var ukPath = WriteTemp("uk-phrase", "я 100", "хочу 100");

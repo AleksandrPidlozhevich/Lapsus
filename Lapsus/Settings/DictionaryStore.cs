@@ -77,6 +77,30 @@ public sealed class DictionaryStore
         }
     }
 
+    // Lists installed before cleaning existed are cleaned in place. A list already at the current version is left
+    // alone, so this costs nothing after the first start.
+    public void CleanOutdatedLists()
+    {
+        foreach (var descriptor in DictionaryCatalog.Available)
+        {
+            if (!IsOutdated(descriptor))
+                continue;
+
+            try
+            {
+                if (IsInstalled(descriptor.Code))
+                    FrequencyListCleaner.CleanFile(PathFor(descriptor.Code), descriptor.Script);
+
+                File.WriteAllText(VersionPathFor(descriptor.Code),
+                    descriptor.Version.ToString(CultureInfo.InvariantCulture));
+            }
+            catch (Exception ex) when (ex is IOException or InvalidDataException)
+            {
+                CrashLog.Log(ex, $"cleaning installed list {descriptor.Code}");
+            }
+        }
+    }
+
     public IReadOnlyList<DictionarySource> Installed()
     {
         var sources = new List<DictionarySource>();
@@ -124,6 +148,8 @@ public sealed class DictionaryStore
             {
                 stagedWords = await BuildWordFormsAsync(descriptor, formLists, staging, ct);
             }
+
+            FrequencyListCleaner.CleanFile(list, descriptor.Script);
 
             File.Move(list, PathFor(descriptor.Code), true);
             if (stagedWords is not null)

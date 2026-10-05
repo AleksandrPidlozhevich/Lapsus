@@ -20,6 +20,39 @@ public class StaleLineStateTests
     }
 
     [Fact]
+    public void Words_typed_before_the_first_correction_runs_are_each_corrected()
+    {
+        var backend = AutoCorrecting();
+        backend.Type("cfk cfk ");
+        Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal("car car ", ScreenAfter(backend, "cfk cfk "));
+    }
+
+    [Fact]
+    public void A_word_corrected_after_more_was_typed_keeps_what_followed_it()
+    {
+        var backend = AutoCorrecting();
+        backend.Type("cfk x");
+        Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal("car x", ScreenAfter(backend, "cfk x"));
+    }
+
+    // Replays the injections over the text the field held, as the app's keystrokes and corrections would.
+    private static string ScreenAfter(FakeInputBackend backend, string typed)
+    {
+        var screen = new System.Text.StringBuilder(typed);
+        foreach (var (backspaces, text) in backend.Injected)
+        {
+            screen.Remove(screen.Length - backspaces, backspaces);
+            screen.Append(text);
+        }
+
+        return screen.ToString();
+    }
+
+    [Fact]
     public void A_layout_switch_inside_a_word_still_suppresses_auto_mode()
     {
         var backend = AutoCorrecting();

@@ -25,11 +25,11 @@ public sealed record DictionaryDescriptor(
 public static class DictionaryCatalog
 {
 
-    public const int DefaultVersion = 2;
+    public const int DefaultVersion = 3;
 
-    private const int HebrewVersion = 3;
+    private const int HebrewVersion = 4;
 
-    private const int UkrainianVersion = 3;
+    private const int UkrainianVersion = 4;
 
     private const string KaikkiUrl = "https://kaikki.org/dictionary";
 
