@@ -1,9 +1,9 @@
+using Lapsus.Core.Licensing;
 using System;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
-using Lapsus.Core.Licensing;
 
 namespace Lapsus.Licensing;
 

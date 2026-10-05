@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Lapsus.Core.Correction;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;

@@ -1,6 +1,6 @@
+using Lapsus.Settings;
 using System;
 using System.Threading.Tasks;
-using Lapsus.Settings;
 
 namespace Lapsus.Licensing;
 

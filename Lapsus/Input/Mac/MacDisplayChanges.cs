@@ -1,7 +1,7 @@
+using Avalonia.Threading;
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using Avalonia.Threading;
 
 namespace Lapsus.Input;
 

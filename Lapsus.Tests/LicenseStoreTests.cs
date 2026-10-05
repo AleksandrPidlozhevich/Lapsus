@@ -1,7 +1,7 @@
-using System.Text;
 using Lapsus.Core.Licensing;
 using Lapsus.Core.Tests;
 using Lapsus.Licensing;
+using System.Text;
 
 namespace Lapsus.Tests;
 

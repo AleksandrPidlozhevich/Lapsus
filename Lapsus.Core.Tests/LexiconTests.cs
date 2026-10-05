@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using Lapsus.Core.Correction;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;
+using System.Text;
 
 namespace Lapsus.Core.Tests;
 

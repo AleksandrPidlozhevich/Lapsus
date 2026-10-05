@@ -1,7 +1,7 @@
-using System;
-using System.Threading.Tasks;
 using Lapsus.Licensing;
 using Lapsus.Startup;
+using System;
+using System.Threading.Tasks;
 using Velopack;
 using Velopack.Sources;
 

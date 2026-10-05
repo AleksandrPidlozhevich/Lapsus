@@ -1,7 +1,7 @@
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using System;
 using static Lapsus.Input.NativeMethods;
 
 namespace Lapsus.Views;

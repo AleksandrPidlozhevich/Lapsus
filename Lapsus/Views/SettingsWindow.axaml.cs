@@ -1,4 +1,3 @@
-using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -8,6 +7,7 @@ using Avalonia.Styling;
 using Avalonia.Threading;
 using Lapsus.Localization;
 using Lapsus.ViewModels;
+using System;
 
 namespace Lapsus.Views;
 

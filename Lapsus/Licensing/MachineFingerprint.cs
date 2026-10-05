@@ -1,9 +1,9 @@
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.Win32;
 
 namespace Lapsus.Licensing;
 

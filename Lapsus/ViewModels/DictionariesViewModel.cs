@@ -1,12 +1,12 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Lapsus.Localization;
+using Lapsus.Settings;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Lapsus.Localization;
-using Lapsus.Settings;
 
 namespace Lapsus.ViewModels;
 
@@ -60,10 +60,12 @@ public sealed partial class DictionariesViewModel : ObservableObject
 
     public ObservableCollection<DictionaryDescriptor> Available { get; } = [];
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(AddCommand), nameof(UpdateCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddCommand), nameof(UpdateCommand))]
     private DictionaryDescriptor? _selectedAvailable;
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(AddCommand), nameof(UpdateCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddCommand), nameof(UpdateCommand))]
     private bool _busy;
 
     [ObservableProperty] private string _status = string.Empty;

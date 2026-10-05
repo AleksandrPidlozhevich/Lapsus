@@ -7,14 +7,25 @@ internal static class TestKeyboardMaps
 {
     public static KeyboardMap GermanQwertz { get; } = new(UsSlotsWith(new Dictionary<char, char>
     {
-        ['y'] = 'z', ['z'] = 'y',
-        [';'] = 'ö', ['-'] = 'ß', ['['] = 'ü', ['\''] = 'ä', ['/'] = '-'
+        ['y'] = 'z',
+        ['z'] = 'y',
+        [';'] = 'ö',
+        ['-'] = 'ß',
+        ['['] = 'ü',
+        ['\''] = 'ä',
+        ['/'] = '-'
     }));
 
     public static KeyboardMap TurkishQ { get; } = new(UsSlotsWith(new Dictionary<char, char>
     {
         ['i'] = 'ı',
-        [';'] = 'ş', ['['] = 'ğ', [']'] = 'ü', ['\''] = 'i', [','] = 'ö', ['.'] = 'ç', ['/'] = '.'
+        [';'] = 'ş',
+        ['['] = 'ğ',
+        [']'] = 'ü',
+        ['\''] = 'i',
+        [','] = 'ö',
+        ['.'] = 'ç',
+        ['/'] = '.'
     }));
 
     private static char[] UsSlotsWith(Dictionary<char, char> overlay)

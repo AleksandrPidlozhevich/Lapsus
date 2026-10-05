@@ -1,6 +1,6 @@
+using Lapsus.Core.Licensing;
 using System;
 using System.IO;
-using Lapsus.Core.Licensing;
 
 namespace Lapsus.Licensing;
 

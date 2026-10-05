@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
 using Lapsus.Core.Correction;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;
@@ -212,8 +210,8 @@ public sealed class BrainTests : IDisposable
         {
             var count = 1000;
             foreach (var stem in stems)
-            foreach (var ending in endings)
-                yield return $"{stem}{ending} {count--}";
+                foreach (var ending in endings)
+                    yield return $"{stem}{ending} {count--}";
         }
     }
 

@@ -1,6 +1,6 @@
-using System.Text;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;
+using System.Text;
 
 namespace Lapsus.Core.Correction;
 

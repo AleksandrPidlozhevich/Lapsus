@@ -17,9 +17,9 @@ public static class ExecutionPlan
         var plan = new List<ExecutionAttempt>();
 
         foreach (var device in Wishlist(preference))
-        foreach (var provider in ProvidersFor(device, capabilities, packDevice, declared))
-            if (!plan.Any(a => string.Equals(a.Provider, provider, StringComparison.OrdinalIgnoreCase)))
-                plan.Add(new ExecutionAttempt(provider, device));
+            foreach (var provider in ProvidersFor(device, capabilities, packDevice, declared))
+                if (!plan.Any(a => string.Equals(a.Provider, provider, StringComparison.OrdinalIgnoreCase)))
+                    plan.Add(new ExecutionAttempt(provider, device));
 
         plan.Add(ExecutionAttempt.Cpu);
         return plan;

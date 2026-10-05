@@ -1,3 +1,5 @@
+using Lapsus.Core.Spelling;
+using Lapsus.Localization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,8 +8,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Lapsus.Core.Spelling;
-using Lapsus.Localization;
 using WeCantSpell.Hunspell;
 
 namespace Lapsus.Settings;

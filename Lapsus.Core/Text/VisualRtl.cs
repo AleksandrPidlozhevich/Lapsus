@@ -1,6 +1,6 @@
+using Lapsus.Core.Layout;
 using System.Globalization;
 using System.Text;
-using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Text;
 
@@ -8,12 +8,18 @@ public static class VisualRtl
 {
     private static readonly Dictionary<char, char> Mirrored = new()
     {
-        ['('] = ')', [')'] = '(',
-        ['['] = ']', [']'] = '[',
-        ['{'] = '}', ['}'] = '{',
-        ['<'] = '>', ['>'] = '<',
-        ['«'] = '»', ['»'] = '«',
-        ['‹'] = '›', ['›'] = '‹'
+        ['('] = ')',
+        [')'] = '(',
+        ['['] = ']',
+        [']'] = '[',
+        ['{'] = '}',
+        ['}'] = '{',
+        ['<'] = '>',
+        ['>'] = '<',
+        ['«'] = '»',
+        ['»'] = '«',
+        ['‹'] = '›',
+        ['›'] = '‹'
     };
 
     public static string Flip(string text)

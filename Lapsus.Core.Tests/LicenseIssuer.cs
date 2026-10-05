@@ -1,7 +1,7 @@
+using Lapsus.Core.Licensing;
 using System.Buffers.Text;
 using System.Security.Cryptography;
 using System.Text.Json;
-using Lapsus.Core.Licensing;
 
 namespace Lapsus.Core.Tests;
 

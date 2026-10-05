@@ -1,3 +1,5 @@
+using Lapsus.Core.Models;
+using Microsoft.ML.OnnxRuntimeGenAI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,8 +8,6 @@ using System.Numerics;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
-using Lapsus.Core.Models;
-using Microsoft.ML.OnnxRuntimeGenAI;
 
 namespace Lapsus.Neural;
 

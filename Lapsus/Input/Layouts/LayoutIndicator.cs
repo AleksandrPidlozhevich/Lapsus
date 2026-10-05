@@ -1,11 +1,11 @@
-using System;
-using System.Globalization;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using Avalonia.Threading;
 using Lapsus.Views;
+using System;
+using System.Globalization;
+using System.Threading.Tasks;
 using static Lapsus.Input.NativeMethods;
 
 namespace Lapsus.Input;

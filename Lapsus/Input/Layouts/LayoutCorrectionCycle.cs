@@ -1,8 +1,8 @@
+using Lapsus.Core.Correction;
+using Lapsus.Core.Layout;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lapsus.Core.Correction;
-using Lapsus.Core.Layout;
 
 namespace Lapsus.Input;
 

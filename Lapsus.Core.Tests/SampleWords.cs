@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Lapsus.Core.Tests;
 
 internal static class SampleWords

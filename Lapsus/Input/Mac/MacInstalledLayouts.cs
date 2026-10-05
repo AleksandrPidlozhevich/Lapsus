@@ -1,9 +1,9 @@
+using Lapsus.Core.Layout;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
-using Lapsus.Core.Layout;
 
 namespace Lapsus.Input;
 
@@ -312,18 +312,51 @@ internal static class MacInstalledLayouts
 
         return keyCode switch
         {
-            0x00 => 'ф', 0x0B => bee, 0x08 => 'с', 0x02 => 'в',
-            0x0E => 'у', 0x03 => 'а', 0x05 => 'п', 0x04 => 'р', 0x22 => 'ш',
-            0x26 => 'о', 0x28 => 'л', 0x25 => 'д', 0x2E => 'ь', 0x2D => 'т',
-            0x1F => ooh, 0x23 => 'з', 0x0C => 'й', 0x0F => 'к', 0x01 => ess,
-            0x11 => 'е', 0x20 => 'г', 0x09 => 'м', 0x0D => 'ц', 0x07 => 'ч',
-            0x10 => 'н', 0x06 => 'я',
+            0x00 => 'ф',
+            0x0B => bee,
+            0x08 => 'с',
+            0x02 => 'в',
+            0x0E => 'у',
+            0x03 => 'а',
+            0x05 => 'п',
+            0x04 => 'р',
+            0x22 => 'ш',
+            0x26 => 'о',
+            0x28 => 'л',
+            0x25 => 'д',
+            0x2E => 'ь',
+            0x2D => 'т',
+            0x1F => ooh,
+            0x23 => 'з',
+            0x0C => 'й',
+            0x0F => 'к',
+            0x01 => ess,
+            0x11 => 'е',
+            0x20 => 'г',
+            0x09 => 'м',
+            0x0D => 'ц',
+            0x07 => 'ч',
+            0x10 => 'н',
+            0x06 => 'я',
 
-            0x1D => '0', 0x12 => '1', 0x13 => '2', 0x14 => '3', 0x15 => '4',
-            0x17 => '5', 0x16 => '6', 0x1A => '7', 0x1C => '8', 0x19 => '9',
+            0x1D => '0',
+            0x12 => '1',
+            0x13 => '2',
+            0x14 => '3',
+            0x15 => '4',
+            0x17 => '5',
+            0x16 => '6',
+            0x1A => '7',
+            0x1C => '8',
+            0x19 => '9',
 
-            0x29 => 'ж', 0x18 => '=', 0x2B => 'б', 0x1B => '-',
-            0x2F => 'ю', 0x2C => '.', 0x32 => grave,
+            0x29 => 'ж',
+            0x18 => '=',
+            0x2B => 'б',
+            0x1B => '-',
+            0x2F => 'ю',
+            0x2C => '.',
+            0x32 => grave,
             0x21 => 'х',
 
             0x2A => ukrainian && !appleVowels ? 'ґ' : '\\',

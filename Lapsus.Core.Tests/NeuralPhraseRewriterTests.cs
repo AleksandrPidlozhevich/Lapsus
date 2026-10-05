@@ -518,7 +518,7 @@ public class NeuralPhraseRewriterTests
             var rewriter = new NeuralPhraseRewriter(
                 llm, new FakeAdviser(advice, Script.Latin, Script.Cyrillic));
 
-            var result = rewriter.CorrectPhrase("geia", Active, [Active], [..Candidates, greek]);
+            var result = rewriter.CorrectPhrase("geia", Active, [Active], [.. Candidates, greek]);
 
             Assert.Equal("γεια", result.Corrected);
             Assert.NotEqual("", llm.LastUserPrompt);
@@ -545,7 +545,7 @@ public class NeuralPhraseRewriterTests
             var llm = new FakeLlm("გამარჯობა");
             var rewriter = new NeuralPhraseRewriter(llm, new FakeAdviser(unchanged, Script.Cyrillic));
 
-            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], [..Candidates, Georgian]);
+            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], [.. Candidates, Georgian]);
 
             Assert.Equal("გამარჯობა", result.Corrected);
             Assert.NotEqual("", llm.LastUserPrompt);
@@ -583,7 +583,7 @@ public class NeuralPhraseRewriterTests
             var rewriter = new NeuralPhraseRewriter(
                 new FakeLlm("გამარჯობა"), new FakeAdviser(unchanged, Script.Cyrillic, Script.Latin));
 
-            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], [..Candidates, Georgian]);
+            var result = rewriter.CorrectPhrase("gamarjoba", Active, [Active], [.. Candidates, Georgian]);
 
             Assert.True(result.Changed);
             Assert.Equal("გამარჯობა", result.Corrected);

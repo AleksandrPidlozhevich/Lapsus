@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Lapsus.Core.Text;
 using Lapsus.Localization;
+using System;
+using System.Collections.Generic;
 
 namespace Lapsus.ViewModels;
 

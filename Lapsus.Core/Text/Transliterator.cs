@@ -1,5 +1,5 @@
-using System.Text;
 using Lapsus.Core.Layout;
+using System.Text;
 
 namespace Lapsus.Core.Text;
 

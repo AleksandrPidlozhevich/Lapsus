@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Lapsus.Neural;
 
 namespace Lapsus.Tests;

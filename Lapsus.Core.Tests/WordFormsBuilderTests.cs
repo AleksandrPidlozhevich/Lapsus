@@ -1,5 +1,3 @@
-using System.IO;
-using System.Linq;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;
 

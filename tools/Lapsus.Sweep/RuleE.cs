@@ -116,24 +116,24 @@ internal static class RuleE
         var examples = new List<string>();
 
         for (var a = 'a'; a <= 'z'; a++)
-        for (var b = 'a'; b <= 'z'; b++)
-        {
-            var chunk = $"{a}{b}";
-            if (machine.KnowsEnglish(chunk))
-                continue;
+            for (var b = 'a'; b <= 'z'; b++)
+            {
+                var chunk = $"{a}{b}";
+                if (machine.KnowsEnglish(chunk))
+                    continue;
 
-            chunks++;
-            if (!AutoCorrectPolicy.IsEligible(chunk, false, minLength))
-                continue;
+                chunks++;
+                if (!AutoCorrectPolicy.IsEligible(chunk, false, minLength))
+                    continue;
 
-            var verdict = machine.Correct(chunk, phraseContext: true, hints: new CorrectionHints(null, true));
-            if (!verdict.Changed || Scripts.Dominant(verdict.Corrected) != machine.Target.Script)
-                continue;
+                var verdict = machine.Correct(chunk, phraseContext: true, hints: new CorrectionHints(null, true));
+                if (!verdict.Changed || Scripts.Dominant(verdict.Corrected) != machine.Target.Script)
+                    continue;
 
-            rewritten++;
-            if (examples.Count < 8)
-                examples.Add($"{chunk} → {verdict.Corrected}");
-        }
+                rewritten++;
+                if (examples.Count < 8)
+                    examples.Add($"{chunk} → {verdict.Corrected}");
+            }
 
         Report.Value(
             $"two-letter chunks English does not use, sent to {machine.Target.ScriptName} ({chunks} of 676)",

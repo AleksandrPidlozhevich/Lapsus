@@ -1,8 +1,8 @@
+using Lapsus.Core.Models;
+using Microsoft.ML.OnnxRuntimeGenAI;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Lapsus.Core.Models;
-using Microsoft.ML.OnnxRuntimeGenAI;
 
 namespace Lapsus.Neural;
 

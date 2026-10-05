@@ -1,7 +1,7 @@
-using System;
-using System.Text.Json.Serialization;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Models;
+using System;
+using System.Text.Json.Serialization;
 
 namespace Lapsus.Settings;
 

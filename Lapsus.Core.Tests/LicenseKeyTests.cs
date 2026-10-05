@@ -1,6 +1,6 @@
+using Lapsus.Core.Licensing;
 using System.Buffers.Text;
 using System.Text;
-using Lapsus.Core.Licensing;
 
 namespace Lapsus.Core.Tests;
 

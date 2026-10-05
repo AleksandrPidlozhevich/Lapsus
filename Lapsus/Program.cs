@@ -1,9 +1,9 @@
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Media.Fonts;
+using Lapsus.Startup;
 using System;
 using System.Runtime.Versioning;
-using Lapsus.Startup;
 using Velopack;
 
 namespace Lapsus;

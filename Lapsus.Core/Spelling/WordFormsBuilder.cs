@@ -1,6 +1,6 @@
+using Lapsus.Core.Layout;
 using System.Text;
 using System.Text.Json;
-using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Spelling;
 

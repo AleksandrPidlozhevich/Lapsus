@@ -1,6 +1,6 @@
+using Microsoft.Win32;
 using System;
 using System.Runtime.Versioning;
-using Microsoft.Win32;
 
 namespace Lapsus.Startup;
 

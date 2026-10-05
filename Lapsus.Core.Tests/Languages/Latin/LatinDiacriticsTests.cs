@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Lapsus.Core.Correction;
+﻿using Lapsus.Core.Correction;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;
-using Xunit;
 
 namespace Lapsus.Core.Tests.Languages.Latin;
 

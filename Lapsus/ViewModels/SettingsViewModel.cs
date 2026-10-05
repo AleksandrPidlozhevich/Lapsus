@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Styling;
@@ -14,12 +8,18 @@ using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Text;
-using Lapsus.Localization;
 using Lapsus.Input;
+using Lapsus.Localization;
 using Lapsus.Neural;
 using Lapsus.Settings;
 using Lapsus.Startup;
 using Lapsus.Updates;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 
@@ -372,7 +372,8 @@ public partial class SettingsViewModel : ViewModelBase
 
     public ObservableCollection<string> ExcludedWords { get; } = [];
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(AddExcludedWordCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddExcludedWordCommand))]
     private string _newExcludedWord = string.Empty;
 
     public bool HasExcludedWords => ExcludedWords.Count > 0;
@@ -407,7 +408,8 @@ public partial class SettingsViewModel : ViewModelBase
 
     public ObservableCollection<string> ExcludedApps { get; } = [];
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(AddExcludedAppCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddExcludedAppCommand))]
     private string _newExcludedApp = string.Empty;
 
     public bool HasExcludedApps => ExcludedApps.Count > 0;
@@ -449,7 +451,8 @@ public partial class SettingsViewModel : ViewModelBase
 
     public bool CanPickRunningApps => Lapsus.Input.RunningApps.IsSupported;
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(AddRunningAppCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddRunningAppCommand))]
     private RunningApp? _selectedRunningApp;
 
     public void RefreshRunningApps()
@@ -557,10 +560,12 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private string _statusText = string.Empty;
 
-    [ObservableProperty] [NotifyPropertyChangedFor(nameof(PermissionsNeeded))]
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PermissionsNeeded))]
     private bool _accessibilityGranted = true;
 
-    [ObservableProperty] [NotifyPropertyChangedFor(nameof(PermissionsNeeded))]
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PermissionsNeeded))]
     private bool _inputMonitoringGranted = true;
 
     public bool PermissionsNeeded => !AccessibilityGranted || !InputMonitoringGranted;

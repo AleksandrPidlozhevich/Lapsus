@@ -1,8 +1,8 @@
-using System.Diagnostics;
 using Lapsus.Core.Correction;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Models;
 using Lapsus.Neural;
+using System.Diagnostics;
 
 namespace Lapsus.Sweep;
 

@@ -1,5 +1,5 @@
-using System.Runtime.Versioning;
 using Lapsus.Input;
+using System.Runtime.Versioning;
 
 namespace Lapsus.Tests;
 

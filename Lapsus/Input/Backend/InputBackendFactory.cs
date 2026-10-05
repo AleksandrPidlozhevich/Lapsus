@@ -1,6 +1,6 @@
-using System;
 using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
+using System;
 
 namespace Lapsus.Input;
 

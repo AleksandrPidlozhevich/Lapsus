@@ -1,8 +1,8 @@
+using Lapsus.Core.Models;
 using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Lapsus.Core.Models;
 
 namespace Lapsus.Settings;
 

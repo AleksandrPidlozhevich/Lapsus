@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lapsus.Core.Models;
 using Lapsus.Localization;
 using Lapsus.Neural;
 using Lapsus.Settings;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 
@@ -66,13 +66,16 @@ public sealed partial class ModelsViewModel : ObservableObject
 
     public bool HasFound => Found.Count > 0;
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(AddCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddCommand))]
     private ModelDescriptor? _selectedAvailable;
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(RemoveCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(RemoveCommand))]
     private ModelDescriptor? _selectedInstalled;
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(AddFoundCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(AddFoundCommand))]
     private ModelDescriptor? _selectedFound;
 
     [ObservableProperty]
@@ -82,7 +85,8 @@ public sealed partial class ModelsViewModel : ObservableObject
     [NotifyCanExecuteChangedFor(nameof(AddFoundCommand))]
     private bool _busy;
 
-    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(SearchCommand))]
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SearchCommand))]
     private string _searchQuery = string.Empty;
 
     [ObservableProperty] private string _status = string.Empty;

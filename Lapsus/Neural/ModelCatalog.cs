@@ -1,8 +1,8 @@
+using Lapsus.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Lapsus.Core.Models;
 
 namespace Lapsus.Neural;
 

@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -20,6 +17,9 @@ using Lapsus.Startup;
 using Lapsus.Updates;
 using Lapsus.ViewModels;
 using Lapsus.Views;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lapsus;
 

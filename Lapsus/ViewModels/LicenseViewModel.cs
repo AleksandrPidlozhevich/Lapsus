@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,6 +5,9 @@ using CommunityToolkit.Mvvm.Input;
 using Lapsus.Core.Licensing;
 using Lapsus.Licensing;
 using Lapsus.Localization;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 

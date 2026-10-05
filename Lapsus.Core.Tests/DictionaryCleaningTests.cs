@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;
+using System.Text;
 using WeCantSpell.Hunspell;
 
 namespace Lapsus.Core.Tests;

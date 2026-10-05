@@ -1,9 +1,9 @@
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-using Microsoft.Win32;
 
 namespace Lapsus.Licensing;
 

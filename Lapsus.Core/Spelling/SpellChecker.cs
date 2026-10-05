@@ -1,5 +1,5 @@
-using System.Globalization;
 using Lapsus.Core.Layout;
+using System.Globalization;
 using WeCantSpell.Hunspell;
 using SymSpellEngine = SymSpell;
 
@@ -283,14 +283,14 @@ public sealed class SpellChecker
             return false;
 
         foreach (var stem in AbjadAffixes.Stems(LookupKey(word, script), script))
-        foreach (var loaded in EnginesFor(languageCode, script))
-        {
-            if (CountOf(loaded, stem) is not { } count)
-                continue;
+            foreach (var loaded in EnginesFor(languageCode, script))
+            {
+                if (CountOf(loaded, stem) is not { } count)
+                    continue;
 
-            frequency = Normalise(count, loaded.LogMaxCount);
-            return true;
-        }
+                frequency = Normalise(count, loaded.LogMaxCount);
+                return true;
+            }
 
         return false;
     }

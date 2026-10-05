@@ -1,5 +1,5 @@
-using System.Diagnostics;
 using Lapsus.Licensing;
+using System.Diagnostics;
 using Xunit.Abstractions;
 
 // xUnit1031 wants await; that hops threads and breaks Dispatcher.UIThread in later tests.

@@ -1,3 +1,6 @@
+using Lapsus.Core.Models;
+using Lapsus.Localization;
+using Lapsus.Settings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -5,9 +8,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Lapsus.Core.Models;
-using Lapsus.Localization;
-using Lapsus.Settings;
 
 namespace Lapsus.Neural;
 

@@ -1,7 +1,7 @@
+using Lapsus.Localization;
 using System.Collections;
 using System.Globalization;
 using System.Resources;
-using Lapsus.Localization;
 
 namespace Lapsus.Tests;
 
