@@ -27,10 +27,14 @@ repaired in place — no retyping, and no waiting on the OS to switch layout.
 | You typed | You get | What that takes |
 |-----------|---------|-----------------|
 | `dsnfyyz` | `вітання` | positional remap between installed layouts |
-| `сфе` | `cat` | remap **plus** a typo fix (SymSpell, edit distance ≤ 2) |
+| `kalhmera` | `καλημέρα` | remap **plus** a typo fix (SymSpell, edit distance ≤ 2) |
+| `akuo` | `שלום` | a final letter on its own key |
+| `lvpfh` | `مرحبا` | positional remap, right to left |
+| `ghbdtn` | `привет` | positional remap on the Russian layout |
+| `;ovek` | `čovek` | č on the semicolon key, Serbian Latin |
 | `gamarjoba` | `გამარჯობა` | a phonetic layout, letters reached through Shift |
 | `sch;n` | `schön` | one mistyped key between two Latin layouts |
-| `ntrcn` in `вітання світ ntrcn` | `текст` | only the tail is wrong; the rest is left alone |
+| `n'rcn` in `прывітанне, свет n'rcn` | `тэкст` | only the tail is wrong; the rest is left alone |
 | `hello,` | `hello,` | a real word stays a real word |
 
 Six writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian**.
