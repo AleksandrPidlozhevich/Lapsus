@@ -67,6 +67,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>ცხელი ღილაკი</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>ჩაწერა</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>დააჭირეთ სასურველ კომბინაციას</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>მოდიფიკატორ კლავიშთან ერთად · Esc — გაუქმება</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>დაამატეთ მოდიფიკატორი</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>გაუქმება</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>მონიშნულის გასწორება</value>
   </data>
@@ -363,6 +378,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>აპლიკაციები</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>კლავიშები</value>
   </data>
     <data name="Excluded_Label" xml:space="preserve">
     <value>სიტყვები, რომლებსაც არ ვეხებით</value>

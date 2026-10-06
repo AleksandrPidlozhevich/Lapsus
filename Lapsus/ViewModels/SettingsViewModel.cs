@@ -39,6 +39,7 @@ public partial class SettingsViewModel : ViewModelBase
     private readonly AppExclusions _excludedApps;
     private readonly LayoutIndicator _indicator;
     private readonly AppUpdater _updater;
+    private readonly HotkeyCapture _capture;
 
     private bool _turningOffTheOtherBrain;
 
@@ -69,6 +70,12 @@ public partial class SettingsViewModel : ViewModelBase
         _startup = StartupRegistrationFactory.CreateForCurrentPlatform();
 
         _selectedHotkey = ResolveHotkey(settings.HotkeyVirtualKey);
+        _capture = new HotkeyCapture(_backend, () => Enabled, message =>
+        {
+            StatusText = message;
+            RefreshPermissionState();
+        });
+        MainRecorder = new HotkeyRecorderViewModel(_capture, trigger => SelectedHotkey = AddRecordedOption(trigger));
         SelectionActions = BuildSelectionActions();
         _enabled = settings.Enabled;
         _autoMode = settings.AutoMode;
@@ -214,7 +221,14 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private bool _plainLayoutSwitch;
 
-    public IReadOnlyList<HotkeyOption> Hotkeys =>
+    // Recorded shortcuts are added to these lists, so every dropdown offers them again.
+    private readonly ObservableCollection<HotkeyOption> _hotkeyOptions = new(BuiltInHotkeys);
+
+    private readonly ObservableCollection<HotkeyOption> _selectionKeyOptions = new(BuiltInSelectionKeys);
+
+    public IReadOnlyList<HotkeyOption> Hotkeys => _hotkeyOptions;
+
+    private static IReadOnlyList<HotkeyOption> BuiltInHotkeys =>
         OperatingSystem.IsMacOS()
             ?
             [
@@ -237,7 +251,7 @@ public partial class SettingsViewModel : ViewModelBase
                 new HotkeyOption("Alt ×2", HotkeyTriggers.DoubleAlt)
             ];
 
-    private IReadOnlyList<HotkeyOption> SelectionKeyOptions =>
+    private static IReadOnlyList<HotkeyOption> BuiltInSelectionKeys =>
         OperatingSystem.IsMacOS()
             ?
             [
@@ -274,9 +288,11 @@ public partial class SettingsViewModel : ViewModelBase
         (SelectionAction.ReverseRtl, "SelectionRtl_Label", "SelectionRtl_Hint")
     ];
 
+    public HotkeyRecorderViewModel MainRecorder { get; }
+
     private IReadOnlyList<SelectionHotkeyViewModel> BuildSelectionActions()
     {
-        var options = SelectionKeyOptions;
+        var options = _selectionKeyOptions;
         var rows = new List<SelectionHotkeyViewModel>(SelectionActionRows.Length);
 
         var taken = new HashSet<int> { SelectedHotkey.VirtualKey };
@@ -286,6 +302,8 @@ public partial class SettingsViewModel : ViewModelBase
         {
             var saved = SavedSelectionHotkey(action);
             var option = options.FirstOrDefault(o => o.VirtualKey == saved);
+            if (option is null && (HotkeyCombo.IsCombo(saved) || HotkeyNames.IsNamedKey(saved)))
+                option = AddRecordedOption(saved);
 
             if (saved == 0 || option is null || !taken.Add(saved))
                 option = options[0];
@@ -298,7 +316,7 @@ public partial class SettingsViewModel : ViewModelBase
 
             _backend.SetSelectionHotkey(action, option.VirtualKey);
             rows.Add(new SelectionHotkeyViewModel(
-                action, label, hint, options, option, OnSelectionHotkeyChanged));
+                action, label, hint, options, option, OnSelectionHotkeyChanged, _capture, AddRecordedOption));
         }
 
         if (changed)
@@ -492,10 +510,33 @@ public partial class SettingsViewModel : ViewModelBase
         if (match is not null)
             return match;
 
+        if (HotkeyCombo.IsCombo(savedVirtualKey) || HotkeyNames.IsNamedKey(savedVirtualKey))
+            return AddRecordedOption(savedVirtualKey);
+
         var fallback = Hotkeys[0];
         _settings.HotkeyVirtualKey = fallback.VirtualKey;
         _store.Save(_settings);
         return fallback;
+    }
+
+    // A recorded shortcut is one option in both lists, and the list entry is returned so rows compare equal.
+    private HotkeyOption AddRecordedOption(int trigger)
+    {
+        var option = _hotkeyOptions.FirstOrDefault(o => o.VirtualKey == trigger)
+                     ?? new HotkeyOption(HotkeyNames.Format(trigger), trigger);
+
+        if (!_hotkeyOptions.Contains(option))
+            _hotkeyOptions.Add(option);
+        if (!_selectionKeyOptions.Contains(option))
+            _selectionKeyOptions.Add(option);
+
+        return option;
+    }
+
+    // The settings window losing focus must not leave the keyboard hook swallowing keys.
+    public void CancelHotkeyRecording()
+    {
+        _capture.CancelActive();
     }
 
     public Localizer L => Localizer.Instance;
@@ -590,6 +631,9 @@ public partial class SettingsViewModel : ViewModelBase
 
     partial void OnEnabledChanged(bool value)
     {
+        if (!value)
+            CancelHotkeyRecording();
+
         _settings.Enabled = value;
         _store.Save(_settings);
         OnPropertyChanged(nameof(CaptureLabel));

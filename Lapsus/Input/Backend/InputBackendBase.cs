@@ -86,6 +86,85 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         return null;
     }
 
+    protected SelectionAction? SelectionActionForKey(int key, HotkeyModifiers held, bool plainAllowed)
+    {
+        for (var i = 0; i < _selectionTriggers.Length; i++)
+            if (TriggerMatches(_selectionTriggers[i], key, held, plainAllowed))
+                return (SelectionAction)i;
+
+        return null;
+    }
+
+    // A plain key fires only where the platform allows it (no shortcut modifier held); a combo needs its exact modifiers.
+    protected static bool TriggerMatches(int trigger, int key, HotkeyModifiers held, bool plainAllowed)
+    {
+        if (trigger == 0)
+            return false;
+
+        if (HotkeyCombo.IsCombo(trigger))
+            return HotkeyCombo.Triggers(trigger, key, held);
+
+        return plainAllowed && trigger == key;
+    }
+
+    private Action<HotkeyCaptureEvent>? _captureSink;
+
+    // Read on the key hook's thread: a capture is on while this is true.
+    protected bool IsCapturingHotkey => _captureSink is not null;
+
+    public void BeginHotkeyCapture(Action<HotkeyCaptureEvent> sink)
+    {
+        _captureSink = sink;
+    }
+
+    public void CancelHotkeyCapture()
+    {
+        _captureSink = null;
+    }
+
+    // The platform hook calls this for every key event while IsCapturingHotkey. True means the event belongs to the
+    // capture and must not reach the app. The sink always runs on the UI thread.
+    protected bool FeedHotkeyCapture(int key, bool isDown, HotkeyKeyKind kind, HotkeyModifiers held)
+    {
+        var sink = _captureSink;
+        if (sink is null)
+            return false;
+
+        if (kind == HotkeyKeyKind.Modifier)
+        {
+            PostCapture(sink, HotkeyCaptureKind.Held, held, 0);
+            return false;
+        }
+
+        if (!isDown)
+            return false;
+
+        if (kind == HotkeyKeyKind.Escape)
+        {
+            _captureSink = null;
+            PostCapture(sink, HotkeyCaptureKind.Cancelled, held, 0);
+            return true;
+        }
+
+        // Shift alone only types a capital letter, so a typing key needs a modifier other than Shift.
+        var needsShortcut = kind == HotkeyKeyKind.Typing && (held & ~HotkeyModifiers.Shift) == 0;
+        if (needsShortcut)
+        {
+            PostCapture(sink, HotkeyCaptureKind.Rejected, held, 0);
+            return true;
+        }
+
+        _captureSink = null;
+        PostCapture(sink, HotkeyCaptureKind.Captured, held, HotkeyCombo.Encode(key, held));
+        return true;
+    }
+
+    private static void PostCapture(Action<HotkeyCaptureEvent> sink, HotkeyCaptureKind kind, HotkeyModifiers held, int trigger)
+    {
+        var evt = new HotkeyCaptureEvent(kind, held, trigger);
+        Dispatcher.UIThread.Post(() => sink(evt));
+    }
+
     public bool AutoMode { get; set; }
 
     public bool AutoFixTypos { get; set; }

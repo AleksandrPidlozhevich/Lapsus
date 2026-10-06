@@ -16,6 +16,14 @@ public sealed class NullInputBackend : IInputBackend
     {
     }
 
+    public void BeginHotkeyCapture(Action<HotkeyCaptureEvent> sink)
+    {
+    }
+
+    public void CancelHotkeyCapture()
+    {
+    }
+
     public bool AutoMode { get; set; }
 
     public bool AutoFixTypos { get; set; }

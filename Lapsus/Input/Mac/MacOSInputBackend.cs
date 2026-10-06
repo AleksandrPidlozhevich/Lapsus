@@ -827,6 +827,10 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             @event, MacOSNativeMethods.EventKeyboardKeycode);
         var flags = MacOSNativeMethods.CGEventGetFlags(@event);
 
+        if (IsCapturingHotkey
+            && FeedHotkeyCapture(keyCode, type == MacOSNativeMethods.EventKeyDown, KeyKindOf(keyCode), HeldModifiersOf(flags)))
+            return IntPtr.Zero;
+
         var pid = NoteEventProcess(@event);
 
         if (type == MacOSNativeMethods.EventFlagsChanged)
@@ -864,7 +868,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             return IntPtr.Zero;
         }
 
-        if (!HasMeaningfulModifiers(flags) && SelectionActionFor(keyCode) is { } action)
+        if (SelectionActionForKey(keyCode, HeldModifiersOf(flags), !HasMeaningfulModifiers(flags)) is { } action)
         {
             PostFromTap(epoch, NoteNonModifierInput);
             if (!ShouldSwallowHotkey(pid))
@@ -930,10 +934,37 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         if (HotkeyVirtualKey == MacHotkeys.CtrlOptionSpace)
             return keyCode == MacOSNativeMethods.SpaceKeyCode && HasCtrlOption(flags);
 
-        if (HotkeyTriggers.IsDoubleTap(HotkeyVirtualKey))
-            return false;
+        return TriggerMatches(HotkeyVirtualKey, keyCode, HeldModifiersOf(flags), !HasMeaningfulModifiers(flags));
+    }
 
-        return keyCode == (ushort)HotkeyVirtualKey && !HasMeaningfulModifiers(flags);
+    private static HotkeyModifiers HeldModifiersOf(ulong flags)
+    {
+        var held = HotkeyModifiers.None;
+        if ((flags & MacOSNativeMethods.EventFlagMaskShift) != 0)
+            held |= HotkeyModifiers.Shift;
+        if ((flags & MacOSNativeMethods.EventFlagMaskControl) != 0)
+            held |= HotkeyModifiers.Control;
+        if ((flags & MacOSNativeMethods.EventFlagMaskAlternate) != 0)
+            held |= HotkeyModifiers.Alt;
+        if ((flags & MacOSNativeMethods.EventFlagMaskCommand) != 0)
+            held |= HotkeyModifiers.Meta;
+
+        return held;
+    }
+
+    private static HotkeyKeyKind KeyKindOf(ushort keyCode)
+    {
+        if (ModifierOf(keyCode) is not null)
+            return HotkeyKeyKind.Modifier;
+
+        if (keyCode == MacOSNativeMethods.EscapeKeyCode)
+            return HotkeyKeyKind.Escape;
+
+        // Caps Lock, Help/Insert, Home, Page Up/Down, Forward Delete, End, and F1-F20 (ANSI keycodes).
+        var named = keyCode is 0x39 or 0x72 or 0x73 or 0x74 or 0x75 or 0x77 or 0x79
+            or 0x7A or 0x78 or 0x63 or 0x76 or 0x60 or 0x61 or 0x62 or 0x64 or 0x65 or 0x6D or 0x67 or 0x6F
+            or 0x69 or 0x6B or 0x71 or 0x6A or 0x40 or 0x4F or 0x50 or 0x5A;
+        return named ? HotkeyKeyKind.Named : HotkeyKeyKind.Typing;
     }
 
     private static TapModifier? ModifierOf(ushort keyCode)

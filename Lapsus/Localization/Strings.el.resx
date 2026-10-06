@@ -67,6 +67,21 @@
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Πλήκτρο συντόμευσης</value>
   </data>
+  <data name="HotkeyRecord_Button" xml:space="preserve">
+    <value>Εγγραφή</value>
+  </data>
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
+    <value>Πατήστε τον επιθυμητό συνδυασμό</value>
+  </data>
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
+    <value>Με πλήκτρο τροποποίησης · Esc για ακύρωση</value>
+  </data>
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+    <value>Προσθέστε πλήκτρο τροποποίησης</value>
+  </data>
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
+    <value>Ακύρωση</value>
+  </data>
     <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Διόρθωση της επιλογής</value>
   </data>
@@ -363,6 +378,9 @@
   </data>
     <data name="Tab_Apps" xml:space="preserve">
     <value>Εφαρμογές</value>
+  </data>
+  <data name="Tab_Hotkeys" xml:space="preserve">
+    <value>Πλήκτρα</value>
   </data>
     <data name="Excluded_Label" xml:space="preserve">
     <value>Λέξεις που δεν πειράζουμε</value>

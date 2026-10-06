@@ -16,7 +16,7 @@ public sealed partial class SelectionHotkeyViewModel : ViewModelBase
     public SelectionHotkeyViewModel(
         SelectionAction action, string labelKey, string hintKey,
         IReadOnlyList<HotkeyOption> options, HotkeyOption selected,
-        Action<SelectionHotkeyViewModel> changed)
+        Action<SelectionHotkeyViewModel> changed, HotkeyCapture capture, Func<int, HotkeyOption> recordedOption)
     {
         Action = action;
         Options = options;
@@ -24,11 +24,14 @@ public sealed partial class SelectionHotkeyViewModel : ViewModelBase
         _hintKey = hintKey;
         _changed = changed;
         _selected = selected;
+        Recorder = new HotkeyRecorderViewModel(capture, trigger => Selected = recordedOption(trigger));
     }
 
     public SelectionAction Action { get; }
 
     public IReadOnlyList<HotkeyOption> Options { get; }
+
+    public HotkeyRecorderViewModel Recorder { get; }
 
     public string Label => Localizer.Instance[_labelKey];
 
