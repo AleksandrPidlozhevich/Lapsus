@@ -56,10 +56,19 @@ done
 iconutil -c icns "$ICONSET" -o "$ICNS"
 
 echo "==> vpk pack"
-# --signAppIdentity -: without it vpk leaves the bundle with whatever ad-hoc signature dotnet
-# publish gave the bare executable — unbound from Info.plist and identified as "apphost", not
-# $BUNDLE_ID. macOS then can't reliably tie an Accessibility/Input Monitoring grant to the app,
-# so CGEventPost text injection silently does nothing even after the user grants permission.
+# "-" binds the signature to $BUNDLE_ID; otherwise macOS sees "apphost" and an Accessibility
+# grant never reaches CGEventPost. A Developer ID (LAPSUS_MAC_APP_IDENTITY) keeps that grant
+# stable across builds.
+SIGN_ARGS=(--signAppIdentity "-")
+if [ -n "${LAPSUS_MAC_APP_IDENTITY:-}" ]; then
+  SIGN_ARGS=(--signAppIdentity "$LAPSUS_MAC_APP_IDENTITY")
+  [ -n "${LAPSUS_MAC_INSTALL_IDENTITY:-}" ] && SIGN_ARGS+=(--signInstallIdentity "$LAPSUS_MAC_INSTALL_IDENTITY")
+  [ -n "${LAPSUS_NOTARY_PROFILE:-}" ] && SIGN_ARGS+=(--notaryProfile "$LAPSUS_NOTARY_PROFILE")
+  [ -n "${LAPSUS_KEYCHAIN:-}" ] && SIGN_ARGS+=(--keychain "$LAPSUS_KEYCHAIN")
+else
+  echo "    (no LAPSUS_MAC_APP_IDENTITY: ad-hoc signature, not notarized)"
+fi
+
 # --yes: re-running the same version locally while testing is the common case, and this only
 # overwrites local build output (build/ is gitignored) — never anything already uploaded to GitHub.
 vpk pack \
@@ -72,7 +81,7 @@ vpk pack \
   --icon "$ICNS" \
   --outputDir "$OUTPUT_DIR" \
   --runtime "$RID" \
-  --signAppIdentity "-" \
+  "${SIGN_ARGS[@]}" \
   --yes
 
 echo "==> Building disk image"
