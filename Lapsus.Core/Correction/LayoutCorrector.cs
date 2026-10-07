@@ -658,6 +658,12 @@ public sealed class LayoutCorrector : IPhraseCorrector
             if (text == word)
                 return;
 
+            // An edit-requiring candidate must never outscore and overwrite an earlier edit-free one:
+            // that would veto the whole word down to the untouched original below, instead of the
+            // plain keys-only reading still sitting in `best`.
+            if (keysOnly && edits > 0)
+                return;
+
             var raw = _scorer.Score(text, script, languageCode);
 
             var needsDictionary = requireDictionaryHit || blindSource || Scripts.IsScoringBlind(script);
@@ -721,10 +727,6 @@ public sealed class LayoutCorrector : IPhraseCorrector
         }
 
         if (!best.Changed || best.Score <= baseline + _switchThreshold)
-            return ScoredWord.AsTyped(word, baseline);
-
-        // Winning edit still vetoes the switch; it is just not written.
-        if (keysOnly && best.Edits > 0)
             return ScoredWord.AsTyped(word, baseline);
 
         return KeysAsTheyStand(word, source, best);

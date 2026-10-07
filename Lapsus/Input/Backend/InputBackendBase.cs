@@ -855,12 +855,13 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
     private bool ApplyHotkeyStep(
         string currentText, string rendered, KeyboardLayout? target, string? layoutId, KeyboardLayout? from)
     {
-
-        SwitchLayoutOnHotkey(target, layoutId);
-
+        // Text first: a failed injection (e.g. a Mac app that refuses the synthetic keys) must not
+        // leave the system layout switched while the text stays wrong, as every other caller already does.
         if (!string.Equals(currentText, rendered, StringComparison.Ordinal)
             && !ApplyRenderedText(currentText, rendered))
             return false;
+
+        SwitchLayoutOnHotkey(target, layoutId);
 
         RaiseCorrected(currentText, rendered, from, target);
         return true;

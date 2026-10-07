@@ -25,7 +25,7 @@ public sealed class BrainTests : IDisposable
     {
         _enPath = WriteTempDictionary("en", "cat 100", "car 80", "can 60", "milk 70", "with 90");
         _ukPath = WriteTempDictionary("uk", "кава 100", "молоко 90", "молоком 90", "молоток 90", "з 200");
-        _ruPath = WriteTempDictionary("ru", "привет 100");
+        _ruPath = WriteTempDictionary("ru", "привет 100", "как 100", "как-цуке 100");
 
         var spell = new SpellChecker(new[]
         {
@@ -50,6 +50,22 @@ public sealed class BrainTests : IDisposable
 
         Assert.Equal("milk", _corrector.CorrectPhrase("mlik", en, [en], ToRussian).Corrected);
         Assert.False(_corrector.CorrectPhrase("mlik", en, [en], ToRussian, null, keysOnly).Changed);
+    }
+
+    // "rfrwert" keys to "какцуке"; "как" alone is a dictionary word but "цуке" is not, and only
+    // "как-цуке" (one hyphen insertion away) is listed. Keys-only must not let that unreachable edit
+    // veto the whole word down to a split that keeps "цуке" as the untransliterated Latin "wert".
+    [Fact]
+    public void Keys_only_does_not_strand_half_a_word_untransliterated()
+    {
+        var en = new LayoutSource(Script.Latin, "en", EnMap, "en");
+        var keysOnly = new CorrectionHints(KeysOnly: true);
+
+        var switched = _corrector.CorrectPhrase("rfrwert", en, [en], ToRussian, null, keysOnly);
+        Assert.Equal("какцуке", switched.Corrected);
+
+        var withTypos = _corrector.CorrectPhrase("rfrwert", en, [en], ToRussian);
+        Assert.Equal("как-цуке", withTypos.Corrected);
     }
 
     [Fact]

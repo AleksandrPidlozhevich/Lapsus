@@ -839,7 +839,13 @@ public partial class SettingsViewModel : ViewModelBase
             // thread). On a pool thread Windows times out every key event and silently drops the hook.
             // Stop touches UI-owned typing state and stays on this thread.
             if (Enabled && OperatingSystem.IsMacOS())
-                await Task.Run(() => _backend.Start()).ConfigureAwait(true);
+                await Task.Run(() =>
+                {
+                    // Surfaces macOS's own permission dialogs on first use instead of only pointing at
+                    // System Settings; a no-op once the user has already granted or denied them.
+                    SystemPermissions.PromptForPermissionsIfNeeded();
+                    _backend.Start();
+                }).ConfigureAwait(true);
             else if (Enabled)
                 _backend.Start();
             else

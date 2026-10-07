@@ -28,6 +28,23 @@ public sealed class CorrectionCycleTests : IDisposable
         Assert.Equal("ghbdtn", backend.Injected[^1].Text);
     }
 
+    // A failed text injection (e.g. a Mac app that refuses the synthetic keys) must not leave the
+    // system layout switched while the text stays wrong — that is the "hotkey only switches the
+    // keyboard layout" bug.
+    [Fact]
+    public void A_failed_injection_does_not_switch_the_system_layout()
+    {
+        var backend = new FakeInputBackend(new ScriptedCorrector("ghbdtn", "привет")).Listening();
+        backend.SwitchSystemLayout = true;
+        backend.InjectionFails = true;
+        backend.Type("ghbdtn");
+
+        backend.PressHotkey();
+
+        Assert.Empty(backend.Injected);
+        Assert.Empty(backend.LayoutSwitches);
+    }
+
     [Fact]
     public void Cycling_wraps_around_instead_of_stopping()
     {

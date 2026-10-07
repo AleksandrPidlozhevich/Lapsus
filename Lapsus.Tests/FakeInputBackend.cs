@@ -30,6 +30,10 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
 
     public List<(int Backspaces, string Text)> Injected { get; } = [];
 
+    // Simulates a Mac app that refuses the synthetic keys (e.g. Accessibility/Input Monitoring not
+    // currently granted), so TryInject fails without touching the typing buffer.
+    public bool InjectionFails { get; set; }
+
     public List<string> Diagnostics { get; } = [];
 
     public List<(KeyboardLayout? Target, string? Id)> LayoutSwitches { get; } = [];
@@ -110,6 +114,9 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
 
     protected override bool TryInject(int backspaces, string text)
     {
+        if (InjectionFails)
+            return false;
+
         Injected.Add((backspaces, text));
         return true;
     }
