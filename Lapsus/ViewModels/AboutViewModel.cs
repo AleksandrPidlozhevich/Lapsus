@@ -6,6 +6,7 @@ using Lapsus.Localization;
 using Lapsus.Settings;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Lapsus.ViewModels;
@@ -47,7 +48,10 @@ public sealed partial class AboutViewModel : ObservableObject
     ];
 
     public IReadOnlyList<DictionaryCredit> Dictionaries { get; } =
-        DictionaryCatalog.Available.Select(d => new DictionaryCredit(d.Title, d.License)).ToList();
+        DictionaryCatalog.Available
+            .OrderBy(d => d.DisplayName, StringComparer.Create(CultureInfo.InvariantCulture, ignoreCase: true))
+            .Select(d => new DictionaryCredit(d.Title, d.License))
+            .ToList();
 
     private static string OnnxGenAiCredit => OperatingSystem.IsWindows()
         ? "ONNX Runtime GenAI (DirectML) 0.14.1"
