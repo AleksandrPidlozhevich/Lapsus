@@ -507,7 +507,11 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
             return;
         }
 
-        if (_focus.IsPassword(BufferOwner.Focus))
+        // Not IsPassword: that fails closed while the (sometimes hundreds-of-milliseconds) accessibility
+        // check is still pending, which would drop every letter typed right after focusing an ordinary
+        // field. The hotkey/diagnostics path still fails closed on a merely-pending check; this one only
+        // stops tracking once the field is actually confirmed protected.
+        if (_focus.IsConfirmedPassword(BufferOwner.Focus))
         {
             ResetTypingBuffer();
             return;

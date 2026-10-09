@@ -213,6 +213,22 @@ public class StaleLineStateTests
     }
 
     [Fact]
+    public void Auto_mode_injects_nothing_into_a_field_the_platform_blocks()
+    {
+        // Windows keeps letters typed while a field's password check is still pending; if the check
+        // has not cleared the field by the time the word's fix runs, the fix must not land in it.
+        var backend = AutoCorrecting();
+        backend.Type("cfk");
+        backend.BlockedReason = "password field";
+
+        backend.Type(" ");
+        Dispatcher.UIThread.RunJobs();
+
+        Assert.Empty(backend.Injected);
+        Assert.Empty(backend.Diagnostics);
+    }
+
+    [Fact]
     public void A_layout_switch_before_glued_punctuation_still_suppresses_auto_mode()
     {
         var backend = AutoCorrecting(new TableCorrector(("cfk.", "car.")));

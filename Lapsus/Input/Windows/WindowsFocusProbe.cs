@@ -100,18 +100,41 @@ internal sealed class WindowsFocusProbe
         if (!SkipPasswordFields)
             return false;
 
+        EnsureFocusCheckStarted(focus);
+
         if (_eventCheck is { } eventCheck && (!eventCheck.IsCompleted || eventCheck.Result))
             return true;
 
-        if (_focusCheck is null || focus != _passwordCheckedFocus)
-        {
-            _passwordCheckedFocus = focus;
-            _focusCheck = WindowsSecureInput.IsPasswordField(focus)
-                ? Task.FromResult(true)
-                : WindowsSecureInput.IsProtectedFocusedElement(focus);
-        }
+        return !_focusCheck!.IsCompleted || _focusCheck.Result;
+    }
 
-        return !_focusCheck.IsCompleted || _focusCheck.Result;
+    // Same check, but a still-pending result reads as "not yet confirmed" rather than "protected".
+    // Used while capturing keystrokes: failing closed there would silently drop the letters typed
+    // before a slow (MSAA, hundreds of milliseconds) check resolves, even in an ordinary field.
+    // IsPassword stays fail-closed for the hotkey/diagnostics path, where a still-pending read only
+    // delays an about-to-be-confirmed field's correction by that same fraction of a second.
+    public bool IsConfirmedPassword(IntPtr focus)
+    {
+        if (!SkipPasswordFields)
+            return false;
+
+        EnsureFocusCheckStarted(focus);
+
+        if (_eventCheck is { IsCompleted: true, Result: true })
+            return true;
+
+        return _focusCheck is { IsCompleted: true, Result: true };
+    }
+
+    private void EnsureFocusCheckStarted(IntPtr focus)
+    {
+        if (_focusCheck is not null && focus == _passwordCheckedFocus)
+            return;
+
+        _passwordCheckedFocus = focus;
+        _focusCheck = WindowsSecureInput.IsPasswordField(focus)
+            ? Task.FromResult(true)
+            : WindowsSecureInput.IsProtectedFocusedElement(focus);
     }
 
     public string? ForegroundProcessName()

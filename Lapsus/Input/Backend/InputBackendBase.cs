@@ -467,6 +467,11 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         if (!IsStillFocused(fix.Owner))
             return;
 
+        // The hook keeps letters typed while a field's password check is still pending; nothing may be
+        // injected into that field until the check has cleared it.
+        if (InputBlockedReason() is not null)
+            return;
+
         // The line must still read "word<space>tail"; a hotkey or a neural rewrite since the space changes it.
         if (!Corrector.IsReady || !_buffer.Segment.EndsWith(word + " " + tail, StringComparison.Ordinal))
             return;
