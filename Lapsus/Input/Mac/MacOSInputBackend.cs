@@ -370,9 +370,14 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             // The trailing characters are already highlighted. Backspacing would delete that whole
             // run on the first key. A paste or a Unicode event replaces the highlight.
             case MacTextInjection.AxReplace.Selected:
-                return replacement.Engine == MacCaretProbe.WebEngineKind.None
-                    ? MacTextInjection.TypeOver(0, text)
-                    : TryPasteOverTrailing(0, text);
+                if (replacement.Engine != MacCaretProbe.WebEngineKind.None)
+                    return TryPasteOverTrailing(0, text);
+
+                if (MacTextInjection.TypeOver(0, text))
+                    return true;
+
+                RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
+                return false;
             default:
                 if (replacement.Engine != MacCaretProbe.WebEngineKind.None)
                     return TryPasteOverTrailing(backspaces, text);
