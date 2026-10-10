@@ -5,8 +5,10 @@
 # (see CLAUDE.md). So it lives here, where the lists can be fetched, and `--compare` exits 2
 # when a guarded number moves more than 0.5 pp the wrong way.
 #
-# A full run of all seven priority baselines takes about four minutes, which is cheap enough
-# to gate pull requests that touch the brain.
+# A full run of all seven priority baselines takes about four minutes. Pull requests that
+# touch the brain run it against cached dictionaries. Release calls this workflow with
+# fresh-dictionaries so packaging waits on the lists a user would download that day —
+# kaikki's weekly Hebrew extract is the only source not pinned to a commit.
 name: Sweep
 
 on:
@@ -17,11 +19,13 @@ on:
       - 'Lapsus.Core/Layout/**'
       - 'tools/Lapsus.Sweep/**'
       - '.github/workflows/sweep.yml'
-  schedule:
-    # Nightly, so a drift in the upstream word lists is caught on its own rather than
-    # landing on whoever opens the next pull request.
-    - cron: '30 3 * * *'
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      fresh-dictionaries:
+        description: Re-download dictionaries instead of using the cache.
+        type: boolean
+        default: false
 
 concurrency:
   group: sweep-${{ github.ref }}
@@ -50,9 +54,10 @@ jobs:
           restore-keys: nuget-${{ runner.os }}-
 
       # The baselines were recorded against what the app installs. Every source but kaikki's
-      # weekly Hebrew extract is pinned to a commit in the catalog, so the cache is keyed on the
-      # catalog and this file and only re-downloads when one of them changes.
+      # weekly Hebrew extract is pinned to a commit in the catalog, so a pull request reuses
+      # the cache until the catalog or this file changes. A release skips the cache.
       - name: Cache dictionaries
+        if: inputs.fresh-dictionaries != true
         id: lists
         uses: actions/cache@v4
         with:
@@ -64,7 +69,7 @@ jobs:
       # by tools/Lapsus.Lexicons, which calls the code the app calls — Hebrew's word forms and
       # the Ukrainian list with its Russian words taken out. Keep it in step with the catalog.
       - name: Download dictionaries
-        if: steps.lists.outputs.cache-hit != 'true'
+        if: inputs.fresh-dictionaries == true || steps.lists.outputs.cache-hit != 'true'
         run: |
           set -euo pipefail
           mkdir -p dictionaries staging
