@@ -10,7 +10,13 @@ env:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 jobs:
+  sweep:
+    uses: ./.github/workflows/sweep.yml
+    with:
+      fresh-dictionaries: true
+
   package:
+    needs: sweep
     name: ${{ matrix.rid }}
     runs-on: ${{ matrix.os }}
     strategy:
