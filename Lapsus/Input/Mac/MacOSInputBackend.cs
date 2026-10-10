@@ -67,7 +67,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     public MacOSInputBackend(IPhraseCorrector corrector, AppExclusions? excludedApps = null)
         : base(corrector, excludedApps)
     {
-        HotkeyVirtualKey = MacHotkeys.CtrlOptionSpace;
+        HotkeyVirtualKey = HotkeyTriggers.DoubleShift;
         _callback = EventTapHandler;
         _callbackHandle = GCHandle.Alloc(_callback);
         _watchdog = new System.Threading.Timer(_ => CheckPermissions(), null, Timeout.Infinite, Timeout.Infinite);

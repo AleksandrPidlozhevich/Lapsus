@@ -232,7 +232,8 @@ public partial class SettingsViewModel : ViewModelBase
         OperatingSystem.IsMacOS()
             ?
             [
-                new HotkeyOption("⌃⌥Space", MacHotkeys.CtrlOptionSpace),
+                // ⌃⌥Space is macOS symbolic hotkey 61, "select the next input source". It cycles
+                // layouts on its own, so the correction never gets to replace the typed word.
                 new HotkeyOption("⇧ ×2", HotkeyTriggers.DoubleShift),
                 new HotkeyOption("⌃ ×2", HotkeyTriggers.DoubleControl),
                 new HotkeyOption("⌥ ×2", HotkeyTriggers.DoubleAlt),
@@ -506,6 +507,13 @@ public partial class SettingsViewModel : ViewModelBase
 
     private HotkeyOption ResolveHotkey(int savedVirtualKey)
     {
+        if (OperatingSystem.IsMacOS() && savedVirtualKey == MacHotkeys.CtrlOptionSpace)
+        {
+            savedVirtualKey = HotkeyTriggers.DoubleShift;
+            _settings.HotkeyVirtualKey = savedVirtualKey;
+            _store.Save(_settings);
+        }
+
         var match = Hotkeys.FirstOrDefault(h => h.VirtualKey == savedVirtualKey);
         if (match is not null)
             return match;
