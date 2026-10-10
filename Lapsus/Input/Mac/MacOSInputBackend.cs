@@ -474,6 +474,11 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
     private bool ShouldSwallowHotkey(int eventPid)
     {
+        // With nothing excluded there is nothing to classify: do not make the hotkey wait on a
+        // pid snapshot that only exists to answer "is this app excluded".
+        if (ExcludedApps.IsEmpty)
+            return true;
+
         var packed = Volatile.Read(ref _excludedSnapshot);
         var snapshotPid = (int)(packed >> 32);
         var excluded = (packed & 1L) != 0;

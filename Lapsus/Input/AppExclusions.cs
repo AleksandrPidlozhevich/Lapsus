@@ -22,6 +22,17 @@ public sealed class AppExclusions
                 _names.Add(normalized);
     }
 
+    // Cheap and lock-free enough to read from the macOS tap callback: with nothing excluded, a
+    // hotkey needs no pid classification at all to know it is not excluded.
+    public bool IsEmpty
+    {
+        get
+        {
+            lock (_gate)
+                return _names.Count == 0;
+        }
+    }
+
     public bool Contains(string? processName)
     {
         if (processName is null || Normalize(processName) is not { } normalized)
