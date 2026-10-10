@@ -59,6 +59,17 @@ public class MacNativeSmokeTests
     }
 
     [Fact]
+    public async Task The_frontmost_app_can_be_asked_from_a_pool_thread()
+    {
+        if (!OperatingSystem.IsMacOS())
+            return;
+
+        var pids = await Task.Run(() => Enumerable.Range(0, 50).Select(_ => MacFrontmost.ProcessId()).ToList());
+
+        Assert.All(pids, pid => Assert.True(pid >= 0));
+    }
+
+    [Fact]
     public void An_accessibility_element_can_be_created_for_this_process()
     {
         if (!OperatingSystem.IsMacOS())

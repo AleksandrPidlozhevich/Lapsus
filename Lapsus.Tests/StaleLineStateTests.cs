@@ -425,6 +425,18 @@ public class StaleLineStateTests
     }
 
     [Fact]
+    public void A_focus_known_only_by_its_app_keeps_the_word()
+    {
+        var backend = new FakeInputBackend(new ScriptedCorrector("ghbdtn", "привет")).Listening().Focused();
+        backend.Type("ghbdtn");
+
+        Assert.False(backend.MoveFocus(new FakeFocus(1, 0)));
+        backend.PressHotkey();
+
+        Assert.Equal("привет", Assert.Single(backend.Injected).Text);
+    }
+
+    [Fact]
     public void An_unreadable_focus_drops_a_word_typed_elsewhere()
     {
         var backend = new FakeInputBackend(new ScriptedCorrector("ghbdtn", "привет")).Listening().Focused();

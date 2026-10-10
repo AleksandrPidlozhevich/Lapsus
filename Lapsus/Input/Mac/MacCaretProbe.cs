@@ -29,7 +29,7 @@ internal static class MacCaretProbe
         if (!MacAccessibility.IsProcessTrusted())
             return default;
 
-        if (!TryCopyFocused(out var focused))
+        if (!TryCopyFocused(out var focused) && !TryCopyFrontmostFocused(out focused))
             return default;
 
         try
@@ -78,6 +78,40 @@ internal static class MacCaretProbe
         return true;
     }
 
+    // Electron reports no focused element at all until its accessibility tree is on, so the
+    // request cannot wait for an element to read the pid from. The tree is built after the flag is
+    // set: the first read here usually still fails and a later sample succeeds.
+    private static bool TryCopyFrontmostFocused(out IntPtr focused)
+    {
+        focused = IntPtr.Zero;
+        var pid = MacFrontmost.ProcessId();
+        if (PrepareWebEngine(pid) == WebEngineKind.None)
+            return false;
+
+        var app = MacOSNativeMethods.AXUIElementCreateApplication(pid);
+        if (app == IntPtr.Zero)
+            return false;
+
+        try
+        {
+            MacOSNativeMethods.AXUIElementSetMessagingTimeout(app, AxTimeoutSeconds);
+            if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
+                    app, MacOSNativeMethods.AxFocusedUiElementAttribute, out focused) == 0
+                && focused != IntPtr.Zero)
+                return true;
+
+            if (focused != IntPtr.Zero)
+                MacOSNativeMethods.CFRelease(focused);
+
+            focused = IntPtr.Zero;
+            return false;
+        }
+        finally
+        {
+            MacOSNativeMethods.CFRelease(app);
+        }
+    }
+
     private static readonly HashSet<int> EnhancedPids = new();
 
     private static readonly object EnhancedGate = new();
@@ -85,6 +119,14 @@ internal static class MacCaretProbe
     internal static WebEngineKind PrepareWebEngine(IntPtr focused)
     {
         if (MacOSNativeMethods.AXUIElementGetPid(focused, out var pid) != 0 || pid <= 0)
+            return WebEngineKind.None;
+
+        return PrepareWebEngine(pid);
+    }
+
+    internal static WebEngineKind PrepareWebEngine(int pid)
+    {
+        if (pid <= 0)
             return WebEngineKind.None;
 
         var path = MacProcessNames.ExecutablePath(pid);

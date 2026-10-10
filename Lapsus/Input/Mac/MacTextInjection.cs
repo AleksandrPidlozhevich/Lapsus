@@ -43,7 +43,10 @@ internal static class MacTextInjection
                 if (focused != IntPtr.Zero)
                     MacOSNativeMethods.CFRelease(focused);
 
-                return new AccessibilityReplacement(AxReplace.Miss, MacCaretProbe.WebEngineKind.None);
+                // Electron hides the focused element until its accessibility tree is on. The engine
+                // still decides between typing and pasting, so it comes from the key window's app.
+                return new AccessibilityReplacement(
+                    AxReplace.Miss, MacCaretProbe.PrepareWebEngine(MacFrontmost.ProcessId()));
             }
 
             try

@@ -165,12 +165,12 @@ internal sealed class MacTypingFocusWatcher : IDisposable
         if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
                 systemWide, MacOSNativeMethods.AxFocusedUiElementAttribute, out var focused) != 0
             || focused == IntPtr.Zero)
-            return default;
+            return FrontmostApp();
 
         try
         {
             if (MacOSNativeMethods.AXUIElementGetPid(focused, out var pid) != 0 || pid <= 0)
-                return default;
+                return FrontmostApp();
 
             var role = ReadRole(focused);
             isTransient = IsTransientRole(role);
@@ -181,6 +181,14 @@ internal sealed class MacTypingFocusWatcher : IDisposable
         {
             MacOSNativeMethods.CFRelease(focused);
         }
+    }
+
+    // Electron answers no focused element until its accessibility tree is switched on, and a busy
+    // app times out. The typing still goes to the app that owns the key window.
+    private static MacTypingFocus FrontmostApp()
+    {
+        var (pid, hash) = MacFocusFallback.Resolve(0, 0, MacFrontmost.ProcessId());
+        return new MacTypingFocus(pid, hash);
     }
 
     private static string ReadRole(IntPtr element)

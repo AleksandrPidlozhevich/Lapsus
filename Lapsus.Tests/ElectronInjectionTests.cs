@@ -47,6 +47,24 @@ public class ElectronInjectionTests
     }
 
     [Fact]
+    public void An_unreadable_focus_is_the_frontmost_app_without_an_element()
+    {
+        Assert.Equal((42, (nint)0), MacFocusFallback.Resolve(0, 0, 42));
+    }
+
+    [Fact]
+    public void A_readable_focus_is_not_replaced_by_the_frontmost_app()
+    {
+        Assert.Equal((7, (nint)99), MacFocusFallback.Resolve(7, 99, 42));
+    }
+
+    [Fact]
+    public void No_focus_and_no_frontmost_app_stays_empty()
+    {
+        Assert.Equal((0, (nint)0), MacFocusFallback.Resolve(0, 0, 0));
+    }
+
+    [Fact]
     public void A_helper_process_belongs_to_the_same_app_as_its_bundle()
     {
         const string main = "/Applications/Cursor.app/Contents/MacOS/Cursor";
