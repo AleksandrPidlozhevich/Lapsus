@@ -86,8 +86,35 @@ internal sealed class PhraseContext(
 
         if ((CrossedScript() ?? direction) is { } mixed)
             FollowNeighbours(mixed, direction == mixed);
+        else if (HeldScript() is { } held)
+            FollowNeighbours(held, false, listedOnly: true);
 
         return _tokens;
+    }
+
+    // The one script whose real words hold a line nothing crossed out of. A word of another layout that
+    // slipped in spells a rarer word there ("πες μου pew όταν είσαι έτοιμος"), so nothing crossed on its
+    // own; it goes with its neighbours like any word both languages know.
+    private Script? HeldScript()
+    {
+        Script? held = null;
+        var seen = new List<Script>();
+        foreach (var token in _tokens)
+        {
+            if (!token.IsWord || seen.Contains(token.Source.Script))
+                continue;
+
+            seen.Add(token.Source.Script);
+            if (Anchors(token.Source.Script) < Quorum)
+                continue;
+
+            if (held is not null)
+                return null;
+
+            held = token.Source.Script;
+        }
+
+        return seen.Count > 1 ? held : null;
     }
 
     // Keys-alone only; a spell-fix must not invent the line's direction.
@@ -281,7 +308,7 @@ internal sealed class PhraseContext(
     // A mixed line switches language mid-way, so a word both languages know goes with its neighbours:
     // "αύριο to πρωί" is Greek, "let me know πότε" keeps its English. A pulled word joins the evidence,
     // and two crossings settle the line for the short words.
-    private void FollowNeighbours(Script into, bool settled)
+    private void FollowNeighbours(Script into, bool settled, bool listedOnly = false)
     {
         bool moved;
         do
@@ -289,6 +316,9 @@ internal sealed class PhraseContext(
             moved = false;
             for (var i = 0; i < _tokens.Count; i++)
             {
+                if (listedOnly && IsKnownWithoutACount(_tokens[i]))
+                    continue;
+
                 if (FollowsNeighbours(i, into, settled || CrossingsInto(into) >= Quorum) is not { } pulled)
                     continue;
 
@@ -296,6 +326,13 @@ internal sealed class PhraseContext(
                 moved = true;
             }
         } while (moved);
+    }
+
+    // A word only Hunspell knows has no frequency to weigh against the other reading's, so any listed
+    // reading would look commoner. Where nothing in the line crossed, that is not enough to move it.
+    private static bool IsKnownWithoutACount(in TokenReading token)
+    {
+        return WordScorer.IsDictionaryHit(token.Baseline) && token.BaselineFrequency <= 0;
     }
 
     private ScoredWord? FollowsNeighbours(int index, Script into, bool settled)
@@ -434,6 +471,12 @@ internal sealed class PhraseContext(
         if (readInScript(token.Typed, token.Source, direction) is not { } pulled)
             return null;
 
-        return scorer.FrequencyOf(pulled.Text, direction) >= token.BaselineFrequency ? pulled : null;
+        if (scorer.FrequencyOf(pulled.Text, direction) >= token.BaselineFrequency)
+            return pulled;
+
+        // The commoner reading keeps a word only while its script still holds part of the line: with every
+        // other word crossed, "με" in "can you send με the report" is "me". The crossings must be this
+        // line's own; a direction handed in with a single word (auto mode) says nothing about its neighbours.
+        return Anchors(token.Source.Script) == 0 && CrossingsInto(direction) >= Quorum ? pulled : null;
     }
 }

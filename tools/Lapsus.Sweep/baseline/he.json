@@ -5,35 +5,35 @@
   "TargetWords": 48893,
   "Metrics": {
     "Rule B — a whole Hebrew line typed on the English layout · lines recovered in full · without": {
-      "Value": 0.335,
+      "Value": 0.3376,
       "Better": "Higher"
     },
     "Rule B — a whole Hebrew line typed on the English layout · lines recovered in full · with": {
-      "Value": 0.9012,
+      "Value": 0.9622,
       "Better": "Higher"
     },
     "Rule B — a whole Hebrew line typed on the English layout · words recovered · without": {
-      "Value": 0.8428,
+      "Value": 0.8439,
       "Better": "Higher"
     },
     "Rule B — a whole Hebrew line typed on the English layout · words recovered · with": {
-      "Value": 0.9837,
+      "Value": 0.9938,
       "Better": "Higher"
     },
     "Rule B — the same Hebrew line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · without": {
-      "Value": 0.3228,
+      "Value": 0.3256,
       "Better": "Higher"
     },
     "Rule B — the same Hebrew line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · with": {
-      "Value": 0.8434,
+      "Value": 0.8988,
       "Better": "Higher"
     },
     "Rule B — the same Hebrew line with a comma inside and a full stop at the end · the comma survived as a comma · without": {
-      "Value": 0.9398,
+      "Value": 0.9394,
       "Better": "Higher"
     },
     "Rule B — the same Hebrew line with a comma inside and a full stop at the end · the comma survived as a comma · with": {
-      "Value": 0.9396,
+      "Value": 0.9393,
       "Better": "Higher"
     },
     "Rule B — English words standing beside two wrong-layout Hebrew ones · English words pulled into Hebrew · without": {
@@ -41,7 +41,7 @@
       "Better": "Lower"
     },
     "Rule B — English words standing beside two wrong-layout Hebrew ones · English words pulled into Hebrew · with": {
-      "Value": 0.0128,
+      "Value": 0.0112,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Hebrew · without": {
@@ -49,11 +49,11 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Hebrew · with": {
-      "Value": 0.0125,
+      "Value": 0.0128,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
-      "Value": 0.3416,
+      "Value": 0.3397,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · control: known word left alone · without": {
@@ -61,7 +61,7 @@
       "Better": "Higher"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · control: known word left alone · with": {
-      "Value": 0.9997,
+      "Value": 0.9998,
       "Better": "Higher"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Hebrew line · pulled across into Hebrew · without": {
@@ -81,11 +81,11 @@
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · typo'd word still crossed into Hebrew · without": {
-      "Value": 0.4865,
+      "Value": 0.4866,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · typo'd word still crossed into Hebrew · with": {
-      "Value": 0.5089,
+      "Value": 0.5125,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · and came back as the word that was meant · without": {
@@ -97,11 +97,11 @@
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Hebrew · without": {
-      "Value": 0.9867,
+      "Value": 0.9872,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Hebrew · with": {
-      "Value": 0.9992,
+      "Value": 0.9996,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · line finished in English does not ask for Hebrew · without": {
@@ -129,19 +129,19 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · alone": {
-      "Value": 0.7339,
+      "Value": 0.7351,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · keys only": {
-      "Value": 0.7338,
+      "Value": 0.735,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · sticky": {
-      "Value": 0.9273,
+      "Value": 0.9285,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · sticky keys only": {
-      "Value": 0.9272,
+      "Value": 0.9284,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · correct English words changed · alone": {
@@ -181,19 +181,19 @@
       "Better": "Lower"
     },
     "Rule F — a wrong-layout Hebrew word the list does not have · the word on its own, recovered": {
-      "Value": 0.7356,
+      "Value": 0.7896,
       "Better": "Higher"
     },
     "Rule F — a wrong-layout Hebrew word the list does not have · the word ending a line of its language, recovered": {
-      "Value": 0.7375,
+      "Value": 0.7914,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.7095,
+      "Value": 0.6965,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · changed into another word": {
-      "Value": 0.1603,
+      "Value": 0.1473,
       "Better": "Lower"
     },
     "Rule G — a Hebrew word with one typo, on its own · crossed into another layout": {
@@ -201,19 +201,19 @@
       "Better": "Lower"
     },
     "Rule G — a Hebrew word with one typo, on its own · left as typed": {
-      "Value": 0.109,
+      "Value": 0.1349,
       "Better": "Either"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.6969,
+      "Value": 0.6714,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · swapped": {
-      "Value": 0.5994,
+      "Value": 0.5735,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · dropped": {
-      "Value": 0.2778,
+      "Value": 0.2593,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · extra": {
@@ -225,11 +225,11 @@
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.6713,
+      "Value": 0.6463,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.7273,
+      "Value": 0.7227,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by word length · 7-9": {
@@ -241,31 +241,31 @@
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed back to the meant word": {
-      "Value": 0.6905,
+      "Value": 0.6748,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · changed into another word": {
-      "Value": 0.2049,
+      "Value": 0.1862,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Hebrew sentence · crossed into another layout": {
-      "Value": 0,
+      "Value": 0.0014,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Hebrew sentence · left as typed": {
-      "Value": 0.1046,
+      "Value": 0.1375,
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · neighbour": {
-      "Value": 0.6115,
+      "Value": 0.5796,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · swapped": {
-      "Value": 0.65,
+      "Value": 0.6143,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · dropped": {
-      "Value": 0.2874,
+      "Value": 0.2759,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · extra": {
@@ -277,11 +277,11 @@
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by word length · 4": {
-      "Value": 0.6773,
+      "Value": 0.6454,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by word length · 5-6": {
-      "Value": 0.7211,
+      "Value": 0.7183,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by word length · 7-9": {

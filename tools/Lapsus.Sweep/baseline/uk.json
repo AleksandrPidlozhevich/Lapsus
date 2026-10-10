@@ -9,7 +9,7 @@
       "Better": "Higher"
     },
     "Rule B — a whole Ukrainian line typed on the English layout · lines recovered in full · with": {
-      "Value": 0.9596,
+      "Value": 0.9806,
       "Better": "Higher"
     },
     "Rule B — a whole Ukrainian line typed on the English layout · words recovered · without": {
@@ -17,7 +17,7 @@
       "Better": "Higher"
     },
     "Rule B — a whole Ukrainian line typed on the English layout · words recovered · with": {
-      "Value": 0.9921,
+      "Value": 0.9958,
       "Better": "Higher"
     },
     "Rule B — the same Ukrainian line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · without": {
@@ -25,7 +25,7 @@
       "Better": "Higher"
     },
     "Rule B — the same Ukrainian line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · with": {
-      "Value": 0.8262,
+      "Value": 0.8426,
       "Better": "Higher"
     },
     "Rule B — the same Ukrainian line with a comma inside and a full stop at the end · the comma survived as a comma · without": {
@@ -41,7 +41,7 @@
       "Better": "Lower"
     },
     "Rule B — English words standing beside two wrong-layout Ukrainian ones · English words pulled into Cyrillic · with": {
-      "Value": 0.0003,
+      "Value": 0.001,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Cyrillic · without": {
@@ -49,7 +49,7 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Cyrillic · with": {
-      "Value": 0.0092,
+      "Value": 0.0072,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
@@ -85,7 +85,7 @@
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · typo'd word still crossed into Cyrillic · with": {
-      "Value": 0.4878,
+      "Value": 0.4898,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · and came back as the word that was meant · without": {
@@ -101,7 +101,7 @@
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Ukrainian · with": {
-      "Value": 0.9968,
+      "Value": 0.9974,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · line finished in English does not ask for Ukrainian · without": {
@@ -165,7 +165,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · keys only": {
-      "Value": 0.0058,
+      "Value": 0.0239,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · sticky": {
@@ -173,7 +173,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · sticky keys only": {
-      "Value": 0.0058,
+      "Value": 0.0239,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · two-letter chunks English does not use, sent to Cyrillic (264 of 676)": {

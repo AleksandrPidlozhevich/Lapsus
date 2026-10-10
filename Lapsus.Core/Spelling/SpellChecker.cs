@@ -224,9 +224,11 @@ public sealed class SpellChecker
         return Scripts.IsAbjad(script) ? DefaultMinAbjadLexiconLetters : DefaultMinLexiconLetters;
     }
 
-    public bool IsLexiconWord(string word, Script script, string? languageCode = null)
+    // typedInScript: no layout crossing is being judged, so the abjad floor (collisions on short strings) is not needed.
+    public bool IsLexiconWord(string word, Script script, string? languageCode = null, bool typedInScript = false)
     {
-        if (string.IsNullOrEmpty(word) || word.Length < (_minLexiconLetters ?? MinLexiconLetters(script)))
+        var floor = _minLexiconLetters ?? (typedInScript ? DefaultMinLexiconLetters : MinLexiconLetters(script));
+        if (string.IsNullOrEmpty(word) || word.Length < floor)
             return false;
 
         if (languageCode is not null)

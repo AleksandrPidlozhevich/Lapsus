@@ -81,9 +81,11 @@ internal sealed class WordScorer(SpellChecker? spell)
         return core.Length == 0 ? 0.0 : spell?.LogCount(core, script, languageCode) ?? 0.0;
     }
 
-    public (string Text, int Edits) SpellFix(string word, Script script, string? languageCode = null)
+    // typedInScript: the word stands in its own script as typed, not as another layout's reading of the keys.
+    public (string Text, int Edits) SpellFix(
+        string word, Script script, string? languageCode = null, bool typedInScript = false)
     {
-        if (!CanSpellFixWord(word, script, languageCode))
+        if (!CanSpellFixWord(word, script, languageCode, typedInScript))
             return (word, 0);
 
         return spell!.TryCorrect(word, script, out var corrected, out var distance, languageCode)
@@ -100,12 +102,14 @@ internal sealed class WordScorer(SpellChecker? spell)
         return CanSpellFixWord(word, script, null) ? spell!.Suggestions(word, script, max) : [];
     }
 
-    // Lexicon word is never spell-fixed into a commoner neighbour.
-    private bool CanSpellFixWord(string word, Script script, string? languageCode)
+    // Lexicon word is never spell-fixed into a commoner neighbour. The abjad length floor guards against
+    // layouts colliding on short strings; a word typed in its own script collides with nothing, and without
+    // this a correct four-letter form the list lacks is respelled (جسرا → سرا).
+    private bool CanSpellFixWord(string word, Script script, string? languageCode, bool typedInScript = false)
     {
         return spell is not null && word.Length >= 2 && WordScanner.IsAllLetters(word, script) &&
                !HasInternalMark(word, script) && !spell.IsKnownWord(word, script, languageCode) &&
-               !spell.IsLexiconWord(word, script, languageCode);
+               !spell.IsLexiconWord(word, script, languageCode, typedInScript);
     }
 
     private static bool HasInternalMark(string word, Script script)

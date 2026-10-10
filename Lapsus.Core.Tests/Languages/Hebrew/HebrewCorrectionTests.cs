@@ -192,6 +192,39 @@ public sealed class HebrewCorrectionTests : IDisposable
         Assert.Equal(KeyboardLayout.He, result.TargetLayout);
     }
 
+    [Theory]
+    // ת is the comma key: the word under a clitic the list lacks, read off its listed stem.
+    [InlineData("vvdsru,", "ההגדרות")]
+    // "seu" is a scrap in the English list; the reading with the comma as ת is far commoner.
+    [InlineData("seu,", "דקות")]
+    // A real English word keeps its comma against a reading only ten times commoner.
+    [InlineData("muse,", "muse,")]
+    [InlineData("hello,", "hello,")]
+    public void The_comma_key_is_a_final_tav_only_where_the_longer_word_earns_it(string typed, string expected)
+    {
+        var he = Path.Combine(Path.GetTempPath(), $"lapsus-he-{Guid.NewGuid():N}.txt");
+        var en = Path.Combine(Path.GetTempPath(), $"lapsus-en-{Guid.NewGuid():N}.txt");
+        try
+        {
+            File.WriteAllLines(he, ["הגדרות 393", "דקות 60008", "צודקת 16699", "שלום 122580"]);
+            File.WriteAllLines(en, ["seu 245", "muse 1612", "hello 700000"]);
+            var corrector = new LayoutCorrector(new SpellChecker(
+            [
+                new DictionarySource("he", he, Script.Hebrew),
+                new DictionarySource("en", en, Script.Latin)
+            ]));
+
+            var result = corrector.CorrectPhrase(typed, Script.Latin, BundledKeyboardMaps.En, ToHebrew);
+
+            Assert.Equal(expected, result.Corrected);
+        }
+        finally
+        {
+            File.Delete(he);
+            File.Delete(en);
+        }
+    }
+
     [Fact]
     public void Clitic_evidence_does_not_carry_a_word_out_of_hebrew()
     {

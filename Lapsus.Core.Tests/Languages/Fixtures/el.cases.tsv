@@ -13,3 +13,6 @@ the water	the water	ok	English stays English
 kalhmera the water	καλημέρα the water	ok	one Greek word, then English
 τηε	the	ok	typed on the Greek layout meaning English
 καλημέρα σε όλους	καλημέρα σε όλους	ok	real Greek stays
+ψαν υοθ σενδ με τηε ρεπορτ	can you send me the report	ok	με is Greek and the keys of "me": with every other word crossed it goes with the line
+saw ευχαριστώ πολύ	σας ευχαριστώ πολύ	ok	one word on the wrong layout in a Greek line spells a rarer English word; it goes with its neighbours
+ευχαριστώ για το test	ευχαριστώ για το test	ok	an English word in a Greek line stays where its Greek reading (τεστ) is the rarer one

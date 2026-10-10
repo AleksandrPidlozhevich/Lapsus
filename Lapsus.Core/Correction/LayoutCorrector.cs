@@ -318,6 +318,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
             }
 
             i = WordScanner.EndOfLayoutWord(text, firstLetter, source.Script, source.Map, source.Candidates);
+            i = EndOfContraction(text, wordStart, i, source);
 
             var inExcludedChunk = excludedMask is not null && excludedMask[firstLetter];
             ScoredWord best;
@@ -357,6 +358,31 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
         CloseVerbatim(text.Length);
         return readings;
+    }
+
+    // "don't" typed on another layout: the apostrophe key ends the word there ("δον'τ", "גםמ,א"), and each
+    // half would be read alone. The halves are one word only when together they spell a listed contraction.
+    private int EndOfContraction(string text, int wordStart, int wordEnd, WordSource source)
+    {
+        if (source.Script == Script.Latin || wordEnd + 1 >= text.Length || !char.IsLetter(text[wordEnd + 1]) ||
+            !source.Map.TryGetKey(text[wordEnd], out var slot, out var shift))
+            return wordEnd;
+
+        var end = wordEnd + 1;
+        while (end < text.Length && char.IsLetter(text[end]))
+            end++;
+
+        foreach (var candidate in source.Candidates)
+        {
+            if (candidate.ScoringScript != Script.Latin || candidate.Map.CharAtSlot(slot, shift) != '\'')
+                continue;
+
+            var reading = LayoutTranscoder.Transcode(text[wordStart..end], source.Map, candidate.Map);
+            if (WordScorer.IsDictionaryHit(_scorer.Score(reading, Script.Latin, candidate.LanguageCode)))
+                return end;
+        }
+
+        return wordEnd;
     }
 
     private static int? LetterlessChunkEnd(
@@ -464,8 +490,13 @@ public sealed class LayoutCorrector : IPhraseCorrector
             : 0;
         var plainIsWord = letters >= MinWordToKeepPunctuation;
 
-        if (plainIsWord && !best.Changed)
-            return (best, wordEnd);
+        // A listed word left as typed keeps its mark unless the longer reading is far commoner: the lists
+        // hold foreign scraps ("seu"), and "seu," is דקות to anyone typing Hebrew.
+        var plainAsTyped = plainIsWord && !best.Changed;
+
+        // As BestWord: the keys alone may cross into an abjad on a clitic's stem (ההגדרות off הגדרות).
+        var word = text[wordStart..wordEnd];
+        var cliticAlone = !(Scripts.IsScoringBlind(source.Script) && Orthography.IsPossibleWord(word, source.Script));
 
         // Two-letter hit gives up "."/"," only to a commoner word; never "]" / ";" (often letters).
         var weighsSentencePunctuation = letters >= MinWordToKeepSentencePunctuation;
@@ -477,10 +508,11 @@ public sealed class LayoutCorrector : IPhraseCorrector
             if (_exceptions.Contains(token))
                 continue;
 
-            if (ReadAsOneWord(token, source, preferred) is not { } longer)
+            if (ReadAsOneWord(token, source, preferred, cliticAlone: cliticAlone) is not { } longer)
                 continue;
 
-            if (endsSentence && !KeyIsALetter(best, longer, source, plainIsWord, weighsSentencePunctuation))
+            if ((endsSentence || plainAsTyped) &&
+                !KeyIsALetter(best, longer, source, plainIsWord, weighsSentencePunctuation, plainAsTyped))
                 continue;
 
             return (longer, end);
@@ -490,14 +522,18 @@ public sealed class LayoutCorrector : IPhraseCorrector
     }
 
     private bool KeyIsALetter(
-        ScoredWord best, ScoredWord longer, WordSource source, bool plainIsWord, bool weighsSentencePunctuation)
+        ScoredWord best, ScoredWord longer, WordSource source, bool plainIsWord, bool weighsSentencePunctuation,
+        bool plainAsTyped = false)
     {
         var script = ScriptOf(longer, source);
         if (plainIsWord)
         {
             var longerWord = _scorer.LogCountOf(longer.Text, script, LanguageOf(longer, source));
             var shorterWord = _scorer.LogCountOf(best.Text, ScriptOf(best, source), LanguageOf(best, source) ?? source.LanguageCode);
-            return longerWord - shorterWord > -_punctuationHeadStart;
+
+            // A switched word gives the mark up to a reading up to the head start rarer. A word standing as
+            // typed gives it up only to one about thirty times commoner: "muse," and "dvd]" are English.
+            return longerWord - shorterWord > (plainAsTyped ? 2 * _punctuationHeadStart : -_punctuationHeadStart);
         }
 
         return !weighsSentencePunctuation ||
@@ -523,7 +559,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
         if (!_scorer.CanSpellFix || !WordScanner.IsAllLetters(token.Typed, token.Source.Script))
             return null;
 
-        var (fixedText, edits) = _scorer.SpellFix(token.Typed, token.Source.Script, token.Source.LanguageCode);
+        var (fixedText, edits) = _scorer.SpellFix(
+            token.Typed, token.Source.Script, token.Source.LanguageCode, typedInScript: true);
         if (edits != 1)
             return null;
 
@@ -532,7 +569,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
     }
 
     private ScoredWord? ReadAsOneWord(
-        string token, WordSource source, KeyboardLayout? preferred, Script? only = null)
+        string token, WordSource source, KeyboardLayout? preferred, Script? only = null, bool cliticAlone = false)
     {
         var best = default(ScoredWord);
         var found = false;
@@ -554,8 +591,9 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
             var score = _scorer.Score(switched, candidate.ScoringScript, candidate.LanguageCode);
 
-            // Clitic evidence only with a settled line direction; alone it must not pick a script.
-            var clitic = only is not null && Scripts.IsAbjad(candidate.ScoringScript) &&
+            // Clitic evidence only with a settled line direction, or where the caller crosses on the keys
+            // alone as BestWord does (cliticAlone); otherwise it must not pick a script.
+            var clitic = (only is not null || cliticAlone) && Scripts.IsAbjad(candidate.ScoringScript) &&
                          WordScorer.IsWeakDictionaryHit(score) &&
                          WordScanner.TrimToLetters(switched, candidate.ScoringScript).Length >= MinLettersToCrossOnClitic;
 
@@ -722,7 +760,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
         if (_scorer.CanSpellFix && !crossScriptSwitch)
         {
-            var (fixedSame, edits) = _scorer.SpellFix(word, source.Script, source.LanguageCode);
+            var (fixedSame, edits) = _scorer.SpellFix(word, source.Script, source.LanguageCode, typedInScript: true);
             Consider(fixedSame, source.Script, null, source.LanguageCode, null, edits);
         }
 

@@ -84,6 +84,16 @@ internal static class WindowsLayoutSwitch
         if (focus == IntPtr.Zero)
             focus = hwnd;
 
+        // Ask the window first. Attaching to its input queue (below) drops a key that is on its way
+        // to it at that moment: after a correction that is the first injected Backspace, and the first
+        // typed letter stays in the field. Most windows honour the request, so they never get attached.
+        RequestLayoutChange(focus, hkl);
+        if (hwnd != IntPtr.Zero && hwnd != focus)
+            RequestLayoutChange(hwnd, hkl);
+
+        if (ForegroundKeyboardLayout() == hkl)
+            return;
+
         var attached = targetThread != 0 && targetThread != thisThread
                        && AttachThreadInput(thisThread, targetThread, true);
         try
@@ -95,13 +105,6 @@ internal static class WindowsLayoutSwitch
             if (attached)
                 AttachThreadInput(thisThread, targetThread, false);
         }
-
-        RequestLayoutChange(focus, hkl);
-        if (hwnd != IntPtr.Zero && hwnd != focus)
-            RequestLayoutChange(hwnd, hkl);
-
-        if (ForegroundKeyboardLayout() == hkl)
-            return;
 
         RequestLayoutChange(focus, hkl);
         if (hwnd != IntPtr.Zero && hwnd != focus)

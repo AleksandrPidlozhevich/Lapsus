@@ -114,6 +114,44 @@ public sealed class LexiconTests : IDisposable
         Assert.False(spell.IsLexiconWord("кава", Script.Cyrillic, "uk"));
     }
 
+    [Fact]
+    public void A_short_abjad_form_the_lexicon_knows_is_not_respelled_where_it_stands()
+    {
+        // Four letters: under the abjad floor that guards layout collisions, which a word typed in Arabic has none of.
+        var words = Write("1\nجسرا\n", NewPath(".dic"));
+        Write("SET UTF-8\n", Path.ChangeExtension(words, ".aff"));
+        var list = Write("سرا 1401\n");
+        var scorer = new WordScorer(new SpellChecker([new DictionarySource("ar", list, Script.Arabic, words)]));
+
+        Assert.Equal(("جسرا", 0), scorer.SpellFix("جسرا", Script.Arabic, "ar", typedInScript: true));
+        Assert.Equal("سرا", scorer.SpellFix("جسرا", Script.Arabic, "ar").Text);
+    }
+
+    [Theory]
+    [InlineData("δον'τ", "el")]
+    [InlineData("גםמ,א", "he")]
+    public void A_contraction_typed_on_another_layout_comes_back_whole(string typed, string code)
+    {
+        var words = Write("1\ndon't\n", NewPath(".dic"));
+        Write("SET UTF-8\n", Path.ChangeExtension(words, ".aff"));
+        var english = Write("don 100\nknow 90\n");
+        var (script, layout, map, list) = code == "el"
+            ? (Script.Greek, KeyboardLayout.El, BundledKeyboardMaps.El, Write("νερό 10\n"))
+            : (Script.Hebrew, KeyboardLayout.He, BundledKeyboardMaps.He, Write("שלום 10\n"));
+
+        var corrector = new LayoutCorrector(new SpellChecker(
+            [new DictionarySource("en", english, Script.Latin, words), new DictionarySource(code, list, script)]));
+        var latin = new LayoutSource(Script.Latin, "en", BundledKeyboardMaps.En, "en-US");
+        var native = new LayoutSource(script, code, map, $"{code}-id");
+        LayoutCandidate[] candidates =
+        [
+            new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en-US"),
+            new(script, layout, map, code, $"{code}-id")
+        ];
+
+        Assert.Equal("don't", corrector.CorrectPhrase(typed, native, [latin, native], candidates).Corrected);
+    }
+
     private SpellChecker Ukrainian(bool lexicon)
     {
         var words = Write(UkWords, NewPath(".dic"));
