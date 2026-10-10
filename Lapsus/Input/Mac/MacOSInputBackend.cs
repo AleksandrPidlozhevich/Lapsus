@@ -671,6 +671,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         return path;
     }
 
+    protected override bool RetainBufferOnUnreadableFocus =>
+        BufferOwner.Pid > 0 && ChromiumApps.IsChromiumExecutable(ExecutablePath(BufferOwner.Pid));
+
     protected override bool IsStillFocused(MacTypingFocus ownerAtStart)
     {
         if (ownerAtStart.IsEmpty)

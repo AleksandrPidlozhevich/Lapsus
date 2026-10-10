@@ -409,6 +409,33 @@ public class StaleLineStateTests
         }
     }
 
+    [Fact]
+    public void An_unreadable_focus_keeps_a_word_typed_in_electron()
+    {
+        var backend = new FakeInputBackend(new ScriptedCorrector("ghbdtn", "привет"))
+        {
+            KeepUnreadableFocus = true
+        }.Listening().Focused();
+        backend.Type("ghbdtn");
+
+        Assert.False(backend.MoveFocus(default));
+        backend.PressHotkey();
+
+        Assert.Equal("привет", Assert.Single(backend.Injected).Text);
+    }
+
+    [Fact]
+    public void An_unreadable_focus_drops_a_word_typed_elsewhere()
+    {
+        var backend = new FakeInputBackend(new ScriptedCorrector("ghbdtn", "привет")).Listening().Focused();
+        backend.Type("ghbdtn");
+
+        Assert.True(backend.MoveFocus(default));
+        backend.PressHotkey();
+
+        Assert.Empty(backend.Injected);
+    }
+
     private static FakeInputBackend AutoCorrecting(IPhraseCorrector? brain = null)
     {
         var backend = new FakeInputBackend(brain ?? new ScriptedCorrector("cfk", "car")).Listening().Focused();

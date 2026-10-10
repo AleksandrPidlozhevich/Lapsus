@@ -57,11 +57,20 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
         NoteModifierKey(modifier, false);
     }
 
+    public bool KeepUnreadableFocus { get; set; }
+
     public FakeInputBackend Focused()
     {
         ApplyFocusSnapshot(new FakeFocus(1, 1), false);
         return this;
     }
+
+    public bool MoveFocus(FakeFocus focus)
+    {
+        return ApplyFocusSnapshot(focus, false);
+    }
+
+    protected override bool RetainBufferOnUnreadableFocus => KeepUnreadableFocus;
 
     public void Type(string text)
     {

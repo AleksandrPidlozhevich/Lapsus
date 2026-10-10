@@ -258,6 +258,10 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
 
     protected abstract bool IsStillFocused(TFocus ownerAtStart);
 
+    // True while a missing accessibility focus should not discard the line. Electron does that
+    // on its own, in the middle of a word.
+    protected virtual bool RetainBufferOnUnreadableFocus => false;
+
     protected void RaiseDiagnostic(string message)
     {
         Diagnostic?.Invoke(this, message);
@@ -354,6 +358,11 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         {
             if (_neuralRewriteInFlight > 0)
                 return true;
+
+            // A failed read is not the user leaving the field. Electron drops the focused
+            // element while it rebuilds the accessibility tree between keystrokes.
+            if (RetainBufferOnUnreadableFocus && (_buffer.Length > 0 || _cycle is not null))
+                return false;
 
             if (_buffer.Length > 0 || _cycle is not null || !BufferOwner.IsEmpty)
                 ClearTypingContext(default);

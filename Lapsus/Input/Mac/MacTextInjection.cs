@@ -49,6 +49,11 @@ internal static class MacTextInjection
             try
             {
                 var engine = MacCaretProbe.PrepareWebEngine(focused);
+                // Chromium reports a successful selected-text write when the document did not
+                // change. The caller replaces the word with a HID backspace and a paste.
+                if (engine == MacCaretProbe.WebEngineKind.Chromium)
+                    return new AccessibilityReplacement(AxReplace.Miss, engine);
+
                 if (engine != MacCaretProbe.WebEngineKind.None)
                 {
                     var copied = MacOSNativeMethods.AXUIElementCopyAttributeValue(
