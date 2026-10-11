@@ -59,12 +59,23 @@ public class MacNativeSmokeTests
     }
 
     [Fact]
-    public async Task The_frontmost_app_can_be_asked_from_a_pool_thread()
+    public void The_frontmost_app_can_be_asked_from_a_thread_without_an_autorelease_pool()
     {
         if (!OperatingSystem.IsMacOS())
             return;
 
-        var pids = await Task.Run(() => Enumerable.Range(0, 50).Select(_ => MacFrontmost.ProcessId()).ToList());
+        // A plain thread, joined: an awaited task would resume the test run on another thread, and
+        // every later test would then be off the thread that owns Dispatcher.UIThread.
+        var pids = new List<int>();
+        var worker = new Thread(() =>
+        {
+            for (var i = 0; i < 50; i++)
+                pids.Add(MacFrontmost.ProcessId());
+        });
+        worker.Start();
+        worker.Join();
+
+        Assert.Equal(50, pids.Count);
 
         Assert.All(pids, pid => Assert.True(pid >= 0));
     }
