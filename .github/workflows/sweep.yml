@@ -5,20 +5,14 @@
 # (see CLAUDE.md). So it lives here, where the lists can be fetched, and `--compare` exits 2
 # when a guarded number moves more than 0.5 pp the wrong way.
 #
-# A full run of all seven priority baselines takes about four minutes. Pull requests that
-# touch the brain run it against cached dictionaries. Release calls this workflow with
-# fresh-dictionaries so packaging waits on the lists a user would download that day —
-# kaikki's weekly Hebrew extract is the only source not pinned to a commit.
+# A full run of all seven priority baselines takes about four minutes. Not run per commit:
+# Release calls this workflow with fresh-dictionaries, so it runs on a version tag or a manual
+# release build and packaging waits on the lists a user would download that day — kaikki's
+# weekly Hebrew extract is the only source not pinned to a commit. Run it by hand, against
+# cached dictionaries, to check a change to the brain in between.
 name: Sweep
 
 on:
-  pull_request:
-    paths:
-      - 'Lapsus.Core/Correction/**'
-      - 'Lapsus.Core/Spelling/**'
-      - 'Lapsus.Core/Layout/**'
-      - 'tools/Lapsus.Sweep/**'
-      - '.github/workflows/sweep.yml'
   workflow_dispatch:
   workflow_call:
     inputs:
@@ -54,7 +48,7 @@ jobs:
           restore-keys: nuget-${{ runner.os }}-
 
       # The baselines were recorded against what the app installs. Every source but kaikki's
-      # weekly Hebrew extract is pinned to a commit in the catalog, so a pull request reuses
+      # weekly Hebrew extract is pinned to a commit in the catalog, so a manual run reuses
       # the cache until the catalog or this file changes. A release skips the cache.
       - name: Cache dictionaries
         if: inputs.fresh-dictionaries != true

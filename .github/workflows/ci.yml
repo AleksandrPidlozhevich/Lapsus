@@ -4,13 +4,14 @@
 # compiled nowhere but a developer's machine, so a [SupportedOSPlatform] break there is
 # invisible until someone packages a release. Building is most of the value; the tests are
 # OS-independent and run on both anyway.
+#
+# Not run per commit: Release calls this workflow, so it runs on a version tag or a manual
+# release build and packaging waits on it. Run it by hand to check a branch in between.
 name: CI
 
 on:
-  push:
-    branches: [master]
-  pull_request:
   workflow_dispatch:
+  workflow_call:
 
 concurrency:
   group: ci-${{ github.ref }}
