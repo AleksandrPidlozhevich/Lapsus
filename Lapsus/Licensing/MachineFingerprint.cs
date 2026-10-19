@@ -1,6 +1,7 @@
+using Lapsus.Input;
 using Microsoft.Win32;
 using System;
-using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
@@ -52,57 +53,53 @@ public static class MachineFingerprint
         return key?.GetValue("MachineGuid") as string;
     }
 
+    // The same IOPlatformUUID `ioreg -rd1 -c IOPlatformExpertDevice` prints, read in process: the
+    // App Sandbox does not let the store build start ioreg, and the value must match what earlier
+    // versions sent so existing activations stay valid.
     [SupportedOSPlatform("macos")]
     private static string? ReadMacPlatformUuid()
     {
-        var output = RunTool("/usr/sbin/ioreg", "-rd1 -c IOPlatformExpertDevice");
-        if (output is null)
+        var service = IOServiceGetMatchingService(0, IOServiceMatching("IOPlatformExpertDevice"));
+        if (service == 0)
             return null;
 
-        foreach (var line in output.Split('\n'))
-        {
-            if (!line.Contains("IOPlatformUUID", StringComparison.Ordinal))
-                continue;
-
-            var close = line.LastIndexOf('"');
-            if (close <= 0)
-                continue;
-
-            var open = line.LastIndexOf('"', close - 1);
-            if (open >= 0 && close - open > 1)
-                return line[(open + 1)..close];
-        }
-
-        return null;
-    }
-
-    private static string? RunTool(string fileName, string arguments)
-    {
+        var key = MacOSNativeMethods.CFStringCreateWithCString(
+            IntPtr.Zero, "IOPlatformUUID", MacOSNativeMethods.CFStringEncodingUtf8);
         try
         {
-            using var process = Process.Start(new ProcessStartInfo
-            {
-                FileName = fileName,
-                Arguments = arguments,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            });
-
-            if (process is null)
+            var value = IORegistryEntryCreateCFProperty(service, key, IntPtr.Zero, 0);
+            if (value == IntPtr.Zero)
                 return null;
 
-            var output = process.StandardOutput.ReadToEnd();
-            if (process.WaitForExit(3000))
-                return output;
-
-            process.Kill(entireProcessTree: true);
-            return null;
+            try
+            {
+                return MacOSNativeMethods.ReadCfString(value);
+            }
+            finally
+            {
+                MacOSNativeMethods.CFRelease(value);
+            }
         }
-        catch (Exception e) when (e is System.ComponentModel.Win32Exception or InvalidOperationException)
+        finally
         {
-            return null;
+            if (key != IntPtr.Zero)
+                MacOSNativeMethods.CFRelease(key);
+            IOObjectRelease(service);
         }
     }
+
+    private const string IOKit = "/System/Library/Frameworks/IOKit.framework/IOKit";
+
+    // The matching dictionary is consumed by IOServiceGetMatchingService; it is not released here.
+    [DllImport(IOKit)]
+    private static extern IntPtr IOServiceMatching(string name);
+
+    [DllImport(IOKit)]
+    private static extern uint IOServiceGetMatchingService(uint mainPort, IntPtr matching);
+
+    [DllImport(IOKit)]
+    private static extern IntPtr IORegistryEntryCreateCFProperty(uint entry, IntPtr key, IntPtr allocator, uint options);
+
+    [DllImport(IOKit)]
+    private static extern int IOObjectRelease(uint obj);
 }

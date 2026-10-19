@@ -1,3 +1,4 @@
+using Lapsus.Startup;
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -27,7 +28,7 @@ internal sealed class MacTypingFocusWatcher : IDisposable
 
     public bool TryStart(IntPtr runLoop)
     {
-        if (_started || runLoop == IntPtr.Zero || !MacAccessibility.IsProcessTrusted())
+        if (_started || runLoop == IntPtr.Zero || MacSandbox.IsSandboxed || !MacAccessibility.IsProcessTrusted())
             return false;
 
         _systemWide = MacOSNativeMethods.AXUIElementCreateSystemWide();
@@ -158,6 +159,12 @@ internal sealed class MacTypingFocusWatcher : IDisposable
     internal static MacTypingFocus ReadFocusUncached(out bool isTransient)
     {
         isTransient = false;
+
+        // No focused element in the sandbox: the key window's app stands in, as it does when a
+        // focused element cannot be read.
+        if (MacSandbox.IsSandboxed)
+            return FrontmostApp();
+
         var systemWide = SystemWideElement;
         if (systemWide == IntPtr.Zero)
             return default;

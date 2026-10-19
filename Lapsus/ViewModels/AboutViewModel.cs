@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Lapsus.Licensing;
 using Lapsus.Localization;
 using Lapsus.Settings;
+using Lapsus.Startup;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -32,7 +33,8 @@ public sealed partial class AboutViewModel : ObservableObject
 
     public string AppVersion { get; }
 
-    public bool ShowDonate => !_license.HasLicense && !_license.ShowLicenseNotice;
+    // Not in the App Store edition: a payment outside the store is not allowed there (guideline 3.1.1).
+    public bool ShowDonate => !_license.HasLicense && !_license.ShowLicenseNotice && !MacSandbox.IsSandboxed;
 
     public IReadOnlyList<ComponentCredit> Components { get; } =
     [

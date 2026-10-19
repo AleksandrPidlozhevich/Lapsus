@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Mac App Store guideline 2.4.5(i). -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <!-- Dictionary and model downloads, license activation. -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <!-- The .NET runtime compiles managed code at run time. -->
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+</dict>
+</plist>

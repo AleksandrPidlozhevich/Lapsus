@@ -3,7 +3,9 @@
 **Private people use Lapsus for free. Companies pay, per seat.**
 
 The line is *who* uses it, not what they use it for and not which features they touch. Nothing is
-locked, crippled or time-limited for anybody.
+locked, crippled or time-limited for anybody. (The one exception is the Mac App Store edition, where
+neural correction is paid for — see the end of this page. The version from this website has every
+feature, free.)
 
 The operative text is [LICENSE](LICENSE) — Business Source License 1.1, whose Additional Use Grant
 says all of this in legal words. This page is the plain-language version; where the two differ,
@@ -20,7 +22,8 @@ Two of those the licence spells out on purpose, because otherwise the client or 
 be read as the one using Lapsus: a freelancer works on their own behalf, not their client's, and a
 student's own coursework is their own — whoever owns the laptop.
 
-If you are not a company, you are done reading. Nothing in the app will ever ask you for money.
+If you are not a company, you are done reading. Nothing in the version from this website will ever
+ask you for money.
 
 ## Paid — one seat per person
 
@@ -85,3 +88,22 @@ dictionaries and bug fixes. If your company uses Lapsus, buy the seats.
 | **Business** | Per seat, yearly. Signed installers, MSI for Intune / Group Policy, priority support, and a written licence for your legal department. |
 
 See [getlapsus.com/pricing](https://getlapsus.com/en/pricing/) for current prices and where to buy.
+
+## The Mac App Store edition
+
+Lapsus is also in the Mac App Store. That copy runs in Apple's App Sandbox, so it cannot read what
+is inside other apps at all, and the App Store installs and updates it.
+
+It is free to download, and everything in it stays free, except **neural correction and features
+added after it**. Those are **Lapsus Plus**: a yearly subscription or a one-time lifetime purchase,
+both through Apple. The first 60 days include Lapsus Plus with nothing to sign up for and no card.
+When the trial or a subscription ends, Lapsus keeps working; only those features switch off, and
+nothing you set up is lost.
+
+Lapsus Plus is bought, refunded and cancelled through your Apple Account. It works in the App Store
+edition on every Mac signed in to that account, and nowhere else: it is not a licence key, and keys
+from this website are not entered there.
+
+The two editions run side by side and do not stand in for each other. Lapsus Plus pays for features
+in the App Store edition; it is not a company licence. A company whose people use Lapsus — from this
+website or from the App Store — buys seats as described above.

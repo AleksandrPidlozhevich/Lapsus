@@ -48,6 +48,12 @@ public sealed class AppSettings
 
     public DateOnly? OrganizationDetectedOn { get; set; }
 
+    // macOS: the first-launch explanation of what Lapsus reads was answered (OnboardingWindow).
+    public bool OnboardingDone { get; set; }
+
+    // Mac App Store edition: the day the trial of the paid features began (StoreAccessPolicy).
+    public DateOnly? StoreTrialStartedOn { get; set; }
+
     public string[] ExcludedWords { get; set; } = [];
 
     public string[] ExcludedApps { get; set; } = [];

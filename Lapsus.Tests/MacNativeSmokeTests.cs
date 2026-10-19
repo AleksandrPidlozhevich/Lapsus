@@ -141,4 +141,37 @@ public class MacNativeSmokeTests
             MacOSNativeMethods.CFRelease(ev);
         }
     }
+
+    // The store build reads the same platform UUID through IOKit that earlier versions read from
+    // ioreg; an empty fingerprint would make every activation fail.
+    [Fact]
+    public void The_machine_fingerprint_is_read_in_process()
+    {
+        if (!OperatingSystem.IsMacOS())
+            return;
+
+        Assert.NotEqual(string.Empty, Lapsus.Licensing.MachineFingerprint.Current);
+    }
+
+    [Fact]
+    public void Post_event_access_can_be_checked_without_prompting()
+    {
+        if (!OperatingSystem.IsMacOS())
+            return;
+
+        _ = MacOSNativeMethods.CGPreflightPostEventAccess();
+    }
+
+    // Only reads the login item state: registering one from a test would add a real login item.
+    [Fact]
+    public void The_sandboxed_login_item_state_can_be_read()
+    {
+        if (!OperatingSystem.IsMacOSVersionAtLeast(13))
+            return;
+
+        var registration = new Lapsus.Startup.MacOsSandboxStartupRegistration();
+
+        Assert.True(registration.IsSupported);
+        _ = registration.IsEnabled;
+    }
 }

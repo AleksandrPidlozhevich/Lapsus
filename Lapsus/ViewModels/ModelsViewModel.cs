@@ -4,6 +4,7 @@ using Lapsus.Core.Models;
 using Lapsus.Localization;
 using Lapsus.Neural;
 using Lapsus.Settings;
+using Lapsus.Startup;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -214,9 +215,13 @@ public sealed partial class ModelsViewModel : ObservableObject
         }
     }
 
+    // The Mac App Store edition offers the built-in list only: App Review looks at what the app can
+    // download, and a free search could fetch anything (guideline 2.4.5(iv)).
+    public bool HubSearchOffered => !MacSandbox.IsSandboxed;
+
     private bool CanSearch()
     {
-        return !Busy && !string.IsNullOrWhiteSpace(SearchQuery);
+        return HubSearchOffered && !Busy && !string.IsNullOrWhiteSpace(SearchQuery);
     }
 
     private static bool LooksLikeReference(string query)

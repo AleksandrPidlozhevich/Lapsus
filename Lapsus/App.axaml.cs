@@ -10,6 +10,7 @@ using Lapsus.Core.Models;
 using Lapsus.Core.Spelling;
 using Lapsus.Input;
 using Lapsus.Licensing;
+using Lapsus.Licensing.AppStore;
 using Lapsus.Localization;
 using Lapsus.Neural;
 using Lapsus.Settings;
@@ -36,9 +37,13 @@ public partial class App : Application
     private WordExceptions? _exceptions;
     private AppExclusions? _excludedApps;
     private LayoutIndicator? _indicator;
+
+    private StoreViewModel? _storeViewModel;
     private LicenseStatus? _licenseStatus;
     private LicenseViewModel? _licenseViewModel;
     private Window? _reminderWindow;
+
+    private Window? _onboardingWindow;
     private DispatcherTimer? _reminderTimer;
     private DateTimeOffset _reminderShownAt;
     private readonly SemaphoreSlim _brainGate = new(1, 1);
@@ -68,7 +73,7 @@ public partial class App : Application
             return;
         }
 
-        if (OperatingSystem.IsMacOS())
+        if (OperatingSystem.IsMacOS() && !MacSandbox.IsSandboxed)
             _ = Task.Run(MacOsStartupRegistration.RefreshIfEnabled);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -111,24 +116,41 @@ public partial class App : Application
             _licenseViewModel = new LicenseViewModel(
                 licenses, _licenseStatus, ShowLicensePage, CloseLicenseReminder);
 
+            _storeViewModel = new StoreViewModel(StorePurchasesFactory.CreateForCurrentBuild(), settings, store);
+            _ = _storeViewModel.RefreshAsync();
+
             _settingsViewModel = new SettingsViewModel(
                 _backend, store, settings, supported, _dictionaryStore, _modelStore,
-                RebuildBrainAsync, _exceptions, _excludedApps, _indicator, _updater, _licenseViewModel);
+                RebuildBrainAsync, _exceptions, _excludedApps, _indicator, _updater, _licenseViewModel,
+                _storeViewModel);
 
             SetupTrayIcon(desktop);
             ActualThemeVariantChanged += (_, _) => ApplyThemedIcon();
             _singleInstance?.StartWatching(ShowWindow);
+
+            // Opening the app again from Finder or Launchpad reaches the running copy as a reopen.
+            // In the store build that is the only signal: Launch Services is its single-instance check.
+            if (TryGetFeature(typeof(IActivatableLifetime)) is IActivatableLifetime activatable)
+                activatable.Activated += (_, e) =>
+                {
+                    if (e.Kind == ActivationKind.Reopen)
+                        ShowWindow();
+                };
 
             _updater.UpdateReadyToInstall += (_, _) => ShowUpdateAvailable();
             _ = CheckForUpdateLaterAsync();
 
             _ = CheckLicenseAsync();
 
-            if (installed.Count == 0 && !settings.NeuralCorrectionEnabled && !settings.PlainLayoutSwitch)
-
-                Dispatcher.UIThread.Post(ShowWindow, DispatcherPriority.Loaded);
-            else
+            var nothingToCorrectWith =
+                installed.Count == 0 && !settings.NeuralCorrectionEnabled && !settings.PlainLayoutSwitch;
+            if (!nothingToCorrectWith)
                 _ = RebuildBrainAsync();
+
+            if (_settingsViewModel.OnboardingPending)
+                Dispatcher.UIThread.Post(ShowOnboarding, DispatcherPriority.Loaded);
+            else if (nothingToCorrectWith)
+                Dispatcher.UIThread.Post(ShowWindow, DispatcherPriority.Loaded);
         }
 
         base.OnFrameworkInitializationCompleted();
@@ -451,6 +473,30 @@ public partial class App : Application
             return;
 
         ShowLicenseReminder();
+    }
+
+    private void ShowOnboarding()
+    {
+        if (_onboardingWindow is not null)
+        {
+            _onboardingWindow.Activate();
+            return;
+        }
+
+        var window = new OnboardingWindow();
+        window.DataContext = new OnboardingViewModel(
+            () =>
+            {
+                _settingsViewModel?.CompleteOnboarding();
+                window.Close();
+                // The permission banner and the dictionary library are both there.
+                ShowWindow();
+            },
+            window.Close);
+        window.Closed += (_, _) => _onboardingWindow = null;
+        _onboardingWindow = window;
+        window.Show();
+        window.Activate();
     }
 
     private void ShowLicenseReminder()

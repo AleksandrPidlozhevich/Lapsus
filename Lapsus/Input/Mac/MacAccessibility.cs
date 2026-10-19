@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using Lapsus.Startup;
 using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
@@ -6,9 +6,13 @@ namespace Lapsus.Input;
 [SupportedOSPlatform("macos")]
 internal static class MacAccessibility
 {
+    // The sandbox never grants Accessibility itself. Posting keys is the part of it capture needs,
+    // and the sandbox does allow that.
     public static bool IsProcessTrusted()
     {
-        return MacOSNativeMethods.AXIsProcessTrusted();
+        return MacSandbox.IsSandboxed
+            ? MacOSNativeMethods.CGPreflightPostEventAccess()
+            : MacOSNativeMethods.AXIsProcessTrusted();
     }
 
     // Shows the Accessibility trust prompt if not granted yet.
@@ -16,6 +20,12 @@ internal static class MacAccessibility
     {
         if (IsProcessTrusted())
             return;
+
+        if (MacSandbox.IsSandboxed)
+        {
+            MacOSNativeMethods.CGRequestPostEventAccess();
+            return;
+        }
 
         MacOSNativeMethods.AXIsProcessTrustedWithOptions(MacOSNativeMethods.GetAccessibilityPromptOptions());
     }
@@ -47,11 +57,6 @@ internal static class MacAccessibility
 
     private static void OpenPrivacyPane(string pane)
     {
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "open",
-            Arguments = $"x-apple.systempreferences:com.apple.preference.security?{pane}",
-            UseShellExecute = false
-        });
+        MacWorkspace.OpenUrl($"x-apple.systempreferences:com.apple.preference.security?{pane}");
     }
 }

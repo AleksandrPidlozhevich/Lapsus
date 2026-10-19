@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Текст на лиценза</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Пробен период на Lapsus Plus. Оставащи дни: {0}</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: абонаментът е активен</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: закупен завинаги</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Всичко освен невронната поправка и функциите, добавени по-късно, е безплатно завинаги. Lapsus Plus ги добавя.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Подновява се на {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>За година, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Завинаги, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Възстановяване на покупките</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Управление на абонамента</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Годишният абонамент се подновява автоматично, освен ако не го откажете в настройките на акаунта си в App Store поне 24 часа преди края на периода. Плащането се таксува към вашия Apple Account.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Условия за ползване</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Политика за поверителност</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>App Store в момента не е достъпен. Опитайте по-късно.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>Покупката чака одобрение.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>Покупката не беше извършена: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Пробният период на Lapsus Plus приключи и невронната поправка е изключена. Всичко останало работи както преди.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Невронната поправка е част от Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>За Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Добре дошли в Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus поправя текст, написан с грешна клавиатурна подредба, във всяко приложение. За целта трябва да вижда натисканията на клавиши.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Всичко се случва на този Mac. Това, което пишете, никъде не се изпраща и не се записва.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Полетата за пароли не се засягат: докато пишете в такова поле, macOS скрива клавишите от другите приложения, включително от Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>Сега macOS ще поиска две разрешения: „Наблюдение на въвеждането“ — за да вижда клавишите, и „Достъпност“ — за да въвежда поправения текст.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Продължи</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Не сега</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Опитай отново</value>
+  </data>
 </root>

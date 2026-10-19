@@ -3,6 +3,7 @@ using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lapsus.Core.Licensing;
+using Lapsus.Input;
 using Lapsus.Licensing;
 using Lapsus.Localization;
 using System;
@@ -177,6 +178,12 @@ public sealed partial class LicenseViewModel : ObservableObject
 
     internal static void OpenLink(string url)
     {
+        if (OperatingSystem.IsMacOS())
+        {
+            MacWorkspace.OpenUrl(url);
+            return;
+        }
+
         try
         {
             Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });

@@ -2,8 +2,10 @@ using Lapsus.Licensing;
 using Lapsus.Startup;
 using System;
 using System.Threading.Tasks;
+#if !MAS
 using Velopack;
 using Velopack.Sources;
+#endif
 
 namespace Lapsus.Updates;
 
@@ -17,6 +19,29 @@ public enum UpdateCheckResult
     NotSupported
 }
 
+#if MAS
+// Mac App Store build: the store updates the app (guideline 2.4.5(vii)) and Velopack is not shipped.
+public sealed class AppUpdater
+{
+    public static bool CanSelfUpdate => false;
+
+    public event EventHandler? UpdateReadyToInstall
+    {
+        add { }
+        remove { }
+    }
+
+    public string? PendingVersion => null;
+
+    public Task CheckSilentlyAsync() => Task.CompletedTask;
+
+    public Task<UpdateCheckResult> CheckNowAsync() => Task.FromResult(UpdateCheckResult.NotSupported);
+
+    public void ApplyAndRestart()
+    {
+    }
+}
+#else
 public sealed class AppUpdater
 {
 
@@ -24,8 +49,8 @@ public sealed class AppUpdater
 
     private UpdateInfo? _pending;
 
-    // Store/MSIX: no self-update (Store updates it; policy forbids otherwise).
-    public static bool CanSelfUpdate => !PackageIdentity.IsPackaged;
+    // Store/MSIX and a sandboxed Mac build: no self-update (the store updates it; policy forbids otherwise).
+    public static bool CanSelfUpdate => !PackageIdentity.IsPackaged && !MacSandbox.IsSandboxed;
 
     private static UpdateManager? TryCreate()
     {
@@ -85,3 +110,4 @@ public sealed class AppUpdater
             manager.ApplyUpdatesAndRestart(update.TargetFullRelease);
     }
 }
+#endif

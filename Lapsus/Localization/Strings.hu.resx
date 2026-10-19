@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Licencszöveg</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Lapsus Plus próbaidőszak: még {0} nap</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: az előfizetés aktív</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: végleg megvásárolva</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>A neurális javítás és a később érkező funkciók kivételével minden örökre ingyenes. A Lapsus Plus ezeket adja hozzá.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Megújul: {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Éves, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Végleges, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Vásárlások visszaállítása</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Előfizetés kezelése</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Az éves előfizetés automatikusan megújul, hacsak nem mondod le az App Store-fiókod beállításaiban legalább 24 órával az időszak vége előtt. A díjat az Apple Account terheli.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Felhasználási feltételek</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Adatvédelmi irányelvek</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>Az App Store most nem érhető el. Próbáld újra később.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>A vásárlás jóváhagyásra vár.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>A vásárlás nem sikerült: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>A Lapsus Plus próbaidőszaka véget ért, ezért a neurális javítás ki van kapcsolva. Minden más ugyanúgy működik.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>A neurális javítás a Lapsus Plus része.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>A Lapsus Plus-ról</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Üdvözöl a Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>A Lapsus bármely alkalmazásban kijavítja a rossz billentyűzetkiosztással gépelt szöveget. Ehhez látnia kell a lenyomott billentyűket.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Minden ezen a Macen történik. Amit begépelsz, azt sehová nem küldi el és nem menti.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>A jelszómezőket nem érinti: amíg jelszót gépelsz, a macOS elrejti a billentyűket a többi alkalmazás, így a Lapsus elől is.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>A macOS most két engedélyt kér: Bevitelfigyelés, hogy lássa a billentyűket, és Kisegítő lehetőségek, hogy begépelje a javított szöveget.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Tovább</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Most nem</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Újra</value>
+  </data>
 </root>

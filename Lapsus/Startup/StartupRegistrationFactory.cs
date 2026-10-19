@@ -11,7 +11,9 @@ internal static class StartupRegistrationFactory
                 ? new WindowsStoreStartupRegistration()
                 : new WindowsStartupRegistration();
         if (OperatingSystem.IsMacOS())
-            return new MacOsStartupRegistration();
+            return MacSandbox.IsSandboxed && OperatingSystem.IsMacOSVersionAtLeast(13)
+                ? new MacOsSandboxStartupRegistration()
+                : new MacOsStartupRegistration();
         if (OperatingSystem.IsLinux())
             return new LinuxStartupRegistration();
 

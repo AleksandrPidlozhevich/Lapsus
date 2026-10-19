@@ -30,6 +30,11 @@ public static class LicenseLinks
 
     public static string Seats => Page("pricing");
 
+    public static string Privacy => Page("privacy");
+
+    // Where an App Store subscription is cancelled or changed; the store manages it, not Lapsus.
+    public const string ManageSubscriptions = "https://apps.apple.com/account/subscriptions";
+
     private static readonly HashSet<string> SiteLocales =
     [
         "ar", "be", "bg", "de", "el", "en", "fr", "he", "ka", "ru", "sr", "uk"

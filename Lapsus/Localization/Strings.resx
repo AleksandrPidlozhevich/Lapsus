@@ -606,4 +606,88 @@
     <data name="Lic_Activating" xml:space="preserve">
     <value>Activating…</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Lapsus Plus trial: {0} days left</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: subscription active</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: yours for good</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Everything except neural correction and features added later is free for good. Lapsus Plus adds them.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Renews on {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Yearly, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Lifetime, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Restore purchases</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Manage subscription</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>The yearly subscription renews automatically unless you cancel it in your App Store account settings at least 24 hours before the period ends. Payment is charged to your Apple Account.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Terms of use</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Privacy policy</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>The App Store is not reachable right now. Try again later.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>The purchase is waiting for approval.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>The purchase did not go through: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>The Lapsus Plus trial has ended, so neural correction is off. Everything else keeps working.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Neural correction is part of Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>About Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Welcome to Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus fixes text typed in the wrong keyboard layout, in any app. To do that, it needs to see the keys you press.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Everything happens on this Mac. What you type is never sent anywhere and never saved.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Password fields are left alone: while you type in one, macOS hides the keys from other apps, Lapsus included.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>macOS will now ask for two permissions: Input Monitoring, to see the keys, and Accessibility, to type the corrected text.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Not now</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Try again</value>
+  </data>
 </root>

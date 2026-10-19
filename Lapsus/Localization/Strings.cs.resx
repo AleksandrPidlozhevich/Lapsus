@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Text licence</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Zkušební doba Lapsus Plus. Zbývá dní: {0}</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: předplatné je aktivní</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: zakoupeno natrvalo</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Vše kromě neuronové opravy a funkcí přidaných později je navždy zdarma. Lapsus Plus je přidává.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Obnoví se {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Ročně, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Natrvalo, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Obnovit nákupy</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Spravovat předplatné</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Roční předplatné se automaticky obnovuje, pokud ho nezrušíte v nastavení účtu App Store nejpozději 24 hodin před koncem období. Platba se strhává z vašeho Apple Account.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Podmínky použití</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Zásady ochrany soukromí</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>App Store teď není dostupný. Zkuste to později.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>Nákup čeká na schválení.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>Nákup neproběhl: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Zkušební doba Lapsus Plus skončila, neuronová oprava je proto vypnutá. Vše ostatní funguje dál.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Neuronová oprava je součástí Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>O Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Vítejte v Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus opravuje text napsaný ve špatném rozložení klávesnice, v libovolné aplikaci. K tomu potřebuje vidět stisky kláves.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Vše se děje na tomto Macu. To, co píšete, se nikam neodesílá ani neukládá.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Pole pro hesla zůstávají nedotčená: když do nich píšete, macOS skrývá klávesy před ostatními aplikacemi, včetně Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>macOS teď požádá o dvě oprávnění: „Sledování vstupu“, aby viděl klávesy, a „Zpřístupnění“, aby mohl psát opravený text.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Pokračovat</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Teď ne</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Zkusit znovu</value>
+  </data>
 </root>

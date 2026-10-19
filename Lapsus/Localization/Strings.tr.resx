@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Lisans metni</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Lapsus Plus denemesi: {0} gün kaldı</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: abonelik etkin</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: ömür boyu satın alındı</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Sinirsel düzeltme ve sonradan eklenecek özellikler dışında her şey sonsuza dek ücretsizdir. Lapsus Plus bunları ekler.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>{0} tarihinde yenilenir.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Yıllık, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Ömür boyu, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Satın alımları geri yükle</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Aboneliği yönet</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Yıllık abonelik, dönem bitmeden en az 24 saat önce App Store hesap ayarlarınızdan iptal etmediğiniz sürece otomatik olarak yenilenir. Ödeme Apple Account hesabınızdan alınır.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Kullanım koşulları</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Gizlilik politikası</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>App Store şu anda erişilemiyor. Daha sonra yeniden deneyin.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>Satın alma onay bekliyor.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>Satın alma tamamlanamadı: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Lapsus Plus denemesi sona erdi, bu yüzden sinirsel düzeltme kapalı. Geri kalan her şey çalışmaya devam ediyor.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Sinirsel düzeltme Lapsus Plus'ın bir parçasıdır.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>Lapsus Plus hakkında</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Lapsus'a hoş geldiniz</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus, yanlış klavye düzeninde yazılan metni her uygulamada düzeltir. Bunun için bastığınız tuşları görmesi gerekir.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Her şey bu Mac'te olur. Yazdıklarınız hiçbir yere gönderilmez ve kaydedilmez.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Parola alanlarına dokunulmaz: birine yazarken macOS tuşları Lapsus dahil diğer uygulamalardan gizler.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>macOS şimdi iki izin isteyecek: tuşları görmek için Girdi İzleme ve düzeltilmiş metni yazmak için Erişilebilirlik.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Devam</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Şimdi değil</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Tekrar dene</value>
+  </data>
 </root>

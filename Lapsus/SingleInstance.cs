@@ -1,4 +1,5 @@
 using Avalonia.Threading;
+using Lapsus.Startup;
 using System;
 using System.IO;
 using System.Threading;
@@ -27,6 +28,11 @@ internal sealed class SingleInstance : IDisposable
 
     public static SingleInstance? TryAcquire()
     {
+        // .NET keeps named mutexes under /tmp/.dotnet/shm, which the sandbox denies. Launch Services
+        // refuses a second copy instead (LSMultipleInstancesProhibited in the bundle's Info.plist).
+        if (MacSandbox.IsSandboxed)
+            return new SingleInstance(new Mutex(true), null);
+
         var mutex = new Mutex(true, MutexName, out var createdNew);
 
         if (!createdNew)
@@ -54,6 +60,10 @@ internal sealed class SingleInstance : IDisposable
 
     public void StartWatching(Action onShowRequested)
     {
+        // Nothing can signal: a second copy never starts in the sandbox (see TryAcquire).
+        if (MacSandbox.IsSandboxed)
+            return;
+
         var thread = new Thread(() =>
         {
             try

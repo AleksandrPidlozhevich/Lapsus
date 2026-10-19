@@ -63,6 +63,17 @@ jobs:
           --logger "trx"
           --results-directory TestResults
 
+      # The Mac App Store variant leaves Velopack out (#if !MAS); compile it so a change on the
+      # other side of that switch cannot break it unnoticed. After the tests: it recompiles
+      # Lapsus into the same obj folder the test build came from.
+      - name: Build (Mac App Store variant)
+        if: runner.os == 'macOS'
+        run: dotnet build Lapsus/Lapsus.csproj -c Release -p:MacAppStore=true -o ${{ runner.temp }}/mas-bin
+
+      - name: Build the StoreKit bridge
+        if: runner.os == 'macOS'
+        run: bash ./scripts/build-storekit-bridge.sh ${{ runner.temp }}/mas-bin
+
       # No threshold yet — the point is to start seeing the number.
       - name: Upload test results and coverage
         if: always()

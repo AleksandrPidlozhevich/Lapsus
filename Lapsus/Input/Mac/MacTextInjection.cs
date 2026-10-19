@@ -1,3 +1,4 @@
+using Lapsus.Startup;
 using System;
 using System.Runtime.Versioning;
 using System.Text;
@@ -26,6 +27,12 @@ internal static class MacTextInjection
 
     private static AccessibilityReplacement TryReplaceViaAccessibility(int count, string text)
     {
+        // The sandbox denies every call into another app's accessibility tree. The engine still
+        // decides between typing and pasting, and the key window's app answers that.
+        if (MacSandbox.IsSandboxed)
+            return new AccessibilityReplacement(
+                AxReplace.Miss, MacCaretProbe.PrepareWebEngine(MacFrontmost.ProcessId()));
+
         if (!MacAccessibility.IsProcessTrusted())
             return new AccessibilityReplacement(AxReplace.Miss, MacCaretProbe.WebEngineKind.None);
 

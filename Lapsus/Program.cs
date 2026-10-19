@@ -4,7 +4,9 @@ using Avalonia.Media.Fonts;
 using Lapsus.Startup;
 using System;
 using System.Runtime.Versioning;
+#if !MAS
 using Velopack;
+#endif
 
 namespace Lapsus;
 
@@ -15,6 +17,7 @@ internal sealed class Program
     {
         CrashLog.Install();
 
+#if !MAS
         // Must run before the single-instance mutex or UI: Velopack re-invokes this exe with hook args.
         var velopack = VelopackApp.Build();
 
@@ -22,6 +25,7 @@ internal sealed class Program
             ClearAutostartOnUninstall(velopack);
 
         velopack.Run();
+#endif
 
         using var instance = SingleInstance.TryAcquire();
         if (instance is null)
@@ -48,9 +52,11 @@ internal sealed class Program
         }
     }
 
+#if !MAS
     [SupportedOSPlatform("windows")]
     private static void ClearAutostartOnUninstall(VelopackApp velopack)
         => velopack.OnBeforeUninstallFastCallback(_ => new WindowsStartupRegistration().SetEnabled(false));
+#endif
 
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()

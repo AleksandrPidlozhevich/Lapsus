@@ -17,6 +17,12 @@ public sealed class SettingsStore
         _path = Path.Combine(dir, "settings.json");
     }
 
+    // Tests: a file of their own instead of the user's real settings.
+    internal SettingsStore(string path)
+    {
+        _path = path;
+    }
+
     public AppSettings Load()
     {
         try

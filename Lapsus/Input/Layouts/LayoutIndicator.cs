@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using Lapsus.Startup;
 using Lapsus.Views;
 using System;
 using System.Globalization;
@@ -51,7 +52,9 @@ public sealed class LayoutIndicator : IDisposable
         _winEventProc = OnHostMoved;
     }
 
-    public static bool IsSupported => OperatingSystem.IsWindows() || OperatingSystem.IsMacOS();
+    // The sandbox has no Accessibility, and without it there is no caret to place the badge at.
+    public static bool IsSupported =>
+        OperatingSystem.IsWindows() || (OperatingSystem.IsMacOS() && !MacSandbox.IsSandboxed);
 
     public bool Enabled
     {

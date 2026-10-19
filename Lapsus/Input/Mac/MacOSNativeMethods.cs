@@ -383,6 +383,16 @@ internal static class MacOSNativeMethods
     [return: MarshalAs(UnmanagedType.I1)]
     public static extern bool AXIsProcessTrustedWithOptions(IntPtr options);
 
+    // The permission to post keyboard events, on its own. A sandboxed app can hold it, though not
+    // Accessibility; System Settings lists both under Accessibility.
+    [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
+    [return: MarshalAs(UnmanagedType.I1)]
+    public static extern bool CGPreflightPostEventAccess();
+
+    [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
+    [return: MarshalAs(UnmanagedType.I1)]
+    public static extern bool CGRequestPostEventAccess();
+
     public const uint HidRequestTypeListenEvent = 0;
     public const uint HidAccessTypeGranted = 0;
 

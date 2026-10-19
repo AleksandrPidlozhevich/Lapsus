@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Textul licenței</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Perioada de probă Lapsus Plus. Zile rămase: {0}</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: abonament activ</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: cumpărat pe viață</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Totul, în afară de corectarea neuronală și funcțiile adăugate mai târziu, este gratuit pentru totdeauna. Lapsus Plus le adaugă.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Se reînnoiește pe {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Anual, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Pe viață, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Restaurează achizițiile</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Gestionează abonamentul</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Abonamentul anual se reînnoiește automat, cu excepția cazului în care îl anulați în setările contului App Store cu cel puțin 24 de ore înainte de sfârșitul perioadei. Plata se încasează din Apple Account.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Condiții de utilizare</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Politica de confidențialitate</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>App Store nu este accesibil acum. Încercați mai târziu.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>Achiziția așteaptă aprobarea.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>Achiziția nu a reușit: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Perioada de probă Lapsus Plus s-a încheiat, așa că corectarea neuronală este dezactivată. Restul funcționează ca înainte.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Corectarea neuronală face parte din Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>Despre Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Bun venit în Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus corectează textul tastat cu aranjamentul de tastatură greșit, în orice aplicație. Pentru asta trebuie să vadă tastele pe care le apăsați.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Totul se întâmplă pe acest Mac. Ce tastați nu este trimis nicăieri și nu este salvat.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Câmpurile pentru parole nu sunt atinse: cât timp tastați într-unul, macOS ascunde tastele de celelalte aplicații, inclusiv de Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>Acum macOS va cere două permisiuni: Monitorizarea introducerii, pentru a vedea tastele, și Accesibilitate, pentru a tasta textul corectat.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Continuă</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Nu acum</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Încearcă din nou</value>
+  </data>
 </root>

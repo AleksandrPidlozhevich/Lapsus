@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Licenstext</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Provperiod för Lapsus Plus: {0} dagar kvar</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: prenumeration aktiv</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: köpt för alltid</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Allt utom neural rättning och funktioner som tillkommer senare är gratis för alltid. Lapsus Plus lägger till dem.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Förnyas den {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Årsvis, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>För alltid, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Återställ köp</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Hantera prenumeration</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Årsprenumerationen förnyas automatiskt om du inte säger upp den i inställningarna för ditt App Store-konto senast 24 timmar innan perioden tar slut. Betalningen dras från ditt Apple Account.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Användarvillkor</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Integritetspolicy</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>App Store går inte att nå just nu. Försök igen senare.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>Köpet väntar på godkännande.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>Köpet gick inte igenom: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Provperioden för Lapsus Plus är slut, så neural rättning är avstängd. Allt annat fungerar som förut.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Neural rättning ingår i Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>Om Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Välkommen till Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus rättar text som skrivits med fel tangentbordslayout, i alla appar. För det behöver den se vilka tangenter du trycker på.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Allt sker på den här Macen. Det du skriver skickas ingenstans och sparas inte.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Lösenordsfält lämnas i fred: medan du skriver i ett döljer macOS tangenterna för andra appar, även Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>macOS frågar nu efter två behörigheter: Inmatningsövervakning, för att se tangenterna, och Hjälpmedel, för att skriva den rättade texten.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Fortsätt</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Inte nu</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Försök igen</value>
+  </data>
 </root>

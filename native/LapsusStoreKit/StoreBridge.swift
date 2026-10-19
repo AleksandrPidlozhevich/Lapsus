@@ -1,0 +1,117 @@
+// StoreKit 2 for the Mac App Store edition of Lapsus. StoreKit 2 exists only in Swift, so this
+// small library gives .NET a C entry point per call (MacStoreKitPurchases.cs P/Invokes them).
+// Every call answers asynchronously through the callback with the caller's token and one JSON
+// object. StoreKit verifies each transaction's signature itself; only verified ones count.
+//
+// Built by scripts/build-storekit-bridge.sh into libLapsusStoreKit.dylib.
+
+import Foundation
+import StoreKit
+
+public typealias LapsusReply = @convention(c) (Int64, UnsafePointer<CChar>?) -> Void
+
+private func reply(_ callback: LapsusReply, _ token: Int64, _ object: [String: Any]) {
+    let data = (try? JSONSerialization.data(withJSONObject: object)) ?? Data("{}".utf8)
+    String(decoding: data, as: UTF8.self).withCString { callback(token, $0) }
+}
+
+private func ownedProducts() async -> [[String: Any]] {
+    var owned: [[String: Any]] = []
+    for await result in Transaction.currentEntitlements {
+        guard case .verified(let transaction) = result, transaction.revocationDate == nil else { continue }
+        var item: [String: Any] = ["productId": transaction.productID]
+        if let expires = transaction.expirationDate {
+            item["expires"] = expires.timeIntervalSince1970
+        }
+        owned.append(item)
+    }
+    return owned
+}
+
+@_cdecl("lapsus_store_owned")
+public func lapsusStoreOwned(_ token: Int64, _ callback: LapsusReply) {
+    Task {
+        reply(callback, token, ["owned": await ownedProducts()])
+    }
+}
+
+@_cdecl("lapsus_store_products")
+public func lapsusStoreProducts(_ token: Int64, _ ids: UnsafePointer<CChar>, _ callback: LapsusReply) {
+    let wanted = String(cString: ids).split(separator: ",").map(String.init)
+    Task {
+        do {
+            let products = try await Product.products(for: wanted)
+            reply(callback, token, ["products": products.map { ["id": $0.id, "price": $0.displayPrice] }])
+        } catch {
+            reply(callback, token, ["error": error.localizedDescription])
+        }
+    }
+}
+
+@_cdecl("lapsus_store_purchase")
+public func lapsusStorePurchase(_ token: Int64, _ id: UnsafePointer<CChar>, _ callback: LapsusReply) {
+    let productId = String(cString: id)
+    Task {
+        do {
+            guard let product = try await Product.products(for: [productId]).first else {
+                reply(callback, token, ["status": "unavailable"])
+                return
+            }
+
+            switch try await product.purchase() {
+            case .success(let verification):
+                guard case .verified(let transaction) = verification else {
+                    reply(callback, token, ["status": "unverified"])
+                    return
+                }
+                await transaction.finish()
+                reply(callback, token, ["status": "purchased"])
+            case .userCancelled:
+                reply(callback, token, ["status": "cancelled"])
+            case .pending:
+                reply(callback, token, ["status": "pending"])
+            @unknown default:
+                reply(callback, token, ["status": "failed"])
+            }
+        } catch {
+            reply(callback, token, ["status": "failed", "error": error.localizedDescription])
+        }
+    }
+}
+
+// "Restore purchases": asks the App Store for this Apple Account's transactions again. It may show
+// the sign-in sheet, which is why it only runs when the user presses the button.
+@_cdecl("lapsus_store_restore")
+public func lapsusStoreRestore(_ token: Int64, _ callback: LapsusReply) {
+    Task {
+        do {
+            try await AppStore.sync()
+        } catch {
+            reply(callback, token, ["error": error.localizedDescription])
+            return
+        }
+        reply(callback, token, ["owned": await ownedProducts()])
+    }
+}
+
+private let watchLock = NSLock()
+private var watching = false
+
+// Renewals, refunds, Ask to Buy approvals and purchases made on another Mac arrive here while the
+// app runs. Each one is finished and reported with token 0; the app then asks for what is owned.
+@_cdecl("lapsus_store_watch")
+public func lapsusStoreWatch(_ callback: LapsusReply) {
+    watchLock.lock()
+    defer { watchLock.unlock() }
+    if watching { return }
+    watching = true
+
+    Task.detached {
+        for await result in Transaction.updates {
+            if case .verified(let transaction) = result {
+                await transaction.finish()
+            }
+            reply(callback, 0, ["changed": true])
+        }
+    }
+}

@@ -1,3 +1,4 @@
+using Lapsus.Startup;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
@@ -131,7 +132,8 @@ internal static class MacCaretProbe
 
         var path = MacProcessNames.ExecutablePath(pid);
         var kind = WebEngineKindOf(path);
-        if (kind == WebEngineKind.None)
+        // Switching on the engine's accessibility tree only helps the paths the sandbox denies.
+        if (kind == WebEngineKind.None || MacSandbox.IsSandboxed)
             return kind;
 
         lock (EnhancedGate)

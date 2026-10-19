@@ -1,3 +1,4 @@
+using Lapsus.Startup;
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
@@ -125,6 +126,10 @@ internal static class ManagedDeviceProbe
     [SupportedOSPlatform("macos")]
     private static DeviceOwnership DetectMacOs()
     {
+        // The sandbox cannot start profiles or dsconfigad. Unknown keeps the reminder quiet.
+        if (MacSandbox.IsSandboxed)
+            return DeviceOwnership.Unknown;
+
         var enrollment = RunTool("/usr/bin/profiles", "status -type enrollment");
         if (enrollment is not null && enrollment.Contains(": Yes", StringComparison.OrdinalIgnoreCase))
             return DeviceOwnership.Managed;

@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>נוסח הרישיון</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>תקופת הניסיון של Lapsus Plus: נותרו {0} ימים</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: המינוי פעיל</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: נרכש לתמיד</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>הכול, מלבד התיקון הנוירוני ותכונות שיתווספו בהמשך, חינמי לתמיד. Lapsus Plus מוסיף אותם.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>יחודש ב־{0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>שנתי, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>לתמיד, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>שחזור רכישות</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>ניהול המינוי</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>המינוי השנתי מתחדש אוטומטית, אלא אם תבטלו אותו בהגדרות חשבון ה־App Store לפחות 24 שעות לפני סוף התקופה. התשלום מחויב מה־Apple Account שלכם.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>תנאי שימוש</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>מדיניות פרטיות</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>ה־App Store אינו זמין כרגע. נסו שוב מאוחר יותר.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>הרכישה ממתינה לאישור.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>הרכישה לא הושלמה: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>תקופת הניסיון של Lapsus Plus הסתיימה, ולכן התיקון הנוירוני כבוי. כל השאר ממשיך לעבוד.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>התיקון הנוירוני הוא חלק מ־Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>אודות Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>ברוכים הבאים ל־Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus מתקן טקסט שהוקלד בפריסת מקלדת שגויה, בכל אפליקציה. לשם כך הוא צריך לראות את המקשים שאתם לוחצים.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>הכול קורה במחשב Mac הזה. מה שאתם מקלידים לעולם לא נשלח לשום מקום ולא נשמר.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>שדות סיסמה נשארים מחוץ לתחום: בזמן ההקלדה בהם macOS מסתיר את המקשים מאפליקציות אחרות, כולל Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>כעת macOS יבקש שתי הרשאות: ניטור קלט, כדי לראות את המקשים, ונגישות, כדי להקליד את הטקסט המתוקן.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>המשך</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>לא עכשיו</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>נסו שוב</value>
+  </data>
 </root>

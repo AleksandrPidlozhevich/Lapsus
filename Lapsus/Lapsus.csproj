@@ -25,6 +25,15 @@
         <NSInputMonitoringUsageDescription>Lapsus needs Input Monitoring to receive keystrokes system-wide via CGEventTap.</NSInputMonitoringUsageDescription>
     </PropertyGroup>
 
+    <!--
+      Mac App Store build (scripts/package-mas.sh passes -p:MacAppStore=true). The store updates the
+      app itself (guideline 2.4.5(vii)), so the self-updater is not shipped; everything else that
+      differs is decided at run time by MacSandbox.IsSandboxed.
+    -->
+    <PropertyGroup Condition="'$(MacAppStore)' == 'true'">
+        <DefineConstants>$(DefineConstants);MAS</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
         <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
@@ -40,7 +49,7 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
         <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="12.0.0.17" />
         <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.12" />
-        <PackageReference Include="Velopack" Version="1.2.161" />
+        <PackageReference Include="Velopack" Version="1.2.161" Condition="'$(MacAppStore)' != 'true'" />
     </ItemGroup>
 
     <!-- The ONNX Runtime GenAI package, and which one each OS takes, lives in Lapsus.Neural. -->

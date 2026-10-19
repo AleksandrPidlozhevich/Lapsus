@@ -28,32 +28,16 @@ fi
 BUILD_DIR="$ROOT/build/macos"
 PUBLISH_DIR="$BUILD_DIR/publish-$RID"
 OUTPUT_DIR="$BUILD_DIR/Releases"
-ICONSET="$BUILD_DIR/AppIcon.iconset"
 ICNS="$BUILD_DIR/AppIcon.icns"
 
-rm -rf "$PUBLISH_DIR" "$ICONSET"
+rm -rf "$PUBLISH_DIR"
 
 echo "==> Publishing ($RID, v$VERSION)"
 dotnet publish "$ROOT/Lapsus/Lapsus.csproj" -c Release -r "$RID" --self-contained \
   -p:PublishSingleFile=false -o "$PUBLISH_DIR"
 
 echo "==> Generating icon from Assets/icon-light.svg"
-mkdir -p "$ICONSET"
-BASE_PNG="$BUILD_DIR/icon-1024.png"
-SVG="$ROOT/Lapsus/Assets/icon-light.svg"
-# Rasterizing the SVG's rounded square edge-to-edge at the full 1024 canvas made the Dock icon look
-# oversized next to every other app: macOS's own icon grid expects ~80% content with transparent
-# margin around it (it adds its own shadow/mask in that margin). Render smaller and pad it back out.
-CONTENT_PNG="$BUILD_DIR/icon-content.png"
-sips -s format png "$SVG" --out "$CONTENT_PNG" --resampleWidth 824 >/dev/null
-sips -p 1024 1024 "$CONTENT_PNG" --out "$BASE_PNG" >/dev/null
-rm -f "$CONTENT_PNG"
-for size in 16 32 128 256 512; do
-  sips -z "$size" "$size" "$BASE_PNG" --out "$ICONSET/icon_${size}x${size}.png" >/dev/null
-  double=$((size * 2))
-  sips -z "$double" "$double" "$BASE_PNG" --out "$ICONSET/icon_${size}x${size}@2x.png" >/dev/null
-done
-iconutil -c icns "$ICONSET" -o "$ICNS"
+"$ROOT/scripts/make-macos-icon.sh" "$BUILD_DIR" "$ICNS"
 
 echo "==> vpk pack"
 # "-" binds the signature to $BUNDLE_ID; otherwise macOS sees "apphost" and an Accessibility

@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Κείμενο άδειας</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Δοκιμή του Lapsus Plus: απομένουν {0} ημέρες</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: η συνδρομή είναι ενεργή</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: αγορά για πάντα</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Όλα, εκτός από τη νευρωνική διόρθωση και τις λειτουργίες που θα προστεθούν αργότερα, είναι δωρεάν για πάντα. Το Lapsus Plus τις προσθέτει.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Ανανεώνεται στις {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Ετήσια, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Για πάντα, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Επαναφορά αγορών</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Διαχείριση συνδρομής</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Η ετήσια συνδρομή ανανεώνεται αυτόματα, εκτός αν την ακυρώσετε στις ρυθμίσεις του λογαριασμού σας στο App Store τουλάχιστον 24 ώρες πριν από τη λήξη της περιόδου. Η χρέωση γίνεται στον Apple Account σας.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Όροι χρήσης</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Πολιτική απορρήτου</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>Το App Store δεν είναι διαθέσιμο αυτή τη στιγμή. Δοκιμάστε αργότερα.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>Η αγορά περιμένει έγκριση.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>Η αγορά δεν ολοκληρώθηκε: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Η δοκιμή του Lapsus Plus έληξε, οπότε η νευρωνική διόρθωση είναι απενεργοποιημένη. Όλα τα άλλα λειτουργούν κανονικά.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Η νευρωνική διόρθωση είναι μέρος του Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>Σχετικά με το Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Καλώς ήρθατε στο Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Το Lapsus διορθώνει κείμενο που πληκτρολογήθηκε με λάθος διάταξη πληκτρολογίου, σε οποιαδήποτε εφαρμογή. Γι' αυτό χρειάζεται να βλέπει τα πλήκτρα που πατάτε.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Όλα γίνονται σε αυτό το Mac. Ό,τι πληκτρολογείτε δεν αποστέλλεται πουθενά και δεν αποθηκεύεται.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Τα πεδία κωδικών μένουν ανέγγιχτα: όσο πληκτρολογείτε σε ένα, το macOS κρύβει τα πλήκτρα από τις άλλες εφαρμογές, και από το Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>Τώρα το macOS θα ζητήσει δύο άδειες: Παρακολούθηση εισόδου, για να βλέπει τα πλήκτρα, και Προσβασιμότητα, για να πληκτρολογεί το διορθωμένο κείμενο.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Συνέχεια</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Όχι τώρα</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Δοκιμή ξανά</value>
+  </data>
 </root>

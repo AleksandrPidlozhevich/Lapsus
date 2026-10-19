@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>ლიცენზიის ტექსტი</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Lapsus Plus-ის საცდელი პერიოდი: დარჩა {0} დღე</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: გამოწერა აქტიურია</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: შეძენილია სამუდამოდ</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>ყველაფერი, გარდა ნეირონული გასწორებისა და მოგვიანებით დამატებული ფუნქციებისა, სამუდამოდ უფასოა. Lapsus Plus მათ ამატებს.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>განახლდება {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>წლიური, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>სამუდამოდ, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>შესყიდვების აღდგენა</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>გამოწერის მართვა</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>წლიური გამოწერა ავტომატურად განახლდება, თუ მას არ გააუქმებთ App Store-ის ანგარიშის პარამეტრებში პერიოდის დასრულებამდე არანაკლებ 24 საათით ადრე. გადახდა ჩამოიჭრება თქვენი Apple Account-იდან.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>გამოყენების პირობები</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>კონფიდენციალურობის პოლიტიკა</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>App Store ახლა მიუწვდომელია. სცადეთ მოგვიანებით.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>შესყიდვა დადასტურებას ელოდება.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>შესყიდვა ვერ შესრულდა: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Lapsus Plus-ის საცდელი პერიოდი დასრულდა, ამიტომ ნეირონული გასწორება გამორთულია. დანარჩენი ყველაფერი ისევ მუშაობს.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>ნეირონული გასწორება Lapsus Plus-ის ნაწილია.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>Lapsus Plus-ის შესახებ</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>კეთილი იყოს თქვენი მობრძანება Lapsus-ში</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus ასწორებს არასწორ კლავიატურის განლაგებაზე აკრეფილ ტექსტს ნებისმიერ აპში. ამისთვის მას სჭირდება დაჭერილი კლავიშების დანახვა.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>ყველაფერი ამ Mac-ზე ხდება. რასაც კრეფთ, არსად იგზავნება და არ ინახება.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>პაროლის ველებს არ ეხება: სანამ პაროლს კრეფთ, macOS კლავიშებს მალავს სხვა აპებისგან, მათ შორის Lapsus-ისგანაც.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>ახლა macOS ორ ნებართვას მოითხოვს: შეყვანის მონიტორინგს — კლავიშების დასანახად, და მისაწვდომობას — გასწორებული ტექსტის ასაკრეფად.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>გაგრძელება</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>ახლა არა</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>ხელახლა ცდა</value>
+  </data>
 </root>

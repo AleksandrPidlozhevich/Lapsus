@@ -145,6 +145,72 @@ Settings → Apps before installing Lapsus from the Store — the two cannot sit
 A Store release needs a new `VERSION` like any other — the Store rejects a package whose
 version is not higher than the one already published.
 
+## Mac App Store
+
+The App Store takes a sandboxed `.pkg` instead of the Velopack bundle. `scripts/package-mas.sh`
+publishes with `-p:MacAppStore=true` (Velopack is left out: the store updates the app), builds the
+`.app` itself, signs it with `Lapsus/Packaging/Mas/Lapsus.entitlements` and wraps it with
+`productbuild`. It builds Apple silicon only (`osx-arm64`).
+
+What it needs, all from the Apple Developer site:
+
+- an **Apple Distribution** certificate and a **Mac Installer Distribution** certificate in your
+  login keychain;
+- a **Mac App Store** provisioning profile for the App ID `com.lapsus.app`;
+- the app's record in App Store Connect, under the same bundle id.
+
+```
+export LAPSUS_MAS_APP_IDENTITY="Apple Distribution: …"
+export LAPSUS_MAS_INSTALLER_IDENTITY="3rd Party Mac Developer Installer: …"
+export LAPSUS_MAS_PROFILE=~/Downloads/Lapsus_Mac_App_Store.provisionprofile
+scripts/package-mas.sh
+```
+The result is `build/mas/Lapsus-<version>-<build>.pkg`; upload it with Transporter. The build
+number (`CFBundleVersion`) is the UTC time of the build, `YYYYMMDD.HHMM`, so every upload gets a new
+and higher one; App Store Connect refuses a repeated number and anything with more than three parts.
+`LAPSUS_MAS_BUILD` overrides it.
+
+### Lapsus Plus in App Store Connect
+
+Neural correction (and features added after it) is paid for in this edition only; see
+`COMMERCIAL-USE.md`. The app asks the App Store for exactly these two products
+(`Lapsus.Core/Licensing/StoreAccess.cs`), so create them with these ids before the first upload:
+
+| Product id | Type | Notes |
+|---|---|---|
+| `com.lapsus.app.plus.yearly` | Auto-renewable subscription, 1 year | its own subscription group; Family Sharing on |
+| `com.lapsus.app.plus.lifetime` | Non-consumable | Family Sharing on |
+
+Do **not** add an App Store introductory offer: the 60-day trial is counted by the app itself, so
+nobody has to start a subscription to try it. The purchase needs the Paid Apps agreement, bank and
+tax details in App Store Connect. Purchases cannot be tried in the `--test` copy below (the App
+Store does not know its bundle id); use a sandbox tester account with a TestFlight build.
+
+The StoreKit 2 bridge is Swift (`native/LapsusStoreKit/StoreBridge.swift`); the script compiles it
+with `scripts/build-storekit-bridge.sh`, so Xcode has to be installed.
+
+A store-signed app does not run outside the store. To try the sandboxed build on your own Mac,
+quit Lapsus and run:
+```
+LAPSUS_MAC_APP_IDENTITY="Developer ID Application: …" scripts/package-mas.sh --test
+open "build/mas-test/Lapsus Sandbox.app"
+```
+It is a separate app, "Lapsus Sandbox" (`com.lapsus.app.sandboxtest`), so it needs its own
+Accessibility and Input Monitoring grants and keeps its settings in
+`~/Library/Containers/com.lapsus.app.sandboxtest/`. Without `LAPSUS_MAC_APP_IDENTITY` it is signed
+ad hoc and macOS asks for the grants again after every rebuild.
+
+What the sandboxed build does differently, all decided at run time by `MacSandbox.IsSandboxed`:
+
+- no Accessibility API: text is replaced by backspacing and retyping, or by pasting in browsers
+  and Electron apps; the layout badge at the caret is not offered;
+- "Run at startup" is a login item (`SMAppService`, System Settings → General → Login Items),
+  off by default;
+- no update button;
+- the License tab sells Lapsus Plus through the App Store instead of taking keys; no links to the
+  website's prices or to Ko-fi (guideline 3.1.1);
+- one copy at a time through `LSMultipleInstancesProhibited`; opening the app again shows Settings.
+
 ## Issuing license keys
 
 Keys and activation tokens are ECDSA P-256 signatures, verified offline against the public key

@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Lapsus.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="360"
+        x:Class="Lapsus.Views.OnboardingWindow"
+        x:DataType="vm:OnboardingViewModel"
+        Title="{Binding L[Onb_Title]}"
+        FlowDirection="{Binding FlowDirection}"
+        Width="480"
+        SizeToContent="Height"
+        CanResize="False"
+        ShowInTaskbar="True"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Styles>
+        <Style Selector="Button.notice">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource LapsusNoticeInkBrush}" />
+        </Style>
+        <Style Selector="Button.notice /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource LapsusAccentBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource LapsusAccentBrush}" />
+        </Style>
+        <Style Selector="TextBlock.point">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="TextBlock.bullet">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="{DynamicResource LapsusAccentBrush}" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+        </Style>
+    </Window.Styles>
+
+    <Border Background="{DynamicResource LapsusSurfaceBrush}" Padding="24"
+            BorderBrush="{DynamicResource LapsusAccentBrush}" BorderThickness="0,3,0,0">
+        <StackPanel Spacing="14">
+            <TextBlock Text="{Binding L[Onb_Title]}" FontWeight="SemiBold" FontSize="18" TextWrapping="Wrap" />
+            <TextBlock Classes="point" Text="{Binding L[Onb_Intro]}" />
+
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                <TextBlock Grid.Row="0" Grid.Column="0" Classes="bullet" Text="●" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Local]}" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Classes="bullet" Text="●" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Passwords]}" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Classes="bullet" Text="●" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Permissions]}" />
+            </Grid>
+
+            <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8" Margin="0,6,0,0">
+                <Button Classes="notice" Content="{Binding L[Onb_Continue]}" Command="{Binding ContinueCommand}"
+                        IsDefault="True" />
+                <Button Content="{Binding L[Onb_Later]}" Command="{Binding LaterCommand}" />
+            </WrapPanel>
+        </StackPanel>
+    </Border>
+</Window>

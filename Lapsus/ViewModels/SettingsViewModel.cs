@@ -51,7 +51,7 @@ public partial class SettingsViewModel : ViewModelBase
         IInputBackend backend, SettingsStore store, AppSettings settings, bool supported,
         DictionaryStore dictionaryStore, ModelStore modelStore, Func<Task> rebuildBrain,
         WordExceptions exceptions, AppExclusions excludedApps, LayoutIndicator indicator,
-        AppUpdater updater, LicenseViewModel license)
+        AppUpdater updater, LicenseViewModel license, StoreViewModel storeAccess)
     {
         _backend = backend;
         _updater = updater;
@@ -82,7 +82,14 @@ public partial class SettingsViewModel : ViewModelBase
         _autoFixTypos = settings.AutoFixTypos;
         _switchSystemLayout = settings.SwitchSystemLayout;
         _runAtStartup = settings.RunAtStartup;
-        _neuralCorrectionEnabled = settings.NeuralCorrectionEnabled;
+        // The App Store edition's trial may have ended while the app was closed.
+        _neuralCorrectionEnabled = settings.NeuralCorrectionEnabled && storeAccess.PaidFeatures;
+        if (_neuralCorrectionEnabled != settings.NeuralCorrectionEnabled)
+        {
+            settings.NeuralCorrectionEnabled = false;
+            store.Save(settings);
+        }
+
         _plainLayoutSwitch = settings.PlainLayoutSwitch;
         _selectedInterfaceLanguage = Languages.FirstOrDefault(l => l.Code == settings.InterfaceLanguage)
                                      ?? Languages[0];
@@ -124,11 +131,41 @@ public partial class SettingsViewModel : ViewModelBase
         };
 
         License = license;
+        Store = storeAccess;
+        Store.AccessChanged += (_, _) => OnStoreAccessChanged();
 
         BuildPreferences(settings.PreferredLayout);
 
-        ApplyEnabled();
+        // macOS asks for Input Monitoring and Accessibility the moment capture starts. A first launch
+        // explains why before that (App Store guideline 2.5.14), and capture waits for the answer.
+        // A Mac that already granted both has nothing to explain.
+        if (OperatingSystem.IsMacOS() && !settings.OnboardingDone)
+        {
+            OnboardingPending = !SystemPermissions.AccessibilityGranted || !SystemPermissions.InputMonitoringGranted;
+            if (!OnboardingPending)
+            {
+                settings.OnboardingDone = true;
+                store.Save(settings);
+            }
+        }
+
+        if (!OnboardingPending)
+            ApplyEnabled();
         ApplyRunAtStartup();
+    }
+
+    public bool OnboardingPending { get; private set; }
+
+    // The user read the explanation and chose to go on: now macOS may ask.
+    public void CompleteOnboarding()
+    {
+        if (!OnboardingPending)
+            return;
+
+        OnboardingPending = false;
+        _settings.OnboardingDone = true;
+        _store.Save(_settings);
+        ApplyEnabled();
     }
 
     public AppSettings SettingsSnapshot()
@@ -205,6 +242,9 @@ public partial class SettingsViewModel : ViewModelBase
 
     private void EnableNeuralForInstalledModel()
     {
+        if (NeuralLocked)
+            return;
+
 
         _skipBrainRebuild = true;
         try
@@ -218,6 +258,21 @@ public partial class SettingsViewModel : ViewModelBase
     }
 
     [ObservableProperty] private bool _neuralCorrectionEnabled;
+
+    public StoreViewModel Store { get; }
+
+    // Only in the App Store edition, after the trial, without a subscription or lifetime purchase.
+    public bool NeuralLocked => !Store.PaidFeatures;
+
+    private void OnStoreAccessChanged()
+    {
+        OnPropertyChanged(nameof(NeuralLocked));
+        if (!NeuralLocked || !NeuralCorrectionEnabled)
+            return;
+
+        NeuralCorrectionEnabled = false;
+        StatusText = L["Store_TrialEnded"];
+    }
 
     [ObservableProperty] private bool _plainLayoutSwitch;
 
@@ -909,7 +964,10 @@ public partial class SettingsViewModel : ViewModelBase
         {
             _startup.SetEnabled(RunAtStartup);
 
-            if (PackageIdentity.IsPackaged && _startup.IsEnabled is var actual && actual != RunAtStartup)
+            // Store builds: the user can switch the item off in the system's own settings, and
+            // enabling it may still be waiting for their approval there.
+            if ((PackageIdentity.IsPackaged || MacSandbox.IsSandboxed)
+                && _startup.IsEnabled is var actual && actual != RunAtStartup)
                 Dispatcher.UIThread.Post(() => RunAtStartup = actual);
         }
         catch (Exception ex)

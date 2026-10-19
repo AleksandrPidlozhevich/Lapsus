@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Texto da licença</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Teste do Lapsus Plus: faltam {0} dias</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: assinatura ativa</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: comprado para sempre</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Tudo, exceto a correção neuronal e as funções adicionadas mais tarde, é gratuito para sempre. O Lapsus Plus acrescenta-as.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Renova em {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Anual, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Para sempre, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Restaurar compras</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Gerir assinatura</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>A assinatura anual renova-se automaticamente, a menos que a cancele nas definições da sua conta da App Store pelo menos 24 horas antes do fim do período. O pagamento é cobrado na sua Apple Account.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Termos de utilização</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Política de privacidade</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>A App Store não está acessível neste momento. Tente mais tarde.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>A compra aguarda aprovação.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>A compra não foi concluída: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>O período de teste do Lapsus Plus terminou, por isso a correção neuronal está desligada. Tudo o resto continua a funcionar.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>A correção neuronal faz parte do Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>Sobre o Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Bem-vindo ao Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>O Lapsus corrige texto escrito com o esquema de teclado errado, em qualquer app. Para isso, precisa de ver as teclas que prime.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Tudo acontece neste Mac. O que escreve nunca é enviado para lado nenhum nem guardado.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Os campos de palavra-passe não são tocados: enquanto escreve num deles, o macOS esconde as teclas das outras apps, incluindo o Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>O macOS vai agora pedir duas permissões: Monitorização de entrada, para ver as teclas, e Acessibilidade, para escrever o texto corrigido.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Agora não</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Tentar novamente</value>
+  </data>
 </root>

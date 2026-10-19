@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Licentietekst</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Lapsus Plus uitproberen: nog {0} dagen</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: abonnement actief</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: voorgoed gekocht</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Alles behalve neurale correctie en later toegevoegde functies blijft voorgoed gratis. Lapsus Plus voegt ze toe.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Wordt verlengd op {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Per jaar, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Voorgoed, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Aankopen herstellen</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Abonnement beheren</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Het jaarabonnement wordt automatisch verlengd, tenzij je het uiterlijk 24 uur voor het einde van de periode opzegt in de instellingen van je App Store-account. De betaling wordt via je Apple Account afgerekend.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Gebruiksvoorwaarden</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Privacybeleid</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>De App Store is nu niet bereikbaar. Probeer het later opnieuw.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>De aankoop wacht op goedkeuring.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>De aankoop is niet gelukt: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>De proefperiode van Lapsus Plus is voorbij, dus neurale correctie staat uit. Al het andere blijft werken.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Neurale correctie hoort bij Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>Over Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Welkom bij Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus verbetert tekst die in de verkeerde toetsenbordindeling is getypt, in elke app. Daarvoor moet het de toetsen zien die je indrukt.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Alles gebeurt op deze Mac. Wat je typt, wordt nergens heen gestuurd en niet bewaard.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Wachtwoordvelden blijven onaangeroerd: terwijl je erin typt, verbergt macOS de toetsen voor andere apps, ook voor Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>macOS vraagt nu om twee machtigingen: Invoermonitoring, om de toetsen te zien, en Toegankelijkheid, om de verbeterde tekst te typen.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Doorgaan</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Niet nu</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Opnieuw proberen</value>
+  </data>
 </root>

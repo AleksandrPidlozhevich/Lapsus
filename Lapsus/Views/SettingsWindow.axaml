@@ -29,6 +29,7 @@
         <StreamGeometry x:Key="TabIconApps">M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z</StreamGeometry>
         <StreamGeometry x:Key="TabIconAi">M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z</StreamGeometry>
 
+        <StreamGeometry x:Key="TabIconPlus">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z</StreamGeometry>
         <StreamGeometry x:Key="TabIconLicense">M12.65 10A5.99 5.99 0 0 0 7 6a6 6 0 0 0 0 12 5.99 5.99 0 0 0 5.65-4H17v4h4v-4h2v-4H12.65zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z</StreamGeometry>
 
         <StreamGeometry x:Key="TabIconHotkeys">M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z</StreamGeometry>
@@ -848,9 +849,19 @@
                                     <TextBlock Grid.Column="0" Classes="sectionTitle" Text="{Binding L[Neural_Toggle]}"
                                                VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
                                     <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsEnabled="{Binding !NeuralLocked}"
                                                   IsChecked="{Binding NeuralCorrectionEnabled}" />
                                 </Grid>
                                 <TextBlock Classes="hint" Text="{Binding L[Neural_Hint]}" />
+                                <TextBlock Classes="hint" Text="{Binding Store.StatusTitle}"
+                                           IsVisible="{Binding Store.IsTrial}" />
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8"
+                                           IsVisible="{Binding NeuralLocked}">
+                                    <TextBlock Classes="hint" VerticalAlignment="Center"
+                                               Text="{Binding L[Neural_Locked]}" />
+                                    <Button Content="{Binding L[Neural_Locked_Button]}"
+                                            Command="{Binding License.OpenLicenseSettingsCommand}" />
+                                </WrapPanel>
 
                                 <Grid IsVisible="{Binding NeuralCorrectionEnabled}"
                                       IsEnabled="{Binding IsSupported}"
@@ -895,12 +906,14 @@
                                             ToolTip.Tip="{Binding L[Model_AddTooltip]}" />
 
                                     <TextBox Grid.Row="4" Grid.Column="0" Margin="0,0,0,8"
+                                             IsVisible="{Binding Models.HubSearchOffered}"
                                              Text="{Binding Models.SearchQuery}"
                                              PlaceholderText="{Binding L[Model_SearchPlaceholder]}"
                                              HorizontalAlignment="Stretch"
                                              IsEnabled="{Binding !Models.Busy}" />
                                     <Button Grid.Row="4" Grid.Column="1" Content="{Binding L[Model_SearchLabel]}"
                                             Margin="0,0,0,8"
+                                            IsVisible="{Binding Models.HubSearchOffered}"
                                             HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                                             Command="{Binding Models.SearchCommand}"
                                             ToolTip.Tip="{Binding L[Model_SearchTooltip]}" />
@@ -925,6 +938,7 @@
                                             Command="{Binding Models.AddFoundCommand}" />
 
                                     <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                               IsVisible="{Binding Models.HubSearchOffered}"
                                                Text="{Binding L[Model_CustomHint]}" />
 
                                     <ProgressBar Grid.Row="7" Grid.ColumnSpan="2" Height="3" Margin="0,0,0,8"
@@ -965,23 +979,70 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Spacing="4">
+                        <!-- The App Store edition sells Lapsus Plus here; there are no keys to call a licence. -->
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconLicense}" Width="20" Height="20"
-                                  HorizontalAlignment="Center" />
-                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_License]}" />
+                                  HorizontalAlignment="Center" IsVisible="{Binding !Store.IsStoreBuild}" />
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconPlus}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" IsVisible="{Binding Store.IsStoreBuild}" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_License]}"
+                                   IsVisible="{Binding !Store.IsStoreBuild}" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Plus]}"
+                                   IsVisible="{Binding Store.IsStoreBuild}" />
                     </StackPanel>
                 </TabItem.Header>
                 <ScrollViewer x:Name="LicenseScroll"
                               VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel x:Name="LicenseList" Spacing="12" Margin="0,12">
 
-                        <Border Classes="card">
+                        <!-- Mac App Store edition: App Store purchases instead of keys and links to the website. -->
+                        <Border Classes="card" IsVisible="{Binding Store.IsStoreBuild}">
+                            <StackPanel Spacing="6">
+                                <TextBlock Classes="sectionTitle" Text="{Binding Store.StatusTitle}" />
+                                <TextBlock Classes="hint" Text="{Binding Store.StatusDetail}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card" IsVisible="{Binding Store.IsStoreBuild}">
+                            <StackPanel Spacing="8">
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
+                                    <Button Classes="notice" Content="{Binding Store.YearlyLabel}"
+                                            Command="{Binding Store.SubscribeCommand}"
+                                            IsVisible="{Binding Store.ShowSubscribe}"
+                                            IsEnabled="{Binding !Store.Busy}" />
+                                    <Button Content="{Binding Store.LifetimeLabel}"
+                                            Command="{Binding Store.BuyLifetimeCommand}"
+                                            IsVisible="{Binding Store.ShowBuyLifetime}"
+                                            IsEnabled="{Binding !Store.Busy}" />
+                                    <Button Content="{Binding L[Store_Manage]}"
+                                            Command="{Binding Store.ManageSubscriptionCommand}"
+                                            IsVisible="{Binding Store.IsSubscribed}" />
+                                    <Button Content="{Binding L[Store_Retry]}"
+                                            Command="{Binding Store.RetryCommand}"
+                                            IsVisible="{Binding !Store.PricesKnown}"
+                                            IsEnabled="{Binding !Store.Busy}" />
+                                    <Button Content="{Binding L[Store_Restore]}"
+                                            Command="{Binding Store.RestoreCommand}"
+                                            IsEnabled="{Binding !Store.Busy}" />
+                                </WrapPanel>
+                                <TextBlock Classes="status" Foreground="{DynamicResource LapsusAccentBrush}"
+                                           Text="{Binding Store.Message}"
+                                           IsVisible="{Binding Store.Message, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                <TextBlock Classes="hint" Text="{Binding L[Store_Disclosure]}" />
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
+                                    <Button Content="{Binding L[Store_Terms]}" Command="{Binding Store.OpenTermsCommand}" />
+                                    <Button Content="{Binding L[Store_Privacy]}" Command="{Binding Store.OpenPrivacyCommand}" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Classes="card" IsVisible="{Binding !Store.IsStoreBuild}">
                             <StackPanel Spacing="6">
                                 <TextBlock Classes="sectionTitle" Text="{Binding License.StatusTitle}" />
                                 <TextBlock Classes="hint" Text="{Binding License.StatusDetail}" />
                             </StackPanel>
                         </Border>
 
-                        <Border Classes="card">
+                        <Border Classes="card" IsVisible="{Binding !Store.IsStoreBuild}">
                             <StackPanel Spacing="8">
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[Lic_Key_Label]}" />
                                 <TextBox Text="{Binding License.KeyInput, Mode=TwoWay}"
@@ -1007,7 +1068,7 @@
                             </StackPanel>
                         </Border>
 
-                        <Border Classes="card">
+                        <Border Classes="card" IsVisible="{Binding !Store.IsStoreBuild}">
                             <StackPanel Spacing="8">
                                 <TextBlock Classes="hint" Text="{Binding L[Lic_Buy_Hint]}" />
                                 <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">

@@ -3,6 +3,7 @@ using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Localization;
+using Lapsus.Startup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -729,7 +730,7 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         MacOSNativeMethods.CGEventTapEnable(tap, true);
 
         var watcher = new MacTypingFocusWatcher(OnAccessibilityFocusChanged);
-        if (!watcher.TryStart(runLoop))
+        if (!watcher.TryStart(runLoop) && !MacSandbox.IsSandboxed)
             CaptureLog.Write("Focus observer did not start; focus changes are detected late.");
 
         _tapReady.Set();

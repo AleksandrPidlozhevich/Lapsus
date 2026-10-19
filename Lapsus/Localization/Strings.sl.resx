@@ -601,4 +601,88 @@
     <data name="About_LicenseText" xml:space="preserve">
     <value>Besedilo licence</value>
   </data>
+    <data name="Store_Title_Trial" xml:space="preserve">
+    <value>Preizkusno obdobje Lapsus Plus. Preostalo dni: {0}</value>
+  </data>
+    <data name="Store_Title_Subscription" xml:space="preserve">
+    <value>Lapsus Plus: naročnina je aktivna</value>
+  </data>
+    <data name="Store_Title_Lifetime" xml:space="preserve">
+    <value>Lapsus Plus: kupljeno za vedno</value>
+  </data>
+    <data name="Store_Title_Free" xml:space="preserve">
+    <value>Lapsus Free</value>
+  </data>
+    <data name="Store_Detail" xml:space="preserve">
+    <value>Vse razen nevronskega popravljanja in funkcij, dodanih pozneje, je za vedno brezplačno. Lapsus Plus jih doda.</value>
+  </data>
+    <data name="Store_Renews" xml:space="preserve">
+    <value>Podaljša se {0}.</value>
+  </data>
+    <data name="Store_Yearly" xml:space="preserve">
+    <value>Letno, {0}</value>
+  </data>
+    <data name="Store_Lifetime" xml:space="preserve">
+    <value>Za vedno, {0}</value>
+  </data>
+    <data name="Store_Restore" xml:space="preserve">
+    <value>Obnovi nakupe</value>
+  </data>
+    <data name="Store_Manage" xml:space="preserve">
+    <value>Upravljaj naročnino</value>
+  </data>
+    <data name="Store_Disclosure" xml:space="preserve">
+    <value>Letna naročnina se samodejno podaljša, razen če jo prekličete v nastavitvah računa App Store vsaj 24 ur pred koncem obdobja. Plačilo se bremeni vašemu Apple Account.</value>
+  </data>
+    <data name="Store_Terms" xml:space="preserve">
+    <value>Pogoji uporabe</value>
+  </data>
+    <data name="Store_Privacy" xml:space="preserve">
+    <value>Pravilnik o zasebnosti</value>
+  </data>
+    <data name="Store_Unavailable" xml:space="preserve">
+    <value>App Store trenutno ni dosegljiv. Poskusite pozneje.</value>
+  </data>
+    <data name="Store_Pending" xml:space="preserve">
+    <value>Nakup čaka na odobritev.</value>
+  </data>
+    <data name="Store_Failed" xml:space="preserve">
+    <value>Nakup ni uspel: {0}</value>
+  </data>
+    <data name="Store_TrialEnded" xml:space="preserve">
+    <value>Preizkusno obdobje Lapsus Plus se je končalo, zato je nevronsko popravljanje izklopljeno. Vse drugo deluje kot prej.</value>
+  </data>
+    <data name="Neural_Locked" xml:space="preserve">
+    <value>Nevronsko popravljanje je del Lapsus Plus.</value>
+  </data>
+    <data name="Neural_Locked_Button" xml:space="preserve">
+    <value>O Lapsus Plus</value>
+  </data>
+    <data name="Onb_Title" xml:space="preserve">
+    <value>Dobrodošli v Lapsus</value>
+  </data>
+    <data name="Onb_Intro" xml:space="preserve">
+    <value>Lapsus popravlja besedilo, natipkano v napačni razporeditvi tipkovnice, v kateri koli aplikaciji. Za to mora videti pritiske tipk.</value>
+  </data>
+    <data name="Onb_Local" xml:space="preserve">
+    <value>Vse se dogaja na tem Macu. Kar tipkate, se nikamor ne pošilja in ne shranjuje.</value>
+  </data>
+    <data name="Onb_Passwords" xml:space="preserve">
+    <value>Polja za gesla ostanejo nedotaknjena: ko tipkate vanje, macOS skrije tipke pred drugimi aplikacijami, tudi pred Lapsus.</value>
+  </data>
+    <data name="Onb_Permissions" xml:space="preserve">
+    <value>macOS bo zdaj zahteval dve dovoljenji: »Spremljanje vnosa«, da vidi tipke, in »Dostopnost«, da vnaša popravljeno besedilo.</value>
+  </data>
+    <data name="Onb_Continue" xml:space="preserve">
+    <value>Nadaljuj</value>
+  </data>
+    <data name="Onb_Later" xml:space="preserve">
+    <value>Ne zdaj</value>
+  </data>
+    <data name="Tab_Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+    <data name="Store_Retry" xml:space="preserve">
+    <value>Poskusi znova</value>
+  </data>
 </root>
