@@ -44,21 +44,32 @@ Six writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian**.
 <table>
   <tr>
     <td width="50%"><img src="docs/images/settings-general.png" alt="General settings"></td>
-    <td width="50%"><img src="docs/images/settings-apps.png" alt="Excluded applications"></td>
+    <td width="50%"><img src="docs/images/settings-hotkeys.png" alt="Hotkeys"></td>
   </tr>
   <tr>
-    <td align="center"><b>General</b> — capture, hotkeys, what a key does to a selection</td>
-    <td align="center"><b>Apps</b> — programs Lapsus stays out of entirely</td>
+    <td align="center"><b>General</b> — capture, auto-correct, what a key does to a line</td>
+    <td align="center"><b>Hotkeys</b> — the main key, plus keys for a selection</td>
   </tr>
   <tr>
+    <td><img src="docs/images/settings-apps.png" alt="Excluded applications"></td>
     <td><img src="docs/images/settings-library.png" alt="Dictionaries"></td>
-    <td><img src="docs/images/settings-ai.png" alt="Local models"></td>
   </tr>
   <tr>
-    <td align="center"><b>Library</b> — 33 downloadable word lists, tie-break language</td>
+    <td align="center"><b>Apps</b> — programs Lapsus stays out of entirely</td>
+    <td align="center"><b>Library</b> — downloadable word lists, tie-break language</td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/settings-ai.png" alt="Local models"></td>
+    <td></td>
+  </tr>
+  <tr>
     <td align="center"><b>AI</b> — optional local model, CPU or GPU, your choice</td>
+    <td></td>
   </tr>
 </table>
+
+The Mac App Store edition has the same window plus a Plus tab; its screenshots are in
+[`docs/images/appstore`](docs/images/appstore).
 
 ## What it can do
 
