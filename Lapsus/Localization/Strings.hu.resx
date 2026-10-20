@@ -685,4 +685,7 @@
     <data name="Store_Retry" xml:space="preserve">
     <value>Újra</value>
   </data>
+    <data name="Store_RestoreFailed" xml:space="preserve">
+    <value>A vásárlások visszaállítása nem sikerült: {0}</value>
+  </data>
 </root>

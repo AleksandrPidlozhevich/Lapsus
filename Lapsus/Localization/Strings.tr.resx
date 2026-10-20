@@ -685,4 +685,7 @@
     <data name="Store_Retry" xml:space="preserve">
     <value>Tekrar dene</value>
   </data>
+    <data name="Store_RestoreFailed" xml:space="preserve">
+    <value>Satın alımlar geri yüklenemedi: {0}</value>
+  </data>
 </root>

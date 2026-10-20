@@ -685,4 +685,7 @@
     <data name="Store_Retry" xml:space="preserve">
     <value>Tentar novamente</value>
   </data>
+    <data name="Store_RestoreFailed" xml:space="preserve">
+    <value>Não foi possível restaurar as compras: {0}</value>
+  </data>
 </root>

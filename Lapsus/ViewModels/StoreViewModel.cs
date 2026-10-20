@@ -180,7 +180,7 @@ public sealed partial class StoreViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Message = L.Format("Store_Failed", ex.Message);
+            Message = L.Format("Store_RestoreFailed", ex.Message);
         }
         finally
         {

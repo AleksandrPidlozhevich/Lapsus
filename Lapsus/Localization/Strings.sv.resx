@@ -685,4 +685,7 @@
     <data name="Store_Retry" xml:space="preserve">
     <value>Försök igen</value>
   </data>
+    <data name="Store_RestoreFailed" xml:space="preserve">
+    <value>Köpen kunde inte återställas: {0}</value>
+  </data>
 </root>

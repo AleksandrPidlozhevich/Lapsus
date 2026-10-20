@@ -685,4 +685,7 @@
     <data name="Store_Retry" xml:space="preserve">
     <value>Обиди се повторно</value>
   </data>
+    <data name="Store_RestoreFailed" xml:space="preserve">
+    <value>Купувањата не можеа да се вратат: {0}</value>
+  </data>
 </root>

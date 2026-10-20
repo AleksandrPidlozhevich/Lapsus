@@ -685,4 +685,7 @@
     <data name="Store_Retry" xml:space="preserve">
     <value>Pokušaj ponovo</value>
   </data>
+    <data name="Store_RestoreFailed" xml:space="preserve">
+    <value>Kupovine nije bilo moguće vratiti: {0}</value>
+  </data>
 </root>

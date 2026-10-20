@@ -1,10 +1,3 @@
-// StoreKit 2 for the Mac App Store edition of Lapsus. StoreKit 2 exists only in Swift, so this
-// small library gives .NET a C entry point per call (MacStoreKitPurchases.cs P/Invokes them).
-// Every call answers asynchronously through the callback with the caller's token and one JSON
-// object. StoreKit verifies each transaction's signature itself; only verified ones count.
-//
-// Built by scripts/build-storekit-bridge.sh into libLapsusStoreKit.dylib.
-
 import Foundation
 import StoreKit
 
@@ -13,6 +6,20 @@ public typealias LapsusReply = @convention(c) (Int64, UnsafePointer<CChar>?) -> 
 private func reply(_ callback: LapsusReply, _ token: Int64, _ object: [String: Any]) {
     let data = (try? JSONSerialization.data(withJSONObject: object)) ?? Data("{}".utf8)
     String(decoding: data, as: UTF8.self).withCString { callback(token, $0) }
+}
+
+// A dismissed sheet arrives as StoreKitError, SKError, Cocoa/URL cancel, or ASDErrorDomain 907.
+private func isCancellation(_ error: Error) -> Bool {
+    if let storeKit = error as? StoreKitError, case .userCancelled = storeKit {
+        return true
+    }
+    if let payment = error as? SKError, payment.code == .paymentCancelled {
+        return true
+    }
+    let ns = error as NSError
+    return (ns.domain == NSCocoaErrorDomain && ns.code == NSUserCancelledError)
+        || (ns.domain == NSURLErrorDomain && ns.code == NSURLErrorCancelled)
+        || (ns.domain == "ASDErrorDomain" && ns.code == 907)
 }
 
 private func ownedProducts() async -> [[String: Any]] {
@@ -73,19 +80,22 @@ public func lapsusStorePurchase(_ token: Int64, _ id: UnsafePointer<CChar>, _ ca
             @unknown default:
                 reply(callback, token, ["status": "failed"])
             }
+        } catch where isCancellation(error) {
+            reply(callback, token, ["status": "cancelled"])
         } catch {
             reply(callback, token, ["status": "failed", "error": error.localizedDescription])
         }
     }
 }
 
-// "Restore purchases": asks the App Store for this Apple Account's transactions again. It may show
-// the sign-in sheet, which is why it only runs when the user presses the button.
 @_cdecl("lapsus_store_restore")
 public func lapsusStoreRestore(_ token: Int64, _ callback: LapsusReply) {
     Task {
         do {
             try await AppStore.sync()
+        } catch where isCancellation(error) {
+            reply(callback, token, ["owned": await ownedProducts(), "cancelled": true])
+            return
         } catch {
             reply(callback, token, ["error": error.localizedDescription])
             return
@@ -97,8 +107,7 @@ public func lapsusStoreRestore(_ token: Int64, _ callback: LapsusReply) {
 private let watchLock = NSLock()
 private var watching = false
 
-// Renewals, refunds, Ask to Buy approvals and purchases made on another Mac arrive here while the
-// app runs. Each one is finished and reported with token 0; the app then asks for what is owned.
+// Token 0: an update arrived on its own, so the app re-reads what is owned.
 @_cdecl("lapsus_store_watch")
 public func lapsusStoreWatch(_ callback: LapsusReply) {
     watchLock.lock()

@@ -685,4 +685,7 @@
     <data name="Store_Retry" xml:space="preserve">
     <value>Poskusi znova</value>
   </data>
+    <data name="Store_RestoreFailed" xml:space="preserve">
+    <value>Nakupov ni bilo mogoče obnoviti: {0}</value>
+  </data>
 </root>
