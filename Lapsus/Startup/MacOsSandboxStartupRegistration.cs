@@ -16,7 +16,6 @@ internal sealed class MacOsSandboxStartupRegistration : IStartupRegistration
 
     private const string ObjC = "/usr/lib/libobjc.A.dylib";
 
-    // SMAppServiceStatus
     private const long StatusEnabled = 1;
     private const long StatusRequiresApproval = 2;
 

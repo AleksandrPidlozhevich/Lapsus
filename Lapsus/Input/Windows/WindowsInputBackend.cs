@@ -467,7 +467,6 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         if (vk == VK_ESCAPE)
             return HotkeyKeyKind.Escape;
 
-        // Pause, Caps Lock, Scroll Lock, Insert, Delete, Home, End, Page Up/Down, F1-F24.
         var named = vk is 0x13 or 0x14 or 0x91 or 0x2D or 0x2E or 0x24 or 0x23 or 0x21 or 0x22
                     or (>= 0x70 and <= 0x87);
         return named ? HotkeyKeyKind.Named : HotkeyKeyKind.Typing;

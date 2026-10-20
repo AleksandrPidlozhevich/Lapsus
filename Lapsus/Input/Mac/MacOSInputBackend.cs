@@ -53,10 +53,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     // Serializes start attempts; never held by Stop, so disabling capture never waits on a start.
     private readonly SemaphoreSlim _startGate = new(1, 1);
 
-    // Guards _tapThread and the flags that Start and Stop change together.
     private readonly object _lifecycle = new();
 
-    // Re-checks Accessibility and Input Monitoring while the user wants capture running.
     private readonly System.Threading.Timer _watchdog;
 
     private int _restarting;
@@ -85,7 +83,6 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         StartCapture(userInitiated: true);
     }
 
-    // Returns true when this call started capture, false when it was already running or not wanted.
     private bool StartCapture(bool userInitiated)
     {
         _startGate.Wait();
@@ -974,7 +971,6 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         if (keyCode == MacOSNativeMethods.EscapeKeyCode)
             return HotkeyKeyKind.Escape;
 
-        // Caps Lock, Help/Insert, Home, Page Up/Down, Forward Delete, End, and F1-F20 (ANSI keycodes).
         var named = keyCode is 0x39 or 0x72 or 0x73 or 0x74 or 0x75 or 0x77 or 0x79
             or 0x7A or 0x78 or 0x63 or 0x76 or 0x60 or 0x61 or 0x62 or 0x64 or 0x65 or 0x6D or 0x67 or 0x6F
             or 0x69 or 0x6B or 0x71 or 0x6A or 0x40 or 0x4F or 0x50 or 0x5A;

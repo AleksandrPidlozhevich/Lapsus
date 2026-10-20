@@ -34,7 +34,6 @@ internal static class HotkeyNames
             or (>= 0x70 and <= 0x87);
     }
 
-    // The modifiers held right now, shown as chips while a shortcut is being recorded.
     public static IReadOnlyList<string> ModifierLabels(HotkeyModifiers modifiers)
     {
         var labels = new List<string>(4);

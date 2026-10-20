@@ -54,7 +54,6 @@ public sealed class HotkeyCapture(IInputBackend backend, Func<bool> isEnabled, A
             backend.Stop();
     }
 
-    // The recording owner stops itself, which calls End.
     public void CancelActive()
     {
         _stopOwner?.Invoke();

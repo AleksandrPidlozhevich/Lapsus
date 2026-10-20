@@ -15,7 +15,6 @@ internal static class MacAccessibility
             : MacOSNativeMethods.AXIsProcessTrusted();
     }
 
-    // Shows the Accessibility trust prompt if not granted yet.
     public static void PromptIfNeeded()
     {
         if (IsProcessTrusted())

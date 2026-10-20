@@ -396,7 +396,6 @@ internal static class MacOSNativeMethods
     public const uint HidRequestTypeListenEvent = 0;
     public const uint HidAccessTypeGranted = 0;
 
-    // Input Monitoring (IOKit): TCC permission CGEventTapCreate needs.
     [DllImport("/System/Library/Frameworks/IOKit.framework/IOKit")]
     public static extern uint IOHIDCheckAccess(uint requestType);
 

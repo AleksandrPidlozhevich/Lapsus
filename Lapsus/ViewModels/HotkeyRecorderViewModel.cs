@@ -21,7 +21,6 @@ public sealed partial class HotkeyRecorderViewModel : ViewModelBase
         _recorded = recorded;
     }
 
-    // Chips for the modifiers held right now.
     public ObservableCollection<string> HeldKeys { get; } = [];
 
     [ObservableProperty] private bool _isRecording;
