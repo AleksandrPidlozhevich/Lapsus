@@ -4,7 +4,7 @@ using Lapsus.Core.Spelling;
 
 namespace Lapsus.Core.Tests.Languages.Latin;
 
-public sealed class LatinDiacriticsTests : IDisposable
+public sealed class LatinDiacriticsTests
 {
     private readonly string _latinPath;
     private readonly string _ukPath;
@@ -16,11 +16,11 @@ public sealed class LatinDiacriticsTests : IDisposable
 
     public LatinDiacriticsTests()
     {
-        _latinPath = WriteTemp(
+        _latinPath = TestDictionaries.List(
             "tr",
             "şey 900", "ağaç 800", "çocuk 700", "değil 600",
             "schön 500", "über 400", "łódź 300", "tiếng 200");
-        _ukPath = WriteTemp("uk", "хата 900", "кава 800");
+        _ukPath = TestDictionaries.List("uk", "хата 900", "кава 800");
         _corrector = new LayoutCorrector(new SpellChecker(
         [
             new DictionarySource("tr", _latinPath, Script.Latin),
@@ -76,18 +76,5 @@ public sealed class LatinDiacriticsTests : IDisposable
         Assert.True(result.Changed);
         Assert.Equal(expected, result.Corrected);
         Assert.Equal(KeyboardLayout.Uk, result.TargetLayout);
-    }
-
-    private static string WriteTemp(string tag, params string[] lines)
-    {
-        var path = Path.Combine(Path.GetTempPath(), $"lapsus-{tag}-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(path, lines);
-        return path;
-    }
-
-    public void Dispose()
-    {
-        File.Delete(_latinPath);
-        File.Delete(_ukPath);
     }
 }

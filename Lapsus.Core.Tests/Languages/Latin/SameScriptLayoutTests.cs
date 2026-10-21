@@ -4,7 +4,7 @@ using Lapsus.Core.Spelling;
 
 namespace Lapsus.Core.Tests.Languages.Latin;
 
-public sealed class SameScriptLayoutTests : IDisposable
+public sealed class SameScriptLayoutTests
 {
     private readonly string _enPath;
     private readonly string _dePath;
@@ -15,9 +15,9 @@ public sealed class SameScriptLayoutTests : IDisposable
 
     public SameScriptLayoutTests()
     {
-        _enPath = WriteTemp("en", "hello 900", "don't 800", "cat 700");
+        _enPath = TestDictionaries.List("en", "hello 900", "don't 800", "cat 700");
         // "kazak" is US "kayak" on QWERTZ — in the dict so punctuation, not a miss, blocks the switch.
-        _dePath = WriteTemp("de", "schön 900", "über 800", "größe 700", "fünf 650", "kazak 600", "şey 500");
+        _dePath = TestDictionaries.List("de", "schön 900", "über 800", "größe 700", "fünf 650", "kazak 600", "şey 500");
         _corrector = new LayoutCorrector(new SpellChecker(
         [
             new DictionarySource("en", _enPath, Script.Latin),
@@ -95,18 +95,5 @@ public sealed class SameScriptLayoutTests : IDisposable
     public void Slip_signature_detects_a_letter_key_typed_as_punctuation(string text, bool expected)
     {
         Assert.Equal(expected, LayoutTranscoder.HasMistypedLetterKey(text, Script.Latin, _us, _germanQwertz));
-    }
-
-    private static string WriteTemp(string tag, params string[] lines)
-    {
-        var path = Path.Combine(Path.GetTempPath(), $"lapsus-{tag}-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(path, lines);
-        return path;
-    }
-
-    public void Dispose()
-    {
-        File.Delete(_enPath);
-        File.Delete(_dePath);
     }
 }

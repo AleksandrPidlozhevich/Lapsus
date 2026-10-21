@@ -4,7 +4,7 @@ using Lapsus.Core.Spelling;
 
 namespace Lapsus.Core.Tests.Languages.Hebrew;
 
-public sealed class HebrewCorrectionTests : IDisposable
+public sealed class HebrewCorrectionTests
 {
     private readonly string _hePath;
     private readonly string _enPath;
@@ -18,18 +18,14 @@ public sealed class HebrewCorrectionTests : IDisposable
 
     public HebrewCorrectionTests()
     {
-        _hePath = Path.Combine(Path.GetTempPath(), $"lapsus-he-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(_hePath,
-        [
+        _hePath = TestDictionaries.List("he", [
             "שלום 900",
             "תודה 800",
             "בוקר 700",
             "ספר 600"
         ]);
 
-        _enPath = Path.Combine(Path.GetTempPath(), $"lapsus-en-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(_enPath,
-        [
+        _enPath = TestDictionaries.List("en", [
             "ship 900",
             "text 800",
             "hello 700"
@@ -41,12 +37,6 @@ public sealed class HebrewCorrectionTests : IDisposable
             new DictionarySource("en", _enPath, Script.Latin)
         ]);
         _corrector = new LayoutCorrector(spell);
-    }
-
-    public void Dispose()
-    {
-        File.Delete(_hePath);
-        File.Delete(_enPath);
     }
 
     [Fact]
@@ -115,50 +105,34 @@ public sealed class HebrewCorrectionTests : IDisposable
     [Fact]
     public void A_spell_fix_may_not_manufacture_the_dictionary_hit_a_switch_needs()
     {
-        var latinOnly = Path.Combine(Path.GetTempPath(), $"lapsus-en2-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(latinOnly, ["aku 900", "hello 800"]);
+        var latinOnly = TestDictionaries.List("en2", ["aku 900", "hello 800"]);
 
-        try
-        {
-            var corrector = new LayoutCorrector(
-                new SpellChecker([new DictionarySource("en", latinOnly, Script.Latin)]));
+        var corrector = new LayoutCorrector(
+            new SpellChecker([new DictionarySource("en", latinOnly, Script.Latin)]));
 
-            var result = corrector.CorrectPhrase(
-                "שלום", Script.Hebrew, BundledKeyboardMaps.He, ToLatin, null, "he");
+        var result = corrector.CorrectPhrase(
+            "שלום", Script.Hebrew, BundledKeyboardMaps.He, ToLatin, null, "he");
 
-            Assert.False(result.Changed);
-            Assert.Equal("שלום", result.Corrected);
-        }
-        finally
-        {
-            File.Delete(latinOnly);
-        }
+        Assert.False(result.Changed);
+        Assert.Equal("שלום", result.Corrected);
     }
 
     [Fact]
     public void Impossible_hebrew_switches_without_a_hebrew_dictionary()
     {
-        var latinOnly = Path.Combine(Path.GetTempPath(), $"lapsus-en3-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(latinOnly, ["hello 900"]);
+        var latinOnly = TestDictionaries.List("en3", ["hello 900"]);
 
-        try
-        {
-            var corrector = new LayoutCorrector(
-                new SpellChecker([new DictionarySource("en", latinOnly, Script.Latin)]));
+        var corrector = new LayoutCorrector(
+            new SpellChecker([new DictionarySource("en", latinOnly, Script.Latin)]));
 
-            var typed = LayoutTranscoder.Transcode("moon", BundledKeyboardMaps.En, BundledKeyboardMaps.He);
-            Assert.False(Orthography.IsPossibleWord(typed, Script.Hebrew));
+        var typed = LayoutTranscoder.Transcode("moon", BundledKeyboardMaps.En, BundledKeyboardMaps.He);
+        Assert.False(Orthography.IsPossibleWord(typed, Script.Hebrew));
 
-            var result = corrector.CorrectPhrase(
-                typed, Script.Hebrew, BundledKeyboardMaps.He, ToLatin, null, "he");
+        var result = corrector.CorrectPhrase(
+            typed, Script.Hebrew, BundledKeyboardMaps.He, ToLatin, null, "he");
 
-            Assert.True(result.Changed);
-            Assert.Equal("moon", result.Corrected);
-        }
-        finally
-        {
-            File.Delete(latinOnly);
-        }
+        Assert.True(result.Changed);
+        Assert.Equal("moon", result.Corrected);
     }
 
     [Fact]
@@ -202,27 +176,17 @@ public sealed class HebrewCorrectionTests : IDisposable
     [InlineData("hello,", "hello,")]
     public void The_comma_key_is_a_final_tav_only_where_the_longer_word_earns_it(string typed, string expected)
     {
-        var he = Path.Combine(Path.GetTempPath(), $"lapsus-he-{Guid.NewGuid():N}.txt");
-        var en = Path.Combine(Path.GetTempPath(), $"lapsus-en-{Guid.NewGuid():N}.txt");
-        try
-        {
-            File.WriteAllLines(he, ["הגדרות 393", "דקות 60008", "צודקת 16699", "שלום 122580"]);
-            File.WriteAllLines(en, ["seu 245", "muse 1612", "hello 700000"]);
-            var corrector = new LayoutCorrector(new SpellChecker(
-            [
-                new DictionarySource("he", he, Script.Hebrew),
-                new DictionarySource("en", en, Script.Latin)
-            ]));
+        var he = TestDictionaries.List("he", ["הגדרות 393", "דקות 60008", "צודקת 16699", "שלום 122580"]);
+        var en = TestDictionaries.List("en", ["seu 245", "muse 1612", "hello 700000"]);
+        var corrector = new LayoutCorrector(new SpellChecker(
+        [
+            new DictionarySource("he", he, Script.Hebrew),
+            new DictionarySource("en", en, Script.Latin)
+        ]));
 
-            var result = corrector.CorrectPhrase(typed, Script.Latin, BundledKeyboardMaps.En, ToHebrew);
+        var result = corrector.CorrectPhrase(typed, Script.Latin, BundledKeyboardMaps.En, ToHebrew);
 
-            Assert.Equal(expected, result.Corrected);
-        }
-        finally
-        {
-            File.Delete(he);
-            File.Delete(en);
-        }
+        Assert.Equal(expected, result.Corrected);
     }
 
     [Fact]
