@@ -10,6 +10,14 @@ string? Option(string name)
 var code = Option("--lang");
 var outDir = Option("--out");
 
+// Word lists for Lapsus.Core.Tests/Languages/Fixtures, from the catalog's pinned URLs.
+if (Option("--fixtures") is { } fixtureDir)
+{
+    var cache = Option("--cache") ?? Path.Combine(Path.GetTempPath(), "lapsus-fixture-downloads");
+    var only = (Option("--only") ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries).ToHashSet();
+    return await Lapsus.Lexicons.TestFixtures.BuildAsync(fixtureDir, cache, only);
+}
+
 // The app's own cleaning (FrequencyListCleaner), for lists built or downloaded outside DictionaryStore.
 if (Option("--clean") is { } listToClean)
 {

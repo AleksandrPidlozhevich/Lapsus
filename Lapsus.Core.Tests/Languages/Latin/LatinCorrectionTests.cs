@@ -3,23 +3,12 @@ using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Tests.Languages.Latin;
 
-public sealed class LatinCorrectionTests : IDisposable
+public sealed class LatinCorrectionTests
 {
-    private readonly ScriptHarness _harness = new();
-    private readonly LayoutCorrector _corrector;
-
-    public LatinCorrectionTests()
-    {
-        _corrector = _harness
-            .With("en", Script.Latin, "car 900", "cat 850", "milk 700", "with 950", "server 600")
-            .With("uk", Script.Cyrillic, "кава 900", "молоко 800", "вітання 850")
-            .Corrector();
-    }
-
-    public void Dispose()
-    {
-        _harness.Dispose();
-    }
+    private readonly LayoutCorrector _corrector = new TestDictionaries()
+        .With("en", Script.Latin, "car 900", "cat 850", "milk 700", "with 950", "server 600")
+        .With("uk", Script.Cyrillic, "кава 900", "молоко 800", "вітання 850")
+        .Corrector();
 
     [Theory]
     [InlineData("сфк", "car")]

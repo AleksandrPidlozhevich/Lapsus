@@ -173,6 +173,11 @@ internal sealed class PhraseContext(
             if (Crossed(other) && other.ChosenScript == into)
                 return null;
 
+            // A word typed right in that language says the writer is writing it: "ну да, это был deploy yf
+            // prod" is на, not "of".
+            if (IsNativeWord(other, into))
+                return null;
+
             if (!other.Chosen.Changed && other.Source.Script == token.Source.Script &&
                 WordScorer.IsDictionaryHit(other.Baseline) &&
                 WordScanner.TrimToLetters(other.Typed, other.Source.Script).Length >= MinAnchorLetters)
@@ -307,7 +312,7 @@ internal sealed class PhraseContext(
 
     // A mixed line switches language mid-way, so a word both languages know goes with its neighbours:
     // "αύριο to πρωί" is Greek, "let me know πότε" keeps its English. A pulled word joins the evidence,
-    // and two crossings settle the line for the short words.
+    // and two words in that language settle the line for the short words.
     private void FollowNeighbours(Script into, bool settled, bool listedOnly = false)
     {
         bool moved;
@@ -319,7 +324,7 @@ internal sealed class PhraseContext(
                 if (listedOnly && IsKnownWithoutACount(_tokens[i]))
                     continue;
 
-                if (FollowsNeighbours(i, into, settled || CrossingsInto(into) >= Quorum) is not { } pulled)
+                if (FollowsNeighbours(i, into, settled || IsWrittenIn(into)) is not { } pulled)
                     continue;
 
                 _tokens[i] = _tokens[i] with { Chosen = pulled, ChosenScript = into };
@@ -349,13 +354,20 @@ internal sealed class PhraseContext(
         var lead = scorer.FrequencyOf(pulled.Text, into) - token.BaselineFrequency;
         var left = SideOf(index, -1);
         var right = SideOf(index, 1);
+        var isShort = WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length < MinAnchorLetters;
+
+        // Among short words only ("ой, nf ye"), a line already written in that language takes them along.
+        if (isShort && settled && left is null && right is null)
+            return lead >= 0 ? pulled : null;
+
+        // With no neighbour in that language only a long word moves, on frequency alone: για over "gia". A short
+        // one typed right stays: "ну vs code" keeps its "vs" though мы is far commoner.
         if (left != into && right != into)
-            return lead >= MinFrequencyLeadWithoutANeighbour ? pulled : null;
+            return !isShort && lead >= MinFrequencyLeadWithoutANeighbour ? pulled : null;
 
         // Beside one crossing a short word is no line at all ("ghbdtn d"). At the seam it goes with the
         // language the line is written in: "στείλε μου to link" is Greek, "strength to αλήθεια" English.
-        if (WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length < MinAnchorLetters &&
-            (!settled || (left != right && !HoldsTheLine(into, token.Source.Script))))
+        if (isShort && (!settled || (left != right && !HoldsTheLine(into, token.Source.Script))))
             return null;
 
         return lead >= 0 ? pulled : null;
@@ -429,6 +441,26 @@ internal sealed class PhraseContext(
         return crossings;
     }
 
+    // A word typed in its own script and listed there, however short: "ну", "да" typed on the Russian layout.
+    // Unlike a crossing it is no coincidence of keys, so it says which language the writer is in.
+    private static bool IsNativeWord(in TokenReading token, Script script)
+    {
+        return token.IsWord && !token.Chosen.Changed && token.Source.Script == script &&
+               WordScorer.IsDictionaryHit(token.Baseline);
+    }
+
+    // Two words in that language, crossed into it or typed in it: "ой, ye dct" is Russian (ой, все), and its
+    // "ye" is ну. Crossings alone left the forgotten interjections of a mixed line behind.
+    private bool IsWrittenIn(Script script)
+    {
+        var words = 0;
+        foreach (var token in _tokens)
+            if ((Crossed(token) && token.ChosenScript == script) || IsNativeWord(token, script))
+                words++;
+
+        return words >= Quorum;
+    }
+
     private int Anchors(Script script)
     {
         var anchors = 0;
@@ -444,7 +476,8 @@ internal sealed class PhraseContext(
     private ScoredWord? PullsIn(int index, Script direction)
     {
         var token = _tokens[index];
-        if (PullsInAnywhere(token, direction) is not { } pulled)
+        var sandwiched = SideOf(index, -1) == direction && SideOf(index, 1) == direction;
+        if (PullsInAnywhere(token, direction, sandwiched) is not { } pulled)
             return null;
 
         // Between two real words of its own script the line's direction is not enough: "let me know πότε".
@@ -455,7 +488,7 @@ internal sealed class PhraseContext(
             : pulled;
     }
 
-    private ScoredWord? PullsInAnywhere(in TokenReading token, Script direction)
+    private ScoredWord? PullsInAnywhere(in TokenReading token, Script direction, bool sandwiched = false)
     {
         // Excluded words read unchanged; without this the line would re-encode them.
         if (!token.IsWord || token.Chosen.Changed || token.Source.Script == direction || token.IsException)
@@ -472,6 +505,13 @@ internal sealed class PhraseContext(
             return null;
 
         if (scorer.FrequencyOf(pulled.Text, direction) >= token.BaselineFrequency)
+            return pulled;
+
+        // Between two crossings a word about as common there goes with them whatever stands elsewhere in the
+        // line: "καλά, λετ με ψηεψκ" is "let me check" though καλά keeps its Greek. A scrap does not: "ρεωιες
+        // στο ψοδε" keeps στο, which reads as the rare "sto".
+        if (sandwiched && WordScorer.IsDictionaryHit(pulled.Score) &&
+            scorer.FrequencyOf(pulled.Text, direction) - token.BaselineFrequency > -MinFrequencyLeadWithoutANeighbour)
             return pulled;
 
         // The commoner reading keeps a word only while its script still holds part of the line: with every
