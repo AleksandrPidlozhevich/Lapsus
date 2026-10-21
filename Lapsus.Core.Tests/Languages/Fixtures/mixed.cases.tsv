@@ -4,21 +4,12 @@
 # Word lists are the fixture lists; en/ru carry the real-list words these lines use, at their real counts, so
 # traps such as "ye" (ну), "jr" (ок), "lf" (да) behave as with the full dictionaries.
 #
-# Why pending rows fail (PhraseContext unless noted):
-# [A] a forgotten 1–2 letter word that is also a word on the typed layout ("ye", "lf", "d", "nf") follows the
-#     line only after two keys-alone crossings; words typed right in the target language count for nothing
-#     (FollowsNeighbours / PullsInAnywhere short-word guard).
-# [B] with two own-script anchors and no other crossing, a right crossing is swapped for a one-edit typo fix
-#     in the typed script ("nfr" → nor, not так); native words of the target language are not counted
-#     (IsTypoLeavingItsOwnLine).
-# [C] a word typed right is pulled across with no neighbour in the target script, on frequency alone
-#     ("vs" → мы; FollowsNeighbours, the no-neighbour branch skips the short-word guard).
-# [D] a native word at the head of the line keeps a short word in its script between two crossings
-#     ("καλά, let με check"; PullsInAnywhere counts καλά as the script still holding the line).
-# [E] a correct word no list knows is respelled into a listed one ("api" → ali, "hotfix" → hottie;
-#     LayoutCorrector.BestWord same-script spell fix, word level).
-# [F] a Russian-layout slip of a Ukrainian word reads as English ("ынше" → shit, not інше): a crossing into
-#     another script beats the same-script layout on frequency alone (LayoutCorrector.BestWord, word level).
+# Why the pending rows still fail:
+# [A] "ye jr, давай" with the fixture lists: one Ukrainian word against two English list words, and ну/ок are
+#     barely commoner in the Ukrainian list than ye/jr in the English one. The full lists get it right.
+# [B] "nfr, let me check": three English words and nothing Ukrainian, so the one crossing gives way to the
+#     typo fix "nor". Trusting the crossing when the fix is a far key moved more English typos across
+#     (sweep, Rule D and G) than it saved.
 # [G] the word is in no list at all ("html"): nothing to cross to.
 #
 # --- English + Russian: every switch made, nothing to fix
@@ -29,7 +20,7 @@ en ru	да, это bug в коде	ok	clean: "да" reads "lf", a word in the En
 en ru	ага, понял, ну ok	ok	clean
 en ru	wow, это круто	ok	clean
 en ru	блин, опять merge conflict	ok	clean
-en ru	хм, а если через api	pending	[E] clean
+en ru	хм, а если через api	ok	clean
 en ru	эй, ты видел новый release?	ok	clean
 en ru	ну, let me check the logs	ok	clean: Russian interjection opens an English line
 en ru	ой, sorry, wrong chat	ok	clean
@@ -52,12 +43,12 @@ en ru	ну, let me check the {ru:logs}	ok	Russian interjection before an English
 en ru	да, I will send the {ru:report}	ok	"да" must not follow the line into English ("lf")
 en ru	ой, sorry, wrong {ru:chat}	ok	"ой" before an English line
 en ru	ага, {en:сейчас посмотрю}	ok	interjection then the forgotten part
-en ru	{en:ну и где} pull request	pending	[A] forgotten at the start, English after
-en ru	хм, а если {en:через} api	pending	[E] one word in the middle
+en ru	{en:ну и где} pull request	ok	forgotten at the start, English after
+en ru	хм, а если {en:через} api	ok	one word in the middle
 en ru	блин, {en:опять} merge conflict	ok	one word after an interjection
 en ru	ок, {en:сделаю завтра}	ok	"ок" before the forgotten part
 en ru	да, {ru:send me the report}, ну пожалуйста	ok	English part forgotten between Russian words
-en ru	oh, {en:ну это} fix	pending	[A] English interjection, forgotten Russian, English term
+en ru	oh, {en:ну это} fix	ok	English interjection, forgotten Russian, English term
 #
 # --- English + Russian: two switches forgotten
 en ru	ну, {ru:let me check} и {en:потом скажу}	ok	both directions forgotten in one line
@@ -84,14 +75,14 @@ en ru	ну так, let me see	ok	clean
 en ru	ну ок, {en:давай завтра}	ok	forgotten after interjections
 en ru	{en:ну ок}, давай завтра	ok	forgotten interjections that are English list words ("ye jr")
 en ru	ага, {ru:I see}	ok	English forgotten after a Russian interjection
-en ru	lol, {en:ну ты даешь}	pending	[A] forgotten after an English interjection
+en ru	lol, {en:ну ты даешь}	ok	forgotten after an English interjection
 en ru	{ru:lol}, ну ты даешь	ok	English interjection forgotten on the Russian layout
 en ru	ну, {en:ну ладно}	ok	interjection inside and outside the forgotten part
 en ru	ой, {en:ну все}	ok	forgotten at the end
 en ru	ок, {en:тогда завтра}, ok	ok	"ок" and "ok" around the forgotten part
 #
 # --- English + Ukrainian: clean
-en uk	ну, це просто hotfix	pending	[E] clean
+en uk	ну, це просто hotfix	ok	clean
 en uk	ой, я забув про standup	ok	clean
 en uk	так, let me check	ok	clean
 en uk	ага, дякую, see you	ok	clean
@@ -125,7 +116,7 @@ en ru uk	ну, I will check, ну да	ok	clean
 en ru uk	ну, это fix, {en:а це вже інше}	ok	Ukrainian forgotten on English
 en ru uk	ой, я забыл, {en:ну добре}	ok	interjection inside the forgotten part
 en ru uk	да, {en:это} bug	ok	one word
-en ru uk	ой, {uk:це} {ru:інше}	pending	[F] Ukrainian word typed on the Russian layout (і as ы)
+en ru uk	ой, {uk:це} {ru:інше}	ok	Ukrainian word typed on the Russian layout (і as ы)
 #
 # --- English + Greek: clean
 en el	ναι, το deploy είναι ok	ok	clean: "το" reads "to"
@@ -174,3 +165,4 @@ en ar	نعم هذا ok	ok	clean
 en ar	شكرا see you غدا	ok	clean
 en ar	شكرا see you {en:غدا}	ok	forgotten at the end
 en ar	نعم send me the {ar:report}	ok	forgotten at the end
+en el	θα σου έχεις m.o. ναι	ok	an abbreviation keeps its letters though μ and ο are Greek words

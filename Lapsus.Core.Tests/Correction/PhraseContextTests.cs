@@ -52,9 +52,9 @@ public sealed class PhraseContextTests
     }
 
     [Fact]
-    public void A_known_line_direction_lets_one_crossed_word_pull_a_straggler_in()
+    public void A_short_word_typed_next_to_a_crossing_goes_with_it()
     {
-        Assert.Equal("привет d", Correct("ghbdtn d").Corrected);
+        Assert.Equal("привет в", Correct("ghbdtn d").Corrected);
 
         var result = Correct("ghbdtn d", hints: new CorrectionHints(LineDirection: Script.Cyrillic));
 
@@ -188,12 +188,12 @@ public sealed class PhraseContextTests
     }
 
     [Fact]
-    public void A_straggler_needs_two_other_words_to_agree()
+    public void A_straggler_follows_the_crossing_typed_beside_it()
     {
         var result = Correct("d ntrcn");
 
         Assert.True(result.Changed);
-        Assert.Equal("d текст", result.Corrected);
+        Assert.Equal("в текст", result.Corrected);
     }
 
     [Fact]

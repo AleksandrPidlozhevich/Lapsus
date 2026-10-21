@@ -96,7 +96,8 @@ public sealed class LayoutSwitchPriorityTests
         var result = _corrector.CorrectPhrase(
             "vs d rjvyfnt", Script.Latin, BundledKeyboardMaps.En, EnAndRu(), sourceLanguageCode: "en");
 
-        Assert.Equal("vs d комнате", result.Corrected);
+        // The short words go with the crossing typed beside them; none of them settles a span.
+        Assert.Equal("мы в комнате", result.Corrected);
         Assert.Null(result.Settled);
     }
 
