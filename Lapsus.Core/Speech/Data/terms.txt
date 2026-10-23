@@ -1,0 +1,142 @@
+# English terms dictation writes in Latin, in their usual spelling. Ordinary English words (pull, merge, deploy,
+# staging, master…) come from the English frequency list; this list holds what that list lacks: names, brands,
+# acronyms and jargon, plus phrases.
+#
+# Canonical|heard|heard…  — heard forms are how the term comes out in Cyrillic when its letters do not say it
+# (acronyms spelled out, odd pronunciations). Everything else is matched by sound from the canonical spelling.
+# A term whose heard form is a common word of the language (Python → питон, CUDA → куда) does not belong here:
+# such words stay as spoken unless the user adds them to their own glossary.
+
+# Code hosting and workflow
+GitHub|гитхаб|гитхабе
+GitLab|гитлаб
+Bitbucket|битбакет
+GitHub Actions|гитхаб экшнс|гитхаб экшенс
+pull request|пул реквест|пулл реквест|пулреквест
+merge request|мерж реквест|мердж реквест
+code review|код ревью|кодревью
+rebase|ребейс|рибейс
+cherry-pick|черри пик|черипик
+hotfix|хотфикс
+feature flag|фича флаг|фичафлаг
+CI|си ай|сиай
+CD|си ди
+CI/CD|си ай си ди
+pipeline|пайплайн
+README|ридми
+changelog|ченджлог
+stand-up|стендап
+sprint|спринт
+backlog|бэклог|беклог
+roadmap|роадмап|роудмап
+
+# Web and services
+endpoint|эндпоинт|эндпойнт
+frontend|фронтенд|фронт энд
+backend|бэкенд|бекенд|бэк энд
+API|апи|эй пи ай
+SDK|эс ди кей
+CLI|си эл ай
+JSON|джейсон|джсон
+YAML|ямл|ямль
+XML|икс эм эль
+HTML|эйч ти эм эль
+CSS|си эс эс
+SQL|эс кью эль|сиквел
+NoSQL|ноу эс кью эль
+HTTP|эйч ти ти пи
+HTTPS|эйч ти ти пи эс
+REST|рест
+GraphQL|граф кью эль|графкьюэль
+gRPC|джи ар пи си
+WebSocket|вебсокет|веб сокет
+URL|урл|ю ар эл
+UI|ю ай|юай
+UX|ю икс|юикс
+QA|кью эй
+MVP|эм ви пи
+SSH|эс эс эйч
+VPN|ви пи эн|впн
+DNS|ди эн эс
+OAuth|оаут|о аут
+JWT|джей дабл ю ти
+localhost|локалхост
+
+# Tools and platforms
+Docker|докер
+Kubernetes|кубернетес|кубернетис|кубер
+Jira|джира
+Confluence|конфлюенс
+Slack|слак
+Zoom|зум
+Figma|фигма
+Notion|ноушн|ноушен
+Miro|миро
+Trello|трелло
+Postman|постман
+Swagger|сваггер
+Grafana|графана
+Prometheus|прометеус
+Sentry|сентри
+Kafka|кафка
+RabbitMQ|рэббит эм кью|реббит
+Redis|редис
+PostgreSQL|постгрес|постгрескьюэль|постгре
+MySQL|май эс кью эль|майскл
+MongoDB|монго ди би|монгодиби
+Elasticsearch|эластиксерч|эластик серч
+Nginx|энджинкс|нджинкс|нгинкс
+Ubuntu|убунту
+macOS|макос|мак ос
+iOS|айос|ай ос
+Terraform|терраформ
+Ansible|ансибл
+Jenkins|дженкинс
+TeamCity|тимсити|тим сити
+Velopack|велопак
+Avalonia|авалония
+Visual Studio|вижуал студио|визуал студио
+VS Code|ви эс код
+IntelliJ|интеллидж|интелиджей
+Rider|райдер
+Xcode|икс код|икскод
+Copilot|копайлот
+ChatGPT|чат джи пи ти|чатгпт|чат гпт
+OpenAI|опен эй ай|опенэйай
+Claude|клод
+Hugging Face|хаггинг фейс|хагинг фейс
+Whisper|виспер
+WhatsApp|ватсап|вотсап
+npm|эн пи эм
+NuGet|нагет|нюгет
+ONNX|оникс|онникс
+ONNX Runtime|оникс рантайм|онникс рантайм
+WebGPU|веб джи пи ю|вебгпу
+DirectML|директ эм эль
+
+# Languages and frameworks
+JavaScript|джаваскрипт|джава скрипт
+TypeScript|тайпскрипт|тайп скрипт
+Java|джава
+Kotlin|котлин
+Swift|свифт
+C#|си шарп|сишарп
+.NET|дотнет|дот нет
+React|реакт
+Angular|ангуляр
+Vue|вью джей эс
+Node.js|ноуд джей эс|нод джей эс|нода джей эс
+Next.js|некст джей эс
+Spring|спринг
+Django|джанго
+Flask|фласк
+Laravel|ларавел
+Webpack|вебпак
+
+# Hardware and AI
+GPU|джи пи ю|гпу
+CPU|си пи ю|цпу
+SSD|эс эс ди
+USB|ю эс би
+AI|эй ай
+LLM|эл эл эм

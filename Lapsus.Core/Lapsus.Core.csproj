@@ -13,6 +13,8 @@
     <ItemGroup>
         <!-- A language's neighbour words its own dictionary cannot rule out (NeighbourWords.IsListed). -->
         <EmbeddedResource Include="Spelling\Data\*.neighbour.txt" LogicalName="Lapsus.Core.Spelling.Data.%(Filename)%(Extension)"/>
+        <!-- Whisper's silence hallucinations and the built-in English terms for dictation. -->
+        <EmbeddedResource Include="Speech\Data\*.txt" LogicalName="Lapsus.Core.Speech.Data.%(Filename)%(Extension)"/>
     </ItemGroup>
 
     <ItemGroup>

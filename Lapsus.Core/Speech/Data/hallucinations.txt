@@ -1,0 +1,59 @@
+# What Whisper writes over silence and noise: credit lines and sign-offs from the subtitles it was trained on.
+# A plain line drops a sentence that is exactly this (case and punctuation ignored).
+# A line starting with ~ drops any sentence that contains it.
+# Only phrases nobody dictates into a chat on purpose belong here.
+
+# Russian
+Продолжение следует
+Спасибо за просмотр
+Спасибо за внимание и до новых встреч
+Подписывайтесь на канал
+Ставьте лайки и подписывайтесь на канал
+~DimaTorzok
+~Редактор субтитров
+~Корректор А.
+~Субтитры сделал
+~Субтитры создавал
+~Субтитры подогнал
+~Субтитры делал
+~Субтитры подготовлены
+
+# Ukrainian
+Дякую за перегляд
+Продовження буде
+Підписуйтесь на канал
+~Субтитри зроблені
+~Субтитри створено
+~Редактор субтитрів
+
+# English
+Thank you for watching
+Thanks for watching
+Thank you so much for watching
+Please subscribe to my channel
+Don't forget to like and subscribe
+~Amara.org
+~Transcription by CastingWords
+~Subtitles by
+~Captions by
+
+# Other languages
+~Untertitel im Auftrag
+~Untertitel der Amara
+~Untertitelung des ZDF
+Vielen Dank fürs Zuschauen
+Merci d'avoir regardé
+~Sous-titres réalisés
+~Sous-titrage ST'
+Gracias por ver el video
+~Subtítulos realizados
+~Subtítulos por la comunidad
+Grazie per la visione
+~Sottotitoli creati
+Obrigado por assistir
+~Legendas pela comunidade
+Dziękuję za obejrzenie
+~Napisy stworzone
+~Napisy wykonane
+~Ondertiteld door
+İzlediğiniz için teşekkürler
