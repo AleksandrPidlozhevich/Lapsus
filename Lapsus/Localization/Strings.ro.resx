@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Actualizare disponibilă — repornește pentru instalare</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Repornește pentru a instala versiunea {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — versiunea {0} este gata de instalare</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} este gata de instalare</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Repornește din meniul pictogramei sau actualizarea se va instala la următoarea pornire a Lapsus.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Repornește pentru a instala această actualizare</value>
   </data>

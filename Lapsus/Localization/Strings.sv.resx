@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Uppdatering finns — starta om för att installera</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Starta om för att installera version {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — version {0} är redo att installeras</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} är redo att installeras</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Starta om från ikonens meny, annars installeras uppdateringen nästa gång Lapsus startar.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Starta om för att installera uppdateringen</value>
   </data>

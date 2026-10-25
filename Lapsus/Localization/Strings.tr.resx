@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Güncelleme var — kurmak için yeniden başlatın</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>{0} sürümünü kurmak için yeniden başlat</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — {0} sürümü kurulmaya hazır</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} kurulmaya hazır</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Simgenin menüsünden yeniden başlatın; aksi halde güncelleme Lapsus bir sonraki açılışında kurulur.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Bu güncellemeyi kurmak için yeniden başlat</value>
   </data>

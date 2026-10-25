@@ -45,15 +45,15 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Greek · without": {
-      "Value": 0.0496,
+      "Value": 0.0478,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Greek · with": {
-      "Value": 0.0116,
+      "Value": 0.0098,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
-      "Value": 0.3366,
+      "Value": 0.3103,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · control: known word left alone · without": {
@@ -65,7 +65,7 @@
       "Better": "Higher"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · pulled across into Greek · without": {
-      "Value": 0.0521,
+      "Value": 0.0499,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · pulled across into Greek · with": {
@@ -73,19 +73,19 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · spell-fixed in place, still English · without": {
-      "Value": 0.298,
+      "Value": 0.2748,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Greek line · spell-fixed in place, still English · with": {
-      "Value": 0.298,
+      "Value": 0.2748,
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Greek line · typo'd word still crossed into Greek · without": {
-      "Value": 0.5308,
+      "Value": 0.5298,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Greek line · typo'd word still crossed into Greek · with": {
-      "Value": 0.5588,
+      "Value": 0.5578,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Greek line · and came back as the word that was meant · without": {
@@ -165,7 +165,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Greek · keys only": {
-      "Value": 0.0384,
+      "Value": 0.033,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Greek · sticky": {
@@ -173,7 +173,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Greek · sticky keys only": {
-      "Value": 0.0384,
+      "Value": 0.033,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · two-letter chunks English does not use, sent to Greek (264 of 676)": {

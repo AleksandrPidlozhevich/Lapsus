@@ -407,7 +407,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
         return end;
     }
 
-    private static PhraseCorrection Emit(
+    private PhraseCorrection Emit(
         string text, IReadOnlyList<TokenReading> readings, KeyboardLayout? preferred,
         IReadOnlyList<TextSpan>? excluded)
     {
@@ -415,6 +415,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
         var votes = new TargetVotes();
 
         List<TextSpan>? settled = excluded is null ? null : [.. excluded];
+        List<TextSpan>? kept = null;
         var at = 0;
 
         foreach (var token in readings)
@@ -433,6 +434,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
                      WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length >= MinWordToSettle)
                 // Advisory only while part of the line still needs work; drop once every letter is settled.
                 (settled ??= []).Add(new TextSpan(start, token.Typed.Length));
+            else if (!token.Chosen.Changed && ReadsBestAsTyped(token))
+                (kept ??= []).Add(new TextSpan(start, token.Typed.Length));
 
             if (token.Chosen.Changed)
             {
@@ -455,11 +458,33 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
         // If contiguity breaks, report no spans rather than wrong ones.
         if (at != text.Length)
+        {
             settled = null;
+            kept = null;
+        }
 
         return new PhraseCorrection(
             text, corrected, !string.Equals(corrected, text, StringComparison.Ordinal),
-            targetLayout, targetLayoutId, settled);
+            targetLayout, targetLayoutId, settled, kept);
+    }
+
+    private bool ReadsBestAsTyped(in TokenReading token)
+    {
+        foreach (var candidate in token.Source.Candidates)
+        {
+            if (candidate.ScoringScript == token.Source.Script)
+                continue;
+
+            var switched = LayoutTranscoder.Transcode(token.Typed, token.Source.Map, candidate.Map);
+            if (switched == token.Typed || !WordScanner.IsAllLetters(switched, candidate.ScoringScript))
+                continue;
+
+            var score = _scorer.Score(switched, candidate.ScoringScript, candidate.LanguageCode);
+            if (WordScorer.IsDictionaryHit(score) || WordScorer.IsWeakDictionaryHit(score) || score > token.Baseline)
+                return false;
+        }
+
+        return true;
     }
 
     private static (KeyboardLayout? Layout, string? LayoutId) OwnLayoutOf(WordSource source)
@@ -848,7 +873,10 @@ public sealed class LayoutCorrector : IPhraseCorrector
         {
             var left = BestWord(word[..i], source, preferred, keysOnly);
             var right = BestWord(word[i..], source, preferred, keysOnly);
-            if (!left.Changed && !right.Changed)
+
+            // A split is for two exact words typed on two layouts ("audiorfdf" is audioкава). Typo fixes glued back
+            // together only mangle a word the list lacks: "something" would come out "sothing" or "съмthing".
+            if ((!SwitchesLayout(left) && !SwitchesLayout(right)) || !IsExactWord(left) || !IsExactWord(right))
                 continue;
 
             var score = (left.Score + right.Score) / 2.0;
@@ -870,6 +898,16 @@ public sealed class LayoutCorrector : IPhraseCorrector
             return null;
 
         return keysOnly && best.Edits > 0 ? null : best;
+    }
+
+    private static bool SwitchesLayout(in ScoredWord half)
+    {
+        return half.Changed && (half.Target is not null || !string.IsNullOrEmpty(half.TargetLayoutId));
+    }
+
+    private static bool IsExactWord(in ScoredWord half)
+    {
+        return half.Edits == 0 && WordScorer.IsDictionaryHit(half.Score);
     }
 
     private static string? PickSplitLayoutId(ScoredWord left, ScoredWord right, KeyboardLayout? chosen)

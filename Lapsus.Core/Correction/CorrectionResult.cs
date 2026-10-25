@@ -16,7 +16,8 @@ public readonly record struct PhraseCorrection(
     bool Changed,
     KeyboardLayout? TargetLayout,
     string? TargetLayoutId = null,
-    IReadOnlyList<TextSpan>? Settled = null);
+    IReadOnlyList<TextSpan>? Settled = null,
+    IReadOnlyList<TextSpan>? Kept = null);
 
 public sealed record LayoutSource(Script? Script, string? LanguageCode, KeyboardMap Map, string? LayoutId = null);
 

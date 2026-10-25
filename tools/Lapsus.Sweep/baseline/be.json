@@ -53,7 +53,7 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
-      "Value": 0.3488,
+      "Value": 0.3146,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · control: known word left alone · without": {
@@ -73,19 +73,19 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Belarusian line · spell-fixed in place, still English · without": {
-      "Value": 0.3412,
+      "Value": 0.3098,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Belarusian line · spell-fixed in place, still English · with": {
-      "Value": 0.3412,
+      "Value": 0.3098,
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Belarusian line · typo'd word still crossed into Cyrillic · without": {
-      "Value": 0.7115,
+      "Value": 0.7113,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Belarusian line · typo'd word still crossed into Cyrillic · with": {
-      "Value": 0.7126,
+      "Value": 0.7123,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Belarusian line · and came back as the word that was meant · without": {
@@ -165,7 +165,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · keys only": {
-      "Value": 0.0235,
+      "Value": 0.0219,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · sticky": {
@@ -173,7 +173,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Cyrillic · sticky keys only": {
-      "Value": 0.0235,
+      "Value": 0.0219,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · two-letter chunks English does not use, sent to Cyrillic (264 of 676)": {

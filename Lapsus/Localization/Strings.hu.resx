@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Elérhető frissítés — indítsa újra a telepítéshez</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Újraindítás a(z) {0} verzió telepítéséhez</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — a(z) {0} verzió telepítésre kész</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>A Lapsus {0} telepítésre kész</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Indítsa újra az ikon menüjéből, különben a frissítés a Lapsus következő indításakor települ.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Újraindítás a frissítés telepítéséhez</value>
   </data>

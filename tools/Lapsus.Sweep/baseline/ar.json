@@ -45,15 +45,15 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Arabic · without": {
-      "Value": 0.0268,
+      "Value": 0.0249,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Arabic · with": {
-      "Value": 0.0056,
+      "Value": 0.0037,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
-      "Value": 0.3448,
+      "Value": 0.3124,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · control: known word left alone · without": {
@@ -65,7 +65,7 @@
       "Better": "Higher"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · pulled across into Arabic · without": {
-      "Value": 0.0266,
+      "Value": 0.0244,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · pulled across into Arabic · with": {
@@ -73,11 +73,11 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · spell-fixed in place, still English · without": {
-      "Value": 0.3255,
+      "Value": 0.2962,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · spell-fixed in place, still English · with": {
-      "Value": 0.3255,
+      "Value": 0.2962,
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Arabic line · typo'd word still crossed into Arabic · without": {

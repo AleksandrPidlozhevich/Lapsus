@@ -53,7 +53,7 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
-      "Value": 0.3397,
+      "Value": 0.3078,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · control: known word left alone · without": {
@@ -73,11 +73,11 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Hebrew line · spell-fixed in place, still English · without": {
-      "Value": 0.3144,
+      "Value": 0.2848,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Hebrew line · spell-fixed in place, still English · with": {
-      "Value": 0.3144,
+      "Value": 0.2848,
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · typo'd word still crossed into Hebrew · without": {
@@ -165,7 +165,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Hebrew · keys only": {
-      "Value": 0.0516,
+      "Value": 0.0504,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Hebrew · sticky": {
@@ -173,7 +173,7 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · English typo at line end crossed into Hebrew · sticky keys only": {
-      "Value": 0.0516,
+      "Value": 0.0504,
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · two-letter chunks English does not use, sent to Hebrew (264 of 676)": {

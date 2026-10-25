@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>יש עדכון — הפעילו מחדש כדי להתקין</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>הפעלה מחדש להתקנת גרסה {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — גרסה {0} מוכנה להתקנה</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} מוכן להתקנה</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>הפעילו מחדש מתפריט הסמל, או שהעדכון יותקן בהפעלה הבאה של Lapsus.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>הפעלה מחדש להתקנת העדכון</value>
   </data>

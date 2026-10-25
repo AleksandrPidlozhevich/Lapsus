@@ -54,6 +54,9 @@ public sealed class AppSettings
     // Mac App Store edition: the day the trial of the paid features began (StoreAccessPolicy).
     public DateOnly? StoreTrialStartedOn { get; set; }
 
+    // The downloaded update the tray last popped up a notification for (UpdateNotice): once per version.
+    public string? AnnouncedUpdateVersion { get; set; }
+
     public string[] ExcludedWords { get; set; } = [];
 
     public string[] ExcludedApps { get; set; } = [];

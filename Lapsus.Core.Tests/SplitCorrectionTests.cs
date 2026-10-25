@@ -41,6 +41,34 @@ public sealed class SplitCorrectionTests : IDisposable
         Assert.Equal("audioкава", result.Corrected);
     }
 
+    [Theory]
+    // Halves that are only typo fixes ("so" + "thing").
+    [InlineData("something")]
+    // One half switches layout ("rfdf" is "кава"), the other is still a typo fix ("ething").
+    [InlineData("rfdfething")]
+    public void A_word_off_the_list_is_not_split_into_typo_fixes(string typed)
+    {
+        var enPath = WriteTemp("en-split", "so 900", "thing 800", "audio 700");
+        var ukPath = WriteTemp("uk-split", "кава 100");
+        try
+        {
+            var corrector = new LayoutCorrector(new SpellChecker(
+            [
+                new DictionarySource("en", enPath, Script.Latin),
+                new DictionarySource("uk", ukPath, Script.Cyrillic)
+            ]));
+
+            var result = corrector.CorrectPhrase(typed);
+
+            Assert.Equal(typed, result.Corrected);
+        }
+        finally
+        {
+            File.Delete(enPath);
+            File.Delete(ukPath);
+        }
+    }
+
     private static string WriteTemp(string tag, params string[] lines)
     {
         var path = Path.Combine(Path.GetTempPath(), $"lapsus-{tag}-{Guid.NewGuid():N}.txt");

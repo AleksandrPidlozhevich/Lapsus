@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>ხელმისაწვდომია განახლება — გადატვირთეთ დასაყენებლად</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>გადატვირთეთ ვერსიის {0} დასაყენებლად</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — ვერსია {0} მზადაა დასაყენებლად</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} მზადაა დასაყენებლად</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>გადატვირთეთ ხატულის მენიუდან, ან განახლება დაყენდება Lapsus-ის შემდეგი გაშვებისას.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>გადატვირთეთ ამ განახლების დასაყენებლად</value>
   </data>

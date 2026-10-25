@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Dostupna je ispravka — ponovo pokrenite radi instalacije</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Ponovo pokreni i instaliraj verziju {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — verzija {0} je spremna za instalaciju</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} je spreman za instalaciju</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Ponovo pokrenite iz menija ikone ili će se ispravka instalirati pri sledećem pokretanju Lapsusa.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Ponovo pokreni i instaliraj ovu ispravku</value>
   </data>

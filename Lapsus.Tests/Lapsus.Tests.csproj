@@ -30,6 +30,13 @@
         <Compile Include="..\Lapsus.Core.Tests\LicenseIssuer.cs" Link="LicenseIssuer.cs" />
     </ItemGroup>
 
+    <!-- Word lists for CycleAcrossLanguagesTests: the generated fixtures, plus the Russian sample list. -->
+    <ItemGroup>
+        <Compile Include="..\Lapsus.Core.Tests\SampleWords.cs" Link="SampleWords.cs" />
+        <None Include="..\Lapsus.Core.Tests\Languages\Fixtures\*.words.txt" Link="Fixtures\%(Filename)%(Extension)"
+              CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\Lapsus\Lapsus.csproj" />
     </ItemGroup>

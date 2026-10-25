@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Има обновление — рестартирайте, за да се инсталира</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Рестартиране и инсталиране на версия {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — версия {0} е готова за инсталиране</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} е готов за инсталиране</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Рестартирайте от менюто на иконата или обновлението ще се инсталира при следващото стартиране на Lapsus.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Рестартиране и инсталиране на това обновление</value>
   </data>
