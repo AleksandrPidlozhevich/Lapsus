@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Aankopen konden niet worden hersteld: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Spraakinvoer</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} begint met luisteren; druk nogmaals en wat je zei verschijnt bij de cursor. Esc annuleert. Spraak wordt op deze computer herkend en het geluid wordt nergens opgeslagen.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Het spraakmodel is nog niet gedownload ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Spraakmodel: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Downloaden mislukt: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Spraakinvoer heeft het spraakmodel nodig: download het via Instellingen → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Microfoon niet beschikbaar: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>De microfoon nam alleen stilte op. Controleer of hij aanstaat en of Windows apps toestaat hem te gebruiken.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Er werd niets gehoord.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Spraakinvoer mislukt: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>De focus ging naar een ander venster ({0}), dus de tekst is naar het klembord gekopieerd.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Start en stopt spraakinvoer (aan te zetten op het tabblad AI). Esc annuleert een opname.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo is het nauwkeurigst; q5 is hetzelfde model als kleinere download. Whisper small is voor computers zonder videokaart, waarop het grote model te traag is.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Volgens de toetsenbordindeling</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>De taal van de actieve indeling, of een andere taal van je indelingen als er duidelijk in die taal wordt gesproken.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Microfoon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Systeemstandaard</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Geheugen vrijgeven</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Geladen neemt het spraakmodel ongeveer {0} MB geheugen in. Na het vrijgeven laadt het volgende dictaat het opnieuw; de opname begint toch meteen.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Na elk dictaat</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Na {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Na 1 uur</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Nooit (laden bij het opstarten)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Engelse termen in Latijnse letters</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termen als pull request of GitHub worden geschreven zoals in het Engels. Woorden die je taal heeft overgenomen, blijven zoals ze zijn.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Woordenlijst</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Namen en termen die goed geschreven moeten worden, één per regel, zoals ze getypt moeten worden. Klinkt een term ongewoon, zet dan na | hoe hij klinkt.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Spraakinvoer hoort bij Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus mag de microfoon niet gebruiken. Sta het toe via Systeeminstellingen → Privacy en beveiliging → Microfoon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Geef Lapsus in het venster dat verschijnt toegang tot de microfoon en start daarna de spraakinvoer opnieuw.</value>
+  </data>
 </root>

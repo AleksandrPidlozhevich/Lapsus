@@ -8,12 +8,15 @@ using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Models;
 using Lapsus.Core.Spelling;
+using Lapsus.Audio;
 using Lapsus.Input;
+using Lapsus.Input.Dictation;
 using Lapsus.Licensing;
 using Lapsus.Licensing.AppStore;
 using Lapsus.Localization;
 using Lapsus.Neural;
 using Lapsus.Settings;
+using Lapsus.Speech;
 using Lapsus.Startup;
 using Lapsus.Updates;
 using Lapsus.ViewModels;
@@ -37,6 +40,9 @@ public partial class App : Application
     private WordExceptions? _exceptions;
     private AppExclusions? _excludedApps;
     private LayoutIndicator? _indicator;
+    private DictationEngine? _dictationEngine;
+    private DictationSession? _dictation;
+    private DictationIndicator? _dictationIndicator;
 
     private StoreViewModel? _storeViewModel;
     private LicenseStatus? _licenseStatus;
@@ -124,6 +130,8 @@ public partial class App : Application
                 RebuildBrainAsync, _exceptions, _excludedApps, _indicator, _updater, _licenseViewModel,
                 _storeViewModel);
 
+            SetupDictation(settings, store);
+
             SetupTrayIcon(desktop);
             ActualThemeVariantChanged += (_, _) => ApplyThemedIcon();
             _singleInstance?.StartWatching(ShowWindow);
@@ -156,6 +164,54 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
+    // Voice typing. Nothing heavy happens here: the speech model loads on the first dictation (or, with "never
+    // unload", half a minute after start), and the microphone opens only while recording.
+    private void SetupDictation(AppSettings settings, SettingsStore store)
+    {
+        if (_backend is not IDictationHost host || _settingsViewModel is null || _dictionaryStore is null)
+            return;
+
+        var audio = AudioCaptureFactory.CreateForCurrentPlatform(() => _settingsViewModel.SettingsSnapshot().MicrophoneName);
+        var supported = audio is not NullAudioCapture;
+        var speech = new SpeechModelStore();
+        var dictionaries = _dictionaryStore;
+        _dictationEngine = new DictationEngine(speech, _settingsViewModel.SettingsSnapshot, dictionaries.Installed);
+        _dictationIndicator = new DictationIndicator(_indicator);
+        _dictation = new DictationSession(host, audio, _dictationEngine, _dictationIndicator,
+            () => _settingsViewModel.SettingsSnapshot().DictationEnabled);
+
+        void Apply(bool enabled)
+        {
+            _settingsViewModel.ApplyDictationHotkey();
+            if (!enabled)
+            {
+                _dictation?.Cancel();
+                _ = Task.Run(() => _dictationEngine?.Unload());
+            }
+            else if (settings.SpeechUnloadAfter == SpeechUnloadAfter.Never)
+            {
+                PreloadSpeechLater();
+            }
+        }
+
+        _settingsViewModel.Voice = new VoiceViewModel(settings, store, speech, supported, Apply,
+            modelReady: () => _dictationEngine?.Prepare(),
+            releaseModel: () => _dictationEngine?.Unload(),
+            locked: () => _settingsViewModel.NeuralLocked);
+        Apply(supported && settings.DictationEnabled);
+    }
+
+    private void PreloadSpeechLater()
+    {
+        var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+        timer.Tick += (_, _) =>
+        {
+            timer.Stop();
+            if (!_exiting)
+                _dictationEngine?.Preload();
+        };
+        timer.Start();
+    }
     // A silent update downloads a whole package. Wait until startup (dictionary load, hook install)
     // has settled so the download does not compete with it and make the machine stutter.
     private async Task CheckForUpdateLaterAsync()
@@ -338,6 +394,17 @@ public partial class App : Application
         try
         {
             _indicator?.Dispose();
+        }
+        catch
+        {
+        }
+
+        try
+        {
+            _dictation?.Dispose();
+            _dictationIndicator?.Dispose();
+            // Like the LLM: native threads may still be decoding, so abandon rather than free.
+            _dictationEngine?.AbandonForShutdown();
         }
         catch
         {

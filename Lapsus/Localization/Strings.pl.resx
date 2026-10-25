@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Nie udało się przywrócić zakupów: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Pisanie głosowe</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} rozpoczyna nagrywanie; naciśnij ponownie, a to, co powiesz, pojawi się w miejscu kursora. Esc anuluje. Mowa jest rozpoznawana na tym komputerze, a dźwięk nigdzie nie jest zapisywany.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Model mowy nie został jeszcze pobrany ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Model mowy: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Pobieranie nie powiodło się: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Pisanie głosowe wymaga modelu mowy: pobierz go w Ustawienia → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofon niedostępny: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofon nagrał tylko ciszę. Sprawdź, czy jest włączony i czy Windows pozwala aplikacjom z niego korzystać.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Nic nie usłyszano.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Pisanie głosowe nie powiodło się: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Fokus przeszedł do innego okna ({0}), więc tekst skopiowano do schowka.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Włącza i zatrzymuje pisanie głosowe (włączane w karcie AI). Esc anuluje nagranie.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo jest najdokładniejszy; q5 to ten sam model, ale mniejszy do pobrania. Whisper small jest dla komputerów bez karty graficznej, na których duży model działa zbyt wolno.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Język</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Według układu klawiatury</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Język aktywnego układu albo inny z języków twoich układów, jeśli mowa wyraźnie jest w nim.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Domyślny systemowy</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Zwalnianie pamięci</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Załadowany model mowy zajmuje około {0} MB pamięci. Po zwolnieniu następne dyktowanie załaduje go ponownie; nagrywanie i tak zaczyna się od razu.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Po każdym dyktowaniu</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Po {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Po 1 godzinie</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Nigdy (ładuj przy starcie)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Angielskie terminy alfabetem łacińskim</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Terminy takie jak pull request czy GitHub są pisane jak po angielsku. Słowa przyswojone przez twój język zostają bez zmian.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Słownik</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Nazwy i terminy, które mają być zapisane poprawnie — po jednym w wierszu, tak jak mają zostać wpisane. Jeśli termin brzmi nietypowo, po | dodaj, jak się go wymawia.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Pisanie głosowe jest częścią Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus nie ma dostępu do mikrofonu. Zezwól na niego w Ustawieniach systemowych → Prywatność i ochrona → Mikrofon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Zezwól aplikacji Lapsus na dostęp do mikrofonu w wyświetlonym oknie, a potem ponownie uruchom pisanie głosowe.</value>
+  </data>
 </root>

@@ -46,6 +46,9 @@ public sealed partial class AboutViewModel : ObservableObject
         new("Velopack 1.2.0", "MIT", "https://github.com/velopack/velopack"),
         new(OnnxGenAiCredit, "MIT", "https://github.com/microsoft/onnxruntime-genai"),
         new("SymSpell 6.7.3", "MIT", "https://github.com/wolfgarbe/symspell"),
+        new("Whisper.net 1.9.1", "MIT", "https://github.com/sandrohanea/whisper.net"),
+        new("whisper.cpp", "MIT", "https://github.com/ggml-org/whisper.cpp"),
+        new("NAudio 2.2.1", "MIT", "https://github.com/naudio/NAudio"),
         new("WeCantSpell.Hunspell 7.0.1", "MPL 1.1", "https://github.com/aarondandy/WeCantSpell.Hunspell")
     ];
 

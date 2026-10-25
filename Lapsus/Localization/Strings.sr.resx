@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Kupovine nije bilo moguće vratiti: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Glasovni unos</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} počinje snimanje; pritisnite ponovo i izgovoreno se pojavljuje tamo gde je kursor. Esc otkazuje. Govor se prepoznaje na ovom računaru, a zvuk se nigde ne čuva.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Model za govor još nije preuzet ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Model za govor: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Preuzimanje nije uspelo: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Za glasovni unos potreban je model za govor: preuzmite ga u Podešavanja → VI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofon nije dostupan: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofon je snimio samo tišinu. Proverite da li je uključen i da li Windows dozvoljava aplikacijama da ga koriste.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Ništa se nije čulo.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Glasovni unos nije uspeo: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Fokus je prešao na drugi prozor ({0}), pa je tekst kopiran u ostavu.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Pokreće i zaustavlja glasovni unos (uključuje se na kartici VI). Esc otkazuje snimanje.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo je najtačniji; q5 je isti model, ali se manje preuzima. Whisper small je za računare bez grafičke kartice, na kojima je veliki model prespor.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Jezik</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Prema rasporedu tastature</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Jezik aktivnog rasporeda ili neki drugi od jezika vaših rasporeda, ako je govor očigledno na njemu.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Sistemski podrazumevani</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Oslobađanje memorije</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Učitan model za govor zauzima oko {0} MB memorije. Posle oslobađanja, sledeće diktiranje ga ponovo učitava; snimanje ipak počinje odmah.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Posle svakog diktiranja</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Posle {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Posle 1 sata</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Nikad (učitavanje pri pokretanju)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Engleski termini latinicom</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termini poput pull request ili GitHub pišu se kao na engleskom, a ne vašim pismom. Reči odomaćene u jeziku ostaju kakve jesu.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Rečnik</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Imena i termini koje treba pisati tačno — po jedan u redu, onako kako treba da budu otkucani. Ako termin zvuči neobično, posle | dodajte kako se izgovara.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Glasovni unos je deo paketa Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus ne sme da koristi mikrofon. Dozvolite to u „Sistemska podešavanja“ → „Privatnost i bezbednost“ → „Mikrofon“.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Dozvolite aplikaciji Lapsus pristup mikrofonu u prozoru koji se pojavio, pa ponovo pokrenite glasovni unos.</value>
+  </data>
 </root>

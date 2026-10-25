@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Käufe konnten nicht wiederhergestellt werden: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Spracheingabe</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} startet die Aufnahme; noch einmal drücken, und das Gesagte erscheint an der Cursorposition. Esc bricht ab. Die Sprache wird auf diesem Computer erkannt, der Ton wird nirgends gespeichert.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Das Sprachmodell ist noch nicht heruntergeladen ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Sprachmodell: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Download fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Für die Spracheingabe wird das Sprachmodell gebraucht: Laden Sie es unter Einstellungen → KI herunter.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofon nicht verfügbar: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Das Mikrofon hat nur Stille aufgenommen. Prüfen Sie, ob es eingeschaltet ist und ob Windows Apps den Zugriff erlaubt.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Nichts gehört.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Spracheingabe fehlgeschlagen: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Der Fokus ist zu einem anderen Fenster gewechselt ({0}), daher wurde der Text in die Zwischenablage kopiert.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Startet und beendet die Spracheingabe (eingeschaltet im Tab KI). Esc bricht eine Aufnahme ab.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo ist am genauesten; q5 ist dasselbe Modell als kleinerer Download. Whisper small ist für Computer ohne Grafikkarte, auf denen das große Modell zu langsam ist.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Nach Tastaturlayout</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Die Sprache des aktiven Layouts oder eine andere Ihrer Layout-Sprachen, wenn eindeutig in ihr gesprochen wird.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Systemstandard</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Speicher freigeben</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Geladen belegt das Sprachmodell etwa {0} MB Speicher. Nach dem Freigeben lädt das nächste Diktat es erneut; die Aufnahme beginnt trotzdem sofort.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Nach jedem Diktat</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Nach {0} Min.</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Nach 1 Stunde</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Nie (beim Start laden)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Englische Begriffe in lateinischer Schrift</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Begriffe wie pull request oder GitHub werden wie im Englischen geschrieben. Wörter, die Ihre Sprache übernommen hat, bleiben unverändert.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glossar</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Namen und Begriffe, die richtig geschrieben werden sollen, einer pro Zeile, so wie sie getippt werden sollen. Klingt ein Begriff ungewöhnlich, fügen Sie nach | hinzu, wie er klingt.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Spracheingabe ist Teil von Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus darf das Mikrofon nicht verwenden. Erlauben Sie es unter Systemeinstellungen → Datenschutz &amp; Sicherheit → Mikrofon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Erlauben Sie Lapsus im angezeigten Dialog den Zugriff auf das Mikrofon und starten Sie die Spracheingabe dann erneut.</value>
+  </data>
 </root>

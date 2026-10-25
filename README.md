@@ -12,10 +12,11 @@ runs entirely on your machine.
 
 [![Website](https://img.shields.io/badge/website-getlapsus.com-2f6fed)](https://getlapsus.com/)
 [![Release](https://img.shields.io/github/v/release/AleksandrPidlozhevich/Lapsus?label=download&color=2f6fed)](https://github.com/AleksandrPidlozhevich/Lapsus/releases)
-![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-2f6fed)
-![.NET](https://img.shields.io/badge/.NET-10-512bd4)
-![Avalonia](https://img.shields.io/badge/UI-Avalonia-8b5cf6)
-![Telemetry](https://img.shields.io/badge/telemetry-none-16a34a)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-2f6fed)](#install)
+[![.NET](https://img.shields.io/badge/.NET-10-512bd4)](https://dotnet.microsoft.com/)
+[![UI](https://img.shields.io/badge/UI-Avalonia-8b5cf6)](https://avaloniaui.net/)
+[![Telemetry](https://img.shields.io/badge/telemetry-none-16a34a)](#privacy)
+[![License](https://img.shields.io/badge/license-BSL%201.1-64748b)](LICENSE)
 
 </div>
 
@@ -90,6 +91,10 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
 - **Show which layout is active** right next to the text cursor (opt-in), so the mistake
   does not happen in the first place. Apps that draw their own cursor (browsers, Electron)
   do not report a caret, on either OS.
+- **Type by voice** (opt-in): press the hotkey (Ctrl twice by default, ⌥ twice on a Mac), speak,
+  press it again, and what you said is typed at the cursor. English terms in Russian or Ukrainian speech come
+  out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own
+  names. [More below.](#voice-typing-optional)
 - **Stay out of the way**: named applications are skipped entirely, password fields never reach the
   buffer, and IME input (Chinese / Japanese / Korean) is left to the IME.
 - **Speak your language**: the interface ships in 26 languages, right-to-left ones included.
@@ -188,6 +193,35 @@ the prompt is built to stay identical from press to press and is rewound instead
 Files land in `%APPDATA%\Lapsus\models\{id}`, beside the dictionaries and equally safe from an
 update.
 
+## Voice typing (optional)
+
+**Settings → AI → Voice typing** turns it on and downloads the speech model;
+the hotkey is on the Hotkeys tab with the others. Press it, speak, press it again — or Esc to throw the
+recording away. A badge with a microphone sits at the cursor while it listens.
+
+- **Recognition** is OpenAI's [Whisper](https://github.com/openai/whisper) large-v3-turbo through
+  [whisper.cpp](https://github.com/ggml-org/whisper.cpp), on the graphics card where there is one
+  (Vulkan on Windows: NVIDIA, AMD and Intel alike; Metal on Apple Silicon) and on the processor
+  otherwise. On a mid-range GPU a phrase
+  takes about a third of a second; on an 8-core CPU, two to three seconds. Three builds are offered —
+  large-v3-turbo (834 MB, the default), the same model as a smaller download (547 MB), and Whisper small
+  (181 MB) for computers without a graphics card.
+- **English terms stay English.** Whisper is shown a sentence that mixes your language with English the
+  way people speak, then a second pass puts terms it still spelled out back into Latin by how they sound
+  (`пулл реквест` → `pull request`, `гитхаб` → `GitHub`), using the English word list and a built-in list
+  of tech names. Words your dictionary knows (`компьютер`, `файл`) and inflected forms (`задеплоил`) are
+  left alone. The glossary takes your own: one per line, `Kubernetes|кубер` when it sounds unusual.
+- **Silence stays silent.** Speech is cut out with [Silero VAD](https://github.com/snakers4/silero-vad)
+  before recognition, and the subtitle credits Whisper likes to invent over quiet audio are filtered out.
+- **The language** is your active keyboard layout's, or another of your layouts' languages when the
+  speech is clearly in it — never one you do not use. It can also be fixed.
+- **Memory**: the model (about 1 GB) loads when a dictation starts — the microphone opens at once, so no
+  word is lost while it loads — and is freed after five idle minutes, or whenever you choose.
+- **On a Mac** the first dictation asks for the microphone (System Settings → Privacy & Security →
+  Microphone). The input device is the system's; picking another one in Lapsus is Windows-only for now.
+
+Models land in `%APPDATA%\Lapsus\speech`, each pinned to a commit and checked against its SHA-256.
+
 ## Build & run
 
 ```bash
@@ -206,8 +240,9 @@ step by step in **[scripts/BUILDING.md](scripts/BUILDING.md)**.
 
 ## Privacy
 
-Correction runs locally, the neural model included. There is no telemetry, no analytics and no
-account, and what you type never leaves your computer. Password fields are skipped wherever the OS
+Correction runs locally, the neural model included, and so does voice typing: the recording stays in
+memory until its text is typed and is never written to disk or sent anywhere. There is no telemetry, no
+analytics and no account, and what you type never leaves your computer. Password fields are skipped wherever the OS
 lets us see them, the typing buffer is overwritten when it is dropped, and it is thrown away after
 one minute of silence.
 
@@ -216,7 +251,7 @@ The app goes online for exactly these, and nothing else:
 | When | Where | What it sends |
 |------|-------|---------------|
 | You install or update a dictionary | `raw.githubusercontent.com`, `kaikki.org` | an ordinary download request |
-| You search for or download a neural model | `huggingface.co` | the search text you typed; an ordinary download request |
+| You search for or download a neural model, or download the speech model | `huggingface.co` | the search text you typed; an ordinary download request |
 | At launch (not in the Microsoft Store version, which the Store updates) | GitHub Releases | an update check |
 | You enter a license key, and about once a month after that | the license server (Supabase) | the key, and a salted SHA-256 hash of the machine's ID — the raw ID never leaves the computer |
 
@@ -232,8 +267,7 @@ them in its own package folder and deletes them when it is uninstalled. Full pol
 
 ## Not done yet
 
-- **Linux backend** (evdev / uinput) — the UI and settings run, but nothing is captured.
-- **Word-bigram context ranking** — next.
+- **Linux backend** (evdev / uinput) — the UI and settings run, but nothing is captured.- **Word-bigram context ranking** — next.
 - **Greek accents through the dead key on macOS** (`kal;ow` → καλός) — works on Windows only for now.
 - **macOS notarization** — outstanding.
 
@@ -242,6 +276,7 @@ them in its own package folder and deletes them when it is uninstalled. Full pol
 - `Lapsus.Core` — the OS-independent brain: layouts, spelling, correction, typing buffer, text transforms
 - `Lapsus.Core.Tests` — xUnit coverage of the core
 - `Lapsus` — the Avalonia tray UI, the Windows / macOS input backends, the ONNX GenAI host
+- `Lapsus.Speech` — the Whisper host behind voice typing
 - `Lapsus.Tests` — the app-layer decisions that need no OS
 
 ## Free for private people, paid for companies

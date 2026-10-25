@@ -672,6 +672,15 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     protected override bool RetainBufferOnUnreadableFocus =>
         BufferOwner.Pid > 0 && ChromiumApps.IsChromiumExecutable(ExecutablePath(BufferOwner.Pid));
 
+    protected override MacTypingFocus CurrentFocus()
+    {
+        var focus = MacTypingFocusWatcher.ReadFocus(out var isTransient);
+        // A focus read mid-change (Electron rebuilding its tree) says nothing; the line's owner is the better guess.
+        return isTransient || focus.IsEmpty ? BufferOwner : focus;
+    }
+
+    protected override bool SetClipboardText(string text) => MacClipboard.SetText(text);
+
     protected override bool IsStillFocused(MacTypingFocus ownerAtStart)
     {
         if (ownerAtStart.IsEmpty)
@@ -868,6 +877,14 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             return IntPtr.Zero;
         }
 
+        // Esc during a recording cancels it and goes no further: the app behind must not see it.
+        if (keyCode == MacOSNativeMethods.EscapeKeyCode && DictationListening)
+        {
+            _swallowedKeyDown = keyCode;
+            _pendingHotkeyAction = RaiseDictationCancel;
+            return IntPtr.Zero;
+        }
+
         if (IsCorrectionHotkey(keyCode, flags))
         {
             PostFromTap(epoch, NoteNonModifierInput);
@@ -887,6 +904,17 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
             _swallowedKeyDown = keyCode;
             _pendingHotkeyAction = () => _ = ApplySelectionActionAsync(action);
+            return IntPtr.Zero;
+        }
+
+        if (TriggerMatches(DictationHotkey, keyCode, HeldModifiersOf(flags), !HasMeaningfulModifiers(flags)))
+        {
+            PostFromTap(epoch, NoteNonModifierInput);
+            if (!ShouldSwallowHotkey(pid))
+                return @event;
+
+            _swallowedKeyDown = keyCode;
+            _pendingHotkeyAction = RaiseDictationHotkey;
             return IntPtr.Zero;
         }
 

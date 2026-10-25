@@ -84,5 +84,8 @@
     <!-- A desktop app: the system-wide keyboard hook, SendInput and the tray all need full trust.
          Partner Center asks for a justification for this capability on submission. -->
     <rescap:Capability Name="runFullTrust" />
+    <!-- Voice typing records from the microphone. Windows asks the user the first time a dictation starts,
+         and the app shows up under Settings → Privacy & security → Microphone. -->
+    <DeviceCapability Name="microphone" />
   </Capabilities>
 </Package>

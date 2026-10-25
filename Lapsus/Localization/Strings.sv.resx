@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Köpen kunde inte återställas: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Röstinmatning</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} börjar lyssna; tryck igen så skrivs det du sa där markören står. Esc avbryter. Talet känns igen på den här datorn och ljudet sparas ingenstans.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Talmodellen är inte hämtad än ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Talmodell: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Hämtningen misslyckades: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Röstinmatning behöver talmodellen: hämta den under Inställningar → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofonen är inte tillgänglig: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofonen spelade bara in tystnad. Kontrollera att den är på och att Windows låter appar använda den.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Inget hördes.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Röstinmatningen misslyckades: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Fokus flyttades till ett annat fönster ({0}), så texten kopierades till Urklipp.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Startar och stoppar röstinmatning (slås på under fliken AI). Esc avbryter en inspelning.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo är mest exakt; q5 är samma modell som en mindre hämtning. Whisper small är för datorer utan grafikkort, där den stora modellen är för långsam.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Enligt tangentbordslayouten</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Den aktiva layoutens språk, eller ett annat av dina layouters språk när talet tydligt är på det.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Systemets standard</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Frigör minnet</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>När talmodellen är inläst tar den cirka {0} MB minne. När den har frigjorts läser nästa diktering in den igen; inspelningen börjar ändå direkt.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Efter varje diktering</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Efter {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Efter 1 timme</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Aldrig (läs in vid start)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Engelska termer med latinska bokstäver</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termer som pull request eller GitHub skrivs som på engelska. Ord som ditt språk har lånat in förblir som de är.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Ordlista</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Namn och termer som ska bli rätt, en per rad, stavade som de ska skrivas. Om en term låter ovanlig, lägg till efter | hur den låter.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Röstinmatning ingår i Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus får inte använda mikrofonen. Tillåt det under Systeminställningar → Integritet och säkerhet → Mikrofon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Ge Lapsus åtkomst till mikrofonen i rutan som visas och starta sedan röstinmatningen igen.</value>
+  </data>
 </root>

@@ -1,3 +1,4 @@
+using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Models;
 using System;
@@ -53,6 +54,30 @@ public sealed class AppSettings
 
     // Mac App Store edition: the day the trial of the paid features began (StoreAccessPolicy).
     public DateOnly? StoreTrialStartedOn { get; set; }
+
+    // Voice typing: the hotkey starts and stops recording; the speech model loads on first use and is unloaded
+    // after SpeechUnloadAfter of no dictation.
+    public bool DictationEnabled { get; set; }
+
+    // Option twice on a Mac: Control twice is one of macOS's own Dictation shortcuts.
+    public int DictationHotkey { get; set; } =
+        HotkeyTriggers.DoubleTap(OperatingSystem.IsMacOS() ? TapModifier.Alt : TapModifier.Control);
+
+    public string SpeechModelId { get; set; } = Speech.SpeechModelCatalog.DefaultId;
+
+    [JsonConverter(typeof(JsonStringEnumConverter<SpeechUnloadAfter>))]
+    public SpeechUnloadAfter SpeechUnloadAfter { get; set; } = SpeechUnloadAfter.Min5;
+
+    // A language code to always dictate in; null picks among the installed layouts' languages.
+    public string? DictationLanguage { get; set; }
+
+    public bool KeepEnglishTermsLatin { get; set; } = true;
+
+    // The recording device by name (WinMM product name); null is the system default.
+    public string? MicrophoneName { get; set; }
+
+    // "Term" or "Term|how it sounds|…", one per entry.
+    public string[] DictationGlossary { get; set; } = [];
 
     public string[] ExcludedWords { get; set; } = [];
 

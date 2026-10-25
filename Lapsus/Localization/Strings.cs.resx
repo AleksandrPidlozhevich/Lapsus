@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Nákupy se nepodařilo obnovit: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Hlasové psaní</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} spustí nahrávání; stiskněte znovu a vyslovený text se objeví na místě kurzoru. Esc zruší. Řeč se rozpoznává na tomto počítači a zvuk se nikam neukládá.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Model řeči ještě není stažen ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Model řeči: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Stažení se nezdařilo: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Hlasové psaní potřebuje model řeči: stáhněte ho v Nastavení → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofon není dostupný: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofon nahrál jen ticho. Zkontrolujte, že je zapnutý a že Windows aplikacím povoluje ho používat.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Nic nebylo slyšet.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Hlasové psaní selhalo: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Zaměření přešlo do jiného okna ({0}), proto byl text zkopírován do schránky.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Spouští a zastavuje hlasové psaní (zapíná se na kartě AI). Esc nahrávání zruší.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo je nejpřesnější; q5 je tentýž model, ale menší ke stažení. Whisper small je pro počítače bez grafické karty, na kterých je velký model příliš pomalý.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Podle rozložení klávesnice</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Jazyk aktivního rozložení, nebo jiný z jazyků vašich rozložení, pokud je řeč zjevně v něm.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Výchozí systémový</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Uvolňovat paměť</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Načtený model řeči zabírá asi {0} MB paměti. Po uvolnění ho další diktování načte znovu; nahrávání přesto začne hned.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Po každém diktování</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Po {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Po 1 hodině</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Nikdy (načíst při spuštění)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Anglické termíny latinkou</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termíny jako pull request nebo GitHub se píšou jako v angličtině. Slova, která váš jazyk přijal, zůstávají beze změny.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glosář</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Jména a termíny, které mají být napsány správně, jeden na řádek, tak jak se mají napsat. Pokud termín zní neobvykle, za | doplňte, jak se vyslovuje.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Hlasové psaní je součástí Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus nesmí používat mikrofon. Povolte to v Nastavení systému → Soukromí a zabezpečení → Mikrofon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>V zobrazeném okně povolte aplikaci Lapsus přístup k mikrofonu a pak hlasové psaní spusťte znovu.</value>
+  </data>
 </root>

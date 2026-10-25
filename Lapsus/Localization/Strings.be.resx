@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Не ўдалося аднавіць пакупкі: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Галасавы ўвод</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} — пачаць запіс; націсніце яшчэ раз, і сказанае з&apos;явіцца там, дзе курсор. Esc — скасаваць. Маўленне распазнаецца на гэтым камп&apos;ютары, гук нідзе не захоўваецца.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Мадэль маўлення яшчэ не спампавана ({0} МБ).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Мадэль маўлення: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Не ўдалося спампаваць: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Для галасавога ўводу патрэбна мадэль маўлення: спампуйце яе ў раздзеле Налады → ШІ.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Мікрафон недаступны: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Мікрафон запісаў толькі цішыню. Праверце, што ён уключаны і Windows дазваляе праграмам ім карыстацца.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Нічога не чуваць.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Галасавы ўвод не спрацаваў: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Фокус перайшоў у іншае акно ({0}), таму тэкст скапіяваны ў буфер абмену.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Запускае і спыняе галасавы ўвод (уключаецца на ўкладцы ШІ). Esc скасоўвае запіс.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo — самая дакладная; q5 — тая ж мадэль, але спампоўваецца менш. Whisper small — для камп&apos;ютараў без відэакарты, дзе вялікая мадэль занадта павольная.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Па раскладцы клавіятуры</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Мова актыўнай раскладкі або іншая з вашых раскладак, калі маўленне відавочна на ёй.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Мікрафон</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Сістэмны па змаўчанні</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Вызваляць памяць</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Загружаная мадэль маўлення займае каля {0} МБ памяці. Пасля вызвалення наступная дыктоўка загрузіць яе зноў; запіс усё роўна пачынаецца адразу.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Пасля кожнай дыктоўкі</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Праз {0} хв</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Праз 1 гадзіну</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Ніколі (загружаць пры запуску)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Англійскія тэрміны лацінкай</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Тэрміны накшталт pull request ці GitHub пішуцца як па-англійску, а не вашымі літарамі. Словы, што прыжыліся ў мове, застаюцца як ёсць.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Гласарый</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Імёны і тэрміны, якія важна пісаць правільна, — па адным у радку, так, як іх трэба надрукаваць. Калі тэрмін гучыць незвычайна, пасля | дадайце, як ён вымаўляецца.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Галасавы ўвод уваходзіць у Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus не дазволена карыстацца мікрафонам. Дазвольце ў «Сістэмныя налады» → «Прыватнасць і бяспека» → «Мікрафон».</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Дазвольце Lapsus доступ да мікрафона ў акне, якое з&apos;явілася, і зноў запусціце галасавы ўвод.</value>
+  </data>
 </root>

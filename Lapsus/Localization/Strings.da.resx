@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Købene kunne ikke gendannes: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Stemmeindtastning</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} begynder at lytte; tryk igen, så skrives det, du sagde, hvor markøren står. Esc annullerer. Talen genkendes på denne computer, og lyden gemmes ingen steder.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Talemodellen er ikke hentet endnu ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Talemodel: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Hentning mislykkedes: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Stemmeindtastning kræver talemodellen: hent den under Indstillinger → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofonen er ikke tilgængelig: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofonen optog kun stilhed. Kontrollér, at den er tændt, og at Windows tillader apps at bruge den.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Der blev ikke hørt noget.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Stemmeindtastning mislykkedes: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Fokus flyttede til et andet vindue ({0}), så teksten blev kopieret til udklipsholderen.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Starter og stopper stemmeindtastning (slås til under fanen AI). Esc annullerer en optagelse.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo er mest præcis; q5 er samme model som en mindre hentning. Whisper small er til computere uden grafikkort, hvor den store model er for langsom.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Sprog</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Efter tastaturlayoutet</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Det aktive layouts sprog eller et andet af dine layouts&apos; sprog, når der tydeligt tales på det.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Systemets standard</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Frigør hukommelsen</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Når talemodellen er indlæst, fylder den cirka {0} MB hukommelse. Når den er frigjort, indlæser næste diktat den igen; optagelsen starter stadig med det samme.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Efter hvert diktat</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Efter {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Efter 1 time</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Aldrig (indlæs ved start)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Engelske termer med latinske bogstaver</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termer som pull request eller GitHub skrives som på engelsk. Ord, som dit sprog har optaget, forbliver, som de er.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Ordliste</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Navne og termer, der skal skrives rigtigt, én pr. linje, stavet som de skal skrives. Hvis en term lyder usædvanlig, så tilføj efter |, hvordan den lyder.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Stemmeindtastning er en del af Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus må ikke bruge mikrofonen. Tillad det under Systemindstillinger → Anonymitet og sikkerhed → Mikrofon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Giv Lapsus adgang til mikrofonen i den dialog, der vises, og start derefter stemmeindtastningen igen.</value>
+  </data>
 </root>

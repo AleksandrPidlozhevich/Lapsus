@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>შესყიდვების აღდგენა ვერ მოხერხდა: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>ხმოვანი შეყვანა</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} იწყებს მოსმენას; კიდევ ერთხელ დააჭირეთ და ნათქვამი კურსორის ადგილას დაიწერება. Esc აუქმებს. მეტყველება ამ კომპიუტერზე ამოიცნობა, ხმა კი არსად ინახება.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>მეტყველების მოდელი ჯერ არ არის ჩამოტვირთული ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>მეტყველების მოდელი: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>ჩამოტვირთვა ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>ხმოვან შეყვანას მეტყველების მოდელი სჭირდება: ჩამოტვირთეთ აქ: პარამეტრები → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>მიკროფონი მიუწვდომელია: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>მიკროფონმა მხოლოდ სიჩუმე ჩაწერა. შეამოწმეთ, რომ ჩართულია და Windows აპლიკაციებს მისი გამოყენების უფლებას აძლევს.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>არაფერი ისმოდა.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>ხმოვანი შეყვანა ვერ შესრულდა: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>ფოკუსი სხვა ფანჯარაზე გადავიდა ({0}), ამიტომ ტექსტი ბუფერში დაკოპირდა.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>იწყებს და აჩერებს ხმოვან შეყვანას (ირთვება ჩანართზე AI). Esc აუქმებს ჩანაწერს.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo ყველაზე ზუსტია; q5 იგივე მოდელია უფრო მცირე ჩამოსატვირთით. Whisper small განკუთვნილია ვიდეობარათის გარეშე კომპიუტერებისთვის, სადაც დიდი მოდელი ზედმეტად ნელია.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>ენა</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>კლავიატურის განლაგების მიხედვით</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>აქტიური განლაგების ენა, ან თქვენი განლაგებების სხვა ენა, თუ მეტყველება აშკარად ამ ენაზეა.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>მიკროფონი</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>სისტემის ნაგულისხმევი</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>მეხსიერების გათავისუფლება</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>ჩატვირთული მეტყველების მოდელი დაახლოებით {0} MB მეხსიერებას იკავებს. გათავისუფლების შემდეგ მომდევნო კარნახი მას ხელახლა ჩატვირთავს; ჩაწერა მაინც მაშინვე იწყება.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>ყოველი კარნახის შემდეგ</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>{0} წუთის შემდეგ</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>1 საათის შემდეგ</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>არასდროს (ჩატვირთვა გაშვებისას)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>ინგლისური ტერმინები ლათინური ასოებით</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>ტერმინები, როგორიცაა pull request ან GitHub, იწერება ისე, როგორც ინგლისურად. თქვენს ენაში დამკვიდრებული სიტყვები უცვლელი რჩება.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>ტერმინების სია</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>სახელები და ტერმინები, რომლებიც სწორად უნდა დაიწეროს, თითო ხაზზე, ისე, როგორც უნდა აიკრიფოს. თუ ტერმინი უჩვეულოდ ჟღერს, | ნიშნის შემდეგ დაამატეთ, როგორ ჟღერს.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>ხმოვანი შეყვანა Lapsus Plus-ის ნაწილია.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus-ს მიკროფონის გამოყენება არ აქვს ნებადართული. დართეთ ნება აქ: სისტემის პარამეტრები → კონფიდენციალურობა და უსაფრთხოება → მიკროფონი.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>გამოჩენილ ფანჯარაში Lapsus-ს მიკროფონზე წვდომის ნება დართეთ და ხმოვანი შეყვანა ხელახლა გაუშვით.</value>
+  </data>
 </root>

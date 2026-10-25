@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Купувањата не можеа да се вратат: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Гласовно внесување</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} го започнува снимањето; притиснете повторно и кажаното се појавува таму каде што е курсорот. Esc откажува. Говорот се препознава на овој компјутер, а звукот никаде не се зачувува.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Моделот за говор сè уште не е преземен ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Модел за говор: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Преземањето не успеа: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>За гласовно внесување е потребен модел за говор: преземете го во Поставки → ВИ.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Микрофонот не е достапен: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Микрофонот сними само тишина. Проверете дали е вклучен и дали Windows им дозволува на апликациите да го користат.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Ништо не се слушна.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Гласовното внесување не успеа: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Фокусот премина на друг прозорец ({0}), па текстот е копиран во таблата со исечоци.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Го започнува и запира гласовното внесување (се вклучува во картичката ВИ). Esc го откажува снимањето.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo е најточен; q5 е истиот модел, но се презема помалку. Whisper small е за компјутери без графичка картичка, каде големиот модел е преспор.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Јазик</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Според распоредот на тастатурата</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Јазикот на активниот распоред или друг од јазиците на вашите распореди, ако говорот очигледно е на него.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Микрофон</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Системскиот стандарден</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Ослободување на меморијата</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Вчитаниот модел за говор зафаќа околу {0} MB меморија. По ослободувањето, следното диктирање повторно го вчитува; снимањето сепак започнува веднаш.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>По секое диктирање</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>По {0} мин</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>По 1 час</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Никогаш (вчитување при стартување)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Англиските термини на латиница</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Термините како pull request или GitHub се пишуваат како на англиски, а не со вашето писмо. Зборовите што се одомаќиле во јазикот остануваат како што се.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Речник</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Имиња и термини што треба да се пишуваат точно — по еден во ред, како што треба да се напишат. Ако терминот звучи необично, по | додадете како се изговара.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Гласовното внесување е дел од Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>На Lapsus не му е дозволено да го користи микрофонот. Дозволете во „Системски поставки“ → „Приватност и безбедност“ → „Микрофон“.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Дозволете му на Lapsus пристап до микрофонот во прозорецот што се појави, па повторно започнете со гласовно внесување.</value>
+  </data>
 </root>

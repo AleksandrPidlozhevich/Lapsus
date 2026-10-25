@@ -23,6 +23,7 @@
         <LSUIElement>true</LSUIElement>
         <NSAccessibilityUsageDescription>Lapsus needs Accessibility access to capture keystrokes, find the text cursor, and inject corrected text in other apps.</NSAccessibilityUsageDescription>
         <NSInputMonitoringUsageDescription>Lapsus needs Input Monitoring to receive keystrokes system-wide via CGEventTap.</NSInputMonitoringUsageDescription>
+        <NSMicrophoneUsageDescription>Lapsus listens only while voice typing is on and you have pressed its hotkey, and turns your speech into text on this Mac.</NSMicrophoneUsageDescription>
     </PropertyGroup>
 
     <!--
@@ -52,10 +53,25 @@
         <PackageReference Include="Velopack" Version="1.2.161" Condition="'$(MacAppStore)' != 'true'" />
     </ItemGroup>
 
-    <!-- The ONNX Runtime GenAI package, and which one each OS takes, lives in Lapsus.Neural. -->
+    <!-- The ONNX Runtime GenAI package, and which one each OS takes, lives in Lapsus.Neural; Whisper's in Lapsus.Speech. -->
     <ItemGroup>
         <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj" />
         <ProjectReference Include="..\Lapsus.Neural\Lapsus.Neural.csproj" />
+        <ProjectReference Include="..\Lapsus.Speech\Lapsus.Speech.csproj" />
+    </ItemGroup>
+
+    <!--
+      Dictation's microphone: WinMM through NAudio (MIT) on Windows. Other platforms do not get the package,
+      so its code is compiled out there and AudioCaptureFactory falls back to NullAudioCapture.
+    -->
+    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+        <PackageReference Include="NAudio.WinMM" Version="2.2.1" />
+    </ItemGroup>
+    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+        <DefineConstants>$(DefineConstants);WINDOWS_AUDIO</DefineConstants>
+    </PropertyGroup>
+    <ItemGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+        <Compile Remove="Audio\Windows\**" />
     </ItemGroup>
 
     <!--

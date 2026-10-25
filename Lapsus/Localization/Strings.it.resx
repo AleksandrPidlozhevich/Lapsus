@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Impossibile ripristinare gli acquisti: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Dettatura vocale</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} avvia l&apos;ascolto; premilo di nuovo e quello che hai detto viene scritto dove si trova il cursore. Esc annulla. La voce viene riconosciuta su questo computer e l&apos;audio non viene salvato da nessuna parte.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Il modello vocale non è ancora scaricato ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Modello vocale: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Download non riuscito: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>La dettatura vocale richiede il modello vocale: scaricalo in Impostazioni → IA.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Microfono non disponibile: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Il microfono ha registrato solo silenzio. Controlla che sia acceso e che Windows consenta alle app di usarlo.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Non si è sentito nulla.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Dettatura vocale non riuscita: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Il focus è passato a un&apos;altra finestra ({0}), quindi il testo è stato copiato negli appunti.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Avvia e ferma la dettatura vocale (si attiva nella scheda IA). Esc annulla la registrazione.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo è il più preciso; q5 è lo stesso modello in un download più leggero. Whisper small è per computer senza scheda grafica, dove il modello grande è troppo lento.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>In base al layout di tastiera</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>La lingua del layout attivo, o un&apos;altra delle lingue dei tuoi layout se si parla chiaramente in quella.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Microfono</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Predefinito di sistema</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Libera la memoria</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Caricato, il modello vocale occupa circa {0} MB di memoria. Una volta liberato, la dettatura successiva lo ricarica; la registrazione parte comunque subito.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Dopo ogni dettatura</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Dopo {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Dopo 1 ora</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Mai (carica all&apos;avvio)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Termini inglesi in lettere latine</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termini come pull request o GitHub vengono scritti come in inglese. Le parole che la tua lingua ha adottato restano come sono.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glossario</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Nomi e termini da scrivere correttamente, uno per riga, così come vanno digitati. Se un termine suona insolito, aggiungi dopo | come si pronuncia.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>La dettatura vocale fa parte di Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus non ha il permesso di usare il microfono. Consentilo in Impostazioni di Sistema → Privacy e sicurezza → Microfono.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Consenti a Lapsus di usare il microfono nella finestra che è comparsa, poi avvia di nuovo la dettatura vocale.</value>
+  </data>
 </root>

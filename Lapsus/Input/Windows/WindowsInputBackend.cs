@@ -273,6 +273,10 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
             WindowsClipboard.RestoreSnapshot(saved);
     }
 
+    protected override TypingFocus CurrentFocus() => _focus.Read();
+
+    protected override bool SetClipboardText(string text) => WindowsClipboard.SetText(text);
+
     protected override bool IsSameContainer(TypingFocus owner, TypingFocus focus)
     {
         return owner.Active == focus.Active;
@@ -337,6 +341,14 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         if (isDown)
         {
             NoteNonModifierInput();
+
+            // Esc during a recording cancels it and goes no further: the app behind must not see it.
+            if (vk == VK_ESCAPE && DictationListening)
+            {
+                _swallowedKeyDown = vk;
+                _pendingHotkeyAction = RaiseDictationCancel;
+                return 1;
+            }
 
             if (TryDispatchHotkey(vk))
             {
@@ -431,6 +443,8 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
             run = ApplyCorrection;
         else if (SelectionActionForKey((int)vk, held, plainAllowed) is { } action)
             run = () => _ = ApplySelectionActionAsync(action);
+        else if (TriggerMatches(DictationHotkey, (int)vk, held, plainAllowed))
+            run = RaiseDictationHotkey;
 
         if (run is null)
             return false;

@@ -1,4 +1,4 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
+<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Lapsus.ViewModels"
         xmlns:settings="using:Lapsus.Settings"
@@ -72,6 +72,29 @@
                     <TextBlock Classes="hint" Text="{Binding HintText}" />
                 </StackPanel>
             </Border>
+        </DataTemplate>
+        <!-- One hotkey: a preset list, a Record button and, while recording, the recorder panel. -->
+        <DataTemplate x:Key="HotkeyRowTemplate" x:DataType="vm:SelectionHotkeyViewModel">
+            <StackPanel Spacing="4" Margin="0,0,0,10">
+                <TextBlock Classes="rowTitle" Text="{Binding Label}" />
+                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding Hint}" />
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
+                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Options}"
+                              SelectedItem="{Binding Selected, Mode=TwoWay}"
+                              HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="vm:HotkeyOption">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding Recorder}"
+                                    ContentTemplate="{StaticResource HotkeyRecordButtonTemplate}" />
+                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding Recorder}"
+                                    ContentTemplate="{StaticResource HotkeyRecorderPanelTemplate}"
+                                    IsVisible="{Binding Recorder.IsRecording}" />
+                </Grid>
+            </StackPanel>
         </DataTemplate>
     </Window.Resources>
 
@@ -557,33 +580,14 @@
                         <Border Classes="card">
                             <StackPanel Spacing="10">
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[SelectionActions_Label]}" />
-                                <ItemsControl ItemsSource="{Binding SelectionActions}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate x:DataType="vm:SelectionHotkeyViewModel">
-                                            <StackPanel Spacing="4" Margin="0,0,0,10">
-                                                <TextBlock Classes="rowTitle" Text="{Binding Label}" />
-                                                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding Hint}" />
-                                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
-                                                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Options}"
-                                                              SelectedItem="{Binding Selected, Mode=TwoWay}"
-                                                              HorizontalAlignment="Stretch">
-                                                        <ComboBox.ItemTemplate>
-                                                            <DataTemplate x:DataType="vm:HotkeyOption">
-                                                                <TextBlock Text="{Binding Name}" />
-                                                            </DataTemplate>
-                                                        </ComboBox.ItemTemplate>
-                                                    </ComboBox>
-                                                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding Recorder}"
-                                                                    ContentTemplate="{StaticResource HotkeyRecordButtonTemplate}" />
-                                                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding Recorder}"
-                                                                    ContentTemplate="{StaticResource HotkeyRecorderPanelTemplate}"
-                                                                    IsVisible="{Binding Recorder.IsRecording}" />
-                                                </Grid>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <ItemsControl ItemsSource="{Binding SelectionActions}"
+                                              ItemTemplate="{StaticResource HotkeyRowTemplate}" />
                             </StackPanel>
+                        </Border>
+
+                        <Border Classes="card" IsVisible="{Binding DictationHotkeyRow, Converter={x:Static ObjectConverters.IsNotNull}}">
+                            <ContentControl Content="{Binding DictationHotkeyRow}"
+                                            ContentTemplate="{StaticResource HotkeyRowTemplate}" />
                         </Border>
 
                     </StackPanel>
@@ -968,6 +972,132 @@
                                     <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Classes="status"
                                                Text="{Binding Models.Status}"
                                                IsVisible="{Binding Models.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Voice typing: its own speech model, loaded only while it is used. Its hotkey is on the Hotkeys tab. -->
+                        <Border Classes="card" IsVisible="{Binding Voice.IsSupported, FallbackValue=False}">
+                            <StackPanel Spacing="8">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Classes="sectionTitle" Text="{Binding L[Voice_Toggle]}"
+                                               VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsEnabled="{Binding !Voice.Locked, FallbackValue=True}"
+                                                  IsChecked="{Binding Voice.Enabled, FallbackValue=False}" />
+                                </Grid>
+                                <TextBlock Classes="hint" Text="{Binding Voice.Hint}" />
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8"
+                                           IsVisible="{Binding Voice.Locked, FallbackValue=False}">
+                                    <TextBlock Classes="hint" VerticalAlignment="Center"
+                                               Text="{Binding L[Voice_Locked]}" />
+                                    <Button Content="{Binding L[Neural_Locked_Button]}"
+                                            Command="{Binding License.OpenLicenseSettingsCommand}" />
+                                </WrapPanel>
+
+                                <Grid IsVisible="{Binding Voice.Enabled, FallbackValue=False}"
+                                      ColumnDefinitions="*,Auto" ColumnSpacing="8"
+                                      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                    <Separator Grid.Row="0" Grid.ColumnSpan="2" Margin="0,2,0,10"
+                                               Background="{DynamicResource LapsusBorderBrush}" />
+
+                                    <!-- Model: choose, download, remove. -->
+                                    <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,0,0,6"
+                                              HorizontalAlignment="Stretch"
+                                              ItemsSource="{Binding Voice.ModelOptions}"
+                                              SelectedItem="{Binding Voice.SelectedModel}"
+                                              IsEnabled="{Binding !Voice.Busy}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:VoiceModelOption">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Grid.Row="1" Grid.Column="1" Margin="0,0,0,6"
+                                            Content="{Binding L[Action_Download]}"
+                                            Command="{Binding Voice.DownloadCommand}"
+                                            IsVisible="{Binding Voice.ShowDownload, FallbackValue=False}" />
+                                    <Button Grid.Row="1" Grid.Column="1" Margin="0,0,0,6" Classes="icon"
+                                            HorizontalAlignment="Right"
+                                            ToolTip.Tip="{Binding L[Model_RemoveTooltip]}"
+                                            Command="{Binding Voice.RemoveCommand}"
+                                            IsVisible="{Binding Voice.ShowRemove, FallbackValue=False}">
+                                        <Svg Path="{Binding TrashIconPath}" Width="16" Height="16" />
+                                    </Button>
+                                    <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,4"
+                                               Text="{Binding Voice.ModelStatus}" />
+                                    <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,6"
+                                               Text="{Binding L[Voice_ModelHint]}" />
+                                    <ProgressBar Grid.Row="4" Grid.ColumnSpan="2" Height="3" Margin="0,0,0,6"
+                                                 Minimum="0" Maximum="1"
+                                                 Value="{Binding Voice.Progress, FallbackValue=0}"
+                                                 IsVisible="{Binding Voice.Busy, FallbackValue=False}" />
+                                    <TextBlock Grid.Row="5" Grid.ColumnSpan="2" Classes="status" Margin="0,0,0,6"
+                                               Text="{Binding Voice.Status}"
+                                               IsVisible="{Binding Voice.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                                    <!-- Language. -->
+                                    <TextBlock Grid.Row="6" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                               Margin="0,4,0,4" Text="{Binding L[Voice_LanguageLabel]}" />
+                                    <ComboBox Grid.Row="6" Grid.Column="1" MinWidth="200" Margin="0,4,0,4"
+                                              ItemsSource="{Binding Voice.LanguageOptions}"
+                                              SelectedItem="{Binding Voice.SelectedLanguage}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:VoiceLanguageOption">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <TextBlock Grid.Row="7" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                               Text="{Binding L[Voice_LanguageHint]}" />
+
+                                    <!-- Microphone. -->
+                                    <TextBlock Grid.Row="8" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                               Margin="0,0,0,8" Text="{Binding L[Voice_MicLabel]}" />
+                                    <ComboBox Grid.Row="8" Grid.Column="1" MinWidth="200" Margin="0,0,0,8"
+                                              ItemsSource="{Binding Voice.MicrophoneOptions}"
+                                              SelectedItem="{Binding Voice.SelectedMicrophone}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:MicrophoneOption">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+
+                                    <!-- Memory. -->
+                                    <TextBlock Grid.Row="9" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                               Margin="0,0,0,4" Text="{Binding L[Voice_UnloadLabel]}" />
+                                    <ComboBox Grid.Row="9" Grid.Column="1" MinWidth="200" Margin="0,0,0,4"
+                                              ItemsSource="{Binding Voice.UnloadOptions}"
+                                              SelectedItem="{Binding Voice.SelectedUnload}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="vm:UnloadOption">
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <TextBlock Grid.Row="10" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                               Text="{Binding Voice.UnloadHint}" />
+
+                                    <!-- English terms. -->
+                                    <TextBlock Grid.Row="11" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                               TextWrapping="Wrap" Margin="0,0,0,4" Text="{Binding L[Voice_KeepLatin]}" />
+                                    <ToggleSwitch Grid.Row="11" Grid.Column="1" Classes="bare" HorizontalAlignment="Right"
+                                                  Margin="0,0,0,4"
+                                                  IsChecked="{Binding Voice.KeepEnglishTermsLatin, FallbackValue=True}" />
+                                    <TextBlock Grid.Row="12" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                               Text="{Binding L[Voice_KeepLatinHint]}" />
+
+                                    <!-- Glossary. -->
+                                    <TextBlock Grid.Row="13" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
+                                               Text="{Binding L[Voice_GlossaryLabel]}" />
+                                    <StackPanel Grid.Row="14" Grid.ColumnSpan="2" Spacing="4">
+                                        <TextBlock Classes="hint" Text="{Binding L[Voice_GlossaryHint]}" />
+                                        <TextBox AcceptsReturn="True" TextWrapping="NoWrap" MinHeight="90" MaxHeight="200"
+                                                 FontFamily="{DynamicResource ContentControlThemeFontFamily}"
+                                                 PlaceholderText="GitHub&#10;Kubernetes|kuber&#10;JSON|jason"
+                                                 Text="{Binding Voice.GlossaryText}" />
+                                    </StackPanel>
                                 </Grid>
                             </StackPanel>
                         </Border>

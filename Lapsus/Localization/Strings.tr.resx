@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Satın alımlar geri yüklenemedi: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Sesle yazma</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} dinlemeyi başlatır; tekrar basın, söyledikleriniz imlecin olduğu yere yazılır. Esc iptal eder. Konuşma bu bilgisayarda tanınır ve ses hiçbir yere kaydedilmez.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Konuşma modeli henüz indirilmedi ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Konuşma modeli: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>İndirme başarısız: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Sesle yazma için konuşma modeli gerekir: Ayarlar → Yapay zekâ bölümünden indirin.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofon kullanılamıyor: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofon yalnızca sessizlik kaydetti. Açık olduğunu ve Windows&apos;un uygulamaların onu kullanmasına izin verdiğini kontrol edin.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Hiçbir şey duyulmadı.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Sesle yazma başarısız oldu: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Odak başka bir pencereye geçti ({0}), bu yüzden metin panoya kopyalandı.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Sesle yazmayı başlatır ve durdurur (Yapay zekâ sekmesinde açılır). Esc kaydı iptal eder.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo en doğru olanıdır; q5 aynı modelin daha küçük indirmesidir. Whisper small, büyük modelin çok yavaş kaldığı ekran kartsız bilgisayarlar içindir.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Klavye düzenine göre</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Etkin düzenin dili ya da konuşma açıkça o dildeyse düzenlerinizin dillerinden biri.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Sistem varsayılanı</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Belleği boşalt</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Yüklü konuşma modeli yaklaşık {0} MB bellek kaplar. Boşaltıldıktan sonra sonraki dikte onu yeniden yükler; kayıt yine de hemen başlar.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Her dikteden sonra</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>{0} dk sonra</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>1 saat sonra</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Asla (başlangıçta yükle)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>İngilizce terimler Latin harfleriyle</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>pull request veya GitHub gibi terimler İngilizcedeki gibi yazılır. Dilinize yerleşmiş sözcükler olduğu gibi kalır.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Sözlük</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Doğru yazılması gereken adlar ve terimler, her satıra bir tane, yazılması gerektiği gibi. Bir terim alışılmadık okunuyorsa | işaretinden sonra nasıl okunduğunu ekleyin.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Sesle yazma, Lapsus Plus&apos;ın bir parçasıdır.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus&apos;un mikrofonu kullanma izni yok. Sistem Ayarları → Gizlilik ve Güvenlik → Mikrofon bölümünden izin verin.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Açılan pencerede Lapsus&apos;un mikrofonu kullanmasına izin verin ve sesle yazmayı yeniden başlatın.</value>
+  </data>
 </root>

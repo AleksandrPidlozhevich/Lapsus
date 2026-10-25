@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>No se pudieron restaurar las compras: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Dictado por voz</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} empieza a escuchar; púlsalo otra vez y lo que dijiste se escribe donde está el cursor. Esc cancela. La voz se reconoce en este ordenador y el audio no se guarda en ningún sitio.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>El modelo de voz aún no está descargado ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Modelo de voz: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>No se pudo descargar: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>El dictado por voz necesita el modelo de voz: descárgalo en Ajustes → IA.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Micrófono no disponible: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>El micrófono solo grabó silencio. Comprueba que está encendido y que Windows permite a las aplicaciones usarlo.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>No se oyó nada.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>El dictado por voz falló: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>El foco pasó a otra ventana ({0}), así que el texto se copió al portapapeles.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Inicia y detiene el dictado por voz (se activa en la pestaña IA). Esc cancela la grabación.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo es el más preciso; q5 es el mismo modelo con una descarga más pequeña. Whisper small es para ordenadores sin tarjeta gráfica en los que el modelo grande va demasiado lento.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Según la distribución del teclado</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>El idioma de la distribución activa, u otro de los idiomas de tus distribuciones si se habla claramente en él.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Micrófono</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Predeterminado del sistema</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Liberar la memoria</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Cargado, el modelo de voz ocupa unos {0} MB de memoria. Una vez liberado, el siguiente dictado lo vuelve a cargar; la grabación empieza igualmente al instante.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Tras cada dictado</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Tras {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Tras 1 hora</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Nunca (cargar al iniciar)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Términos ingleses en letras latinas</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Términos como pull request o GitHub se escriben como en inglés. Las palabras que tu idioma ya ha adoptado se quedan como están.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glosario</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Nombres y términos que deben escribirse bien, uno por línea, tal como deben escribirse. Si un término suena raro, añade después de | cómo suena.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>El dictado por voz forma parte de Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus no tiene permiso para usar el micrófono. Permítelo en Ajustes del Sistema → Privacidad y seguridad → Micrófono.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Permite a Lapsus usar el micrófono en el cuadro de diálogo y vuelve a iniciar el dictado por voz.</value>
+  </data>
 </root>

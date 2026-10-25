@@ -693,4 +693,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Purchases could not be restored: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Voice typing</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>{0} starts listening; press it again and what you said is typed at the cursor. Esc cancels. Speech is recognized on this computer, and the audio is never saved.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>The speech model is not downloaded yet ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Speech model: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Download failed: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Voice typing needs the speech model: download it in Settings → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Microphone unavailable: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>The microphone recorded only silence. Check that it is on and that Windows lets apps use it.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Nothing was heard.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Voice typing failed: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Focus moved to another window ({0}), so the text was copied to the clipboard instead.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Starts and stops voice typing (turned on in the AI tab). Esc cancels a recording.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3-turbo is the most accurate; q5 is a smaller download of the same model. Whisper small is for computers without a graphics card, where the large model is too slow.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Language</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>From the keyboard layout</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>The active layout&apos;s language, or another of your layouts&apos; languages when the speech is clearly in it.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>System default</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Free the memory</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>While loaded, the speech model takes about {0} MB of memory. Once it is freed, the next dictation loads it again; recording still starts at once.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>After each dictation</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>After {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>After 1 hour</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Never (load at startup)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Keep English terms in Latin letters</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Terms like pull request or GitHub are written as in English instead of in your alphabet. Words your language has adopted stay as they are.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glossary</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Names and terms to get right, one per line, spelled as they should be typed. If a term sounds unusual, add how it sounds after |.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Voice typing is part of Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus may not use the microphone. Allow it in System Settings → Privacy &amp; Security → Microphone.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Allow Lapsus to use the microphone in the dialog, then start voice typing again.</value>
+  </data>
 </root>

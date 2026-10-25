@@ -11,5 +11,8 @@
     <!-- The .NET runtime compiles managed code at run time. -->
     <key>com.apple.security.cs.allow-jit</key>
     <true/>
+    <!-- Voice typing records from the microphone. -->
+    <key>com.apple.security.device.audio-input</key>
+    <true/>
 </dict>
 </plist>

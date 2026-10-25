@@ -688,4 +688,97 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η επαναφορά των αγορών: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Φωνητική πληκτρολόγηση</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Το {0} ξεκινά την ακρόαση· πατήστε το ξανά και ό,τι είπατε γράφεται εκεί που βρίσκεται ο δρομέας. Το Esc ακυρώνει. Η ομιλία αναγνωρίζεται σε αυτόν τον υπολογιστή και ο ήχος δεν αποθηκεύεται πουθενά.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Το μοντέλο ομιλίας δεν έχει ληφθεί ακόμη ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Μοντέλο ομιλίας: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Η λήψη απέτυχε: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Η φωνητική πληκτρολόγηση χρειάζεται το μοντέλο ομιλίας: κατεβάστε το από Ρυθμίσεις → ΤΝ.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Το μικρόφωνο δεν είναι διαθέσιμο: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Το μικρόφωνο ηχογράφησε μόνο σιωπή. Ελέγξτε ότι είναι ενεργό και ότι τα Windows επιτρέπουν στις εφαρμογές να το χρησιμοποιούν.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Δεν ακούστηκε τίποτα.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Η φωνητική πληκτρολόγηση απέτυχε: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Η εστίαση μετακινήθηκε σε άλλο παράθυρο ({0}), οπότε το κείμενο αντιγράφηκε στο πρόχειρο.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Ξεκινά και σταματά τη φωνητική πληκτρολόγηση (ενεργοποιείται στην καρτέλα ΤΝ). Το Esc ακυρώνει μια εγγραφή.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>Το large-v3-turbo είναι το πιο ακριβές· το q5 είναι το ίδιο μοντέλο σε μικρότερη λήψη. Το Whisper small είναι για υπολογιστές χωρίς κάρτα γραφικών, όπου το μεγάλο μοντέλο είναι πολύ αργό.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Γλώσσα</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Από τη διάταξη πληκτρολογίου</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Η γλώσσα της ενεργής διάταξης ή άλλη από τις γλώσσες των διατάξεών σας, αν η ομιλία είναι σαφώς σε αυτήν.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Μικρόφωνο</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Προεπιλογή συστήματος</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Αποδέσμευση μνήμης</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Φορτωμένο, το μοντέλο ομιλίας καταλαμβάνει περίπου {0} MB μνήμης. Μετά την αποδέσμευση, η επόμενη υπαγόρευση το φορτώνει ξανά· η εγγραφή ξεκινά πάντως αμέσως.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Μετά από κάθε υπαγόρευση</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Μετά από {0} λεπτά</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Μετά από 1 ώρα</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Ποτέ (φόρτωση κατά την εκκίνηση)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Αγγλικοί όροι με λατινικά γράμματα</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Όροι όπως pull request ή GitHub γράφονται όπως στα αγγλικά. Οι λέξεις που έχει υιοθετήσει η γλώσσα σας μένουν ως έχουν.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Γλωσσάρι</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Ονόματα και όροι που πρέπει να γράφονται σωστά, ένας ανά γραμμή, όπως πρέπει να πληκτρολογηθούν. Αν ένας όρος ακούγεται ασυνήθιστα, προσθέστε μετά το | πώς προφέρεται.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Η φωνητική πληκτρολόγηση είναι μέρος του Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Το Lapsus δεν επιτρέπεται να χρησιμοποιεί το μικρόφωνο. Επιτρέψτε το στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια → Μικρόφωνο.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Επιτρέψτε στο Lapsus να χρησιμοποιεί το μικρόφωνο στο παράθυρο που εμφανίστηκε και ξεκινήστε ξανά τη φωνητική πληκτρολόγηση.</value>
+  </data>
 </root>

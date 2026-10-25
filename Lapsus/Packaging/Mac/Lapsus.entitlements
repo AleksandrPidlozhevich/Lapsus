@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Hardened-runtime entitlements for the direct-download build (scripts/package-macos.sh passes this to
+  `vpk pack` with signEntitlements). Without a file of its own vpk signs with vendor/Velopack.entitlements
+  from its repository; the first five keys are that file unchanged, so nothing else changes, and the last
+  is the one Lapsus adds: under the hardened runtime macOS gives the microphone only to apps that claim it.
+-->
+<plist version="1.0">
+<dict>
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <true/>
+    <key>com.apple.security.cs.disable-library-validation</key>
+    <true/>
+    <key>com.apple.security.cs.allow-dyld-environment-variables</key>
+    <true/>
+    <key>com.apple.security.automation.apple-events</key>
+    <true/>
+    <!-- Voice typing. -->
+    <key>com.apple.security.device.audio-input</key>
+    <true/>
+</dict>
+</plist>

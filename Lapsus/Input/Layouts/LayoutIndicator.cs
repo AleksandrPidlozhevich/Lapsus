@@ -87,6 +87,25 @@ public sealed class LayoutIndicator : IDisposable
         }
     }
 
+    private bool _suspended;
+
+    // While dictation's microphone badge shows in the same place, this one keeps out of its way.
+    public bool Suspended
+    {
+        get => _suspended;
+        set
+        {
+            if (_suspended == value)
+                return;
+
+            _suspended = value;
+            if (value)
+                Hide();
+            else
+                Refresh();
+        }
+    }
+
     public void Dispose()
     {
         Enabled = false;
@@ -189,6 +208,9 @@ public sealed class LayoutIndicator : IDisposable
 
     private void Apply(string? processName, CaretBounds caret)
     {
+        if (_suspended)
+            return;
+
         if (OperatingSystem.IsMacOS())
             NoteMacCaret(!caret.IsEmpty);
 

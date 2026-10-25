@@ -9,6 +9,7 @@ using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Text;
 using Lapsus.Input;
+using Lapsus.Input.Dictation;
 using Lapsus.Localization;
 using Lapsus.Neural;
 using Lapsus.Settings;
@@ -77,6 +78,7 @@ public partial class SettingsViewModel : ViewModelBase
         });
         MainRecorder = new HotkeyRecorderViewModel(_capture, trigger => SelectedHotkey = AddRecordedOption(trigger));
         SelectionActions = BuildSelectionActions();
+        DictationHotkeyRow = BuildDictationHotkeyRow();
         _enabled = settings.Enabled;
         _autoMode = settings.AutoMode;
         _autoFixTypos = settings.AutoFixTypos;
@@ -175,6 +177,9 @@ public partial class SettingsViewModel : ViewModelBase
 
     public ModelsViewModel Models { get; }
 
+    // Set by the app once dictation is wired up; null where it is not.
+    [ObservableProperty] private VoiceViewModel? _voice;
+
     public DictionariesViewModel Dictionaries { get; }
 
     public LicenseViewModel License { get; }
@@ -267,6 +272,11 @@ public partial class SettingsViewModel : ViewModelBase
     private void OnStoreAccessChanged()
     {
         OnPropertyChanged(nameof(NeuralLocked));
+        // Voice typing is a paid feature in the App Store edition too.
+        if (NeuralLocked && Voice is { Enabled: true } voice)
+            voice.Enabled = false;
+        Voice?.RefreshLabels();
+        ApplyDictationHotkey();
         if (!NeuralLocked || !NeuralCorrectionEnabled)
             return;
 
@@ -384,13 +394,12 @@ public partial class SettingsViewModel : ViewModelBase
     private void OnSelectionHotkeyChanged(SelectionHotkeyViewModel row)
     {
         var key = row.Selected.VirtualKey;
-        SaveSelectionHotkey(row.Action, key);
-        _backend.SetSelectionHotkey(row.Action, key);
+        ApplyRowKey(row, key);
 
         if (key != 0)
         {
 
-            foreach (var other in SelectionActions)
+            foreach (var other in HotkeyRows)
                 if (other != row && other.Selected.VirtualKey == key)
                     TurnOff(other);
 
@@ -405,13 +414,73 @@ public partial class SettingsViewModel : ViewModelBase
     private void TurnOff(SelectionHotkeyViewModel row)
     {
         row.SetSilently(row.Off);
-        SaveSelectionHotkey(row.Action, row.Off.VirtualKey);
-        _backend.SetSelectionHotkey(row.Action, row.Off.VirtualKey);
+        ApplyRowKey(row, row.Off.VirtualKey);
     }
 
     private bool IsKeyTaken(int virtualKey)
     {
-        return SelectionActions.Any(r => r.Selected.VirtualKey == virtualKey);
+        return HotkeyRows.Any(r => r.Selected.VirtualKey == virtualKey);
+    }
+
+    // Every hotkey row: the selection actions and, where dictation exists, its hotkey. No two may share a key.
+    private IEnumerable<SelectionHotkeyViewModel> HotkeyRows =>
+        DictationHotkeyRow is { } dictation ? SelectionActions.Append(dictation) : SelectionActions;
+
+    private void ApplyRowKey(SelectionHotkeyViewModel row, int key)
+    {
+        if (row.Action is { } action)
+        {
+            SaveSelectionHotkey(action, key);
+            _backend.SetSelectionHotkey(action, key);
+            return;
+        }
+
+        _settings.DictationHotkey = key;
+        ApplyDictationHotkey();
+        Voice?.RefreshLabels();
+    }
+
+    // Dictation runs where the backend can take its hotkey and the platform has a microphone backend.
+    public bool DictationSupported =>
+        _supported && (OperatingSystem.IsWindows() || OperatingSystem.IsMacOS()) && _backend is IDictationHost;
+
+    public SelectionHotkeyViewModel? DictationHotkeyRow { get; }
+
+    private SelectionHotkeyViewModel? BuildDictationHotkeyRow()
+    {
+        if (!DictationSupported)
+            return null;
+
+        var options = _selectionKeyOptions;
+        var saved = _settings.DictationHotkey;
+        var option = options.FirstOrDefault(o => o.VirtualKey == saved);
+        if (option is null && (HotkeyCombo.IsCombo(saved) || HotkeyNames.IsNamedKey(saved)))
+            option = AddRecordedOption(saved);
+
+        // A key another action already has leaves dictation without one rather than firing both.
+        if (option is null || saved == SelectedHotkey.VirtualKey || SelectionActions.Any(r => r.Selected.VirtualKey == saved))
+            option = options[0];
+        if (option.VirtualKey != saved)
+        {
+            _settings.DictationHotkey = option.VirtualKey;
+            _store.Save(_settings);
+        }
+
+        var row = new SelectionHotkeyViewModel(
+            null, "Voice_Toggle", "Dictation_HotkeyHint", options, option, OnSelectionHotkeyChanged, _capture,
+            AddRecordedOption);
+        ApplyDictationHotkey();
+        return row;
+    }
+
+    // The backend listens for the dictation hotkey only while voice typing is on.
+    public void ApplyDictationHotkey()
+    {
+        if (_backend is IDictationHost host)
+            // Store is set later in the constructor than the first call; until then nothing is locked.
+            host.DictationHotkey = DictationSupported && _settings.DictationEnabled && Store is not { PaidFeatures: false }
+                ? _settings.DictationHotkey
+                : 0;
     }
 
     private int SavedSelectionHotkey(SelectionAction action)
@@ -708,7 +777,7 @@ public partial class SettingsViewModel : ViewModelBase
         _settings.HotkeyVirtualKey = value.VirtualKey;
         _backend.HotkeyVirtualKey = value.VirtualKey;
 
-        foreach (var row in SelectionActions)
+        foreach (var row in HotkeyRows)
             if (row.Selected.VirtualKey == value.VirtualKey)
                 TurnOff(row);
 
@@ -858,7 +927,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
 
         BuildPreferences(_settings.PreferredLayout);
-        foreach (var row in SelectionActions)
+        foreach (var row in HotkeyRows)
             row.RefreshLabels();
         Models.RefreshLabels();
         OnPropertyChanged(nameof(UpdateButtonTooltip));

@@ -96,8 +96,21 @@ public sealed class HuggingFaceClient
         ];
     }
 
+    public Task DownloadFilesAsync(
+        string repo,
+        string subPath,
+        IReadOnlyList<RepoFile> files,
+        string destination,
+        IProgress<double>? progress = null,
+        CancellationToken ct = default)
+    {
+        return DownloadFilesAsync(repo, "main", subPath, files, destination, progress, ct);
+    }
+
+    // revision: a branch or a commit; a commit pins exactly the files a catalog entry was checked against.
     public async Task DownloadFilesAsync(
         string repo,
+        string revision,
         string subPath,
         IReadOnlyList<RepoFile> files,
         string destination,
@@ -119,7 +132,7 @@ public sealed class HuggingFaceClient
             var target = Path.Combine(destination, relative.Replace('/', Path.DirectorySeparatorChar));
             Directory.CreateDirectory(Path.GetDirectoryName(target)!);
 
-            await using var response = await Http.GetStreamAsync(FileUrl(repo, file.Path), ct)
+            await using var response = await Http.GetStreamAsync(FileUrl(repo, revision, file.Path), ct)
                 .ConfigureAwait(false);
             await using var output = File.Create(target);
 
@@ -142,9 +155,9 @@ public sealed class HuggingFaceClient
             : fullPath;
     }
 
-    private static string FileUrl(string repo, string path)
+    private static string FileUrl(string repo, string revision, string path)
     {
-        return $"{Files}/{repo}/resolve/main/{path}";
+        return $"{Files}/{repo}/resolve/{revision}/{path}";
     }
 
     private static async Task<JsonDocument?> GetJsonAsync(string url, CancellationToken ct)
