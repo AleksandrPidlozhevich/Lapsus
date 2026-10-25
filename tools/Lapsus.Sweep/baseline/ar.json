@@ -9,7 +9,7 @@
       "Better": "Higher"
     },
     "Rule B — a whole Arabic line typed on the English layout · lines recovered in full · with": {
-      "Value": 0.9796,
+      "Value": 0.983,
       "Better": "Higher"
     },
     "Rule B — a whole Arabic line typed on the English layout · words recovered · without": {
@@ -17,7 +17,7 @@
       "Better": "Higher"
     },
     "Rule B — a whole Arabic line typed on the English layout · words recovered · with": {
-      "Value": 0.9964,
+      "Value": 0.9973,
       "Better": "Higher"
     },
     "Rule B — the same Arabic line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · without": {
@@ -25,7 +25,7 @@
       "Better": "Higher"
     },
     "Rule B — the same Arabic line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · with": {
-      "Value": 0.8824,
+      "Value": 0.8848,
       "Better": "Higher"
     },
     "Rule B — the same Arabic line with a comma inside and a full stop at the end · the comma survived as a comma · without": {
@@ -77,7 +77,7 @@
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · spell-fixed in place, still English · with": {
-      "Value": 0.2962,
+      "Value": 0,
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Arabic line · typo'd word still crossed into Arabic · without": {
@@ -85,7 +85,7 @@
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Arabic line · typo'd word still crossed into Arabic · with": {
-      "Value": 0.5314,
+      "Value": 0.5317,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Arabic line · and came back as the word that was meant · without": {
@@ -101,7 +101,7 @@
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Arabic · with": {
-      "Value": 0.9996,
+      "Value": 1,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · line finished in English does not ask for Arabic · without": {

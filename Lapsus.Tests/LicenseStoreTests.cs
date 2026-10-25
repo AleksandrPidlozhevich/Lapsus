@@ -1,5 +1,5 @@
 using Lapsus.Core.Licensing;
-using Lapsus.Core.Tests;
+using Lapsus.Core.Tests.Licensing;
 using Lapsus.Licensing;
 using System.Text;
 

@@ -92,7 +92,8 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
                 continue;
 
             var onKeys = LayoutTranscoder.Transcode(word, meant.Map, typed.Map);
-            if (onKeys == word || !IsAllLetters(onKeys, typed.Script) ||
+            // Plain keys only: a word that needs Shift on the other layout ("الآن" is "hgNk") is another case.
+            if (onKeys == word || !IsAllLetters(onKeys, typed.Script) || onKeys.Any(char.IsUpper) ||
                 LayoutTranscoder.Transcode(onKeys, typed.Map, meant.Map) != word ||
                 installed.Any(l => lists.Of(l).Knows(onKeys)))
                 continue;
@@ -156,12 +157,15 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
                 var entries = full[language.Code];
                 var others = Languages.Where(l => l.Script != language.Script).ToArray();
 
-                // Ordinary words with no listed word two edits away, so the typo fix has nothing to respell them
-                // into, and that no other script spells as a word.
+                // Ordinary words with no listed word two edits away in any list of the script (they are pooled: a
+                // Bulgarian "затвора" is a neighbour of the Ukrainian "завтра"), so the typo fix has nothing to
+                // respell them into, and that no other script spells as a word.
                 var words = entries.Select(e => e.Word).ToList();
+                var sameScript = Languages.Where(l => l.Script == language.Script)
+                    .SelectMany(l => full[l.Code].Select(e => e.Word)).Distinct().ToList();
                 var unlisted = words.Skip(100)
                     .Where(w => w.Length >= 6 && IsAllLetters(w, language.Script) &&
-                                !words.Any(n => n != w && Math.Abs(n.Length - w.Length) <= 2 && Distance(n, w) <= 2) &&
+                                !sameScript.Any(n => n != w && Math.Abs(n.Length - w.Length) <= 2 && Distance(n, w) <= 2) &&
                                 others.All(o => !full[o.Code].Any(e => e.Word ==
                                     LayoutTranscoder.Transcode(w, language.Map, o.Map))))
                     .Take(2)
@@ -197,29 +201,31 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
                 File.Delete(path);
         }
 
+        // Edits with a swap of two neighbouring letters counted as one, as the typo fix counts them ("завтра" is
+        // two edits from "затвора").
         private static int Distance(string a, string b)
         {
-            var row = Enumerable.Range(0, b.Length + 1).ToArray();
+            var d = new int[a.Length + 1, b.Length + 1];
+            for (var i = 0; i <= a.Length; i++)
+                d[i, 0] = i;
+            for (var j = 0; j <= b.Length; j++)
+                d[0, j] = j;
+
             for (var i = 1; i <= a.Length; i++)
+            for (var j = 1; j <= b.Length; j++)
             {
-                var diagonal = row[0];
-                row[0] = i;
-                for (var j = 1; j <= b.Length; j++)
-                {
-                    var above = row[j];
-                    row[j] = Math.Min(Math.Min(row[j] + 1, row[j - 1] + 1), diagonal + (a[i - 1] == b[j - 1] ? 0 : 1));
-                    diagonal = above;
-                }
+                var cost = a[i - 1] == b[j - 1] ? 0 : 1;
+                d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
+                if (i > 1 && j > 1 && a[i - 1] == b[j - 2] && a[i - 2] == b[j - 1])
+                    d[i, j] = Math.Min(d[i, j], d[i - 2, j - 2] + 1);
             }
 
-            return row[b.Length];
+            return d[a.Length, b.Length];
         }
 
         private static List<(string Word, long Count)> Read(Language language)
         {
-            var lines = language.Code == "ru"
-                ? Core.Tests.SampleWords.RussianLines()
-                : File.ReadLines(Path.Combine(FixtureDir, $"{language.Code}.words.txt"));
+            var lines = File.ReadLines(Path.Combine(FixtureDir, $"{language.Code}.words.txt"));
 
             var entries = new List<(string, long)>();
             foreach (var line in lines)

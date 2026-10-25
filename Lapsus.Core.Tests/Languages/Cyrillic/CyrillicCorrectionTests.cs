@@ -3,25 +3,14 @@ using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Tests.Languages.Cyrillic;
 
-public sealed class CyrillicCorrectionTests : IDisposable
+public sealed class CyrillicCorrectionTests
 {
-    private readonly ScriptHarness _harness = new();
-    private readonly LayoutCorrector _corrector;
-
-    public CyrillicCorrectionTests()
-    {
-        _corrector = _harness
-            .With("uk", Script.Cyrillic,
-                "кава 900", "вітання 850", "молоко 800", "дякую 700", "п'ять 600", "я 950", "здоров 300", "здорово 250")
-            .With("ru", Script.Cyrillic, "привет 900", "кофе 800", "молоко 800", "спасибо 700")
-            .With("en", Script.Latin, "car 900", "cat 850", "server 700")
-            .Corrector();
-    }
-
-    public void Dispose()
-    {
-        _harness.Dispose();
-    }
+    private readonly LayoutCorrector _corrector = new TestDictionaries()
+        .With("uk", Script.Cyrillic,
+            "кава 900", "вітання 850", "молоко 800", "дякую 700", "п'ять 600", "я 950", "здоров 300", "здорово 250")
+        .With("ru", Script.Cyrillic, "привет 900", "кофе 800", "молоко 800", "спасибо 700")
+        .With("en", Script.Latin, "car 900", "cat 850", "server 700")
+        .Corrector();
 
     [Theory]
     [InlineData("rfdf", "кава")]

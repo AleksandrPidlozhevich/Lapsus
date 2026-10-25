@@ -4,7 +4,7 @@ using Lapsus.Core.Spelling;
 
 namespace Lapsus.Core.Tests.Languages.Arabic;
 
-public sealed class ArabicCorrectionTests : IDisposable
+public sealed class ArabicCorrectionTests
 {
     private readonly string _arPath;
     private readonly string _enPath;
@@ -18,9 +18,7 @@ public sealed class ArabicCorrectionTests : IDisposable
 
     public ArabicCorrectionTests()
     {
-        _arPath = Path.Combine(Path.GetTempPath(), $"lapsus-ar-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(_arPath,
-        [
+        _arPath = TestDictionaries.List("ar", [
             "مرحبا 900",
             "شكرا 800",
             "كتاب 700",
@@ -30,8 +28,7 @@ public sealed class ArabicCorrectionTests : IDisposable
             "مدرسة 300"
         ]);
 
-        _enPath = Path.Combine(Path.GetTempPath(), $"lapsus-en-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(_enPath, ["ship 900", "text 800", "hello 700"]);
+        _enPath = TestDictionaries.List("en", ["ship 900", "text 800", "hello 700"]);
 
         var spell = new SpellChecker(
         [
@@ -39,12 +36,6 @@ public sealed class ArabicCorrectionTests : IDisposable
             new DictionarySource("en", _enPath, Script.Latin)
         ]);
         _corrector = new LayoutCorrector(spell);
-    }
-
-    public void Dispose()
-    {
-        File.Delete(_arPath);
-        File.Delete(_enPath);
     }
 
     [Fact]
@@ -161,24 +152,16 @@ public sealed class ArabicCorrectionTests : IDisposable
     [Fact]
     public void A_spell_fix_may_not_manufacture_the_dictionary_hit_a_switch_needs()
     {
-        var latinOnly = Path.Combine(Path.GetTempPath(), $"lapsus-en2-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(latinOnly, ["lvpf 900", "hello 800"]);
+        var latinOnly = TestDictionaries.List("en2", ["lvpf 900", "hello 800"]);
 
-        try
-        {
-            var corrector = new LayoutCorrector(
-                new SpellChecker([new DictionarySource("en", latinOnly, Script.Latin)]));
+        var corrector = new LayoutCorrector(
+            new SpellChecker([new DictionarySource("en", latinOnly, Script.Latin)]));
 
-            var result = corrector.CorrectPhrase(
-                "مرحبا", Script.Arabic, BundledKeyboardMaps.Ar, ToLatin, null, "ar");
+        var result = corrector.CorrectPhrase(
+            "مرحبا", Script.Arabic, BundledKeyboardMaps.Ar, ToLatin, null, "ar");
 
-            Assert.False(result.Changed);
-            Assert.Equal("مرحبا", result.Corrected);
-        }
-        finally
-        {
-            File.Delete(latinOnly);
-        }
+        Assert.False(result.Changed);
+        Assert.Equal("مرحبا", result.Corrected);
     }
 
     [Fact]

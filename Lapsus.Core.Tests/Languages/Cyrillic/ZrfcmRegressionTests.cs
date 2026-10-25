@@ -4,14 +4,14 @@ using Lapsus.Core.Spelling;
 
 namespace Lapsus.Core.Tests.Languages.Cyrillic;
 
-public sealed class ZrfcmRegressionTests : IDisposable
+public sealed class ZrfcmRegressionTests
 {
     private readonly string _ukPath;
     private readonly LayoutCorrector _corrector;
 
     public ZrfcmRegressionTests()
     {
-        _ukPath = WriteTempDictionary("uk", "якась 100");
+        _ukPath = TestDictionaries.List("uk", "якась 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", _ukPath, Script.Cyrillic)
@@ -102,7 +102,7 @@ public sealed class ZrfcmRegressionTests : IDisposable
     [Fact]
     public void Leading_comma_is_part_of_ukrainian_word()
     {
-        var ukPath = WriteTempDictionary("uk", "брама 100");
+        var ukPath = TestDictionaries.List("uk", "брама 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", ukPath, Script.Cyrillic)
@@ -123,8 +123,8 @@ public sealed class ZrfcmRegressionTests : IDisposable
     [Fact]
     public void Trailing_comma_stays_punctuation_after_english_word()
     {
-        var enPath = WriteTempDictionary("en", "hello 100");
-        var ukPath = WriteTempDictionary("uk", "брама 100");
+        var enPath = TestDictionaries.List("en", "hello 100");
+        var ukPath = TestDictionaries.List("uk", "брама 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("en", enPath, Script.Latin),
@@ -165,7 +165,7 @@ public sealed class ZrfcmRegressionTests : IDisposable
     [Fact]
     public void Ukrainian_phrase_with_oem_commas_corrects_fully()
     {
-        var ukPath = WriteTempDictionary("uk", "брама 100", "до 100", "неба 100");
+        var ukPath = TestDictionaries.List("uk", "брама 100", "до 100", "неба 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", ukPath, Script.Cyrillic)
@@ -181,14 +181,12 @@ public sealed class ZrfcmRegressionTests : IDisposable
         Assert.True(result.Changed);
         Assert.Equal("брама до неба", result.Corrected);
         Assert.Equal(KeyboardLayout.Uk, result.TargetLayout);
-
-        File.Delete(ukPath);
     }
 
     [Fact]
     public void Ukrainian_phrase_corrects_short_word_without_dictionary_entry()
     {
-        var ukPath = WriteTempDictionary("uk", "брама 100", "неба 100");
+        var ukPath = TestDictionaries.List("uk", "брама 100", "неба 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", ukPath, Script.Cyrillic)
@@ -203,14 +201,12 @@ public sealed class ZrfcmRegressionTests : IDisposable
 
         Assert.True(result.Changed);
         Assert.Equal("брама до неба", result.Corrected);
-
-        File.Delete(ukPath);
     }
 
     [Fact]
     public void Phrase_with_leading_bracket_letter_is_i_want()
     {
-        var ukPath = WriteTempDictionary("uk", "я 100", "хочу 100");
+        var ukPath = TestDictionaries.List("uk", "я 100", "хочу 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", ukPath, Script.Cyrillic)
@@ -226,8 +222,6 @@ public sealed class ZrfcmRegressionTests : IDisposable
         Assert.True(result.Changed);
         Assert.Equal("я хочу", result.Corrected);
         Assert.Equal(KeyboardLayout.Uk, result.TargetLayout);
-
-        File.Delete(ukPath);
     }
 
     [Theory]
@@ -238,7 +232,7 @@ public sealed class ZrfcmRegressionTests : IDisposable
     [InlineData("[jxe", "хочу")]
     public void Short_wrong_layout_words_correct_when_known(string input, string expected)
     {
-        var ukPath = WriteTempDictionary("uk", "я 100", "как 100", "шо 100", "де 100", "хочу 100");
+        var ukPath = TestDictionaries.List("uk", "я 100", "как 100", "шо 100", "де 100", "хочу 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", ukPath, Script.Cyrillic)
@@ -254,14 +248,12 @@ public sealed class ZrfcmRegressionTests : IDisposable
         Assert.True(result.Changed);
         Assert.Equal(expected, result.Corrected);
         Assert.Equal(KeyboardLayout.Uk, result.TargetLayout);
-
-        File.Delete(ukPath);
     }
 
     [Fact]
     public void Interior_comma_is_part_of_wrong_layout_word()
     {
-        var ukPath = WriteTempDictionary("uk", "неба 100");
+        var ukPath = TestDictionaries.List("uk", "неба 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", ukPath, Script.Cyrillic)
@@ -276,14 +268,12 @@ public sealed class ZrfcmRegressionTests : IDisposable
 
         Assert.True(result.Changed);
         Assert.Equal("неба", result.Corrected);
-
-        File.Delete(ukPath);
     }
 
     [Fact]
     public void Picks_installed_layout_variant_with_best_transcode_score()
     {
-        var ukPath = WriteTempDictionary("uk", "брама 100");
+        var ukPath = TestDictionaries.List("uk", "брама 100");
         var spell = new SpellChecker(new[]
         {
             new DictionarySource("uk", ukPath, Script.Cyrillic)
@@ -307,19 +297,5 @@ public sealed class ZrfcmRegressionTests : IDisposable
         Assert.True(result.Changed);
         Assert.Equal("брама", result.Corrected);
         Assert.Equal("com.apple.Ukrainian-Legacy", result.TargetLayoutId);
-
-        File.Delete(ukPath);
-    }
-
-    private static string WriteTempDictionary(string tag, params string[] lines)
-    {
-        var path = Path.Combine(Path.GetTempPath(), $"lapsus-{tag}-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(path, lines);
-        return path;
-    }
-
-    public void Dispose()
-    {
-        File.Delete(_ukPath);
     }
 }
