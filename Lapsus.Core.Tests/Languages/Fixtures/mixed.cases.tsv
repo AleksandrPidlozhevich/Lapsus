@@ -166,3 +166,14 @@ en ar	شكرا see you غدا	ok	clean
 en ar	شكرا see you {en:غدا}	ok	forgotten at the end
 en ar	نعم send me the {ar:report}	ok	forgotten at the end
 en el	θα σου έχεις m.o. ναι	ok	an abbreviation keeps its letters though μ and ο are Greek words
+#
+# --- Punctuation keys that are letters on the other layout (; ж, ' э, [ х, ] ъ, , б, . ю)
+en ru	это был {en:муж}	ok	ж on the ; key ends a forgotten word
+en ru	ладно, {en:хорошо}	ok	х on the [ key opens a forgotten word
+en ru	{en:эх}, ладно	ok	a forgotten interjection made only of punctuation keys
+en ru	окей, {en:этаж} второй	ok	э and ж keys around a forgotten word
+en ru	ну {en:уж} нет	ok	a two-key interjection ending on ;
+en ru	я слушаю {en:ники минаж}	ok	a name the list lacks: ; is ж though мина is a word
+en ru	ok; {en:давай}	ok	a real semicolon after an English word stays
+en uk	{en:щось є}	ok	є on the ' key, alone
+en uk	це {en:їжа}	ok	ї on the ] key opens the word

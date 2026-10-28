@@ -20,6 +20,7 @@ public sealed class TypingFixtureTests
     private static readonly Dictionary<string, Language> Languages = new()
     {
         ["uk"] = new("uk", Script.Cyrillic, KeyboardLayout.Uk, BundledKeyboardMaps.Uk),
+        ["ru"] = new("ru", Script.Cyrillic, KeyboardLayout.Ru, BundledKeyboardMaps.Ru),
         ["he"] = new("he", Script.Hebrew, KeyboardLayout.He, BundledKeyboardMaps.He),
         ["ar"] = new("ar", Script.Arabic, KeyboardLayout.Ar, BundledKeyboardMaps.Ar),
         ["el"] = new("el", Script.Greek, KeyboardLayout.El, BundledKeyboardMaps.El),
@@ -45,6 +46,10 @@ public sealed class TypingFixtureTests
     [Theory]
     [MemberData(nameof(Cases), "uk")]
     public void Ukrainian(string typed, string expected, string status, string note) => Check("uk", typed, expected, status, note);
+
+    [Theory]
+    [MemberData(nameof(Cases), "ru")]
+    public void Russian(string typed, string expected, string status, string note) => Check("ru", typed, expected, status, note);
 
     [Theory]
     [MemberData(nameof(Cases), "he")]

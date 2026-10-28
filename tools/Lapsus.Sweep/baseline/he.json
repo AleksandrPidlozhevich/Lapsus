@@ -5,27 +5,27 @@
   "TargetWords": 48893,
   "Metrics": {
     "Rule B — a whole Hebrew line typed on the English layout · lines recovered in full · without": {
-      "Value": 0.3376,
+      "Value": 0.3491,
       "Better": "Higher"
     },
     "Rule B — a whole Hebrew line typed on the English layout · lines recovered in full · with": {
-      "Value": 0.9668,
+      "Value": 0.9682,
       "Better": "Higher"
     },
     "Rule B — a whole Hebrew line typed on the English layout · words recovered · without": {
-      "Value": 0.8439,
+      "Value": 0.8483,
       "Better": "Higher"
     },
     "Rule B — a whole Hebrew line typed on the English layout · words recovered · with": {
-      "Value": 0.9948,
+      "Value": 0.995,
       "Better": "Higher"
     },
     "Rule B — the same Hebrew line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · without": {
-      "Value": 0.3256,
+      "Value": 0.3352,
       "Better": "Higher"
     },
     "Rule B — the same Hebrew line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · with": {
-      "Value": 0.9042,
+      "Value": 0.9054,
       "Better": "Higher"
     },
     "Rule B — the same Hebrew line with a comma inside and a full stop at the end · the comma survived as a comma · without": {
@@ -81,23 +81,23 @@
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · typo'd word still crossed into Hebrew · without": {
-      "Value": 0.4866,
+      "Value": 0.4942,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · typo'd word still crossed into Hebrew · with": {
-      "Value": 0.5152,
+      "Value": 0.5212,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · and came back as the word that was meant · without": {
-      "Value": 0.0399,
+      "Value": 0.0422,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Hebrew line · and came back as the word that was meant · with": {
-      "Value": 0.0399,
+      "Value": 0.0422,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Hebrew · without": {
-      "Value": 0.9872,
+      "Value": 0.9882,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Hebrew · with": {
@@ -129,19 +129,19 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · alone": {
-      "Value": 0.7351,
+      "Value": 0.7375,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · keys only": {
-      "Value": 0.735,
+      "Value": 0.7374,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · sticky": {
-      "Value": 0.9285,
+      "Value": 0.9304,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Hebrew words recovered · sticky keys only": {
-      "Value": 0.9284,
+      "Value": 0.9303,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · correct English words changed · alone": {
@@ -181,11 +181,11 @@
       "Better": "Lower"
     },
     "Rule F — a wrong-layout Hebrew word the list does not have · the word on its own, recovered": {
-      "Value": 0.7896,
+      "Value": 0.7915,
       "Better": "Higher"
     },
     "Rule F — a wrong-layout Hebrew word the list does not have · the word ending a line of its language, recovered": {
-      "Value": 0.7914,
+      "Value": 0.7952,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed back to the meant word": {

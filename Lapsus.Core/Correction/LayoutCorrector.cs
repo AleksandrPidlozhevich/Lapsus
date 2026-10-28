@@ -8,6 +8,9 @@ public sealed class LayoutCorrector : IPhraseCorrector
 {
     private const double EditPenalty = 0.12;
 
+    // The most a word no list knows can score (naturalness × WordScorer's unknown-word penalty).
+    private const double UnknownWordCeiling = 0.6;
+
     private const int MinWordToKeepPunctuation = 3;
 
     private const int MinWordToKeepSentencePunctuation = 2;
@@ -275,7 +278,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
             {
                 CloseVerbatim(i);
                 var chunk = text[i..chunkEnd];
-                var chunkSource = sourceFor(chunk[0]) with { LanguageCode = phraseSourceLanguageCode };
+                var chunkSource = KeysSource(chunk, sourceFor, installed) with { LanguageCode = phraseSourceLanguageCode };
                 chunkSource = chunkSource with
                 {
                     Candidates = EnsureOppositeScriptCandidates(chunkSource.Script, chunkSource.Candidates, installed)
@@ -398,13 +401,38 @@ public sealed class LayoutCorrector : IPhraseCorrector
             end++;
         }
 
-        var raw = sourceFor(text[start]);
+        var raw = KeysSource(text[start..end], sourceFor, installed);
         var candidates = EnsureOppositeScriptCandidates(raw.Script, raw.Candidates, installed);
         for (var k = start; k < end; k++)
             if (!WordScanner.CarriesLetterElsewhere(text[k], raw.Map, candidates))
                 return null;
 
         return end;
+    }
+
+    // Letterless keys take the active layout's script, but "'[" cannot be typed on the Russian layout at all:
+    // the layout that types them is the one they were typed on.
+    private static WordSource KeysSource(
+        string chunk, Func<char, WordSource> sourceFor, IReadOnlyList<LayoutSource>? installed)
+    {
+        var raw = sourceFor(chunk[0]);
+        if (installed is null || Types(raw.Map, chunk))
+            return raw;
+
+        foreach (var layout in installed)
+            if (layout.Script is { } script && Types(layout.Map, chunk))
+                return raw with { Script = script, Map = layout.Map, LanguageCode = layout.LanguageCode };
+
+        return raw;
+
+        static bool Types(KeyboardMap map, string keys)
+        {
+            foreach (var ch in keys)
+                if (!map.TryGetKey(ch, out _, out _))
+                    return false;
+
+            return true;
+        }
     }
 
     private PhraseCorrection Emit(
@@ -533,7 +561,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
             if (_exceptions.Contains(token))
                 continue;
 
-            if (ReadAsOneWord(token, source, preferred, cliticAlone: cliticAlone) is not { } longer)
+            if ((ReadAsOneWord(token, source, preferred, cliticAlone: cliticAlone) ??
+                 LetterKeysAfterACrossing(best, text[wordEnd..end], source)) is not { } longer)
                 continue;
 
             if ((endsSentence || plainAsTyped) &&
@@ -544,6 +573,19 @@ public sealed class LayoutCorrector : IPhraseCorrector
         }
 
         return (best, wordEnd);
+    }
+
+    // A word that crossed takes the letter keys after it whatever the list says: to someone typing Russian
+    // ";" "'" "[" "]" are ж э х ъ, never punctuation ("vbyf;" is минаж, not мина;). A full stop or comma is
+    // still the list's call.
+    private static ScoredWord? LetterKeysAfterACrossing(ScoredWord best, string tail, WordSource source)
+    {
+        if (!best.Changed || CandidateOf(best, source) is not { } candidate || candidate.ScoringScript == source.Script ||
+            tail.AsSpan().IndexOfAny(".,!?:") >= 0)
+            return null;
+
+        var text = best.Text + LayoutTranscoder.Transcode(tail, source.Map, candidate.Map);
+        return WordScanner.IsAllLetters(text, candidate.ScoringScript) ? best with { Text = text } : null;
     }
 
     private bool KeyIsALetter(
@@ -709,6 +751,12 @@ public sealed class LayoutCorrector : IPhraseCorrector
     private ScoredWord BestWord(string word, WordSource source, KeyboardLayout? preferred, bool keysOnly = false)
     {
         var baseline = _scorer.Score(word, source.Script, source.LanguageCode);
+
+        // "];f" spells "f" once its leading keys are trimmed, but as typed it is no word: those keys are letters
+        // elsewhere (їжа). It scores as an unknown word, so a listed reading can cross it. A leading apostrophe
+        // is English's own ('s, 'll), not such a key.
+        if (word.Length > 0 && !char.IsLetter(word[0]) && word[0] is not ('\'' or '’'))
+            baseline = Math.Min(baseline, UnknownWordCeiling);
         var best = ScoredWord.AsTyped(word, baseline);
 
         var writableAsTyped = Orthography.IsPossibleWord(word, source.Script);

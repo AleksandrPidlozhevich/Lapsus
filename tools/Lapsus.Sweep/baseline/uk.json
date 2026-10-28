@@ -5,35 +5,35 @@
   "TargetWords": 32402,
   "Metrics": {
     "Rule B — a whole Ukrainian line typed on the English layout · lines recovered in full · without": {
-      "Value": 0.2068,
+      "Value": 0.2296,
       "Better": "Higher"
     },
     "Rule B — a whole Ukrainian line typed on the English layout · lines recovered in full · with": {
-      "Value": 0.9833,
+      "Value": 0.9844,
       "Better": "Higher"
     },
     "Rule B — a whole Ukrainian line typed on the English layout · words recovered · without": {
-      "Value": 0.7818,
+      "Value": 0.7953,
       "Better": "Higher"
     },
     "Rule B — a whole Ukrainian line typed on the English layout · words recovered · with": {
-      "Value": 0.9971,
+      "Value": 0.9975,
       "Better": "Higher"
     },
     "Rule B — the same Ukrainian line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · without": {
-      "Value": 0.2066,
+      "Value": 0.2284,
       "Better": "Higher"
     },
     "Rule B — the same Ukrainian line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · with": {
-      "Value": 0.8451,
+      "Value": 0.8612,
       "Better": "Higher"
     },
     "Rule B — the same Ukrainian line with a comma inside and a full stop at the end · the comma survived as a comma · without": {
-      "Value": 0.9228,
+      "Value": 0.9239,
       "Better": "Higher"
     },
     "Rule B — the same Ukrainian line with a comma inside and a full stop at the end · the comma survived as a comma · with": {
-      "Value": 0.9206,
+      "Value": 0.9216,
       "Better": "Higher"
     },
     "Rule B — English words standing beside two wrong-layout Ukrainian ones · English words pulled into Cyrillic · without": {
@@ -81,27 +81,27 @@
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · typo'd word still crossed into Cyrillic · without": {
-      "Value": 0.485,
+      "Value": 0.495,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · typo'd word still crossed into Cyrillic · with": {
-      "Value": 0.49,
+      "Value": 0.499,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · and came back as the word that was meant · without": {
-      "Value": 0.1646,
+      "Value": 0.1683,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · and came back as the word that was meant · with": {
-      "Value": 0.1646,
+      "Value": 0.1682,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Ukrainian · without": {
-      "Value": 0.9686,
+      "Value": 0.9747,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Ukrainian · with": {
-      "Value": 0.9996,
+      "Value": 0.9997,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · line finished in English does not ask for Ukrainian · without": {
@@ -129,19 +129,19 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Ukrainian words recovered · alone": {
-      "Value": 0.6336,
+      "Value": 0.6357,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Ukrainian words recovered · keys only": {
-      "Value": 0.6336,
+      "Value": 0.6357,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Ukrainian words recovered · sticky": {
-      "Value": 0.9001,
+      "Value": 0.902,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Ukrainian words recovered · sticky keys only": {
-      "Value": 0.9001,
+      "Value": 0.902,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · correct English words changed · alone": {

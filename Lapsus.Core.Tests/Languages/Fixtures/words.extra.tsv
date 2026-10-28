@@ -40,3 +40,16 @@ ru	посмотрю	mixed.cases.tsv
 # Words the typing fixtures type
 uk	вітання	uk.cases.tsv, MixedLanguageTests
 bg	щастие	bg.cases.tsv: "]astie"
+#
+# Words the Russian typing fixtures and the punctuation-key cases type
+ru	ники	ru.cases.tsv: "ybrb vbyf;"
+ru	мина	ru.cases.tsv: the trap that keeps ";" as punctuation
+ru	нож	ru.cases.tsv
+ru	этаж	ru.cases.tsv
+ru	дождь	ru.cases.tsv
+ru	ждем	ru.cases.tsv
+ru	журнал	ru.cases.tsv
+ru	экран	ru.cases.tsv
+ru	поезжай	ru.cases.tsv
+uk	їжа	mixed.cases.tsv
+ru	слушаю	mixed.cases.tsv: "я слушаю" typed right

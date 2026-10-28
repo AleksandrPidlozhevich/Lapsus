@@ -125,10 +125,15 @@ internal sealed class PhraseContext(
 
     private (ScoredWord Pulled, Script Into)? FollowsItsRun(int index)
     {
-        if (!IsShortAndUnmoved(index) || _tokens[index].BaselineFrequency <= 0 || !StandsAlone(index))
+        if (!IsShortAndUnmoved(index))
             return null;
 
+        // Keys with no letter of their own ("'[", "'") are no word where typed, so nothing holds them there.
         var token = _tokens[index];
+        var letterless = WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length == 0;
+        if (!letterless && (token.BaselineFrequency <= 0 || !StandsAlone(index)))
+            return null;
+
         var left = WordBeside(index, -1);
         var right = WordBeside(index, 1);
         var fromLeft = CrossedOnTheSameKeys(left, token);
@@ -137,10 +142,10 @@ internal sealed class PhraseContext(
             return null;
 
         if ((fromLeft ?? fromRight) is not { } into)
-            return OnlyShortWordsBeside(index);
+            return letterless ? LetterlessBesideItsLanguage(index, left, right) : OnlyShortWordsBeside(index);
 
-        if (IsBlindTo(token, into) ||
-            readInScript(token.Typed, token.Source, into) is not { } pulled || !WordScorer.IsDictionaryHit(pulled.Score))
+        var reading = letterless ? ReadLetterless(token, into) : readInScript(token.Typed, token.Source, into);
+        if (IsBlindTo(token, into) || reading is not { } pulled || !WordScorer.IsDictionaryHit(pulled.Score))
             return null;
 
         // The commoner word must not give way: "in" next to a crossing is still "in", never шт.
@@ -152,6 +157,33 @@ internal sealed class PhraseContext(
         // "oh, ye 'nj fix" is "oh, ну это fix", ye being a rare word and ну a common one.
         var seam = IsOwnWordBeside(left, token, into) || IsOwnWordBeside(right, token, into);
         return seam && lead < MinFrequencyLeadWithoutANeighbour ? null : (pulled, into);
+    }
+
+    // "'[, ладно": letterless keys beside a word typed right in another script are a word of that script when
+    // they spell one there (эх).
+    private (ScoredWord Pulled, Script Into)? LetterlessBesideItsLanguage(int index, int? left, int? right)
+    {
+        var token = _tokens[index];
+        if ((NativeScriptOf(left) ?? NativeScriptOf(right)) is not { } into || into == token.Source.Script ||
+            ReadLetterless(token, into) is not { } pulled)
+            return null;
+
+        return (pulled, into);
+    }
+
+    // "'[," is эх and a comma: the chunk runs to the space, so a sentence mark typed after it is read off first
+    // and kept as typed when the keys alone spell no word.
+    private ScoredWord? ReadLetterless(in TokenReading token, Script into)
+    {
+        if (readInScript(token.Typed, token.Source, into) is { } whole && WordScorer.IsDictionaryHit(whole.Score))
+            return whole;
+
+        var core = token.Typed.TrimEnd('.', ',', '!', '?');
+        if (core.Length == 0 || core.Length == token.Typed.Length ||
+            readInScript(core, token.Source, into) is not { } pulled || !WordScorer.IsDictionaryHit(pulled.Score))
+            return null;
+
+        return pulled with { Text = pulled.Text + token.Typed[core.Length..] };
     }
 
     // "ye jr, давай": a run of short words, every one of them both languages' and next to a word typed right in
