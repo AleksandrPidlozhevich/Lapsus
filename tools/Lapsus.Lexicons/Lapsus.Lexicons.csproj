@@ -12,4 +12,9 @@
         <ProjectReference Include="..\..\Lapsus.Core\Lapsus.Core.csproj"/>
     </ItemGroup>
 
+    <!-- The app's catalog itself, so the test fixtures come from the same pinned URLs the app downloads. -->
+    <ItemGroup>
+        <Compile Include="..\..\Lapsus\Settings\DictionaryCatalog.cs" Link="DictionaryCatalog.cs"/>
+    </ItemGroup>
+
 </Project>

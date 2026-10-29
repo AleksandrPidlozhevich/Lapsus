@@ -59,6 +59,7 @@ public partial class App : Application
     private bool _creatingWindow;
     private readonly AppUpdater _updater = new();
     private NativeMenuItem? _updateItem;
+    private UpdateNotice? _updateNotice;
 
     public override void Initialize()
     {
@@ -145,7 +146,8 @@ public partial class App : Application
                         ShowWindow();
                 };
 
-            _updater.UpdateReadyToInstall += (_, _) => ShowUpdateAvailable();
+            _updateNotice = new UpdateNotice(settings, store);
+            _updater.UpdateReadyToInstall += (_, _) => Dispatcher.UIThread.Post(ShowUpdateAvailable);
             _ = CheckForUpdateLaterAsync();
 
             _ = CheckLicenseAsync();
@@ -390,9 +392,11 @@ public partial class App : Application
         {
             showItem.Header = loc["Tray_Settings"];
             exitItem.Header = loc["Tray_Exit"];
-            _trayIcon.ToolTipText = loc["Tray_Tooltip"];
+            _trayIcon.ToolTipText = _updateItem is null
+                ? loc["Tray_Tooltip"]
+                : UpdateNotice.TooltipText(loc, _updater.PendingVersion);
             if (_updateItem is not null)
-                _updateItem.Header = loc["Tray_UpdateAvailable"];
+                _updateItem.Header = UpdateNotice.MenuText(loc, _updater.PendingVersion);
         };
 
         TrayIcon.SetIcons(this, new TrayIcons { _trayIcon });
@@ -448,14 +452,35 @@ public partial class App : Application
         }
     }
 
+    // The silent check (or the Settings button) has downloaded an update. The tray keeps a menu item, a
+    // tooltip and a dot on the icon until it is installed; Windows also gets one balloon per version.
+    // Store builds never get here: their AppUpdater cannot check, so the event never fires.
     private void ShowUpdateAvailable()
     {
-        if (_updateItem is not null || _trayIcon?.Menu is not { } menu)
+        if (!AppUpdater.CanSelfUpdate || _exiting || _updateItem is not null || _trayIcon?.Menu is not { } menu)
             return;
 
-        _updateItem = new NativeMenuItem(Localizer.Instance["Tray_UpdateAvailable"]);
+        var loc = Localizer.Instance;
+        var version = _updater.PendingVersion;
+
+        _updateItem = new NativeMenuItem(UpdateNotice.MenuText(loc, version));
         _updateItem.Click += (_, _) => _updater.ApplyAndRestart();
         menu.Items.Insert(0, _updateItem);
+        menu.Items.Insert(1, new NativeMenuItemSeparator());
+        _trayIcon.ToolTipText = UpdateNotice.TooltipText(loc, version);
+        ApplyThemedIcon();
+
+        // Claimed even when nothing pops up, so the same version is not announced on a later start.
+        if (_updateNotice?.TryClaimAnnouncement(version) != true || version is null)
+            return;
+
+        // Someone looking at Settings already sees the update button change.
+        if (_window is { IsActive: true })
+            return;
+
+        if (OperatingSystem.IsWindows())
+            WindowsTrayBalloon.TryShow(_trayIcon, UpdateNotice.AnnouncementTitle(loc, version),
+                UpdateNotice.AnnouncementBody(loc));
     }
 
     private void ApplyThemedIcon()
@@ -463,9 +488,10 @@ public partial class App : Application
         if (_trayIcon is null)
             return;
 
+        var badge = _updateItem is not null;
         _trayIcon.Icon = OperatingSystem.IsMacOS()
-            ? AppIcons.CreateTrayTemplateIcon()
-            : AppIcons.CreateWindowIcon(ActualThemeVariant);
+            ? AppIcons.CreateTrayTemplateIcon(badge)
+            : AppIcons.CreateTrayIcon(ActualThemeVariant, badge);
 
         if (_window is not null)
             _window.Icon = AppIcons.CreateWindowIcon(ActualThemeVariant);

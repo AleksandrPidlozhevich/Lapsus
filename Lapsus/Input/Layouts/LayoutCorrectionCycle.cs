@@ -167,9 +167,14 @@ internal sealed class LayoutCorrectionCycle
 
     private static IReadOnlyList<TextSpan>? SettledSpans(PhraseCorrection first, string segment)
     {
+        if (!string.Equals(first.Original, segment, StringComparison.Ordinal))
+            return null;
 
-        if (first.Settled is not { Count: > 0 } spans
-            || !string.Equals(first.Original, segment, StringComparison.Ordinal))
+        IReadOnlyList<TextSpan>? spans = first.Changed && first.Kept is { Count: > 0 } kept
+            ? [.. first.Settled ?? [], .. kept]
+            : first.Settled;
+
+        if (spans is not { Count: > 0 })
             return null;
 
         if (!TextSpans.CoversEveryLetter(segment, spans))

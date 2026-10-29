@@ -1,0 +1,29 @@
+# typed	expected	status	note — what a Russian speaker types with the English layout still on
+ybrb vbyf;	ники минаж	ok	a name the list lacks: ";" ends the word as ж, though мина is a word
+vjq ve;	мой муж	ok	ж on the ; key at the end of a listed word
+yj;	нож	ok	a whole word ending on the ; key
+ye e; ytn	ну уж нет	ok	interjection уж: е then the ; key
+'nf;	этаж	ok	э on the ' key at the start, ж on ; at the end
+'nj	это	ok	э on the ' key at the start
+nfr ;t	так же	ok	a word that is only the ; key and a letter
+e;t	уже	ok	ж on the ; key inside the word
+[jhjij	хорошо	ok	х on the [ key at the start
+[jxe cgfnm	хочу спать	ok	х on [ at the start of a line
+j,]zcybnm	объяснить	ok	б on the comma key and ъ on ] inside the word
+k.,jdm	любовь	ok	ю on the full stop key and б on the comma key inside
+k.,k.	люблю	ok	ends on the full stop key: ю, not a full stop
+lj;lm	дождь	ok	ж on ; inside the word
+vs dct ;ltv	мы все ждем	ok	a word opening on the ; key
+;ehyfk	журнал	ok	ж on ; at the start of a line
+'rhfy	экран	ok	э on ' at the start of a line
+gjtp;fq	поезжай	ok	ж on ; inside
+cgfcb,j	спасибо	ok	б on the comma key inside
+pyf.	знаю	ok	ю on the full stop key at the end
+gjl]tpl	подъезд	pending	ъ on ]; no frequency list has the word, only Hunspell, which the fixtures leave out (the app gets it right)
+'[, kflyj	эх, ладно	ok	interjection of punctuation keys only (' and [), a real comma after it
+[v, f tckb	хм, а если	ok	interjection: х on [, then a real comma
+f[ djn rfr	ах вот как	ok	interjection ending on the [ key
+j[, ytn	ох, нет	ok	interjection ending on the [ key, real comma
+ghbdtn, rfr ltkf	привет, как дела	ok	a real comma stays a comma after a whole word
+hello; world	hello; world	ok	a real semicolon in an English line stays
+ok; let me check	ok; let me check	ok	a semicolon after a short English word stays

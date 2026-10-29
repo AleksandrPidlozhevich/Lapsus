@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>يتوفر تحديث — أعد التشغيل للتثبيت</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>أعد التشغيل لتثبيت الإصدار {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — الإصدار {0} جاهز للتثبيت</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} جاهز للتثبيت</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>أعد التشغيل من قائمة الأيقونة، أو سيُثبَّت التحديث عند تشغيل Lapsus في المرة القادمة.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>أعد التشغيل لتثبيت هذا التحديث</value>
   </data>

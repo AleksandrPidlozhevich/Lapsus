@@ -3,9 +3,11 @@ i 27086011
 the 22761659
 to 17099834
 a 14484562
+'s 14291013
 it 13631703
 and 10572938
 that 10203742
+'t 9628970
 of 8915110
 is 7400675
 in 7337058
@@ -21,11 +23,13 @@ have 4764010
 your 4610945
 do 4419883
 was 4401531
+'m 4386306
 no 4374975
 not 4262273
 be 4210868
 are 4203821
 don 4158644
+'re 4059719
 know 3892394
 can 3826118
 with 3806977
@@ -37,6 +41,7 @@ there 3148528
 here 3138591
 they 3060204
 like 2983027
+'ll 2913428
 get 2883193
 she 2778359
 go 2738504
@@ -55,6 +60,7 @@ well 2159909
 her 2154982
 how 2140365
 yeah 2000641
+'ve 1991871
 will 1969807
 got 1968389
 want 1950845
@@ -95,6 +101,7 @@ some 1166914
 say 1153915
 hey 1149292
 could 1111837
+'d 1109205
 didn 1100643
 by 1090424
 need 1040131
@@ -167,6 +174,7 @@ last 527395
 better 520328
 everything 519795
 told 517951
+mr. 515685
 new 508486
 things 503642
 always 503417
@@ -481,6 +489,7 @@ city 142573
 walk 142055
 town 141835
 trust 141327
+dr. 141231
 met 141208
 office 141140
 question 140970
@@ -538,6 +547,7 @@ six 124087
 hot 123994
 funny 123924
 black 123718
+mrs. 123530
 alive 122833
 pick 122698
 feeling 122065
@@ -566,6 +576,7 @@ hour 112782
 anybody 112582
 small 112316
 perfect 112229
+'cause 112193
 lives 110583
 special 110344
 parents 110206
@@ -723,6 +734,7 @@ wedding 76940
 strange 76863
 general 76816
 pain 76799
+'am 76751
 kidding 76744
 decided 76683
 ya 76658
@@ -946,6 +958,7 @@ cell 57033
 drunk 56919
 share 56854
 camera 56757
+mm-hmm 56720
 within 56709
 card 56659
 fly 56595
@@ -975,6 +988,7 @@ prove 55079
 private 54978
 wall 54813
 seat 54615
+i-i 54460
 position 54449
 lieutenant 54321
 realize 54306
@@ -1150,6 +1164,7 @@ rings 44331
 mission 44289
 named 44264
 heaven 44231
+'ii 44152
 picked 44114
 paris 44110
 race 44089
@@ -1269,6 +1284,7 @@ pressure 40065
 fresh 40049
 weapon 40033
 sky 39986
+ms. 39904
 stole 39897
 study 39882
 burn 39874
@@ -1407,6 +1423,7 @@ faster 35547
 cars 35472
 folks 35431
 bullshit 35397
+i. 35384
 fellow 35335
 several 35232
 grandma 35216
@@ -1432,6 +1449,7 @@ stories 34792
 health 34788
 advice 34773
 held 34733
+uh-huh 34672
 murdered 34599
 beyond 34595
 rule 34517
@@ -1585,6 +1603,7 @@ brown 30395
 recognize 30366
 heads 30350
 audience 30335
+'all 30283
 jealous 30274
 pretend 30225
 society 30208
@@ -1808,6 +1827,7 @@ chef 25754
 contract 25746
 dig 25698
 chest 25688
+good-bye 25685
 drinks 25643
 dave 25633
 buried 25623
@@ -2032,6 +2052,7 @@ positive 22369
 attorney 22345
 direction 22341
 families 22338
+'clock 22311
 doin 22289
 forces 22284
 location 22282
@@ -2322,6 +2343,7 @@ fallen 18795
 stranger 18791
 presence 18788
 tear 18766
+st. 18766
 internet 18765
 monsieur 18763
 therefore 18733
@@ -2440,6 +2462,7 @@ unusual 17603
 county 17598
 stairs 17597
 campaign 17583
+'mon 17576
 vision 17563
 reporter 17553
 equipment 17536
@@ -2538,6 +2561,7 @@ estate 16813
 customers 16788
 maggie 16770
 gunshot 16763
+i- 16759
 device 16734
 troops 16729
 hug 16724
@@ -2690,6 +2714,7 @@ guarantee 15493
 barking 15493
 gather 15484
 policy 15482
+u.s. 15482
 violent 15464
 maid 15457
 embarrassing 15455
@@ -2714,6 +2739,7 @@ identity 15281
 virgin 15276
 impressive 15272
 windows 15229
+no-one 15212
 potential 15193
 guitar 15191
 committee 15152
@@ -2803,7 +2829,9 @@ shy 14479
 punishment 14476
 los 14462
 clicks 14462
+'you 14441
 closet 14440
+bye-bye 14436
 fever 14430
 coward 14421
 flash 14418
@@ -2823,6 +2851,7 @@ dollar 14367
 tone 14366
 voices 14350
 g 14340
+'i 14312
 cheating 14310
 confess 14303
 demand 14303
@@ -2866,6 +2895,7 @@ hong 14048
 jokes 14047
 breaks 14045
 argue 14042
+you- 14035
 trail 14033
 option 14026
 recall 14021
@@ -2968,33 +2998,24 @@ suits 13469
 pee 13455
 stress 13446
 cave 13446
-wing 13445
-jordan 13443
-arrange 13442
-comrade 13438
-noble 13437
-tricks 13428
-betty 13426
-launch 13420
-legend 13418
-mix 13418
-golf 13415
-imagination 13415
-fox 13409
-kissing 13398
-butter 13398
-tax 13389
-gross 13387
-edward 13367
-texas 13351
-insist 13332
-marcus 13314
-classic 13308
-selfish 13305
-skull 13299
-frankie 13299
-shown 13295
-bat 13294
-survived 13293
-print 13293
-champion 13290
+ali 12691
+link 12591
+bug 12385
+ye 10344
+conflict 8125
+oops 7954
+jr 5012
+je 3458
+zoom 3399
+logs 2970
+ae 2025
+merge 1968
+deploy 1874
+hottie 1286
+lol 953
+vs 865
+omg 557
+prod 545
+standup 331
+ns 292
+btw 181

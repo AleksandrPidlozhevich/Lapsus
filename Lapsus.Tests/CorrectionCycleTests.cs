@@ -639,11 +639,36 @@ public sealed class CorrectionCycleTests : IDisposable
         }
     }
 
-    private static List<string> WalkCircle(IPhraseCorrector brain, string typed)
+    [Fact]
+    public void The_circle_leaves_unlisted_and_short_words_that_read_right_as_typed()
     {
+        
+        var enPath = WriteTemp("en-svg", "svg 500", "hello 900");
+        var ruPath = WriteTemp("ru-svg", "если 900", "нужны 500", "или 800", "из 900", "приложения 300", "бери 200");
+        try
+        {
+            // Typed on the Russian layout, which is the active one.
+            var seen = WalkCircle(EnRuBrain(enPath, ruPath),
+                "если нужны скриншоты или иконки из приложения бери ымп",
+                [FakeInputBackend.Ru, FakeInputBackend.En, FakeInputBackend.Uk]);
+
+            Assert.Equal("если нужны скриншоты или иконки из приложения бери svg", seen[0]);
+            Assert.All(seen, text => Assert.StartsWith("если нужны скриншоты или иконки из приложения бери ", text));
+        }
+        finally
+        {
+            File.Delete(enPath);
+            File.Delete(ruPath);
+        }
+    }
+
+    private static List<string> WalkCircle(
+        IPhraseCorrector brain, string typed, List<Lapsus.Input.InstalledLayout>? layouts = null)
+    {
+        // The first layout is the active one.
         var backend = new FakeInputBackend(brain)
         {
-            InstalledLayouts = [FakeInputBackend.En, FakeInputBackend.Ru]
+            InstalledLayouts = layouts ?? [FakeInputBackend.En, FakeInputBackend.Ru]
         }.Listening();
         backend.Type(typed);
 

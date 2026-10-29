@@ -4,7 +4,7 @@ using Lapsus.Core.Spelling;
 
 namespace Lapsus.Core.Tests.Languages.Georgian;
 
-public sealed class GeorgianCorrectionTests : IDisposable
+public sealed class GeorgianCorrectionTests
 {
     private static readonly string[] GeorgianWords =
     [
@@ -30,7 +30,6 @@ public sealed class GeorgianCorrectionTests : IDisposable
     private static readonly List<LayoutCandidate> ToUkrainian =
         [new(Script.Cyrillic, KeyboardLayout.Uk, BundledKeyboardMaps.Uk, "uk")];
 
-    private readonly List<string> _files = [];
     private readonly DictionarySource _georgian;
     private readonly DictionarySource _english;
     private readonly DictionarySource _ukrainian;
@@ -45,18 +44,9 @@ public sealed class GeorgianCorrectionTests : IDisposable
         _corrector = CorrectorWith(_georgian, _english);
     }
 
-    public void Dispose()
+    private static DictionarySource WriteDictionary(string code, Script script, string[] lines)
     {
-        foreach (var file in _files)
-            File.Delete(file);
-    }
-
-    private DictionarySource WriteDictionary(string code, Script script, string[] lines)
-    {
-        var path = Path.Combine(Path.GetTempPath(), $"lapsus-{code}-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(path, lines);
-        _files.Add(path);
-        return new DictionarySource(code, path, script);
+        return new DictionarySource(code, TestDictionaries.List(code, lines), script);
     }
 
     private static LayoutCorrector CorrectorWith(params DictionarySource[] dictionaries)

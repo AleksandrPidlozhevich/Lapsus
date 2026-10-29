@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Opdatering klar — genstart for at installere</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Genstart for at installere version {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — version {0} er klar til installation</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} er klar til installation</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Genstart fra ikonets menu, ellers installeres opdateringen, næste gang Lapsus starter.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Genstart for at installere denne opdatering</value>
   </data>

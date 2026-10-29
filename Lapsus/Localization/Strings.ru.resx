@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Доступно обновление — перезапустить</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Перезапустить и установить версию {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — версия {0} готова к установке</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} готов к установке</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Перезапустите через меню в трее — или обновление установится при следующем запуске Lapsus.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Перезапустить, чтобы установить обновление</value>
   </data>

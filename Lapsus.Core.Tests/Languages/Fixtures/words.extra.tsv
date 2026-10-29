@@ -1,0 +1,55 @@
+# language	word	why a test needs it — rarer than the cut, added at the count the full list gives it
+# (tools/Lapsus.Lexicons --fixtures; a word the full list lacks stops the run)
+#
+# English words the mixed-line cases type
+en	bug	mixed.cases.tsv: IT words in Russian and Ukrainian lines
+en	conflict	mixed.cases.tsv
+en	deploy	mixed.cases.tsv
+en	link	mixed.cases.tsv
+en	logs	mixed.cases.tsv
+en	merge	mixed.cases.tsv
+en	prod	mixed.cases.tsv
+en	standup	mixed.cases.tsv
+en	zoom	mixed.cases.tsv: "zoom" next to "room"
+en	lol	mixed.cases.tsv: English interjections
+en	omg	mixed.cases.tsv
+en	btw	mixed.cases.tsv
+en	oops	mixed.cases.tsv
+# English words that are a Cyrillic word typed on the English layout: the traps of a mixed line
+en	ye	ну
+en	jr	ок
+en	ae	фу
+en	je	оу
+en	ns	ты
+en	vs	мы
+# What a correct word no list knows is respelled into
+en	hottie	"hotfix" → hottie
+en	ali	"api" → ali
+#
+# Russian words the mixed-line cases type
+ru	коде	mixed.cases.tsv: "в коде" next to "кофе"
+ru	норм	mixed.cases.tsv
+ru	баг	mixed.cases.tsv
+ru	даешь	mixed.cases.tsv
+ru	чат	mixed.cases.tsv
+ru	фу	mixed.cases.tsv: interjection that reads "ae"
+ru	эх	mixed.cases.tsv: interjection
+ru	угу	mixed.cases.tsv: interjection; without it "угу" reads "eye"
+ru	посмотрю	mixed.cases.tsv
+#
+# Words the typing fixtures type
+uk	вітання	uk.cases.tsv, MixedLanguageTests
+bg	щастие	bg.cases.tsv: "]astie"
+#
+# Words the Russian typing fixtures and the punctuation-key cases type
+ru	ники	ru.cases.tsv: "ybrb vbyf;"
+ru	мина	ru.cases.tsv: the trap that keeps ";" as punctuation
+ru	нож	ru.cases.tsv
+ru	этаж	ru.cases.tsv
+ru	дождь	ru.cases.tsv
+ru	ждем	ru.cases.tsv
+ru	журнал	ru.cases.tsv
+ru	экран	ru.cases.tsv
+ru	поезжай	ru.cases.tsv
+uk	їжа	mixed.cases.tsv
+ru	слушаю	mixed.cases.tsv: "я слушаю" typed right

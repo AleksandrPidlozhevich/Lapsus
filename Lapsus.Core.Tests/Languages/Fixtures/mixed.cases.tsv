@@ -1,0 +1,179 @@
+# layouts	line	status	note — the hotkey pressed over a line whose writer switches layouts word by word
+# {en:ну ладно} = "ну ладно" typed while the English layout was active (the screen shows "ye kflyj"). The line
+# as written is what should come back: text outside braces was typed right and must stay as it is.
+# Word lists are the fixture lists; en/ru carry the real-list words these lines use, at their real counts, so
+# traps such as "ye" (ну), "jr" (ок), "lf" (да) behave as with the full dictionaries.
+#
+# Why the pending rows still fail:
+# [A] "ye jr, давай" with the fixture lists: one Ukrainian word against two English list words, and ну/ок are
+#     barely commoner in the Ukrainian list than ye/jr in the English one. The full lists get it right.
+# [B] "nfr, let me check": three English words and nothing Ukrainian, so the one crossing gives way to the
+#     typo fix "nor". Trusting the crossing when the fix is a far key moved more English typos across
+#     (sweep, Rule D and G) than it saved.
+# [G] the word is in no list at all ("html"): nothing to cross to.
+#
+# --- English + Russian: every switch made, nothing to fix
+en ru	ну да, это был deploy на prod	ok	clean: interjections around English terms
+en ru	ой, я забыл про meeting, ну ладно	ok	clean
+en ru	ok, ну давай так	ok	clean: English interjection opens a Russian line
+en ru	да, это bug в коде	ok	clean: "да" reads "lf", a word in the English list
+en ru	ага, понял, ну ok	ok	clean
+en ru	wow, это круто	ok	clean
+en ru	блин, опять merge conflict	ok	clean
+en ru	хм, а если через api	ok	clean
+en ru	эй, ты видел новый release?	ok	clean
+en ru	ну, let me check the logs	ok	clean: Russian interjection opens an English line
+en ru	ой, sorry, wrong chat	ok	clean
+en ru	да, I will send the report tomorrow	ok	clean
+en ru	ок, see you	ok	clean
+en ru	ага, ok, ну и что	ok	clean
+en ru	oh, ну это fix	ok	clean
+en ru	hmm, а что если так	ok	clean
+en ru	yeah, да, все верно	ok	clean
+en ru	ну vs code тоже норм	ok	clean: "vs" reads "мы"
+en ru	мы с ним в zoom	ok	clean: "мы" reads "vs"
+#
+# --- English + Russian: one switch forgotten
+en ru	ну да, это был deploy {en:на} prod	ok	short word in the middle
+en ru	ой, я забыл про meeting, {en:ну ладно}	ok	interjection inside the forgotten part
+en ru	ok, {en:ну давай так}	ok	English interjection before a forgotten Russian part
+en ru	да, это bug {en:в коде}	ok	forgotten at the end
+en ru	{en:да}, это bug в коде	ok	forgotten interjection at the start
+en ru	ну, let me check the {ru:logs}	ok	Russian interjection before an English line ending on the Russian layout
+en ru	да, I will send the {ru:report}	ok	"да" must not follow the line into English ("lf")
+en ru	ой, sorry, wrong {ru:chat}	ok	"ой" before an English line
+en ru	ага, {en:сейчас посмотрю}	ok	interjection then the forgotten part
+en ru	{en:ну и где} pull request	ok	forgotten at the start, English after
+en ru	хм, а если {en:через} api	ok	one word in the middle
+en ru	блин, {en:опять} merge conflict	ok	one word after an interjection
+en ru	ок, {en:сделаю завтра}	ok	"ок" before the forgotten part
+en ru	да, {ru:send me the report}, ну пожалуйста	ok	English part forgotten between Russian words
+en ru	oh, {en:ну это} fix	ok	English interjection, forgotten Russian, English term
+#
+# --- English + Russian: two switches forgotten
+en ru	ну, {ru:let me check} и {en:потом скажу}	ok	both directions forgotten in one line
+en ru	да, {en:это} bug, {ru:fix} уже есть	ok	one word each way
+#
+# --- English + Russian: lines thick with interjections. Many read as English words on the other layout:
+# ну "ye", ок "jr", фу "ae", да "lf"; and back: lol "дщд", vs "мы".
+en ru	ну ок, давай	ok	clean: "ну ок" reads "ye jr", both English list words
+en ru	фу, опять баг	ok	clean: "фу" reads "ae"
+en ru	ну ну, посмотрим	ok	clean
+en ru	угу, понял	ok	clean
+en ru	ага, ну да, конечно	ok	clean
+en ru	ой, ну все, пока	ok	clean
+en ru	эх, ладно	ok	clean
+en ru	ох, ну и день	ok	clean
+en ru	lol, ну ты даешь	ok	clean: English interjection opens a Russian line
+en ru	omg, это что	ok	clean
+en ru	btw, я завтра не смогу	ok	clean
+en ru	oops, не тот чат	ok	clean
+en ru	ну ok, I will check	ok	clean: Russian then English interjection, English line
+en ru	ага, I see	ok	clean
+en ru	да ну, really?	ok	clean
+en ru	ну так, let me see	ok	clean
+en ru	ну ок, {en:давай завтра}	ok	forgotten after interjections
+en ru	{en:ну ок}, давай завтра	ok	forgotten interjections that are English list words ("ye jr")
+en ru	ага, {ru:I see}	ok	English forgotten after a Russian interjection
+en ru	lol, {en:ну ты даешь}	ok	forgotten after an English interjection
+en ru	{ru:lol}, ну ты даешь	ok	English interjection forgotten on the Russian layout
+en ru	ну, {en:ну ладно}	ok	interjection inside and outside the forgotten part
+en ru	ой, {en:ну все}	ok	forgotten at the end
+en ru	ок, {en:тогда завтра}, ok	ok	"ок" and "ok" around the forgotten part
+#
+# --- English + Ukrainian: clean
+en uk	ну, це просто hotfix	ok	clean
+en uk	ой, я забув про standup	ok	clean
+en uk	так, let me check	ok	clean
+en uk	ага, дякую, see you	ok	clean
+en uk	та ні, це не bug	ok	clean
+en uk	ну ж, давай merge	ok	clean: one-letter particle
+en uk	ok, добре, завтра	ok	clean
+en uk	ого, це вже release	ok	clean
+#
+# --- English + Ukrainian: one switch forgotten
+en uk	ну, let me check the {uk:logs}	ok	"logs" on the Ukrainian layout has і for s
+en uk	та ні, це не bug, {en:це інше}	ok	forgotten at the end
+en uk	ой, {en:завтра}	ok	one word after an interjection
+en uk	ага, {en:дякую}, see you	ok	forgotten between an interjection and English
+en uk	{en:так}, let me check	pending	[B] forgotten interjection at the start
+en uk	ok, {en:добре завтра}	ok	English interjection, forgotten Ukrainian
+en uk	так, {uk:send me the report}	ok	English part forgotten after a Ukrainian interjection
+en uk	ну ок, давай	ok	clean: "ну ок" reads "ye jr"
+en uk	ой, та ну	ok	clean
+en uk	ага, ну то й що	ok	clean: one-letter "й"
+en uk	{en:ну ок}, давай	pending	[A] forgotten interjections that are English list words
+en uk	ой, {en:та ну}	ok	forgotten interjections at the end
+#
+# --- English + Russian + Ukrainian: clean
+en ru uk	ну, это fix, а {uk:це вже інше}	ok	clean: Russian, English, Ukrainian
+en ru uk	привет, {uk:ну як справи}? ok	ok	clean
+en ru uk	ой, я забыл, {uk:ну добре}	ok	clean
+en ru uk	{uk:ага, дякую}, see you	ok	clean
+en ru uk	ну, I will check, ну да	ok	clean
+#
+# --- English + Russian + Ukrainian: forgotten switches
+en ru uk	ну, это fix, {en:а це вже інше}	ok	Ukrainian forgotten on English
+en ru uk	ой, я забыл, {en:ну добре}	ok	interjection inside the forgotten part
+en ru uk	да, {en:это} bug	ok	one word
+en ru uk	ой, {uk:це} {ru:інше}	ok	Ukrainian word typed on the Russian layout (і as ы)
+#
+# --- English + Greek: clean
+en el	ναι, το deploy είναι ok	ok	clean: "το" reads "to"
+en el	οκ, το link είναι εδώ	ok	clean
+en el	εντάξει, see you αύριο	ok	clean
+en el	όχι, wrong chat	ok	clean
+en el	λοιπόν, let me check	ok	clean
+en el	καλά, το meeting είναι αύριο	ok	clean
+#
+# --- English + Greek: one switch forgotten
+en el	{el:send me the report}	ok	whole line forgotten: "με" follows the crossings
+en el	καλά, {el:send me the report}	ok	the same line after one native word: "με" stays Greek
+en el	ναι, send me the {el:html}	pending	[G] "ναι" before an English line
+en el	εντάξει, see you {en:αύριο}	ok	forgotten at the end
+en el	ναι, το meeting είναι {en:τώρα}	ok	forgotten after Greek
+en el	{en:λοιπόν}, let me check	ok	forgotten interjection at the start
+en el	καλά, {el:let me check}	ok	English forgotten after a Greek interjection
+#
+# --- English + Hebrew: clean
+en he	כן, זה bug	ok	clean
+en he	נו, איפה ה report	ok	clean
+en he	אוקיי, see you מחר	ok	clean
+en he	טוב, let me check	ok	clean
+en he	לא, wrong chat	ok	clean
+en he	אה, sorry	ok	clean
+#
+# --- English + Hebrew: one switch forgotten
+en he	כן, send me the {he:report}	ok	"כן" before an English line
+en he	נו, {en:איפה} report	ok	one word in the middle
+en he	טוב, let me check {en:עכשיו}	ok	forgotten at the end
+en he	אוקיי, see you {en:מחר}	ok	forgotten at the end
+en he	{en:תודה}, see you	ok	forgotten at the start
+#
+# --- English + Bulgarian
+en bg	ами, добре, ok	ok	clean
+en bg	ей, какво е това	ok	clean
+en bg	хайде, see you утре	ok	clean
+en bg	ок, мерси	ok	clean
+en bg	ами, {en:добре}, ok	ok	one word in the middle
+en bg	хайде, see you {en:утре}	ok	forgotten at the end
+en bg	ей, {en:какво е това}	ok	one-letter word inside the forgotten part
+en bg	да, send me the {bg:report}	ok	"да" before an English line
+#
+# --- English + Arabic
+en ar	نعم هذا ok	ok	clean
+en ar	شكرا see you غدا	ok	clean
+en ar	شكرا see you {en:غدا}	ok	forgotten at the end
+en ar	نعم send me the {ar:report}	ok	forgotten at the end
+en el	θα σου έχεις m.o. ναι	ok	an abbreviation keeps its letters though μ and ο are Greek words
+#
+# --- Punctuation keys that are letters on the other layout (; ж, ' э, [ х, ] ъ, , б, . ю)
+en ru	это был {en:муж}	ok	ж on the ; key ends a forgotten word
+en ru	ладно, {en:хорошо}	ok	х on the [ key opens a forgotten word
+en ru	{en:эх}, ладно	ok	a forgotten interjection made only of punctuation keys
+en ru	окей, {en:этаж} второй	ok	э and ж keys around a forgotten word
+en ru	ну {en:уж} нет	ok	a two-key interjection ending on ;
+en ru	я слушаю {en:ники минаж}	ok	a name the list lacks: ; is ж though мина is a word
+en ru	ok; {en:давай}	ok	a real semicolon after an English word stays
+en uk	{en:щось є}	ok	є on the ' key, alone
+en uk	це {en:їжа}	ok	ї on the ] key opens the word

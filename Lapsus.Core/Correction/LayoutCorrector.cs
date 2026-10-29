@@ -8,6 +8,9 @@ public sealed class LayoutCorrector : IPhraseCorrector
 {
     private const double EditPenalty = 0.12;
 
+    // The most a word no list knows can score (naturalness × WordScorer's unknown-word penalty).
+    private const double UnknownWordCeiling = 0.6;
+
     private const int MinWordToKeepPunctuation = 3;
 
     private const int MinWordToKeepSentencePunctuation = 2;
@@ -275,7 +278,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
             {
                 CloseVerbatim(i);
                 var chunk = text[i..chunkEnd];
-                var chunkSource = sourceFor(chunk[0]) with { LanguageCode = phraseSourceLanguageCode };
+                var chunkSource = KeysSource(chunk, sourceFor, installed) with { LanguageCode = phraseSourceLanguageCode };
                 chunkSource = chunkSource with
                 {
                     Candidates = EnsureOppositeScriptCandidates(chunkSource.Script, chunkSource.Candidates, installed)
@@ -398,7 +401,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
             end++;
         }
 
-        var raw = sourceFor(text[start]);
+        var raw = KeysSource(text[start..end], sourceFor, installed);
         var candidates = EnsureOppositeScriptCandidates(raw.Script, raw.Candidates, installed);
         for (var k = start; k < end; k++)
             if (!WordScanner.CarriesLetterElsewhere(text[k], raw.Map, candidates))
@@ -407,7 +410,32 @@ public sealed class LayoutCorrector : IPhraseCorrector
         return end;
     }
 
-    private static PhraseCorrection Emit(
+    // Letterless keys take the active layout's script, but "'[" cannot be typed on the Russian layout at all:
+    // the layout that types them is the one they were typed on.
+    private static WordSource KeysSource(
+        string chunk, Func<char, WordSource> sourceFor, IReadOnlyList<LayoutSource>? installed)
+    {
+        var raw = sourceFor(chunk[0]);
+        if (installed is null || Types(raw.Map, chunk))
+            return raw;
+
+        foreach (var layout in installed)
+            if (layout.Script is { } script && Types(layout.Map, chunk))
+                return raw with { Script = script, Map = layout.Map, LanguageCode = layout.LanguageCode };
+
+        return raw;
+
+        static bool Types(KeyboardMap map, string keys)
+        {
+            foreach (var ch in keys)
+                if (!map.TryGetKey(ch, out _, out _))
+                    return false;
+
+            return true;
+        }
+    }
+
+    private PhraseCorrection Emit(
         string text, IReadOnlyList<TokenReading> readings, KeyboardLayout? preferred,
         IReadOnlyList<TextSpan>? excluded)
     {
@@ -415,6 +443,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
         var votes = new TargetVotes();
 
         List<TextSpan>? settled = excluded is null ? null : [.. excluded];
+        List<TextSpan>? kept = null;
         var at = 0;
 
         foreach (var token in readings)
@@ -433,6 +462,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
                      WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length >= MinWordToSettle)
                 // Advisory only while part of the line still needs work; drop once every letter is settled.
                 (settled ??= []).Add(new TextSpan(start, token.Typed.Length));
+            else if (!token.Chosen.Changed && ReadsBestAsTyped(token))
+                (kept ??= []).Add(new TextSpan(start, token.Typed.Length));
 
             if (token.Chosen.Changed)
             {
@@ -455,11 +486,33 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
         // If contiguity breaks, report no spans rather than wrong ones.
         if (at != text.Length)
+        {
             settled = null;
+            kept = null;
+        }
 
         return new PhraseCorrection(
             text, corrected, !string.Equals(corrected, text, StringComparison.Ordinal),
-            targetLayout, targetLayoutId, settled);
+            targetLayout, targetLayoutId, settled, kept);
+    }
+
+    private bool ReadsBestAsTyped(in TokenReading token)
+    {
+        foreach (var candidate in token.Source.Candidates)
+        {
+            if (candidate.ScoringScript == token.Source.Script)
+                continue;
+
+            var switched = LayoutTranscoder.Transcode(token.Typed, token.Source.Map, candidate.Map);
+            if (switched == token.Typed || !WordScanner.IsAllLetters(switched, candidate.ScoringScript))
+                continue;
+
+            var score = _scorer.Score(switched, candidate.ScoringScript, candidate.LanguageCode);
+            if (WordScorer.IsDictionaryHit(score) || WordScorer.IsWeakDictionaryHit(score) || score > token.Baseline)
+                return false;
+        }
+
+        return true;
     }
 
     private static (KeyboardLayout? Layout, string? LayoutId) OwnLayoutOf(WordSource source)
@@ -508,7 +561,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
             if (_exceptions.Contains(token))
                 continue;
 
-            if (ReadAsOneWord(token, source, preferred, cliticAlone: cliticAlone) is not { } longer)
+            if ((ReadAsOneWord(token, source, preferred, cliticAlone: cliticAlone) ??
+                 LetterKeysAfterACrossing(best, text[wordEnd..end], source)) is not { } longer)
                 continue;
 
             if ((endsSentence || plainAsTyped) &&
@@ -519,6 +573,19 @@ public sealed class LayoutCorrector : IPhraseCorrector
         }
 
         return (best, wordEnd);
+    }
+
+    // A word that crossed takes the letter keys after it whatever the list says: to someone typing Russian
+    // ";" "'" "[" "]" are ж э х ъ, never punctuation ("vbyf;" is минаж, not мина;). A full stop or comma is
+    // still the list's call.
+    private static ScoredWord? LetterKeysAfterACrossing(ScoredWord best, string tail, WordSource source)
+    {
+        if (!best.Changed || CandidateOf(best, source) is not { } candidate || candidate.ScoringScript == source.Script ||
+            tail.AsSpan().IndexOfAny(".,!?:") >= 0)
+            return null;
+
+        var text = best.Text + LayoutTranscoder.Transcode(tail, source.Map, candidate.Map);
+        return WordScanner.IsAllLetters(text, candidate.ScoringScript) ? best with { Text = text } : null;
     }
 
     private bool KeyIsALetter(
@@ -684,6 +751,12 @@ public sealed class LayoutCorrector : IPhraseCorrector
     private ScoredWord BestWord(string word, WordSource source, KeyboardLayout? preferred, bool keysOnly = false)
     {
         var baseline = _scorer.Score(word, source.Script, source.LanguageCode);
+
+        // "];f" spells "f" once its leading keys are trimmed, but as typed it is no word: those keys are letters
+        // elsewhere (їжа). It scores as an unknown word, so a listed reading can cross it. A leading apostrophe
+        // is English's own ('s, 'll), not such a key.
+        if (word.Length > 0 && !char.IsLetter(word[0]) && word[0] is not ('\'' or '’'))
+            baseline = Math.Min(baseline, UnknownWordCeiling);
         var best = ScoredWord.AsTyped(word, baseline);
 
         var writableAsTyped = Orthography.IsPossibleWord(word, source.Script);
@@ -848,7 +921,10 @@ public sealed class LayoutCorrector : IPhraseCorrector
         {
             var left = BestWord(word[..i], source, preferred, keysOnly);
             var right = BestWord(word[i..], source, preferred, keysOnly);
-            if (!left.Changed && !right.Changed)
+
+            // A split is for two exact words typed on two layouts ("audiorfdf" is audioкава). Typo fixes glued back
+            // together only mangle a word the list lacks: "something" would come out "sothing" or "съмthing".
+            if ((!SwitchesLayout(left) && !SwitchesLayout(right)) || !IsExactWord(left) || !IsExactWord(right))
                 continue;
 
             var score = (left.Score + right.Score) / 2.0;
@@ -870,6 +946,16 @@ public sealed class LayoutCorrector : IPhraseCorrector
             return null;
 
         return keysOnly && best.Edits > 0 ? null : best;
+    }
+
+    private static bool SwitchesLayout(in ScoredWord half)
+    {
+        return half.Changed && (half.Target is not null || !string.IsNullOrEmpty(half.TargetLayoutId));
+    }
+
+    private static bool IsExactWord(in ScoredWord half)
+    {
+        return half.Edits == 0 && WordScorer.IsDictionaryHit(half.Score);
     }
 
     private static string? PickSplitLayoutId(ScoredWord left, ScoredWord right, KeyboardLayout? chosen)

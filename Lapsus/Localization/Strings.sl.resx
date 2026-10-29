@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Na voljo je posodobitev — znova zaženite za namestitev</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Znova zaženi in namesti različico {0}</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — različica {0} je pripravljena za namestitev</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} je pripravljen za namestitev</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Znova zaženite iz menija ikone, sicer se bo posodobitev namestila ob naslednjem zagonu programa Lapsus.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Znova zaženi in namesti to posodobitev</value>
   </data>

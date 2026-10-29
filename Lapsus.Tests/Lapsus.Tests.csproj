@@ -27,7 +27,13 @@
     <!-- Mints keys for LicenseStoreTests. Linked, rather than a reference to Lapsus.Core.Tests,
          so this project does not take that test assembly as a dependency. -->
     <ItemGroup>
-        <Compile Include="..\Lapsus.Core.Tests\LicenseIssuer.cs" Link="LicenseIssuer.cs" />
+        <Compile Include="..\Lapsus.Core.Tests\Licensing\LicenseIssuer.cs" Link="LicenseIssuer.cs" />
+    </ItemGroup>
+
+    <!-- Word lists for CycleAcrossLanguagesTests: the generated fixtures. -->
+    <ItemGroup>
+        <None Include="..\Lapsus.Core.Tests\Languages\Fixtures\*.words.txt" Link="Fixtures\%(Filename)%(Extension)"
+              CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
     <ItemGroup>

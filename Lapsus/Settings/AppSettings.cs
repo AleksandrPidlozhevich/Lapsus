@@ -88,6 +88,9 @@ public sealed class AppSettings
     // "Term" or "Term|how it sounds|…", one per entry.
     public string[] DictationGlossary { get; set; } = [];
 
+    // The downloaded update the tray last popped up a notification for (UpdateNotice): once per version.
+    public string? AnnouncedUpdateVersion { get; set; }
+
     public string[] ExcludedWords { get; set; } = [];
 
     public string[] ExcludedApps { get; set; } = [];

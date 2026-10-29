@@ -7,8 +7,6 @@ namespace Lapsus.Core.Tests.Languages;
 // A pending fixture row must still fail; closing the gap flips the row.
 public sealed class TypingFixtureTests
 {
-    private static readonly string FixtureDir = Path.Combine(AppContext.BaseDirectory, "Languages", "Fixtures");
-
     private static readonly LayoutCandidate English =
         new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en-US");
 
@@ -22,6 +20,7 @@ public sealed class TypingFixtureTests
     private static readonly Dictionary<string, Language> Languages = new()
     {
         ["uk"] = new("uk", Script.Cyrillic, KeyboardLayout.Uk, BundledKeyboardMaps.Uk),
+        ["ru"] = new("ru", Script.Cyrillic, KeyboardLayout.Ru, BundledKeyboardMaps.Ru),
         ["he"] = new("he", Script.Hebrew, KeyboardLayout.He, BundledKeyboardMaps.He),
         ["ar"] = new("ar", Script.Arabic, KeyboardLayout.Ar, BundledKeyboardMaps.Ar),
         ["el"] = new("el", Script.Greek, KeyboardLayout.El, BundledKeyboardMaps.El),
@@ -32,7 +31,7 @@ public sealed class TypingFixtureTests
     public static TheoryData<string, string, string, string> Cases(string fixture)
     {
         var data = new TheoryData<string, string, string, string>();
-        foreach (var line in File.ReadLines(Path.Combine(FixtureDir, $"{fixture}.cases.tsv")))
+        foreach (var line in File.ReadLines(Path.Combine(TestDictionaries.FixtureDir, $"{fixture}.cases.tsv")))
         {
             if (line.Length == 0 || line[0] == '#')
                 continue;
@@ -47,6 +46,10 @@ public sealed class TypingFixtureTests
     [Theory]
     [MemberData(nameof(Cases), "uk")]
     public void Ukrainian(string typed, string expected, string status, string note) => Check("uk", typed, expected, status, note);
+
+    [Theory]
+    [MemberData(nameof(Cases), "ru")]
+    public void Russian(string typed, string expected, string status, string note) => Check("ru", typed, expected, status, note);
 
     [Theory]
     [MemberData(nameof(Cases), "he")]
@@ -73,8 +76,8 @@ public sealed class TypingFixtureTests
         var language = Languages[fixture];
         var corrector = new LayoutCorrector(new SpellChecker(
         [
-            new DictionarySource("en", Path.Combine(FixtureDir, "en.words.txt"), Script.Latin),
-            new DictionarySource(language.Code, Path.Combine(FixtureDir, $"{language.Code}.words.txt"), language.Script)
+            new DictionarySource("en", TestDictionaries.Fixture("en"), Script.Latin),
+            new DictionarySource(language.Code, TestDictionaries.Fixture(language.Code), language.Script)
         ]));
 
         var english = new LayoutSource(Script.Latin, "en", BundledKeyboardMaps.En, "en-US");

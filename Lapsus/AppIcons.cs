@@ -33,15 +33,21 @@ internal static class AppIcons
         return CreateWindowIcon(PathForTheme(variant), size);
     }
 
-    public static WindowIcon CreateTrayTemplateIcon(int size = 256)
+    // badge: a dot in the lower right corner, set while a downloaded update waits to be installed.
+    public static WindowIcon CreateTrayIcon(ThemeVariant variant, bool badge)
     {
-        return CreateWindowIcon("/Assets/tray-icon-template.svg", size);
+        return CreateWindowIcon(PathForTheme(variant), 256, badge);
     }
 
-    public static WindowIcon CreateWindowIcon(string assetPath, int size = 256)
+    public static WindowIcon CreateTrayTemplateIcon(bool badge = false)
+    {
+        return CreateWindowIcon("/Assets/tray-icon-template.svg", 256, badge);
+    }
+
+    public static WindowIcon CreateWindowIcon(string assetPath, int size = 256, bool badge = false)
     {
         using var source = Load(assetPath);
-        using var png = RasterizeToPng(source, size);
+        using var png = RasterizeToPng(source, size, badge);
         return new WindowIcon(png);
     }
 
@@ -52,7 +58,9 @@ internal static class AppIcons
         return SvgSource.LoadFromStream(stream);
     }
 
-    private static MemoryStream RasterizeToPng(SvgSource source, int size)
+    private static readonly SKColor BadgeColor = new(0xdf, 0x53, 0x38);
+
+    private static MemoryStream RasterizeToPng(SvgSource source, int size, bool badge)
     {
         var picture = source.Picture
                       ?? throw new InvalidOperationException("SVG failed to load.");
@@ -68,11 +76,29 @@ internal static class AppIcons
         canvas.Scale(scale);
         canvas.DrawPicture(picture);
 
+        if (badge)
+            DrawBadge(canvas, size);
+
         using var image = surface.Snapshot();
         using var data = image.Encode(SKEncodedImageFormat.Png, 100);
         var png = new MemoryStream();
         data.SaveTo(png);
         png.Position = 0;
         return png;
+    }
+
+    // The ring around the dot is cut out of the glyph so the dot stays readable at 16 px, and in the
+    // macOS template icon, where only the alpha shows.
+    private static void DrawBadge(SKCanvas canvas, int size)
+    {
+        canvas.ResetMatrix();
+        var centre = size * 0.76f;
+        var radius = size * 0.22f;
+
+        using var cut = new SKPaint { BlendMode = SKBlendMode.Clear, IsAntialias = true };
+        canvas.DrawCircle(centre, centre, radius + size * 0.06f, cut);
+
+        using var dot = new SKPaint { Color = BadgeColor, IsAntialias = true, Style = SKPaintStyle.Fill };
+        canvas.DrawCircle(centre, centre, radius, dot);
     }
 }

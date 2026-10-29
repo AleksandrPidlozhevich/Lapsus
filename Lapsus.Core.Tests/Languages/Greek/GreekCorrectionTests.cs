@@ -3,23 +3,12 @@ using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Tests.Languages.Greek;
 
-public sealed class GreekCorrectionTests : IDisposable
+public sealed class GreekCorrectionTests
 {
-    private readonly ScriptHarness _harness = new();
-    private readonly LayoutCorrector _corrector;
-
-    public GreekCorrectionTests()
-    {
-        _corrector = _harness
-            .With("el", Script.Greek, "νερό 200", "καλημέρα 500", "καλημερα 400", "ευχαριστώ 300", "έχω 450")
-            .With("en", Script.Latin, "cat 900", "server 700")
-            .Corrector();
-    }
-
-    public void Dispose()
-    {
-        _harness.Dispose();
-    }
+    private readonly LayoutCorrector _corrector = new TestDictionaries()
+        .With("el", Script.Greek, "νερό 200", "καλημέρα 500", "καλημερα 400", "ευχαριστώ 300", "έχω 450")
+        .With("en", Script.Latin, "cat 900", "server 700")
+        .Corrector();
 
     [Fact]
     public void Latin_keystrokes_switch_to_greek()

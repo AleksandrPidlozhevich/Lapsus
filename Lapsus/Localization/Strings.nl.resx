@@ -217,6 +217,18 @@
     <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Update beschikbaar — herstart om te installeren</value>
   </data>
+    <data name="Tray_InstallUpdate" xml:space="preserve">
+    <value>Herstarten om versie {0} te installeren</value>
+  </data>
+    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+    <value>Lapsus — versie {0} is klaar om te installeren</value>
+  </data>
+    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+    <value>Lapsus {0} is klaar om te installeren</value>
+  </data>
+    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+    <value>Herstart via het menu van het pictogram, anders wordt de update geïnstalleerd wanneer Lapsus de volgende keer start.</value>
+  </data>
     <data name="Update_Tooltip" xml:space="preserve">
     <value>Herstarten om deze update te installeren</value>
   </data>

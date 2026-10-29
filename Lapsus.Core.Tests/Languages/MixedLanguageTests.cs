@@ -4,7 +4,7 @@ using Lapsus.Core.Spelling;
 
 namespace Lapsus.Core.Tests.Languages;
 
-public sealed class MixedLanguageTests : IDisposable
+public sealed class MixedLanguageTests
 {
     private const string EnKeys = "`qwertyuiop[]asdfghjkl;'zxcvbnm,./";
     private const string UkrainianKeys = "ʼйцукенгшщзхїфівапролджєячсмитьбю.";
@@ -16,18 +16,17 @@ public sealed class MixedLanguageTests : IDisposable
     private static readonly KeyboardMap RuMap = new(RussianKeys.ToCharArray());
     private static readonly KeyboardMap ElMap = new(GreekKeys.ToCharArray());
 
-    private readonly List<string> _paths = [];
     private readonly LayoutCorrector _corrector;
 
     public MixedLanguageTests()
     {
         _corrector = new LayoutCorrector(new SpellChecker(
         [
-            new DictionarySource("en", Temp("en", "cat 900", "server 800", "the 950"), Script.Latin),
-            new DictionarySource("pl", Temp("pl", "dobry 850", "dzień 900", "mleko 800"), Script.Latin),
-            new DictionarySource("uk", Temp("uk", "вітання 900", "кава 800", "молоко 800"), Script.Cyrillic),
-            new DictionarySource("ru", Temp("ru", "привет 900", "кофе 800", "молоко 800"), Script.Cyrillic),
-            new DictionarySource("el", Temp("el", "καλημέρα 900", "κόσμος 800"), Script.Greek)
+            new DictionarySource("en", TestDictionaries.List("en", "cat 900", "server 800", "the 950"), Script.Latin),
+            new DictionarySource("pl", TestDictionaries.List("pl", "dobry 850", "dzień 900", "mleko 800"), Script.Latin),
+            new DictionarySource("uk", TestDictionaries.List("uk", "вітання 900", "кава 800", "молоко 800"), Script.Cyrillic),
+            new DictionarySource("ru", TestDictionaries.List("ru", "привет 900", "кофе 800", "молоко 800"), Script.Cyrillic),
+            new DictionarySource("el", TestDictionaries.List("el", "καλημέρα 900", "κόσμος 800"), Script.Greek)
         ]));
     }
 
@@ -177,7 +176,7 @@ public sealed class MixedLanguageTests : IDisposable
     private static PhraseCorrection CorrectMixed(
         string text, string code, KeyboardLayout layout, string[] words, bool activeIsTheOther = false)
     {
-        using var harness = new ScriptHarness()
+        var harness = new TestDictionaries()
             .With("en", Script.Latin, English)
             .With(code, ScriptLayouts.ScriptOf(layout), words);
 
@@ -246,19 +245,5 @@ public sealed class MixedLanguageTests : IDisposable
         var result = CorrectMixed("check this s yfgbib vtys pfdnhf", "uk", KeyboardLayout.Uk, Ukrainian);
 
         Assert.Equal("check this і напиши мені завтра", result.Corrected);
-    }
-
-    private string Temp(string tag, params string[] lines)
-    {
-        var path = Path.Combine(Path.GetTempPath(), $"lapsus-{tag}-{Guid.NewGuid():N}.txt");
-        File.WriteAllLines(path, lines);
-        _paths.Add(path);
-        return path;
-    }
-
-    public void Dispose()
-    {
-        foreach (var path in _paths)
-            File.Delete(path);
     }
 }
