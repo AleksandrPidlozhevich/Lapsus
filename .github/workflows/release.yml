@@ -110,6 +110,8 @@ jobs:
       contents: write
     steps:
       # Only the installers: the run also holds the test results and the sweep report.
+      # Velopack 1.x clients read releases.{channel}.json and the full .nupkg; the legacy RELEASES
+      # files and vpk's own assets.*.json are never fetched by the app, so they stay out of the release.
       - uses: actions/download-artifact@v4
         with:
           pattern: releases-*
@@ -122,4 +124,4 @@ jobs:
         run: |
           gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
             --draft --title "Lapsus ${GITHUB_REF_NAME#v}" --generate-notes \
-            $(find out -type f)
+            $(find out -type f ! -name 'RELEASES*' ! -name 'assets.*.json')
