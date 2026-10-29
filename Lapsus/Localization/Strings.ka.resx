@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>შესყიდვების აღდგენა ვერ მოხერხდა: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>ხმოვანი შეყვანა</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>ილაპარაკეთ ბეჭდვის ნაცვლად: Lapsus დაბეჭდავს ნათქვამს იქ, სადაც კურსორია. მეტყველება ამოიცნობა ამ კომპიუტერზე, ხმა არსად ინახება.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>მეტყველების მოდელი ჯერ არ არის ჩამოტვირთული ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>მეტყველების მოდელი: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>ჩამოტვირთვა ვერ მოხერხდა: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>ხმოვან შეყვანას მეტყველების მოდელი სჭირდება: ჩამოტვირთეთ აქ: პარამეტრები → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>მიკროფონი მიუწვდომელია: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>მიკროფონმა მხოლოდ სიჩუმე ჩაწერა. შეამოწმეთ, რომ ჩართულია და Windows აპლიკაციებს მისი გამოყენების უფლებას აძლევს.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>არაფერი ისმოდა.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>ხმოვანი შეყვანა ვერ შესრულდა: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>ფოკუსი სხვა ფანჯარაზე გადავიდა ({0}), ამიტომ ტექსტი ბუფერში დაკოპირდა.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>გეჭიროთ, სანამ ლაპარაკობთ, და გაუშვით — ტექსტი დაიბეჭდება; მოკლე დაჭერა ხელების გარეშე იწერს შემდეგ დაჭერამდე. Esc აუქმებს. დანარჩენი პარამეტრები ჩანართზე „ხმა“.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 ყველაზე ზუსტია, მაგრამ ვიდეობარათი სჭირდება (მის გარეშე ფრაზაზე დაახლოებით 5 წმ). large-v3-turbo თითქმის ისეთივე ზუსტი და უფრო სწრაფია; q5 იგივე turbo-ა უფრო მცირე ჩამოტვირთვით. Whisper small ვიდეობარათის გარეშე კომპიუტერებისთვისაა.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>ენა</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>კლავიატურის განლაგების მიხედვით</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>აქტიური განლაგების ენა, ან თქვენი განლაგებების სხვა ენა, თუ მეტყველება აშკარად ამ ენაზეა.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>მიკროფონი</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>სისტემის ნაგულისხმევი</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>მეხსიერების გათავისუფლება</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>ჩატვირთული მეტყველების მოდელი დაახლოებით {0} MB მეხსიერებას იკავებს. გათავისუფლების შემდეგ მომდევნო კარნახი მას ხელახლა ჩატვირთავს; ჩაწერა მაინც მაშინვე იწყება.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>ყოველი კარნახის შემდეგ</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>{0} წუთის შემდეგ</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>1 საათის შემდეგ</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>არასდროს (ჩატვირთვა გაშვებისას)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>ინგლისური ტერმინები ლათინური ასოებით</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>ტერმინები, როგორიცაა pull request ან GitHub, იწერება ისე, როგორც ინგლისურად. თქვენს ენაში დამკვიდრებული სიტყვები უცვლელი რჩება.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>ტერმინების სია</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>სახელები და ტერმინები, რომლებიც სწორად უნდა დაიწეროს, თითო ხაზზე, ისე, როგორც უნდა აიკრიფოს. თუ ტერმინი უჩვეულოდ ჟღერს, | ნიშნის შემდეგ დაამატეთ, როგორ ჟღერს.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>ხმოვანი შეყვანა Lapsus Plus-ის ნაწილია.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus-ს მიკროფონის გამოყენება არ აქვს ნებადართული. დართეთ ნება აქ: სისტემის პარამეტრები → კონფიდენციალურობა და უსაფრთხოება → მიკროფონი.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>გამოჩენილ ფანჯარაში Lapsus-ს მიკროფონზე წვდომის ნება დართეთ და ხმოვანი შეყვანა ხელახლა გაუშვით.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>ხმა</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — მზადაა · Esc — გაუქმება</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>დააწკაპუნეთ ნებისმიერ ველში, დააჭირეთ და გეჭიროთ {0} და ილაპარაკეთ — გაუშვით და ტექსტი კურსორთან გამოჩნდება. {0}-ის მოკლე დაჭერა ხელების გარეშე იწერს შემდეგ დაჭერამდე. Esc აუქმებს.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>კლავიში არ არის — აირჩიეთ ჩანართზე „კლავიშები“</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>როგორ გამოვიყენოთ</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>მიკროფონის ღილაკი ეკრანზე</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>პატარა ღილაკი ეკრანის ქვედა ნაწილში: დაწკაპუნება იწყებს ან ამთავრებს ჩაწერას, მასზე მიტანისას ჩანს კლავიშთა კომბინაცია.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>ხმა ჩაწერის დაწყებისა და დასრულებისას</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>ხმოვანი შეყვანა: დააწკაპუნეთ ან {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>მთავარი</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>ამოცნობა</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>დააწკაპუნეთ ნებისმიერ ველში, დააჭირეთ {0} და ილაპარაკეთ; კვლავ დააჭირეთ {0} და ტექსტი კურსორთან გამოჩნდება. Esc აუქმებს.</value>
+  </data>
 </root>

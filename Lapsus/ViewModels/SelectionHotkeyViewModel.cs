@@ -14,7 +14,7 @@ public sealed partial class SelectionHotkeyViewModel : ViewModelBase
     private bool _suppressChanged;
 
     public SelectionHotkeyViewModel(
-        SelectionAction action, string labelKey, string hintKey,
+        SelectionAction? action, string labelKey, string hintKey,
         IReadOnlyList<HotkeyOption> options, HotkeyOption selected,
         Action<SelectionHotkeyViewModel> changed, HotkeyCapture capture, Func<int, HotkeyOption> recordedOption)
     {
@@ -27,7 +27,8 @@ public sealed partial class SelectionHotkeyViewModel : ViewModelBase
         Recorder = new HotkeyRecorderViewModel(capture, trigger => Selected = recordedOption(trigger));
     }
 
-    public SelectionAction Action { get; }
+    // null: the dictation hotkey, which shares this row's look and its clash rules.
+    public SelectionAction? Action { get; }
 
     public IReadOnlyList<HotkeyOption> Options { get; }
 

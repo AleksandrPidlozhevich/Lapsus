@@ -18,6 +18,9 @@ a dependency is added or dropped in `Lapsus.csproj`, both are part of the same e
 | [ONNX Runtime GenAI](https://github.com/microsoft/onnxruntime-genai) | MIT | Copyright (c) Microsoft Corporation |
 | [SymSpell](https://github.com/wolfgarbe/symspell) 6.7.3 | MIT | Copyright (c) 2018 Wolf Garbe |
 | [WeCantSpell.Hunspell](https://github.com/aarondandy/WeCantSpell.Hunspell) 7.0.1 | MPL 1.1 (of its MPL 1.1 / GPL 2.0 / LGPL 2.1 tri-licence) | Copyright (C) 2002-2005 Kevin Hendricks (MySpell) and Németh László (Hunspell); .NET port by Aaron Dandy and contributors |
+| [Whisper.net](https://github.com/sandrohanea/whisper.net) 1.9.1 | MIT | Copyright (c) 2024 sandrohanea |
+| [whisper.cpp](https://github.com/ggml-org/whisper.cpp) and ggml (native libraries inside the Whisper.net runtime packages) | MIT | Copyright (c) 2023-2026 The ggml authors |
+| [NAudio](https://github.com/naudio/NAudio) 2.2.1 (`NAudio.WinMM`, `NAudio.Core`; Windows builds only) | MIT | © Mark Heath 2023 |
 
 Two notes on that table. **ONNX Runtime GenAI ships in two flavours** and the version depends on the
 platform: Windows builds carry `Microsoft.ML.OnnxRuntimeGenAI.DirectML` 0.14.1, every other platform
@@ -28,6 +31,11 @@ under the same licence. The two typefaces are not packages at all: they are TTF 
 `Lapsus/Assets/Fonts/` (the site's own type, so the app and getlapsus.com read alike), each next to
 its OFL text, and the SIL OFL below is the licence they ship under.
 
+**Voice typing** brings three rows. Whisper.net is the managed wrapper; the native recognizer is
+whisper.cpp with ggml, shipped inside `Whisper.net.Runtime` (CPU, and Metal on macOS) and, on Windows,
+`Whisper.net.Runtime.Vulkan` — all MIT, all from the same project at the same version. NAudio reads the
+microphone and is referenced on Windows only, so the macOS build does not carry it.
+
 `AvaloniaUI.DiagnosticsSupport` is deliberately absent. It is Debug-only (`IncludeAssets=None`
 outside Debug), so it is not in a shipped build. The xUnit, coverlet and test-SDK packages are absent
 for the same reason — they build the tests, not the app.
@@ -36,7 +44,7 @@ for the same reason — they build the tests, not the app.
 
 Dictionaries and neural models are **not** part of any Lapsus distribution. Nothing is included until
 the person using the app asks for a specific download, and each pack keeps the licence of whoever
-published it — listed per entry in `DictionaryCatalog` and `ModelCatalog`, and shown in the Settings
+published it — listed per entry in `DictionaryCatalog`, `ModelCatalog` and `SpeechModelCatalog`, and shown in the Settings
 window before a download starts. A language's dictionary is built on the device from up to three sources,
 each pinned to a commit in `DictionaryCatalog` and fetched unmodified — the one exception being the Ukrainian
 frequency list, whose Russian entries are dropped on the device after download:
@@ -58,6 +66,13 @@ frequency list, whose Russian entries are dropped on the device after download:
   built from it are AGPL: the forms listed by English Wiktionary, via [kaikki.org](https://kaikki.org)'s extract
   (Wiktionary text is CC BY-SA 4.0), and by [UniMorph](https://github.com/unimorph/heb) (CC BY-SA 3.0), built on
   the device into a word list that is an adaptation of both and so is CC BY-SA 4.0 itself.
+
+The **speech models** for voice typing follow the same rule. Each is fetched from Hugging Face at a pinned
+commit and checked against its SHA-256 (`SpeechModelCatalog`): the Whisper weights in whisper.cpp's ggml
+conversion ([ggerganov/whisper.cpp](https://huggingface.co/ggerganov/whisper.cpp); Whisper is MIT, Copyright (c)
+2022 OpenAI) and the Silero voice activity detector in the same format
+([ggml-org/whisper-vad](https://huggingface.co/ggml-org/whisper-vad); Silero VAD is MIT, Copyright (c)
+2020-present Silero Team).
 
 ### Every dictionary, its authors and its licence
 
@@ -128,8 +143,8 @@ request (the filtered Ukrainian list is made on the device and never leaves it):
 
 ## MIT License
 
-Applies to Avalonia, CommunityToolkit.Mvvm, Svg.Controls.Skia.Avalonia, Velopack, ONNX Runtime GenAI
-and SymSpell, each with its own copyright notice as listed above.
+Applies to Avalonia, CommunityToolkit.Mvvm, Svg.Controls.Skia.Avalonia, Velopack, ONNX Runtime GenAI,
+SymSpell, Whisper.net, whisper.cpp and NAudio, each with its own copyright notice as listed above.
 
 ```
 MIT License

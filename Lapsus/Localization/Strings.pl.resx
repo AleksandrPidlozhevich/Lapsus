@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Nie udało się przywrócić zakupów: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Pisanie głosowe</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Mów zamiast pisać: Lapsus wpisze to, co powiesz, tam, gdzie jest kursor. Mowa jest rozpoznawana na tym komputerze, dźwięk nigdzie nie jest zapisywany.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Model mowy nie został jeszcze pobrany ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Model mowy: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Pobieranie nie powiodło się: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Pisanie głosowe wymaga modelu mowy: pobierz go w Ustawienia → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofon niedostępny: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofon nagrał tylko ciszę. Sprawdź, czy jest włączony i czy Windows pozwala aplikacjom z niego korzystać.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Nic nie usłyszano.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Pisanie głosowe nie powiodło się: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Fokus przeszedł do innego okna ({0}), więc tekst skopiowano do schowka.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Przytrzymaj podczas mówienia i puść — tekst zostanie wpisany; krótkie naciśnięcie nagrywa bez trzymania aż do następnego. Esc anuluje. Pozostałe ustawienia są na karcie „Głos”.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 jest najdokładniejszy, ale wymaga karty graficznej (bez niej około 5 s na frazę). large-v3-turbo jest prawie tak samo dokładny i szybszy; q5 to ten sam turbo, ale mniejszy do pobrania. Whisper small jest dla komputerów bez karty graficznej.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Język</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Według układu klawiatury</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Język aktywnego układu albo inny z języków twoich układów, jeśli mowa wyraźnie jest w nim.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Domyślny systemowy</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Zwalnianie pamięci</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Załadowany model mowy zajmuje około {0} MB pamięci. Po zwolnieniu następne dyktowanie załaduje go ponownie; nagrywanie i tak zaczyna się od razu.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Po każdym dyktowaniu</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Po {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Po 1 godzinie</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Nigdy (ładuj przy starcie)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Angielskie terminy alfabetem łacińskim</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Terminy takie jak pull request czy GitHub są pisane jak po angielsku. Słowa przyswojone przez twój język zostają bez zmian.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Słownik</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Nazwy i terminy, które mają być zapisane poprawnie — po jednym w wierszu, tak jak mają zostać wpisane. Jeśli termin brzmi nietypowo, po | dodaj, jak się go wymawia.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Pisanie głosowe jest częścią Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus nie ma dostępu do mikrofonu. Zezwól na niego w Ustawieniach systemowych → Prywatność i ochrona → Mikrofon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Zezwól aplikacji Lapsus na dostęp do mikrofonu w wyświetlonym oknie, a potem ponownie uruchom pisanie głosowe.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Głos</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — gotowe · Esc — anuluj</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Kliknij w dowolne pole, przytrzymaj {0} i mów — puść, a tekst pojawi się przy kursorze. Krótkie naciśnięcie {0} nagrywa bez trzymania aż do następnego naciśnięcia. Esc anuluje.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>brak skrótu — wybierz go na karcie „Klawisze”</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Jak używać</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Przycisk mikrofonu na ekranie</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Mały przycisk na dole ekranu: kliknięcie zaczyna i kończy nagrywanie, po najechaniu widać skrót.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Dźwięk na początku i końcu nagrywania</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Pisanie głosowe: kliknij lub {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Główne</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Rozpoznawanie</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Kliknij w dowolne pole, naciśnij {0} i mów; naciśnij {0} ponownie, a tekst pojawi się przy kursorze. Esc anuluje.</value>
+  </data>
 </root>

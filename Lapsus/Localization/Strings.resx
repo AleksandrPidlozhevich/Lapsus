@@ -705,4 +705,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Purchases could not be restored: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Voice typing</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Speak instead of typing: Lapsus types what you say wherever the cursor is. Speech is recognised on this computer; the audio is never stored.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>The speech model is not downloaded yet ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Speech model: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Download failed: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Voice typing needs the speech model: download it in Settings → AI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Microphone unavailable: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>The microphone recorded only silence. Check that it is on and that Windows lets apps use it.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Nothing was heard.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Voice typing failed: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Focus moved to another window ({0}), so the text was copied to the clipboard instead.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Hold it while you speak and let go to type the text; a short press records hands-free until the next press. Esc cancels. Everything else is on the Voice tab.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 is the most accurate but wants a graphics card (about 5 s a phrase without one). large-v3-turbo is nearly as accurate and faster; q5 is the same turbo as a smaller download. Whisper small is for computers without a graphics card.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Language</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>From the keyboard layout</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>The active layout&apos;s language, or another of your layouts&apos; languages when the speech is clearly in it.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>System default</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Free the memory</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>While loaded, the speech model takes about {0} MB of memory. Once it is freed, the next dictation loads it again; recording still starts at once.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>After each dictation</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>After {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>After 1 hour</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Never (load at startup)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Keep English terms in Latin letters</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Terms like pull request or GitHub are written as in English instead of in your alphabet. Words your language has adopted stay as they are.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glossary</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Names and terms to get right, one per line, spelled as they should be typed. If a term sounds unusual, add how it sounds after |.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Voice typing is part of Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus may not use the microphone. Allow it in System Settings → Privacy &amp; Security → Microphone.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Allow Lapsus to use the microphone in the dialog, then start voice typing again.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Voice</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — done · Esc — cancel</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Click into any text field, hold {0} and speak, then let go: the text appears at the cursor. A short press of {0} records hands-free until you press it again. Esc cancels.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>no hotkey — set one on the Hotkeys tab</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>How to use it</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Microphone button on screen</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>A small button at the bottom of the screen: click it to start or finish a recording, hover over it to see the hotkey.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Sound when recording starts and stops</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Voice typing: click, or {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Main</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Recognition</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Click into any text field, press {0} and speak; press {0} again and the text appears at the cursor. Esc cancels.</value>
+  </data>
 </root>

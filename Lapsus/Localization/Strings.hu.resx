@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>A vásárlások visszaállítása nem sikerült: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Hangalapú bevitel</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Gépelés helyett beszéljen: a Lapsus oda írja, amit mond, ahol a kurzor áll. A beszédfelismerés ezen a számítógépen történik, a hangot sehol nem tárolja.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>A beszédmodell még nincs letöltve ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Beszédmodell: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>A letöltés nem sikerült: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>A hangalapú bevitelhez beszédmodell kell: töltse le itt: Beállítások → MI.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>A mikrofon nem érhető el: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>A mikrofon csak csendet rögzített. Ellenőrizze, hogy be van-e kapcsolva, és hogy a Windows engedi-e az alkalmazásoknak a használatát.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Semmi sem hallatszott.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>A hangalapú bevitel nem sikerült: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>A fókusz másik ablakra került ({0}), ezért a szöveg a vágólapra került.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Tartsa lenyomva, amíg beszél, és engedje fel a szöveg beírásához; rövid megnyomás kéz nélkül rögzít a következő megnyomásig. Az Esc megszakítja. A többi beállítás a „Hang” lapon van.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>A large-v3 a legpontosabb, de videokártya kell hozzá (nélküle kb. 5 mp mondatonként). A large-v3-turbo majdnem ugyanilyen pontos és gyorsabb; a q5 ugyanaz a turbo kisebb letöltéssel. A Whisper small videokártya nélküli gépekre való.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>A billentyűzetkiosztás szerint</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Az aktív kiosztás nyelve, vagy kiosztásai közül egy másik nyelv, ha egyértelműen azon beszél.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Rendszer alapértelmezése</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Memória felszabadítása</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Betöltve a beszédmodell körülbelül {0} MB memóriát foglal. Felszabadítás után a következő diktálás újra betölti; a felvétel így is azonnal indul.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Minden diktálás után</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>{0} perc után</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>1 óra után</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Soha (betöltés induláskor)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Angol kifejezések latin betűkkel</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Az olyan kifejezések, mint a pull request vagy a GitHub, angolul íródnak. A nyelvébe beépült szavak változatlanok maradnak.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Szójegyzék</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Helyesen írandó nevek és kifejezések, soronként egy, úgy, ahogy be kell gépelni őket. Ha egy kifejezés szokatlanul hangzik, a | után írja le, hogyan hangzik.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>A hangalapú bevitel a Lapsus Plus része.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>A Lapsus nem használhatja a mikrofont. Engedélyezze itt: Rendszerbeállítások → Adatvédelem és biztonság → Mikrofon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>A megjelenő ablakban engedélyezze a Lapsusnak a mikrofon használatát, majd indítsa újra a hangalapú bevitelt.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Hang</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — kész · Esc — mégse</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Kattintson bármelyik mezőbe, tartsa lenyomva ezt: {0}, és beszéljen — engedje fel, és a szöveg megjelenik a kurzornál. Egy rövid {0} kéz nélkül rögzít a következő megnyomásig. Az Esc megszakítja.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>nincs billentyű — válasszon egyet a „Gombok” lapon</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Használat</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Mikrofon gomb a képernyőn</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Kis gomb a képernyő alján: kattintással indítható és leállítható a felvétel, ha fölé viszi az egeret, látszik a billentyűparancs.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Hang a felvétel elején és végén</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Hangalapú bevitel: kattintson, vagy {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Általános</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Felismerés</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Kattintson bármelyik mezőbe, nyomja meg ezt: {0}, és beszéljen; nyomja meg újra ({0}), és a szöveg megjelenik a kurzornál. Az Esc megszakítja.</value>
+  </data>
 </root>

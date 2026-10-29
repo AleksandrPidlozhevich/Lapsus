@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>לא ניתן היה לשחזר את הרכישות: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>הקלדה קולית</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>דברו במקום להקליד: Lapsus מקליד את מה שאתם אומרים במקום שבו נמצא הסמן. הדיבור מזוהה במחשב הזה, והשמע לא נשמר בשום מקום.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>מודל הדיבור עדיין לא הורד ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>מודל דיבור: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>ההורדה נכשלה: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>הקלדה קולית צריכה את מודל הדיבור: הורידו אותו בהגדרות ← בינה מלאכותית.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>המיקרופון אינו זמין: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>המיקרופון הקליט רק שקט. בדקו שהוא מופעל ושמערכת Windows מאפשרת ליישומים להשתמש בו.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>לא נשמע דבר.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>ההקלדה הקולית נכשלה: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>המיקוד עבר לחלון אחר ({0}), ולכן הטקסט הועתק ללוח.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>החזיקו בזמן הדיבור ושחררו כדי שהטקסט יוקלד; לחיצה קצרה מקליטה בלי ידיים עד הלחיצה הבאה. Esc מבטל. שאר ההגדרות בכרטיסייה &quot;קול&quot;.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 הוא המדויק ביותר, אבל דורש כרטיס מסך (בלעדיו כ-5 שניות למשפט). large-v3-turbo מדויק כמעט באותה מידה ומהיר יותר; q5 הוא אותו turbo בהורדה קטנה יותר. Whisper small מיועד למחשבים ללא כרטיס מסך.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>שפה</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>לפי פריסת המקלדת</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>השפה של הפריסה הפעילה, או שפה אחרת מהפריסות שלכם כשהדיבור בבירור בה.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>מיקרופון</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>ברירת המחדל של המערכת</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>שחרור הזיכרון</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>כשמודל הדיבור טעון הוא תופס כ-{0} MB זיכרון. אחרי השחרור, ההכתבה הבאה טוענת אותו מחדש; ההקלטה בכל זאת מתחילה מיד.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>אחרי כל הכתבה</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>אחרי {0} דק׳</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>אחרי שעה</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>אף פעם (טעינה בהפעלה)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>מונחים באנגלית באותיות לטיניות</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>מונחים כמו pull request או GitHub נכתבים כמו באנגלית. מילים שהשפה שלכם אימצה נשארות כמו שהן.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>מילון מונחים</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>שמות ומונחים שצריך לכתוב נכון, אחד בכל שורה, כפי שצריך להקליד אותם. אם מונח נשמע חריג, הוסיפו אחרי | איך הוא נשמע.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>הקלדה קולית היא חלק מ-Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>ל-Lapsus אין הרשאה להשתמש במיקרופון. אפשרו זאת בהגדרות המערכת ← פרטיות ואבטחה ← מיקרופון.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>אפשרו ל-Lapsus להשתמש במיקרופון בחלון שנפתח, ואז הפעילו שוב את ההקלדה הקולית.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>קול</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — סיום · Esc — ביטול</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>לחצו בשדה כלשהו, החזיקו את {0} ודברו — שחררו והטקסט יופיע במקום הסמן. לחיצה קצרה על {0} מקליטה בלי ידיים עד הלחיצה הבאה. Esc מבטל.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>אין מקש — בחרו אחד בכרטיסייה &quot;מקשים&quot;</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>איך משתמשים</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>כפתור מיקרופון על המסך</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>כפתור קטן בתחתית המסך: לחיצה מתחילה או מסיימת הקלטה, ובריחוף מעליו מוצג קיצור המקשים.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>צליל בתחילת ההקלטה ובסופה</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>הקלדה קולית: לחצו או {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>כללי</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>זיהוי</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>לחצו בשדה כלשהו, הקישו {0} ודברו; הקישו {0} שוב והטקסט יופיע במקום הסמן. Esc מבטל.</value>
+  </data>
 </root>

@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Satın alımlar geri yüklenemedi: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Sesle yazma</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Yazmak yerine konuşun: Lapsus söylediklerinizi imlecin olduğu yere yazar. Konuşma bu bilgisayarda tanınır, ses hiçbir yerde saklanmaz.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Konuşma modeli henüz indirilmedi ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Konuşma modeli: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>İndirme başarısız: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Sesle yazma için konuşma modeli gerekir: Ayarlar → Yapay zekâ bölümünden indirin.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Mikrofon kullanılamıyor: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofon yalnızca sessizlik kaydetti. Açık olduğunu ve Windows&apos;un uygulamaların onu kullanmasına izin verdiğini kontrol edin.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Hiçbir şey duyulmadı.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Sesle yazma başarısız oldu: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Odak başka bir pencereye geçti ({0}), bu yüzden metin panoya kopyalandı.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Konuşurken basılı tutun, metni yazdırmak için bırakın; kısa basış bir sonraki basışa kadar eller serbest kaydeder. Esc iptal eder. Diğer ayarlar Ses sekmesindedir.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 en doğru olanıdır ama ekran kartı ister (onsuz cümle başına yaklaşık 5 sn). large-v3-turbo neredeyse aynı doğrulukta ve daha hızlıdır; q5 aynı turbo modelin daha küçük indirmesidir. Whisper small ekran kartı olmayan bilgisayarlar içindir.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Klavye düzenine göre</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Etkin düzenin dili ya da konuşma açıkça o dildeyse düzenlerinizin dillerinden biri.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Sistem varsayılanı</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Belleği boşalt</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Yüklü konuşma modeli yaklaşık {0} MB bellek kaplar. Boşaltıldıktan sonra sonraki dikte onu yeniden yükler; kayıt yine de hemen başlar.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Her dikteden sonra</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>{0} dk sonra</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>1 saat sonra</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Asla (başlangıçta yükle)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>İngilizce terimler Latin harfleriyle</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>pull request veya GitHub gibi terimler İngilizcedeki gibi yazılır. Dilinize yerleşmiş sözcükler olduğu gibi kalır.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Sözlük</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Doğru yazılması gereken adlar ve terimler, her satıra bir tane, yazılması gerektiği gibi. Bir terim alışılmadık okunuyorsa | işaretinden sonra nasıl okunduğunu ekleyin.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Sesle yazma, Lapsus Plus&apos;ın bir parçasıdır.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus&apos;un mikrofonu kullanma izni yok. Sistem Ayarları → Gizlilik ve Güvenlik → Mikrofon bölümünden izin verin.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Açılan pencerede Lapsus&apos;un mikrofonu kullanmasına izin verin ve sesle yazmayı yeniden başlatın.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Ses</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — bitti · Esc — iptal</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Herhangi bir alana tıklayın, {0} tuşunu basılı tutup konuşun; bıraktığınızda metin imlecin olduğu yerde belirir. {0} tuşuna kısa basmak, tekrar basana kadar eller serbest kaydeder. Esc iptal eder.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>kısayol yok — Tuşlar sekmesinden birini seçin</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Nasıl kullanılır</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Ekranda mikrofon düğmesi</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Ekranın altında küçük bir düğme: tıklamak kaydı başlatır veya bitirir, üzerine gelince kısayol görünür.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Kayıt başlarken ve biterken ses</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Sesle yazma: tıklayın veya {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Genel</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Tanıma</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Herhangi bir alana tıklayın, {0} tuşuna basıp konuşun; {0} tuşuna yeniden basınca metin imlecin olduğu yerde belirir. Esc iptal eder.</value>
+  </data>
 </root>

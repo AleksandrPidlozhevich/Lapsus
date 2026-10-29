@@ -200,6 +200,13 @@ public sealed class SpellChecker
         return _codesByScript.TryGetValue(script, out var codes) ? codes : [];
     }
 
+    // Every list word of a language with its count, in lookup form (lower case, marks folded). Empty when the
+    // language has no list loaded.
+    public IEnumerable<KeyValuePair<string, long>> WordsIn(string languageCode)
+    {
+        return _byLanguage.TryGetValue(languageCode, out var loaded) ? loaded.Counts : [];
+    }
+
     public bool IsKnownWord(string word, Script script, string? languageCode = null)
     {
         if (string.IsNullOrEmpty(word))

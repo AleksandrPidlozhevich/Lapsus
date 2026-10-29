@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Не вдалося відновити покупки: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Голосове введення</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Говоріть замість того, щоб друкувати: Lapsus надрукує сказане там, де курсор. Мовлення розпізнається на цьому комп’ютері, звук ніде не зберігається.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Модель мовлення ще не завантажено ({0} МБ).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Модель мовлення: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Не вдалося завантажити: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Для голосового введення потрібна модель мовлення: завантажте її в розділі Налаштування → ШІ.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Мікрофон недоступний: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Мікрофон записав лише тишу. Перевірте, що він увімкнений і Windows дозволяє застосункам ним користуватися.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Нічого не почуто.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Голосове введення не спрацювало: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Фокус перейшов до іншого вікна ({0}), тому текст скопійовано в буфер обміну.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Утримуйте, поки говорите, відпустіть — текст надрукується; коротке натискання — запис без рук до наступного натискання. Esc — скасувати. Решта налаштувань — на вкладці «Голос».</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 — найточніша, але їй потрібна відеокарта (без неї близько 5 с на фразу). large-v3-turbo майже така ж точна і швидша; q5 — та сама turbo, але завантажується менше. Whisper small — для комп’ютерів без відеокарти.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Мова</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>За розкладкою клавіатури</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Мова активної розкладки або інша з ваших розкладок, якщо мовлення явно нею.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Мікрофон</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Системний за замовчуванням</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Звільняти пам&apos;ять</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Завантажена модель мовлення займає близько {0} МБ пам&apos;яті. Після звільнення наступна диктовка завантажить її знову; запис однаково починається одразу.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Після кожної диктовки</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Через {0} хв</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Через 1 годину</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Ніколи (завантажувати під час запуску)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Англійські терміни латиницею</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Терміни на кшталт pull request чи GitHub пишуться як англійською, а не вашими літерами. Слова, що прижилися в мові, лишаються як є.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Глосарій</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Імена й терміни, які важливо писати правильно, — по одному в рядку, так, як їх треба надрукувати. Якщо термін звучить незвично, після | додайте, як він вимовляється.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Голосове введення входить до Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus не дозволено користуватися мікрофоном. Дозвольте в «Системні параметри» → «Приватність і безпека» → «Мікрофон».</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Дозвольте Lapsus доступ до мікрофона у вікні, що з&apos;явилося, і знову запустіть голосове введення.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Голос</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — готово · Esc — скасувати</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Клацніть у будь-якому полі, затисніть {0} і говоріть — відпустіть, і текст з’явиться біля курсора. Коротке натискання {0} — запис без рук до наступного натискання. Esc — скасувати.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>клавішу не задано — виберіть на вкладці «Клавіші»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Як користуватися</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Кнопка мікрофона на екрані</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Невелика кнопка внизу екрана: клацання починає й завершує запис, при наведенні видно гарячу клавішу.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Звук на початку й наприкінці запису</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Голосове введення: клацніть або {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Основне</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Розпізнавання</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Клацніть у будь-якому полі, натисніть {0} і говоріть; натисніть {0} ще раз — текст з’явиться біля курсора. Esc — скасувати.</value>
+  </data>
 </root>

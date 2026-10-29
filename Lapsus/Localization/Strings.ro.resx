@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Achizițiile nu au putut fi restaurate: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Dictare vocală</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Vorbiți în loc să tastați: Lapsus scrie ce spuneți acolo unde este cursorul. Vorbirea este recunoscută pe acest computer; sunetul nu este salvat nicăieri.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Modelul de vorbire nu este încă descărcat ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Model de vorbire: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Descărcarea a eșuat: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Dictarea vocală are nevoie de modelul de vorbire: descarcă-l din Setări → IA.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Microfon indisponibil: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Microfonul a înregistrat doar liniște. Verifică dacă este pornit și dacă Windows permite aplicațiilor să îl folosească.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Nu s-a auzit nimic.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Dictarea vocală a eșuat: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Focalizarea a trecut la altă fereastră ({0}), așa că textul a fost copiat în clipboard.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Țineți apăsat cât vorbiți și eliberați pentru a scrie textul; o apăsare scurtă înregistrează fără mâini până la următoarea. Esc anulează. Restul se află în fila „Voce”.</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 este cel mai precis, dar are nevoie de placă video (fără ea, circa 5 s pe frază). large-v3-turbo este aproape la fel de precis și mai rapid; q5 este același turbo, cu descărcare mai mică. Whisper small este pentru calculatoare fără placă video.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Limbă</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>După aranjamentul tastaturii</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Limba aranjamentului activ sau o altă limbă a aranjamentelor tale, dacă se vorbește clar în ea.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Microfon</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Implicit al sistemului</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Eliberarea memoriei</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Încărcat, modelul de vorbire ocupă circa {0} MB de memorie. După eliberare, următoarea dictare îl încarcă din nou; înregistrarea începe totuși imediat.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>După fiecare dictare</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>După {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>După 1 oră</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Niciodată (încarcă la pornire)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Termenii englezești cu litere latine</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termeni ca pull request sau GitHub se scriu ca în engleză. Cuvintele pe care limba ta le-a adoptat rămân cum sunt.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glosar</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Nume și termeni care trebuie scriși corect, câte unul pe rând, așa cum trebuie tastați. Dacă un termen sună neobișnuit, adaugă după | cum se pronunță.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Dictarea vocală face parte din Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus nu are voie să folosească microfonul. Permite-i din Configurări sistem → Confidențialitate și securitate → Microfon.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Permite-i lui Lapsus să folosească microfonul în fereastra apărută, apoi pornește din nou dictarea vocală.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Voce</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — gata · Esc — anulare</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Faceți clic în orice câmp, țineți apăsat {0} și vorbiți — eliberați, iar textul apare la cursor. O apăsare scurtă pe {0} înregistrează fără mâini până la următoarea apăsare. Esc anulează.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>nicio tastă — alegeți una în fila „Taste”</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Cum se folosește</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Buton de microfon pe ecran</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Un buton mic în partea de jos a ecranului: un clic pornește sau oprește înregistrarea, la trecerea mouse-ului vedeți tasta rapidă.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Sunet la începutul și la sfârșitul înregistrării</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Dictare vocală: faceți clic sau {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>General</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Recunoaștere</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Faceți clic în orice câmp, apăsați {0} și vorbiți; apăsați din nou {0}, iar textul apare la cursor. Esc anulează.</value>
+  </data>
 </root>

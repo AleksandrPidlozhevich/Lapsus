@@ -39,13 +39,54 @@ dotnet publish "$ROOT/Lapsus/Lapsus.csproj" -c Release -r "$RID" --self-containe
 echo "==> Generating icon from Assets/icon-light.svg"
 "$ROOT/scripts/make-macos-icon.sh" "$BUILD_DIR" "$ICNS"
 
+echo "==> Writing Info.plist"
+# vpk's own Info.plist carries no usage descriptions, and macOS ends an app that opens the microphone
+# without NSMicrophoneUsageDescription. So the plist is written here: the keys vpk writes (same values,
+# from OsxBundleCommandRunner) plus the three descriptions of what Lapsus asks for.
+PLIST="$BUILD_DIR/Info.plist"
+cat > "$PLIST" <<PLIST_END
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>$APP_NAME</string>
+    <key>CFBundleExecutable</key>
+    <string>$APP_NAME</string>
+    <key>CFBundleIdentifier</key>
+    <string>$BUNDLE_ID</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>${VERSION%%-*}</string>
+    <key>CFBundleVersion</key>
+    <string>$VERSION</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleIconFile</key>
+    <string>$(basename "$ICNS")</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <key>NSAccessibilityUsageDescription</key>
+    <string>Lapsus needs Accessibility access to capture keystrokes, find the text cursor, and type corrected text in other apps.</string>
+    <key>NSInputMonitoringUsageDescription</key>
+    <string>Lapsus needs Input Monitoring to receive keystrokes system-wide.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Lapsus listens only while voice typing is on and you have pressed its hotkey, and turns your speech into text on this Mac.</string>
+</dict>
+</plist>
+PLIST_END
+
 echo "==> vpk pack"
 # "-" binds the signature to $BUNDLE_ID; otherwise macOS sees "apphost" and an Accessibility
 # grant never reaches CGEventPost. A Developer ID (LAPSUS_MAC_APP_IDENTITY) keeps that grant
 # stable across builds.
-SIGN_ARGS=(--signAppIdentity "-")
+#
+# The entitlements are vpk's own .NET defaults plus the microphone (voice typing); see the file.
+ENTITLEMENTS="$ROOT/Lapsus/Packaging/Mac/Lapsus.entitlements"
+SIGN_ARGS=(--signAppIdentity "-" --signEntitlements "$ENTITLEMENTS")
 if [ -n "${LAPSUS_MAC_APP_IDENTITY:-}" ]; then
-  SIGN_ARGS=(--signAppIdentity "$LAPSUS_MAC_APP_IDENTITY")
+  SIGN_ARGS=(--signAppIdentity "$LAPSUS_MAC_APP_IDENTITY" --signEntitlements "$ENTITLEMENTS")
   [ -n "${LAPSUS_MAC_INSTALL_IDENTITY:-}" ] && SIGN_ARGS+=(--signInstallIdentity "$LAPSUS_MAC_INSTALL_IDENTITY")
   [ -n "${LAPSUS_NOTARY_PROFILE:-}" ] && SIGN_ARGS+=(--notaryProfile "$LAPSUS_NOTARY_PROFILE")
   [ -n "${LAPSUS_KEYCHAIN:-}" ] && SIGN_ARGS+=(--keychain "$LAPSUS_KEYCHAIN")
@@ -63,6 +104,7 @@ vpk pack \
   --packTitle "$APP_NAME" \
   --bundleId "$BUNDLE_ID" \
   --icon "$ICNS" \
+  --plist "$PLIST" \
   --outputDir "$OUTPUT_DIR" \
   --runtime "$RID" \
   "${SIGN_ARGS[@]}" \

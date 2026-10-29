@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>تعذّر استعادة المشتريات: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>الكتابة الصوتية</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>تحدّث بدلًا من الكتابة: يكتب Lapsus ما تقوله حيث يوجد المؤشر. يُتعرّف على الكلام على هذا الكمبيوتر، ولا يُحفظ الصوت في أي مكان.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>لم يُنزَّل نموذج الكلام بعد ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>نموذج الكلام: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>فشل التنزيل: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>تحتاج الكتابة الصوتية إلى نموذج الكلام: نزّله من الإعدادات ← الذكاء الاصطناعي.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>الميكروفون غير متاح: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>سجّل الميكروفون صمتًا فقط. تأكد من أنه يعمل وأن Windows يسمح للتطبيقات باستخدامه.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>لم يُسمع شيء.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>فشلت الكتابة الصوتية: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>انتقل التركيز إلى نافذة أخرى ({0})، لذا نُسخ النص إلى الحافظة.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>اضغط مع الاستمرار أثناء الكلام واترك المفتاح لكتابة النص؛ الضغط القصير يسجّل دون استخدام اليدين حتى الضغطة التالية. Esc يلغي. باقي الإعدادات في علامة التبويب «الصوت».</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 هو الأدق لكنه يحتاج إلى بطاقة رسومات (من دونها نحو 5 ثوانٍ للعبارة). large-v3-turbo دقيق تقريبًا بالقدر نفسه وأسرع؛ وq5 هو turbo نفسه بتنزيل أصغر. Whisper small للحواسيب التي لا تحتوي على بطاقة رسومات.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>حسب تخطيط لوحة المفاتيح</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>لغة التخطيط النشط، أو لغة أخرى من لغات تخطيطاتك إذا كان الكلام بها بوضوح.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>الميكروفون</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>الافتراضي في النظام</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>تحرير الذاكرة</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>يشغل نموذج الكلام عند تحميله نحو {0} MB من الذاكرة. بعد تحريره تحمّله الإملاءة التالية من جديد؛ ويبدأ التسجيل فورًا مع ذلك.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>بعد كل إملاءة</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>بعد {0} دقيقة</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>بعد ساعة</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>أبدًا (التحميل عند بدء التشغيل)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>المصطلحات الإنجليزية بالحروف اللاتينية</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>تُكتب مصطلحات مثل pull request أو GitHub كما في الإنجليزية. وتبقى الكلمات التي تبنّتها لغتك كما هي.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>المسرد</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>أسماء ومصطلحات يجب أن تُكتب صحيحة، واحد في كل سطر، كما ينبغي أن تُكتب. إذا كان نطق المصطلح غير مألوف فأضف بعد | كيف يُنطق.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>الكتابة الصوتية جزء من Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>لا يُسمح لـ Lapsus باستخدام الميكروفون. اسمح بذلك من إعدادات النظام ← الخصوصية والأمن ← الميكروفون.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>اسمح لـ Lapsus باستخدام الميكروفون في النافذة التي ظهرت، ثم شغّل الكتابة الصوتية من جديد.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>الصوت</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — تم · Esc — إلغاء</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>انقر في أي حقل، واضغط مع الاستمرار على {0} وتحدّث، ثم اترك المفتاح فيظهر النص عند المؤشر. الضغط القصير على {0} يسجّل دون استخدام اليدين حتى الضغطة التالية. Esc يلغي.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>لا يوجد مفتاح — اختر واحدًا في علامة التبويب «المفاتيح»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>طريقة الاستخدام</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>زر الميكروفون على الشاشة</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>زر صغير أسفل الشاشة: النقر يبدأ التسجيل أو ينهيه، وعند تمرير المؤشر فوقه يظهر اختصار لوحة المفاتيح.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>صوت عند بدء التسجيل وانتهائه</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>الكتابة الصوتية: انقر أو {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>عام</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>التعرّف</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>انقر في أي حقل، واضغط {0} وتحدّث؛ اضغط {0} مرة أخرى فيظهر النص عند المؤشر. Esc يلغي.</value>
+  </data>
 </root>

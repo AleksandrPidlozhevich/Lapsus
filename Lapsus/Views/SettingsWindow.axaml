@@ -1,4 +1,4 @@
-﻿<Window xmlns="https://github.com/avaloniaui"
+<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Lapsus.ViewModels"
         xmlns:settings="using:Lapsus.Settings"
@@ -29,6 +29,7 @@
         <StreamGeometry x:Key="TabIconApps">M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z</StreamGeometry>
         <StreamGeometry x:Key="TabIconAi">M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z</StreamGeometry>
 
+        <StreamGeometry x:Key="TabIconVoice">M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z</StreamGeometry>
         <StreamGeometry x:Key="TabIconPlus">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z</StreamGeometry>
         <StreamGeometry x:Key="TabIconLicense">M12.65 10A5.99 5.99 0 0 0 7 6a6 6 0 0 0 0 12 5.99 5.99 0 0 0 5.65-4H17v4h4v-4h2v-4H12.65zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z</StreamGeometry>
 
@@ -72,6 +73,29 @@
                     <TextBlock Classes="hint" Text="{Binding HintText}" />
                 </StackPanel>
             </Border>
+        </DataTemplate>
+        <!-- One hotkey: a preset list, a Record button and, while recording, the recorder panel. -->
+        <DataTemplate x:Key="HotkeyRowTemplate" x:DataType="vm:SelectionHotkeyViewModel">
+            <StackPanel Spacing="4" Margin="0,0,0,10">
+                <TextBlock Classes="rowTitle" Text="{Binding Label}" />
+                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding Hint}" />
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
+                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Options}"
+                              SelectedItem="{Binding Selected, Mode=TwoWay}"
+                              HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="vm:HotkeyOption">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding Recorder}"
+                                    ContentTemplate="{StaticResource HotkeyRecordButtonTemplate}" />
+                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding Recorder}"
+                                    ContentTemplate="{StaticResource HotkeyRecorderPanelTemplate}"
+                                    IsVisible="{Binding Recorder.IsRecording}" />
+                </Grid>
+            </StackPanel>
         </DataTemplate>
     </Window.Resources>
 
@@ -148,8 +172,10 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="CornerRadius" Value="4" />
         </Style>
+        <!-- Fluent paints a checked button's text for its accent fill (white); on the card fill it vanishes in light mode. -->
         <Style Selector="ToggleButton.segment:checked /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource LapsusCardBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
         </Style>
 
         <Style Selector="Ellipse.statusDot">
@@ -181,7 +207,7 @@
         <Style Selector="TabControl.settings > TabItem">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="MinHeight" Value="0" />
-            <Setter Property="Padding" Value="6,8" />
+            <Setter Property="Padding" Value="2,8" />
             <Setter Property="Template">
                 <ControlTemplate>
                     <Border Background="{TemplateBinding Background}"
@@ -557,33 +583,14 @@
                         <Border Classes="card">
                             <StackPanel Spacing="10">
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[SelectionActions_Label]}" />
-                                <ItemsControl ItemsSource="{Binding SelectionActions}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate x:DataType="vm:SelectionHotkeyViewModel">
-                                            <StackPanel Spacing="4" Margin="0,0,0,10">
-                                                <TextBlock Classes="rowTitle" Text="{Binding Label}" />
-                                                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding Hint}" />
-                                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
-                                                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Options}"
-                                                              SelectedItem="{Binding Selected, Mode=TwoWay}"
-                                                              HorizontalAlignment="Stretch">
-                                                        <ComboBox.ItemTemplate>
-                                                            <DataTemplate x:DataType="vm:HotkeyOption">
-                                                                <TextBlock Text="{Binding Name}" />
-                                                            </DataTemplate>
-                                                        </ComboBox.ItemTemplate>
-                                                    </ComboBox>
-                                                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding Recorder}"
-                                                                    ContentTemplate="{StaticResource HotkeyRecordButtonTemplate}" />
-                                                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding Recorder}"
-                                                                    ContentTemplate="{StaticResource HotkeyRecorderPanelTemplate}"
-                                                                    IsVisible="{Binding Recorder.IsRecording}" />
-                                                </Grid>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <ItemsControl ItemsSource="{Binding SelectionActions}"
+                                              ItemTemplate="{StaticResource HotkeyRowTemplate}" />
                             </StackPanel>
+                        </Border>
+
+                        <Border Classes="card" IsVisible="{Binding DictationHotkeyRow, Converter={x:Static ObjectConverters.IsNotNull}}">
+                            <ContentControl Content="{Binding DictationHotkeyRow}"
+                                            ContentTemplate="{StaticResource HotkeyRowTemplate}" />
                         </Border>
 
                     </StackPanel>
@@ -968,6 +975,187 @@
                                     <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Classes="status"
                                                Text="{Binding Models.Status}"
                                                IsVisible="{Binding Models.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem IsVisible="{Binding Voice.IsSupported, FallbackValue=False}">
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconVoice}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Voice]}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="VoiceScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="VoiceList" Spacing="12" Margin="0,12">
+
+                        <!-- Voice typing: its own speech model, loaded only while it is used. Its hotkey is on the Hotkeys tab. -->
+                        <Border Classes="card">
+                            <StackPanel Spacing="8">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Classes="sectionTitle" Text="{Binding L[Voice_Toggle]}"
+                                               VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsEnabled="{Binding !Voice.Locked, FallbackValue=True}"
+                                                  IsChecked="{Binding Voice.Enabled, FallbackValue=False}" />
+                                </Grid>
+                                <TextBlock Classes="hint" Text="{Binding Voice.Hint}" />
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8"
+                                           IsVisible="{Binding Voice.Locked, FallbackValue=False}">
+                                    <TextBlock Classes="hint" VerticalAlignment="Center"
+                                               Text="{Binding L[Voice_Locked]}" />
+                                    <Button Content="{Binding L[Neural_Locked_Button]}"
+                                            Command="{Binding License.OpenLicenseSettingsCommand}" />
+                                </WrapPanel>
+
+                                <!-- Two sections keep the tab as short as the others: the model and how to start it; how speech is read. -->
+                                <StackPanel Spacing="8" IsVisible="{Binding Voice.Enabled, FallbackValue=False}">
+                                    <Separator Margin="0,2,0,2" Background="{DynamicResource LapsusBorderBrush}" />
+                                    <Border Background="{DynamicResource LapsusRowBrush}" CornerRadius="6" Padding="2"
+                                            HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal" Spacing="2">
+                                            <ToggleButton Classes="segment" Padding="12,5"
+                                                          IsChecked="{Binding Voice.ShowMain, Mode=OneWay}"
+                                                          Command="{Binding Voice.ShowSectionCommand}" CommandParameter="Main"
+                                                          Content="{Binding L[Voice_SectionMain]}" />
+                                            <ToggleButton Classes="segment" Padding="12,5"
+                                                          IsChecked="{Binding Voice.ShowRecognition, Mode=OneWay}"
+                                                          Command="{Binding Voice.ShowSectionCommand}" CommandParameter="Recognition"
+                                                          Content="{Binding L[Voice_SectionRecognition]}" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Model: choose, download, remove. -->
+                                    <Grid IsVisible="{Binding Voice.ShowMain, FallbackValue=True}"
+                                          ColumnDefinitions="*,Auto" ColumnSpacing="8" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                                        <ComboBox Grid.Row="0" Grid.Column="0" Margin="0,4,0,6"
+                                                  HorizontalAlignment="Stretch"
+                                                  ItemsSource="{Binding Voice.ModelOptions}"
+                                                  SelectedItem="{Binding Voice.SelectedModel}"
+                                                  IsEnabled="{Binding !Voice.Busy}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:VoiceModelOption">
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <Button Grid.Row="0" Grid.Column="1" Margin="0,4,0,6"
+                                                Content="{Binding L[Action_Download]}"
+                                                Command="{Binding Voice.DownloadCommand}"
+                                                IsVisible="{Binding Voice.ShowDownload, FallbackValue=False}" />
+                                        <Button Grid.Row="0" Grid.Column="1" Margin="0,4,0,6" Classes="icon"
+                                                HorizontalAlignment="Right"
+                                                ToolTip.Tip="{Binding L[Model_RemoveTooltip]}"
+                                                Command="{Binding Voice.RemoveCommand}"
+                                                IsVisible="{Binding Voice.ShowRemove, FallbackValue=False}">
+                                            <Svg Path="{Binding TrashIconPath}" Width="16" Height="16" />
+                                        </Button>
+                                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,4"
+                                                   Text="{Binding Voice.ModelStatus}" />
+                                        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,2"
+                                                   Text="{Binding L[Voice_ModelHint]}" />
+                                        <ProgressBar Grid.Row="3" Grid.ColumnSpan="2" Height="3" Margin="0,4,0,2"
+                                                     Minimum="0" Maximum="1"
+                                                     Value="{Binding Voice.Progress, FallbackValue=0}"
+                                                     IsVisible="{Binding Voice.Busy, FallbackValue=False}" />
+                                        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Classes="status" Margin="0,4,0,0"
+                                                   Text="{Binding Voice.Status}"
+                                                   IsVisible="{Binding Voice.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                    </Grid>
+
+                                    <!-- How speech is read: language, microphone, memory, English terms, glossary. -->
+                                    <Grid IsVisible="{Binding Voice.ShowRecognition, FallbackValue=False}"
+                                          ColumnDefinitions="*,Auto" ColumnSpacing="8"
+                                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                                   Margin="0,4,0,4" Text="{Binding L[Voice_LanguageLabel]}" />
+                                        <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Margin="0,4,0,4"
+                                                  ItemsSource="{Binding Voice.LanguageOptions}"
+                                                  SelectedItem="{Binding Voice.SelectedLanguage}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:VoiceLanguageOption">
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                                   Text="{Binding L[Voice_LanguageHint]}" />
+
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                                   Margin="0,0,0,8" Text="{Binding L[Voice_MicLabel]}" />
+                                        <ComboBox Grid.Row="2" Grid.Column="1" MinWidth="200" Margin="0,0,0,8"
+                                                  ItemsSource="{Binding Voice.MicrophoneOptions}"
+                                                  SelectedItem="{Binding Voice.SelectedMicrophone}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:MicrophoneOption">
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                                   Margin="0,0,0,4" Text="{Binding L[Voice_UnloadLabel]}" />
+                                        <ComboBox Grid.Row="3" Grid.Column="1" MinWidth="200" Margin="0,0,0,4"
+                                                  ItemsSource="{Binding Voice.UnloadOptions}"
+                                                  SelectedItem="{Binding Voice.SelectedUnload}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:UnloadOption">
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                                   Text="{Binding Voice.UnloadHint}" />
+
+                                        <TextBlock Grid.Row="5" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                                   TextWrapping="Wrap" Margin="0,0,0,4" Text="{Binding L[Voice_KeepLatin]}" />
+                                        <ToggleSwitch Grid.Row="5" Grid.Column="1" Classes="bare" HorizontalAlignment="Right"
+                                                      Margin="0,0,0,4"
+                                                      IsChecked="{Binding Voice.KeepEnglishTermsLatin, FallbackValue=True}" />
+                                        <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                                   Text="{Binding L[Voice_KeepLatinHint]}" />
+
+                                        <TextBlock Grid.Row="7" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
+                                                   Text="{Binding L[Voice_GlossaryLabel]}" />
+                                        <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Spacing="4">
+                                            <TextBlock Classes="hint" Text="{Binding L[Voice_GlossaryHint]}" />
+                                            <TextBox AcceptsReturn="True" TextWrapping="NoWrap" MinHeight="90" MaxHeight="200"
+                                                     FontFamily="{DynamicResource ContentControlThemeFontFamily}"
+                                                     PlaceholderText="GitHub&#10;Kubernetes|kuber&#10;JSON|jason"
+                                                     Text="{Binding Voice.GlossaryText}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- How to start it, and the two things that make it visible and audible. -->
+                        <Border Classes="card" IsVisible="{Binding Voice.ShowUsage, FallbackValue=False}">
+                            <StackPanel Spacing="8">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Voice_UsageTitle]}" />
+                                <TextBlock Classes="hint" Text="{Binding Voice.TryIt}" />
+
+                                <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0"
+                                      IsVisible="{Binding Voice.ButtonSupported, FallbackValue=False}">
+                                    <TextBlock Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                               TextWrapping="Wrap" Margin="0,0,12,0" Text="{Binding L[Voice_ShowButton]}" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding Voice.ShowButton, FallbackValue=True}" />
+                                </Grid>
+                                <TextBlock Classes="hint" Text="{Binding L[Voice_ShowButtonHint]}"
+                                           IsVisible="{Binding Voice.ButtonSupported, FallbackValue=False}" />
+
+                                <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                                    <TextBlock Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                               TextWrapping="Wrap" Margin="0,0,12,0" Text="{Binding L[Voice_Sounds]}" />
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding Voice.Sounds, FallbackValue=True}" />
                                 </Grid>
                             </StackPanel>
                         </Border>

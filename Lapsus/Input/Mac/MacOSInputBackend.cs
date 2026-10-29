@@ -489,9 +489,9 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
         return name == "?" ? null : name;
     }
 
-    protected override string? PlatformInputBlockedReason()
+    protected override string? PlatformInputBlockedReason(bool passwords)
     {
-        if (SkipPasswordFields && IsSecureInputEnabled())
+        if (passwords && SkipPasswordFields && IsSecureInputEnabled())
             return Localizer.Instance["Diag_SecureField"];
 
         if (MacInstalledLayouts.CurrentSourceIsInputMethod())
@@ -672,6 +672,15 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
     protected override bool RetainBufferOnUnreadableFocus =>
         BufferOwner.Pid > 0 && ChromiumApps.IsChromiumExecutable(ExecutablePath(BufferOwner.Pid));
 
+    protected override MacTypingFocus CurrentFocus()
+    {
+        var focus = MacTypingFocusWatcher.ReadFocus(out var isTransient);
+        // A focus read mid-change (Electron rebuilding its tree) says nothing; the line's owner is the better guess.
+        return isTransient || focus.IsEmpty ? BufferOwner : focus;
+    }
+
+    protected override bool SetClipboardText(string text) => MacClipboard.SetText(text);
+
     protected override bool IsStillFocused(MacTypingFocus ownerAtStart)
     {
         if (ownerAtStart.IsEmpty)
@@ -846,6 +855,8 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
         if (type == MacOSNativeMethods.EventFlagsChanged)
         {
+            var held = HeldModifiersOf(flags);
+            PostFromTap(epoch, () => NoteDictationModifiers(held));
             if (ModifierOf(keyCode) is { } modifier)
             {
                 var down = (flags & FlagMaskOf(modifier)) != 0;
@@ -868,6 +879,20 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
             return IntPtr.Zero;
         }
 
+        // A held hotkey repeats its key-down; it already did its work on the first one.
+        if (_swallowedKeyDown == keyCode)
+            return IntPtr.Zero;
+
+        PostFromTap(epoch, NoteDictationOtherKey);
+
+        // Esc during a recording cancels it and goes no further: the app behind must not see it.
+        if (keyCode == MacOSNativeMethods.EscapeKeyCode && DictationListening)
+        {
+            _swallowedKeyDown = keyCode;
+            _pendingHotkeyAction = RaiseDictationCancel;
+            return IntPtr.Zero;
+        }
+
         if (IsCorrectionHotkey(keyCode, flags))
         {
             PostFromTap(epoch, NoteNonModifierInput);
@@ -887,6 +912,19 @@ internal sealed class MacOSInputBackend : InputBackendBase<MacTypingFocus>
 
             _swallowedKeyDown = keyCode;
             _pendingHotkeyAction = () => _ = ApplySelectionActionAsync(action);
+            return IntPtr.Zero;
+        }
+
+        if (TriggerMatches(DictationHotkey, keyCode, HeldModifiersOf(flags), !HasMeaningfulModifiers(flags)))
+        {
+            PostFromTap(epoch, NoteNonModifierInput);
+            if (!ShouldSwallowHotkey(pid))
+                return @event;
+
+            // Starts on the key going down, so it can be held while speaking; letting go is the release.
+            _swallowedKeyDown = keyCode;
+            PostFromTap(epoch, RaiseDictationHotkey);
+            _pendingHotkeyAction = () => RaiseDictationReleased();
             return IntPtr.Zero;
         }
 

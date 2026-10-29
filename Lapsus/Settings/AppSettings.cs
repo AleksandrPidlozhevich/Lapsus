@@ -1,3 +1,4 @@
+using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Models;
 using System;
@@ -53,6 +54,39 @@ public sealed class AppSettings
 
     // Mac App Store edition: the day the trial of the paid features began (StoreAccessPolicy).
     public DateOnly? StoreTrialStartedOn { get; set; }
+
+    // Voice typing: the hotkey starts and stops recording; the speech model loads on first use and is unloaded
+    // after SpeechUnloadAfter of no dictation.
+    public bool DictationEnabled { get; set; }
+
+    public int DictationHotkey { get; set; } = DictationChord;
+
+    // Held while speaking, tapped for hands-free. Two modifiers next to each other at the bottom left, which do
+    // nothing on their own: Ctrl+Win on Windows, ⌃⌥ on a Mac.
+    public static int DictationChord => HotkeyCombo.Encode(0,
+        HotkeyModifiers.Control | (OperatingSystem.IsMacOS() ? HotkeyModifiers.Alt : HotkeyModifiers.Meta));
+
+    // A short tone when recording starts and stops.
+    public bool DictationSounds { get; set; } = true;
+
+    // A small microphone button at the bottom of the screen: click to dictate, hover to see the hotkey.
+    public bool DictationShowButton { get; set; } = true;
+
+    public string SpeechModelId { get; set; } = Speech.SpeechModelCatalog.DefaultId;
+
+    [JsonConverter(typeof(JsonStringEnumConverter<SpeechUnloadAfter>))]
+    public SpeechUnloadAfter SpeechUnloadAfter { get; set; } = SpeechUnloadAfter.Min5;
+
+    // A language code to always dictate in; null picks among the installed layouts' languages.
+    public string? DictationLanguage { get; set; }
+
+    public bool KeepEnglishTermsLatin { get; set; } = true;
+
+    // The recording device by name (WinMM product name); null is the system default.
+    public string? MicrophoneName { get; set; }
+
+    // "Term" or "Term|how it sounds|…", one per entry.
+    public string[] DictationGlossary { get; set; } = [];
 
     // The downloaded update the tray last popped up a notification for (UpdateNotice): once per version.
     public string? AnnouncedUpdateVersion { get; set; }

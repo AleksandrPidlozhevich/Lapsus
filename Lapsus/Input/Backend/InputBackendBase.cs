@@ -3,6 +3,7 @@ using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Text;
+using Lapsus.Input.Dictation;
 using Lapsus.Localization;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ internal interface ITypingFocus
     bool IsEmpty { get; }
 }
 
-internal abstract class InputBackendBase<TFocus> : IInputBackend
+internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
     where TFocus : struct, ITypingFocus, IEquatable<TFocus>
 {
 
@@ -225,15 +226,16 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
 
     protected abstract string ForegroundAppName();
 
-    protected string? InputBlockedReason()
+    protected string? InputBlockedReason(bool passwords = true)
     {
         if (IsExcludedApp(out var process))
             return Localizer.Instance.Format("Diag_AppExcluded", process);
 
-        return PlatformInputBlockedReason();
+        return PlatformInputBlockedReason(passwords);
     }
 
-    protected abstract string? PlatformInputBlockedReason();
+    // passwords: false skips the password-field check (dictation reads nothing from the field).
+    protected abstract string? PlatformInputBlockedReason(bool passwords);
 
     protected abstract string? ForegroundProcessName();
 
@@ -286,6 +288,12 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
             apply = ApplyCorrection;
         else if (SelectionActionFor(trigger) is { } action)
             apply = () => _ = ApplySelectionActionAsync(action);
+        else if (trigger == DictationHotkey)
+            apply = () =>
+            {
+                RaiseDictationHotkey();
+                RaiseDictationReleased();
+            };
 
         if (apply is null)
             return;
@@ -295,6 +303,159 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend
         else
             apply();
     }
+
+    // ---- Dictation (IDictationHost) ----
+
+    public int DictationHotkey { get; set; }
+
+    // Read on the key hook's thread: Esc cancels a recording while this is true.
+    public bool DictationListening { get; set; }
+
+    public event Action? DictationHotkeyPressed;
+
+    public event Action<bool>? DictationHotkeyReleased;
+
+    public event Action? DictationCancelPressed;
+
+    protected void RaiseDictationHotkey() => DictationHotkeyPressed?.Invoke();
+
+    protected void RaiseDictationReleased(bool interrupted = false) => DictationHotkeyReleased?.Invoke(interrupted);
+
+    protected void RaiseDictationCancel() => DictationCancelPressed?.Invoke();
+
+    // ---- A dictation hotkey of modifiers alone (Ctrl+Win, ⌃⌥): hold to talk, a quick tap toggles ----
+
+    // Held this long before the microphone opens, so Ctrl+Win+→ and the like never flash it.
+    private static readonly TimeSpan ChordDelay = TimeSpan.FromMilliseconds(150);
+
+    private HotkeyModifiers _lastHeld;
+    private bool _chordHeld;
+    private bool _chordSpoiled;
+    private bool _chordPressed;
+    private int _chordGeneration;
+
+    private HotkeyModifiers DictationChord =>
+        HotkeyCombo.IsCombo(DictationHotkey) && HotkeyCombo.KeyOf(DictationHotkey) == 0
+            ? HotkeyCombo.ModifiersOf(DictationHotkey)
+            : HotkeyModifiers.None;
+
+    // UI thread: every modifier going down or up, with the whole set held now. True when this completed the chord.
+    protected bool NoteDictationModifiers(HotkeyModifiers held)
+    {
+        var previous = _lastHeld;
+        _lastHeld = held;
+        var chord = DictationChord;
+        if (chord == HotkeyModifiers.None || held == previous)
+            return false;
+
+        if (held == chord)
+        {
+            // Reached by letting go of a key (Shift out of Ctrl+Win+Shift) it is the tail of another shortcut.
+            if ((previous & ~chord) != 0)
+                return false;
+
+            _chordHeld = true;
+            _chordSpoiled = false;
+            _chordPressed = false;
+            var generation = ++_chordGeneration;
+            DispatcherTimer.RunOnce(() =>
+            {
+                if (generation != _chordGeneration || !_chordHeld || _chordSpoiled)
+                    return;
+                _chordPressed = true;
+                RaiseDictationHotkey();
+            }, ChordDelay);
+            return true;
+        }
+
+        if (!_chordHeld)
+            return false;
+
+        _chordHeld = false;
+        _chordGeneration++;
+        var letGo = (held & ~chord) == 0;
+        if (_chordPressed)
+        {
+            RaiseDictationReleased(interrupted: !letGo);
+        }
+        else if (letGo && !_chordSpoiled)
+        {
+            RaiseDictationHotkey();
+            RaiseDictationReleased();
+        }
+
+        _chordPressed = false;
+        return false;
+    }
+
+    // UI thread: a key other than a modifier went down. While the chord is held that makes it another shortcut.
+    protected void NoteDictationOtherKey()
+    {
+        if (!_chordHeld || _chordSpoiled)
+            return;
+
+        _chordSpoiled = true;
+        if (!_chordPressed)
+            return;
+
+        _chordPressed = false;
+        RaiseDictationReleased(interrupted: true);
+    }
+
+    // No password check: dictation reads nothing from the field, only types into it, and the check fails
+    // closed while it runs (hundreds of ms in Chrome/Electron), which refused dictation in ordinary fields.
+    public string? DictationBlockedReason() => InputBlockedReason(passwords: false);
+
+    // The field with focus right now; a platform that can read it says so, the rest fall back to the line's owner.
+    protected virtual TFocus CurrentFocus() => BufferOwner;
+
+    public object CaptureDictationTarget() => CurrentFocus();
+
+    // A field nobody could read at the start (the Mac App Store sandbox has no Accessibility) cannot be
+    // checked later either; the text then goes wherever the caret is, as the typed keys would.
+    public bool IsDictationTargetFocused(object target) =>
+        target is TFocus focus && (focus.IsEmpty || IsStillFocused(focus));
+
+    public bool InsertDictatedText(string text)
+    {
+        if (text.Length == 0)
+            return false;
+
+        // A word typed right before the caret gets a space between it and the dictation.
+        var line = _buffer.Segment;
+        var spaced = line.Length > 0 && !char.IsWhiteSpace(line[^1]) && !char.IsWhiteSpace(text[0])
+            ? " " + text
+            : text;
+        if (!TryInject(0, spaced))
+            return false;
+
+        // The dictated text becomes the line, committed, so the next dictation knows a word precedes the caret
+        // and the correction hotkey does not take it for something typed on the wrong layout.
+        ResetTypingBuffer();
+        foreach (var ch in spaced)
+            _buffer.Append(ch);
+        _committedLength = _buffer.Length;
+        return true;
+    }
+
+    public bool CopyDictatedText(string text) => SetClipboardText(text);
+
+    protected virtual bool SetClipboardText(string text) => false;
+
+    public string? ActiveLanguage() => ActiveInstalledLayout()?.LanguageCode;
+
+    public IReadOnlyList<string> InstalledLanguages()
+    {
+        var languages = new List<string>();
+        foreach (var layout in Layouts ??= EnumerateLayouts())
+            if (layout.LanguageCode is { Length: > 0 } code && !languages.Contains(code))
+                languages.Add(code);
+        return languages;
+    }
+
+    public string DictationAppName() => ForegroundAppName();
+
+    public void ReportDictation(string message) => RaiseDiagnostic(message);
 
     protected void NoteNonModifierInput()
     {

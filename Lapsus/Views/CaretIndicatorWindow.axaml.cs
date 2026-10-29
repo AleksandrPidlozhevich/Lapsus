@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using System;
 using static Lapsus.Input.NativeMethods;
 
@@ -8,19 +10,52 @@ namespace Lapsus.Views;
 
 public partial class CaretIndicatorWindow : Window
 {
+    private static readonly IBrush Listening = new SolidColorBrush(Color.Parse("#E5484D"));
+    private static readonly IBrush Working = new SolidColorBrush(Color.Parse("#8B8D98"));
+
     private readonly TextBlock _label;
+    private readonly Canvas _mic;
+    private readonly Path _micHead;
+    private readonly Path _micStand;
 
     public CaretIndicatorWindow()
     {
         AvaloniaXamlLoader.Load(this);
         _label = this.FindControl<TextBlock>("Label")
                  ?? throw new InvalidOperationException("CaretIndicatorWindow.axaml has no Label.");
+        _mic = this.FindControl<Canvas>("Mic")
+               ?? throw new InvalidOperationException("CaretIndicatorWindow.axaml has no Mic.");
+        _micHead = this.FindControl<Path>("MicHead")!;
+        _micStand = this.FindControl<Path>("MicStand")!;
     }
 
     public string Text
     {
         get => _label.Text ?? string.Empty;
-        set => _label.Text = value;
+        set
+        {
+            _label.Text = value;
+            _label.IsVisible = value.Length > 0;
+        }
+    }
+
+    // null: the plain text badge (layout indicator); true: the microphone listening; false: working on it.
+    public bool? Microphone
+    {
+        set
+        {
+            _mic.IsVisible = value is not null;
+            var brush = value == true ? Listening : Working;
+            _micHead.Fill = brush;
+            _micStand.Stroke = brush;
+            _mic.Opacity = 1;
+        }
+    }
+
+    // Loudness 0..1: a quiet microphone is dimmer, a voice lights it up.
+    public void ShowLevel(float level)
+    {
+        _mic.Opacity = 0.45 + 0.55 * Math.Clamp(level * 12, 0, 1);
     }
 
     public PixelPoint NativePosition

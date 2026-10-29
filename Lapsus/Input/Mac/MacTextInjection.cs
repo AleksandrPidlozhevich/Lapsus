@@ -237,11 +237,30 @@ internal static class MacTextInjection
         return true;
     }
 
+    // One keyboard event carries at most 20 UTF-16 units (CGEventKeyboardSetUnicodeString); apps drop the
+    // rest. A word fits; a dictated sentence goes out as several events, never splitting a surrogate pair.
+    private const int MaxUnitsPerEvent = 20;
+
     public static bool SendUnicode(string text, Route route = Route.Hid)
     {
         if (string.IsNullOrEmpty(text))
             return true;
 
+        for (var at = 0; at < text.Length;)
+        {
+            var take = Math.Min(MaxUnitsPerEvent, text.Length - at);
+            if (take < text.Length - at && char.IsHighSurrogate(text[at + take - 1]))
+                take--;
+            if (!SendUnicodeEvent(text.Substring(at, take), route))
+                return false;
+            at += take;
+        }
+
+        return true;
+    }
+
+    private static bool SendUnicodeEvent(string text, Route route)
+    {
         var bytes = Encoding.Unicode.GetBytes(text);
         var ev = MacOSNativeMethods.CGEventCreateKeyboardEvent(IntPtr.Zero, 0, true);
         if (ev == IntPtr.Zero)

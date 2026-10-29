@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Lapsus.Views.DictationButtonWindow"
+        WindowDecorations="None"
+        Background="Transparent"
+        TransparencyLevelHint="Transparent"
+        Topmost="True"
+        ShowActivated="False"
+        ShowInTaskbar="False"
+        CanResize="False"
+        WindowStartupLocation="Manual"
+        SizeToContent="WidthAndHeight">
+
+    <Window.Styles>
+        <Style Selector="Border#Pill">
+            <Setter Property="Opacity" Value="0.7" />
+        </Style>
+        <Style Selector="Border#Pill:pointerover">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+    </Window.Styles>
+
+    <!-- A small pill: a microphone that is grey while idle, red while listening, and "…" while the speech is read. -->
+    <Border x:Name="Pill"
+            Background="{DynamicResource LapsusCardBrush}"
+            BorderBrush="{DynamicResource LapsusBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="14"
+            Padding="12,6"
+            Cursor="Hand">
+        <StackPanel Orientation="Horizontal" Spacing="6">
+            <Canvas x:Name="Mic" Width="12" Height="14" VerticalAlignment="Center">
+                <Path x:Name="MicHead" Fill="#8B8D98"
+                      Data="M4,2.5 A2,2 0 0 1 8,2.5 L8,7 A2,2 0 0 1 4,7 Z" />
+                <Path x:Name="MicStand" Stroke="#8B8D98" StrokeThickness="1.3" StrokeLineCap="Round"
+                      Data="M2,6.5 A4,4 0 0 0 10,6.5 M6,10.7 L6,13 M3.8,13 L8.2,13" />
+            </Canvas>
+            <TextBlock x:Name="Label" FontSize="11" FontWeight="SemiBold" VerticalAlignment="Center" />
+        </StackPanel>
+    </Border>
+</Window>

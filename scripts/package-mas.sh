@@ -130,6 +130,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <false/>
     <key>NSHighResolutionCapable</key>
     <true/>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Lapsus listens only while voice typing is on and you have pressed its hotkey, and turns your speech into text on this Mac.</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
 </dict>

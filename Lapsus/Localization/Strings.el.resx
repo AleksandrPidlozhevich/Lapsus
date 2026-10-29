@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η επαναφορά των αγορών: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Φωνητική πληκτρολόγηση</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Μιλήστε αντί να πληκτρολογείτε: το Lapsus γράφει ό,τι λέτε εκεί όπου βρίσκεται ο κέρσορας. Η ομιλία αναγνωρίζεται σε αυτόν τον υπολογιστή· ο ήχος δεν αποθηκεύεται πουθενά.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Το μοντέλο ομιλίας δεν έχει ληφθεί ακόμη ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Μοντέλο ομιλίας: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Η λήψη απέτυχε: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>Η φωνητική πληκτρολόγηση χρειάζεται το μοντέλο ομιλίας: κατεβάστε το από Ρυθμίσεις → ΤΝ.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Το μικρόφωνο δεν είναι διαθέσιμο: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Το μικρόφωνο ηχογράφησε μόνο σιωπή. Ελέγξτε ότι είναι ενεργό και ότι τα Windows επιτρέπουν στις εφαρμογές να το χρησιμοποιούν.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Δεν ακούστηκε τίποτα.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Η φωνητική πληκτρολόγηση απέτυχε: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Η εστίαση μετακινήθηκε σε άλλο παράθυρο ({0}), οπότε το κείμενο αντιγράφηκε στο πρόχειρο.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Κρατήστε το πατημένο όσο μιλάτε και αφήστε το για να γραφτεί το κείμενο· ένα σύντομο πάτημα ηχογραφεί χωρίς χέρια μέχρι το επόμενο. Το Esc ακυρώνει. Τα υπόλοιπα βρίσκονται στην καρτέλα «Φωνή».</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>Το large-v3 είναι το πιο ακριβές, αλλά θέλει κάρτα γραφικών (χωρίς αυτή περίπου 5 δευτ. ανά φράση). Το large-v3-turbo είναι σχεδόν εξίσου ακριβές και ταχύτερο· το q5 είναι το ίδιο turbo με μικρότερη λήψη. Το Whisper small είναι για υπολογιστές χωρίς κάρτα γραφικών.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Γλώσσα</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>Από τη διάταξη πληκτρολογίου</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>Η γλώσσα της ενεργής διάταξης ή άλλη από τις γλώσσες των διατάξεών σας, αν η ομιλία είναι σαφώς σε αυτήν.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Μικρόφωνο</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Προεπιλογή συστήματος</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Αποδέσμευση μνήμης</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Φορτωμένο, το μοντέλο ομιλίας καταλαμβάνει περίπου {0} MB μνήμης. Μετά την αποδέσμευση, η επόμενη υπαγόρευση το φορτώνει ξανά· η εγγραφή ξεκινά πάντως αμέσως.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Μετά από κάθε υπαγόρευση</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Μετά από {0} λεπτά</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Μετά από 1 ώρα</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Ποτέ (φόρτωση κατά την εκκίνηση)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Αγγλικοί όροι με λατινικά γράμματα</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Όροι όπως pull request ή GitHub γράφονται όπως στα αγγλικά. Οι λέξεις που έχει υιοθετήσει η γλώσσα σας μένουν ως έχουν.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Γλωσσάρι</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Ονόματα και όροι που πρέπει να γράφονται σωστά, ένας ανά γραμμή, όπως πρέπει να πληκτρολογηθούν. Αν ένας όρος ακούγεται ασυνήθιστα, προσθέστε μετά το | πώς προφέρεται.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>Η φωνητική πληκτρολόγηση είναι μέρος του Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Το Lapsus δεν επιτρέπεται να χρησιμοποιεί το μικρόφωνο. Επιτρέψτε το στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια → Μικρόφωνο.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Επιτρέψτε στο Lapsus να χρησιμοποιεί το μικρόφωνο στο παράθυρο που εμφανίστηκε και ξεκινήστε ξανά τη φωνητική πληκτρολόγηση.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Φωνή</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — τέλος · Esc — ακύρωση</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Κάντε κλικ σε οποιοδήποτε πεδίο, κρατήστε πατημένο το {0} και μιλήστε — αφήστε το και το κείμενο εμφανίζεται στον κέρσορα. Ένα σύντομο πάτημα του {0} ηχογραφεί χωρίς χέρια μέχρι το επόμενο πάτημα. Το Esc ακυρώνει.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>κανένα πλήκτρο — επιλέξτε ένα στην καρτέλα «Πλήκτρα»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Πώς χρησιμοποιείται</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Κουμπί μικροφώνου στην οθόνη</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Ένα μικρό κουμπί στο κάτω μέρος της οθόνης: ένα κλικ ξεκινά ή τερματίζει την ηχογράφηση, περνώντας το ποντίκι από πάνω βλέπετε τη συντόμευση.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Ήχος στην αρχή και στο τέλος της ηχογράφησης</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Φωνητική πληκτρολόγηση: κάντε κλικ ή {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Γενικά</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Αναγνώριση</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Κάντε κλικ σε οποιοδήποτε πεδίο, πατήστε {0} και μιλήστε· πατήστε ξανά {0} και το κείμενο εμφανίζεται στον κέρσορα. Το Esc ακυρώνει.</value>
+  </data>
 </root>

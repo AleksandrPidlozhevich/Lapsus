@@ -700,4 +700,133 @@
     <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Impossibile ripristinare gli acquisti: {0}</value>
   </data>
+    <data name="Voice_Toggle" xml:space="preserve">
+    <value>Dettatura vocale</value>
+  </data>
+    <data name="Voice_Hint" xml:space="preserve">
+    <value>Parla invece di scrivere: Lapsus scrive ciò che dici dove si trova il cursore. La voce viene riconosciuta su questo computer, l’audio non viene mai salvato.</value>
+  </data>
+    <data name="Voice_ModelMissing" xml:space="preserve">
+    <value>Il modello vocale non è ancora scaricato ({0} MB).</value>
+  </data>
+    <data name="Voice_ModelReady" xml:space="preserve">
+    <value>Modello vocale: {0}.</value>
+  </data>
+    <data name="Voice_DownloadFailed" xml:space="preserve">
+    <value>Download non riuscito: {0}</value>
+  </data>
+    <data name="Diag_DictationNoModel" xml:space="preserve">
+    <value>La dettatura vocale richiede il modello vocale: scaricalo in Impostazioni → IA.</value>
+  </data>
+    <data name="Diag_MicUnavailable" xml:space="preserve">
+    <value>Microfono non disponibile: {0}</value>
+  </data>
+    <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Il microfono ha registrato solo silenzio. Controlla che sia acceso e che Windows consenta alle app di usarlo.</value>
+  </data>
+    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+    <value>Non si è sentito nulla.</value>
+  </data>
+    <data name="Diag_DictationFailed" xml:space="preserve">
+    <value>Dettatura vocale non riuscita: {0}</value>
+  </data>
+    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+    <value>Il focus è passato a un&apos;altra finestra ({0}), quindi il testo è stato copiato negli appunti.</value>
+  </data>
+    <data name="Dictation_HotkeyHint" xml:space="preserve">
+    <value>Tienilo premuto mentre parli e rilascialo per scrivere il testo; una pressione breve registra a mani libere fino alla successiva. Esc annulla. Il resto è nella scheda «Voce».</value>
+  </data>
+    <data name="Voice_ModelHint" xml:space="preserve">
+    <value>large-v3 è il più preciso ma richiede una scheda grafica (senza, circa 5 s a frase). large-v3-turbo è quasi altrettanto preciso e più veloce; q5 è lo stesso turbo con un download più piccolo. Whisper small è per computer senza scheda grafica.</value>
+  </data>
+    <data name="Voice_LanguageLabel" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+    <data name="Voice_LanguageAuto" xml:space="preserve">
+    <value>In base al layout di tastiera</value>
+  </data>
+    <data name="Voice_LanguageHint" xml:space="preserve">
+    <value>La lingua del layout attivo, o un&apos;altra delle lingue dei tuoi layout se si parla chiaramente in quella.</value>
+  </data>
+    <data name="Voice_MicLabel" xml:space="preserve">
+    <value>Microfono</value>
+  </data>
+    <data name="Voice_MicDefault" xml:space="preserve">
+    <value>Predefinito di sistema</value>
+  </data>
+    <data name="Voice_UnloadLabel" xml:space="preserve">
+    <value>Libera la memoria</value>
+  </data>
+    <data name="Voice_UnloadHint" xml:space="preserve">
+    <value>Caricato, il modello vocale occupa circa {0} MB di memoria. Una volta liberato, la dettatura successiva lo ricarica; la registrazione parte comunque subito.</value>
+  </data>
+    <data name="Voice_UnloadImmediately" xml:space="preserve">
+    <value>Dopo ogni dettatura</value>
+  </data>
+    <data name="Voice_UnloadMinutes" xml:space="preserve">
+    <value>Dopo {0} min</value>
+  </data>
+    <data name="Voice_UnloadHour" xml:space="preserve">
+    <value>Dopo 1 ora</value>
+  </data>
+    <data name="Voice_UnloadNever" xml:space="preserve">
+    <value>Mai (carica all&apos;avvio)</value>
+  </data>
+    <data name="Voice_KeepLatin" xml:space="preserve">
+    <value>Termini inglesi in lettere latine</value>
+  </data>
+    <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Termini come pull request o GitHub vengono scritti come in inglese. Le parole che la tua lingua ha adottato restano come sono.</value>
+  </data>
+    <data name="Voice_GlossaryLabel" xml:space="preserve">
+    <value>Glossario</value>
+  </data>
+    <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Nomi e termini da scrivere correttamente, uno per riga, così come vanno digitati. Se un termine suona insolito, aggiungi dopo | come si pronuncia.</value>
+  </data>
+    <data name="Voice_Locked" xml:space="preserve">
+    <value>La dettatura vocale fa parte di Lapsus Plus.</value>
+  </data>
+    <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus non ha il permesso di usare il microfono. Consentilo in Impostazioni di Sistema → Privacy e sicurezza → Microfono.</value>
+  </data>
+    <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Consenti a Lapsus di usare il microfono nella finestra che è comparsa, poi avvia di nuovo la dettatura vocale.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Voce</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — fatto · Esc — annulla</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Fai clic in un campo qualsiasi, tieni premuto {0} e parla: al rilascio il testo compare al cursore. Una pressione breve di {0} registra a mani libere fino alla pressione successiva. Esc annulla.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>nessuna scorciatoia: sceglila nella scheda «Tasti»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Come si usa</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Pulsante microfono sullo schermo</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Un piccolo pulsante in fondo allo schermo: un clic avvia o termina la registrazione, passandoci sopra vedi la scorciatoia.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Suono all’inizio e alla fine della registrazione</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Dettatura vocale: fai clic o {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Generale</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Riconoscimento</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Fai clic in un campo qualsiasi, premi {0} e parla; premi di nuovo {0} e il testo compare al cursore. Esc annulla.</value>
+  </data>
 </root>

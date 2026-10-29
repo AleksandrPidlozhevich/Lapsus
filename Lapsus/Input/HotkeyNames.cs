@@ -10,10 +10,27 @@ internal static class HotkeyNames
 {
     public static string Format(int trigger)
     {
+        if (HotkeyTriggers.IsDoubleTap(trigger))
+        {
+            var tapped = (TapModifier)(trigger & 0xFF) switch
+            {
+                TapModifier.Shift => HotkeyModifiers.Shift,
+                TapModifier.Control => HotkeyModifiers.Control,
+                TapModifier.Alt => HotkeyModifiers.Alt,
+                _ => HotkeyModifiers.Meta
+            };
+            return ModifierLabels(tapped)[0] + " ×2";
+        }
+
         var key = HotkeyCombo.KeyOf(trigger);
         var modifiers = HotkeyCombo.ModifiersOf(trigger);
+        var mac = OperatingSystem.IsMacOS();
 
-        if (OperatingSystem.IsMacOS())
+        // Modifiers alone, held (the dictation chord).
+        if (key == 0 && modifiers != HotkeyModifiers.None)
+            return mac ? string.Concat(ModifierLabels(modifiers)) : string.Join('+', ModifierLabels(modifiers));
+
+        if (mac)
             return string.Concat(ModifierLabels(modifiers)) + MacKeyName(key);
 
         return string.Join('+', ModifierLabels(modifiers).Append(WindowsKeyName(key)));
