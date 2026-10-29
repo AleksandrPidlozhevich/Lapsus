@@ -692,7 +692,7 @@
     <value>Spraakinvoer</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} begint met luisteren; druk nogmaals en wat je zei verschijnt bij de cursor. Esc annuleert. Spraak wordt op deze computer herkend en het geluid wordt nergens opgeslagen.</value>
+    <value>Spreek in plaats van te typen: Lapsus typt wat u zegt waar de cursor staat. Spraak wordt op deze computer herkend; het geluid wordt nergens bewaard.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Het spraakmodel is nog niet gedownload ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>De focus ging naar een ander venster ({0}), dus de tekst is naar het klembord gekopieerd.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Start en stopt spraakinvoer (aan te zetten op het tabblad AI). Esc annuleert een opname.</value>
+    <value>Ingedrukt houden terwijl u spreekt en loslaten om de tekst te typen; kort drukken neemt handsfree op tot de volgende druk. Esc annuleert. De rest staat op het tabblad ‘Spraak’.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo is het nauwkeurigst; q5 is hetzelfde model als kleinere download. Whisper small is voor computers zonder videokaart, waarop het grote model te traag is.</value>
+    <value>large-v3 is het nauwkeurigst, maar wil een videokaart (zonder ongeveer 5 s per zin). large-v3-turbo is bijna even nauwkeurig en sneller; q5 is dezelfde turbo als kleinere download. Whisper small is voor computers zonder videokaart.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Taal</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Geef Lapsus in het venster dat verschijnt toegang tot de microfoon en start daarna de spraakinvoer opnieuw.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Spraak</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — klaar · Esc — annuleren</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Klik in een willekeurig veld, houd {0} ingedrukt en spreek — laat los en de tekst verschijnt bij de cursor. Kort op {0} drukken neemt handsfree op tot u weer drukt. Esc annuleert.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>geen sneltoets — kies er een op het tabblad ‘Toetsen’</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Zo werkt het</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Microfoonknop op het scherm</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Een kleine knop onder aan het scherm: een klik start of beëindigt de opname, met de muis erboven ziet u de sneltoets.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Geluid bij begin en einde van de opname</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Spraakinvoer: klik of {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Algemeen</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Herkenning</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Klik in een willekeurig veld, druk op {0} en spreek; druk nogmaals op {0} en de tekst verschijnt bij de cursor. Esc annuleert.</value>
   </data>
 </root>

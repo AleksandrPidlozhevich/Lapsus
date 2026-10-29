@@ -226,15 +226,16 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
 
     protected abstract string ForegroundAppName();
 
-    protected string? InputBlockedReason()
+    protected string? InputBlockedReason(bool passwords = true)
     {
         if (IsExcludedApp(out var process))
             return Localizer.Instance.Format("Diag_AppExcluded", process);
 
-        return PlatformInputBlockedReason();
+        return PlatformInputBlockedReason(passwords);
     }
 
-    protected abstract string? PlatformInputBlockedReason();
+    // passwords: false skips the password-field check (dictation reads nothing from the field).
+    protected abstract string? PlatformInputBlockedReason(bool passwords);
 
     protected abstract string? ForegroundProcessName();
 
@@ -288,7 +289,11 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         else if (SelectionActionFor(trigger) is { } action)
             apply = () => _ = ApplySelectionActionAsync(action);
         else if (trigger == DictationHotkey)
-            apply = RaiseDictationHotkey;
+            apply = () =>
+            {
+                RaiseDictationHotkey();
+                RaiseDictationReleased();
+            };
 
         if (apply is null)
             return;
@@ -308,13 +313,98 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
 
     public event Action? DictationHotkeyPressed;
 
+    public event Action<bool>? DictationHotkeyReleased;
+
     public event Action? DictationCancelPressed;
 
     protected void RaiseDictationHotkey() => DictationHotkeyPressed?.Invoke();
 
+    protected void RaiseDictationReleased(bool interrupted = false) => DictationHotkeyReleased?.Invoke(interrupted);
+
     protected void RaiseDictationCancel() => DictationCancelPressed?.Invoke();
 
-    public string? DictationBlockedReason() => InputBlockedReason();
+    // ---- A dictation hotkey of modifiers alone (Ctrl+Win, ⌃⌥): hold to talk, a quick tap toggles ----
+
+    // Held this long before the microphone opens, so Ctrl+Win+→ and the like never flash it.
+    private static readonly TimeSpan ChordDelay = TimeSpan.FromMilliseconds(150);
+
+    private HotkeyModifiers _lastHeld;
+    private bool _chordHeld;
+    private bool _chordSpoiled;
+    private bool _chordPressed;
+    private int _chordGeneration;
+
+    private HotkeyModifiers DictationChord =>
+        HotkeyCombo.IsCombo(DictationHotkey) && HotkeyCombo.KeyOf(DictationHotkey) == 0
+            ? HotkeyCombo.ModifiersOf(DictationHotkey)
+            : HotkeyModifiers.None;
+
+    // UI thread: every modifier going down or up, with the whole set held now. True when this completed the chord.
+    protected bool NoteDictationModifiers(HotkeyModifiers held)
+    {
+        var previous = _lastHeld;
+        _lastHeld = held;
+        var chord = DictationChord;
+        if (chord == HotkeyModifiers.None || held == previous)
+            return false;
+
+        if (held == chord)
+        {
+            // Reached by letting go of a key (Shift out of Ctrl+Win+Shift) it is the tail of another shortcut.
+            if ((previous & ~chord) != 0)
+                return false;
+
+            _chordHeld = true;
+            _chordSpoiled = false;
+            _chordPressed = false;
+            var generation = ++_chordGeneration;
+            DispatcherTimer.RunOnce(() =>
+            {
+                if (generation != _chordGeneration || !_chordHeld || _chordSpoiled)
+                    return;
+                _chordPressed = true;
+                RaiseDictationHotkey();
+            }, ChordDelay);
+            return true;
+        }
+
+        if (!_chordHeld)
+            return false;
+
+        _chordHeld = false;
+        _chordGeneration++;
+        var letGo = (held & ~chord) == 0;
+        if (_chordPressed)
+        {
+            RaiseDictationReleased(interrupted: !letGo);
+        }
+        else if (letGo && !_chordSpoiled)
+        {
+            RaiseDictationHotkey();
+            RaiseDictationReleased();
+        }
+
+        _chordPressed = false;
+        return false;
+    }
+
+    // UI thread: a key other than a modifier went down. While the chord is held that makes it another shortcut.
+    protected void NoteDictationOtherKey()
+    {
+        if (!_chordHeld || _chordSpoiled)
+            return;
+
+        _chordSpoiled = true;
+        if (!_chordPressed)
+            return;
+
+        _chordPressed = false;
+        RaiseDictationReleased(interrupted: true);
+    }
+
+    // No password check: dictation reads nothing from the field, only types into it, and the check fails
+    // closed while it runs (hundreds of ms in Chrome/Electron), which refused dictation in ordinary fields.
+    public string? DictationBlockedReason() => InputBlockedReason(passwords: false);
 
     // The field with focus right now; a platform that can read it says so, the rest fall back to the line's owner.
     protected virtual TFocus CurrentFocus() => BufferOwner;

@@ -8,13 +8,18 @@ namespace Lapsus.Input.Dictation;
 // raised there.
 internal interface IDictationHost
 {
-    // 0 turns the hotkey off. Same encoding as every other hotkey (plain key, combo or modifier double tap).
+    // 0 turns the hotkey off. Same encoding as every other hotkey (plain key, combo, modifier double tap), plus
+    // modifiers alone (Ctrl+Win, ⌃⌥: a combo whose key is 0), which are meant to be held.
     int DictationHotkey { get; set; }
 
     // While true the hook takes Esc for itself (it cancels the recording) instead of passing it on.
     bool DictationListening { get; set; }
 
+    // The hotkey going down and coming up again; a double tap raises both at once.
     event Action? DictationHotkeyPressed;
+
+    // True: another key went down while the hotkey was held, so the press was some other shortcut.
+    event Action<bool>? DictationHotkeyReleased;
 
     event Action? DictationCancelPressed;
 

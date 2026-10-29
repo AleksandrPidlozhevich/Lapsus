@@ -692,7 +692,7 @@
     <value>Голосовой ввод</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} — начать запись; нажмите ещё раз, и сказанное появится там, где курсор. Esc — отмена. Речь распознаётся на этом компьютере, звук нигде не сохраняется.</value>
+    <value>Говорите вместо того, чтобы печатать: Lapsus напечатает сказанное там, где курсор. Речь распознаётся на этом компьютере, звук нигде не сохраняется.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Модель речи ещё не скачана ({0} МБ).</value>
@@ -722,10 +722,10 @@
     <value>Фокус перешёл в другое окно ({0}), поэтому текст скопирован в буфер обмена.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Запускает и останавливает голосовой ввод (включается на вкладке ИИ). Esc отменяет запись.</value>
+    <value>Держите, пока говорите, отпустите — текст напечатается; короткое нажатие — запись без рук до следующего нажатия. Esc — отмена. Остальные настройки — на вкладке «Голос».</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo — самая точная; q5 — та же модель, но скачивается меньше. Whisper small — для компьютеров без видеокарты, где большая модель слишком медленная.</value>
+    <value>large-v3 — самая точная, но ей нужна видеокарта (без неё около 5 с на фразу). large-v3-turbo почти так же точна и быстрее; q5 — та же turbo, но скачивается меньше. Whisper small — для компьютеров без видеокарты.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Язык</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Разрешите Lapsus доступ к микрофону в появившемся окне и снова запустите голосовой ввод.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Голос</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — готово · Esc — отмена</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Щёлкните в любом поле, зажмите {0} и говорите — отпустите, и текст появится у курсора. Короткое нажатие {0} — запись без рук до следующего нажатия. Esc — отмена.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>клавиша не задана — выберите на вкладке «Клавиши»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Как пользоваться</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Кнопка микрофона на экране</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Небольшая кнопка внизу экрана: щелчок начинает и заканчивает запись, при наведении видна горячая клавиша.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Звук в начале и в конце записи</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Голосовой ввод: щёлкните или {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Распознавание</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Щёлкните в любом поле, нажмите {0} и говорите; нажмите {0} ещё раз — текст появится у курсора. Esc — отмена.</value>
   </data>
 </root>

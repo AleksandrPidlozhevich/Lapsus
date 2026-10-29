@@ -692,7 +692,7 @@
     <value>Spracheingabe</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} startet die Aufnahme; noch einmal drücken, und das Gesagte erscheint an der Cursorposition. Esc bricht ab. Die Sprache wird auf diesem Computer erkannt, der Ton wird nirgends gespeichert.</value>
+    <value>Sprechen statt tippen: Lapsus schreibt das Gesagte dort, wo der Cursor steht. Die Sprache wird auf diesem Computer erkannt, der Ton wird nirgends gespeichert.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Das Sprachmodell ist noch nicht heruntergeladen ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Der Fokus ist zu einem anderen Fenster gewechselt ({0}), daher wurde der Text in die Zwischenablage kopiert.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Startet und beendet die Spracheingabe (eingeschaltet im Tab KI). Esc bricht eine Aufnahme ab.</value>
+    <value>Gedrückt halten, solange Sie sprechen, und loslassen — der Text wird geschrieben; ein kurzer Druck nimmt freihändig bis zum nächsten Druck auf. Esc bricht ab. Alles Weitere im Tab „Sprache“.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo ist am genauesten; q5 ist dasselbe Modell als kleinerer Download. Whisper small ist für Computer ohne Grafikkarte, auf denen das große Modell zu langsam ist.</value>
+    <value>large-v3 ist am genauesten, braucht aber eine Grafikkarte (ohne sie etwa 5 s pro Satz). large-v3-turbo ist fast so genau und schneller; q5 ist dasselbe Turbo als kleinerer Download. Whisper small ist für Computer ohne Grafikkarte.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Sprache</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Erlauben Sie Lapsus im angezeigten Dialog den Zugriff auf das Mikrofon und starten Sie die Spracheingabe dann erneut.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — fertig · Esc — abbrechen</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Klicken Sie in ein beliebiges Textfeld, halten Sie {0} gedrückt und sprechen Sie — loslassen, und der Text erscheint am Cursor. Ein kurzer Druck auf {0} nimmt freihändig auf, bis Sie erneut drücken. Esc bricht ab.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>kein Tastenkürzel — wählen Sie eines im Tab „Tasten“</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>So geht’s</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Mikrofon-Schaltfläche auf dem Bildschirm</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Eine kleine Schaltfläche unten auf dem Bildschirm: Ein Klick startet oder beendet die Aufnahme, beim Darüberfahren sehen Sie das Tastenkürzel.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Ton bei Beginn und Ende der Aufnahme</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Spracheingabe: klicken oder {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Erkennung</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Klicken Sie in ein beliebiges Textfeld, drücken Sie {0} und sprechen Sie; drücken Sie {0} erneut, und der Text erscheint am Cursor. Esc bricht ab.</value>
   </data>
 </root>

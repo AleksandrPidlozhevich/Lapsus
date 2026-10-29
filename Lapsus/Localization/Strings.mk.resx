@@ -692,7 +692,7 @@
     <value>Гласовно внесување</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} го започнува снимањето; притиснете повторно и кажаното се појавува таму каде што е курсорот. Esc откажува. Говорот се препознава на овој компјутер, а звукот никаде не се зачувува.</value>
+    <value>Зборувајте наместо да пишувате: Lapsus ќе го напише кажаното каде што е курсорот. Говорот се препознава на овој компјутер, звукот никаде не се зачувува.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Моделот за говор сè уште не е преземен ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Фокусот премина на друг прозорец ({0}), па текстот е копиран во таблата со исечоци.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Го започнува и запира гласовното внесување (се вклучува во картичката ВИ). Esc го откажува снимањето.</value>
+    <value>Држете додека зборувате и пуштете — текстот ќе се напише; кратко притискање снима без раце до следното притискање. Esc — откажи. Другите поставки се во картичката „Глас“.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo е најточен; q5 е истиот модел, но се презема помалку. Whisper small е за компјутери без графичка картичка, каде големиот модел е преспор.</value>
+    <value>large-v3 е најточен, но бара графичка картичка (без неа околу 5 с по реченица). large-v3-turbo е речиси подеднакво точен и побрз; q5 е истиот turbo со помало преземање. Whisper small е за компјутери без графичка картичка.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Јазик</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Дозволете му на Lapsus пристап до микрофонот во прозорецот што се појави, па повторно започнете со гласовно внесување.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Глас</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — готово · Esc — откажи</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Кликнете во кое било поле, држете {0} и зборувајте — пуштете и текстот ќе се појави кај курсорот. Кратко притискање на {0} снима без раце до следното притискање. Esc — откажи.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>нема копче — изберете во картичката „Копчиња“</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Како се користи</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Копче за микрофон на екранот</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Мало копче на дното на екранот: клик го започнува и завршува снимањето, при лебдење се гледа кратенката.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Звук на почетокот и на крајот на снимањето</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Гласовно внесување: кликнете или {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Основно</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Препознавање</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Кликнете во кое било поле, притиснете {0} и зборувајте; притиснете {0} повторно и текстот ќе се појави кај курсорот. Esc — откажи.</value>
   </data>
 </root>

@@ -10,6 +10,7 @@ public class DictationSessionTests
         public int DictationHotkey { get; set; }
         public bool DictationListening { get; set; }
         public event Action? DictationHotkeyPressed;
+        public event Action<bool>? DictationHotkeyReleased;
         public event Action? DictationCancelPressed;
 
         public string? Blocked;
@@ -19,7 +20,15 @@ public class DictationSessionTests
         public readonly List<string> Copied = [];
         public readonly List<string> Reports = [];
 
-        public void PressHotkey() => DictationHotkeyPressed?.Invoke();
+        // A quick tap: down and up at once.
+        public void PressHotkey()
+        {
+            HoldHotkey();
+            LetGo();
+        }
+
+        public void HoldHotkey() => DictationHotkeyPressed?.Invoke();
+        public void LetGo(bool interrupted = false) => DictationHotkeyReleased?.Invoke(interrupted);
         public void PressEscape() => DictationCancelPressed?.Invoke();
 
         public string? DictationBlockedReason() => Blocked;
@@ -72,6 +81,14 @@ public class DictationSessionTests
             return Recorded;
         }
 
+        public int Taken;
+
+        public float[] TakeRecorded()
+        {
+            Taken++;
+            return Recorded;
+        }
+
         public void Hear(float level) => Level?.Invoke(level);
 
         public void Dispose()
@@ -84,6 +101,7 @@ public class DictationSessionTests
         public bool HasModel { get; set; } = true;
         public int Prepared;
         public string Answer = "Закинул pull request.";
+        public readonly Queue<string> Answers = new();
         public TaskCompletionSource<string>? Hold;
         public DictationRequest? LastRequest;
 
@@ -94,7 +112,7 @@ public class DictationSessionTests
             LastRequest = request;
             if (Hold is { } hold)
                 return hold.Task.WaitAsync(ct);
-            return Task.FromResult(Answer);
+            return Task.FromResult(Answers.TryDequeue(out var next) ? next : Answer);
         }
     }
 
@@ -166,6 +184,140 @@ public class DictationSessionTests
         Assert.Equal("hidden", rig.Badge.State);
         Assert.Equal("ru", rig.Engine.LastRequest!.Language);
         Assert.Equal(["ru", "en"], rig.Engine.LastRequest.Languages);
+    }
+
+    [Fact]
+    public async Task Held_while_speaking_it_types_on_letting_go()
+    {
+        var rig = new Rig();
+
+        rig.Host.HoldHotkey();
+        Assert.Equal(DictationSession.State.Listening, rig.Session.Current);
+        rig.Mic.Hear(0.1f);
+        rig.Now += DictationSession.HoldToTalk;
+        rig.Host.LetGo();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Закинул pull request."], rig.Host.Typed);
+    }
+
+    [Fact]
+    public void A_short_press_keeps_listening_hands_free()
+    {
+        var rig = new Rig();
+
+        rig.Host.HoldHotkey();
+        rig.Now += DictationSession.HoldToTalk - TimeSpan.FromMilliseconds(100);
+        rig.Host.LetGo();
+
+        Assert.Equal(DictationSession.State.Listening, rig.Session.Current);
+    }
+
+    [Fact]
+    public void Keys_that_turn_out_to_be_another_shortcut_throw_the_recording_away()
+    {
+        var rig = new Rig();
+
+        rig.Host.HoldHotkey();
+        rig.Now += TimeSpan.FromSeconds(1);
+        rig.Host.LetGo(interrupted: true);
+
+        Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
+        Assert.False(rig.Mic.IsRecording);
+        Assert.Empty(rig.Host.Typed);
+    }
+
+    [Fact]
+    public async Task A_hands_free_recording_stops_on_the_next_press_even_if_held()
+    {
+        var rig = new Rig();
+
+        rig.Host.PressHotkey();
+        rig.Mic.Hear(0.1f);
+        rig.Host.HoldHotkey();
+        rig.Now += TimeSpan.FromSeconds(2);
+        rig.Host.LetGo(interrupted: true);
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Закинул pull request."], rig.Host.Typed);
+    }
+
+    // Speak past PartAfter, then pause past PauseEndsPart: the part said so far is cut off.
+    private static async Task SayAPartAsync(Rig rig)
+    {
+        rig.Mic.Hear(0.1f);
+        rig.Now += DictationSession.PartAfter + TimeSpan.FromSeconds(1);
+        rig.Mic.Hear(0.1f);
+        rig.Now += DictationSession.PauseEndsPart + TimeSpan.FromMilliseconds(100);
+        rig.Session.Tick();
+        await rig.Session.Pending!;
+    }
+
+    [Fact]
+    public async Task A_long_hands_free_dictation_is_typed_part_by_part_while_it_goes_on()
+    {
+        var rig = new Rig();
+        rig.Engine.Answers.Enqueue("Первая часть.");
+        rig.Engine.Answers.Enqueue("Вторая часть.");
+
+        rig.Host.PressHotkey();
+        await SayAPartAsync(rig);
+
+        Assert.Equal(["Первая часть."], rig.Host.Typed);
+        Assert.Equal(DictationSession.State.Listening, rig.Session.Current);
+
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Первая часть.", "Вторая часть."], rig.Host.Typed);
+        Assert.Equal("Первая часть.", rig.Engine.LastRequest!.PreviousText);
+    }
+
+    [Fact]
+    public async Task While_the_hotkey_is_held_parts_wait_and_are_typed_on_letting_go()
+    {
+        var rig = new Rig();
+        rig.Engine.Answers.Enqueue("Первая часть.");
+        rig.Engine.Answers.Enqueue("Вторая часть.");
+
+        rig.Host.HoldHotkey();
+        await SayAPartAsync(rig);
+        Assert.Empty(rig.Host.Typed);
+
+        rig.Host.LetGo();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Первая часть. Вторая часть."], rig.Host.Typed);
+    }
+
+    [Fact]
+    public async Task Esc_keeps_the_parts_already_typed()
+    {
+        var rig = new Rig();
+        rig.Engine.Answers.Enqueue("Первая часть.");
+
+        rig.Host.PressHotkey();
+        await SayAPartAsync(rig);
+        rig.Host.PressEscape();
+
+        Assert.Equal(["Первая часть."], rig.Host.Typed);
+        Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
+    }
+
+    [Fact]
+    public void A_short_quiet_moment_does_not_cut_a_part()
+    {
+        var rig = new Rig();
+
+        rig.Host.PressHotkey();
+        rig.Mic.Hear(0.1f);
+        rig.Now += TimeSpan.FromSeconds(2);
+        rig.Mic.Hear(0.1f);
+        rig.Now += DictationSession.PauseEndsPart + TimeSpan.FromMilliseconds(100);
+        rig.Session.Tick();
+
+        Assert.Equal(0, rig.Mic.Taken);
     }
 
     [Fact]

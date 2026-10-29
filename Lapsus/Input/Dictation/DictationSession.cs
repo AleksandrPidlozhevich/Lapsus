@@ -2,13 +2,14 @@ using Avalonia.Threading;
 using Lapsus.Audio;
 using Lapsus.Localization;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Lapsus.Input.Dictation;
 
-// One dictation at a time, driven by a single hotkey: press to start listening, press again to stop and type
-// what was said into the field that had focus when it started. Esc cancels. The microphone opens at once and
+// One dictation at a time, driven by a single hotkey: hold it while speaking, or tap it to start and tap again
+// to stop; what was said is typed into the field that had focus when it started. Esc cancels. The microphone opens at once and
 // the model loads while the user speaks; the text goes nowhere if focus moved to another field meanwhile.
 // Runs on the UI thread.
 internal sealed class DictationSession : IDisposable
@@ -28,6 +29,11 @@ internal sealed class DictationSession : IDisposable
 
     private const int SampleRate = 16000;
 
+    // A long dictation is typed part by part while it goes on: once this much has been said since the last
+    // part, the next pause this long ends a part, which is recognised and typed while the user keeps talking.
+    public static readonly TimeSpan PartAfter = TimeSpan.FromSeconds(4);
+    public static readonly TimeSpan PauseEndsPart = TimeSpan.FromMilliseconds(700);
+
     public enum State { Idle, Listening, Transcribing }
 
     private readonly IDictationHost _host;
@@ -44,8 +50,16 @@ internal sealed class DictationSession : IDisposable
     private DateTime _startedAt;
     private long _lastLoudTicks;
     private float _peak;
-    private CancellationTokenSource? _transcribing;
     private (object Target, string Text, DateTime At)? _previous;
+
+    // This dictation: Esc cancels it whole; what was already typed stays.
+    private CancellationTokenSource? _dictation;
+    private string? _continued;
+    private string _said = "";
+    private string _untyped = "";
+    private Task _parts = Task.CompletedTask;
+    private Exception? _partFailed;
+    private DateTime _lastCut;
 
     public DictationSession(
         IDictationHost host, IAudioCapture audio, IDictationEngine engine, IDictationIndicator indicator,
@@ -58,13 +72,14 @@ internal sealed class DictationSession : IDisposable
         _enabled = enabled;
         _now = now ?? (() => DateTime.UtcNow);
 
-        _host.DictationHotkeyPressed += Toggle;
+        _host.DictationHotkeyPressed += Press;
+        _host.DictationHotkeyReleased += Release;
         _host.DictationCancelPressed += Cancel;
         _audio.Level += OnLevel;
 
         if (watchdog)
         {
-            _watchdog = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _watchdog = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(200) };
             _watchdog.Tick += (_, _) => Tick();
             _watchdog.Start();
         }
@@ -75,17 +90,51 @@ internal sealed class DictationSession : IDisposable
     // The transcription in flight, for tests.
     internal Task? Pending { get; private set; }
 
+    // A press that starts a recording and is held at least this long is hold-to-talk: letting go stops it.
+    // A shorter one leaves it running until the next press.
+    public static readonly TimeSpan HoldToTalk = TimeSpan.FromMilliseconds(350);
+
+    private DateTime? _startedByPress;
+    private bool _stopOnRelease;
+
+    // A click (the on-screen button) or a double tap: press and release at once.
     public void Toggle()
+    {
+        Press();
+        Release(false);
+    }
+
+    public void Press()
     {
         switch (Current)
         {
             case State.Idle:
                 Start();
+                _startedByPress = Current == State.Listening ? _now() : null;
+                _stopOnRelease = false;
                 break;
             case State.Listening:
-                Pending = StopAsync();
+                _stopOnRelease = true;
                 break;
         }
+    }
+
+    public void Release(bool interrupted)
+    {
+        var startedAt = _startedByPress;
+        var stop = _stopOnRelease;
+        _startedByPress = null;
+        _stopOnRelease = false;
+        if (Current != State.Listening)
+            return;
+
+        // The keys that started it were part of another shortcut (Ctrl+Win+D): nothing was meant to be said.
+        if (interrupted && startedAt is not null)
+            Cancel();
+        else if (stop || startedAt is { } at && _now() - at >= HoldToTalk)
+            Pending = StopAsync();
+        else
+            TypeWhatIsReady();
     }
 
     public void Cancel()
@@ -94,12 +143,13 @@ internal sealed class DictationSession : IDisposable
         {
             case State.Listening:
                 _audio.Stop();
+                _dictation?.Cancel();
                 _host.DictationListening = false;
                 Current = State.Idle;
                 _indicator.Hide();
                 break;
             case State.Transcribing:
-                _transcribing?.Cancel();
+                _dictation?.Cancel();
                 break;
         }
     }
@@ -113,6 +163,66 @@ internal sealed class DictationSession : IDisposable
         var lastLoud = new DateTime(Interlocked.Read(ref _lastLoudTicks), DateTimeKind.Utc);
         if (now - _startedAt >= MaxRecording || now - lastLoud >= MaxSilence)
             Pending = StopAsync();
+        else if (now - _lastCut >= PartAfter && now - lastLoud >= PauseEndsPart && lastLoud > _lastCut)
+            CutPart(now);
+    }
+
+    // The speech so far goes to recognition while recording goes on; parts are recognised and typed in order.
+    private void CutPart(DateTime now)
+    {
+        _lastCut = now;
+        var pcm = _audio.TakeRecorded();
+        var before = _parts;
+        _parts = RecognisePartAsync(before, pcm, _dictation!.Token);
+        Pending = _parts;
+    }
+
+    // Never throws: a failure is kept for the end of the dictation, which reports it if nothing was heard.
+    private async Task RecognisePartAsync(Task before, float[] pcm, CancellationToken cancel)
+    {
+        await before.ConfigureAwait(true);
+        if (cancel.IsCancellationRequested)
+            return;
+
+        try
+        {
+            Heard(await _engine.TranscribeAsync(pcm, Request(), cancel).ConfigureAwait(true));
+            TypeWhatIsReady();
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception ex)
+        {
+            _partFailed = ex;
+        }
+    }
+
+    // The earlier dictation into this field and everything recognised so far: Whisper's context for the next part.
+    private DictationRequest Request()
+    {
+        var context = string.Join(' ', new[] { _continued, _said }.Where(s => !string.IsNullOrEmpty(s)));
+        return new DictationRequest(_language, _languages, context.Length > 0 ? context : null);
+    }
+
+    private void Heard(string text)
+    {
+        if (text.Length == 0)
+            return;
+        _said = _said.Length > 0 ? _said + " " + text : text;
+        _untyped = _untyped.Length > 0 ? _untyped + " " + text : text;
+    }
+
+    // Typed now unless the hotkey is held (the letters would arrive with Ctrl down and act as shortcuts) or the
+    // field is not in front; then it waits for the release, or for the end of the dictation.
+    private void TypeWhatIsReady()
+    {
+        if (_untyped.Length == 0 || _startedByPress is not null || _stopOnRelease || _target is null)
+            return;
+        if (!_host.IsDictationTargetFocused(_target) || _host.DictationBlockedReason() is not null)
+            return;
+        if (_host.InsertDictatedText(_untyped))
+            _untyped = "";
     }
 
     private void Start()
@@ -163,6 +273,16 @@ internal sealed class DictationSession : IDisposable
         _engine.Prepare();
 
         _startedAt = _now();
+        _lastCut = _startedAt;
+        _continued = _previous is { } last && Equals(last.Target, _target) && _startedAt - last.At < ContinueWithin
+            ? last.Text
+            : null;
+        _said = "";
+        _untyped = "";
+        _parts = Task.CompletedTask;
+        _partFailed = null;
+        _dictation?.Dispose();
+        _dictation = new CancellationTokenSource();
         Interlocked.Exchange(ref _lastLoudTicks, _startedAt.Ticks);
         _peak = 0;
         Current = State.Listening;
@@ -184,18 +304,13 @@ internal sealed class DictationSession : IDisposable
         }
 
         var target = _target!;
-        var previous = _previous is { } last && Equals(last.Target, target) && _now() - last.At < ContinueWithin
-            ? last.Text
-            : null;
-
-        using var cancel = new CancellationTokenSource();
-        _transcribing = cancel;
-        string text;
+        var cancel = _dictation!.Token;
         try
         {
-            text = await _engine
-                .TranscribeAsync(pcm, new DictationRequest(_language, _languages, previous), cancel.Token)
-                .ConfigureAwait(true);
+            await _parts.ConfigureAwait(true);
+            cancel.ThrowIfCancellationRequested();
+            if (pcm.Length > 0)
+                Heard(await _engine.TranscribeAsync(pcm, Request(), cancel).ConfigureAwait(true));
         }
         catch (OperationCanceledException)
         {
@@ -208,22 +323,28 @@ internal sealed class DictationSession : IDisposable
             Fail(Localizer.Instance.Format("Diag_DictationFailed", ex.Message));
             return;
         }
-        finally
-        {
-            _transcribing = null;
-        }
 
         Current = State.Idle;
-        if (text.Length == 0)
+        if (_said.Length == 0)
         {
-            _indicator.ShowMessage(Localizer.Instance["Diag_DictationNothingHeard"]);
+            if (_partFailed is { } failed)
+                Fail(Localizer.Instance.Format("Diag_DictationFailed", failed.Message));
+            else
+                _indicator.ShowMessage(Localizer.Instance["Diag_DictationNothingHeard"]);
+            return;
+        }
+
+        _previous = (target, string.Join(' ', new[] { _continued, _said }.Where(s => !string.IsNullOrEmpty(s))), _now());
+        if (_untyped.Length == 0)
+        {
+            _indicator.Hide();
             return;
         }
 
         if (!_host.IsDictationTargetFocused(target))
         {
             var app = _host.DictationAppName();
-            Fail(_host.CopyDictatedText(text)
+            Fail(_host.CopyDictatedText(_untyped)
                 ? Localizer.Instance.Format("Diag_DictationFocusChanged", app)
                 : Localizer.Instance.Format("Diag_FocusChanged", app));
             return;
@@ -236,8 +357,8 @@ internal sealed class DictationSession : IDisposable
         }
 
         _indicator.Hide();
-        if (_host.InsertDictatedText(text))
-            _previous = (target, text, _now());
+        if (_host.InsertDictatedText(_untyped))
+            _untyped = "";
     }
 
     private void OnLevel(float level)
@@ -260,11 +381,12 @@ internal sealed class DictationSession : IDisposable
     public void Dispose()
     {
         _watchdog?.Stop();
-        _host.DictationHotkeyPressed -= Toggle;
+        _host.DictationHotkeyPressed -= Press;
+        _host.DictationHotkeyReleased -= Release;
         _host.DictationCancelPressed -= Cancel;
         _audio.Level -= OnLevel;
         if (Current == State.Listening)
             _audio.Stop();
-        _transcribing?.Cancel();
+        _dictation?.Cancel();
     }
 }

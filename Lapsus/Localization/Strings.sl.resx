@@ -692,7 +692,7 @@
     <value>Glasovno tipkanje</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} začne snemanje; pritisnite znova in izgovorjeno se prikaže tam, kjer je kazalka. Esc prekliče. Govor se prepozna na tem računalniku, zvok pa se nikjer ne shrani.</value>
+    <value>Govorite namesto tipkanja: Lapsus natipka povedano tam, kjer je kazalka. Govor se prepozna na tem računalniku, zvok se nikjer ne shrani.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Model za govor še ni prenesen ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Fokus se je premaknil v drugo okno ({0}), zato je bilo besedilo kopirano v odložišče.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Začne in ustavi glasovno tipkanje (vklopi se na zavihku UI). Esc prekliče snemanje.</value>
+    <value>Pridržite med govorjenjem in spustite — besedilo se natipka; kratek pritisk snema prostoročno do naslednjega pritiska. Esc prekliče. Druge nastavitve so na zavihku »Glas«.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo je najnatančnejši; q5 je isti model, a manjši za prenos. Whisper small je za računalnike brez grafične kartice, na katerih je veliki model prepočasen.</value>
+    <value>large-v3 je najnatančnejši, a potrebuje grafično kartico (brez nje približno 5 s na stavek). large-v3-turbo je skoraj enako natančen in hitrejši; q5 je isti turbo z manjšim prenosom. Whisper small je za računalnike brez grafične kartice.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Jezik</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>V prikazanem oknu dovolite aplikaciji Lapsus dostop do mikrofona, nato znova zaženite glasovno tipkanje.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Glas</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — končano · Esc — prekliči</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Kliknite v poljubno polje, pridržite {0} in govorite — spustite in besedilo se prikaže pri kazalki. Kratek pritisk {0} snema prostoročno do naslednjega pritiska. Esc prekliče.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>ni bližnjice — izberite jo na zavihku »Tipke«</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Kako uporabljati</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Gumb mikrofona na zaslonu</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Majhen gumb na dnu zaslona: klik začne in konča snemanje, ob premiku miške nanj se prikaže bližnjica.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Zvok ob začetku in koncu snemanja</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Glasovno tipkanje: kliknite ali {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Glavno</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Prepoznavanje</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Kliknite v poljubno polje, pritisnite {0} in govorite; znova pritisnite {0} in besedilo se prikaže pri kazalki. Esc prekliče.</value>
   </data>
 </root>

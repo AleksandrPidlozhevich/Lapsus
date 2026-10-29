@@ -692,7 +692,7 @@
     <value>Saisie vocale</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} lance l&apos;écoute ; appuyez à nouveau et ce que vous avez dit s&apos;écrit à l&apos;emplacement du curseur. Échap annule. La parole est reconnue sur cet ordinateur et le son n&apos;est enregistré nulle part.</value>
+    <value>Parlez au lieu de taper : Lapsus écrit ce que vous dites là où se trouve le curseur. La parole est reconnue sur cet ordinateur ; le son n’est jamais enregistré.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Le modèle vocal n&apos;est pas encore téléchargé ({0} Mo).</value>
@@ -722,10 +722,10 @@
     <value>Le focus est passé à une autre fenêtre ({0}), le texte a donc été copié dans le presse-papiers.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Lance et arrête la saisie vocale (activée dans l&apos;onglet IA). Échap annule l&apos;enregistrement.</value>
+    <value>Maintenez pendant que vous parlez et relâchez pour écrire le texte ; un appui bref enregistre en mains libres jusqu’au prochain appui. Échap annule. Le reste se trouve dans l’onglet « Voix ».</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo est le plus précis ; q5 est le même modèle en téléchargement plus léger. Whisper small est pour les ordinateurs sans carte graphique, où le grand modèle est trop lent.</value>
+    <value>large-v3 est le plus précis mais demande une carte graphique (environ 5 s par phrase sans elle). large-v3-turbo est presque aussi précis et plus rapide ; q5 est le même turbo en téléchargement plus léger. Whisper small convient aux ordinateurs sans carte graphique.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Langue</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Autorisez Lapsus à utiliser le micro dans la fenêtre qui s&apos;est ouverte, puis relancez la saisie vocale.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Voix</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — terminé · Échap — annuler</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Cliquez dans n’importe quel champ, maintenez {0} et parlez, puis relâchez : le texte apparaît au curseur. Un appui bref sur {0} enregistre en mains libres jusqu’au prochain appui. Échap annule.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>aucun raccourci — choisissez-en un dans l’onglet « Touches »</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Mode d’emploi</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Bouton micro à l’écran</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Un petit bouton en bas de l’écran : un clic démarre ou termine l’enregistrement, survolez-le pour voir le raccourci.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Son au début et à la fin de l’enregistrement</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Saisie vocale : cliquez ou {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Général</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Reconnaissance</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Cliquez dans n’importe quel champ, appuyez sur {0} et parlez ; appuyez de nouveau sur {0} : le texte apparaît au curseur. Échap annule.</value>
   </data>
 </root>

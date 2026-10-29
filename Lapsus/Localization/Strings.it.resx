@@ -692,7 +692,7 @@
     <value>Dettatura vocale</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} avvia l&apos;ascolto; premilo di nuovo e quello che hai detto viene scritto dove si trova il cursore. Esc annulla. La voce viene riconosciuta su questo computer e l&apos;audio non viene salvato da nessuna parte.</value>
+    <value>Parla invece di scrivere: Lapsus scrive ciò che dici dove si trova il cursore. La voce viene riconosciuta su questo computer, l’audio non viene mai salvato.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Il modello vocale non è ancora scaricato ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Il focus è passato a un&apos;altra finestra ({0}), quindi il testo è stato copiato negli appunti.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Avvia e ferma la dettatura vocale (si attiva nella scheda IA). Esc annulla la registrazione.</value>
+    <value>Tienilo premuto mentre parli e rilascialo per scrivere il testo; una pressione breve registra a mani libere fino alla successiva. Esc annulla. Il resto è nella scheda «Voce».</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo è il più preciso; q5 è lo stesso modello in un download più leggero. Whisper small è per computer senza scheda grafica, dove il modello grande è troppo lento.</value>
+    <value>large-v3 è il più preciso ma richiede una scheda grafica (senza, circa 5 s a frase). large-v3-turbo è quasi altrettanto preciso e più veloce; q5 è lo stesso turbo con un download più piccolo. Whisper small è per computer senza scheda grafica.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Lingua</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Consenti a Lapsus di usare il microfono nella finestra che è comparsa, poi avvia di nuovo la dettatura vocale.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Voce</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — fatto · Esc — annulla</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Fai clic in un campo qualsiasi, tieni premuto {0} e parla: al rilascio il testo compare al cursore. Una pressione breve di {0} registra a mani libere fino alla pressione successiva. Esc annulla.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>nessuna scorciatoia: sceglila nella scheda «Tasti»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Come si usa</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Pulsante microfono sullo schermo</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Un piccolo pulsante in fondo allo schermo: un clic avvia o termina la registrazione, passandoci sopra vedi la scorciatoia.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Suono all’inizio e alla fine della registrazione</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Dettatura vocale: fai clic o {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Generale</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Riconoscimento</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Fai clic in un campo qualsiasi, premi {0} e parla; premi di nuovo {0} e il testo compare al cursore. Esc annulla.</value>
   </data>
 </root>

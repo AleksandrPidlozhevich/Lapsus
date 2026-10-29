@@ -692,7 +692,7 @@
     <value>الكتابة الصوتية</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} يبدأ الاستماع؛ اضغطه مرة أخرى فيُكتب ما قلته حيث يوجد المؤشر. Esc للإلغاء. يُتعرَّف على الكلام على هذا الحاسوب، ولا يُحفظ الصوت في أي مكان.</value>
+    <value>تحدّث بدلًا من الكتابة: يكتب Lapsus ما تقوله حيث يوجد المؤشر. يُتعرّف على الكلام على هذا الكمبيوتر، ولا يُحفظ الصوت في أي مكان.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>لم يُنزَّل نموذج الكلام بعد ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>انتقل التركيز إلى نافذة أخرى ({0})، لذا نُسخ النص إلى الحافظة.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>يبدأ الكتابة الصوتية ويوقفها (تُفعَّل في تبويب الذكاء الاصطناعي). Esc يلغي التسجيل.</value>
+    <value>اضغط مع الاستمرار أثناء الكلام واترك المفتاح لكتابة النص؛ الضغط القصير يسجّل دون استخدام اليدين حتى الضغطة التالية. Esc يلغي. باقي الإعدادات في علامة التبويب «الصوت».</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo هو الأدق؛ وq5 هو النموذج نفسه بتنزيل أصغر. وWhisper small للحواسيب التي لا تحتوي على بطاقة رسومية ويكون فيها النموذج الكبير بطيئًا جدًا.</value>
+    <value>large-v3 هو الأدق لكنه يحتاج إلى بطاقة رسومات (من دونها نحو 5 ثوانٍ للعبارة). large-v3-turbo دقيق تقريبًا بالقدر نفسه وأسرع؛ وq5 هو turbo نفسه بتنزيل أصغر. Whisper small للحواسيب التي لا تحتوي على بطاقة رسومات.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>اللغة</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>اسمح لـ Lapsus باستخدام الميكروفون في النافذة التي ظهرت، ثم شغّل الكتابة الصوتية من جديد.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>الصوت</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — تم · Esc — إلغاء</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>انقر في أي حقل، واضغط مع الاستمرار على {0} وتحدّث، ثم اترك المفتاح فيظهر النص عند المؤشر. الضغط القصير على {0} يسجّل دون استخدام اليدين حتى الضغطة التالية. Esc يلغي.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>لا يوجد مفتاح — اختر واحدًا في علامة التبويب «المفاتيح»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>طريقة الاستخدام</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>زر الميكروفون على الشاشة</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>زر صغير أسفل الشاشة: النقر يبدأ التسجيل أو ينهيه، وعند تمرير المؤشر فوقه يظهر اختصار لوحة المفاتيح.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>صوت عند بدء التسجيل وانتهائه</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>الكتابة الصوتية: انقر أو {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>عام</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>التعرّف</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>انقر في أي حقل، واضغط {0} وتحدّث؛ اضغط {0} مرة أخرى فيظهر النص عند المؤشر. Esc يلغي.</value>
   </data>
 </root>

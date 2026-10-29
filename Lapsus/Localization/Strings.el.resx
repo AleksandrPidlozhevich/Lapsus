@@ -692,7 +692,7 @@
     <value>Φωνητική πληκτρολόγηση</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>Το {0} ξεκινά την ακρόαση· πατήστε το ξανά και ό,τι είπατε γράφεται εκεί που βρίσκεται ο δρομέας. Το Esc ακυρώνει. Η ομιλία αναγνωρίζεται σε αυτόν τον υπολογιστή και ο ήχος δεν αποθηκεύεται πουθενά.</value>
+    <value>Μιλήστε αντί να πληκτρολογείτε: το Lapsus γράφει ό,τι λέτε εκεί όπου βρίσκεται ο κέρσορας. Η ομιλία αναγνωρίζεται σε αυτόν τον υπολογιστή· ο ήχος δεν αποθηκεύεται πουθενά.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Το μοντέλο ομιλίας δεν έχει ληφθεί ακόμη ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Η εστίαση μετακινήθηκε σε άλλο παράθυρο ({0}), οπότε το κείμενο αντιγράφηκε στο πρόχειρο.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Ξεκινά και σταματά τη φωνητική πληκτρολόγηση (ενεργοποιείται στην καρτέλα ΤΝ). Το Esc ακυρώνει μια εγγραφή.</value>
+    <value>Κρατήστε το πατημένο όσο μιλάτε και αφήστε το για να γραφτεί το κείμενο· ένα σύντομο πάτημα ηχογραφεί χωρίς χέρια μέχρι το επόμενο. Το Esc ακυρώνει. Τα υπόλοιπα βρίσκονται στην καρτέλα «Φωνή».</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>Το large-v3-turbo είναι το πιο ακριβές· το q5 είναι το ίδιο μοντέλο σε μικρότερη λήψη. Το Whisper small είναι για υπολογιστές χωρίς κάρτα γραφικών, όπου το μεγάλο μοντέλο είναι πολύ αργό.</value>
+    <value>Το large-v3 είναι το πιο ακριβές, αλλά θέλει κάρτα γραφικών (χωρίς αυτή περίπου 5 δευτ. ανά φράση). Το large-v3-turbo είναι σχεδόν εξίσου ακριβές και ταχύτερο· το q5 είναι το ίδιο turbo με μικρότερη λήψη. Το Whisper small είναι για υπολογιστές χωρίς κάρτα γραφικών.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Γλώσσα</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Επιτρέψτε στο Lapsus να χρησιμοποιεί το μικρόφωνο στο παράθυρο που εμφανίστηκε και ξεκινήστε ξανά τη φωνητική πληκτρολόγηση.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Φωνή</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — τέλος · Esc — ακύρωση</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Κάντε κλικ σε οποιοδήποτε πεδίο, κρατήστε πατημένο το {0} και μιλήστε — αφήστε το και το κείμενο εμφανίζεται στον κέρσορα. Ένα σύντομο πάτημα του {0} ηχογραφεί χωρίς χέρια μέχρι το επόμενο πάτημα. Το Esc ακυρώνει.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>κανένα πλήκτρο — επιλέξτε ένα στην καρτέλα «Πλήκτρα»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Πώς χρησιμοποιείται</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Κουμπί μικροφώνου στην οθόνη</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Ένα μικρό κουμπί στο κάτω μέρος της οθόνης: ένα κλικ ξεκινά ή τερματίζει την ηχογράφηση, περνώντας το ποντίκι από πάνω βλέπετε τη συντόμευση.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Ήχος στην αρχή και στο τέλος της ηχογράφησης</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Φωνητική πληκτρολόγηση: κάντε κλικ ή {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Γενικά</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Αναγνώριση</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Κάντε κλικ σε οποιοδήποτε πεδίο, πατήστε {0} και μιλήστε· πατήστε ξανά {0} και το κείμενο εμφανίζεται στον κέρσορα. Το Esc ακυρώνει.</value>
   </data>
 </root>

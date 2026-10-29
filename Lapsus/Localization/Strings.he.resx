@@ -692,7 +692,7 @@
     <value>הקלדה קולית</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} מתחיל להאזין; לחצו שוב ומה שאמרתם יוקלד במקום הסמן. Esc מבטל. הדיבור מזוהה במחשב הזה, והשמע לא נשמר בשום מקום.</value>
+    <value>דברו במקום להקליד: Lapsus מקליד את מה שאתם אומרים במקום שבו נמצא הסמן. הדיבור מזוהה במחשב הזה, והשמע לא נשמר בשום מקום.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>מודל הדיבור עדיין לא הורד ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>המיקוד עבר לחלון אחר ({0}), ולכן הטקסט הועתק ללוח.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>מתחיל ומפסיק הקלדה קולית (מופעלת בלשונית בינה מלאכותית). Esc מבטל הקלטה.</value>
+    <value>החזיקו בזמן הדיבור ושחררו כדי שהטקסט יוקלד; לחיצה קצרה מקליטה בלי ידיים עד הלחיצה הבאה. Esc מבטל. שאר ההגדרות בכרטיסייה &quot;קול&quot;.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo הוא המדויק ביותר; q5 הוא אותו מודל בהורדה קטנה יותר. Whisper small מיועד למחשבים בלי כרטיס גרפי, שבהם המודל הגדול איטי מדי.</value>
+    <value>large-v3 הוא המדויק ביותר, אבל דורש כרטיס מסך (בלעדיו כ-5 שניות למשפט). large-v3-turbo מדויק כמעט באותה מידה ומהיר יותר; q5 הוא אותו turbo בהורדה קטנה יותר. Whisper small מיועד למחשבים ללא כרטיס מסך.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>שפה</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>אפשרו ל-Lapsus להשתמש במיקרופון בחלון שנפתח, ואז הפעילו שוב את ההקלדה הקולית.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>קול</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — סיום · Esc — ביטול</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>לחצו בשדה כלשהו, החזיקו את {0} ודברו — שחררו והטקסט יופיע במקום הסמן. לחיצה קצרה על {0} מקליטה בלי ידיים עד הלחיצה הבאה. Esc מבטל.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>אין מקש — בחרו אחד בכרטיסייה &quot;מקשים&quot;</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>איך משתמשים</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>כפתור מיקרופון על המסך</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>כפתור קטן בתחתית המסך: לחיצה מתחילה או מסיימת הקלטה, ובריחוף מעליו מוצג קיצור המקשים.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>צליל בתחילת ההקלטה ובסופה</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>הקלדה קולית: לחצו או {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>כללי</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>זיהוי</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>לחצו בשדה כלשהו, הקישו {0} ודברו; הקישו {0} שוב והטקסט יופיע במקום הסמן. Esc מבטל.</value>
   </data>
 </root>

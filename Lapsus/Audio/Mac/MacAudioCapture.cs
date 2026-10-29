@@ -110,6 +110,16 @@ internal sealed class MacAudioCapture : IAudioCapture
         }
     }
 
+    public float[] TakeRecorded()
+    {
+        lock (_gate)
+        {
+            var result = _samples.ToArray();
+            _samples.Clear();
+            return result;
+        }
+    }
+
     private void OnBuffer(IntPtr userData, IntPtr queue, IntPtr buffer, IntPtr startTime, uint packets, IntPtr descriptions)
     {
         try

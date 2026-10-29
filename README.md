@@ -91,8 +91,8 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
 - **Show which layout is active** right next to the text cursor (opt-in), so the mistake
   does not happen in the first place. Apps that draw their own cursor (browsers, Electron)
   do not report a caret, on either OS.
-- **Type by voice** (opt-in): press the hotkey (Ctrl twice by default, ⌥ twice on a Mac), speak,
-  press it again, and what you said is typed at the cursor. English terms in Russian or Ukrainian speech come
+- **Type by voice** (opt-in): hold Ctrl+Win (⌃⌥ on a Mac) while you speak and let go, and what you
+  said is typed at the cursor; a short press records hands-free until the next one. English terms in Russian or Ukrainian speech come
   out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own
   names. [More below.](#voice-typing-optional)
 - **Stay out of the way**: named applications are skipped entirely, password fields never reach the
@@ -195,17 +195,27 @@ update.
 
 ## Voice typing (optional)
 
-**Settings → AI → Voice typing** turns it on and downloads the speech model;
-the hotkey is on the Hotkeys tab with the others. Press it, speak, press it again — or Esc to throw the
-recording away. A badge with a microphone sits at the cursor while it listens.
+**Settings → Voice** turns it on and downloads the speech model; the hotkey is on the Hotkeys tab with
+the others. Hold it while you speak and let go, or tap it once to talk hands-free and tap again to finish —
+Esc throws the recording away. A badge with a microphone sits at the cursor while it listens, saying how to
+finish for the first few seconds, and a short tone marks the start and the end (it can be turned off).
+On Windows a small microphone button waits at the bottom of the screen, labelled with the hotkey: a click
+starts or finishes a dictation without taking focus from the field you are in. The password-field setting
+does not apply here — dictation reads nothing from the field, it only types into it.
 
 - **Recognition** is OpenAI's [Whisper](https://github.com/openai/whisper) large-v3-turbo through
   [whisper.cpp](https://github.com/ggml-org/whisper.cpp), on the graphics card where there is one
   (Vulkan on Windows: NVIDIA, AMD and Intel alike; Metal on Apple Silicon) and on the processor
   otherwise. On a mid-range GPU a phrase
-  takes about a third of a second; on an 8-core CPU, two to three seconds. Three builds are offered —
-  large-v3-turbo (834 MB, the default), the same model as a smaller download (547 MB), and Whisper small
-  (181 MB) for computers without a graphics card.
+  takes about a third of a second; on an 8-core CPU, two to three seconds. Four builds are offered —
+  large-v3-turbo (834 MB, the default), the same model as a smaller download (547 MB), the full large-v3
+  (1031 MB: on our test phrases 7.1% word errors and 19 of 25 English terms right against turbo's 9.3% and
+  17, at about 0.8 s a phrase on a mid-range GPU and 5 s on a CPU), and Whisper small (181 MB) for computers
+  without a graphics card.
+- **Long dictations are typed as you go.** Once a few seconds have been said, the next pause sends that
+  part to recognition and it is typed while you keep talking; the earlier parts are Whisper's context for
+  the next. While the hotkey is held the parts wait (letters typed with Ctrl down would act as shortcuts)
+  and go in the moment you let go, so only the last part is waited for.
 - **English terms stay English.** Whisper is shown a sentence that mixes your language with English the
   way people speak, then a second pass puts terms it still spelled out back into Latin by how they sound
   (`пулл реквест` → `pull request`, `гитхаб` → `GitHub`), using the English word list and a built-in list

@@ -59,9 +59,18 @@ public sealed class AppSettings
     // after SpeechUnloadAfter of no dictation.
     public bool DictationEnabled { get; set; }
 
-    // Option twice on a Mac: Control twice is one of macOS's own Dictation shortcuts.
-    public int DictationHotkey { get; set; } =
-        HotkeyTriggers.DoubleTap(OperatingSystem.IsMacOS() ? TapModifier.Alt : TapModifier.Control);
+    public int DictationHotkey { get; set; } = DictationChord;
+
+    // Held while speaking, tapped for hands-free. Two modifiers next to each other at the bottom left, which do
+    // nothing on their own: Ctrl+Win on Windows, ⌃⌥ on a Mac.
+    public static int DictationChord => HotkeyCombo.Encode(0,
+        HotkeyModifiers.Control | (OperatingSystem.IsMacOS() ? HotkeyModifiers.Alt : HotkeyModifiers.Meta));
+
+    // A short tone when recording starts and stops.
+    public bool DictationSounds { get; set; } = true;
+
+    // A small microphone button at the bottom of the screen: click to dictate, hover to see the hotkey.
+    public bool DictationShowButton { get; set; } = true;
 
     public string SpeechModelId { get; set; } = Speech.SpeechModelCatalog.DefaultId;
 

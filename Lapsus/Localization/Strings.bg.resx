@@ -692,7 +692,7 @@
     <value>Гласово въвеждане</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} започва записа; натиснете отново и казаното се появява там, където е курсорът. Esc отказва. Речта се разпознава на този компютър, а звукът никъде не се запазва.</value>
+    <value>Говорете, вместо да пишете: Lapsus ще напише казаното там, където е курсорът. Речта се разпознава на този компютър, звукът не се съхранява никъде.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Моделът за реч още не е свален ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Фокусът премина към друг прозорец ({0}), затова текстът е копиран в клипборда.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Пуска и спира гласовото въвеждане (включва се в раздела ИИ). Esc отказва записа.</value>
+    <value>Задръжте, докато говорите, и пуснете — текстът ще бъде написан; кратко натискане записва без ръце до следващото натискане. Esc — отказ. Останалите настройки са в раздела „Глас“.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo е най-точният; q5 е същият модел, но се сваля по-малко. Whisper small е за компютри без видеокарта, на които големият модел е твърде бавен.</value>
+    <value>large-v3 е най-точният, но иска видеокарта (без нея около 5 с на фраза). large-v3-turbo е почти толкова точен и по-бърз; q5 е същият turbo с по-малко изтегляне. Whisper small е за компютри без видеокарта.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Език</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Разрешете на Lapsus достъп до микрофона в появилия се прозорец и стартирайте гласовото въвеждане отново.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Глас</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — готово · Esc — отказ</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Щракнете в което и да е поле, задръжте {0} и говорете — пуснете и текстът ще се появи при курсора. Кратко натискане на {0} записва без ръце до следващото натискане. Esc — отказ.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>няма клавиш — изберете в раздела „Клавиши“</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Как се използва</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Бутон с микрофон на екрана</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Малък бутон в долната част на екрана: щракване започва и завършва записа, при посочване се вижда клавишната комбинация.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Звук при начало и край на записа</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Гласово въвеждане: щракнете или {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Основни</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Разпознаване</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Щракнете в което и да е поле, натиснете {0} и говорете; натиснете {0} отново и текстът ще се появи при курсора. Esc — отказ.</value>
   </data>
 </root>

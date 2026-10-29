@@ -692,7 +692,7 @@
     <value>Галасавы ўвод</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} — пачаць запіс; націсніце яшчэ раз, і сказанае з&apos;явіцца там, дзе курсор. Esc — скасаваць. Маўленне распазнаецца на гэтым камп&apos;ютары, гук нідзе не захоўваецца.</value>
+    <value>Гаварыце замест таго, каб друкаваць: Lapsus надрукуе сказанае там, дзе курсор. Маўленне распазнаецца на гэтым камп’ютары, гук нідзе не захоўваецца.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Мадэль маўлення яшчэ не спампавана ({0} МБ).</value>
@@ -722,10 +722,10 @@
     <value>Фокус перайшоў у іншае акно ({0}), таму тэкст скапіяваны ў буфер абмену.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Запускае і спыняе галасавы ўвод (уключаецца на ўкладцы ШІ). Esc скасоўвае запіс.</value>
+    <value>Утрымлівайце, пакуль гаворыце, адпусціце — тэкст надрукуецца; кароткае націсканне — запіс без рук да наступнага націскання. Esc — адмена. Астатнія налады — на ўкладцы «Голас».</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo — самая дакладная; q5 — тая ж мадэль, але спампоўваецца менш. Whisper small — для камп&apos;ютараў без відэакарты, дзе вялікая мадэль занадта павольная.</value>
+    <value>large-v3 — самая дакладная, але ёй патрэбна відэакарта (без яе каля 5 с на фразу). large-v3-turbo амаль такая ж дакладная і хутчэйшая; q5 — тая ж turbo, але спампоўваецца менш. Whisper small — для камп’ютараў без відэакарты.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Мова</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Дазвольце Lapsus доступ да мікрафона ў акне, якое з&apos;явілася, і зноў запусціце галасавы ўвод.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Голас</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — гатова · Esc — адмена</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Пстрыкніце ў любым полі, утрымлівайце {0} і гаварыце — адпусціце, і тэкст з’явіцца каля курсора. Кароткае націсканне {0} — запіс без рук да наступнага націскання. Esc — адмена.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>клавіша не зададзена — выберыце на ўкладцы «Клавішы»</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Як карыстацца</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Кнопка мікрафона на экране</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Невялікая кнопка ўнізе экрана: пстрычка пачынае і заканчвае запіс, пры навядзенні відаць гарачая клавіша.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Гук у пачатку і ў канцы запісу</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Галасавы ўвод: пстрыкніце або {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Асноўнае</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Распазнаванне</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Пстрыкніце ў любым полі, націсніце {0} і гаварыце; націсніце {0} яшчэ раз — тэкст з’явіцца каля курсора. Esc — адмена.</value>
   </data>
 </root>

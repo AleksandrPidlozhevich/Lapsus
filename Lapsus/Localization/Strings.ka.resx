@@ -692,7 +692,7 @@
     <value>ხმოვანი შეყვანა</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} იწყებს მოსმენას; კიდევ ერთხელ დააჭირეთ და ნათქვამი კურსორის ადგილას დაიწერება. Esc აუქმებს. მეტყველება ამ კომპიუტერზე ამოიცნობა, ხმა კი არსად ინახება.</value>
+    <value>ილაპარაკეთ ბეჭდვის ნაცვლად: Lapsus დაბეჭდავს ნათქვამს იქ, სადაც კურსორია. მეტყველება ამოიცნობა ამ კომპიუტერზე, ხმა არსად ინახება.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>მეტყველების მოდელი ჯერ არ არის ჩამოტვირთული ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>ფოკუსი სხვა ფანჯარაზე გადავიდა ({0}), ამიტომ ტექსტი ბუფერში დაკოპირდა.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>იწყებს და აჩერებს ხმოვან შეყვანას (ირთვება ჩანართზე AI). Esc აუქმებს ჩანაწერს.</value>
+    <value>გეჭიროთ, სანამ ლაპარაკობთ, და გაუშვით — ტექსტი დაიბეჭდება; მოკლე დაჭერა ხელების გარეშე იწერს შემდეგ დაჭერამდე. Esc აუქმებს. დანარჩენი პარამეტრები ჩანართზე „ხმა“.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo ყველაზე ზუსტია; q5 იგივე მოდელია უფრო მცირე ჩამოსატვირთით. Whisper small განკუთვნილია ვიდეობარათის გარეშე კომპიუტერებისთვის, სადაც დიდი მოდელი ზედმეტად ნელია.</value>
+    <value>large-v3 ყველაზე ზუსტია, მაგრამ ვიდეობარათი სჭირდება (მის გარეშე ფრაზაზე დაახლოებით 5 წმ). large-v3-turbo თითქმის ისეთივე ზუსტი და უფრო სწრაფია; q5 იგივე turbo-ა უფრო მცირე ჩამოტვირთვით. Whisper small ვიდეობარათის გარეშე კომპიუტერებისთვისაა.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>ენა</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>გამოჩენილ ფანჯარაში Lapsus-ს მიკროფონზე წვდომის ნება დართეთ და ხმოვანი შეყვანა ხელახლა გაუშვით.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>ხმა</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — მზადაა · Esc — გაუქმება</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>დააწკაპუნეთ ნებისმიერ ველში, დააჭირეთ და გეჭიროთ {0} და ილაპარაკეთ — გაუშვით და ტექსტი კურსორთან გამოჩნდება. {0}-ის მოკლე დაჭერა ხელების გარეშე იწერს შემდეგ დაჭერამდე. Esc აუქმებს.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>კლავიში არ არის — აირჩიეთ ჩანართზე „კლავიშები“</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>როგორ გამოვიყენოთ</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>მიკროფონის ღილაკი ეკრანზე</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>პატარა ღილაკი ეკრანის ქვედა ნაწილში: დაწკაპუნება იწყებს ან ამთავრებს ჩაწერას, მასზე მიტანისას ჩანს კლავიშთა კომბინაცია.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>ხმა ჩაწერის დაწყებისა და დასრულებისას</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>ხმოვანი შეყვანა: დააწკაპუნეთ ან {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>მთავარი</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>ამოცნობა</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>დააწკაპუნეთ ნებისმიერ ველში, დააჭირეთ {0} და ილაპარაკეთ; კვლავ დააჭირეთ {0} და ტექსტი კურსორთან გამოჩნდება. Esc აუქმებს.</value>
   </data>
 </root>

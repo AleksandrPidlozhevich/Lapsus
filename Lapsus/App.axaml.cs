@@ -176,13 +176,25 @@ public partial class App : Application
         var speech = new SpeechModelStore();
         var dictionaries = _dictionaryStore;
         _dictationEngine = new DictationEngine(speech, _settingsViewModel.SettingsSnapshot, dictionaries.Installed);
-        _dictationIndicator = new DictationIndicator(_indicator);
+        string HotkeyName() => HotkeyNames.Format(settings.DictationHotkey);
+        _dictationIndicator = new DictationIndicator(_indicator,
+            () => Localizer.Instance.Format("Voice_ListeningHint", HotkeyName()),
+            () => settings.DictationSounds);
         _dictation = new DictationSession(host, audio, _dictationEngine, _dictationIndicator,
             () => _settingsViewModel.SettingsSnapshot().DictationEnabled);
+        _dictationIndicator.ButtonClicked = _dictation.Toggle;
+
+        // Shown while voice typing is on (and not locked); its label follows the hotkey.
+        void UpdateButton() => _dictationIndicator?.SetButton(
+            supported && OperatingSystem.IsWindows() && settings.DictationEnabled && settings.DictationShowButton
+            && !_settingsViewModel.NeuralLocked,
+            settings.DictationHotkey == 0 ? "" : HotkeyName(),
+            Localizer.Instance.Format("Voice_ButtonTip", settings.DictationHotkey == 0 ? "—" : HotkeyName()));
 
         void Apply(bool enabled)
         {
             _settingsViewModel.ApplyDictationHotkey();
+            UpdateButton();
             if (!enabled)
             {
                 _dictation?.Cancel();
@@ -198,6 +210,12 @@ public partial class App : Application
             modelReady: () => _dictationEngine?.Prepare(),
             releaseModel: () => _dictationEngine?.Unload(),
             locked: () => _settingsViewModel.NeuralLocked);
+        // Hint is raised again whenever the hotkey or the interface language changes.
+        _settingsViewModel.Voice.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(VoiceViewModel.Hint))
+                UpdateButton();
+        };
         Apply(supported && settings.DictationEnabled);
     }
 

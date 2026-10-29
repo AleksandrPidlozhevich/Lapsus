@@ -692,7 +692,7 @@
     <value>Röstinmatning</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} börjar lyssna; tryck igen så skrivs det du sa där markören står. Esc avbryter. Talet känns igen på den här datorn och ljudet sparas ingenstans.</value>
+    <value>Tala i stället för att skriva: Lapsus skriver det du säger där markören står. Talet känns igen på den här datorn; ljudet sparas aldrig.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Talmodellen är inte hämtad än ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Fokus flyttades till ett annat fönster ({0}), så texten kopierades till Urklipp.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Startar och stoppar röstinmatning (slås på under fliken AI). Esc avbryter en inspelning.</value>
+    <value>Håll ned medan du talar och släpp för att skriva texten; ett kort tryck spelar in handsfree till nästa tryck. Esc avbryter. Resten finns på fliken ”Röst”.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo är mest exakt; q5 är samma modell som en mindre hämtning. Whisper small är för datorer utan grafikkort, där den stora modellen är för långsam.</value>
+    <value>large-v3 är mest exakt men vill ha ett grafikkort (utan ca 5 s per mening). large-v3-turbo är nästan lika exakt och snabbare; q5 är samma turbo som mindre nedladdning. Whisper small är för datorer utan grafikkort.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Språk</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Ge Lapsus åtkomst till mikrofonen i rutan som visas och starta sedan röstinmatningen igen.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Röst</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — klart · Esc — avbryt</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Klicka i valfritt fält, håll ned {0} och tala — släpp så visas texten vid markören. Ett kort tryck på {0} spelar in handsfree tills du trycker igen. Esc avbryter.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>inget kortkommando — välj ett på fliken ”Tangenter”</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Så använder du det</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Mikrofonknapp på skärmen</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>En liten knapp längst ned på skärmen: ett klick startar eller avslutar inspelningen, håll muspekaren över den för att se kortkommandot.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Ljud när inspelningen startar och slutar</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Röstinmatning: klicka eller {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Allmänt</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Igenkänning</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Klicka i valfritt fält, tryck på {0} och tala; tryck på {0} igen så visas texten vid markören. Esc avbryter.</value>
   </data>
 </root>

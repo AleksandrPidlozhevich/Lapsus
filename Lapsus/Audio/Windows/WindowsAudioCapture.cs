@@ -139,6 +139,16 @@ internal sealed class WindowsAudioCapture : IAudioCapture
         }
     }
 
+    public float[] TakeRecorded()
+    {
+        lock (_gate)
+        {
+            var result = _samples.ToArray();
+            _samples.Clear();
+            return result;
+        }
+    }
+
     private void OnData(object? sender, WaveInEventArgs e)
     {
         double sum = 0;

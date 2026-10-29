@@ -692,7 +692,7 @@
     <value>Stemmeindtastning</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} begynder at lytte; tryk igen, så skrives det, du sagde, hvor markøren står. Esc annullerer. Talen genkendes på denne computer, og lyden gemmes ingen steder.</value>
+    <value>Tal i stedet for at skrive: Lapsus skriver det, du siger, der hvor markøren er. Tale genkendes på denne computer; lyden gemmes aldrig.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Talemodellen er ikke hentet endnu ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Fokus flyttede til et andet vindue ({0}), så teksten blev kopieret til udklipsholderen.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Starter og stopper stemmeindtastning (slås til under fanen AI). Esc annullerer en optagelse.</value>
+    <value>Hold nede, mens du taler, og slip for at skrive teksten; et kort tryk optager håndfrit til næste tryk. Esc annullerer. Resten findes på fanen “Tale”.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo er mest præcis; q5 er samme model som en mindre hentning. Whisper small er til computere uden grafikkort, hvor den store model er for langsom.</value>
+    <value>large-v3 er den mest præcise, men kræver et grafikkort (uden ca. 5 s pr. sætning). large-v3-turbo er næsten lige så præcis og hurtigere; q5 er samme turbo som mindre download. Whisper small er til computere uden grafikkort.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Sprog</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Giv Lapsus adgang til mikrofonen i den dialog, der vises, og start derefter stemmeindtastningen igen.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Tale</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — færdig · Esc — annuller</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Klik i et vilkårligt felt, hold {0} nede og tal — slip, og teksten vises ved markøren. Et kort tryk på {0} optager håndfrit, indtil du trykker igen. Esc annullerer.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>ingen genvej — vælg en på fanen “Taster”</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Sådan bruges det</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Mikrofonknap på skærmen</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>En lille knap nederst på skærmen: et klik starter eller afslutter optagelsen, hold musen over den for at se genvejen.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Lyd når optagelsen starter og stopper</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Stemmeindtastning: klik, eller {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Generelt</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Genkendelse</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Klik i et vilkårligt felt, tryk på {0} og tal; tryk på {0} igen, og teksten vises ved markøren. Esc annullerer.</value>
   </data>
 </root>

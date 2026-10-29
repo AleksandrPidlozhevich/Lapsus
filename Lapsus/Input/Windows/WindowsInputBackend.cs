@@ -179,10 +179,10 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         return _focus.ForegroundProcessName();
     }
 
-    protected override string? PlatformInputBlockedReason()
+    protected override string? PlatformInputBlockedReason(bool passwords)
     {
 
-        if (_focus.IsPassword(_focus.Read().Focus))
+        if (passwords && _focus.IsPassword(_focus.Read().Focus))
             return Localizer.Instance["Diag_SecureField"];
 
         if (InstalledLayouts.IsImeLanguage(ForegroundKeyboardLayout()))
@@ -330,6 +330,25 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         if (IsCapturingHotkey && FeedHotkeyCapture((int)vk, isDown, KeyKindOf(vk), HeldModifiers()))
             return 1;
 
+        var isWin = vk is VK_LWIN or VK_RWIN;
+        if (isDown || isUp)
+        {
+            if (ModifierOf(vk) is not null || isWin)
+            {
+                // Win let go after Ctrl+Win would open Start; an unassigned key in between tells Windows it was a chord.
+                if (NoteDictationModifiers(HeldModifiers()) && _winDown)
+                    WindowsTextInjection.MaskStartMenu();
+            }
+            else if (isDown && _swallowedKeyDown != vk)
+            {
+                NoteDictationOtherKey();
+            }
+        }
+
+        // A held hotkey repeats its key-down; it already did its work on the first one.
+        if (isDown && _swallowedKeyDown == vk)
+            return 1;
+
         if (ModifierOf(vk) is { } modifier)
         {
             if (isDown || isUp)
@@ -439,12 +458,13 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         var plainAllowed = !IsShortcutModifierDown;
 
         Action? run = null;
+        var dictation = false;
         if (TriggerMatches(HotkeyVirtualKey, (int)vk, held, plainAllowed))
             run = ApplyCorrection;
         else if (SelectionActionForKey((int)vk, held, plainAllowed) is { } action)
             run = () => _ = ApplySelectionActionAsync(action);
         else if (TriggerMatches(DictationHotkey, (int)vk, held, plainAllowed))
-            run = RaiseDictationHotkey;
+            (run, dictation) = (() => RaiseDictationReleased(), true);
 
         if (run is null)
             return false;
@@ -452,6 +472,9 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         if (IsExcludedApp(out _))
             return false;
 
+        // Dictation starts on the key going down, so it can be held while speaking; the rest wait for key-up.
+        if (dictation)
+            Dispatcher.UIThread.Post(RaiseDictationHotkey);
         _pendingHotkeyAction = run;
         return true;
     }

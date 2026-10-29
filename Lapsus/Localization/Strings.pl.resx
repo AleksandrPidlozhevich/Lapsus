@@ -692,7 +692,7 @@
     <value>Pisanie głosowe</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} rozpoczyna nagrywanie; naciśnij ponownie, a to, co powiesz, pojawi się w miejscu kursora. Esc anuluje. Mowa jest rozpoznawana na tym komputerze, a dźwięk nigdzie nie jest zapisywany.</value>
+    <value>Mów zamiast pisać: Lapsus wpisze to, co powiesz, tam, gdzie jest kursor. Mowa jest rozpoznawana na tym komputerze, dźwięk nigdzie nie jest zapisywany.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Model mowy nie został jeszcze pobrany ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Fokus przeszedł do innego okna ({0}), więc tekst skopiowano do schowka.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Włącza i zatrzymuje pisanie głosowe (włączane w karcie AI). Esc anuluje nagranie.</value>
+    <value>Przytrzymaj podczas mówienia i puść — tekst zostanie wpisany; krótkie naciśnięcie nagrywa bez trzymania aż do następnego. Esc anuluje. Pozostałe ustawienia są na karcie „Głos”.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo jest najdokładniejszy; q5 to ten sam model, ale mniejszy do pobrania. Whisper small jest dla komputerów bez karty graficznej, na których duży model działa zbyt wolno.</value>
+    <value>large-v3 jest najdokładniejszy, ale wymaga karty graficznej (bez niej około 5 s na frazę). large-v3-turbo jest prawie tak samo dokładny i szybszy; q5 to ten sam turbo, ale mniejszy do pobrania. Whisper small jest dla komputerów bez karty graficznej.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Język</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Zezwól aplikacji Lapsus na dostęp do mikrofonu w wyświetlonym oknie, a potem ponownie uruchom pisanie głosowe.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Głos</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — gotowe · Esc — anuluj</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Kliknij w dowolne pole, przytrzymaj {0} i mów — puść, a tekst pojawi się przy kursorze. Krótkie naciśnięcie {0} nagrywa bez trzymania aż do następnego naciśnięcia. Esc anuluje.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>brak skrótu — wybierz go na karcie „Klawisze”</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Jak używać</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Przycisk mikrofonu na ekranie</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Mały przycisk na dole ekranu: kliknięcie zaczyna i kończy nagrywanie, po najechaniu widać skrót.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Dźwięk na początku i końcu nagrywania</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Pisanie głosowe: kliknij lub {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Główne</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Rozpoznawanie</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Kliknij w dowolne pole, naciśnij {0} i mów; naciśnij {0} ponownie, a tekst pojawi się przy kursorze. Esc anuluje.</value>
   </data>
 </root>

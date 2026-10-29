@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Platform;
 using Avalonia.Threading;
+using Lapsus.Audio;
 using Lapsus.Views;
 using System;
 using System.Threading;
@@ -10,30 +11,72 @@ namespace Lapsus.Input.Dictation;
 
 // The microphone badge, where the layout badge sits: next to the caret, or next to the mouse pointer in apps
 // that do not report a caret. The layout badge steps aside while it shows.
+// Also the start and stop tones, and the on-screen microphone button, which mirrors the badge's state.
 internal sealed class DictationIndicator : IDictationIndicator, IDisposable
 {
     private static readonly TimeSpan MessageTime = TimeSpan.FromSeconds(4);
 
+    // How long the badge says how to finish before it shrinks to the microphone alone.
+    private static readonly TimeSpan HintTime = TimeSpan.FromSeconds(3);
+
     private const double MaxBadgeDip = 480;
 
     private readonly LayoutIndicator? _layoutIndicator;
+    private readonly Func<string> _listeningHint;
+    private readonly Func<bool> _sounds;
     private readonly DispatcherTimer _hideMessage;
+    private readonly DispatcherTimer _hideHint;
     private CaretIndicatorWindow? _window;
+    private DictationButtonWindow? _button;
     private int _levelPosted;
     private float _level;
     private bool _listening;
 
-    public DictationIndicator(LayoutIndicator? layoutIndicator)
+    public DictationIndicator(LayoutIndicator? layoutIndicator, Func<string> listeningHint, Func<bool> sounds)
     {
         _layoutIndicator = layoutIndicator;
+        _listeningHint = listeningHint;
+        _sounds = sounds;
         _hideMessage = new DispatcherTimer { Interval = MessageTime };
         _hideMessage.Tick += (_, _) => Hide();
+        _hideHint = new DispatcherTimer { Interval = HintTime };
+        _hideHint.Tick += (_, _) =>
+        {
+            _hideHint.Stop();
+            if (_listening)
+                Show(microphone: true, "");
+        };
+    }
+
+    // The button's click; set once the session exists.
+    public Action? ButtonClicked { get; set; }
+
+    public void SetButton(bool visible, string hotkey, string tip)
+    {
+        if (!visible)
+        {
+            _button?.Hide();
+            return;
+        }
+
+        if (_button is null)
+        {
+            _button = new DictationButtonWindow();
+            _button.Clicked += () => ButtonClicked?.Invoke();
+        }
+
+        _button.Describe(hotkey, tip);
+        if (!_button.IsVisible)
+            _button.Show();
     }
 
     public void ShowListening()
     {
         _listening = true;
-        Show(microphone: true, "");
+        if (_sounds())
+            DictationSounds.Play(start: true);
+        Show(microphone: true, _listeningHint());
+        _hideHint.Start();
     }
 
     public void SetLevel(float level)
@@ -46,20 +89,29 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
         Dispatcher.UIThread.Post(() =>
         {
             Interlocked.Exchange(ref _levelPosted, 0);
-            if (_listening && _window is { IsVisible: true } window)
-                window.ShowLevel(Volatile.Read(ref _level));
+            if (!_listening)
+                return;
+            var level = Volatile.Read(ref _level);
+            if (_window is { IsVisible: true } window)
+                window.ShowLevel(level);
+            if (_button is { IsVisible: true } button)
+                button.ShowLevel(level);
         }, DispatcherPriority.Background);
     }
 
     public void ShowWorking()
     {
         _listening = false;
+        _hideHint.Stop();
+        if (_sounds())
+            DictationSounds.Play(start: false);
         Show(microphone: false, "…");
     }
 
     public void ShowMessage(string message)
     {
         _listening = false;
+        _hideHint.Stop();
         Show(microphone: null, message);
         _hideMessage.Start();
     }
@@ -67,13 +119,18 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
     public void Hide()
     {
         _listening = false;
+        _onButton = false;
+        _hideHint.Stop();
         _hideMessage.Stop();
+        _button?.ShowState(null, null);
         if (_window is { IsVisible: true })
             _window.Hide();
         if (_layoutIndicator is not null)
             _layoutIndicator.Suspended = false;
     }
 
+    // One badge per dictation: at the caret when the field reports one, otherwise the on-screen button says it
+    // all (when it is shown), and only without either does a badge follow the mouse pointer.
     private void Show(bool? microphone, string text)
     {
         _hideMessage.Stop();
@@ -81,23 +138,36 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
             _layoutIndicator.Suspended = true;
 
         var window = _window ??= new CaretIndicatorWindow();
-        var appearing = !window.IsVisible;
-        window.Microphone = microphone;
-        window.Text = text;
-
-        if (appearing)
+        if (!_onButton && !window.IsVisible)
         {
-            _anchor = Anchor();
-            window.Show();
-            if (OperatingSystem.IsMacOS())
-                FindMacCaretLater(++_placement);
+            if (Anchor() is { } anchor)
+            {
+                _anchor = anchor;
+                window.Show();
+                if (OperatingSystem.IsMacOS())
+                    FindMacCaretLater(++_placement);
+            }
+            else
+            {
+                _onButton = true;
+            }
         }
 
+        if (_onButton)
+        {
+            _button?.ShowState(microphone, text);
+            return;
+        }
+
+        window.Microphone = microphone;
+        window.Text = text;
         Place(window, _anchor);
+        _button?.ShowState(microphone, null);
     }
 
     private CaretBounds _anchor;
     private int _placement;
+    private bool _onButton;
 
     private static void Place(CaretIndicatorWindow window, CaretBounds anchor)
     {
@@ -110,14 +180,17 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
         window.MoveTo(CaretBadgePlacement.For(anchor, badge, screen?.WorkingArea ?? default, scale));
     }
 
-    // The caret if the app reports one (Windows reads it at once), else a pointer-sized box at the mouse.
-    private static CaretBounds Anchor()
+    // The caret if the app reports one (Windows reads it at once); null when there is none and the button is up;
+    // else a pointer-sized box at the mouse.
+    private CaretBounds? Anchor()
     {
         if (OperatingSystem.IsWindows())
         {
             var caret = WindowsCaretProbe.Read();
             if (!caret.IsEmpty)
                 return caret;
+            if (_button is { IsVisible: true })
+                return null;
             if (NativeMethods.GetCursorPos(out var point))
                 return AtPointer(point.x, point.y);
         }
@@ -151,7 +224,10 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
     public void Dispose()
     {
         _hideMessage.Stop();
+        _hideHint.Stop();
         _window?.Close();
         _window = null;
+        _button?.Close();
+        _button = null;
     }
 }

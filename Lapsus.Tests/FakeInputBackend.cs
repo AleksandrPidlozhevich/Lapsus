@@ -57,6 +57,15 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
         NoteModifierKey(modifier, false);
     }
 
+    // The modifiers held after a key goes down or up, in order (a chord press is "Control", "Control|Meta", "Control", "None").
+    public void Modifiers(params HotkeyModifiers[] steps)
+    {
+        foreach (var held in steps)
+            NoteDictationModifiers(held);
+    }
+
+    public void OtherKey() => NoteDictationOtherKey();
+
     public bool KeepUnreadableFocus { get; set; }
 
     public FakeInputBackend Focused()
@@ -145,9 +154,9 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
         return "TestApp";
     }
 
-    protected override string? PlatformInputBlockedReason()
+    protected override string? PlatformInputBlockedReason(bool passwords)
     {
-        return BlockedReason;
+        return passwords ? BlockedReason : null;
     }
 
     protected override string? TypingBlockedReason()

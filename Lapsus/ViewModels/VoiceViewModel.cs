@@ -2,6 +2,7 @@ using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lapsus.Audio;
+using Lapsus.Core.Input;
 using Lapsus.Core.Speech;
 using Lapsus.Input;
 using Lapsus.Localization;
@@ -25,7 +26,7 @@ public sealed record MicrophoneOption(string Name, string? Device);
 
 public sealed record UnloadOption(string Name, SpeechUnloadAfter Value);
 
-// The voice typing card on the AI tab. Its hotkey lives with the others on the Hotkeys tab.
+// The Voice tab. Its hotkey lives with the others on the Hotkeys tab.
 public partial class VoiceViewModel : ViewModelBase
 {
     private static readonly TimeSpan GlossarySaveDelay = TimeSpan.FromMilliseconds(700);
@@ -60,6 +61,8 @@ public partial class VoiceViewModel : ViewModelBase
         _building = true;
         _enabled = supported && settings.DictationEnabled && !_locked();
         _keepEnglishTermsLatin = settings.KeepEnglishTermsLatin;
+        _sounds = settings.DictationSounds;
+        _showButton = settings.DictationShowButton;
         _glossaryText = string.Join(Environment.NewLine, settings.DictationGlossary);
         BuildOptions();
         _building = false;
@@ -78,8 +81,26 @@ public partial class VoiceViewModel : ViewModelBase
     public bool Locked => _locked();
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(ShowDownload))]
+    [NotifyPropertyChangedFor(nameof(ShowDownload), nameof(ShowUsage))]
     private bool _enabled;
+
+    // The tab's two sections: the model and how to start it, or how speech is read.
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ShowMain), nameof(ShowUsage))]
+    private bool _showRecognition;
+
+    public bool ShowMain => !ShowRecognition;
+
+    public bool ShowUsage => Enabled && !ShowRecognition;
+
+    [RelayCommand]
+    private void ShowSection(string section)
+    {
+        ShowRecognition = section == "Recognition";
+        // A click on the section already shown unchecks its button; say again which one is on.
+        OnPropertyChanged(nameof(ShowMain));
+        OnPropertyChanged(nameof(ShowRecognition));
+    }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ShowDownload), nameof(ShowRemove))]
@@ -91,6 +112,13 @@ public partial class VoiceViewModel : ViewModelBase
     [ObservableProperty] private string? _status;
 
     [ObservableProperty] private bool _keepEnglishTermsLatin;
+
+    [ObservableProperty] private bool _sounds;
+
+    [ObservableProperty] private bool _showButton;
+
+    // The on-screen button needs a window that takes clicks without taking focus; only Windows has one here.
+    public bool ButtonSupported => OperatingSystem.IsWindows();
 
     [ObservableProperty] private string _glossaryText;
 
@@ -125,7 +153,16 @@ public partial class VoiceViewModel : ViewModelBase
         ? Localizer.Instance.Format("Voice_ModelReady", Model.DisplayName)
         : Localizer.Instance.Format("Voice_ModelMissing", Model.SizeMb);
 
-    public string Hint => Localizer.Instance.Format("Voice_Hint", HotkeyNames.Format(_settings.DictationHotkey));
+    public string Hint => Localizer.Instance["Voice_Hint"];
+
+    // Shown once the model is on disk: how to use it, right where it was downloaded.
+    // A double tap cannot be held, so it gets the press-speak-press version.
+    public string TryIt => Localizer.Instance.Format(
+        HotkeyTriggers.IsDoubleTap(_settings.DictationHotkey) ? "Voice_TryItTap" : "Voice_TryIt", HotkeyName);
+
+    private string HotkeyName => _settings.DictationHotkey == 0
+        ? Localizer.Instance["Voice_NoHotkey"]
+        : HotkeyNames.Format(_settings.DictationHotkey);
 
     public string UnloadHint => Localizer.Instance.Format("Voice_UnloadHint", Model.RamMb);
 
@@ -142,6 +179,19 @@ public partial class VoiceViewModel : ViewModelBase
     {
         _settings.KeepEnglishTermsLatin = value;
         _store.Save(_settings);
+    }
+
+    partial void OnSoundsChanged(bool value)
+    {
+        _settings.DictationSounds = value;
+        _store.Save(_settings);
+    }
+
+    partial void OnShowButtonChanged(bool value)
+    {
+        _settings.DictationShowButton = value;
+        _store.Save(_settings);
+        _applyEnabled(Enabled);
     }
 
     partial void OnGlossaryTextChanged(string value)
@@ -244,6 +294,7 @@ public partial class VoiceViewModel : ViewModelBase
         OnPropertyChanged(nameof(ShowRemove));
         OnPropertyChanged(nameof(ModelStatus));
         OnPropertyChanged(nameof(Hint));
+        OnPropertyChanged(nameof(TryIt));
         OnPropertyChanged(nameof(UnloadHint));
     }
 

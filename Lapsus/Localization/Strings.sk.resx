@@ -692,7 +692,7 @@
     <value>Hlasové písanie</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} spustí nahrávanie; stlačte znova a vyslovený text sa objaví na mieste kurzora. Esc zruší. Reč sa rozpoznáva na tomto počítači a zvuk sa nikam neukladá.</value>
+    <value>Hovorte namiesto písania: Lapsus napíše, čo poviete, tam, kde je kurzor. Reč sa rozpoznáva na tomto počítači, zvuk sa nikde neukladá.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Model reči ešte nie je stiahnutý ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>Zameranie prešlo do iného okna ({0}), preto bol text skopírovaný do schránky.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Spúšťa a zastavuje hlasové písanie (zapína sa na karte AI). Esc nahrávanie zruší.</value>
+    <value>Držte, kým hovoríte, a pustite — text sa napíše; krátke stlačenie nahráva bez držania až do ďalšieho stlačenia. Esc zruší. Ostatné nastavenia sú na karte „Hlas“.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo je najpresnejší; q5 je ten istý model, ale menší na stiahnutie. Whisper small je pre počítače bez grafickej karty, na ktorých je veľký model príliš pomalý.</value>
+    <value>large-v3 je najpresnejší, ale chce grafickú kartu (bez nej asi 5 s na vetu). large-v3-turbo je takmer rovnako presný a rýchlejší; q5 je ten istý turbo s menším sťahovaním. Whisper small je pre počítače bez grafickej karty.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Jazyk</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>V zobrazenom okne povoľte aplikácii Lapsus prístup k mikrofónu a potom hlasové písanie spustite znova.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Hlas</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — hotovo · Esc — zrušiť</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Kliknite do ľubovoľného poľa, podržte {0} a hovorte — pustite a text sa zobrazí pri kurzore. Krátke stlačenie {0} nahráva bez držania až do ďalšieho stlačenia. Esc zruší.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>žiadny kláves — vyberte ho na karte „Klávesy“</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Ako to používať</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Tlačidlo mikrofónu na obrazovke</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Malé tlačidlo dole na obrazovke: kliknutie spustí a ukončí nahrávanie, po prejdení myšou uvidíte skratku.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Zvuk na začiatku a konci nahrávania</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Hlasové písanie: kliknite alebo {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Hlavné</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Rozpoznávanie</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Kliknite do ľubovoľného poľa, stlačte {0} a hovorte; stlačte {0} znova a text sa zobrazí pri kurzore. Esc zruší.</value>
   </data>
 </root>

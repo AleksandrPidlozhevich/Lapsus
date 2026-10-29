@@ -8,8 +8,11 @@ internal interface IAudioCapture : IDisposable
     // Throws AudioCaptureException when there is no microphone or it cannot be opened.
     void Start();
 
-    // Everything recorded since Start; the capture can be started again afterwards.
+    // Everything recorded since Start (or the last TakeRecorded); the capture can be started again afterwards.
     float[] Stop();
+
+    // What was recorded since Start or the last call, while recording goes on: the part said so far.
+    float[] TakeRecorded();
 
     bool IsRecording { get; }
 
@@ -75,6 +78,8 @@ internal sealed class NullAudioCapture : IAudioCapture
     public void Start() => throw new AudioCaptureException("No microphone support on this platform.");
 
     public float[] Stop() => [];
+
+    public float[] TakeRecorded() => [];
 
     public void Dispose()
     {

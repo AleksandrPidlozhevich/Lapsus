@@ -70,4 +70,13 @@ public class HotkeyGuardTests
 
         Assert.Equal(["password field"], backend.Diagnostics);
     }
+
+    [Fact]
+    public void Dictation_is_not_refused_by_the_password_check()
+    {
+        var backend = new FakeInputBackend(new ScriptedCorrector("ghbdtn", "привет")).Listening();
+        backend.BlockedReason = "password field";
+
+        Assert.Null(backend.DictationBlockedReason());
+    }
 }

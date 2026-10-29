@@ -291,6 +291,8 @@ public partial class SettingsViewModel : ViewModelBase
 
     private readonly ObservableCollection<HotkeyOption> _selectionKeyOptions = new(BuiltInSelectionKeys);
 
+    private readonly ObservableCollection<HotkeyOption> _dictationKeyOptions = new(BuiltInSelectionKeys);
+
     public IReadOnlyList<HotkeyOption> Hotkeys => _hotkeyOptions;
 
     private static IReadOnlyList<HotkeyOption> BuiltInHotkeys =>
@@ -451,7 +453,9 @@ public partial class SettingsViewModel : ViewModelBase
         if (!DictationSupported)
             return null;
 
-        var options = _selectionKeyOptions;
+        // Its own list: only dictation understands modifiers held alone, so only it offers them.
+        var options = _dictationKeyOptions;
+        options.Insert(1, new HotkeyOption(HotkeyNames.Format(AppSettings.DictationChord), AppSettings.DictationChord));
         var saved = _settings.DictationHotkey;
         var option = options.FirstOrDefault(o => o.VirtualKey == saved);
         if (option is null && (HotkeyCombo.IsCombo(saved) || HotkeyNames.IsNamedKey(saved)))
@@ -661,6 +665,8 @@ public partial class SettingsViewModel : ViewModelBase
             _hotkeyOptions.Add(option);
         if (!_selectionKeyOptions.Contains(option))
             _selectionKeyOptions.Add(option);
+        if (!_dictationKeyOptions.Contains(option))
+            _dictationKeyOptions.Add(option);
 
         return option;
     }

@@ -72,6 +72,13 @@ internal static class WindowsTextInjection
         return SendInput((uint)inputs.Length, inputs, Marshal.SizeOf<INPUT>()) == (uint)inputs.Length;
     }
 
+    // vkE8 is unassigned: pressed while Win is down it makes Win's release a chord, not a Start menu tap.
+    public static void MaskStartMenu()
+    {
+        INPUT[] inputs = [KeyboardInput(0xE8, '\0', false), KeyboardInput(0xE8, '\0', true)];
+        SendInput((uint)inputs.Length, inputs, Marshal.SizeOf<INPUT>());
+    }
+
     private static INPUT KeyboardInput(ushort vk, char scan, bool keyUp, bool unicode = false)
     {
         uint flags = 0;

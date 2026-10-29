@@ -692,7 +692,7 @@
     <value>Ditado por voz</value>
   </data>
     <data name="Voice_Hint" xml:space="preserve">
-    <value>{0} começa a ouvir; prima de novo e o que disse é escrito onde está o cursor. Esc cancela. A voz é reconhecida neste computador e o áudio não é guardado em lado nenhum.</value>
+    <value>Fale em vez de digitar: o Lapsus digita o que você diz onde estiver o cursor. A fala é reconhecida neste computador; o áudio nunca é guardado.</value>
   </data>
     <data name="Voice_ModelMissing" xml:space="preserve">
     <value>O modelo de voz ainda não foi transferido ({0} MB).</value>
@@ -722,10 +722,10 @@
     <value>O foco mudou para outra janela ({0}), por isso o texto foi copiado para a área de transferência.</value>
   </data>
     <data name="Dictation_HotkeyHint" xml:space="preserve">
-    <value>Inicia e para o ditado por voz (ativado no separador IA). Esc cancela a gravação.</value>
+    <value>Mantenha pressionado enquanto fala e solte para digitar o texto; um toque curto grava sem as mãos até o próximo toque. Esc cancela. O resto está na aba “Voz”.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-turbo é o mais preciso; q5 é o mesmo modelo com uma transferência mais pequena. Whisper small é para computadores sem placa gráfica, onde o modelo grande é demasiado lento.</value>
+    <value>large-v3 é o mais preciso, mas precisa de placa de vídeo (sem ela, cerca de 5 s por frase). large-v3-turbo é quase tão preciso e mais rápido; q5 é o mesmo turbo com download menor. Whisper small é para computadores sem placa de vídeo.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Idioma</value>
@@ -780,5 +780,41 @@
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
     <value>Permita que o Lapsus use o microfone na janela apresentada e volte a iniciar o ditado por voz.</value>
+  </data>
+    <data name="Tab_Voice" xml:space="preserve">
+    <value>Voz</value>
+  </data>
+    <data name="Voice_ListeningHint" xml:space="preserve">
+    <value>{0} — pronto · Esc — cancelar</value>
+  </data>
+    <data name="Voice_TryIt" xml:space="preserve">
+    <value>Clique em qualquer campo, mantenha {0} pressionado e fale; ao soltar, o texto aparece no cursor. Um toque curto em {0} grava sem as mãos até o próximo toque. Esc cancela.</value>
+  </data>
+    <data name="Voice_NoHotkey" xml:space="preserve">
+    <value>sem atalho — escolha um na aba “Teclas”</value>
+  </data>
+    <data name="Voice_UsageTitle" xml:space="preserve">
+    <value>Como usar</value>
+  </data>
+    <data name="Voice_ShowButton" xml:space="preserve">
+    <value>Botão de microfone na tela</value>
+  </data>
+    <data name="Voice_ShowButtonHint" xml:space="preserve">
+    <value>Um pequeno botão na parte de baixo da tela: um clique inicia ou termina a gravação; ao passar o mouse, aparece o atalho.</value>
+  </data>
+    <data name="Voice_Sounds" xml:space="preserve">
+    <value>Som no início e no fim da gravação</value>
+  </data>
+    <data name="Voice_ButtonTip" xml:space="preserve">
+    <value>Ditado por voz: clique ou {0}</value>
+  </data>
+    <data name="Voice_SectionMain" xml:space="preserve">
+    <value>Geral</value>
+  </data>
+    <data name="Voice_SectionRecognition" xml:space="preserve">
+    <value>Reconhecimento</value>
+  </data>
+    <data name="Voice_TryItTap" xml:space="preserve">
+    <value>Clique em qualquer campo, pressione {0} e fale; pressione {0} de novo e o texto aparece no cursor. Esc cancela.</value>
   </data>
 </root>

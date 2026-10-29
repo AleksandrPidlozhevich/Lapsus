@@ -36,6 +36,12 @@ public static class SpeechModelCatalog
             new SpeechFile(WhisperRepo, WhisperRevision, "ggml-large-v3-turbo-q5_0.bin", 574041195,
                 "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"),
             RamMb: 800, License: "MIT"),
+        // The full decoder (32 layers to turbo's 4): on the 22 test phrases 7.1% WER and 19/25 terms against
+        // turbo's 9.3% and 17/25, at 0.8 s a phrase on an RTX 3080 to turbo's 0.5 s. Meant for a graphics card.
+        new("whisper-large-v3-q5", "Whisper large-v3",
+            new SpeechFile(WhisperRepo, WhisperRevision, "ggml-large-v3-q5_0.bin", 1081140203,
+                "d75795ecff3f83b5faa89d1900604ad8c780abd5739fae406de19f23ecd98ad1"),
+            RamMb: 1900, License: "MIT"),
         new("whisper-small-q5", "Whisper small",
             new SpeechFile(WhisperRepo, WhisperRevision, "ggml-small-q5_1.bin", 190085487,
                 "ae85e4a935d7a567bd102fe55afc16bb595bdb618e11b2fc7591bc08120411bb"),
