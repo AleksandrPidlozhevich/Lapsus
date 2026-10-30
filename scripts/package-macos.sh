@@ -78,9 +78,9 @@ cat > "$PLIST" <<PLIST_END
 PLIST_END
 
 echo "==> vpk pack"
-# "-" binds the signature to $BUNDLE_ID; otherwise macOS sees "apphost" and an Accessibility
-# grant never reaches CGEventPost. A Developer ID (LAPSUS_MAC_APP_IDENTITY) keeps that grant
-# stable across builds.
+# "-" binds the signature to $BUNDLE_ID (taken from the Info.plist above: vpk refuses --bundleId
+# together with --plist); otherwise macOS sees "apphost" and an Accessibility grant never reaches
+# CGEventPost. A Developer ID (LAPSUS_MAC_APP_IDENTITY) keeps that grant stable across builds.
 #
 # The entitlements are vpk's own .NET defaults plus the microphone (voice typing); see the file.
 ENTITLEMENTS="$ROOT/Lapsus/Packaging/Mac/Lapsus.entitlements"
@@ -102,7 +102,6 @@ vpk pack \
   --packDir "$PUBLISH_DIR" \
   --mainExe "$APP_NAME" \
   --packTitle "$APP_NAME" \
-  --bundleId "$BUNDLE_ID" \
   --icon "$ICNS" \
   --plist "$PLIST" \
   --outputDir "$OUTPUT_DIR" \
