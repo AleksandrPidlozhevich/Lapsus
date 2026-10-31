@@ -55,6 +55,12 @@
     <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>Гарачая клавіша заўсёды мяняе мову. Гэты пераключальнік толькі для аўта пасля прабелу і выпраўлення вылучанага.</value>
   </data>
+    <data name="HotkeyCyclesLayout" xml:space="preserve">
+    <value>Hotkey always switches the layout</value>
+  </data>
+    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+    <value>With nothing to correct, the hotkey still switches to the next installed layout.</value>
+  </data>
     <data name="StartAtLogin" xml:space="preserve">
     <value>Запускаць пры ўваходзе</value>
   </data>

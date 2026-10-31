@@ -23,6 +23,9 @@ public interface IInputBackend : IDisposable
 
     bool SwitchSystemLayout { get; set; }
 
+    /// <summary>With nothing to correct, the hotkey still moves to the next installed layout.</summary>
+    bool HotkeyCyclesLayout { get; set; }
+
     KeyboardLayout? PreferredLayout { get; set; }
 
     bool SkipPasswordFields { get; set; }

@@ -83,6 +83,7 @@ public partial class SettingsViewModel : ViewModelBase
         _autoMode = settings.AutoMode;
         _autoFixTypos = settings.AutoFixTypos;
         _switchSystemLayout = settings.SwitchSystemLayout;
+        _hotkeyCyclesLayout = settings.HotkeyCyclesLayout;
         _runAtStartup = settings.RunAtStartup;
         // The App Store edition's trial may have ended while the app was closed.
         _neuralCorrectionEnabled = settings.NeuralCorrectionEnabled && storeAccess.PaidFeatures;
@@ -110,6 +111,7 @@ public partial class SettingsViewModel : ViewModelBase
         _backend.AutoMode = _autoMode;
         _backend.AutoFixTypos = _autoFixTypos;
         _backend.SwitchSystemLayout = _switchSystemLayout;
+        _backend.HotkeyCyclesLayout = _hotkeyCyclesLayout;
         _backend.Corrected += OnCorrected;
         _backend.Diagnostic += OnDiagnostic;
 
@@ -727,6 +729,8 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private bool _switchSystemLayout;
 
+    [ObservableProperty] private bool _hotkeyCyclesLayout;
+
     [ObservableProperty] private bool _skipPasswordFields;
 
     [ObservableProperty] private bool _showLayoutIndicator;
@@ -861,6 +865,13 @@ public partial class SettingsViewModel : ViewModelBase
         _backend.SwitchSystemLayout = value;
         _store.Save(_settings);
         UpdateStatus();
+    }
+
+    partial void OnHotkeyCyclesLayoutChanged(bool value)
+    {
+        _settings.HotkeyCyclesLayout = value;
+        _backend.HotkeyCyclesLayout = value;
+        _store.Save(_settings);
     }
 
     partial void OnSkipPasswordFieldsChanged(bool value)

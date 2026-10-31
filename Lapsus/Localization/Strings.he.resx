@@ -55,6 +55,12 @@
     <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>מקש הקיצור תמיד מחליף את השפה. זה חל רק על תיקון אוטומטי אחרי רווח ועל תיקון הבחירה.</value>
   </data>
+    <data name="HotkeyCyclesLayout" xml:space="preserve">
+    <value>Hotkey always switches the layout</value>
+  </data>
+    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+    <value>With nothing to correct, the hotkey still switches to the next installed layout.</value>
+  </data>
     <data name="StartAtLogin" xml:space="preserve">
     <value>הפעלה עם הכניסה למחשב</value>
   </data>

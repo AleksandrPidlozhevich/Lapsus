@@ -512,6 +512,16 @@
 
                                 <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
                                     <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[HotkeyCyclesLayout]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[HotkeyCyclesLayout_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare"
+                                                  IsChecked="{Binding HotkeyCyclesLayout}" />
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding IsSupported}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
                                         <TextBlock Text="{Binding L[SkipPasswords]}"
                                                    VerticalAlignment="Center" TextWrapping="Wrap" />
                                         <TextBlock Classes="hint" Text="{Binding L[SkipPasswords_Hint]}" />

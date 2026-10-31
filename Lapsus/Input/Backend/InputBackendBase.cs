@@ -172,6 +172,8 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
 
     public bool SwitchSystemLayout { get; set; }
 
+    public bool HotkeyCyclesLayout { get; set; }
+
     public KeyboardLayout? PreferredLayout { get; set; }
 
     public abstract bool SkipPasswordFields { get; set; }
@@ -737,7 +739,8 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         var segment = _buffer.Segment[Math.Min(_committedLength, _buffer.Length)..];
         if (string.IsNullOrWhiteSpace(segment))
         {
-            RaiseDiagnosticFormat("Diag_Empty", ForegroundAppName());
+            if (!CycleSystemLayout())
+                RaiseDiagnosticFormat("Diag_Empty", ForegroundAppName());
             return;
         }
 
@@ -774,7 +777,8 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
 
         if (cycle is null)
         {
-            RaiseDiagnosticFormat("Diag_NoChange", segment);
+            if (!CycleSystemLayout())
+                RaiseDiagnosticFormat("Diag_NoChange", segment);
             return;
         }
 
@@ -999,7 +1003,8 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         var phrase = result.Phrase;
         if (!phrase.Changed)
         {
-            RaiseDiagnosticFormat("Diag_NoChange", segment);
+            if (!CycleSystemLayout())
+                RaiseDiagnosticFormat("Diag_NoChange", segment);
             return;
         }
 
@@ -1013,6 +1018,25 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
 
         RaiseCorrected(segment, phrase.Corrected, result.Source?.Target, phrase.TargetLayout);
         SwitchLayoutOnHotkey(phrase.TargetLayout, phrase.TargetLayoutId);
+    }
+
+    // Hotkey with nothing to fix: step to the next installed layout (ru → uk → ru with two of them).
+    private bool CycleSystemLayout()
+    {
+        if (!HotkeyCyclesLayout)
+            return false;
+
+        var (active, all) = ReadLayouts();
+        if (active is null || all.Count < 2)
+            return false;
+
+        var at = 0;
+        while (at < all.Count - 1 && all[at].LayoutId != active.LayoutId)
+            at++;
+
+        var next = all[(at + 1) % all.Count];
+        ApplyLayoutSwitch(next.Target, next.LayoutId);
+        return true;
     }
 
     private void SwitchLayoutIfRequested(KeyboardLayout? target, string? layoutId)

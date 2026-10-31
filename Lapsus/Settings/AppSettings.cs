@@ -26,6 +26,8 @@ public sealed class AppSettings
 
     public bool SwitchSystemLayout { get; set; }
 
+    public bool HotkeyCyclesLayout { get; set; }
+
     public bool RunAtStartup { get; set; }
 
     public KeyboardLayout? PreferredLayout { get; set; }

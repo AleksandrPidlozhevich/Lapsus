@@ -55,6 +55,12 @@
     <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>Η συντόμευση αλλάζει πάντα τη γλώσσα. Αυτό ισχύει μόνο για αυτόματο μετά το Διάστημα και τη διόρθωση της επιλογής.</value>
   </data>
+    <data name="HotkeyCyclesLayout" xml:space="preserve">
+    <value>Hotkey always switches the layout</value>
+  </data>
+    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+    <value>With nothing to correct, the hotkey still switches to the next installed layout.</value>
+  </data>
     <data name="StartAtLogin" xml:space="preserve">
     <value>Εκκίνηση κατά τη σύνδεση</value>
   </data>

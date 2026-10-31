@@ -55,6 +55,12 @@
     <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>Bližnjica vedno zamenja jezik. To velja samo za samodejno po preslednici in popravek izbora.</value>
   </data>
+    <data name="HotkeyCyclesLayout" xml:space="preserve">
+    <value>Hotkey always switches the layout</value>
+  </data>
+    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+    <value>With nothing to correct, the hotkey still switches to the next installed layout.</value>
+  </data>
     <data name="StartAtLogin" xml:space="preserve">
     <value>Zaženi ob prijavi</value>
   </data>

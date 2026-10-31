@@ -55,6 +55,12 @@
     <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>Гаряча клавіша завжди змінює мову. Цей перемикач лише для авто після пробілу і виправлення виділеного.</value>
   </data>
+    <data name="HotkeyCyclesLayout" xml:space="preserve">
+    <value>Гаряча клавіша завжди перемикає розкладку</value>
+  </data>
+    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+    <value>Якщо виправляти нічого, гаряча клавіша все одно перемикає на наступну встановлену розкладку.</value>
+  </data>
     <data name="StartAtLogin" xml:space="preserve">
     <value>Запускати при вході</value>
   </data>

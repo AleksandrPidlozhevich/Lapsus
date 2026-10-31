@@ -28,6 +28,7 @@ public sealed class NullInputBackend : IInputBackend
 
     public bool AutoFixTypos { get; set; }
     public bool SwitchSystemLayout { get; set; }
+    public bool HotkeyCyclesLayout { get; set; }
     public KeyboardLayout? PreferredLayout { get; set; }
 
     public bool SkipPasswordFields { get; set; } = true;
