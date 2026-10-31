@@ -61,11 +61,11 @@ Six writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian**.
   </tr>
   <tr>
     <td><img src="docs/images/settings-ai.png" alt="Local models"></td>
-    <td></td>
+    <td><img src="docs/images/settings-voice.png" alt="Voice typing"></td>
   </tr>
   <tr>
     <td align="center"><b>AI</b> — optional local model, CPU or GPU, your choice</td>
-    <td></td>
+    <td align="center"><b>Voice</b> — type by voice, speech model, on-screen microphone button</td>
   </tr>
 </table>
 
