@@ -189,15 +189,15 @@
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.9177,
+      "Value": 0.9535,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · changed into another word": {
-      "Value": 0.0681,
+      "Value": 0.0295,
       "Better": "Lower"
     },
     "Rule G — a Greek word with one typo, on its own · crossed into another layout": {
-      "Value": 0.0142,
+      "Value": 0.017,
       "Better": "Lower"
     },
     "Rule G — a Greek word with one typo, on its own · left as typed": {
@@ -205,19 +205,19 @@
       "Better": "Either"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.9183,
+      "Value": 0.9837,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by slip · swapped": {
-      "Value": 0.9429,
+      "Value": 0.9766,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by slip · dropped": {
-      "Value": 0.7406,
+      "Value": 0.8213,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by slip · extra": {
-      "Value": 0.9815,
+      "Value": 0.9877,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by slip · doubled": {
@@ -225,27 +225,27 @@
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.8264,
+      "Value": 0.9005,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.9153,
+      "Value": 0.9547,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by word length · 7-9": {
-      "Value": 0.9784,
+      "Value": 0.9843,
       "Better": "Higher"
     },
     "Rule G — a Greek word with one typo, on its own · fixed, by word length · 10+": {
-      "Value": 0.9926,
+      "Value": 1,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed back to the meant word": {
-      "Value": 0.9324,
+      "Value": 0.9638,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · changed into another word": {
-      "Value": 0.0556,
+      "Value": 0.0242,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Greek sentence · crossed into another layout": {
@@ -257,39 +257,39 @@
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by slip · neighbour": {
-      "Value": 0.9444,
+      "Value": 0.9815,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by slip · swapped": {
-      "Value": 0.9486,
+      "Value": 0.96,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by slip · dropped": {
-      "Value": 0.8155,
+      "Value": 0.9107,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by slip · extra": {
-      "Value": 0.979,
+      "Value": 0.986,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by slip · doubled": {
-      "Value": 0.9778,
+      "Value": 0.9833,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 4": {
-      "Value": 0.8791,
+      "Value": 0.9505,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 5-6": {
-      "Value": 0.9474,
+      "Value": 0.9838,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 7-9": {
-      "Value": 0.9826,
+      "Value": 0.9896,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Greek sentence · fixed, by word length · 10+": {
-      "Value": 0.8559,
+      "Value": 0.8739,
       "Better": "Higher"
     }
   }

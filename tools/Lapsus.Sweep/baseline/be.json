@@ -189,11 +189,11 @@
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.946,
+      "Value": 0.9594,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · changed into another word": {
-      "Value": 0.0447,
+      "Value": 0.0313,
       "Better": "Lower"
     },
     "Rule G — a Belarusian word with one typo, on its own · crossed into another layout": {
@@ -205,47 +205,47 @@
       "Better": "Either"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.9692,
+      "Value": 0.9872,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by slip · swapped": {
-      "Value": 0.9595,
+      "Value": 0.9671,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by slip · dropped": {
-      "Value": 0.8157,
+      "Value": 0.8509,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by slip · extra": {
-      "Value": 0.9898,
+      "Value": 0.9924,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by slip · doubled": {
-      "Value": 0.9874,
+      "Value": 0.9925,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.7831,
+      "Value": 0.8373,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.9247,
+      "Value": 0.9409,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by word length · 7-9": {
-      "Value": 0.9789,
+      "Value": 0.9871,
       "Better": "Higher"
     },
     "Rule G — a Belarusian word with one typo, on its own · fixed, by word length · 10+": {
-      "Value": 0.9755,
+      "Value": 0.9782,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed back to the meant word": {
-      "Value": 0.8186,
+      "Value": 0.853,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · changed into another word": {
-      "Value": 0.1332,
+      "Value": 0.0987,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Belarusian sentence · crossed into another layout": {
@@ -257,35 +257,35 @@
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by slip · neighbour": {
-      "Value": 0.8114,
+      "Value": 0.8686,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by slip · swapped": {
-      "Value": 0.8343,
+      "Value": 0.8629,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by slip · dropped": {
-      "Value": 0.6726,
+      "Value": 0.75,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by slip · extra": {
-      "Value": 0.8857,
+      "Value": 0.8914,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by slip · doubled": {
-      "Value": 0.882,
+      "Value": 0.8876,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by word length · 4": {
-      "Value": 0.8354,
+      "Value": 0.8987,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by word length · 5-6": {
-      "Value": 0.8342,
+      "Value": 0.8622,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by word length · 7-9": {
-      "Value": 0.8478,
+      "Value": 0.8804,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Belarusian sentence · fixed, by word length · 10+": {

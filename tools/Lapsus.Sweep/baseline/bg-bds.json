@@ -189,15 +189,15 @@
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.8785,
+      "Value": 0.9025,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · changed into another word": {
-      "Value": 0.084,
+      "Value": 0.0589,
       "Better": "Lower"
     },
     "Rule G — a Bulgarian word with one typo, on its own · crossed into another layout": {
-      "Value": 0.0376,
+      "Value": 0.0386,
       "Better": "Lower"
     },
     "Rule G — a Bulgarian word with one typo, on its own · left as typed": {
@@ -205,15 +205,15 @@
       "Better": "Either"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.8976,
+      "Value": 0.9542,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · swapped": {
-      "Value": 0.8586,
+      "Value": 0.8712,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · dropped": {
-      "Value": 0.6261,
+      "Value": 0.6799,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · extra": {
@@ -221,31 +221,31 @@
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by slip · doubled": {
-      "Value": 0.99,
+      "Value": 0.9925,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.7305,
+      "Value": 0.7859,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.8935,
+      "Value": 0.912,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 7-9": {
-      "Value": 0.9432,
+      "Value": 0.956,
       "Better": "Higher"
     },
     "Rule G — a Bulgarian word with one typo, on its own · fixed, by word length · 10+": {
-      "Value": 0.9727,
+      "Value": 0.9818,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed back to the meant word": {
-      "Value": 0.9001,
+      "Value": 0.9174,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · changed into another word": {
-      "Value": 0.0888,
+      "Value": 0.0715,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · crossed into another layout": {
@@ -257,15 +257,15 @@
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · neighbour": {
-      "Value": 0.9141,
+      "Value": 0.9509,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · swapped": {
-      "Value": 0.8882,
+      "Value": 0.9255,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · dropped": {
-      "Value": 0.7308,
+      "Value": 0.7372,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · extra": {
@@ -273,19 +273,19 @@
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by slip · doubled": {
-      "Value": 0.9759,
+      "Value": 0.9819,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 4": {
-      "Value": 0.8161,
+      "Value": 0.931,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 5-6": {
-      "Value": 0.9039,
+      "Value": 0.9091,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 7-9": {
-      "Value": 0.9356,
+      "Value": 0.9432,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Bulgarian sentence · fixed, by word length · 10+": {

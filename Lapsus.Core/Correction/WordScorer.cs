@@ -20,6 +20,8 @@ internal sealed class WordScorer(SpellChecker? spell)
     // Clitic stem band: below a real hit, above naturalness; never settles line direction.
     private const double StemHitScore = 0.88;
 
+    public const double StemHitFloor = StemHitScore;
+
     private const double StemHitSpan = 0.02;
 
     public bool HasDictionaries => spell?.HasDictionaries ?? false;
@@ -29,6 +31,11 @@ internal sealed class WordScorer(SpellChecker? spell)
     public IReadOnlyList<string> LanguagesFor(Script script)
     {
         return spell?.LanguagesFor(script) ?? [];
+    }
+
+    public bool HasLexiconFor(string languageCode)
+    {
+        return spell?.HasLexicon(languageCode) ?? false;
     }
 
     public bool HasDictionaryFor(Script script)
@@ -83,12 +90,14 @@ internal sealed class WordScorer(SpellChecker? spell)
 
     // typedInScript: the word stands in its own script as typed, not as another layout's reading of the keys.
     public (string Text, int Edits) SpellFix(
-        string word, Script script, string? languageCode = null, bool typedInScript = false)
+        string word, Script script, string? languageCode = null, bool typedInScript = false, KeyboardMap? map = null)
     {
         if (!CanSpellFixWord(word, script, languageCode, typedInScript))
             return (word, 0);
 
-        return spell!.TryCorrect(word, script, out var corrected, out var distance, languageCode)
+        // Latin keeps the commonest pick: a rarer English fix scores lower and lets a wrong-layout reading cross.
+        return spell!.TryCorrect(word, script, out var corrected, out var distance, languageCode,
+                   script == Script.Latin ? null : map)
                && distance > 0
                && corrected != word
             ? (corrected, distance)

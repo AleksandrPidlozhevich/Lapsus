@@ -5,27 +5,27 @@
   "TargetWords": 48249,
   "Metrics": {
     "Rule B — a whole Russian line typed on the English layout · lines recovered in full · without": {
-      "Value": 0.2651,
+      "Value": 0.2884,
       "Better": "Higher"
     },
     "Rule B — a whole Russian line typed on the English layout · lines recovered in full · with": {
-      "Value": 0.9939,
+      "Value": 0.9944,
       "Better": "Higher"
     },
     "Rule B — a whole Russian line typed on the English layout · words recovered · without": {
-      "Value": 0.8127,
+      "Value": 0.8236,
       "Better": "Higher"
     },
     "Rule B — a whole Russian line typed on the English layout · words recovered · with": {
-      "Value": 0.999,
+      "Value": 0.9991,
       "Better": "Higher"
     },
     "Rule B — the same Russian line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · without": {
-      "Value": 0.2619,
+      "Value": 0.2838,
       "Better": "Higher"
     },
     "Rule B — the same Russian line with a comma inside and a full stop at the end · lines recovered in full, punctuation kept · with": {
-      "Value": 0.9385,
+      "Value": 0.941,
       "Better": "Higher"
     },
     "Rule B — the same Russian line with a comma inside and a full stop at the end · the comma survived as a comma · without": {
@@ -81,27 +81,27 @@
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Russian line · typo'd word still crossed into Cyrillic · without": {
-      "Value": 0.5506,
+      "Value": 0.5565,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Russian line · typo'd word still crossed into Cyrillic · with": {
-      "Value": 0.5556,
+      "Value": 0.5601,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Russian line · and came back as the word that was meant · without": {
-      "Value": 0.1774,
+      "Value": 0.1796,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Russian line · and came back as the word that was meant · with": {
-      "Value": 0.1774,
+      "Value": 0.1796,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Russian · without": {
-      "Value": 0.9772,
+      "Value": 0.9814,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Russian · with": {
-      "Value": 0.9999,
+      "Value": 1,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · line finished in English does not ask for Russian · without": {
@@ -129,19 +129,19 @@
       "Better": "Lower"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Russian words recovered · alone": {
-      "Value": 0.6977,
+      "Value": 0.6993,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Russian words recovered · keys only": {
-      "Value": 0.6977,
+      "Value": 0.6993,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Russian words recovered · sticky": {
-      "Value": 0.9259,
+      "Value": 0.9274,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · wrong-layout Russian words recovered · sticky keys only": {
-      "Value": 0.9259,
+      "Value": 0.9274,
       "Better": "Higher"
     },
     "Rule E — auto-after-space, word by word (alone → keys only → sticky → sticky keys only) · correct English words changed · alone": {
@@ -189,11 +189,11 @@
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.9138,
+      "Value": 0.9461,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · changed into another word": {
-      "Value": 0.0765,
+      "Value": 0.0441,
       "Better": "Lower"
     },
     "Rule G — a Russian word with one typo, on its own · crossed into another layout": {
@@ -205,47 +205,47 @@
       "Better": "Either"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.9518,
+      "Value": 0.9695,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by slip · swapped": {
-      "Value": 0.8995,
+      "Value": 0.9447,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by slip · dropped": {
-      "Value": 0.7214,
+      "Value": 0.8189,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by slip · extra": {
-      "Value": 0.9874,
+      "Value": 0.9925,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by slip · doubled": {
-      "Value": 0.99,
+      "Value": 0.9925,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.812,
+      "Value": 0.8803,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.9182,
+      "Value": 0.9505,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by word length · 7-9": {
-      "Value": 0.9583,
+      "Value": 0.9705,
       "Better": "Higher"
     },
     "Rule G — a Russian word with one typo, on its own · fixed, by word length · 10+": {
-      "Value": 0.9542,
+      "Value": 0.9804,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed back to the meant word": {
-      "Value": 0.8998,
+      "Value": 0.9347,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · changed into another word": {
-      "Value": 0.0839,
+      "Value": 0.049,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Russian sentence · crossed into another layout": {
@@ -257,35 +257,35 @@
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by slip · neighbour": {
-      "Value": 0.9186,
+      "Value": 0.9477,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by slip · swapped": {
-      "Value": 0.9091,
+      "Value": 0.9432,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by slip · dropped": {
-      "Value": 0.7261,
+      "Value": 0.828,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by slip · extra": {
-      "Value": 0.9657,
+      "Value": 0.9714,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by slip · doubled": {
-      "Value": 0.9607,
+      "Value": 0.9719,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by word length · 4": {
-      "Value": 0.7874,
+      "Value": 0.8583,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by word length · 5-6": {
-      "Value": 0.936,
+      "Value": 0.9803,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by word length · 7-9": {
-      "Value": 0.9359,
+      "Value": 0.9466,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Russian sentence · fixed, by word length · 10+": {

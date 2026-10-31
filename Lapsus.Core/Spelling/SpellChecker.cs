@@ -81,6 +81,11 @@ public sealed class SpellChecker
 
     public bool HasDictionaries => _byLanguage.Count > 0;
 
+    public bool HasLexicon(string languageCode)
+    {
+        return _lexiconByLanguage.ContainsKey(languageCode);
+    }
+
     public bool Has(Script script)
     {
         return _byScript.TryGetValue(script, out var engines) && engines.Count > 0;
@@ -365,8 +370,12 @@ public sealed class SpellChecker
         return false;
     }
 
+    // With a keyboard, spellings at the closest distance are ranked by frequency less the price of the slip
+    // that would have typed them, not by frequency alone (a dropped key beats a far one).
+    public const double SlipWeight = 0.35;
+
     public bool TryCorrect(string word, Script script, out string suggestion, out int distance,
-        string? languageCode = null)
+        string? languageCode = null, KeyboardMap? map = null)
     {
         suggestion = word;
         distance = 0;
@@ -380,12 +389,27 @@ public sealed class SpellChecker
 
         foreach (var loaded in EnginesFor(languageCode, script))
         {
-            var hits = loaded.Engine.Lookup(LookupKey(word, loaded), SymSpellEngine.Verbosity.Top, MaxEditDistance);
+            var hits = loaded.Engine.Lookup(LookupKey(word, loaded),
+                map is null ? SymSpellEngine.Verbosity.Top : SymSpellEngine.Verbosity.Closest, MaxEditDistance);
             if (hits.Count == 0)
                 continue;
 
             var top = hits[0];
             var frequency = Normalise(top.count, loaded.LogMaxCount);
+            if (map is not null)
+            {
+                frequency -= SlipWeight * Correction.TypoCost.Between(word, top.term, map);
+                foreach (var hit in hits.Skip(1))
+                {
+                    var rank = Normalise(hit.count, loaded.LogMaxCount) -
+                               SlipWeight * Correction.TypoCost.Between(word, hit.term, map);
+                    if (rank > frequency)
+                    {
+                        top = hit;
+                        frequency = rank;
+                    }
+                }
+            }
 
             // Strict ">" so equal distance keeps the language's own list, not load order.
             if (top.distance < bestDistance ||

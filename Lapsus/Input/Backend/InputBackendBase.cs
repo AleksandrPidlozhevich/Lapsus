@@ -7,6 +7,8 @@ using Lapsus.Input.Dictation;
 using Lapsus.Localization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -52,6 +54,10 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
     protected TFocus BufferOwner;
 
     private Script? _lineDirection;
+
+    // Short words just before this one that auto mode passed over for want of a line direction; if this word
+    // settles one, they are read again with it. Cleared by anything else that happens on the line.
+    private readonly List<string> _skippedRun = [];
 
     protected InputBackendBase(IPhraseCorrector corrector, AppExclusions? excludedApps = null)
     {
@@ -472,6 +478,7 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         _cycle = null;
         _committedLength = 0;
         _lineDirection = null;
+        _skippedRun.Clear();
         _atWordStart = true;
         _layoutChangedMidWord = false;
     }
@@ -649,7 +656,21 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
             return;
 
         if (!AutoCorrectPolicy.IsEligible(word, _lineDirection is not null))
+        {
+            if (AutoMode && _lineDirection is null && AutoCorrectPolicy.IsEligible(word, true))
+                _skippedRun.Add(word);
+            else
+                _skippedRun.Clear();
             return;
+        }
+
+        // The run is read again only if this word settles the direction, and only while the line still holds it.
+        var run = _skippedRun.Count > 0 && AutoMode && _lineDirection is null &&
+                  _buffer.Segment.EndsWith(string.Concat(_skippedRun.Select(w => w + " ")) + word + " " + tail,
+                      StringComparison.Ordinal)
+            ? _skippedRun.ToArray()
+            : [];
+        _skippedRun.Clear();
 
         // Typos only asks the brain for spelling inside the typed layout. A brain that ignores the hint can still
         // answer with another layout, so the result is checked below as well.
@@ -673,17 +694,27 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         if (!AutoMode && (phrase.TargetLayout is not null || !string.IsNullOrEmpty(phrase.TargetLayoutId)))
             return;
 
+        var crossedInto = _lineDirection is null && phrase.Changed &&
+                          Scripts.Dominant(phrase.Corrected) is { } into && into != Scripts.Dominant(word)
+            ? into
+            : (Script?)null;
         NoteLineDirection(word, phrase);
         if (!phrase.Changed)
             return;
 
+        // Short words before a word that crosses are read again with its direction.
+        var lead = crossedInto is { } direction ? ReadRunAgain(run, direction) : string.Empty;
+        var original = string.Concat(run.Select(w => w + " ")) + word + " " + tail;
+        if (lead.Length == 0)
+            original = word + " " + tail;
+
         // The tail was typed into the field already; it is retyped after the corrected word so the caret ends where it was.
-        var replacement = phrase.Corrected + " " + tail;
-        if (!TryInject(word.Length + 1 + tail.Length, replacement))
+        var replacement = lead + phrase.Corrected + " " + tail;
+        if (!TryInject(original.Length, replacement))
             return;
 
         _bufferGeneration++;
-        if (_buffer.TryReplaceTrailing(word + " " + tail, replacement))
+        if (_buffer.TryReplaceTrailing(original, replacement))
         {
             _committedLength = _buffer.Length - replacement.Length;
 
@@ -698,6 +729,34 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
 
         RaiseCorrected(word, phrase.Corrected, source?.Target, phrase.TargetLayout);
         SwitchLayoutIfRequested(phrase.TargetLayout, phrase.TargetLayoutId);
+    }
+
+    // The skipped words, each followed by its space, as the settled direction reads them; empty when none changes.
+    private string ReadRunAgain(string[] run, Script direction)
+    {
+        var read = new StringBuilder();
+        var changed = false;
+        foreach (var skipped in run)
+        {
+            var again = skipped;
+            try
+            {
+                var phrase = TryCorrectInstalled(skipped, new CorrectionHints(direction, KeysOnly: !AutoFixTypos), out _);
+                if (phrase.Changed && Scripts.Dominant(phrase.Corrected) == direction)
+                {
+                    again = phrase.Corrected;
+                    changed = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                RaiseDiagnosticFormat("Diag_CorrectionFailed", ex.Message);
+            }
+
+            read.Append(again).Append(' ');
+        }
+
+        return changed ? read.ToString() : string.Empty;
     }
 
     private sealed class PendingAutoFix(string word, TFocus owner)
@@ -733,6 +792,7 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         }
 
         _lineDirection = null;
+        _skippedRun.Clear();
 
         DropTypingBufferIfIdle();
 

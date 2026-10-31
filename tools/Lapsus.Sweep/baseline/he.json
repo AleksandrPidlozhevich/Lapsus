@@ -189,11 +189,11 @@
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.6965,
+      "Value": 0.7525,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · changed into another word": {
-      "Value": 0.1473,
+      "Value": 0.0913,
       "Better": "Lower"
     },
     "Rule G — a Hebrew word with one typo, on its own · crossed into another layout": {
@@ -205,35 +205,35 @@
       "Better": "Either"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.6714,
+      "Value": 0.745,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · swapped": {
-      "Value": 0.5735,
+      "Value": 0.6686,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · dropped": {
-      "Value": 0.2593,
+      "Value": 0.3426,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · extra": {
-      "Value": 0.9107,
+      "Value": 0.9286,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by slip · doubled": {
-      "Value": 0.856,
+      "Value": 0.8843,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.6463,
+      "Value": 0.7018,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.7227,
+      "Value": 0.7807,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by word length · 7-9": {
-      "Value": 0.8352,
+      "Value": 0.8791,
       "Better": "Higher"
     },
     "Rule G — a Hebrew word with one typo, on its own · fixed, by word length · 10+": {
@@ -241,11 +241,11 @@
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed back to the meant word": {
-      "Value": 0.6748,
+      "Value": 0.7479,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · changed into another word": {
-      "Value": 0.1862,
+      "Value": 0.1132,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Hebrew sentence · crossed into another layout": {
@@ -257,31 +257,31 @@
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · neighbour": {
-      "Value": 0.5796,
+      "Value": 0.707,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · swapped": {
-      "Value": 0.6143,
+      "Value": 0.7071,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · dropped": {
-      "Value": 0.2759,
+      "Value": 0.3908,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · extra": {
-      "Value": 0.8861,
+      "Value": 0.9114,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by slip · doubled": {
-      "Value": 0.8333,
+      "Value": 0.859,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by word length · 4": {
-      "Value": 0.6454,
+      "Value": 0.7284,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by word length · 5-6": {
-      "Value": 0.7183,
+      "Value": 0.7887,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Hebrew sentence · fixed, by word length · 7-9": {

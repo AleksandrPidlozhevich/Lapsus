@@ -537,6 +537,53 @@ public sealed class CorrectionCycleTests : IDisposable
     }
 
     [Fact]
+    public void A_short_word_before_the_word_that_crosses_is_read_again_with_it()
+    {
+        var enPath = WriteTemp("en-retro", "hello 900");
+        var ruPath = WriteTemp("ru-retro", "привет 900", "в 9000");
+        try
+        {
+            var backend = AutoCorrectingEnRu(EnRuBrain(enPath, ruPath));
+
+            backend.Type("d ");
+            Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+            backend.Type("ghbdtn ");
+            Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+            Assert.Equal((9, "в привет "), Assert.Single(backend.Injected));
+        }
+        finally
+        {
+            File.Delete(enPath);
+            File.Delete(ruPath);
+        }
+    }
+
+    [Fact]
+    public void A_short_word_before_a_word_left_standing_is_not_read_again()
+    {
+        var enPath = WriteTemp("en-retro-stay", "hello 900", "world 800");
+        var ruPath = WriteTemp("ru-retro-stay", "привет 900", "в 9000");
+        try
+        {
+            var backend = AutoCorrectingEnRu(EnRuBrain(enPath, ruPath));
+
+            foreach (var chunk in new[] { "d ", "hello ", "ghbdtn " })
+            {
+                backend.Type(chunk);
+                Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+            }
+
+            Assert.Equal((7, "привет "), Assert.Single(backend.Injected));
+        }
+        finally
+        {
+            File.Delete(enPath);
+            File.Delete(ruPath);
+        }
+    }
+
+    [Fact]
     public void A_short_word_alone_is_still_left_to_the_hotkey()
     {
         var (enPath, ruPath) = ShortWordLists();

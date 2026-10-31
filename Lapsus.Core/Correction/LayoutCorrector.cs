@@ -8,6 +8,9 @@ public sealed class LayoutCorrector : IPhraseCorrector
 {
     private const double EditPenalty = 0.12;
 
+    // Share of the commonest end of the list a one-edit fix must reach to replace keys no dictionary accepts.
+    private const double MinFrequencyToFixPlainKeys = 0.4;
+
     // The most a word no list knows can score (naturalness × WordScorer's unknown-word penalty).
     private const double UnknownWordCeiling = 0.6;
 
@@ -627,7 +630,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
             return null;
 
         var (fixedText, edits) = _scorer.SpellFix(
-            token.Typed, token.Source.Script, token.Source.LanguageCode, typedInScript: true);
+            token.Typed, token.Source.Script, token.Source.LanguageCode, typedInScript: true, token.Source.Map);
         if (edits != 1)
             return null;
 
@@ -672,6 +675,23 @@ public sealed class LayoutCorrector : IPhraseCorrector
             if (!WordScorer.IsDictionaryHit(score) && !clitic && !followsTheLine)
                 continue;
 
+            // A word only the line carries across, one edit from a common listed word, is a slip.
+            var edits = 0;
+            if (followsTheLine && _scorer.CanSpellFix)
+            {
+                var (fixedWord, fixEdits) = _scorer.SpellFix(
+                    switched, candidate.ScoringScript, candidate.LanguageCode, map: candidate.Map);
+                var fixedScore = fixEdits == 1
+                    ? _scorer.Score(fixedWord, candidate.ScoringScript, candidate.LanguageCode)
+                    : 0.0;
+                if (WordScorer.IsDictionaryHit(fixedScore) && IsASlipNotARareWord(fixedWord, switched, candidate))
+                {
+                    switched = fixedWord;
+                    score = fixedScore - EditPenalty;
+                    edits = fixEdits;
+                }
+            }
+
             var incumbentIsPreferred = preferred is not null && found && best.Target == preferred;
             var breaksTie = found && SameEvidence(score, best.Score) &&
                             candidate.Target == preferred && best.Target != preferred;
@@ -682,7 +702,7 @@ public sealed class LayoutCorrector : IPhraseCorrector
                 preferred);
             if (!found || outranked || breaksTie || winsUnknownTie)
             {
-                best = new ScoredWord(switched, candidate.Target, candidate.LayoutId, score, true);
+                best = new ScoredWord(switched, candidate.Target, candidate.LayoutId, score, true, edits);
                 found = true;
             }
         }
@@ -833,7 +853,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
         if (_scorer.CanSpellFix && !crossScriptSwitch)
         {
-            var (fixedSame, edits) = _scorer.SpellFix(word, source.Script, source.LanguageCode, typedInScript: true);
+            var (fixedSame, edits) = _scorer.SpellFix(
+                word, source.Script, source.LanguageCode, typedInScript: true, source.Map);
             Consider(fixedSame, source.Script, null, source.LanguageCode, null, edits);
         }
 
@@ -841,6 +862,16 @@ public sealed class LayoutCorrector : IPhraseCorrector
             return ScoredWord.AsTyped(word, baseline);
 
         return KeysAsTheyStand(word, source, best);
+    }
+
+    // Keys no list, stem or Hunspell form accepts, one edit from a common listed word: a slip, not a rare word.
+    // shortcut: measured on Ukrainian only; the same rule costs 3-40 pp of rare-word recovery in the other languages.
+    private bool IsASlipNotARareWord(string fixedWord, string plain, LayoutCandidate candidate)
+    {
+        return candidate.LanguageCode == "uk" && _scorer.HasLexiconFor("uk") &&
+               _scorer.FrequencyOf(fixedWord, candidate.ScoringScript, candidate.LanguageCode) >=
+               MinFrequencyToFixPlainKeys &&
+               _scorer.Score(plain, candidate.ScoringScript, candidate.LanguageCode) < WordScorer.StemHitFloor;
     }
 
     private ScoredWord KeysAsTheyStand(string word, WordSource source, ScoredWord best)
@@ -857,6 +888,10 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
         // Keep mark-only edits (e.g. Greek tonos); bare keys are the same word.
         if (DifferOnlyByMarks(plain, best.Text, candidate.ScoringScript))
+            return best;
+
+        if (best.Edits == 1 && WordScorer.IsDictionaryHit(best.Score + EditPenalty) &&
+            IsASlipNotARareWord(best.Text, plain, candidate))
             return best;
 
         var natural = _scorer.NaturalnessOf(plain, candidate.ScoringScript, candidate.LanguageCode);

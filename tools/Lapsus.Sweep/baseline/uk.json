@@ -89,11 +89,11 @@
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · and came back as the word that was meant · without": {
-      "Value": 0.1683,
+      "Value": 0.235,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Ukrainian line · and came back as the word that was meant · with": {
-      "Value": 0.1682,
+      "Value": 0.2348,
       "Better": "Higher"
     },
     "Rule C — where the OS layout is asked to go · wrong-layout line asks for Ukrainian · without": {
@@ -181,23 +181,23 @@
       "Better": "Lower"
     },
     "Rule F — a wrong-layout Ukrainian word the list does not have · the word on its own, recovered": {
-      "Value": 0.8478,
+      "Value": 0.8448,
       "Better": "Higher"
     },
     "Rule F — a wrong-layout Ukrainian word the list does not have · the word ending a line of its language, recovered": {
-      "Value": 0.8478,
+      "Value": 0.8448,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.8989,
+      "Value": 0.9319,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · changed into another word": {
-      "Value": 0.0759,
+      "Value": 0.0408,
       "Better": "Lower"
     },
     "Rule G — a Ukrainian word with one typo, on its own · crossed into another layout": {
-      "Value": 0.0253,
+      "Value": 0.0273,
       "Better": "Lower"
     },
     "Rule G — a Ukrainian word with one typo, on its own · left as typed": {
@@ -205,35 +205,35 @@
       "Better": "Either"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.9273,
+      "Value": 0.9558,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by slip · swapped": {
-      "Value": 0.9235,
+      "Value": 0.949,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by slip · dropped": {
-      "Value": 0.6604,
+      "Value": 0.7601,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by slip · extra": {
-      "Value": 0.9799,
+      "Value": 0.99,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by slip · doubled": {
-      "Value": 0.9898,
+      "Value": 0.9949,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.7614,
+      "Value": 0.8286,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.9131,
+      "Value": 0.9452,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by word length · 7-9": {
-      "Value": 0.9744,
+      "Value": 0.9862,
       "Better": "Higher"
     },
     "Rule G — a Ukrainian word with one typo, on its own · fixed, by word length · 10+": {
@@ -241,11 +241,11 @@
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed back to the meant word": {
-      "Value": 0.8914,
+      "Value": 0.9095,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · changed into another word": {
-      "Value": 0.0758,
+      "Value": 0.0577,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · crossed into another layout": {
@@ -257,7 +257,7 @@
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by slip · neighbour": {
-      "Value": 0.9029,
+      "Value": 0.9429,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by slip · swapped": {
@@ -265,31 +265,31 @@
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by slip · dropped": {
-      "Value": 0.7427,
+      "Value": 0.7836,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by slip · extra": {
-      "Value": 0.9451,
+      "Value": 0.9505,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by slip · doubled": {
-      "Value": 0.9435,
+      "Value": 0.9492,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by word length · 4": {
-      "Value": 0.8405,
+      "Value": 0.865,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by word length · 5-6": {
-      "Value": 0.9425,
+      "Value": 0.9675,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by word length · 7-9": {
-      "Value": 0.918,
+      "Value": 0.9219,
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Ukrainian sentence · fixed, by word length · 10+": {
-      "Value": 0.6,
+      "Value": 0.6154,
       "Better": "Higher"
     }
   }

@@ -87,6 +87,19 @@ public class SpellCheckerTests
         Assert.Equal(1, distance);
     }
 
+    [Fact]
+    public void With_a_keyboard_a_dropped_key_beats_a_slightly_commoner_far_one()
+    {
+        var spell = new SpellChecker([new DictionarySource(
+            "uk", TestDictionaries.List("uk-slip", ["мають 2000", "мабуть 1000"]), Script.Cyrillic)]);
+
+        Assert.True(spell.TryCorrect("мауть", Script.Cyrillic, out var byFrequency, out _));
+        Assert.True(spell.TryCorrect("мауть", Script.Cyrillic, out var bySlip, out _, map: BundledKeyboardMaps.Uk));
+
+        Assert.Equal("мають", byFrequency);
+        Assert.Equal("мабуть", bySlip);
+    }
+
     [Theory]
     [InlineData("he", Script.Hebrew, "שָׁלוֹם 900", "שלום")]
     [InlineData("he", Script.Hebrew, "שלום 900", "שָׁלוֹם")]
