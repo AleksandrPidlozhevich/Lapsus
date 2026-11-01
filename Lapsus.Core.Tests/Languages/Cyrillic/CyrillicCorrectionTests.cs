@@ -150,6 +150,26 @@ public sealed class CyrillicCorrectionTests
         Assert.Contains(result.Settled ?? [], span => span.Length == "п'ять".Length);
     }
 
+    // The hotkey's "whole line to English" step keeps settled words; "и", "в" must not turn into "b", "d".
+    [Fact]
+    public void Short_russian_words_beside_settled_ones_are_settled_too()
+    {
+        var corrector = new TestDictionaries()
+            .With("ru", Script.Cyrillic, "и 900", "в 900", "лучше 800", "случае 700")
+            .With("en", Script.Latin, "b 500", "d 500")
+            .Corrector();
+        const string line = "и лучше в случае CN№";
+
+        var result = corrector.CorrectPhrase(line, Script.Cyrillic, Layouts.Map(KeyboardLayout.Ru), Layouts.ToEnglish);
+        var toEnglish = LayoutTranscoder.TranscodeIntoScript(line,
+            [Layouts.Map(KeyboardLayout.Ru)], Layouts.Map(KeyboardLayout.En), Script.Latin, result.Settled ?? []);
+
+        Assert.Equal(line, toEnglish);
+
+        var alone = corrector.CorrectPhrase("и", Script.Cyrillic, Layouts.Map(KeyboardLayout.Ru), Layouts.ToEnglish);
+        Assert.Empty(alone.Settled ?? []);
+    }
+
     [Fact]
     public void An_english_contraction_keeps_its_apostrophe_and_is_not_split()
     {

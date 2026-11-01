@@ -447,6 +447,8 @@ public sealed class LayoutCorrector : IPhraseCorrector
 
         List<TextSpan>? settled = excluded is null ? null : [.. excluded];
         List<TextSpan>? kept = null;
+        List<(TextSpan Span, Script? Script)>? shortListed = null;
+        HashSet<Script?>? settledScripts = null;
         var at = 0;
 
         foreach (var token in readings)
@@ -459,14 +461,20 @@ public sealed class LayoutCorrector : IPhraseCorrector
             if (!token.IsWord)
                 continue;
 
+            var listedAsTyped = !token.Chosen.Changed && WordScorer.IsDictionaryHit(token.Baseline);
             if (token.IsException)
                 (settled ??= []).Add(new TextSpan(start, token.Typed.Length, true));
-            else if (!token.Chosen.Changed && WordScorer.IsDictionaryHit(token.Baseline) &&
+            else if (listedAsTyped &&
                      WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length >= MinWordToSettle)
+            {
                 // Advisory only while part of the line still needs work; drop once every letter is settled.
                 (settled ??= []).Add(new TextSpan(start, token.Typed.Length));
+                (settledScripts ??= []).Add(token.Source.Script);
+            }
             else if (!token.Chosen.Changed && ReadsBestAsTyped(token))
                 (kept ??= []).Add(new TextSpan(start, token.Typed.Length));
+            else if (listedAsTyped)
+                (shortListed ??= []).Add((new TextSpan(start, token.Typed.Length), token.Source.Script));
 
             if (token.Chosen.Changed)
             {
@@ -483,6 +491,12 @@ public sealed class LayoutCorrector : IPhraseCorrector
             if (own is not null || !string.IsNullOrEmpty(ownId))
                 votes.Add(own, ownId, counter: true);
         }
+
+        // "и", "в" alone could be keys meant for "b", "d"; beside a settled word of their script they are not.
+        if (shortListed is not null && settledScripts is not null)
+            foreach (var (span, script) in shortListed)
+                if (settledScripts.Contains(script))
+                    settled!.Add(span);
 
         var corrected = sb.ToString();
         var (targetLayout, targetLayoutId) = votes.Pick(preferred);

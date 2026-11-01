@@ -82,6 +82,104 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
             $"a step re-encoded the typed words: {text}\nwalk: {walk}"));
     }
 
+    // Combinations whose typed language has a short word that another installed layout reads as a listed word
+    // ("и" is "b" on English keys); the rest have nothing to trip on.
+    public static TheoryData<string, string, string> CombinationsWithAShortTrap()
+    {
+        var data = new TheoryData<string, string, string>();
+        foreach (var row in Combinations())
+        {
+            var codes = new[] { (string)row[0], (string)row[1], (string)row[2] }.Where(c => c.Length > 0).ToArray();
+            var typed = Find(codes[0]);
+            var others = codes.Skip(1).Select(Find).Where(l => l.Script != typed.Script).ToArray();
+            if (ShortTrapIn(Lists.Full[typed.Code], typed, others) is not null)
+                data.Add(codes[0], (string)row[1], (string)row[2]);
+        }
+
+        return data;
+    }
+
+    // "и что лучше в каком случае …": "и" and "в" are words on English keys too, but the line around them is
+    // Russian. Neither the first press nor any later step may turn them into "b", "d".
+    [Theory]
+    [MemberData(nameof(CombinationsWithAShortTrap))]
+    public void A_short_word_that_spells_a_word_on_another_layout_stays(
+        string typedIn, string meantIn, string alsoInstalled)
+    {
+        var (typed, meant, languages) = Setup(typedIn, meantIn, alsoInstalled);
+        var words = lists.Of(typed);
+        var trap = ShortTrapIn(Lists.Full[typed.Code], typed, languages.Where(l => l.Script != typed.Script))!;
+
+        var line = new[] { words.Listed[0], trap, words.Listed[1], words.Listed[2] };
+        var (fixedWord, onWrongKeys) = WordTypedOnWrongKeys(meant, typed, languages);
+        var kept = string.Join(' ', line) + " ";
+
+        var seen = Walk(kept + onWrongKeys, typed, languages);
+
+        Assert.True(kept + fixedWord == seen[0], $"typed: {kept + onWrongKeys}\nfirst press: {seen[0]}");
+        AssertNoStepReEncodes(seen, kept);
+    }
+
+    // The line is right and ends in a word of another script that no list knows ("… выбирать CN№"): the brain
+    // leaves it all alone, and the steps that re-type the line on another layout must still spare the typed words.
+    [Theory]
+    [MemberData(nameof(CombinationsWithAShortTrap))]
+    public void With_nothing_to_fix_no_step_re_encodes_the_typed_words(
+        string typedIn, string meantIn, string alsoInstalled)
+    {
+        var (typed, meant, languages) = Setup(typedIn, meantIn, alsoInstalled);
+        var words = lists.Of(typed);
+        var trap = ShortTrapIn(Lists.Full[typed.Code], typed, languages.Where(l => l.Script != typed.Script))!;
+
+        var kept = string.Join(' ', words.Listed[0], trap, words.Listed[1], words.Listed[2]) + " ";
+
+        var seen = Walk(kept + lists.Of(meant).Unlisted[0], typed, languages);
+
+        AssertNoStepReEncodes(seen, kept);
+    }
+
+    private (Language Typed, Language Meant, Language[] Installed) Setup(
+        string typedIn, string meantIn, string alsoInstalled)
+    {
+        var typed = Find(typedIn);
+        var meant = Find(meantIn);
+        return (typed, meant, alsoInstalled.Length == 0 ? [typed, meant] : [typed, meant, Find(alsoInstalled)]);
+    }
+
+    // Every text the hotkey steps through before it returns to the typed one; empty when it offers nothing.
+    private List<string> Walk(string segment, Language typed, IReadOnlyList<Language> languages)
+    {
+        var installed = languages.Select((l, i) => l.Installed(i + 1)).ToList();
+        var brain = new LayoutCorrector(new SpellChecker(languages.Select(lists.Source).ToList()));
+
+        var cycle = LayoutCorrectionCycle.Start(brain, segment, installed[0], installed, null);
+        if (cycle is null)
+            return [];
+
+        var seen = new List<string> { cycle.Current.Text };
+        while (seen.Count < 10 && cycle.MoveNext().Text != segment)
+            seen.Add(cycle.Current.Text);
+
+        Assert.True(cycle.Current.Text == segment, $"the circle never returns to the typed text: {string.Join(" | ", seen)}");
+        return seen;
+    }
+
+    private static void AssertNoStepReEncodes(List<string> seen, string kept)
+    {
+        var walk = string.Join(" | ", seen);
+        Assert.All(seen, text => Assert.True(text.StartsWith(kept, StringComparison.Ordinal),
+            $"a step re-encoded the typed words: {text}\nwalk: {walk}"));
+    }
+
+    private static string? ShortTrapIn(
+        IEnumerable<(string Word, long Count)> typedWords, Language typed, IEnumerable<Language> others)
+    {
+        return typedWords.Select(e => e.Word)
+            .FirstOrDefault(w => w.Length <= 2 && IsAllLetters(w, typed.Script) &&
+                                 others.Any(o => Lists.Full[o.Code].Any(e =>
+                                     e.Word == LayoutTranscoder.Transcode(w, typed.Map, o.Map))));
+    }
+
     // A word of the other script typed on the active layout's keys, which nothing installed reads as typed.
     private (string Word, string OnWrongKeys) WordTypedOnWrongKeys(
         Language meant, Language typed, IReadOnlyList<Language> installed)
@@ -149,9 +247,13 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
         private readonly Dictionary<string, (Words Words, DictionarySource Source)> _byCode = [];
         private readonly List<string> _paths = [];
 
+        // Each fixture list as it ships, commonest first.
+        public static readonly Dictionary<string, List<(string Word, long Count)>> Full =
+            Languages.ToDictionary(l => l.Code, Read);
+
         public Lists()
         {
-            var full = Languages.ToDictionary(l => l.Code, Read);
+            var full = Full;
             foreach (var language in Languages)
             {
                 var entries = full[language.Code];
