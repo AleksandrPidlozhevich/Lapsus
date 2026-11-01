@@ -324,11 +324,11 @@
                            HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Button>
             <Button Classes="icon" Width="20" Height="20"
-                    Command="{Binding CheckOrInstallUpdateCommand}"
-                    IsEnabled="{Binding !IsCheckingForUpdate}"
-                    IsVisible="{Binding CanSelfUpdate}"
-                    ToolTip.Tip="{Binding UpdateButtonTooltip}">
-                <TextBlock Text="{Binding UpdateButtonGlyph}" FontSize="12"
+                    Command="{Binding Updates.CheckOrInstallUpdateCommand}"
+                    IsEnabled="{Binding !Updates.IsCheckingForUpdate}"
+                    IsVisible="{Binding Updates.CanSelfUpdate}"
+                    ToolTip.Tip="{Binding Updates.UpdateButtonTooltip}">
+                <TextBlock Text="{Binding Updates.UpdateButtonGlyph}" FontSize="12"
                            HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Button>
         </StackPanel>
@@ -347,29 +347,29 @@
                 <Border Background="{DynamicResource LapsusRowBrush}" CornerRadius="6" Padding="2">
                     <StackPanel Orientation="Horizontal" Spacing="2">
                         <ToggleButton Classes="segment"
-                                      IsChecked="{Binding IsLightTheme, Mode=OneWay}"
-                                      Command="{Binding SetThemeCommand}" CommandParameter="Light"
+                                      IsChecked="{Binding Appearance.IsLightTheme, Mode=OneWay}"
+                                      Command="{Binding Appearance.SetThemeCommand}" CommandParameter="Light"
                                       ToolTip.Tip="{Binding L[Theme_Light]}">
-                            <Svg Path="{Binding SunIconPath}" Width="16" Height="16" />
+                            <Svg Path="{Binding Appearance.SunIconPath}" Width="16" Height="16" />
                         </ToggleButton>
                         <ToggleButton Classes="segment"
-                                      IsChecked="{Binding IsDarkTheme, Mode=OneWay}"
-                                      Command="{Binding SetThemeCommand}" CommandParameter="Dark"
+                                      IsChecked="{Binding Appearance.IsDarkTheme, Mode=OneWay}"
+                                      Command="{Binding Appearance.SetThemeCommand}" CommandParameter="Dark"
                                       ToolTip.Tip="{Binding L[Theme_Dark]}">
-                            <Svg Path="{Binding MoonIconPath}" Width="16" Height="16" />
+                            <Svg Path="{Binding Appearance.MoonIconPath}" Width="16" Height="16" />
                         </ToggleButton>
                         <ToggleButton Classes="segment"
-                                      IsChecked="{Binding IsSystemTheme, Mode=OneWay}"
-                                      Command="{Binding SetThemeCommand}" CommandParameter="System"
+                                      IsChecked="{Binding Appearance.IsSystemTheme, Mode=OneWay}"
+                                      Command="{Binding Appearance.SetThemeCommand}" CommandParameter="System"
                                       ToolTip.Tip="{Binding L[Theme_System]}">
-                            <Svg Path="{Binding SystemIconPath}" Width="16" Height="16" />
+                            <Svg Path="{Binding Appearance.SystemIconPath}" Width="16" Height="16" />
                         </ToggleButton>
                     </StackPanel>
                 </Border>
 
                 <ComboBox Classes="langPicker" MinWidth="0" Padding="8,4"
-                          ItemsSource="{Binding Languages}"
-                          SelectedItem="{Binding SelectedInterfaceLanguage}"
+                          ItemsSource="{Binding Appearance.Languages}"
+                          SelectedItem="{Binding Appearance.SelectedInterfaceLanguage}"
                           ToolTip.Tip="{Binding L[Lang_Label]}">
                     <ComboBox.SelectionBoxItemTemplate>
                         <DataTemplate x:DataType="loc:LanguageOption">
@@ -572,8 +572,8 @@
 
                                 <!-- Row 0: combo + Record button. Row 1: the recording panel, shown only while recording. -->
                                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
-                                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Hotkeys}"
-                                              SelectedItem="{Binding SelectedHotkey, Mode=TwoWay}"
+                                    <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Shortcuts.Hotkeys}"
+                                              SelectedItem="{Binding Shortcuts.SelectedHotkey, Mode=TwoWay}"
                                               HorizontalAlignment="Stretch">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate x:DataType="vm:HotkeyOption">
@@ -581,11 +581,11 @@
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
-                                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding MainRecorder}"
+                                    <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding Shortcuts.MainRecorder}"
                                                     ContentTemplate="{StaticResource HotkeyRecordButtonTemplate}" />
-                                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding MainRecorder}"
+                                    <ContentControl Grid.Row="1" Grid.ColumnSpan="2" Content="{Binding Shortcuts.MainRecorder}"
                                                     ContentTemplate="{StaticResource HotkeyRecorderPanelTemplate}"
-                                                    IsVisible="{Binding MainRecorder.IsRecording}" />
+                                                    IsVisible="{Binding Shortcuts.MainRecorder.IsRecording}" />
                                 </Grid>
                             </StackPanel>
                         </Border>
@@ -593,13 +593,13 @@
                         <Border Classes="card">
                             <StackPanel Spacing="10">
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[SelectionActions_Label]}" />
-                                <ItemsControl ItemsSource="{Binding SelectionActions}"
+                                <ItemsControl ItemsSource="{Binding Shortcuts.SelectionActions}"
                                               ItemTemplate="{StaticResource HotkeyRowTemplate}" />
                             </StackPanel>
                         </Border>
 
-                        <Border Classes="card" IsVisible="{Binding DictationHotkeyRow, Converter={x:Static ObjectConverters.IsNotNull}}">
-                            <ContentControl Content="{Binding DictationHotkeyRow}"
+                        <Border Classes="card" IsVisible="{Binding Shortcuts.DictationHotkeyRow, Converter={x:Static ObjectConverters.IsNotNull}}">
+                            <ContentControl Content="{Binding Shortcuts.DictationHotkeyRow}"
                                             ContentTemplate="{StaticResource HotkeyRowTemplate}" />
                         </Border>
 
@@ -675,7 +675,7 @@
                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding}">
                                                             <Svg
-                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).TrashIconPath,
+                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).Appearance.TrashIconPath,
                                                                    RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 Width="16" Height="16" />
                                                         </Button>
@@ -781,7 +781,7 @@
                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding}">
                                                             <Svg
-                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).TrashIconPath,
+                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).Appearance.TrashIconPath,
                                                                    RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 Width="16" Height="16" />
                                                         </Button>
@@ -831,7 +831,7 @@
                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding}">
                                                             <Svg
-                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).TrashIconPath,
+                                                                Path="{Binding ((vm:SettingsViewModel)DataContext).Appearance.TrashIconPath,
                                                                    RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 Width="16" Height="16" />
                                                         </Button>
@@ -979,7 +979,7 @@
                                             HorizontalAlignment="Right"
                                             ToolTip.Tip="{Binding L[Model_RemoveTooltip]}"
                                             Command="{Binding Models.RemoveCommand}">
-                                        <Svg Path="{Binding TrashIconPath}" Width="16" Height="16" />
+                                        <Svg Path="{Binding Appearance.TrashIconPath}" Width="16" Height="16" />
                                     </Button>
 
                                     <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Classes="status"
@@ -1064,7 +1064,7 @@
                                                 ToolTip.Tip="{Binding L[Model_RemoveTooltip]}"
                                                 Command="{Binding Voice.RemoveCommand}"
                                                 IsVisible="{Binding Voice.ShowRemove, FallbackValue=False}">
-                                            <Svg Path="{Binding TrashIconPath}" Width="16" Height="16" />
+                                            <Svg Path="{Binding Appearance.TrashIconPath}" Width="16" Height="16" />
                                         </Button>
                                         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,4"
                                                    Text="{Binding Voice.ModelStatus}" />
