@@ -52,6 +52,7 @@ internal sealed class DictationSession : IDisposable
     // This dictation: Esc cancels it whole; what was already typed stays.
     private CancellationTokenSource? _dictation;
     private string? _continued;
+    private string _typedBefore = "";
     private string _said = "";
     private string _untyped = "";
     private Task _parts = Task.CompletedTask;
@@ -195,10 +196,12 @@ internal sealed class DictationSession : IDisposable
         }
     }
 
-    // The earlier dictation into this field and everything recognised so far: Whisper's context for the next part.
+    // What precedes the caret and everything recognised so far: Whisper's context for the next part. The typed line
+    // already holds an earlier dictation into it; the remembered one stands in when a click cleared the line.
     private DictationRequest Request()
     {
-        var context = string.Join(' ', new[] { _continued, _said }.Where(s => !string.IsNullOrEmpty(s)));
+        var before = _typedBefore.Trim().Length > 0 ? _typedBefore.Trim() : _continued;
+        var context = string.Join(' ', new[] { before, _said }.Where(s => !string.IsNullOrEmpty(s)));
         return new DictationRequest(_language, _languages, context.Length > 0 ? context : null);
     }
 
@@ -252,6 +255,7 @@ internal sealed class DictationSession : IDisposable
         }
 
         _target = _host.CaptureDictationTarget();
+        _typedBefore = _host.DictationTextBefore();
         _language = _host.ActiveLanguage() ?? "en";
         _languages = _host.InstalledLanguages();
 

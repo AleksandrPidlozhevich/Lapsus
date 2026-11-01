@@ -28,7 +28,10 @@ internal interface IDictationHost
 
     bool IsDictationTargetFocused(object target);
 
-    // Types the text at the caret, after a space when the caret follows a word typed in this field.
+    // What was typed before the caret in this field, as far as the host knows; "" when it does not.
+    string DictationTextBefore();
+
+    // Types the text at the caret, fitted to the line before it (a space, the first letter's case).
     bool InsertDictatedText(string text);
 
     // Where the text goes when its field lost focus before it was ready, so nothing said is lost.

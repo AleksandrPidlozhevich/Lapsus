@@ -404,6 +404,9 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
             return;
         }
 
+        if (UndoDictation())
+            return;
+
         _lineDirection = null;
         _skippedRun.Clear();
 

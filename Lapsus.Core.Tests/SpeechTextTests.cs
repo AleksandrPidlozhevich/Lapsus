@@ -96,4 +96,23 @@ public class SpeechTextTests
     {
         Assert.Equal(expected, DictationLanguagePicker.Resolve("ru", detected, p));
     }
+
+    [Theory]
+    [InlineData("", "Мы пойдём.", "Мы пойдём.")]
+    [InlineData("Я думаю, что", "Мы пойдём.", " мы пойдём.")]
+    [InlineData("Я думаю, что ", "Мы пойдём.", "мы пойдём.")]
+    [InlineData("Готово.", "Мы пойдём.", " Мы пойдём.")]
+    [InlineData("Он сказал: «Готово!» ", "Мы пойдём.", "Мы пойдём.")]
+    [InlineData("Список:", "Хлеб и молоко.", " Хлеб и молоко.")]
+    [InlineData("and then", "I left.", " I left.")]
+    [InlineData("and then", "I'm out.", " I'm out.")]
+    [InlineData("обновил", "README и конфиг.", " README и конфиг.")]
+    [InlineData("закинул в", "GitHub.", " GitHub.")]
+    [InlineData("Я думаю, что", "Я прав.", " я прав.")]
+    [InlineData("Купи хлеб", ", молоко.", ", молоко.")]
+    [InlineData("hello", "...", "...")]
+    public void Dictated_text_fits_the_line_before_the_caret(string before, string text, string expected)
+    {
+        Assert.Equal(expected, DictationText.FitAfter(before, text));
+    }
 }

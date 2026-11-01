@@ -235,14 +235,18 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
         }
 
         var text = new System.Text.StringBuilder();
-        var minP = 1f;
+        float minP = 1f, sumP = 0f;
+        var segments = 0;
         await foreach (var segment in processor.ProcessAsync(speech, ct).ConfigureAwait(false))
         {
             text.Append(segment.Text);
             minP = Math.Min(minP, segment.MinProbability);
+            sumP += segment.Probability;
+            segments++;
         }
 
-        return new SpeechResult(text.ToString().Trim(), language, seconds, probability, minP);
+        return new SpeechResult(text.ToString().Trim(), language, seconds, probability, minP,
+            segments > 0 ? sumP / segments : 1f);
     }
 
     // Never so small that Whisper loses its footing.

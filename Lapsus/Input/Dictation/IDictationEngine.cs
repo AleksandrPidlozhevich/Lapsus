@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Lapsus.Input.Dictation;
 
 // Languages: the others detection may pick.
-// PreviousText: this field's last dictation, so the next one continues it.
+// PreviousText: what precedes the caret (typed, or this field's last dictation), so the next one continues it.
 internal sealed record DictationRequest(string Language, IReadOnlyList<string> Languages, string? PreviousText = null);
 
 internal interface IDictationEngine

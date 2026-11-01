@@ -17,6 +17,9 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 {
     private static readonly TimeSpan IdleCheck = TimeSpan.FromSeconds(10);
 
+    // Mean token probability below which a CPU decode is tried again in the user's next language.
+    private const float RetryBelow = 0.75f;
+
     private readonly WhisperRecognizer _recognizer = new();
     private readonly SpeechModelStore _store;
     private readonly Func<AppSettings> _settings;
@@ -92,16 +95,29 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
             var settings = _settings();
             var glossary = settings.DictationGlossary.Where(g => g.Trim().Length > 0).ToArray();
-            var prompt = SpeechPromptBuilder.Build(request.Language, glossary.Select(g => g.Split('|')[0]),
-                request.PreviousText);
             var among = settings.DictationLanguage is { } fixedLanguage
                 ? [fixedLanguage]
                 : DictationLanguagePicker.Candidates(request.Language, request.Languages);
             var language = settings.DictationLanguage ?? request.Language;
 
-            var result = await _recognizer
-                .TranscribeAsync(pcm, new SpeechRequest(language, prompt, among), cancellationToken)
-                .ConfigureAwait(false);
+            Task<SpeechResult> Recognize(string lang, IReadOnlyList<string> detectAmong) => _recognizer.TranscribeAsync(
+                pcm,
+                new SpeechRequest(lang, SpeechPromptBuilder.Build(lang, glossary.Select(g => g.Split('|')[0]),
+                    request.PreviousText), detectAmong),
+                cancellationToken);
+
+            var result = await Recognize(language, among).ConfigureAwait(false);
+
+            // A CPU skips language detection (a pass of its own, ~10 s), so speech in another of the user's
+            // languages is decoded as the main one. Such a decode is unsure: ru speech read as en scored below
+            // RetryBelow in 5 of its 8 broken phrases, ru read as ru never did (22 phrases, stage 2 audio).
+            if (!_recognizer.OnGpu && result.MeanTokenProbability < RetryBelow
+                && among.FirstOrDefault(l => l != result.Language) is { } other)
+            {
+                var second = await Recognize(other, [other]).ConfigureAwait(false);
+                if (second.MeanTokenProbability > result.MeanTokenProbability)
+                    result = second;
+            }
 
             var text = HallucinationFilter.Clean(result.Text);
             if (text.Length > 0 && settings.KeepEnglishTermsLatin)
