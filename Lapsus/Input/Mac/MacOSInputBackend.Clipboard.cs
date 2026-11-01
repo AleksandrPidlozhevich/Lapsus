@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
-// Selection actions through the pasteboard: copy, paste, restore.
 internal sealed partial class MacOSInputBackend
 {
     private const int CopyTimeoutMs = 500;
@@ -101,14 +100,12 @@ internal sealed partial class MacOSInputBackend
         var saved = _savedClipboard;
         await Task.Delay(RestoreDelayMs).ConfigureAwait(true);
 
-        // A newer correction or a selection copy took over the clipboard.
         if (epoch != _clipboardEpoch || !_clipboardDirty)
             return;
 
         _clipboardDirty = false;
         _savedClipboard = null;
 
-        // The user copied something while we waited; that copy is newer than our snapshot.
         if (MacClipboard.WasModified())
         {
             CaptureLog.Write("Clipboard changed during a correction; the newer copy is kept.");

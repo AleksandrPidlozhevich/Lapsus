@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Builds the macOS .icns from Lapsus/Assets/icon-light.svg. Shared by package-macos.sh (direct
-# download) and package-mas.sh (Mac App Store).
-#
-# Usage: scripts/make-macos-icon.sh <work-dir> <output.icns>
-
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WORK_DIR="$1"
 ICNS="$2"

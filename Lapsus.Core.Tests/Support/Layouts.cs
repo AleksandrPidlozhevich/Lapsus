@@ -3,7 +3,6 @@ using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Tests.Support;
 
-// Candidates over the bundled keyboard maps, named "{code}-id".
 internal static class Layouts
 {
     public static KeyboardMap Map(KeyboardLayout layout)

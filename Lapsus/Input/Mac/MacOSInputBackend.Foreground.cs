@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
-// The frontmost process: its name, whether it is excluded, and secure input.
 internal sealed partial class MacOSInputBackend
 {
     private readonly Lock _procNameGate = new();

@@ -4,8 +4,8 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
 
-// The process that owns the key window. Hardware key events report the event source, which is not
-// the app being typed into, so Chromium detection cannot use that pid.
+// Hardware key events report the event source, which is not the app being typed into, so
+// Chromium detection cannot use that pid.
 [SupportedOSPlatform("macos")]
 internal static class MacFrontmost
 {

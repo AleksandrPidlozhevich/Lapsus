@@ -5,8 +5,7 @@ using System;
 
 namespace Lapsus.ViewModels;
 
-// First launch on macOS, before any permission prompt: what Lapsus reads, what it never does with
-// it, and which two permissions macOS is about to ask for.
+// First launch on macOS, before any permission prompt.
 public sealed partial class OnboardingViewModel
 {
     private readonly Action _continue;

@@ -43,7 +43,6 @@ public static partial class PhoneticKey
         return Finish(w);
     }
 
-    // How a word written in a non-Latin script (or already in Latin, as heard) sounds.
     public static string Heard(string word)
     {
         var script = Scripts.Dominant(word);

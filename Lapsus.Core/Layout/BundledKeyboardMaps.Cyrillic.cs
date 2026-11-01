@@ -1,6 +1,5 @@
 namespace Lapsus.Core.Layout;
 
-// Cyrillic layouts: ЙЦУКЕН variants, Bulgarian (phonetic, 2006 phonetic, BDS) and Macedonian.
 public static partial class BundledKeyboardMaps
 {
     private static char[] BuildJcuken(JcukenVariant variant)

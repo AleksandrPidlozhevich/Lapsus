@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Package manifest for the Microsoft Store (MSIX) build; scripts/package-store.ps1 fills {{Version}} and
-  {{Architecture}} and packs it with the publish output. The three Identity values below are the app's
-  own and must match Partner Center → Product management → Product identity character for character
-  (Package/Identity/Name, Package/Identity/Publisher, Package/Properties/PublisherDisplayName), or the
-  upload is rejected. They are not secrets.
+  scripts/package-store.ps1 fills {{Version}} and {{Architecture}}. Identity Name, Publisher, and
+  PublisherDisplayName must match Partner Center character for character, or the upload is rejected. They are not secrets.
 -->
 <Package
     xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -29,7 +26,7 @@
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
   </Dependencies>
 
-  <!-- The interface languages of Lapsus/Localization (Strings.resx is English; Serbian is Latin). -->
+  <!-- Strings.resx is English; Serbian is Latin. -->
   <Resources>
     <Resource Language="en-US" />
     <Resource Language="ar" />
@@ -71,8 +68,7 @@
       </uap:VisualElements>
 
       <Extensions>
-        <!-- "Run at startup": off until the user turns it on in settings. TaskId must match
-             WindowsStoreStartupRegistration.TaskId — the HKCU Run key does not work from a package. -->
+        <!-- TaskId must match WindowsStoreStartupRegistration.TaskId — the HKCU Run key does not work from a package. -->
         <desktop:Extension Category="windows.startupTask">
           <desktop:StartupTask TaskId="LapsusStartup" Enabled="false" DisplayName="Lapsus" />
         </desktop:Extension>

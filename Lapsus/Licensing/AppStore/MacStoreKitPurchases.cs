@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Licensing.AppStore;
 
-// Talks to StoreKit 2 through libLapsusStoreKit.dylib (native/LapsusStoreKit/StoreBridge.swift),
-// which package-mas.sh puts next to the executable. Each call hands the bridge a token; the bridge
-// answers on a StoreKit thread with that token and a JSON object, which completes the call's task.
+// libLapsusStoreKit.dylib (native/LapsusStoreKit/StoreBridge.swift), which package-mas.sh puts next to the executable.
+// Each call hands the bridge a token; the bridge answers on a StoreKit thread with that token and a JSON object.
 [SupportedOSPlatform("macos")]
 internal sealed class MacStoreKitPurchases : IStorePurchases
 {

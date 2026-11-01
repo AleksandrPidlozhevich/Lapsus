@@ -20,7 +20,6 @@ public class DictationSessionTests
         public readonly List<string> Copied = [];
         public readonly List<string> Reports = [];
 
-        // A quick tap: down and up at once.
         public void PressHotkey()
         {
             HoldHotkey();
@@ -152,7 +151,6 @@ public class DictationSessionTests
             Session = new DictationSession(Host, Mic, Engine, Badge, () => Enabled, () => Now, watchdog: false);
         }
 
-        // Start, say something, stop, and let the transcription finish.
         public async Task DictateAsync()
         {
             Host.PressHotkey();

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Lapsus.ViewModels;
 
-// The Hotkeys tab: the correction hotkey, one per selection action and dictation's. No two share a key.
+// No two hotkeys share a key.
 public sealed partial class ShortcutsViewModel : ObservableObject
 {
     private readonly IInputBackend _backend;
@@ -43,7 +43,6 @@ public sealed partial class ShortcutsViewModel : ObservableObject
         _backend.HotkeyVirtualKey = _selectedHotkey.VirtualKey;
     }
 
-    // Recorded shortcuts are added to these lists, so every dropdown offers them again.
     private readonly ObservableCollection<HotkeyOption> _hotkeyOptions = new(BuiltInHotkeys);
 
     private readonly ObservableCollection<HotkeyOption> _selectionKeyOptions = new(BuiltInSelectionKeys);
@@ -181,7 +180,6 @@ public sealed partial class ShortcutsViewModel : ObservableObject
         return HotkeyRows.Any(r => r.Selected.VirtualKey == virtualKey);
     }
 
-    // Every hotkey row: the selection actions and, where dictation exists, its hotkey. No two may share a key.
     private IEnumerable<SelectionHotkeyViewModel> HotkeyRows =>
         DictationHotkeyRow is { } dictation ? SelectionActions.Append(dictation) : SelectionActions;
 
@@ -199,7 +197,6 @@ public sealed partial class ShortcutsViewModel : ObservableObject
         _dictationKeyChanged();
     }
 
-    // Dictation runs where the backend can take its hotkey and the platform has a microphone backend.
     public bool DictationSupported =>
         _supported && (OperatingSystem.IsWindows() || OperatingSystem.IsMacOS()) && _backend is IDictationHost;
 
@@ -210,7 +207,7 @@ public sealed partial class ShortcutsViewModel : ObservableObject
         if (!DictationSupported)
             return null;
 
-        // Its own list: only dictation understands modifiers held alone, so only it offers them.
+        // Only dictation understands modifiers held alone, so only it offers them.
         var options = _dictationKeyOptions;
         options.Insert(1, new HotkeyOption(HotkeyNames.Format(AppSettings.DictationChord), AppSettings.DictationChord));
         var saved = _settings.DictationHotkey;
@@ -234,7 +231,6 @@ public sealed partial class ShortcutsViewModel : ObservableObject
         return row;
     }
 
-    // The backend listens for the dictation hotkey only while voice typing is on.
     public void ApplyDictationHotkey()
     {
         if (_backend is IDictationHost host)
@@ -294,7 +290,7 @@ public sealed partial class ShortcutsViewModel : ObservableObject
         return fallback;
     }
 
-    // A recorded shortcut is one option in both lists, and the list entry is returned so rows compare equal.
+    // The list entry is returned so rows compare equal.
     private HotkeyOption AddRecordedOption(int trigger)
     {
         var option = _hotkeyOptions.FirstOrDefault(o => o.VirtualKey == trigger)

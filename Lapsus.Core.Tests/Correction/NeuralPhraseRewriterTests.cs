@@ -937,7 +937,6 @@ public class NeuralPhraseRewriterTests
             Assert.Equal(KeyboardLayout.Ru, result.TargetLayout);
         }
 
-        // Never answers until told to stop.
         private sealed class StuckLlm : ILocalLlm
         {
             public bool IsLoaded => true;
@@ -965,7 +964,6 @@ public class NeuralPhraseRewriterTests
             }
         }
 
-        // Scores a text by how many of its words are in the list: the "model" reads those as natural.
         private sealed class ScoringLlm(params string[] natural) : ILocalLlm
         {
             public int Calls { get; private set; }

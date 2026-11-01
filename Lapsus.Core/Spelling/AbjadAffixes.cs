@@ -17,7 +17,7 @@ public static class AbjadAffixes
 
     private static readonly string[] ArabicSuffixes = ["تها", "ها", "هم", "نا", "ات", "ون", "ين", "كم", "هن", "ه", "ك", "ي"];
 
-    // Min stems: 3 Hebrew / 4 Arabic; shorter leaves almost nothing.
+    // Shorter than 3 Hebrew / 4 Arabic leaves almost nothing of the stem.
     private const int HebrewMinStem = 3;
 
     private const int ArabicMinStem = 4;

@@ -2,7 +2,6 @@ using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Correction;
 
-// Which keyboard a word was typed on and which layouts may read it.
 internal static class WordSources
 {
     public static int? LetterlessChunkEnd(

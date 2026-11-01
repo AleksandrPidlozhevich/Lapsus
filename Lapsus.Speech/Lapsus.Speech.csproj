@@ -1,8 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <!--
-      The Whisper host for dictation, kept free of Avalonia (like Lapsus.Neural) so the evaluation tool runs the
-      same recognizer the app runs. Model download and the catalog belong in the app.
-
       Whisper.net wraps whisper.cpp. Windows takes the Vulkan build next to the CPU one: any Vulkan GPU (NVIDIA,
       AMD, Intel) and, with the GPU off, the same CPU path the plain build has (stage 1: no slower). Other OSes
       take the base runtime, which carries Metal on macOS.

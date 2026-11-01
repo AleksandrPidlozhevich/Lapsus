@@ -57,7 +57,6 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
         NoteModifierKey(modifier, false);
     }
 
-    // The modifiers held after a key goes down or up, in order (a chord press is "Control", "Control|Meta", "Control", "None").
     public void Modifiers(params HotkeyModifiers[] steps)
     {
         foreach (var held in steps)
@@ -255,7 +254,6 @@ internal sealed class GatedAsyncCorrector(string from, string to) : IPhraseCorre
     }
 }
 
-// Holds each request until it is cancelled, keeping every token it was handed.
 internal sealed class CancellableAsyncCorrector : IPhraseCorrector, IDisposable
 {
     public SemaphoreSlim Entered { get; } = new(0);

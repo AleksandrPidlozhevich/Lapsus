@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
-// Capture watchdog: restarts a tap macOS disabled and follows permission changes.
 internal sealed partial class MacOSInputBackend
 {
     private int _watchdogPeriodMs = CaptureWatchdogPolicy.PeriodMs;
@@ -52,7 +51,7 @@ internal sealed partial class MacOSInputBackend
         _watchdog.Change(Timeout.Infinite, Timeout.Infinite);
     }
 
-    // Runs on a timer thread. The decision is in CaptureWatchdogPolicy; this method only observes and acts.
+    // Runs on a timer thread.
     private void CheckPermissions()
     {
         var wanted = _wantCapture;

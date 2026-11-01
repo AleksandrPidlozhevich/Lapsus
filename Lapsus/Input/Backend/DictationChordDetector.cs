@@ -70,7 +70,7 @@ internal sealed class DictationChordDetector(Func<int> hotkey, Action pressed, A
         return false;
     }
 
-    // A key other than a modifier went down. While the chord is held that makes it another shortcut.
+    // While the chord is held, another key makes it a different shortcut.
     public void NoteOtherKey()
     {
         if (!_chordHeld || _chordSpoiled)

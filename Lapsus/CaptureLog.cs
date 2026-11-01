@@ -3,8 +3,7 @@ using System.IO;
 
 namespace Lapsus;
 
-// Lifecycle events of keyboard capture (start, stop, permission changes, tap re-enables). Never
-// records typed text. Lives next to the crash log and is rotated once it grows past 512 KB.
+// Never records typed text.
 internal static class CaptureLog
 {
     private const long MaxBytes = 512 * 1024;

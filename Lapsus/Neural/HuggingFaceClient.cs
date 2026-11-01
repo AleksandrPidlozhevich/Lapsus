@@ -107,7 +107,7 @@ public sealed class HuggingFaceClient
         return DownloadFilesAsync(repo, "main", subPath, files, destination, progress, ct);
     }
 
-    // revision: a branch or a commit; a commit pins exactly the files a catalog entry was checked against.
+    // A commit pins exactly the files a catalog entry was checked against.
     public async Task DownloadFilesAsync(
         string repo,
         string revision,

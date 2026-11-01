@@ -129,8 +129,7 @@ public partial class App : Application
             ActualThemeVariantChanged += (_, _) => ApplyThemedIcon();
             _singleInstance?.StartWatching(ShowWindow);
 
-            // Opening the app again from Finder or Launchpad reaches the running copy as a reopen.
-            // In the store build that is the only signal: Launch Services is its single-instance check.
+            // Store build: Launch Services is the single-instance check, so a reopen is the only signal.
             if (TryGetFeature(typeof(IActivatableLifetime)) is IActivatableLifetime activatable)
                 activatable.Activated += (_, e) =>
                 {
@@ -158,8 +157,7 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
-    // Voice typing. Nothing heavy happens here: the speech model loads on the first dictation (or, with "never
-    // unload", half a minute after start), and the microphone opens only while recording.
+    // The speech model loads on the first dictation (or, with "never unload", half a minute after start); the microphone opens only while recording.
     private void SetupDictation(AppSettings settings, SettingsStore store)
     {
         if (_backend is not IDictationHost host || _settingsViewModel is null || _dictionaryStore is null)
@@ -178,7 +176,6 @@ public partial class App : Application
             () => _settingsViewModel.SettingsSnapshot().DictationEnabled);
         _dictationIndicator.ButtonClicked = _dictation.Toggle;
 
-        // Shown while voice typing is on (and not locked); its label follows the hotkey.
         void UpdateButton() => _dictationIndicator?.SetButton(
             supported && OperatingSystem.IsWindows() && settings.DictationEnabled && settings.DictationShowButton
             && !_settingsViewModel.NeuralLocked,
@@ -204,7 +201,6 @@ public partial class App : Application
             modelReady: () => _dictationEngine?.Prepare(),
             releaseModel: () => _dictationEngine?.Unload(),
             locked: () => _settingsViewModel.NeuralLocked);
-        // Hint is raised again whenever the hotkey or the interface language changes.
         _settingsViewModel.Voice.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(VoiceViewModel.Hint))
@@ -225,8 +221,7 @@ public partial class App : Application
         timer.Start();
     }
 
-    // A silent update downloads a whole package. Wait until startup (dictionary load, hook install)
-    // has settled so the download does not compete with it and make the machine stutter.
+    // Wait until startup (dictionary load, hook install) has settled so the download does not compete with it and make the machine stutter.
     private async Task CheckForUpdateLaterAsync()
     {
         await Task.Delay(TimeSpan.FromMinutes(3)).ConfigureAwait(true);
@@ -325,8 +320,6 @@ public partial class App : Application
         }
     }
 
-    // The silent check (or the Settings button) has downloaded an update. The tray keeps a menu item, a
-    // tooltip and a dot on the icon until it is installed; Windows also gets one balloon per version.
     // Store builds never get here: their AppUpdater cannot check, so the event never fires.
     private void ShowUpdateAvailable()
     {
@@ -347,7 +340,6 @@ public partial class App : Application
         if (_updateNotice?.TryClaimAnnouncement(version) != true || version is null)
             return;
 
-        // Someone looking at Settings already sees the update button change.
         if (_window is { IsActive: true })
             return;
 
@@ -428,7 +420,6 @@ public partial class App : Application
             {
                 _settingsViewModel?.CompleteOnboarding();
                 window.Close();
-                // The permission banner and the dictionary library are both there.
                 ShowWindow();
             },
             window.Close);

@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Lapsus.ViewModels;
 
-// Words Lapsus never corrects and apps it never types into.
 public sealed partial class ExclusionsViewModel : ObservableObject
 {
     private readonly WordExceptions _exceptions;

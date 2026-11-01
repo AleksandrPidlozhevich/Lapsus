@@ -4,7 +4,6 @@ using Lapsus.Settings;
 
 namespace Lapsus.Tests;
 
-// A dictation hotkey of modifiers alone (Ctrl+Win): a quick tap toggles, other keys mean another shortcut.
 public class DictationChordTests
 {
     private const HotkeyModifiers Ctrl = HotkeyModifiers.Control;

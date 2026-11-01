@@ -2,32 +2,27 @@ using System;
 
 namespace Lapsus.Audio;
 
-// The microphone, as dictation needs it: 16 kHz mono samples in [-1, 1], from Start to Stop.
+// 16 kHz mono samples in [-1, 1], from Start to Stop.
 internal interface IAudioCapture : IDisposable
 {
-    // Throws AudioCaptureException when there is no microphone or it cannot be opened.
     void Start();
 
-    // Everything recorded since Start (or the last TakeRecorded); the capture can be started again afterwards.
     float[] Stop();
 
-    // What was recorded since Start or the last call, while recording goes on: the part said so far.
     float[] TakeRecorded();
 
     bool IsRecording { get; }
 
-    // Loudness of the latest block (RMS, 0..1), raised on a capture thread.
+    // Raised on a capture thread.
     event Action<float>? Level;
 
-    // Whether the OS lets the app record. Windows answers per device at Start, so it reports Granted here.
+    // Windows answers per device at Start, so it reports Granted here.
     MicrophoneAccess Access => MicrophoneAccess.Granted;
 
-    // Raises the OS's own permission dialog, where there is one.
     void RequestAccess()
     {
     }
 
-    // Opens the OS's privacy settings for the microphone, where they exist.
     void OpenAccessSettings()
     {
     }

@@ -1,8 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <!--
-      The ONNX Runtime GenAI host, kept free of Avalonia so tools/Lapsus.Sweep can run the same
-      model code the app runs. Model download and the catalog stay in Lapsus/Neural.
-    -->
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>

@@ -35,13 +35,11 @@
 
         <StreamGeometry x:Key="TabIconHotkeys">M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z</StreamGeometry>
 
-        <!-- The Record button sits beside the combo; the panel below it appears only while recording. -->
         <DataTemplate x:Key="HotkeyRecordButtonTemplate" x:DataType="vm:HotkeyRecorderViewModel">
             <Button Content="{Binding RecordLabel}" Command="{Binding StartCommand}"
                     IsVisible="{Binding !IsRecording}" />
         </DataTemplate>
 
-        <!-- The prompt, the held keys as keycaps and a pulse while recording. -->
         <DataTemplate x:Key="HotkeyRecorderPanelTemplate" x:DataType="vm:HotkeyRecorderViewModel">
             <Border Classes="recorder" Classes.rejected="{Binding IsRejected}">
                 <StackPanel Spacing="6">
@@ -74,7 +72,6 @@
                 </StackPanel>
             </Border>
         </DataTemplate>
-        <!-- One hotkey: a preset list, a Record button and, while recording, the recorder panel. -->
         <DataTemplate x:Key="HotkeyRowTemplate" x:DataType="vm:SelectionHotkeyViewModel">
             <StackPanel Spacing="4" Margin="0,0,0,10">
                 <TextBlock Classes="rowTitle" Text="{Binding Label}" />
@@ -570,7 +567,6 @@
                             <StackPanel Spacing="8">
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[Hotkey_Label]}" />
 
-                                <!-- Row 0: combo + Record button. Row 1: the recording panel, shown only while recording. -->
                                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="6">
                                     <ComboBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Shortcuts.Hotkeys}"
                                               SelectedItem="{Binding Shortcuts.SelectedHotkey, Mode=TwoWay}"
@@ -1005,7 +1001,6 @@
                               VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel x:Name="VoiceList" Spacing="12" Margin="0,12">
 
-                        <!-- Voice typing: its own speech model, loaded only while it is used. Its hotkey is on the Hotkeys tab. -->
                         <Border Classes="card">
                             <StackPanel Spacing="8">
                                 <Grid ColumnDefinitions="*,Auto">
@@ -1024,7 +1019,6 @@
                                             Command="{Binding License.OpenLicenseSettingsCommand}" />
                                 </WrapPanel>
 
-                                <!-- Two sections keep the tab as short as the others: the model and how to start it; how speech is read. -->
                                 <StackPanel Spacing="8" IsVisible="{Binding Voice.Enabled, FallbackValue=False}">
                                     <Separator Margin="0,2,0,2" Background="{DynamicResource LapsusBorderBrush}" />
                                     <Border Background="{DynamicResource LapsusRowBrush}" CornerRadius="6" Padding="2"
@@ -1041,7 +1035,6 @@
                                         </StackPanel>
                                     </Border>
 
-                                    <!-- Model: choose, download, remove. -->
                                     <Grid IsVisible="{Binding Voice.ShowMain, FallbackValue=True}"
                                           ColumnDefinitions="*,Auto" ColumnSpacing="8" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
                                         <ComboBox Grid.Row="0" Grid.Column="0" Margin="0,4,0,6"
@@ -1079,7 +1072,6 @@
                                                    IsVisible="{Binding Voice.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
                                     </Grid>
 
-                                    <!-- How speech is read: language, microphone, memory, English terms, glossary. -->
                                     <Grid IsVisible="{Binding Voice.ShowRecognition, FallbackValue=False}"
                                           ColumnDefinitions="*,Auto" ColumnSpacing="8"
                                           RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
@@ -1145,7 +1137,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- How to start it, and the two things that make it visible and audible. -->
                         <Border Classes="card" IsVisible="{Binding Voice.ShowUsage, FallbackValue=False}">
                             <StackPanel Spacing="8">
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[Voice_UsageTitle]}" />
@@ -1177,7 +1168,6 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Spacing="4">
-                        <!-- The App Store edition sells Lapsus Plus here; there are no keys to call a licence. -->
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconLicense}" Width="20" Height="20"
                                   HorizontalAlignment="Center" IsVisible="{Binding !Store.IsStoreBuild}" />
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconPlus}" Width="20" Height="20"
@@ -1192,7 +1182,6 @@
                               VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel x:Name="LicenseList" Spacing="12" Margin="0,12">
 
-                        <!-- Mac App Store edition: App Store purchases instead of keys and links to the website. -->
                         <Border Classes="card" IsVisible="{Binding Store.IsStoreBuild}">
                             <StackPanel Spacing="6">
                                 <TextBlock Classes="sectionTitle" Text="{Binding Store.StatusTitle}" />

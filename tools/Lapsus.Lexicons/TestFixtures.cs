@@ -6,10 +6,6 @@ using WeCantSpell.Hunspell;
 
 namespace Lapsus.Lexicons;
 
-// The word lists in Lapsus.Core.Tests/Languages/Fixtures: each catalog language's list taken from its pinned URL
-// and installed the way DictionaryStore installs it (Russian words out of Ukrainian, FrequencyListCleaner), then cut
-// to its commonest words. words.extra.tsv names rarer words a test needs ("ye", typed for "ну"); they come in at
-// the count the full list gives them, and a word the full list lacks stops the run rather than get a made-up one.
 internal static class TestFixtures
 {
     private const int Top = 1500;

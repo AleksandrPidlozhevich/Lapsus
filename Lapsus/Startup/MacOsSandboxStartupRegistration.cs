@@ -4,10 +4,8 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Startup;
 
-// Sandboxed (Mac App Store) autostart: the app registers itself as a login item through
-// SMAppService (macOS 13+). The sandbox cannot write ~/Library/LaunchAgents or run launchctl, which
-// is what MacOsStartupRegistration does for the direct download. The user can switch it off in
-// System Settings > General > Login Items, so IsEnabled asks the system rather than our settings.
+// The sandbox cannot write ~/Library/LaunchAgents or run launchctl.
+// The user can switch the login item off in System Settings, so IsEnabled asks the system rather than our settings.
 [SupportedOSPlatform("macos13.0")]
 internal sealed class MacOsSandboxStartupRegistration : IStartupRegistration
 {

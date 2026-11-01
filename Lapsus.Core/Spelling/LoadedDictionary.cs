@@ -3,7 +3,7 @@ using SymSpellEngine = SymSpell;
 
 namespace Lapsus.Core.Spelling;
 
-// One language's frequency list, built once per file by DictionaryFiles and shared between SpellCheckers.
+// Built once per file by DictionaryFiles and shared between SpellCheckers.
 internal readonly record struct LoadedDictionary(
     Dictionary<string, long> Counts, SymSpellEngine Engine, double LogMaxCount, CharNgramModel? Ngrams,
     Script Script, bool CommaBelow)
@@ -14,7 +14,6 @@ internal readonly record struct LoadedDictionary(
         return CommaBelow ? LookupKeys.FoldCedilla(key) : key;
     }
 
-    // Ukrainian apostrophe words: known when every part between marks is; rarest part sets the count.
     public long? CountOf(string word)
     {
         if (Counts.TryGetValue(Key(word), out var known))

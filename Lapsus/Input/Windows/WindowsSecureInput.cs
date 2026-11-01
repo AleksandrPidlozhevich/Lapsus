@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Lapsus.Input;
 
 [SupportedOSPlatform("windows")]
-// Password-field skip: ES_PASSWORD / STATE_SYSTEM_PROTECTED; idle-drop is the backstop.
+// Idle-drop is the backstop.
 internal static class WindowsSecureInput
 {
     private const int GwlStyle = -16;

@@ -120,7 +120,7 @@ public sealed class KeyboardMap
             : null;
     }
 
-    // The key whose ligature starts at text[at], if one does; the longest wins.
+    // The longest ligature that starts at text[at] wins.
     public bool TryMatchLigature(string text, int at, out int slot, out KeyShift shift, out int length)
     {
         slot = 0;

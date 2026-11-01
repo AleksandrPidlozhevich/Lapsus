@@ -4,8 +4,8 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
 
-// Where the mouse pointer is, in global display points with the origin at the top left — the space the
-// caret probe reports in. Needs no permission, so it works in the App Store sandbox as well.
+// Global display points with the origin at the top left — the space the caret probe reports in.
+// Needs no permission, so it works in the App Store sandbox as well.
 [SupportedOSPlatform("macos")]
 internal static class MacPointer
 {

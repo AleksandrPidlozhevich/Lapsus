@@ -2,7 +2,6 @@ using System;
 
 namespace Lapsus.Settings;
 
-// How long the speech model stays in memory after the last dictation (Handy's choice of steps).
 public enum SpeechUnloadAfter
 {
     Immediately,

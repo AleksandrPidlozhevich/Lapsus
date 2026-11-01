@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Mac App Store build: publishes Lapsus with -p:MacAppStore=true (no Velopack), adds the StoreKit
-# bridge, assembles the .app by hand, signs it with the App Sandbox entitlements and wraps it in the
-# .pkg App Store Connect takes. Upload the .pkg with Transporter. Walked through in scripts/BUILDING.md ("Mac App Store").
-#
-# Usage:
-#   scripts/package-mas.sh            store package; needs the variables below
-#   scripts/package-mas.sh --test     sandboxed copy to run on this Mac; no profile, no .pkg
-#
 # Store package:
 #   LAPSUS_MAS_APP_IDENTITY        "Apple Distribution: ..." (or "3rd Party Mac Developer Application: ...")
 #   LAPSUS_MAS_INSTALLER_IDENTITY  "3rd Party Mac Developer Installer: ..."

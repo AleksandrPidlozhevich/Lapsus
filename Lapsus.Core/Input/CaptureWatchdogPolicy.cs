@@ -8,8 +8,6 @@ public enum WatchdogAction
     Restart
 }
 
-// What the capture watchdog should do on one timer tick. Pure: the platform backend reports what it
-// observes and carries out the answer, so every branch can be tested without macOS.
 public static class CaptureWatchdogPolicy
 {
     public const int PeriodMs = 2000;

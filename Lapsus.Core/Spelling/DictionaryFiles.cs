@@ -123,7 +123,7 @@ internal static class DictionaryFiles
             if (key.Length == 0)
                 continue;
 
-            // Skip neighbour-language / wrong-alphabet entries; fold before judging.
+            // Fold before judging.
             if (!LanguageAlphabets.IsWordOf(key, script, languageCode) || NeighbourWords.IsListed(languageCode, key))
                 continue;
 

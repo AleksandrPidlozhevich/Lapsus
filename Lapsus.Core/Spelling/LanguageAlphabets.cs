@@ -4,7 +4,6 @@ namespace Lapsus.Core.Spelling;
 
 public static class LanguageAlphabets
 {
-    // Cyrillic languages differ by a handful of letters — those tell them apart.
     // Serbian omitted on purpose: the offered list is Latin-script.
     private static readonly Dictionary<string, HashSet<char>> ByLanguage = new(StringComparer.OrdinalIgnoreCase)
     {

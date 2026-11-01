@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Speech;
 
-// Speech models under %APPDATA%/Lapsus/speech (next to models/, outside the install folder updates replace):
-// speech/<model id>/<file> and speech/vad/<file>. A file counts as installed at its catalog size; a download
-// lands in a .download file, is checked against its SHA-256 and only then takes the real name.
+// Under %APPDATA%/Lapsus/speech, outside the install folder updates replace.
 public sealed class SpeechModelStore
 {
     private readonly HuggingFaceClient _client;

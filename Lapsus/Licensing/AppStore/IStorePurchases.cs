@@ -19,7 +19,6 @@ public enum StorePurchaseStatus
 
 public readonly record struct StorePurchaseResult(StorePurchaseStatus Status, string? Error = null);
 
-// The App Store side of the Mac App Store edition. Every other build gets NullStorePurchases.
 public interface IStorePurchases
 {
     bool IsAvailable { get; }
@@ -29,7 +28,6 @@ public interface IStorePurchases
 
     Task<StoreEntitlement> OwnedAsync();
 
-    // language: the app's UI language, used to spell out the trial length.
     Task<IReadOnlyList<StoreProduct>> ProductsAsync(string language);
 
     Task<StorePurchaseResult> PurchaseAsync(string productId);

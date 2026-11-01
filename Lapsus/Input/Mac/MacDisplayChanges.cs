@@ -5,7 +5,6 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
 
-// Reports when displays are added, removed, moved or change scale, so the layout badge is placed again.
 [SupportedOSPlatform("macos")]
 internal static class MacDisplayChanges
 {

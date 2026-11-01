@@ -25,7 +25,7 @@ public readonly record struct ActivationResult(string? Token, ActivationError Er
     public bool Ok => Error == ActivationError.None && !string.IsNullOrEmpty(Token);
 }
 
-// Only licensing network call: key + fingerprint → token. Do not add other outbound calls.
+// Only licensing network call. Do not add other outbound calls.
 public sealed class ActivationClient
 {
     private static readonly TimeSpan Timeout = TimeSpan.FromSeconds(10);

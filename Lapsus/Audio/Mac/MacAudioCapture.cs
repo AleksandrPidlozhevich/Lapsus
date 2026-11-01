@@ -5,9 +5,7 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Audio;
 
-// The default macOS input device through an AudioToolbox input queue. Asking the queue for 16 kHz mono
-// 16-bit PCM makes Core Audio do the resampling, as the wave mapper does on Windows. Callbacks come on the
-// queue's own thread (no run loop is given).
+// Asking the queue for 16 kHz mono 16-bit PCM makes Core Audio do the resampling. Callbacks come on the queue's own thread (no run loop is given).
 [SupportedOSPlatform("macos")]
 internal sealed class MacAudioCapture : IAudioCapture
 {
@@ -15,7 +13,6 @@ internal sealed class MacAudioCapture : IAudioCapture
     private const int MaxSamples = SampleRate * 60 * 6;
     private const int BufferCount = 4;
 
-    // 50 ms of 16-bit mono per buffer.
     private const int BufferBytes = SampleRate / 20 * 2;
 
     private readonly object _gate = new();
@@ -206,14 +203,12 @@ internal sealed class MacAudioCapture : IAudioCapture
     private static extern int AudioQueueDispose(IntPtr queue, [MarshalAs(UnmanagedType.U1)] bool immediate);
 }
 
-// The microphone permission (TCC). Until it is granted an input queue records silence, so dictation asks
-// first instead of failing on an empty recording.
+// Until microphone permission is granted, an input queue records silence, so dictation asks first instead of failing on an empty recording.
 [SupportedOSPlatform("macos")]
 internal static class MacMicrophone
 {
     private const string AvFoundation = "/System/Library/Frameworks/AVFoundation.framework/AVFoundation";
 
-    // AVAuthorizationStatus.
     private const long NotDetermined = 0;
     private const long Authorized = 3;
 
@@ -256,7 +251,6 @@ internal static class MacMicrophone
     public static void OpenSettings() =>
         Input.MacWorkspace.OpenUrl("x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone");
 
-    // +[AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio]; null if AVFoundation is missing.
     private static long? Status()
     {
         if (!_loaded)

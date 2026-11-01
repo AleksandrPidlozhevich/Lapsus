@@ -14,11 +14,9 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
-// Auto mode: each word ended by a space is corrected on the UI thread, with the tail typed since.
 internal abstract partial class InputBackendBase<TFocus>
 {
-    // A backspace removes the last character: from a tail it shortens the tail; from a queued word's space it
-    // removes that word, since its correction no longer has the space it was queued for.
+    // A backspace into a queued word's space removes that word: its correction no longer has the space it was queued for.
     private void TrimPendingAutoFixes()
     {
         for (var i = _pendingAutoFixes.Count - 1; i >= 0; i--)
@@ -69,8 +67,7 @@ internal abstract partial class InputBackendBase<TFocus>
             : [];
         _skippedRun.Clear();
 
-        // Typos only asks the brain for spelling inside the typed layout. A brain that ignores the hint can still
-        // answer with another layout, so the result is checked below as well.
+        // A brain that ignores the typo-only hint can still name another layout, so the result is checked below.
         var hints = AutoMode
             ? new CorrectionHints(_lineDirection, KeysOnly: !AutoFixTypos)
             : new CorrectionHints(TypoOnly: true);
@@ -87,7 +84,6 @@ internal abstract partial class InputBackendBase<TFocus>
             return;
         }
 
-        // Typos only keeps a word as typed when the answer still names another layout.
         if (!AutoMode && (phrase.TargetLayout is not null || !string.IsNullOrEmpty(phrase.TargetLayoutId)))
             return;
 
@@ -99,7 +95,6 @@ internal abstract partial class InputBackendBase<TFocus>
         if (!phrase.Changed)
             return;
 
-        // Short words before a word that crosses are read again with its direction.
         var lead = crossedInto is { } direction ? ReadRunAgain(run, direction) : string.Empty;
         var original = string.Concat(run.Select(w => w + " ")) + word + " " + tail;
         if (lead.Length == 0)
@@ -128,7 +123,6 @@ internal abstract partial class InputBackendBase<TFocus>
         SwitchLayoutIfRequested(phrase.TargetLayout, phrase.TargetLayoutId);
     }
 
-    // The skipped words, each followed by its space, as the settled direction reads them; empty when none changes.
     private string ReadRunAgain(string[] run, Script direction)
     {
         var read = new StringBuilder();

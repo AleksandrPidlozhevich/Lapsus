@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
-// Selection actions: copy the selection, fix or transform it, paste it back.
 internal abstract partial class InputBackendBase<TFocus>
 {
     protected async Task ApplySelectionActionAsync(SelectionAction action)

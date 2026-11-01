@@ -14,10 +14,8 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
-// IDictationHost: where dictated text goes and the dictation hotkey events.
 internal abstract partial class InputBackendBase<TFocus>
 {
-    // ---- Dictation (IDictationHost) ----
 
     public int DictationHotkey { get; set; }
 
@@ -36,10 +34,10 @@ internal abstract partial class InputBackendBase<TFocus>
 
     protected void RaiseDictationCancel() => DictationCancelPressed?.Invoke();
 
-    // UI thread: every modifier going down or up, with the whole set held now. True when this completed the chord.
+    // UI thread. True when this completed the chord.
     protected bool NoteDictationModifiers(HotkeyModifiers held) => _dictationChord.NoteModifiers(held);
 
-    // UI thread: a key other than a modifier went down.
+    // UI thread.
     protected void NoteDictationOtherKey() => _dictationChord.NoteOtherKey();
 
 
@@ -62,7 +60,6 @@ internal abstract partial class InputBackendBase<TFocus>
         if (text.Length == 0)
             return false;
 
-        // A word typed right before the caret gets a space between it and the dictation.
         var line = _buffer.Segment;
         var spaced = line.Length > 0 && !char.IsWhiteSpace(line[^1]) && !char.IsWhiteSpace(text[0])
             ? " " + text

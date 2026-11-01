@@ -4,7 +4,6 @@ using static Lapsus.Input.NativeMethods;
 
 namespace Lapsus.Input;
 
-// Which modifiers are held, as the low-level keyboard hook saw them go down and up.
 [SupportedOSPlatform("windows")]
 internal sealed class WindowsModifierKeys
 {

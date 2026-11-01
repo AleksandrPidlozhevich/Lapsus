@@ -37,8 +37,7 @@ var indexSize = indexSizeIndex >= 0 && indexSizeIndex + 1 < args.Length && int.T
     ? size
     : SpellChecker.DefaultSuggestionIndexSize;
 
-// --neural <model folder or installed model id>: measure the neural brain instead. A model call costs
-// hundreds of milliseconds, so it runs on far fewer lines, and the rules below are not run.
+// A model call costs hundreds of milliseconds, so it runs on far fewer lines, and the rules below are not run.
 var neuralIndex = Array.IndexOf(args, "--neural");
 string? modelDirectory = null;
 if (neuralIndex >= 0)
@@ -54,7 +53,6 @@ if (neuralIndex >= 0)
     }
 }
 
-// --blocks <text>: only the neural blocks whose heading contains it, e.g. "typo".
 var blocksIndex = Array.IndexOf(args, "--blocks");
 var blocks = blocksIndex >= 0 && blocksIndex + 1 < args.Length ? args[blocksIndex + 1] : null;
 

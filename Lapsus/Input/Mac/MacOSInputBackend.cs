@@ -103,7 +103,6 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
                 }
             }
 
-            // A previous tap thread may still be winding down after a stop or a watchdog stop.
             var previous = CurrentTapThread();
             if (previous is { IsAlive: true } && !previous.Join(TapThreadJoin))
                 throw new InvalidOperationException("The previous keyboard capture thread did not exit in time.");

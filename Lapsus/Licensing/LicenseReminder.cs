@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Licensing;
 
-// Shows the licence reminder at start and then at most once a day. A reminder only, never a feature gate.
+// A reminder only, never a feature gate.
 internal sealed class LicenseReminder(LicenseStatus status, LicenseViewModel viewModel)
 {
     private static readonly TimeSpan ReminderInterval = TimeSpan.FromDays(1);

@@ -3,7 +3,6 @@ using System.Text;
 
 namespace Lapsus.Core.Correction;
 
-// Joins the chosen readings back into a phrase: the text, the layout to switch to and the settled spans.
 internal static class PhraseEmitter
 {
     // Short words must not settle a line: "d"/"vs" are also how "в"/"мы" get typed.

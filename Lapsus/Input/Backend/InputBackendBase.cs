@@ -198,8 +198,7 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
 
     protected abstract bool IsStillFocused(TFocus ownerAtStart);
 
-    // True while a missing accessibility focus should not discard the line. Electron does that
-    // on its own, in the middle of a word.
+    // Electron drops the focused element on its own, in the middle of a word.
     protected virtual bool RetainBufferOnUnreadableFocus => false;
 
     protected void RaiseDiagnostic(string message)

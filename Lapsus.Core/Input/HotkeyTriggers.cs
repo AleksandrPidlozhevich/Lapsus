@@ -38,8 +38,8 @@ public enum HotkeyModifiers
     Meta = 8
 }
 
-// What a key press is while a shortcut is being recorded: a modifier only changes what is held, a named key
-// (F-keys, Pause, Insert...) may stand alone, a typing key needs a modifier so it cannot hijack typing.
+// A modifier only changes what is held, a named key (F-keys, Pause, Insert...) may stand alone, a typing key
+// needs a modifier so it cannot hijack typing.
 public enum HotkeyKeyKind
 {
     Modifier,
@@ -56,7 +56,6 @@ public enum HotkeyCaptureKind
     Cancelled
 }
 
-// Trigger is the encoded shortcut for Captured; Held is the modifier set so far, for live feedback.
 public readonly record struct HotkeyCaptureEvent(HotkeyCaptureKind Kind, HotkeyModifiers Held, int Trigger);
 
 // A key pressed with modifiers, packed above the plain key codes. The bits used here are free: the

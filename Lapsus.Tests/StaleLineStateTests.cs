@@ -39,7 +39,6 @@ public class StaleLineStateTests
         Assert.Equal("car x", ScreenAfter(backend, "cfk x"));
     }
 
-    // Replays the injections over the text the field held, as the app's keystrokes and corrections would.
     private static string ScreenAfter(FakeInputBackend backend, string typed)
     {
         var screen = new System.Text.StringBuilder(typed);

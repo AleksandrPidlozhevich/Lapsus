@@ -108,11 +108,8 @@ internal sealed class WindowsFocusProbe
         return !_focusCheck!.IsCompleted || _focusCheck.Result;
     }
 
-    // Same check, but a still-pending result reads as "not yet confirmed" rather than "protected".
-    // Used while capturing keystrokes: failing closed there would silently drop the letters typed
-    // before a slow (MSAA, hundreds of milliseconds) check resolves, even in an ordinary field.
-    // IsPassword stays fail-closed for the hotkey/diagnostics path, where a still-pending read only
-    // delays an about-to-be-confirmed field's correction by that same fraction of a second.
+    // A still-pending result is not confirmed: failing closed would drop letters before a slow MSAA check resolves.
+    // IsPassword stays fail-closed; a pending read there only delays the correction.
     public bool IsConfirmedPassword(IntPtr focus)
     {
         if (!SkipPasswordFields)

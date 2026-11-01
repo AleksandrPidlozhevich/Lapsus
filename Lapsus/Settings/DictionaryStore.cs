@@ -77,8 +77,7 @@ public sealed class DictionaryStore
         }
     }
 
-    // Lists installed before cleaning existed are cleaned in place. A list already at the current version is left
-    // alone, so this costs nothing after the first start.
+    // Lists installed before cleaning existed are cleaned in place.
     public void CleanOutdatedLists()
     {
         foreach (var descriptor in DictionaryCatalog.Available)

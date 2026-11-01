@@ -3,7 +3,6 @@ using WeCantSpell.Hunspell;
 
 namespace Lapsus.Core.Spelling;
 
-// How a typed word is folded before it is looked up in a frequency list or a Hunspell lexicon.
 internal static class LookupKeys
 {
     // Lookups fold marks; written-back text keeps the user's spelling. Hebrew keeps geresh.

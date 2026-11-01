@@ -4,13 +4,11 @@ namespace Lapsus.Core.Spelling;
 
 // A frequency list is scraped text, and it carries entries no language writes: "нeт" (a Latin "e" among
 // Cyrillic), "eсли", "пo". The spell checker counts them as known words, so the fix that should land on them
-// never runs. Cleaning drops every entry whose letters span more than one alphabet. It is decided by the
-// characters alone, so it needs no lexicon: a Hunspell lexicon is not complete enough to be the authority
-// (it lacks many real words), and cleaning by it removed real words and cost typo accuracy in every language.
+// never runs. A Hunspell lexicon is not complete enough to be the authority (it lacks many real words), and
+// cleaning by it removed real words and cost typo accuracy in every language.
 public static class FrequencyListCleaner
 {
-    // Rewrites the list without its mixed-alphabet entries, when there are any. Returns how many were removed.
-    // Two lists are left as they are. Abjads: their clitic-prefixed words must stay with the spell checker.
+    // Abjads: their clitic-prefixed words must stay with the spell checker.
     // Latin: the English list's Greek look-alike entries ("yοu", "tο") are high-frequency; removing them moved the
     // English trigram model and cost about a point of English OOV recovery across every target (sweep, Rule A).
     public static int CleanFile(string listPath, Script script)

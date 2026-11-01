@@ -4,12 +4,12 @@ using System;
 
 namespace Lapsus.Input;
 
-// Records the next key combination for a hotkey field in Settings. Fed from the key hook's thread.
+// Fed from the key hook's thread.
 internal sealed class HotkeyRecorder
 {
     private Action<HotkeyCaptureEvent>? _sink;
 
-    // Read on the key hook's thread: a capture is on while this is true.
+    // Read on the key hook's thread.
     public bool IsActive => _sink is not null;
 
     public void Begin(Action<HotkeyCaptureEvent> sink)
@@ -22,7 +22,7 @@ internal sealed class HotkeyRecorder
         _sink = null;
     }
 
-    // True means the event belongs to the capture and must not reach the app. The sink always runs on the UI thread.
+    // True means the event belongs to the capture and must not reach the app.
     public bool Feed(int key, bool isDown, HotkeyKeyKind kind, HotkeyModifiers held)
     {
         var sink = _sink;

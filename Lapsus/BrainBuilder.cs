@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus;
 
-// Picks the correction brain from settings and hands it to the backend, one rebuild at a time.
 internal sealed class BrainBuilder(
     IInputBackend backend, DictionaryStore dictionaryStore, ModelStore modelStore, WordExceptions exceptions)
 {
@@ -22,7 +21,6 @@ internal sealed class BrainBuilder(
 
     private (string Path, ComputeDevicePreference Device)? _loadedModel;
 
-    // Set once the settings view model exists; it is built with RebuildAsync as its callback.
     public SettingsViewModel? Settings { get; set; }
 
     public async Task RebuildAsync()

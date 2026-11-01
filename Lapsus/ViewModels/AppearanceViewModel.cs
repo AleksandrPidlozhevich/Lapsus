@@ -10,7 +10,6 @@ using System.Linq;
 
 namespace Lapsus.ViewModels;
 
-// Theme and interface language, the pickers in the window's header, plus the theme-matched icons.
 public sealed partial class AppearanceViewModel : ObservableObject
 {
     private readonly SettingsStore _store;

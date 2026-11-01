@@ -38,7 +38,6 @@ internal sealed class LineEvidence(WordScorer scorer, PhraseContext.ReadInScript
         return null;
     }
 
-    // The script a neighbour typed on the same layout crossed into.
     public Script? CrossedOnTheSameKeys(int? index, in TokenReading token)
     {
         if (index is not { } i)

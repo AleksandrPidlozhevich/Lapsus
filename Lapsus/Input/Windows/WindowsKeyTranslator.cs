@@ -6,7 +6,6 @@ using static Lapsus.Input.NativeMethods;
 
 namespace Lapsus.Input;
 
-// Turns a key the hook saw into the characters it types on a layout, carrying a dead key over to the next one.
 [SupportedOSPlatform("windows")]
 internal sealed class WindowsKeyTranslator
 {

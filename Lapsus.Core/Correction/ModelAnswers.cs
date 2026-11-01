@@ -2,7 +2,6 @@ using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Correction;
 
-// Cleaning and vetting a free-form answer from the model, and which layout it moved the text to.
 internal static class ModelAnswers
 {
     // A letter in a script the user neither typed nor has a layout for is a translation, not a repair.

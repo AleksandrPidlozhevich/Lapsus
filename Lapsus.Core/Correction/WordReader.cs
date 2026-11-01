@@ -4,7 +4,6 @@ using static Lapsus.Core.Correction.WordSources;
 
 namespace Lapsus.Core.Correction;
 
-// Reads one typed word: as typed, through every candidate layout, typo-fixed, split in two, or with the keys after it.
 internal sealed class WordReader
 {
     private const double EditPenalty = 0.12;

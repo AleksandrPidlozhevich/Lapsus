@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Compiles native/LapsusStoreKit/StoreBridge.swift into libLapsusStoreKit.dylib, the StoreKit 2
-# bridge the Mac App Store edition loads. Needs Xcode (or its command line tools) for swiftc.
-#
-# Usage: scripts/build-storekit-bridge.sh <output-dir>
-
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT_DIR="$1"
 mkdir -p "$OUT_DIR"

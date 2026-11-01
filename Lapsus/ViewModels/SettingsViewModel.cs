@@ -121,7 +121,6 @@ public partial class SettingsViewModel : ViewModelBase
 
         // macOS asks for Input Monitoring and Accessibility the moment capture starts. A first launch
         // explains why before that (App Store guideline 2.5.14), and capture waits for the answer.
-        // A Mac that already granted both has nothing to explain.
         if (OperatingSystem.IsMacOS() && !settings.OnboardingDone)
         {
             OnboardingPending = !SystemPermissions.AccessibilityGranted || !SystemPermissions.InputMonitoringGranted;
@@ -158,7 +157,6 @@ public partial class SettingsViewModel : ViewModelBase
 
     public ModelsViewModel Models { get; }
 
-    // Set by the app once dictation is wired up; null where it is not.
     [ObservableProperty] private VoiceViewModel? _voice;
 
     public DictionariesViewModel Dictionaries { get; }
@@ -189,7 +187,6 @@ public partial class SettingsViewModel : ViewModelBase
 
     public StoreViewModel Store { get; }
 
-    // Only in the App Store edition, after the trial, without a subscription or lifetime purchase.
     public bool NeuralLocked => !Store.PaidFeatures;
 
     private void OnStoreAccessChanged()

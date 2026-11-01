@@ -331,7 +331,7 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
             }
         }
 
-        // A held hotkey repeats its key-down; it already did its work on the first one.
+        // A held key repeats its key-down.
         if (isDown && _swallowedKeyDown == vk)
             return 1;
 
@@ -347,7 +347,6 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         {
             NoteNonModifierInput();
 
-            // Esc during a recording cancels it and goes no further: the app behind must not see it.
             if (vk == VK_ESCAPE && DictationListening)
             {
                 _swallowedKeyDown = vk;
@@ -431,7 +430,7 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         if (IsExcludedApp(out _))
             return false;
 
-        // Dictation starts on the key going down, so it can be held while speaking; the rest wait for key-up.
+        // Dictation starts on key-down so it can be held while speaking.
         if (dictation)
             Dispatcher.UIThread.Post(RaiseDictationHotkey);
         _pendingHotkeyAction = run;
@@ -451,10 +450,8 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
             return;
         }
 
-        // Not IsPassword: that fails closed while the (sometimes hundreds-of-milliseconds) accessibility
-        // check is still pending, which would drop every letter typed right after focusing an ordinary
-        // field. The hotkey/diagnostics path still fails closed on a merely-pending check; this one only
-        // stops tracking once the field is actually confirmed protected.
+        // Not IsPassword: a pending check fails closed and would drop letters in an ordinary field.
+        // The hotkey path stays fail-closed; this stops tracking only once the field is confirmed protected.
         if (_focus.IsConfirmedPassword(BufferOwner.Focus))
         {
             ResetTypingBuffer();

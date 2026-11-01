@@ -1,10 +1,10 @@
 namespace Lapsus.Core.Layout;
 
-// Which keys sit next to which on a staggered ANSI board, read through any layout: a slip lands on a
+// Physical neighbours on a staggered ANSI board, read through any layout: a slip lands on a
 // neighbour far more often than anywhere else, whatever the key prints.
 public static class KeyNeighbours
 {
-    // The three letter rows as the US layout prints them, with each row's stagger in key widths.
+    // Each row's stagger, in key widths.
     private static readonly (string Keys, double Offset)[] Rows =
     [
         ("qwertyuiop[]", 0.0),

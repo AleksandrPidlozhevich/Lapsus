@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
-// The CGEventTap thread and what it does with each key event.
 internal sealed partial class MacOSInputBackend
 {
     private void RunTapThread()
@@ -159,8 +158,8 @@ internal sealed partial class MacOSInputBackend
         if (MacOSNativeMethods.CGEventGetIntegerValueField(@event, MacOSNativeMethods.EventSourceUserData)
             == MacOSNativeMethods.InjectedMarker)
         {
-            // The target app must see a normal key. WebKit and Chromium drop an event that still
-            // carries our marker, and the marker is what keeps the key out of the typing buffer.
+            // WebKit and Chromium drop an event that still carries our marker, and the marker
+            // is what keeps the key out of the typing buffer.
             MacOSNativeMethods.CGEventSetIntegerValueField(
                 @event, MacOSNativeMethods.EventSourceUserData, 0);
             return @event;
@@ -208,7 +207,6 @@ internal sealed partial class MacOSInputBackend
 
         PostFromTap(epoch, NoteDictationOtherKey);
 
-        // Esc during a recording cancels it and goes no further: the app behind must not see it.
         if (keyCode == MacOSNativeMethods.EscapeKeyCode && DictationListening)
         {
             _swallowedKeyDown = keyCode;
@@ -329,7 +327,7 @@ internal sealed partial class MacOSInputBackend
             return;
         }
 
-        // Skip when Secure Event Input is on (password fields / Terminal); tap sees no keys.
+        // Secure Event Input (password fields / Terminal): the tap sees no keys.
         if (SkipPasswordFields && IsSecureInputEnabled())
         {
             ResetTypingBuffer();

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 
-// The update button in the window's corner: check now, or install the update already downloaded.
 public sealed partial class UpdatesViewModel : ObservableObject
 {
     private readonly AppUpdater _updater;

@@ -1,6 +1,5 @@
 namespace Lapsus.Core.Layout;
 
-// Greek, Hebrew, Arabic and Georgian layouts.
 public static partial class BundledKeyboardMaps
 {
     private static char[] BuildGreek()
