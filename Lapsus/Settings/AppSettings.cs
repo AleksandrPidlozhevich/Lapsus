@@ -54,9 +54,6 @@ public sealed class AppSettings
     // macOS: the first-launch explanation of what Lapsus reads was answered (OnboardingWindow).
     public bool OnboardingDone { get; set; }
 
-    // Mac App Store edition: the day the trial of the paid features began (StoreAccessPolicy).
-    public DateOnly? StoreTrialStartedOn { get; set; }
-
     // Voice typing: the hotkey starts and stops recording; the speech model loads on first use and is unloaded
     // after SpeechUnloadAfter of no dictation.
     public bool DictationEnabled { get; set; }

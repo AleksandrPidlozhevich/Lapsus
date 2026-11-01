@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Έξοδος</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Τερματισμός Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — διόρθωση διάταξης</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Ετήσια, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} δωρεάν, μετά {1} τον χρόνο</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Δωρεάν έως {0}. Στη συνέχεια ξεκινά η ετήσια συνδρομή, εκτός αν την ακυρώσετε στις ρυθμίσεις του λογαριασμού σας στο App Store τουλάχιστον 24 ώρες νωρίτερα.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Για πάντα, {0}</value>

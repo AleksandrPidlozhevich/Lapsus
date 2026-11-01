@@ -123,7 +123,7 @@ public partial class App : Application
             _licenseViewModel = new LicenseViewModel(
                 licenses, _licenseStatus, ShowLicensePage, CloseLicenseReminder);
 
-            _storeViewModel = new StoreViewModel(StorePurchasesFactory.CreateForCurrentBuild(), settings, store);
+            _storeViewModel = new StoreViewModel(StorePurchasesFactory.CreateForCurrentBuild());
             _ = _storeViewModel.RefreshAsync();
 
             _settingsViewModel = new SettingsViewModel(
@@ -366,7 +366,9 @@ public partial class App : Application
         var showItem = new NativeMenuItem(loc["Tray_Settings"]);
         showItem.Click += (_, _) => ShowWindow();
 
-        var exitItem = new NativeMenuItem(loc["Tray_Exit"]);
+        // Apple requires "Quit <App>" on macOS; Windows keeps "Exit".
+        var exitKey = OperatingSystem.IsMacOS() ? "Tray_Quit" : "Tray_Exit";
+        var exitItem = new NativeMenuItem(loc[exitKey]);
         exitItem.Click += (_, _) =>
         {
             PerformExitCleanup();
@@ -391,7 +393,7 @@ public partial class App : Application
         loc.LanguageChanged += (_, _) =>
         {
             showItem.Header = loc["Tray_Settings"];
-            exitItem.Header = loc["Tray_Exit"];
+            exitItem.Header = loc[exitKey];
             _trayIcon.ToolTipText = _updateItem is null
                 ? loc["Tray_Tooltip"]
                 : UpdateNotice.TooltipText(loc, _updater.PendingVersion);

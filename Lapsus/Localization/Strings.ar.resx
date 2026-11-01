@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>خروج</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>إنهاء Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — تصحيح التخطيط</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>سنوي، {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} مجانًا، ثم {1} سنويًا</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>مجانًا حتى {0}. بعد ذلك يبدأ الاشتراك السنوي ما لم تلغه من إعدادات حسابك في App Store قبل 24 ساعة على الأقل.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>مدى الحياة، {0}</value>

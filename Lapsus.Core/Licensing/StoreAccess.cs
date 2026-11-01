@@ -20,8 +20,8 @@ public enum StorePlan
 }
 
 // What the App Store says the user owns right now. An expired or refunded subscription is not
-// reported at all, so Yearly always means active.
-public readonly record struct StoreEntitlement(StorePlan Plan, DateTimeOffset? Expires = null)
+// reported at all. IsTrial: the yearly subscription is still in its free introductory period.
+public readonly record struct StoreEntitlement(StorePlan Plan, DateTimeOffset? Expires = null, bool IsTrial = false)
 {
     public static StoreEntitlement None { get; } = new(StorePlan.None);
 }
@@ -43,36 +43,27 @@ public readonly record struct StoreAccess(StoreAccessKind Kind, int TrialDaysLef
 
 public static class StoreAccessPolicy
 {
-    // Counted by the app from the first launch, so trying it needs no card and no subscription.
-    public const int TrialDays = 60;
-
-    public static StoreAccess Decide(bool isStoreBuild, StoreEntitlement entitlement, DateOnly? trialStarted, DateOnly today)
+    // The trial is the yearly subscription's free introductory offer, so the App Store counts it.
+    public static StoreAccess Decide(bool isStoreBuild, StoreEntitlement entitlement, DateTimeOffset now)
     {
         if (!isStoreBuild)
             return new StoreAccess(StoreAccessKind.NotStoreBuild);
 
-        switch (entitlement.Plan)
-        {
-            case StorePlan.Lifetime:
-                return new StoreAccess(StoreAccessKind.Lifetime);
-            case StorePlan.Yearly:
-                return new StoreAccess(StoreAccessKind.Subscription, Renews: entitlement.Expires);
-        }
+        if (entitlement.Plan == StorePlan.Lifetime)
+            return new StoreAccess(StoreAccessKind.Lifetime);
 
-        var left = TrialDaysLeft(trialStarted, today);
-        return left > 0
-            ? new StoreAccess(StoreAccessKind.Trial, TrialDaysLeft: left)
-            : new StoreAccess(StoreAccessKind.Free);
+        // Entitlements are re-read now and then; one that ran out in between no longer counts.
+        if (entitlement.Plan != StorePlan.Yearly || entitlement.Expires <= now)
+            return new StoreAccess(StoreAccessKind.Free);
+
+        return entitlement.IsTrial
+            ? new StoreAccess(StoreAccessKind.Trial, TrialDaysLeft(entitlement.Expires, now), entitlement.Expires)
+            : new StoreAccess(StoreAccessKind.Subscription, Renews: entitlement.Expires);
     }
 
-    // No start date yet means the trial starts today. A start in the future (the clock was moved
-    // back) never makes the trial longer than its full length.
-    public static int TrialDaysLeft(DateOnly? trialStarted, DateOnly today)
-    {
-        var start = trialStarted ?? today;
-        var elapsed = Math.Max(0, today.DayNumber - start.DayNumber);
-        return Math.Clamp(TrialDays - elapsed, 0, TrialDays);
-    }
+    // The last day of the trial still counts as one day left.
+    public static int TrialDaysLeft(DateTimeOffset? ends, DateTimeOffset now) =>
+        ends is { } end ? Math.Max(1, (int)Math.Ceiling((end - now).TotalDays)) : 0;
 
     public static StorePlan PlanOf(string productId) => productId switch
     {

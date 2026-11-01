@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>יציאה</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>צא מ-Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — תיקון פריסה</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>שנתי, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} בחינם, ולאחר מכן {1} לשנה</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>בחינם עד {0}. לאחר מכן המינוי השנתי מתחיל, אלא אם תבטלו אותו בהגדרות חשבון ה־App Store לפחות 24 שעות לפני כן.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>לתמיד, {0}</value>

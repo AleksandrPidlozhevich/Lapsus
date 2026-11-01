@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Beenden</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Lapsus beenden</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — Layoutkorrektur</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Jährlich, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} kostenlos, danach {1} pro Jahr</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Kostenlos bis {0}. Danach beginnt das Jahresabo, sofern du es nicht spätestens 24 Stunden vorher in den Einstellungen deines App Store-Accounts kündigst.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Dauerhaft, {0}</value>

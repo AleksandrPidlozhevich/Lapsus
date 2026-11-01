@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Quitter</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Quitter Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — correction de disposition</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Annuel, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} gratuitement, puis {1} par an</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Gratuit jusqu'au {0}. Ensuite, l'abonnement annuel commence, sauf si vous l'annulez dans les réglages de votre compte App Store au moins 24 heures avant.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>À vie, {0}</value>

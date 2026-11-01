@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Çıkış</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Lapsus'tan Çık</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — düzen düzeltme</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Yıllık, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} ücretsiz, ardından yıllık {1}</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>{0} tarihine kadar ücretsiz. Ardından, en az 24 saat önce App Store hesap ayarlarınızdan iptal etmediğiniz sürece yıllık abonelik başlar.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Ömür boyu, {0}</value>

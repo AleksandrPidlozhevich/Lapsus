@@ -181,8 +181,10 @@ Neural correction (and features added after it) is paid for in this edition only
 | `com.lapsus.app.plus.yearly` | Auto-renewable subscription, 1 year | its own subscription group; Family Sharing on |
 | `com.lapsus.app.plus.lifetime` | Non-consumable | Family Sharing on |
 
-Do **not** add an App Store introductory offer: the 60-day trial is counted by the app itself, so
-nobody has to start a subscription to try it. The purchase needs the Paid Apps agreement, bank and
+Give the yearly subscription an **introductory offer: Free, 2 months**, for new subscribers in
+every territory. That offer is the trial: the App Store counts it and decides who is still eligible
+(App Review guideline 3.1.1 does not allow a trial counted by the app). Use only a free trial as the
+introductory offer; the app reads any introductory period as "in the trial". The purchase needs the Paid Apps agreement, bank and
 tax details in App Store Connect. Purchases cannot be tried in the `--test` copy below (the App
 Store does not know its bundle id); use a sandbox tester account with a TestFlight build.
 

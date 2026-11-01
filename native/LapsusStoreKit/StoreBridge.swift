@@ -30,6 +30,10 @@ private func ownedProducts() async -> [[String: Any]] {
         if let expires = transaction.expirationDate {
             item["expires"] = expires.timeIntervalSince1970
         }
+        // Only a free trial is set up as the introductory offer, so this means "in the trial".
+        if transaction.offerType == .introductory {
+            item["trial"] = true
+        }
         owned.append(item)
     }
     return owned
@@ -42,13 +46,52 @@ public func lapsusStoreOwned(_ token: Int64, _ callback: LapsusReply) {
     }
 }
 
+// "2 months" in the app's language, which may differ from the system's.
+private func describe(_ period: Product.SubscriptionPeriod, _ language: String) -> String? {
+    var components = DateComponents()
+    switch period.unit {
+    case .day: components.day = period.value
+    case .week: components.weekOfMonth = period.value
+    case .month: components.month = period.value
+    case .year: components.year = period.value
+    @unknown default: return nil
+    }
+
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.locale = Locale(identifier: language)
+    let formatter = DateComponentsFormatter()
+    formatter.calendar = calendar
+    formatter.unitsStyle = .full
+    formatter.allowedUnits = [.year, .month, .weekOfMonth, .day]
+    return formatter.string(from: components)
+}
+
+// The free trial is offered only to someone who has never had it; Apple decides that.
+private func freeTrial(_ product: Product, _ language: String) async -> String? {
+    guard let subscription = product.subscription,
+          let offer = subscription.introductoryOffer,
+          offer.paymentMode == .freeTrial,
+          await subscription.isEligibleForIntroOffer else { return nil }
+    return describe(offer.period, language)
+}
+
 @_cdecl("lapsus_store_products")
-public func lapsusStoreProducts(_ token: Int64, _ ids: UnsafePointer<CChar>, _ callback: LapsusReply) {
+public func lapsusStoreProducts(
+    _ token: Int64, _ ids: UnsafePointer<CChar>, _ language: UnsafePointer<CChar>, _ callback: LapsusReply
+) {
     let wanted = String(cString: ids).split(separator: ",").map(String.init)
+    let lang = String(cString: language)
     Task {
         do {
-            let products = try await Product.products(for: wanted)
-            reply(callback, token, ["products": products.map { ["id": $0.id, "price": $0.displayPrice] }])
+            var list: [[String: Any]] = []
+            for product in try await Product.products(for: wanted) {
+                var item: [String: Any] = ["id": product.id, "price": product.displayPrice]
+                if let trial = await freeTrial(product, lang) {
+                    item["trial"] = trial
+                }
+                list.append(item)
+            }
+            reply(callback, token, ["products": list])
         } catch {
             reply(callback, token, ["error": error.localizedDescription])
         }

@@ -63,18 +63,21 @@ internal sealed class MacStoreKitPurchases : IStorePurchases
         return ReadOwned(answer);
     }
 
-    public async Task<IReadOnlyList<StoreProduct>> ProductsAsync()
+    public async Task<IReadOnlyList<StoreProduct>> ProductsAsync(string language)
     {
         var ids = string.Join(",", StoreProducts.All);
-        var answer = await CallAsync(token => lapsus_store_products(token, ids, Reply)).ConfigureAwait(false);
+        var answer = await CallAsync(token => lapsus_store_products(token, ids, language, Reply)).ConfigureAwait(false);
         if (!answer.TryGetProperty("products", out var products))
             return [];
 
         var list = new List<StoreProduct>();
         foreach (var product in products.EnumerateArray())
         {
-            if (product.TryGetProperty("id", out var id) && product.TryGetProperty("price", out var price))
-                list.Add(new StoreProduct(id.GetString() ?? string.Empty, price.GetString() ?? string.Empty));
+            if (!product.TryGetProperty("id", out var id) || !product.TryGetProperty("price", out var price))
+                continue;
+
+            var trial = product.TryGetProperty("trial", out var length) ? length.GetString() : null;
+            list.Add(new StoreProduct(id.GetString() ?? string.Empty, price.GetString() ?? string.Empty, trial));
         }
 
         return list;
@@ -118,7 +121,8 @@ internal sealed class MacStoreKitPurchases : IStorePurchases
             DateTimeOffset? expires = item.TryGetProperty("expires", out var seconds)
                 ? DateTimeOffset.FromUnixTimeMilliseconds((long)(seconds.GetDouble() * 1000))
                 : null;
-            entitlements.Add(new StoreEntitlement(StoreAccessPolicy.PlanOf(id.GetString() ?? string.Empty), expires));
+            var isTrial = item.TryGetProperty("trial", out var trial) && trial.ValueKind == JsonValueKind.True;
+            entitlements.Add(new StoreEntitlement(StoreAccessPolicy.PlanOf(id.GetString() ?? string.Empty), expires, isTrial));
         }
 
         return StoreAccessPolicy.Strongest(entitlements);
@@ -177,7 +181,10 @@ internal sealed class MacStoreKitPurchases : IStorePurchases
 
     [DllImport(Bridge)]
     private static extern void lapsus_store_products(
-        long token, [MarshalAs(UnmanagedType.LPUTF8Str)] string ids, ReplyCallback callback);
+        long token,
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string ids,
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string language,
+        ReplyCallback callback);
 
     [DllImport(Bridge)]
     private static extern void lapsus_store_purchase(
