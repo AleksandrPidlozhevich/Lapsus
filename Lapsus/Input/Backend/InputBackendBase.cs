@@ -19,7 +19,7 @@ internal interface ITypingFocus
     bool IsEmpty { get; }
 }
 
-internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
+internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDictationHost
     where TFocus : struct, ITypingFocus, IEquatable<TFocus>
 {
 
@@ -64,6 +64,8 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         Corrector = corrector;
 
         ExcludedApps = excludedApps ?? new AppExclusions();
+        _dictationChord = new DictationChordDetector(
+            () => DictationHotkey, RaiseDictationHotkey, interrupted => RaiseDictationReleased(interrupted));
     }
 
     protected AppExclusions ExcludedApps { get; }
@@ -74,103 +76,31 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
 
     public int HotkeyVirtualKey { get; set; }
 
-    private readonly int[] _selectionTriggers = new int[Enum.GetValues<SelectionAction>().Length];
+    private readonly SelectionTriggers _selectionTriggers = new();
 
-    public void SetSelectionHotkey(SelectionAction action, int trigger)
-    {
-        _selectionTriggers[(int)action] = trigger;
-    }
+    private readonly HotkeyRecorder _hotkeyRecorder = new();
 
-    protected SelectionAction? SelectionActionFor(int trigger)
-    {
-        if (trigger == 0)
-            return null;
+    private readonly DictationChordDetector _dictationChord;
 
-        for (var i = 0; i < _selectionTriggers.Length; i++)
-            if (_selectionTriggers[i] == trigger)
-                return (SelectionAction)i;
+    public void SetSelectionHotkey(SelectionAction action, int trigger) => _selectionTriggers.Set(action, trigger);
 
-        return null;
-    }
+    protected SelectionAction? SelectionActionFor(int trigger) => _selectionTriggers.For(trigger);
 
-    protected SelectionAction? SelectionActionForKey(int key, HotkeyModifiers held, bool plainAllowed)
-    {
-        for (var i = 0; i < _selectionTriggers.Length; i++)
-            if (TriggerMatches(_selectionTriggers[i], key, held, plainAllowed))
-                return (SelectionAction)i;
+    protected SelectionAction? SelectionActionForKey(int key, HotkeyModifiers held, bool plainAllowed) =>
+        _selectionTriggers.ForKey(key, held, plainAllowed);
 
-        return null;
-    }
+    protected static bool TriggerMatches(int trigger, int key, HotkeyModifiers held, bool plainAllowed) =>
+        SelectionTriggers.Matches(trigger, key, held, plainAllowed);
 
-    // A plain key fires only where the platform allows it (no shortcut modifier held); a combo needs its exact modifiers.
-    protected static bool TriggerMatches(int trigger, int key, HotkeyModifiers held, bool plainAllowed)
-    {
-        if (trigger == 0)
-            return false;
+    protected bool IsCapturingHotkey => _hotkeyRecorder.IsActive;
 
-        if (HotkeyCombo.IsCombo(trigger))
-            return HotkeyCombo.Triggers(trigger, key, held);
+    public void BeginHotkeyCapture(Action<HotkeyCaptureEvent> sink) => _hotkeyRecorder.Begin(sink);
 
-        return plainAllowed && trigger == key;
-    }
+    public void CancelHotkeyCapture() => _hotkeyRecorder.Cancel();
 
-    private Action<HotkeyCaptureEvent>? _captureSink;
-
-    // Read on the key hook's thread: a capture is on while this is true.
-    protected bool IsCapturingHotkey => _captureSink is not null;
-
-    public void BeginHotkeyCapture(Action<HotkeyCaptureEvent> sink)
-    {
-        _captureSink = sink;
-    }
-
-    public void CancelHotkeyCapture()
-    {
-        _captureSink = null;
-    }
-
-    // The platform hook calls this for every key event while IsCapturingHotkey. True means the event belongs to the
-    // capture and must not reach the app. The sink always runs on the UI thread.
-    protected bool FeedHotkeyCapture(int key, bool isDown, HotkeyKeyKind kind, HotkeyModifiers held)
-    {
-        var sink = _captureSink;
-        if (sink is null)
-            return false;
-
-        if (kind == HotkeyKeyKind.Modifier)
-        {
-            PostCapture(sink, HotkeyCaptureKind.Held, held, 0);
-            return false;
-        }
-
-        if (!isDown)
-            return false;
-
-        if (kind == HotkeyKeyKind.Escape)
-        {
-            _captureSink = null;
-            PostCapture(sink, HotkeyCaptureKind.Cancelled, held, 0);
-            return true;
-        }
-
-        // Shift alone only types a capital letter, so a typing key needs a modifier other than Shift.
-        var needsShortcut = kind == HotkeyKeyKind.Typing && (held & ~HotkeyModifiers.Shift) == 0;
-        if (needsShortcut)
-        {
-            PostCapture(sink, HotkeyCaptureKind.Rejected, held, 0);
-            return true;
-        }
-
-        _captureSink = null;
-        PostCapture(sink, HotkeyCaptureKind.Captured, held, HotkeyCombo.Encode(key, held));
-        return true;
-    }
-
-    private static void PostCapture(Action<HotkeyCaptureEvent> sink, HotkeyCaptureKind kind, HotkeyModifiers held, int trigger)
-    {
-        var evt = new HotkeyCaptureEvent(kind, held, trigger);
-        Dispatcher.UIThread.Post(() => sink(evt));
-    }
+    // The platform hook calls this for every key event while IsCapturingHotkey; true swallows the event.
+    protected bool FeedHotkeyCapture(int key, bool isDown, HotkeyKeyKind kind, HotkeyModifiers held) =>
+        _hotkeyRecorder.Feed(key, isDown, kind, held);
 
     public bool AutoMode { get; set; }
 
@@ -311,159 +241,6 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         else
             apply();
     }
-
-    // ---- Dictation (IDictationHost) ----
-
-    public int DictationHotkey { get; set; }
-
-    // Read on the key hook's thread: Esc cancels a recording while this is true.
-    public bool DictationListening { get; set; }
-
-    public event Action? DictationHotkeyPressed;
-
-    public event Action<bool>? DictationHotkeyReleased;
-
-    public event Action? DictationCancelPressed;
-
-    protected void RaiseDictationHotkey() => DictationHotkeyPressed?.Invoke();
-
-    protected void RaiseDictationReleased(bool interrupted = false) => DictationHotkeyReleased?.Invoke(interrupted);
-
-    protected void RaiseDictationCancel() => DictationCancelPressed?.Invoke();
-
-    // ---- A dictation hotkey of modifiers alone (Ctrl+Win, ⌃⌥): hold to talk, a quick tap toggles ----
-
-    // Held this long before the microphone opens, so Ctrl+Win+→ and the like never flash it.
-    private static readonly TimeSpan ChordDelay = TimeSpan.FromMilliseconds(150);
-
-    private HotkeyModifiers _lastHeld;
-    private bool _chordHeld;
-    private bool _chordSpoiled;
-    private bool _chordPressed;
-    private int _chordGeneration;
-
-    private HotkeyModifiers DictationChord =>
-        HotkeyCombo.IsCombo(DictationHotkey) && HotkeyCombo.KeyOf(DictationHotkey) == 0
-            ? HotkeyCombo.ModifiersOf(DictationHotkey)
-            : HotkeyModifiers.None;
-
-    // UI thread: every modifier going down or up, with the whole set held now. True when this completed the chord.
-    protected bool NoteDictationModifiers(HotkeyModifiers held)
-    {
-        var previous = _lastHeld;
-        _lastHeld = held;
-        var chord = DictationChord;
-        if (chord == HotkeyModifiers.None || held == previous)
-            return false;
-
-        if (held == chord)
-        {
-            // Reached by letting go of a key (Shift out of Ctrl+Win+Shift) it is the tail of another shortcut.
-            if ((previous & ~chord) != 0)
-                return false;
-
-            _chordHeld = true;
-            _chordSpoiled = false;
-            _chordPressed = false;
-            var generation = ++_chordGeneration;
-            DispatcherTimer.RunOnce(() =>
-            {
-                if (generation != _chordGeneration || !_chordHeld || _chordSpoiled)
-                    return;
-                _chordPressed = true;
-                RaiseDictationHotkey();
-            }, ChordDelay);
-            return true;
-        }
-
-        if (!_chordHeld)
-            return false;
-
-        _chordHeld = false;
-        _chordGeneration++;
-        var letGo = (held & ~chord) == 0;
-        if (_chordPressed)
-        {
-            RaiseDictationReleased(interrupted: !letGo);
-        }
-        else if (letGo && !_chordSpoiled)
-        {
-            RaiseDictationHotkey();
-            RaiseDictationReleased();
-        }
-
-        _chordPressed = false;
-        return false;
-    }
-
-    // UI thread: a key other than a modifier went down. While the chord is held that makes it another shortcut.
-    protected void NoteDictationOtherKey()
-    {
-        if (!_chordHeld || _chordSpoiled)
-            return;
-
-        _chordSpoiled = true;
-        if (!_chordPressed)
-            return;
-
-        _chordPressed = false;
-        RaiseDictationReleased(interrupted: true);
-    }
-
-    // No password check: dictation reads nothing from the field, only types into it, and the check fails
-    // closed while it runs (hundreds of ms in Chrome/Electron), which refused dictation in ordinary fields.
-    public string? DictationBlockedReason() => InputBlockedReason(passwords: false);
-
-    // The field with focus right now; a platform that can read it says so, the rest fall back to the line's owner.
-    protected virtual TFocus CurrentFocus() => BufferOwner;
-
-    public object CaptureDictationTarget() => CurrentFocus();
-
-    // A field nobody could read at the start (the Mac App Store sandbox has no Accessibility) cannot be
-    // checked later either; the text then goes wherever the caret is, as the typed keys would.
-    public bool IsDictationTargetFocused(object target) =>
-        target is TFocus focus && (focus.IsEmpty || IsStillFocused(focus));
-
-    public bool InsertDictatedText(string text)
-    {
-        if (text.Length == 0)
-            return false;
-
-        // A word typed right before the caret gets a space between it and the dictation.
-        var line = _buffer.Segment;
-        var spaced = line.Length > 0 && !char.IsWhiteSpace(line[^1]) && !char.IsWhiteSpace(text[0])
-            ? " " + text
-            : text;
-        if (!TryInject(0, spaced))
-            return false;
-
-        // The dictated text becomes the line, committed, so the next dictation knows a word precedes the caret
-        // and the correction hotkey does not take it for something typed on the wrong layout.
-        ResetTypingBuffer();
-        foreach (var ch in spaced)
-            _buffer.Append(ch);
-        _committedLength = _buffer.Length;
-        return true;
-    }
-
-    public bool CopyDictatedText(string text) => SetClipboardText(text);
-
-    protected virtual bool SetClipboardText(string text) => false;
-
-    public string? ActiveLanguage() => ActiveInstalledLayout()?.LanguageCode;
-
-    public IReadOnlyList<string> InstalledLanguages()
-    {
-        var languages = new List<string>();
-        foreach (var layout in Layouts ??= EnumerateLayouts())
-            if (layout.LanguageCode is { Length: > 0 } code && !languages.Contains(code))
-                languages.Add(code);
-        return languages;
-    }
-
-    public string DictationAppName() => ForegroundAppName();
-
-    public void ReportDictation(string message) => RaiseDiagnostic(message);
 
     protected void NoteNonModifierInput()
     {
@@ -620,169 +397,6 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
             _layoutChangedMidWord = false;
     }
 
-    // A backspace removes the last character: from a tail it shortens the tail; from a queued word's space it
-    // removes that word, since its correction no longer has the space it was queued for.
-    private void TrimPendingAutoFixes()
-    {
-        for (var i = _pendingAutoFixes.Count - 1; i >= 0; i--)
-        {
-            var pending = _pendingAutoFixes[i];
-            if (pending.Tail.Length > 0)
-                pending.Tail = pending.Tail[..^1];
-            else
-                _pendingAutoFixes.RemoveAt(i);
-        }
-    }
-
-    private void AutoCorrect(PendingAutoFix fix)
-    {
-        // Gone when a reset, a backspace into it, or a focus change ran after its space.
-        if (!_pendingAutoFixes.Remove(fix))
-            return;
-
-        var word = fix.Word;
-        var tail = fix.Tail;
-
-        if (!IsStillFocused(fix.Owner))
-            return;
-
-        // The hook keeps letters typed while a field's password check is still pending; nothing may be
-        // injected into that field until the check has cleared it.
-        if (InputBlockedReason() is not null)
-            return;
-
-        // The line must still read "word<space>tail"; a hotkey or a neural rewrite since the space changes it.
-        if (!Corrector.IsReady || !_buffer.Segment.EndsWith(word + " " + tail, StringComparison.Ordinal))
-            return;
-
-        if (!AutoCorrectPolicy.IsEligible(word, _lineDirection is not null))
-        {
-            if (AutoMode && _lineDirection is null && AutoCorrectPolicy.IsEligible(word, true))
-                _skippedRun.Add(word);
-            else
-                _skippedRun.Clear();
-            return;
-        }
-
-        // The run is read again only if this word settles the direction, and only while the line still holds it.
-        var run = _skippedRun.Count > 0 && AutoMode && _lineDirection is null &&
-                  _buffer.Segment.EndsWith(string.Concat(_skippedRun.Select(w => w + " ")) + word + " " + tail,
-                      StringComparison.Ordinal)
-            ? _skippedRun.ToArray()
-            : [];
-        _skippedRun.Clear();
-
-        // Typos only asks the brain for spelling inside the typed layout. A brain that ignores the hint can still
-        // answer with another layout, so the result is checked below as well.
-        var hints = AutoMode
-            ? new CorrectionHints(_lineDirection, KeysOnly: !AutoFixTypos)
-            : new CorrectionHints(TypoOnly: true);
-
-        PhraseCorrection phrase;
-        InstalledLayout? source;
-        try
-        {
-            phrase = TryCorrectInstalled(word, hints, out source);
-        }
-        catch (Exception ex)
-        {
-            RaiseDiagnosticFormat("Diag_CorrectionFailed", ex.Message);
-            return;
-        }
-
-        // Typos only keeps a word as typed when the answer still names another layout.
-        if (!AutoMode && (phrase.TargetLayout is not null || !string.IsNullOrEmpty(phrase.TargetLayoutId)))
-            return;
-
-        var crossedInto = _lineDirection is null && phrase.Changed &&
-                          Scripts.Dominant(phrase.Corrected) is { } into && into != Scripts.Dominant(word)
-            ? into
-            : (Script?)null;
-        NoteLineDirection(word, phrase);
-        if (!phrase.Changed)
-            return;
-
-        // Short words before a word that crosses are read again with its direction.
-        var lead = crossedInto is { } direction ? ReadRunAgain(run, direction) : string.Empty;
-        var original = string.Concat(run.Select(w => w + " ")) + word + " " + tail;
-        if (lead.Length == 0)
-            original = word + " " + tail;
-
-        // The tail was typed into the field already; it is retyped after the corrected word so the caret ends where it was.
-        var replacement = lead + phrase.Corrected + " " + tail;
-        if (!TryInject(original.Length, replacement))
-            return;
-
-        _bufferGeneration++;
-        if (_buffer.TryReplaceTrailing(original, replacement))
-        {
-            _committedLength = _buffer.Length - replacement.Length;
-
-            // A cycle walks the corrected word alone, which is only the whole segment while nothing followed it.
-            if (tail.Length == 0 && source is not null && Layouts is not null)
-                _cycle = LayoutCorrectionCycle.StartAuto(word, phrase, source, Layouts, Corrector.SupportsLayoutCycle);
-        }
-        else
-        {
-            ResetTypingBuffer();
-        }
-
-        RaiseCorrected(word, phrase.Corrected, source?.Target, phrase.TargetLayout);
-        SwitchLayoutIfRequested(phrase.TargetLayout, phrase.TargetLayoutId);
-    }
-
-    // The skipped words, each followed by its space, as the settled direction reads them; empty when none changes.
-    private string ReadRunAgain(string[] run, Script direction)
-    {
-        var read = new StringBuilder();
-        var changed = false;
-        foreach (var skipped in run)
-        {
-            var again = skipped;
-            try
-            {
-                var phrase = TryCorrectInstalled(skipped, new CorrectionHints(direction, KeysOnly: !AutoFixTypos), out _);
-                if (phrase.Changed && Scripts.Dominant(phrase.Corrected) == direction)
-                {
-                    again = phrase.Corrected;
-                    changed = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                RaiseDiagnosticFormat("Diag_CorrectionFailed", ex.Message);
-            }
-
-            read.Append(again).Append(' ');
-        }
-
-        return changed ? read.ToString() : string.Empty;
-    }
-
-    private sealed class PendingAutoFix(string word, TFocus owner)
-    {
-        public string Word { get; } = word;
-
-        public TFocus Owner { get; } = owner;
-
-        // What was typed after the word's space while its correction waited for the UI thread.
-        public string Tail { get; set; } = string.Empty;
-    }
-
-    private void NoteLineDirection(string word, in PhraseCorrection phrase)
-    {
-        var typed = Scripts.Dominant(word);
-        if (phrase.Changed)
-        {
-            if (Scripts.Dominant(phrase.Corrected) is { } into && into != typed)
-                _lineDirection = into;
-            return;
-        }
-
-        if (phrase.Settled is { Count: > 0 } settled && TextSpans.CoversEveryLetter(word, settled))
-            _lineDirection = null;
-    }
-
     protected void ApplyCorrection()
     {
         if (TypingBlockedReason() is { } blocked)
@@ -845,169 +459,6 @@ internal abstract class InputBackendBase<TFocus> : IInputBackend, IDictationHost
         _cycle = cycle;
         var current = cycle.Current;
         ApplyHotkeyStep(segment, current.Text, current.TargetLayout, current.TargetLayoutId, cycle.OriginalLayout);
-    }
-
-    protected async Task ApplySelectionActionAsync(SelectionAction action)
-    {
-
-        if (_selectionActionRunning)
-            return;
-
-        if (InputBlockedReason() is { } blocked)
-        {
-            RaiseDiagnostic(blocked);
-            return;
-        }
-
-        if (action == SelectionAction.Correct && !Corrector.IsReady)
-        {
-            RaiseDiagnostic(Localizer.Instance[Corrector.PreferAsync ? "Diag_NoModel" : "Diag_NoDictionaries"]);
-            return;
-        }
-
-        _selectionActionRunning = true;
-        try
-        {
-            string? selection;
-            try
-            {
-                selection = await CopySelectionAsync().ConfigureAwait(true);
-            }
-            catch (Exception ex)
-            {
-                RaiseDiagnosticFormat("Diag_ClipboardFailed", ex.Message);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(selection))
-            {
-                RaiseDiagnosticFormat("Diag_NoSelection", ForegroundAppName());
-                return;
-            }
-
-            try
-            {
-                if (action != SelectionAction.Correct)
-                {
-                    ApplySelectionTransform(action, selection);
-                    return;
-                }
-
-                var layouts = ReadLayouts();
-                var generation = _asyncCorrectionGeneration;
-                var request = BeginModelRequest();
-                var hints = new CorrectionHints(Cancellation: request.Token);
-                (PhraseCorrection Phrase, InstalledLayout? Source) result;
-                try
-                {
-                    result = await Task.Run(
-                        () => (Phrase: CorrectWith(selection, layouts.Active, layouts.All, hints),
-                            Source: layouts.Active)).ConfigureAwait(true);
-                }
-                catch (OperationCanceledException)
-                {
-                    return;
-                }
-                finally
-                {
-                    EndModelRequest(request);
-                }
-
-                if (generation != _asyncCorrectionGeneration)
-                    return;
-
-                if (!result.Phrase.Changed)
-                {
-                    RaiseDiagnosticFormat("Diag_NoChange", Shorten(selection));
-                    return;
-                }
-
-                if (!PasteText(result.Phrase.Corrected))
-                    return;
-
-                RaiseCorrected(Shorten(selection), Shorten(result.Phrase.Corrected),
-                    result.Source?.Target, result.Phrase.TargetLayout);
-                SwitchLayoutIfRequested(result.Phrase.TargetLayout, result.Phrase.TargetLayoutId);
-            }
-            catch (Exception ex)
-            {
-                RaiseDiagnosticFormat(Corrector.PreferAsync ? "Diag_NeuralFailed" : "Diag_CorrectionFailed", ex.Message);
-            }
-        }
-        finally
-        {
-
-            try
-            {
-                await RestoreClipboardAsync().ConfigureAwait(true);
-            }
-            catch (Exception ex)
-            {
-                RaiseDiagnosticFormat("Diag_ClipboardFailed", ex.Message);
-            }
-            finally
-            {
-                _selectionActionRunning = false;
-            }
-        }
-    }
-
-    private void ApplySelectionTransform(SelectionAction action, string selection)
-    {
-
-        var (latinTarget, language) = action == SelectionAction.Transliterate
-            ? LatinTransliterationTarget()
-            : (Script.Cyrillic, null);
-
-        var transformed = SelectionTransforms.Apply(action, selection, latinTarget, language);
-        if (string.Equals(transformed, selection, StringComparison.Ordinal))
-        {
-            RaiseDiagnosticFormat("Diag_NoChange", Shorten(selection));
-            return;
-        }
-
-        if (!PasteText(transformed))
-            return;
-
-        RaiseCorrected(Shorten(selection), Shorten(transformed), null, null);
-    }
-
-    private (Script Script, string? Language) LatinTransliterationTarget()
-    {
-
-        switch (PreferredLayout)
-        {
-            case KeyboardLayout.El: return (Script.Greek, "el");
-            case KeyboardLayout.He: return (Script.Hebrew, "he");
-            case KeyboardLayout.Ar: return (Script.Arabic, "ar");
-        }
-
-        var preferredLanguage = PreferredLayout is { } preferred ? LayoutLanguage.FromKeyboardLayout(preferred) : null;
-
-        Script? other = null;
-        foreach (var layout in ReadLayouts().All)
-        {
-            if (layout.Script == Script.Cyrillic)
-                return (Script.Cyrillic, preferredLanguage ?? layout.LanguageCode);
-
-            if (layout.Script is Script.Greek or Script.Hebrew or Script.Arabic)
-                other ??= layout.Script;
-        }
-
-        return other switch
-        {
-            Script.Greek => (Script.Greek, "el"),
-            Script.Hebrew => (Script.Hebrew, "he"),
-            Script.Arabic => (Script.Arabic, "ar"),
-            _ => (Script.Cyrillic, preferredLanguage)
-        };
-    }
-
-    private static string Shorten(string text)
-    {
-        const int limit = 60;
-        var flat = text.ReplaceLineEndings(" ");
-        return flat.Length <= limit ? flat : flat[..limit] + "…";
     }
 
     internal Task? PendingNeuralRewrite { get; private set; }

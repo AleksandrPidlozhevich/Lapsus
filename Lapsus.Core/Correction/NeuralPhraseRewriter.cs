@@ -93,7 +93,7 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
             return certain.Correction;
 
         using var budget = CancellationTokenSource.CreateLinkedTokenSource(hints.Cancellation);
-        budget.CancelAfter(_baseBudget + BudgetPerWord * Chunks(text).Count);
+        budget.CancelAfter(_baseBudget + BudgetPerWord * PhraseChunks.Of(text).Count);
         try
         {
             return AskTheModel(text, active, installed, candidates, preferred, advice, trusted, remaps, budget.Token);
@@ -124,10 +124,10 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         var system = NeuralRewritePrompt.BuildSystem(preferred);
         var user = NeuralRewritePrompt.BuildUser(text, active.Map, candidates, preferred, offered);
         var rewritten = _llm.CompleteAsync(system, user, text.Length, cancellationToken).GetAwaiter().GetResult();
-        rewritten = SanitizeModelOutput(rewritten, text);
+        rewritten = ModelAnswers.SanitizeModelOutput(rewritten, text);
 
         Answer? answer;
-        if (string.IsNullOrEmpty(rewritten) || IsEcho(rewritten, text))
+        if (string.IsNullOrEmpty(rewritten) || ModelAnswers.IsEcho(rewritten, text))
             answer = WhenTheModelSaidNothing(text, trusted, remaps);
         else if (offered.Contains(rewritten, StringComparer.Ordinal))
             answer = Answer.FromModelOrRemap(rewritten);
@@ -137,7 +137,7 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         if (answer is null)
             return new PhraseCorrection(text, text, false, null);
 
-        var restored = RestoreOuterWhitespace(text, answer.Value.Text);
+        var restored = ModelAnswers.RestoreOuterWhitespace(text, answer.Value.Text);
         if (answer.Value.Correction is { } dictated)
             return dictated;
 
@@ -146,13 +146,13 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
 
         restored = kept;
 
-        if (!WritesOnlyTypableScripts(text, restored, active, candidates) || !MovesOnlyIntoKnownWords(text, restored))
+        if (!ModelAnswers.WritesOnlyTypableScripts(text, restored, active, candidates) || !MovesOnlyIntoKnownWords(text, restored))
             return trusted?.Correction ?? new PhraseCorrection(text, text, false, null);
 
         if (string.Equals(restored, text, StringComparison.Ordinal))
             return new PhraseCorrection(text, text, false, null);
 
-        var (target, targetId) = ResolveTarget(text, restored, active, candidates, preferred);
+        var (target, targetId) = ModelAnswers.ResolveTarget(text, restored, active, candidates, preferred);
         return new PhraseCorrection(text, restored, true, target, targetId);
     }
 
@@ -171,10 +171,10 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         if (ranked == text)
             return new PhraseCorrection(text, text, false, null);
 
-        if (!WritesOnlyTypableScripts(text, ranked, active, candidates) || !MovesOnlyIntoKnownWords(text, ranked))
+        if (!ModelAnswers.WritesOnlyTypableScripts(text, ranked, active, candidates) || !MovesOnlyIntoKnownWords(text, ranked))
             return trusted?.Correction ?? new PhraseCorrection(text, text, false, null);
 
-        var (target, targetId) = ResolveTarget(text, ranked, active, candidates, preferred);
+        var (target, targetId) = ModelAnswers.ResolveTarget(text, ranked, active, candidates, preferred);
         return new PhraseCorrection(text, ranked, true, target, targetId);
     }
 
@@ -184,8 +184,8 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         if (_exceptions?.ChunkSpans(text) is not { } listed)
             return rewritten;
 
-        var typed = Chunks(text);
-        var answered = Chunks(rewritten);
+        var typed = PhraseChunks.Of(text);
+        var answered = PhraseChunks.Of(rewritten);
         if (typed.Count != answered.Count)
             return null;
 
@@ -204,22 +204,6 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         return sb.Append(rewritten, at, rewritten.Length - at).ToString();
     }
 
-    // A letter in a script the user neither typed nor has a layout for is a translation, not a repair.
-    private static bool WritesOnlyTypableScripts(
-        string text, string rewritten, LayoutSource active, IReadOnlyList<LayoutCandidate> candidates)
-    {
-        foreach (var ch in rewritten)
-        {
-            if (Scripts.Of(ch) is not { } script || script == active.Script)
-                continue;
-
-            if (!candidates.Any(c => c.ScoringScript == script) && !text.Any(c => Scripts.Of(c) == script))
-                return false;
-        }
-
-        return true;
-    }
-
     // A word moved into a script the dictionary reads must be a word it knows; on a phonetic layout the
     // remap of correct English is a transliteration, and the model is happy to pick it.
     private bool MovesOnlyIntoKnownWords(string text, string rewritten)
@@ -227,8 +211,8 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         if (_adviser is not { IsReady: true } adviser)
             return true;
 
-        var typed = Chunks(text);
-        var answered = Chunks(rewritten);
+        var typed = PhraseChunks.Of(text);
+        var answered = PhraseChunks.Of(rewritten);
         var whole = Scripts.Dominant(text);
         for (var i = 0; i < answered.Count; i++)
         {
@@ -247,36 +231,16 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         return true;
     }
 
-    internal static List<(int Start, int Length)> Chunks(string text)
-    {
-        var chunks = new List<(int Start, int Length)>();
-        var i = 0;
-        while (i < text.Length)
-        {
-            while (i < text.Length && char.IsWhiteSpace(text[i]))
-                i++;
-
-            var start = i;
-            while (i < text.Length && !char.IsWhiteSpace(text[i]))
-                i++;
-
-            if (i > start)
-                chunks.Add((start, i - start));
-        }
-
-        return chunks;
-    }
-
     private static Answer? WhenTheModelSaidNothing(
         string text, (PhraseCorrection Correction, string Text)? trusted, IReadOnlyList<string> remaps)
     {
         if (trusted is { } advice)
             return Answer.FromDictionary(advice.Correction);
 
-        if (remaps.Count == 0 || !LooksLikeWrongLayoutRun(text))
+        if (remaps.Count == 0 || !ModelAnswers.LooksLikeWrongLayoutRun(text))
             return null;
 
-        return IsEcho(remaps[0], text) ? null : Answer.FromModelOrRemap(remaps[0]);
+        return ModelAnswers.IsEcho(remaps[0], text) ? null : Answer.FromModelOrRemap(remaps[0]);
     }
 
     private Answer? WhenNoCandidateHoldsTheAnswer(
@@ -294,7 +258,7 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         var inScript = Scripts.Dominant(text);
         var nearEcho = inScript is not null &&
                        inScript == Scripts.Dominant(rewritten) &&
-                       LooksLikeWrongLayoutRun(text);
+                       ModelAnswers.LooksLikeWrongLayoutRun(text);
 
         return Answer.FromModelOrRemap(nearEcho && remaps.Count > 0 ? remaps[0] : rewritten);
     }
@@ -375,153 +339,11 @@ public sealed class NeuralPhraseRewriter : IPhraseCorrector
         return offered;
     }
 
-    private static bool IsEcho(string rewritten, string text)
-    {
-        return string.Equals(rewritten, text, StringComparison.Ordinal) ||
-               string.Equals(rewritten, text.Trim(), StringComparison.Ordinal);
-    }
-
-    private static string RestoreOuterWhitespace(string original, string rewritten)
-    {
-        var trimmed = original.AsSpan().Trim();
-        if (trimmed.Length == original.Length || trimmed.Length == 0)
-            return rewritten;
-
-        var leading = original.Length - original.AsSpan().TrimStart().Length;
-        var trailing = original.Length - original.AsSpan().TrimEnd().Length;
-        return string.Concat(original.AsSpan(0, leading), rewritten, original.AsSpan(original.Length - trailing));
-    }
-
-    private static bool LooksLikeWrongLayoutRun(string text)
-    {
-        if (Scripts.Dominant(text) is not { } script)
-            return false;
-
-        if (!Orthography.IsPossibleWord(text, script))
-            return true;
-
-        if (Scripts.IsScoringBlind(script))
-            return false;
-
-        var letters = 0;
-        var vowels = 0;
-        foreach (var ch in text)
-        {
-            if (!Alphabets.IsLetterOf(script, ch))
-                continue;
-
-            letters++;
-            if (Alphabets.IsVowelOf(script, ch))
-                vowels++;
-        }
-
-        return letters >= 3 && vowels == 0;
-    }
-
-    public static string SanitizeModelOutput(string raw, string original)
-    {
-        if (string.IsNullOrWhiteSpace(raw))
-            return string.Empty;
-
-        var s = raw.Trim();
-
-        // Refuse multi-paragraph chatter.
-        var nl = s.IndexOfAny(['\r', '\n']);
-        if (nl >= 0)
-            s = s[..nl].Trim();
-
-        if (s.Length >= 2 &&
-            ((s[0] == '"' && s[^1] == '"') || (s[0] == '\'' && s[^1] == '\'')))
-            s = s[1..^1].Trim();
-
-        if (s.StartsWith("=>", StringComparison.Ordinal))
-            s = s[2..].Trim();
-
-        foreach (var prefix in new[]
-                 {
-                     "Corrected:", "Correction:", "Output:", "Answer:", "Result:",
-                     "Исправленный текст:", "Исправлено:", "Ответ:"
-                 })
-            if (s.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
-            {
-                s = s[prefix.Length..].Trim();
-                break;
-            }
-
-        var arrowIdx = s.LastIndexOf("=>", StringComparison.Ordinal);
-        var arrowLen = 2;
-        if (arrowIdx < 0)
-        {
-            arrowIdx = s.LastIndexOf("→", StringComparison.Ordinal);
-            arrowLen = 1;
-        }
-
-        if (arrowIdx >= 0 && arrowIdx + arrowLen < s.Length)
-        {
-            var right = s[(arrowIdx + arrowLen)..].Trim();
-            if (right.Length > 0)
-                s = right;
-        }
-
-        if (s.Length > Math.Max(original.Length * 3, original.Length + 40))
-            return string.Empty;
-
-        return s;
-    }
+    public static string SanitizeModelOutput(string raw, string original) =>
+        ModelAnswers.SanitizeModelOutput(raw, original);
 
     public static (KeyboardLayout? Target, string? LayoutId) ResolveTarget(
-        string original,
-        string corrected,
-        LayoutSource active,
-        IReadOnlyList<LayoutCandidate> candidates,
-        KeyboardLayout? preferred)
-    {
-        var originalScript = Scripts.Dominant(original) ?? active.Script;
-        if (MovedInto(original, corrected, originalScript) is not { } correctedScript)
-            return (null, null);
-
-        LayoutCandidate? match = null;
-        foreach (var c in candidates)
-        {
-            if (c.ScoringScript != correctedScript)
-                continue;
-
-            if (preferred is not null && c.Target == preferred)
-            {
-                match = c;
-                break;
-            }
-
-            match ??= c;
-        }
-
-        return match is null ? (null, null) : (match.Value.Target, match.Value.LayoutId);
-    }
-
-    private static Script? MovedInto(string original, string corrected, Script? originalScript)
-    {
-        var before = original.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-        var after = corrected.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
-
-        if (before.Length == 0 || before.Length != after.Length)
-        {
-            var whole = Scripts.Dominant(corrected);
-            return whole is null || whole == originalScript ? null : whole;
-        }
-
-        Script? into = null;
-        for (var i = 0; i < before.Length; i++)
-        {
-            var to = Scripts.Dominant(after[i]);
-            if (to is null || to == Scripts.Dominant(before[i]))
-                continue;
-
-            if (into is not null && into != to)
-                return null;
-
-            into = to;
-        }
-
-        return into;
-    }
+        string original, string corrected, LayoutSource active, IReadOnlyList<LayoutCandidate> candidates,
+        KeyboardLayout? preferred) =>
+        ModelAnswers.ResolveTarget(original, corrected, active, candidates, preferred);
 }

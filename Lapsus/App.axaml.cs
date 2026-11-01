@@ -5,8 +5,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
-using Lapsus.Core.Layout;
-using Lapsus.Core.Models;
 using Lapsus.Core.Spelling;
 using Lapsus.Audio;
 using Lapsus.Input;
@@ -22,7 +20,6 @@ using Lapsus.Updates;
 using Lapsus.ViewModels;
 using Lapsus.Views;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Lapsus;
@@ -33,7 +30,7 @@ public partial class App : Application
     private SettingsViewModel? _settingsViewModel;
     private DictionaryStore? _dictionaryStore;
     private ModelStore? _modelStore;
-    private OnnxGenAiLlm? _llm;
+    private BrainBuilder? _brain;
     private Window? _window;
     private TrayIcon? _trayIcon;
     private SingleInstance? _singleInstance;
@@ -45,16 +42,9 @@ public partial class App : Application
     private DictationIndicator? _dictationIndicator;
 
     private StoreViewModel? _storeViewModel;
-    private LicenseStatus? _licenseStatus;
-    private LicenseViewModel? _licenseViewModel;
-    private Window? _reminderWindow;
+    private LicenseReminder? _licenseReminder;
 
     private Window? _onboardingWindow;
-    private DispatcherTimer? _reminderTimer;
-    private DateTimeOffset _reminderShownAt;
-    private readonly SemaphoreSlim _brainGate = new(1, 1);
-
-    private (string Path, ComputeDevicePreference Device)? _loadedModel;
     private bool _exiting;
     private bool _creatingWindow;
     private readonly AppUpdater _updater = new();
@@ -89,7 +79,6 @@ public partial class App : Application
 
             _dictionaryStore = new DictionaryStore();
             _modelStore = new ModelStore();
-            _llm = new OnnxGenAiLlm();
             var installed = _dictionaryStore.Installed();
 
             var store = new SettingsStore();
@@ -111,6 +100,7 @@ public partial class App : Application
 
             _backend = InputBackendFactory.CreateForCurrentPlatform(
                 new LayoutCorrector(new SpellChecker(), exceptions: _exceptions), _excludedApps);
+            _brain = new BrainBuilder(_backend, _dictionaryStore, _modelStore, _exceptions);
             var supported = InputBackendFactory.IsSupported(_backend);
 
             ThemeApplier.Apply(this, settings.ThemePreference);
@@ -118,18 +108,20 @@ public partial class App : Application
             _indicator = new LayoutIndicator(_excludedApps);
 
             var licenses = new LicenseStore();
-            _licenseStatus = new LicenseStatus(
+            var licenseStatus = new LicenseStatus(
                 licenses, new ActivationStore(), new ActivationClient(), settings, store);
-            _licenseViewModel = new LicenseViewModel(
-                licenses, _licenseStatus, ShowLicensePage, CloseLicenseReminder);
+            var licenseViewModel = new LicenseViewModel(
+                licenses, licenseStatus, ShowLicensePage, () => _licenseReminder?.Close());
+            _licenseReminder = new LicenseReminder(licenseStatus, licenseViewModel);
 
             _storeViewModel = new StoreViewModel(StorePurchasesFactory.CreateForCurrentBuild());
             _ = _storeViewModel.RefreshAsync();
 
             _settingsViewModel = new SettingsViewModel(
                 _backend, store, settings, supported, _dictionaryStore, _modelStore,
-                RebuildBrainAsync, _exceptions, _excludedApps, _indicator, _updater, _licenseViewModel,
+                _brain.RebuildAsync, _exceptions, _excludedApps, _indicator, _updater, licenseViewModel,
                 _storeViewModel);
+            _brain.Settings = _settingsViewModel;
 
             SetupDictation(settings, store);
 
@@ -150,12 +142,12 @@ public partial class App : Application
             _updater.UpdateReadyToInstall += (_, _) => Dispatcher.UIThread.Post(ShowUpdateAvailable);
             _ = CheckForUpdateLaterAsync();
 
-            _ = CheckLicenseAsync();
+            _ = _licenseReminder.CheckAsync();
 
             var nothingToCorrectWith =
                 installed.Count == 0 && !settings.NeuralCorrectionEnabled && !settings.PlainLayoutSwitch;
             if (!nothingToCorrectWith)
-                _ = RebuildBrainAsync();
+                _ = _brain.RebuildAsync();
 
             if (_settingsViewModel.OnboardingPending)
                 Dispatcher.UIThread.Post(ShowOnboarding, DispatcherPriority.Loaded);
@@ -232,131 +224,13 @@ public partial class App : Application
         };
         timer.Start();
     }
+
     // A silent update downloads a whole package. Wait until startup (dictionary load, hook install)
     // has settled so the download does not compete with it and make the machine stutter.
     private async Task CheckForUpdateLaterAsync()
     {
         await Task.Delay(TimeSpan.FromMinutes(3)).ConfigureAwait(true);
         await _updater.CheckSilentlyAsync().ConfigureAwait(true);
-    }
-
-    private async Task RebuildBrainAsync()
-    {
-        if (_dictionaryStore is null || _modelStore is null || _backend is null || _llm is null
-            || _settingsViewModel is null)
-            return;
-
-        await _brainGate.WaitAsync().ConfigureAwait(true);
-        try
-        {
-            // Lists installed before cleaning existed are cleaned before any brain reads them. Gated by version: no-op after the first run.
-            await Task.Run(_dictionaryStore.CleanOutdatedLists).ConfigureAwait(true);
-
-            var settings = _settingsViewModel.SettingsSnapshot();
-            IPhraseCorrector corrector;
-
-            _backend.SetCorrector(new InactiveCorrector(settings.NeuralCorrectionEnabled));
-
-            if (!settings.NeuralCorrectionEnabled)
-            {
-                _loadedModel = null;
-                _ = Task.Run(() => _llm.Unload());
-            }
-
-            if (settings.NeuralCorrectionEnabled)
-            {
-                if (settings.SelectedModelId is { } modelId && _modelStore.IsInstalled(modelId))
-                {
-                    var path = _modelStore.PathFor(modelId);
-                    var display = _modelStore.Describe(modelId)?.DisplayName ?? modelId;
-                    var plan = ExecutionPlan.Build(
-                        settings.ComputeDevice,
-                        ComputeDeviceProbe.Capabilities(),
-                        _modelStore.InstalledVariant(modelId).Device,
-                        _modelStore.DeclaredProviders(modelId));
-                    try
-                    {
-
-                        var wanted = (path, settings.ComputeDevice);
-                        if (!_llm.IsLoaded || _loadedModel != wanted)
-                        {
-                            _settingsViewModel.Models.ReportLoading(display);
-                            _loadedModel = null;
-
-                            await Task.Run(() => _llm.Load(path, plan)).ConfigureAwait(true);
-                            _loadedModel = wanted;
-
-                            WarmUpNeural(_backend.PreferredLayout);
-                        }
-
-                        corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), _exceptions,
-                            spellingLanguages: SpellingLanguages.For(modelId));
-                        _settingsViewModel.Models.ReportReady(display, _llm.ExecutionProvider);
-                    }
-                    catch (Exception ex)
-                    {
-                        _loadedModel = null;
-                        await Task.Run(() => _llm.Unload()).ConfigureAwait(true);
-                        _settingsViewModel.Models.ReportLoadFailed(ex.Message);
-
-                        corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), _exceptions);
-                    }
-                }
-                else
-                {
-                    _loadedModel = null;
-                    await Task.Run(() => _llm.Unload()).ConfigureAwait(true);
-                    _settingsViewModel.Models.ReportNeedsModel();
-                    corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), _exceptions);
-                }
-            }
-            else if (settings.PlainLayoutSwitch)
-            {
-                corrector = new PlainLayoutSwitcher(_exceptions);
-            }
-            else
-            {
-                var installed = _dictionaryStore.Installed();
-                corrector = await Task
-                    .Run(() => new LayoutCorrector(new SpellChecker(installed), exceptions: _exceptions))
-                    .ConfigureAwait(true);
-            }
-
-            _backend.SetCorrector(corrector);
-
-            _backend.AutoMode = settings.AutoMode;
-        }
-        finally
-        {
-            _brainGate.Release();
-        }
-    }
-
-    private async Task<IPhraseCorrector?> BuildAdviserAsync()
-    {
-        if (_dictionaryStore is null)
-            return null;
-
-        var installed = _dictionaryStore.Installed();
-        if (installed.Count == 0)
-            return null;
-
-        return await Task
-            .Run(IPhraseCorrector () =>
-                new LayoutCorrector(new SpellChecker(installed), exceptions: _exceptions))
-            .ConfigureAwait(true);
-    }
-
-    private void WarmUpNeural(KeyboardLayout? preferred)
-    {
-        if (_llm is not { } llm || _backend is null)
-            return;
-
-        const string sample = "ntrcn";
-        var system = NeuralRewritePrompt.BuildSystem(preferred);
-        var user = NeuralRewritePrompt.BuildUser(
-            sample, BundledKeyboardMaps.En, _backend.LayoutCandidates(), preferred);
-        _ = llm.WarmUpAsync(system, user, sample.Length);
     }
 
     private void SetupTrayIcon(IClassicDesktopStyleApplicationLifetime desktop)
@@ -412,8 +286,7 @@ public partial class App : Application
 
         ShutdownGuard.Arm();
 
-        _reminderTimer?.Stop();
-        _reminderTimer = null;
+        _licenseReminder?.Stop();
 
         try
         {
@@ -442,12 +315,10 @@ public partial class App : Application
         {
         }
 
-        var llm = _llm;
-        _llm = null;
         try
         {
             // Do not Dispose here: that waits/frees natives while ORT threads may still be inside.
-            llm?.AbandonForShutdown();
+            _brain?.AbandonForShutdown();
         }
         catch
         {
@@ -543,51 +414,6 @@ public partial class App : Application
         _window.Activate();
     }
 
-    private static readonly TimeSpan ReminderInterval = TimeSpan.FromDays(1);
-
-    private static readonly TimeSpan ReminderPollInterval = TimeSpan.FromMinutes(30);
-
-    // License check is a reminder, never a feature gate.
-    private async Task CheckLicenseAsync()
-    {
-        if (_licenseStatus is null || _licenseViewModel is null)
-            return;
-
-        var required = await _licenseStatus.RefreshAsync().ConfigureAwait(true);
-        _licenseViewModel.OnStatusRefreshed();
-
-        StartReminderTimer();
-
-        if (!required)
-            return;
-
-        Dispatcher.UIThread.Post(ShowLicenseReminder, DispatcherPriority.Loaded);
-    }
-
-    private void StartReminderTimer()
-    {
-        if (_reminderTimer is not null)
-            return;
-
-        _reminderTimer = new DispatcherTimer { Interval = ReminderPollInterval };
-        _reminderTimer.Tick += (_, _) => RemindIfDue();
-        _reminderTimer.Start();
-    }
-
-    private void RemindIfDue()
-    {
-        if (_exiting || _licenseStatus is null)
-            return;
-
-        if (!_licenseStatus.LicenseRequired || _licenseStatus.IsEvaluating)
-            return;
-
-        if (DateTimeOffset.UtcNow - _reminderShownAt < ReminderInterval)
-            return;
-
-        ShowLicenseReminder();
-    }
-
     private void ShowOnboarding()
     {
         if (_onboardingWindow is not null)
@@ -610,28 +436,6 @@ public partial class App : Application
         _onboardingWindow = window;
         window.Show();
         window.Activate();
-    }
-
-    private void ShowLicenseReminder()
-    {
-
-        _reminderShownAt = DateTimeOffset.UtcNow;
-
-        if (_reminderWindow is not null)
-        {
-            _reminderWindow.Activate();
-            return;
-        }
-
-        _reminderWindow = new LicenseReminderWindow { DataContext = _licenseViewModel };
-        _reminderWindow.Closed += (_, _) => _reminderWindow = null;
-        _reminderWindow.Show();
-    }
-
-    private void CloseLicenseReminder()
-    {
-        _reminderWindow?.Close();
-        _reminderWindow = null;
     }
 
     private void ShowLicensePage()

@@ -36,8 +36,6 @@ public partial class SettingsViewModel : ViewModelBase
     private readonly bool _supported;
     private readonly Func<Task> _rebuildBrain;
     private readonly IStartupRegistration _startup;
-    private readonly WordExceptions _exceptions;
-    private readonly AppExclusions _excludedApps;
     private readonly LayoutIndicator _indicator;
     private readonly AppUpdater _updater;
     private readonly HotkeyCapture _capture;
@@ -62,8 +60,6 @@ public partial class SettingsViewModel : ViewModelBase
             UpdateVersion = _updater.PendingVersion;
         });
         _indicator = indicator;
-        _exceptions = exceptions;
-        _excludedApps = excludedApps;
         _store = store;
         _settings = settings;
         _supported = supported;
@@ -117,10 +113,7 @@ public partial class SettingsViewModel : ViewModelBase
 
         Localizer.Instance.LanguageChanged += OnLanguageChanged;
 
-        RefreshExcludedWords();
-        _exceptions.Changed += (_, _) => Dispatcher.UIThread.Post(RefreshExcludedWords);
-
-        RefreshExcludedApps();
+        Exclusions = new ExclusionsViewModel(exceptions, excludedApps);
 
         Dictionaries = new DictionariesViewModel(dictionaryStore, _rebuildBrain);
         Dictionaries.Installed.CollectionChanged += (_, _) => BuildPreferences(_settings.PreferredLayout);
@@ -519,121 +512,9 @@ public partial class SettingsViewModel : ViewModelBase
         }
     }
 
-    public ObservableCollection<string> ExcludedWords { get; } = [];
+    public ExclusionsViewModel Exclusions { get; }
 
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AddExcludedWordCommand))]
-    private string _newExcludedWord = string.Empty;
-
-    public bool HasExcludedWords => ExcludedWords.Count > 0;
-
-    private bool CanAddExcludedWord()
-    {
-        return !string.IsNullOrWhiteSpace(NewExcludedWord);
-    }
-
-    [RelayCommand(CanExecute = nameof(CanAddExcludedWord))]
-    private void AddExcludedWord()
-    {
-        _exceptions.Add(NewExcludedWord);
-        NewExcludedWord = string.Empty;
-    }
-
-    [RelayCommand]
-    private void RemoveExcludedWord(string? word)
-    {
-        if (word is not null)
-            _exceptions.Remove(word);
-    }
-
-    private void RefreshExcludedWords()
-    {
-        ExcludedWords.Clear();
-        foreach (var word in _exceptions.Snapshot())
-            ExcludedWords.Add(word);
-
-        OnPropertyChanged(nameof(HasExcludedWords));
-    }
-
-    public ObservableCollection<string> ExcludedApps { get; } = [];
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AddExcludedAppCommand))]
-    private string _newExcludedApp = string.Empty;
-
-    public bool HasExcludedApps => ExcludedApps.Count > 0;
-
-    private bool CanAddExcludedApp()
-    {
-        return !string.IsNullOrWhiteSpace(NewExcludedApp);
-    }
-
-    [RelayCommand(CanExecute = nameof(CanAddExcludedApp))]
-    private void AddExcludedApp()
-    {
-        _excludedApps.Add(NewExcludedApp);
-        NewExcludedApp = string.Empty;
-        RefreshExcludedApps();
-    }
-
-    [RelayCommand]
-    private void RemoveExcludedApp(string? name)
-    {
-        if (name is null)
-            return;
-
-        _excludedApps.Remove(name);
-        RefreshExcludedApps();
-        RefreshRunningApps();
-    }
-
-    private void RefreshExcludedApps()
-    {
-        ExcludedApps.Clear();
-        foreach (var name in _excludedApps.Snapshot())
-            ExcludedApps.Add(name);
-
-        OnPropertyChanged(nameof(HasExcludedApps));
-    }
-
-    public ObservableCollection<RunningApp> RunningApps { get; } = [];
-
-    public bool CanPickRunningApps => Lapsus.Input.RunningApps.IsSupported;
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AddRunningAppCommand))]
-    private RunningApp? _selectedRunningApp;
-
-    public void RefreshRunningApps()
-    {
-        if (!CanPickRunningApps)
-            return;
-
-        var wasSelected = SelectedRunningApp?.ProcessName;
-
-        RunningApps.Clear();
-        foreach (var app in Lapsus.Input.RunningApps.List())
-            if (!_excludedApps.Contains(app.ProcessName))
-                RunningApps.Add(app);
-
-        SelectedRunningApp = RunningApps.FirstOrDefault(app => app.ProcessName == wasSelected);
-    }
-
-    private bool CanAddRunningApp()
-    {
-        return SelectedRunningApp is not null;
-    }
-
-    [RelayCommand(CanExecute = nameof(CanAddRunningApp))]
-    private void AddRunningApp()
-    {
-        if (SelectedRunningApp is null)
-            return;
-
-        _excludedApps.Add(SelectedRunningApp.ProcessName);
-        RefreshExcludedApps();
-        RefreshRunningApps();
-    }
+    public void RefreshRunningApps() => Exclusions.RefreshRunningApps();
 
     private HotkeyOption ResolveHotkey(int savedVirtualKey)
     {

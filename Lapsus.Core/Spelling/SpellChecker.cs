@@ -1,5 +1,4 @@
 using Lapsus.Core.Layout;
-using System.Globalization;
 using WeCantSpell.Hunspell;
 using SymSpellEngine = SymSpell;
 
@@ -9,31 +8,11 @@ public readonly record struct DictionarySource(string Code, string Path, Script 
 
 public sealed class SpellChecker
 {
-    static SpellChecker()
-    {
-        // Hunspell code-page provider must be registered; older .aff encodings are not UTF-8.
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-    }
-
     // Don't cut to 1 for short words: false crossings come from keys, not two-edit fixes.
     public const int MaxEditDistance = 2;
 
     // Index only the commonest words; every list word is still known for lookup.
     public const int DefaultSuggestionIndexSize = 100_000;
-
-    private static readonly char[] Separators = [' ', '\t'];
-
-    private readonly record struct LoadedDictionary(
-        Dictionary<string, long> Counts, SymSpellEngine Engine, double LogMaxCount, CharNgramModel? Ngrams,
-        Script Script, bool CommaBelow);
-
-    private static readonly Dictionary<string, (long Stamp, LoadedDictionary Loaded)> EngineCache =
-        new(StringComparer.OrdinalIgnoreCase);
-
-    private static readonly object CacheLock = new();
-
-    private static readonly Dictionary<string, (long Stamp, WordList Words)> LexiconCache =
-        new(StringComparer.OrdinalIgnoreCase);
 
     private readonly Dictionary<string, WordList> _lexiconByLanguage = new(StringComparer.OrdinalIgnoreCase);
     private readonly Dictionary<Script, List<WordList>> _lexiconsByScript = new();
@@ -57,10 +36,10 @@ public sealed class SpellChecker
         _minLexiconLetters = minLexiconLetters;
         foreach (var source in sources)
         {
-            if (!TryLoadFile(source.Path, source.Script, source.Code, suggestionIndexSize, out var loaded))
+            if (!DictionaryFiles.TryLoad(source.Path, source.Script, source.Code, suggestionIndexSize, out var loaded))
                 continue;
 
-            if (lexicon && source.WordFormsPath is { } wordForms && TryLoadLexicon(wordForms) is { } words)
+            if (lexicon && source.WordFormsPath is { } wordForms && DictionaryFiles.TryLoadLexicon(wordForms) is { } words)
             {
                 _lexiconByLanguage[source.Code] = words;
                 if (!_lexiconsByScript.TryGetValue(source.Script, out var lexicons))
@@ -114,7 +93,7 @@ public sealed class SpellChecker
             if (loaded.Ngrams is null)
                 continue;
 
-            var score = loaded.Ngrams.Score(LookupKey(word, loaded));
+            var score = loaded.Ngrams.Score(loaded.Key(word));
             if (score > best)
                 best = score;
         }
@@ -128,38 +107,7 @@ public sealed class SpellChecker
             !_byLanguage.TryGetValue(languageCode, out var loaded) || loaded.Ngrams is null)
             return null;
 
-        return loaded.Ngrams.AverageLogProb(LookupKey(word, loaded));
-    }
-
-    private static string LookupKey(string word, in LoadedDictionary loaded)
-    {
-        var key = LookupKey(word, loaded.Script);
-        return loaded.CommaBelow ? FoldCedilla(key) : key;
-    }
-
-    // Romanian lists alone: ş/ţ (cedilla) → ș/ț (comma); Turkish ş is its own letter.
-    private static string FoldCedilla(string key)
-    {
-        return key.Replace('ş', 'ș').Replace('ţ', 'ț');
-    }
-
-    // Lookups fold marks; written-back text keeps the user's spelling. Hebrew keeps geresh.
-    private static string LookupKey(string word, Script script)
-    {
-        var key = Scripts.FoldMarks(word.ToLowerInvariant(), script);
-        if (script == Script.Arabic)
-            key = FoldArabic(key);
-        else if (script == Script.Cyrillic)
-            key = StripInternalMarks(key, script);
-
-        return key;
-    }
-
-    // Do not fold alef maqsura to ya — merges short words and hands English strings a hit.
-    private static string FoldArabic(string key)
-    {
-        var folded = key.Replace('أ', 'ا').Replace('إ', 'ا').Replace('آ', 'ا');
-        return folded.Length > 1 && folded[^1] == 'ة' ? string.Concat(folded.AsSpan(0, folded.Length - 1), "ه") : folded;
+        return loaded.Ngrams.AverageLogProb(loaded.Key(word));
     }
 
     public double LogCount(string word, Script script, string? languageCode = null)
@@ -169,27 +117,10 @@ public sealed class SpellChecker
 
         var best = 0.0;
         foreach (var loaded in EnginesFor(languageCode, script))
-            if (CountOf(loaded, word) is { } count && Math.Log(1 + count) > best)
+            if (loaded.CountOf(word) is { } count && Math.Log(1 + count) > best)
                 best = Math.Log(1 + count);
 
         return best;
-    }
-
-    private static string StripInternalMarks(string word, Script script)
-    {
-        System.Text.StringBuilder? sb = null;
-        for (var i = 0; i < word.Length; i++)
-        {
-            if (!Scripts.IsWordInternalMark(script, word[i]))
-            {
-                sb?.Append(word[i]);
-                continue;
-            }
-
-            sb ??= new System.Text.StringBuilder(word, 0, i, word.Length);
-        }
-
-        return sb?.ToString() ?? word;
     }
 
     public bool IsKnownInLanguage(string word, string languageCode)
@@ -197,7 +128,7 @@ public sealed class SpellChecker
         if (string.IsNullOrEmpty(word) || !_byLanguage.TryGetValue(languageCode, out var loaded))
             return false;
 
-        return CountOf(loaded, word) is not null;
+        return loaded.CountOf(word) is not null;
     }
 
     public IReadOnlyList<string> LanguagesFor(Script script)
@@ -218,7 +149,7 @@ public sealed class SpellChecker
             return false;
 
         foreach (var loaded in EnginesFor(languageCode, script))
-            if (CountOf(loaded, word) is not null)
+            if (loaded.CountOf(word) is not null)
                 return true;
 
         return false;
@@ -244,50 +175,16 @@ public sealed class SpellChecker
             return false;
 
         if (languageCode is not null)
-            return _lexiconByLanguage.TryGetValue(languageCode, out var own) && Check(own, word);
+            return _lexiconByLanguage.TryGetValue(languageCode, out var own) && LookupKeys.InLexicon(own, word);
 
         if (!_lexiconsByScript.TryGetValue(script, out var lexicons))
             return false;
 
         foreach (var lexicon in lexicons)
-            if (Check(lexicon, word))
+            if (LookupKeys.InLexicon(lexicon, word))
                 return true;
 
         return false;
-    }
-
-    internal static bool Check(WordList lexicon, string word)
-    {
-        // Keyboard apostrophe / cedilla variants must match dictionary spellings.
-        return lexicon.Check(word) ||
-               (word.Contains('ʼ') && lexicon.Check(word.Replace('ʼ', '\''))) ||
-               (word.AsSpan().IndexOfAny("şţŞŢ") >= 0 &&
-                lexicon.Check(word.Replace('ş', 'ș').Replace('ţ', 'ț').Replace('Ş', 'Ș').Replace('Ţ', 'Ț')));
-    }
-
-    private static WordList? TryLoadLexicon(string wordFormsPath)
-    {
-        var affixPath = Path.ChangeExtension(wordFormsPath, ".aff");
-        try
-        {
-            if (!File.Exists(wordFormsPath) || !File.Exists(affixPath))
-                return null;
-
-            var stamp = Math.Max(File.GetLastWriteTimeUtc(wordFormsPath).Ticks, File.GetLastWriteTimeUtc(affixPath).Ticks);
-            lock (CacheLock)
-            {
-                if (LexiconCache.TryGetValue(wordFormsPath, out var cached) && cached.Stamp == stamp)
-                    return cached.Words;
-
-                var words = WordList.CreateFromFiles(wordFormsPath, affixPath);
-                LexiconCache[wordFormsPath] = (stamp, words);
-                return words;
-            }
-        }
-        catch
-        {
-            return null;
-        }
     }
 
     public bool IsKnownStem(string word, Script script, string? languageCode, out double frequency)
@@ -296,13 +193,13 @@ public sealed class SpellChecker
         if (!_clitics || string.IsNullOrEmpty(word) || !Scripts.IsAbjad(script))
             return false;
 
-        foreach (var stem in AbjadAffixes.Stems(LookupKey(word, script), script))
+        foreach (var stem in AbjadAffixes.Stems(LookupKeys.For(word, script), script))
             foreach (var loaded in EnginesFor(languageCode, script))
             {
-                if (CountOf(loaded, stem) is not { } count)
+                if (loaded.CountOf(stem) is not { } count)
                     continue;
 
-                frequency = Normalise(count, loaded.LogMaxCount);
+                frequency = loaded.Normalise(count);
                 return true;
             }
 
@@ -317,10 +214,10 @@ public sealed class SpellChecker
         var best = 0.0;
         foreach (var loaded in EnginesFor(languageCode, script))
         {
-            if (CountOf(loaded, word) is not { } count)
+            if (loaded.CountOf(word) is not { } count)
                 continue;
 
-            var frequency = Normalise(count, loaded.LogMaxCount);
+            var frequency = loaded.Normalise(count);
             if (frequency > best)
                 best = frequency;
         }
@@ -333,41 +230,7 @@ public sealed class SpellChecker
         if (string.IsNullOrEmpty(word) || !_byLanguage.TryGetValue(languageCode, out var loaded))
             return 0.0;
 
-        return CountOf(loaded, word) is { } count ? Normalise(count, loaded.LogMaxCount) : 0.0;
-    }
-
-    // Ukrainian apostrophe words: known when every part between marks is; rarest part sets the count.
-    private static long? CountOf(in LoadedDictionary loaded, string word)
-    {
-        if (loaded.Counts.TryGetValue(LookupKey(word, loaded), out var known))
-            return known;
-
-        if (loaded.Script != Script.Cyrillic || !HasInternalMark(word, loaded.Script))
-            return null;
-
-        long? rarest = null;
-        foreach (var part in Scripts.FoldMarks(word.ToLowerInvariant(), loaded.Script).Split('\''))
-        {
-            if (part.Length == 0)
-                return null;
-
-            if (!loaded.Counts.TryGetValue(LookupKey(part, loaded), out var partCount))
-                return null;
-
-            if (rarest is null || partCount < rarest)
-                rarest = partCount;
-        }
-
-        return rarest;
-    }
-
-    private static bool HasInternalMark(string word, Script script)
-    {
-        foreach (var ch in word)
-            if (Scripts.IsWordInternalMark(script, ch))
-                return true;
-
-        return false;
+        return loaded.CountOf(word) is { } count ? loaded.Normalise(count) : 0.0;
     }
 
     // With a keyboard, spellings at the closest distance are ranked by frequency less the price of the slip
@@ -389,19 +252,19 @@ public sealed class SpellChecker
 
         foreach (var loaded in EnginesFor(languageCode, script))
         {
-            var hits = loaded.Engine.Lookup(LookupKey(word, loaded),
+            var hits = loaded.Engine.Lookup(loaded.Key(word),
                 map is null ? SymSpellEngine.Verbosity.Top : SymSpellEngine.Verbosity.Closest, MaxEditDistance);
             if (hits.Count == 0)
                 continue;
 
             var top = hits[0];
-            var frequency = Normalise(top.count, loaded.LogMaxCount);
+            var frequency = loaded.Normalise(top.count);
             if (map is not null)
             {
                 frequency -= SlipWeight * Correction.TypoCost.Between(word, top.term, map);
                 foreach (var hit in hits.Skip(1))
                 {
-                    var rank = Normalise(hit.count, loaded.LogMaxCount) -
+                    var rank = loaded.Normalise(hit.count) -
                                SlipWeight * Correction.TypoCost.Between(word, hit.term, map);
                     if (rank > frequency)
                     {
@@ -424,7 +287,7 @@ public sealed class SpellChecker
         if (bestTerm is null)
             return false;
 
-        suggestion = RestoreLeadingCase(word, bestTerm);
+        suggestion = LookupKeys.RestoreLeadingCase(word, bestTerm);
         distance = bestDistance;
         return true;
     }
@@ -440,10 +303,10 @@ public sealed class SpellChecker
         var found = new List<(string Term, int Distance, double Frequency)>();
         foreach (var loaded in EnginesFor(languageCode, script))
             // "All", not "Closest": for a word the list already holds, Closest returns only the word itself (distance 0).
-            foreach (var hit in loaded.Engine.Lookup(LookupKey(word, loaded), SymSpellEngine.Verbosity.All,
+            foreach (var hit in loaded.Engine.Lookup(loaded.Key(word), SymSpellEngine.Verbosity.All,
                          MaxEditDistance))
                 if (hit.distance > 0 && !found.Exists(f => f.Term == hit.term))
-                    found.Add((hit.term, hit.distance, Normalise(hit.count, loaded.LogMaxCount)));
+                    found.Add((hit.term, hit.distance, loaded.Normalise(hit.count)));
 
         // Only the nearest spellings, as Closest gave for a word the list does not hold.
         if (found.Count > 0)
@@ -475,7 +338,7 @@ public sealed class SpellChecker
             .OrderBy(f => f.Distance)
             .ThenByDescending(f => f.Frequency)
             .Take(max)
-            .Select(f => (RestoreLeadingCase(word, f.Term), f.Distance))
+            .Select(f => (LookupKeys.RestoreLeadingCase(word, f.Term), f.Distance))
             .ToList();
     }
 
@@ -519,142 +382,8 @@ public sealed class SpellChecker
         }
     }
 
-    private static double Normalise(long count, double logMax)
-    {
-        return logMax <= 0.0 ? 0.0 : Math.Clamp(Math.Log(1 + count) / logMax, 0.0, 1.0);
-    }
-
     public static bool CanRead(string path)
     {
-        try
-        {
-            return File.Exists(path) && File.ReadLines(path).Any(line => TryParse(line, out _, out _));
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    private static bool TryParse(string line, out string word, out long count)
-    {
-        // Space and tab: FrequencyWords and Unilex disagree on the separator.
-        var fields = line.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
-        word = fields.Length > 0 ? fields[0] : string.Empty;
-        count = 0;
-        return fields.Length >= 2 &&
-               long.TryParse(fields[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out count) &&
-               count > 0;
-    }
-
-    private static bool TryLoadFile(
-        string path, Script script, string languageCode, int suggestionIndexSize, out LoadedDictionary loaded)
-    {
-        loaded = default;
-        try
-        {
-            if (!File.Exists(path))
-                return false;
-
-            var key = $"{path}\n{languageCode}\n{suggestionIndexSize}";
-            var stamp = File.GetLastWriteTimeUtc(path).Ticks;
-            lock (CacheLock)
-            {
-                if (EngineCache.TryGetValue(key, out var cached) && cached.Stamp == stamp)
-                {
-                    loaded = cached.Loaded;
-                    return true;
-                }
-
-                if (!TryBuild(path, script, languageCode, suggestionIndexSize, out loaded))
-                    return false;
-
-                EngineCache[key] = (stamp, loaded);
-                PruneDeletedFiles();
-            }
-
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    private static bool TryBuild(
-        string path, Script script, string languageCode, int suggestionIndexSize, out LoadedDictionary loaded)
-    {
-        var counts = new Dictionary<string, long>(StringComparer.Ordinal);
-        var commaBelow = string.Equals(languageCode, "ro", StringComparison.OrdinalIgnoreCase);
-
-        foreach (var line in File.ReadLines(path))
-        {
-            if (!TryParse(line, out var word, out var count))
-                continue;
-
-            var key = LookupKey(word, script);
-            if (commaBelow)
-                key = FoldCedilla(key);
-            if (key.Length == 0)
-                continue;
-
-            // Skip neighbour-language / wrong-alphabet entries; fold before judging.
-            if (!LanguageAlphabets.IsWordOf(key, script, languageCode) || NeighbourWords.IsListed(languageCode, key))
-                continue;
-
-            counts[key] = counts.TryGetValue(key, out var earlier) && earlier > long.MaxValue - count
-                ? long.MaxValue
-                : earlier + count;
-        }
-
-        if (counts.Count == 0)
-        {
-            loaded = default;
-            return false;
-        }
-
-        var engine = new SymSpellEngine(Math.Min(counts.Count, suggestionIndexSize), MaxEditDistance, 7);
-        var max = 0L;
-        foreach (var (word, count) in counts
-                     .OrderByDescending(e => e.Value)
-                     .ThenBy(e => e.Key, StringComparer.Ordinal)
-                     .Take(suggestionIndexSize))
-        {
-            engine.CreateDictionaryEntry(word, count);
-            max = Math.Max(max, count);
-        }
-
-        var ngrams = CharNgramModel.Build(counts.Select(e => (e.Key, e.Value)), script);
-        loaded = new LoadedDictionary(counts, engine, Math.Log(1 + max), ngrams, script, commaBelow);
-        return true;
-    }
-
-    private static void PruneDeletedFiles()
-    {
-        List<string>? gone = null;
-        foreach (var key in EngineCache.Keys)
-            if (!File.Exists(key[..key.IndexOf('\n')]))
-                (gone ??= []).Add(key);
-
-        foreach (var path in LexiconCache.Keys)
-            if (!File.Exists(path))
-                (gone ??= []).Add(path);
-
-        if (gone is null)
-            return;
-
-        foreach (var path in gone)
-        {
-            EngineCache.Remove(path);
-            LexiconCache.Remove(path);
-        }
-    }
-
-    private static string RestoreLeadingCase(string original, string suggestion)
-    {
-        if (original.Length == 0 || suggestion.Length == 0 || !char.IsUpper(original[0]))
-            return suggestion;
-
-        return char.ToUpperInvariant(suggestion[0]) + suggestion[1..];
+        return DictionaryFiles.CanRead(path);
     }
 }

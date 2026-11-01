@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Text;
 using System.Threading.Tasks;
 using static Lapsus.Input.NativeMethods;
 
@@ -39,25 +38,13 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
     private IntPtr _foregroundEventHook;
     private IntPtr _focusEventHook;
 
-    private bool _shiftDown;
-    private bool _ctrlDown;
-    private bool _altDown;
+    private readonly WindowsModifierKeys _modifiers = new();
 
-    private bool _rightAltDown;
-
-    private bool _winDown;
+    private readonly WindowsKeyTranslator _translator = new();
 
     private uint _swallowedKeyDown;
 
     private Action? _pendingHotkeyAction;
-
-    private readonly byte[] _keyState = new byte[256];
-    private readonly StringBuilder _translateBuffer = new(8);
-    private readonly char[] _translated = new char[8];
-
-    private bool _deadKeyPending;
-
-    private char _pendingAccent;
 
     public WindowsInputBackend(IPhraseCorrector corrector, AppExclusions? excludedApps = null)
         : base(corrector, excludedApps)
@@ -134,9 +121,8 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
 
     private void ResetModifierState()
     {
-        _shiftDown = _ctrlDown = _altDown = _rightAltDown = _winDown = false;
-        _deadKeyPending = false;
-        _pendingAccent = '\0';
+        _modifiers.Reset();
+        _translator.Reset();
         _swallowedKeyDown = 0;
         _pendingHotkeyAction = null;
     }
@@ -325,18 +311,18 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         var isUp = msg is WM_KEYUP or WM_SYSKEYUP;
         var vk = data.vkCode;
 
-        TrackModifiers(vk, isDown, isUp);
+        _modifiers.Track(vk, isDown, isUp);
 
-        if (IsCapturingHotkey && FeedHotkeyCapture((int)vk, isDown, KeyKindOf(vk), HeldModifiers()))
+        if (IsCapturingHotkey && FeedHotkeyCapture((int)vk, isDown, WindowsModifierKeys.KeyKindOf(vk), _modifiers.Held()))
             return 1;
 
         var isWin = vk is VK_LWIN or VK_RWIN;
         if (isDown || isUp)
         {
-            if (ModifierOf(vk) is not null || isWin)
+            if (WindowsModifierKeys.ModifierOf(vk) is not null || isWin)
             {
                 // Win let go after Ctrl+Win would open Start; an unassigned key in between tells Windows it was a chord.
-                if (NoteDictationModifiers(HeldModifiers()) && _winDown)
+                if (NoteDictationModifiers(_modifiers.Held()) && _modifiers.Win)
                     WindowsTextInjection.MaskStartMenu();
             }
             else if (isDown && _swallowedKeyDown != vk)
@@ -349,7 +335,7 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         if (isDown && _swallowedKeyDown == vk)
             return 1;
 
-        if (ModifierOf(vk) is { } modifier)
+        if (WindowsModifierKeys.ModifierOf(vk) is { } modifier)
         {
             if (isDown || isUp)
                 NoteModifierKey(modifier, isDown);
@@ -425,37 +411,10 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         }
     }
 
-    private void TrackModifiers(uint vk, bool isDown, bool isUp)
-    {
-        switch (vk)
-        {
-            case VK_SHIFT or VK_LSHIFT or VK_RSHIFT:
-                if (isDown) _shiftDown = true;
-                else if (isUp) _shiftDown = false;
-                break;
-            case VK_CONTROL or VK_LCONTROL or VK_RCONTROL:
-                if (isDown) _ctrlDown = true;
-                else if (isUp) _ctrlDown = false;
-                break;
-            case VK_MENU or VK_LMENU:
-                if (isDown) _altDown = true;
-                else if (isUp) _altDown = false;
-                break;
-            case VK_RMENU:
-                if (isDown) _altDown = _rightAltDown = true;
-                else if (isUp) _altDown = _rightAltDown = false;
-                break;
-            case VK_LWIN or VK_RWIN:
-                if (isDown) _winDown = true;
-                else if (isUp) _winDown = false;
-                break;
-        }
-    }
-
     private bool TryDispatchHotkey(uint vk)
     {
-        var held = HeldModifiers();
-        var plainAllowed = !IsShortcutModifierDown;
+        var held = _modifiers.Held();
+        var plainAllowed = !_modifiers.IsShortcutDown;
 
         Action? run = null;
         var dictation = false;
@@ -477,57 +436,6 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
             Dispatcher.UIThread.Post(RaiseDictationHotkey);
         _pendingHotkeyAction = run;
         return true;
-    }
-
-    private HotkeyModifiers HeldModifiers()
-    {
-        var held = HotkeyModifiers.None;
-        if (_shiftDown)
-            held |= HotkeyModifiers.Shift;
-
-        // AltGr arrives as Ctrl with RightAlt; that Ctrl was not pressed by the user.
-        if (_ctrlDown && !_rightAltDown)
-            held |= HotkeyModifiers.Control;
-        if (_altDown)
-            held |= HotkeyModifiers.Alt;
-        if (_winDown)
-            held |= HotkeyModifiers.Meta;
-
-        return held;
-    }
-
-    private static HotkeyKeyKind KeyKindOf(uint vk)
-    {
-        if (ModifierOf(vk) is not null || vk is VK_LWIN or VK_RWIN)
-            return HotkeyKeyKind.Modifier;
-
-        if (vk == VK_ESCAPE)
-            return HotkeyKeyKind.Escape;
-
-        var named = vk is 0x13 or 0x14 or 0x91 or 0x2D or 0x2E or 0x24 or 0x23 or 0x21 or 0x22
-                    or (>= 0x70 and <= 0x87);
-        return named ? HotkeyKeyKind.Named : HotkeyKeyKind.Typing;
-    }
-
-    private static TapModifier? ModifierOf(uint vk)
-    {
-        return vk switch
-        {
-            VK_SHIFT or VK_LSHIFT or VK_RSHIFT => TapModifier.Shift,
-            VK_CONTROL or VK_LCONTROL or VK_RCONTROL => TapModifier.Control,
-            VK_MENU or VK_LMENU or VK_RMENU => TapModifier.Alt,
-            _ => null
-        };
-    }
-
-    private bool IsShortcutModifierDown => (_ctrlDown || _altDown || _winDown) && !_rightAltDown;
-
-    private static bool IsCaretMovingKey(uint vk)
-    {
-        return vk is VK_TAB or VK_ESCAPE
-            or VK_PRIOR or VK_NEXT or VK_END or VK_HOME
-            or VK_LEFT or VK_UP or VK_RIGHT or VK_DOWN
-            or VK_INSERT or VK_DELETE;
     }
 
     private void CaptureKey(uint vk, uint scanCode)
@@ -560,7 +468,7 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
             return;
         }
 
-        if (IsCaretMovingKey(vk))
+        if (WindowsModifierKeys.IsCaretMovingKey(vk))
         {
             ResetTypingBuffer();
             return;
@@ -569,11 +477,11 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         if (vk == VK_BACK)
         {
 
-            BackspaceTypingBuffer(IsShortcutModifierDown);
+            BackspaceTypingBuffer(_modifiers.IsShortcutDown);
             return;
         }
 
-        if (IsShortcutModifierDown)
+        if (_modifiers.IsShortcutDown)
         {
             ResetTypingBuffer();
             return;
@@ -581,62 +489,7 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
 
         NoteKeystrokeLayout(layout.ToInt64());
 
-        AppendCapturedText(_translated.AsSpan(0, Translate(vk, scanCode, layout)));
-    }
-
-    private int Translate(uint vk, uint scanCode, IntPtr layout)
-    {
-        _keyState[VK_SHIFT] = _shiftDown ? (byte)0x80 : (byte)0x00;
-        _keyState[VK_CAPITAL] = (GetKeyState(VK_CAPITAL) & 1) != 0 ? (byte)0x01 : (byte)0x00;
-
-        _keyState[VK_CONTROL] = _rightAltDown ? (byte)0x80 : (byte)0x00;
-        _keyState[VK_MENU] = _rightAltDown ? (byte)0x80 : (byte)0x00;
-
-        var sb = _translateBuffer;
-        sb.Clear();
-
-        var rc = ToUnicodeEx(vk, scanCode, _keyState, sb, sb.Capacity, 0x4, layout);
-
-        if (rc < 0)
-        {
-
-            _deadKeyPending = true;
-            _pendingAccent = sb.Length > 0 ? sb[0] : '\0';
-            return 0;
-        }
-
-        var afterDeadKey = _deadKeyPending;
-        var accent = _pendingAccent;
-        _deadKeyPending = false;
-        _pendingAccent = '\0';
-
-        if (rc == 0 || sb.Length == 0)
-            return 0;
-
-        if (rc == 1)
-        {
-
-            _translated[0] = afterDeadKey && Accented(sb[0], accent) is { } composed ? composed : sb[0];
-            return 1;
-        }
-
-        var count = Math.Min(sb.Length, _translated.Length);
-        if (afterDeadKey)
-        {
-            var letter = sb[count - 1];
-            _translated[0] = Accented(letter, accent) ?? letter;
-            return 1;
-        }
-
-        sb.CopyTo(0, _translated, 0, count);
-        return count;
-    }
-
-    private static char? Accented(char letter, char accent)
-    {
-        return accent != '\0' && char.IsLetter(letter) && DeadKeys.CombiningMarks(accent) is { } marks
-            ? DeadKeys.Compose(letter, marks)
-            : null;
+        AppendCapturedText(_translator.Translate(vk, scanCode, layout, _modifiers.Shift, _modifiers.RightAlt));
     }
 
     private bool DiscardBufferIfFocusChanged()

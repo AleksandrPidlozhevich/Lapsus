@@ -624,12 +624,12 @@
                                 <TextBlock Classes="hint" TextWrapping="Wrap"
                                            Text="{Binding L[ExcludedApps_Hint]}" />
 
-                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding CanPickRunningApps}">
+                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding Exclusions.CanPickRunningApps}">
                                     <ComboBox x:Name="RunningAppsPicker" Grid.Column="0"
                                               HorizontalAlignment="Stretch"
                                               PlaceholderText="{Binding L[ExcludedApps_Pick]}"
-                                              ItemsSource="{Binding RunningApps}"
-                                              SelectedItem="{Binding SelectedRunningApp, Mode=TwoWay}"
+                                              ItemsSource="{Binding Exclusions.RunningApps}"
+                                              SelectedItem="{Binding Exclusions.SelectedRunningApp, Mode=TwoWay}"
                                               DropDownOpened="OnRunningAppsDropDownOpened">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate x:DataType="input:RunningApp">
@@ -643,24 +643,24 @@
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
                                     <Button Grid.Column="1" Content="{Binding L[Add_Label]}"
-                                            Margin="8,0,0,0" Command="{Binding AddRunningAppCommand}" />
+                                            Margin="8,0,0,0" Command="{Binding Exclusions.AddRunningAppCommand}" />
                                 </Grid>
 
                                 <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
-                                    <TextBox Grid.Column="0" Text="{Binding NewExcludedApp, Mode=TwoWay}"
+                                    <TextBox Grid.Column="0" Text="{Binding Exclusions.NewExcludedApp, Mode=TwoWay}"
                                              PlaceholderText="{Binding L[ExcludedApps_Placeholder]}"
                                              HorizontalAlignment="Stretch" />
                                     <Button Grid.Column="1" Content="{Binding L[Add_Label]}"
-                                            Margin="8,0,0,0" Command="{Binding AddExcludedAppCommand}" />
+                                            Margin="8,0,0,0" Command="{Binding Exclusions.AddExcludedAppCommand}" />
                                 </Grid>
 
                                 <TextBlock Classes="hint" Text="{Binding L[ExcludedApps_Empty]}"
-                                           IsVisible="{Binding !HasExcludedApps}" />
+                                           IsVisible="{Binding !Exclusions.HasExcludedApps}" />
 
                                 <ScrollViewer MaxHeight="210" Padding="0,0,4,0"
                                               HorizontalScrollBarVisibility="Disabled"
                                               VerticalScrollBarVisibility="Auto">
-                                    <ItemsControl ItemsSource="{Binding ExcludedApps}">
+                                    <ItemsControl ItemsSource="{Binding Exclusions.ExcludedApps}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate x:DataType="x:String">
                                                 <Border Classes="row" Margin="0,2">
@@ -671,7 +671,7 @@
                                                         <Button Grid.Column="1" Classes="icon"
                                                                 ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[ExcludedApps_RemoveTooltip],
                                                                              RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).RemoveExcludedAppCommand,
+                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).Exclusions.RemoveExcludedAppCommand,
                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding}">
                                                             <Svg
@@ -803,20 +803,20 @@
                                 <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding L[Excluded_Hint]}" />
 
                                 <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
-                                    <TextBox Grid.Column="0" Text="{Binding NewExcludedWord, Mode=TwoWay}"
+                                    <TextBox Grid.Column="0" Text="{Binding Exclusions.NewExcludedWord, Mode=TwoWay}"
                                              PlaceholderText="{Binding L[Excluded_Placeholder]}"
                                              HorizontalAlignment="Stretch" />
                                     <Button Grid.Column="1" Content="{Binding L[Add_Label]}"
-                                            Margin="8,0,0,0" Command="{Binding AddExcludedWordCommand}" />
+                                            Margin="8,0,0,0" Command="{Binding Exclusions.AddExcludedWordCommand}" />
                                 </Grid>
 
                                 <TextBlock Classes="hint" Text="{Binding L[Excluded_Empty]}"
-                                           IsVisible="{Binding !HasExcludedWords}" />
+                                           IsVisible="{Binding !Exclusions.HasExcludedWords}" />
 
                                 <ScrollViewer MaxHeight="210" Padding="0,0,4,0"
                                               HorizontalScrollBarVisibility="Disabled"
                                               VerticalScrollBarVisibility="Auto">
-                                    <ItemsControl ItemsSource="{Binding ExcludedWords}">
+                                    <ItemsControl ItemsSource="{Binding Exclusions.ExcludedWords}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate x:DataType="x:String">
                                                 <Border Classes="row" Margin="0,2">
@@ -827,7 +827,7 @@
                                                         <Button Grid.Column="1" Classes="icon"
                                                                 ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[Excluded_RemoveTooltip],
                                                                              RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).RemoveExcludedWordCommand,
+                                                                Command="{Binding ((vm:SettingsViewModel)DataContext).Exclusions.RemoveExcludedWordCommand,
                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 CommandParameter="{Binding}">
                                                             <Svg
