@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Izhod</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Končaj Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — popravljanje razporeditve</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Letno, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} brezplačno, nato {1} na leto</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Brezplačno do {0}. Nato se začne letna naročnina, razen če jo prekličete v nastavitvah računa App Store vsaj 24 ur prej.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Za vedno, {0}</value>

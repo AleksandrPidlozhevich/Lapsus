@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Afsluiten</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Stop Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — indelingscorrectie</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Per jaar, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} gratis, daarna {1} per jaar</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Gratis tot {0}. Daarna start het jaarabonnement, tenzij je het uiterlijk 24 uur van tevoren opzegt in de instellingen van je App Store-account.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Voorgoed, {0}</value>

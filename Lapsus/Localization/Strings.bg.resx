@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Изход</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Изход от Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — поправка на подредбата</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>За година, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} безплатно, след това {1} на година</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Безплатно до {0}. След това започва годишният абонамент, освен ако не го откажете в настройките на акаунта си в App Store поне 24 часа преди това.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Завинаги, {0}</value>

@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Licensing.AppStore;
 
-public sealed record StoreProduct(string Id, string DisplayPrice);
+// FreeTrial: the length of the free trial, e.g. "2 months", when this user can still start it.
+public sealed record StoreProduct(string Id, string DisplayPrice, string? FreeTrial = null);
 
 public enum StorePurchaseStatus
 {
@@ -28,7 +29,8 @@ public interface IStorePurchases
 
     Task<StoreEntitlement> OwnedAsync();
 
-    Task<IReadOnlyList<StoreProduct>> ProductsAsync();
+    // language: the app's UI language, used to spell out the trial length.
+    Task<IReadOnlyList<StoreProduct>> ProductsAsync(string language);
 
     Task<StorePurchaseResult> PurchaseAsync(string productId);
 
@@ -47,7 +49,7 @@ internal sealed class NullStorePurchases : IStorePurchases
 
     public Task<StoreEntitlement> OwnedAsync() => Task.FromResult(StoreEntitlement.None);
 
-    public Task<IReadOnlyList<StoreProduct>> ProductsAsync() => Task.FromResult<IReadOnlyList<StoreProduct>>([]);
+    public Task<IReadOnlyList<StoreProduct>> ProductsAsync(string language) => Task.FromResult<IReadOnlyList<StoreProduct>>([]);
 
     public Task<StorePurchaseResult> PurchaseAsync(string productId) =>
         Task.FromResult(new StorePurchaseResult(StorePurchaseStatus.Unavailable));

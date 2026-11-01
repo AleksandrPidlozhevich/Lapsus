@@ -88,6 +88,12 @@ ditto "$PUBLISH_DIR" "$APP/Contents/MacOS"
 # crash dumper, so it is left out rather than signed.
 rm -f "$APP/Contents/MacOS/createdump"
 find "$APP/Contents/MacOS" -name '*.pdb' -delete
+# Whisper.net ships every OS's runtime. Linux and Windows libraries are not Mach-O, so their
+# signatures would go in extended attributes, which the store does not take; only this Mac's
+# folder stays, where Whisper.net looks for it. Its Metal shaders are compiled into
+# libggml-metal-whisper.dylib, so the loose ggml-metal.metal is not needed either.
+find "$APP/Contents/MacOS/runtimes" -mindepth 1 -maxdepth 1 ! -name "macos-${RID#osx-}" -exec rm -rf {} +
+rm -f "$APP/Contents/MacOS/ggml-metal.metal"
 
 # StoreKit 2 bridge (subscription and lifetime purchase). Beside the executable, where .NET looks
 # for a native library.

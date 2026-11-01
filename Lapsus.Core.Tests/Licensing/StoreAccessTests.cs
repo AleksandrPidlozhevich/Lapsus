@@ -4,54 +4,50 @@ namespace Lapsus.Core.Tests.Licensing;
 
 public class StoreAccessTests
 {
-    private static readonly DateOnly Today = new(2026, 10, 16);
+    private static readonly DateTimeOffset Now = new(2026, 10, 16, 12, 0, 0, TimeSpan.Zero);
 
     [Fact]
     public void The_website_build_gates_nothing_whatever_it_owns()
     {
-        var access = StoreAccessPolicy.Decide(isStoreBuild: false, StoreEntitlement.None, trialStarted: Today.AddDays(-400), Today);
+        var access = StoreAccessPolicy.Decide(isStoreBuild: false, StoreEntitlement.None, Now);
 
         Assert.Equal(StoreAccessKind.NotStoreBuild, access.Kind);
         Assert.True(access.PaidFeatures);
     }
 
     [Fact]
-    public void A_first_launch_starts_the_full_trial()
+    public void Owning_nothing_is_the_free_part_only()
     {
-        var access = StoreAccessPolicy.Decide(true, StoreEntitlement.None, trialStarted: null, Today);
-
-        Assert.Equal(StoreAccessKind.Trial, access.Kind);
-        Assert.Equal(StoreAccessPolicy.TrialDays, access.TrialDaysLeft);
-        Assert.True(access.PaidFeatures);
-    }
-
-    [Theory]
-    [InlineData(0, 60)]
-    [InlineData(1, 59)]
-    [InlineData(59, 1)]
-    public void The_trial_counts_down_by_calendar_day(int daysAgo, int left)
-    {
-        var access = StoreAccessPolicy.Decide(true, StoreEntitlement.None, Today.AddDays(-daysAgo), Today);
-
-        Assert.Equal(StoreAccessKind.Trial, access.Kind);
-        Assert.Equal(left, access.TrialDaysLeft);
-    }
-
-    [Theory]
-    [InlineData(60)]
-    [InlineData(365)]
-    public void After_the_trial_only_the_free_part_is_left(int daysAgo)
-    {
-        var access = StoreAccessPolicy.Decide(true, StoreEntitlement.None, Today.AddDays(-daysAgo), Today);
+        var access = StoreAccessPolicy.Decide(true, StoreEntitlement.None, Now);
 
         Assert.Equal(StoreAccessKind.Free, access.Kind);
         Assert.False(access.PaidFeatures);
     }
 
-    [Fact]
-    public void Moving_the_clock_back_never_lengthens_the_trial()
+    [Theory]
+    [InlineData(60, 60)]
+    [InlineData(1.5, 2)]
+    [InlineData(0.1, 1)]
+    public void The_app_store_trial_unlocks_and_counts_down(double daysToEnd, int left)
     {
-        Assert.Equal(StoreAccessPolicy.TrialDays, StoreAccessPolicy.TrialDaysLeft(Today.AddDays(30), Today));
+        var ends = Now.AddDays(daysToEnd);
+
+        var access = StoreAccessPolicy.Decide(true, new StoreEntitlement(StorePlan.Yearly, ends, IsTrial: true), Now);
+
+        Assert.Equal(StoreAccessKind.Trial, access.Kind);
+        Assert.Equal(left, access.TrialDaysLeft);
+        Assert.Equal(ends, access.Renews);
+        Assert.True(access.PaidFeatures);
+    }
+
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void A_subscription_that_ran_out_since_the_last_check_unlocks_nothing(bool isTrial)
+    {
+        var access = StoreAccessPolicy.Decide(true, new StoreEntitlement(StorePlan.Yearly, Now.AddMinutes(-1), isTrial), Now);
+
+        Assert.Equal(StoreAccessKind.Free, access.Kind);
     }
 
     [Fact]
@@ -59,7 +55,7 @@ public class StoreAccessTests
     {
         var renews = new DateTimeOffset(2027, 10, 16, 0, 0, 0, TimeSpan.Zero);
 
-        var access = StoreAccessPolicy.Decide(true, new StoreEntitlement(StorePlan.Yearly, renews), Today.AddDays(-400), Today);
+        var access = StoreAccessPolicy.Decide(true, new StoreEntitlement(StorePlan.Yearly, renews), Now);
 
         Assert.Equal(StoreAccessKind.Subscription, access.Kind);
         Assert.Equal(renews, access.Renews);
@@ -69,7 +65,7 @@ public class StoreAccessTests
     [Fact]
     public void A_lifetime_purchase_unlocks_for_good()
     {
-        var access = StoreAccessPolicy.Decide(true, new StoreEntitlement(StorePlan.Lifetime), Today.AddDays(-400), Today);
+        var access = StoreAccessPolicy.Decide(true, new StoreEntitlement(StorePlan.Lifetime), Now);
 
         Assert.Equal(StoreAccessKind.Lifetime, access.Kind);
         Assert.True(access.PaidFeatures);

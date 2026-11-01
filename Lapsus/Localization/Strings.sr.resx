@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Izlaz</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Zatvori Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — ispravka rasporeda</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Godišnje, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} besplatno, zatim {1} godišnje</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Besplatno do {0}. Zatim počinje godišnja pretplata ako je ne otkažete u podešavanjima App Store naloga najkasnije 24 sata ranije.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Zauvek, {0}</value>

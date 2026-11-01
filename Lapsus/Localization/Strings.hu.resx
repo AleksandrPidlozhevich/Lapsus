@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Kilépés</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Kilépés: Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — kiosztásjavítás</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Éves, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} ingyen, utána évi {1}</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Ingyenes eddig: {0}. Utána elindul az éves előfizetés, hacsak nem mondod le az App Store-fiókod beállításaiban legalább 24 órával előtte.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Végleges, {0}</value>

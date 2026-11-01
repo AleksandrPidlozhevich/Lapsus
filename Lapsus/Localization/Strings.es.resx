@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Salir</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Salir de Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — corrección de distribución</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Anual, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} gratis, luego {1} al año</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Gratis hasta el {0}. Después empieza la suscripción anual, salvo que la canceles en los ajustes de tu cuenta de App Store al menos 24 horas antes.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Para siempre, {0}</value>

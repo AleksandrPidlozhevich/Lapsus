@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Avsluta</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Avsluta Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — layouträttning</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Årsvis, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} gratis, sedan {1} per år</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Gratis till och med {0}. Därefter startar årsprenumerationen om du inte säger upp den i inställningarna för ditt App Store-konto senast 24 timmar innan.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>För alltid, {0}</value>

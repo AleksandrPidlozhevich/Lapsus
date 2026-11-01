@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>გასვლა</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Lapsus-იდან გასვლა</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — განლაგების გასწორება</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>წლიური, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} უფასოდ, შემდეგ {1} წელიწადში</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>უფასოდ {0}-მდე. შემდეგ დაიწყება წლიური გამოწერა, თუ მას არ გააუქმებთ App Store-ის ანგარიშის პარამეტრებში არანაკლებ 24 საათით ადრე.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>სამუდამოდ, {0}</value>

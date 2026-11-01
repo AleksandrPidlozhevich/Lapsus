@@ -217,6 +217,9 @@
     <data name="Tray_Exit" xml:space="preserve">
     <value>Ukončiť</value>
   </data>
+    <data name="Tray_Quit" xml:space="preserve">
+    <value>Ukončiť Lapsus</value>
+  </data>
     <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — oprava rozloženia</value>
   </data>
@@ -639,6 +642,12 @@
   </data>
     <data name="Store_Yearly" xml:space="preserve">
     <value>Ročne, {0}</value>
+  </data>
+    <data name="Store_YearlyTrial" xml:space="preserve">
+    <value>{0} zadarmo, potom {1} ročne</value>
+  </data>
+    <data name="Store_TrialDetail" xml:space="preserve">
+    <value>Zadarmo do {0}. Potom sa začne ročné predplatné, ak ho nezrušíte v nastaveniach účtu App Store najneskôr 24 hodín vopred.</value>
   </data>
     <data name="Store_Lifetime" xml:space="preserve">
     <value>Natrvalo, {0}</value>

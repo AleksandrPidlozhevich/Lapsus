@@ -96,7 +96,8 @@ is inside other apps at all, and the App Store installs and updates it.
 
 It is free to download, and everything in it stays free, except **neural correction and features
 added after it**. Those are **Lapsus Plus**: a yearly subscription or a one-time lifetime purchase,
-both through Apple. The first 60 days include Lapsus Plus with nothing to sign up for and no card.
+both through Apple. The yearly subscription starts with a free trial, counted by the App Store;
+cancel it in your App Store account before the trial ends and nothing is charged.
 When the trial or a subscription ends, Lapsus keeps working; only those features switch off, and
 nothing you set up is lost.
 
