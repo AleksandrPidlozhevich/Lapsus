@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 
 namespace Lapsus.Audio;
 
-// Two short tones: rising when the microphone opens, falling when it closes. Made here, not shipped as files.
 // UI thread only.
 internal static class DictationSounds
 {
@@ -29,7 +28,6 @@ internal static class DictationSounds
         }
     }
 
-    // Two 75 ms notes with a soft attack and decay, quiet enough not to startle.
     internal static byte[] Tones(double first, double second)
     {
         const double noteSeconds = 0.075;

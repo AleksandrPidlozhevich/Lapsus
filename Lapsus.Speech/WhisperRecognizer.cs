@@ -5,8 +5,7 @@ using Whisper.net.Logger;
 
 namespace Lapsus.Speech;
 
-// Whisper (ggml model through Whisper.net) as the dictation recognizer. Decoding follows what stage 1 measured
-// on large-v3-turbo:
+// Decoding follows what stage 1 measured on large-v3-turbo:
 //  - GPU: the full 30 s window, greedy, with the prompt — best quality and ~0.3 s a phrase;
 //  - CPU: the window cut to the audio's length, which is five times faster, with beam search, because greedy
 //    decoding on a cut window falls into loops.
@@ -42,18 +41,15 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
         }
     }
 
-    // Whether decoding runs on a GPU. Read from the native log while loading: whisper.cpp falls back to the CPU
-    // quietly when asked for a GPU it does not find.
+    // Read from the native log while loading: whisper.cpp falls back to the CPU quietly when asked for a GPU it does not find.
     public bool OnGpu { get; private set; }
 
     public string DeviceLabel { get; private set; } = "";
 
-    // whisper.cpp's own log from the last load, for diagnostics.
     public IReadOnlyList<string> LoadLog { get; private set; } = [];
 
     public int Threads { get; init; } = Math.Clamp(Environment.ProcessorCount, 1, 8);
 
-    // modelPath: a ggml Whisper model. vadPath: a ggml Silero VAD model, or null to decode audio uncut.
     public void Load(string modelPath, string? vadPath, bool preferGpu)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
@@ -249,15 +245,13 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
         return new SpeechResult(text.ToString().Trim(), language, seconds, probability, minP);
     }
 
-    // The encoder window for audio this long on the CPU: a second of slack, rounded up to 64 frames, never so
-    // small that Whisper loses its footing; null for audio that needs the whole window anyway.
+    // Never so small that Whisper loses its footing.
     internal static int? WindowFor(double seconds)
     {
         var frames = (int)Math.Ceiling((seconds + 1.0) * FramesPerSecond / 64.0) * 64;
         return frames >= FullWindowFrames ? null : Math.Max(frames, 384);
     }
 
-    // Speech stretches as VAD finds them, joined.
     private static float[] KeepSpeech(WhisperVadProcessor vad, float[] pcm)
     {
         var kept = new List<float>(pcm.Length);

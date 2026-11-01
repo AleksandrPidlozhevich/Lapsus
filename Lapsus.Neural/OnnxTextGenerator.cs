@@ -111,7 +111,6 @@ internal sealed class OnnxTextGenerator : IDisposable
         return scores;
     }
 
-    // A generator holding exactly the first `count` tokens of the sequence in its cache.
     private Generator Keep(int[] sequence, int count)
     {
         if (_generator is not null && SharedPrefix(_cached, sequence) >= count)

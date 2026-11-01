@@ -1,4 +1,5 @@
 using Lapsus.Core.Layout;
+using static Lapsus.Core.Correction.LineEvidence;
 
 namespace Lapsus.Core.Correction;
 
@@ -13,93 +14,81 @@ internal sealed class PhraseContext(
 
     internal delegate ScoredWord? FixInOwnScript(in TokenReading token);
 
-    private const int Quorum = 2;
-
-    // Short words ("d", "vs") must not anchor a line.
-    private const int MinAnchorLetters = 3;
-
     // Short chunks follow only when own-script anchors no longer hold the line.
     private const int MinPulledLettersBesideAnchors = 3;
-
-    // Two spell-fix edits across scripts is a guess ("github" → черги); it needs a crossed neighbour.
-    private const int MinEditsToNeedANeighbour = 2;
-
-    // Frequency lead that pulls a word both languages know with no crossed neighbour: για over "gia".
-    private const double MinFrequencyLeadWithoutANeighbour = 0.3;
 
     // An own-script typo fix must start from something that looks like the language: not σονγ → σον.
     private const double MinNaturalnessOfATypo = 0.5;
 
-    private readonly List<TokenReading> _tokens = [];
+    private readonly LineEvidence _line = new(scorer, readInScript, hint);
 
-    // Per token, read once: the typed keys never change while the line is revised.
-    private readonly Dictionary<int, double?> _frequencyElsewhere = [];
+    private List<TokenReading> Tokens => _line.Tokens;
 
     public void Add(in TokenReading token)
     {
-        _tokens.Add(token);
+        Tokens.Add(token);
     }
 
     public IReadOnlyList<TokenReading> Revise()
     {
         // Fix typos and revert islands before Direction, so neither can set it.
         List<(int Index, ScoredWord Fix)>? typos = null;
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
             if (IsTypoLeavingItsOwnLine(i) is { } fix)
                 (typos ??= []).Add((i, fix));
 
         if (typos is not null)
             foreach (var (i, fix) in typos)
-                _tokens[i] = keysOnly
-                    ? _tokens[i].Reverted()
-                    : _tokens[i] with { Chosen = fix, ChosenScript = _tokens[i].Source.Script };
+                Tokens[i] = keysOnly
+                    ? Tokens[i].Reverted()
+                    : Tokens[i] with { Chosen = fix, ChosenScript = Tokens[i].Source.Script };
 
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
         {
             if (IsTermAmongAnotherLanguage(i))
-                _tokens[i] = _tokens[i].Reverted();
+                Tokens[i] = Tokens[i].Reverted();
             else if (SameScriptLayoutInstead(i) is { } sibling)
-                _tokens[i] = _tokens[i] with { Chosen = sibling, ChosenScript = _tokens[i].Source.Script };
+                Tokens[i] = Tokens[i] with { Chosen = sibling, ChosenScript = Tokens[i].Source.Script };
         }
 
         List<int>? islands = null;
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
             if (IsUncorroboratedIsland(i))
                 (islands ??= []).Add(i);
 
         if (islands is not null)
             foreach (var i in islands)
-                _tokens[i] = _tokens[i].Reverted();
+                Tokens[i] = Tokens[i].Reverted();
 
         List<int>? guesses = null;
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
             if (IsFarFetchedCrossing(i))
                 (guesses ??= []).Add(i);
 
         if (guesses is not null)
             foreach (var i in guesses)
-                _tokens[i] = _tokens[i].Reverted();
+                Tokens[i] = Tokens[i].Reverted();
 
-        var direction = Direction();
+        var direction = _line.Direction();
         if (direction is { } settled)
         {
-            for (var i = 0; i < _tokens.Count; i++)
+            for (var i = 0; i < Tokens.Count; i++)
             {
                 if (PullsIn(i, settled) is { } pulled)
-                    _tokens[i] = _tokens[i] with { Chosen = pulled, ChosenScript = settled };
-                else if (KeysAsTheyStand(_tokens[i], settled) is { } plain)
-                    _tokens[i] = _tokens[i] with { Chosen = plain, ChosenScript = settled };
+                    Tokens[i] = Tokens[i] with { Chosen = pulled, ChosenScript = settled };
+                else if (KeysAsTheyStand(Tokens[i], settled) is { } plain)
+                    Tokens[i] = Tokens[i] with { Chosen = plain, ChosenScript = settled };
             }
         }
 
-        if ((CrossedScript() ?? direction) is { } mixed)
+        if ((_line.CrossedScript() ?? direction) is { } mixed)
             FollowNeighbours(mixed, direction == mixed);
-        else if (HeldScript() is { } held)
+        else if (_line.HeldScript() is { } held)
             FollowNeighbours(held, false, listedOnly: true);
 
         FollowRuns();
 
-        return _tokens;
+        return Tokens;
     }
 
     // A short word both languages know goes the way of the words typed next to it on the same keys: in
@@ -112,12 +101,12 @@ internal sealed class PhraseContext(
         do
         {
             moved = false;
-            for (var i = 0; i < _tokens.Count; i++)
+            for (var i = 0; i < Tokens.Count; i++)
             {
                 if (FollowsItsRun(i) is not { } follow)
                     continue;
 
-                _tokens[i] = _tokens[i] with { Chosen = follow.Pulled, ChosenScript = follow.Into };
+                Tokens[i] = Tokens[i] with { Chosen = follow.Pulled, ChosenScript = follow.Into };
                 moved = true;
             }
         } while (moved);
@@ -125,19 +114,19 @@ internal sealed class PhraseContext(
 
     private (ScoredWord Pulled, Script Into)? FollowsItsRun(int index)
     {
-        if (!IsShortAndUnmoved(index))
+        if (!_line.IsShortAndUnmoved(index))
             return null;
 
         // Keys with no letter of their own ("'[", "'") are no word where typed, so nothing holds them there.
-        var token = _tokens[index];
+        var token = Tokens[index];
         var letterless = WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length == 0;
-        if (!letterless && (token.BaselineFrequency <= 0 || !StandsAlone(index)))
+        if (!letterless && (token.BaselineFrequency <= 0 || !_line.StandsAlone(index)))
             return null;
 
-        var left = WordBeside(index, -1);
-        var right = WordBeside(index, 1);
-        var fromLeft = CrossedOnTheSameKeys(left, token);
-        var fromRight = CrossedOnTheSameKeys(right, token);
+        var left = _line.WordBeside(index, -1);
+        var right = _line.WordBeside(index, 1);
+        var fromLeft = _line.CrossedOnTheSameKeys(left, token);
+        var fromRight = _line.CrossedOnTheSameKeys(right, token);
         if (fromLeft is not null && fromRight is not null && fromLeft != fromRight)
             return null;
 
@@ -145,7 +134,7 @@ internal sealed class PhraseContext(
             return letterless ? LetterlessBesideItsLanguage(index, left, right) : OnlyShortWordsBeside(index);
 
         var reading = letterless ? ReadLetterless(token, into) : readInScript(token.Typed, token.Source, into);
-        if (IsBlindTo(token, into) || reading is not { } pulled || !WordScorer.IsDictionaryHit(pulled.Score))
+        if (_line.IsBlindTo(token, into) || reading is not { } pulled || !WordScorer.IsDictionaryHit(pulled.Score))
             return null;
 
         // The commoner word must not give way: "in" next to a crossing is still "in", never шт.
@@ -155,7 +144,7 @@ internal sealed class PhraseContext(
 
         // At a seam between a real word of its own and the crossing, only a far commoner reading moves:
         // "oh, ye 'nj fix" is "oh, ну это fix", ye being a rare word and ну a common one.
-        var seam = IsOwnWordBeside(left, token, into) || IsOwnWordBeside(right, token, into);
+        var seam = _line.IsOwnWordBeside(left, token, into) || _line.IsOwnWordBeside(right, token, into);
         return seam && lead < MinFrequencyLeadWithoutANeighbour ? null : (pulled, into);
     }
 
@@ -163,8 +152,8 @@ internal sealed class PhraseContext(
     // they spell one there (эх).
     private (ScoredWord Pulled, Script Into)? LetterlessBesideItsLanguage(int index, int? left, int? right)
     {
-        var token = _tokens[index];
-        if ((NativeScriptOf(left) ?? NativeScriptOf(right)) is not { } into || into == token.Source.Script ||
+        var token = Tokens[index];
+        if ((_line.NativeScriptOf(left) ?? _line.NativeScriptOf(right)) is not { } into || into == token.Source.Script ||
             ReadLetterless(token, into) is not { } pulled)
             return null;
 
@@ -191,31 +180,31 @@ internal sealed class PhraseContext(
     // there. A single short word stays as typed: "Спартак vs ЦСКА".
     private (ScoredWord Pulled, Script Into)? OnlyShortWordsBeside(int index)
     {
-        var token = _tokens[index];
+        var token = Tokens[index];
         var first = index;
-        while (WordBeside(first, -1) is { } before && _tokens[before].Source.Script == token.Source.Script)
+        while (_line.WordBeside(first, -1) is { } before && Tokens[before].Source.Script == token.Source.Script)
             first = before;
 
         var last = index;
-        while (WordBeside(last, 1) is { } after && _tokens[after].Source.Script == token.Source.Script)
+        while (_line.WordBeside(last, 1) is { } after && Tokens[after].Source.Script == token.Source.Script)
             last = after;
 
         var run = 0;
         for (var i = first; i <= last; i++)
         {
-            if (!_tokens[i].IsWord)
+            if (!Tokens[i].IsWord)
                 continue;
 
-            if (!IsShortAndUnmoved(i))
+            if (!_line.IsShortAndUnmoved(i))
                 return null;
             run++;
         }
 
-        if (run < Quorum || Anchors(token.Source.Script) > 0)
+        if (run < Quorum || _line.Anchors(token.Source.Script) > 0)
             return null;
 
-        if ((NativeScriptOf(WordBeside(first, -1)) ?? NativeScriptOf(WordBeside(last, 1))) is not { } into ||
-            into == token.Source.Script || IsBlindTo(token, into))
+        if ((_line.NativeScriptOf(_line.WordBeside(first, -1)) ?? _line.NativeScriptOf(_line.WordBeside(last, 1))) is not { } into ||
+            into == token.Source.Script || _line.IsBlindTo(token, into))
             return null;
 
         if (readInScript(token.Typed, token.Source, into) is not { } pulled || !WordScorer.IsDictionaryHit(pulled.Score))
@@ -226,140 +215,32 @@ internal sealed class PhraseContext(
             : null;
     }
 
-    private bool IsShortAndUnmoved(int index)
-    {
-        var token = _tokens[index];
-        return token.IsWord && !token.Chosen.Changed && !token.IsException &&
-               WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length < MinAnchorLetters;
-    }
-
-    private int? WordBeside(int index, int step)
-    {
-        for (var i = index + step; i >= 0 && i < _tokens.Count; i += step)
-            if (_tokens[i].IsWord)
-                return i;
-
-        return null;
-    }
-
-    // The script a neighbour typed on the same layout crossed into.
-    private Script? CrossedOnTheSameKeys(int? index, in TokenReading token)
-    {
-        if (index is not { } i)
-            return null;
-
-        var other = _tokens[i];
-        return other.Source.Script == token.Source.Script && other.Chosen.Changed &&
-               other.ChosenScript is { } into && into != other.Source.Script &&
-               other.Edits < MinEditsToNeedANeighbour && WordScorer.IsDictionaryHit(other.Chosen.Score)
-            ? into
-            : null;
-    }
-
-    // A real word of the token's own script that the other script cannot read: "oh", "fix".
-    private bool IsOwnWordBeside(int? index, in TokenReading token, Script into)
-    {
-        if (index is not { } i)
-            return false;
-
-        var other = _tokens[i];
-        if (!IsNativeWord(other, token.Source.Script))
-            return false;
-
-        return WordScanner.TrimToLetters(other.Typed, other.Source.Script).Length >= MinAnchorLetters ||
-               readInScript(other.Typed, other.Source, into) is not { } reading ||
-               !WordScorer.IsDictionaryHit(reading.Score);
-    }
-
-    private Script? NativeScriptOf(int? index)
-    {
-        return index is { } i && IsNativeWord(_tokens[i], _tokens[i].Source.Script) ? _tokens[i].Source.Script : null;
-    }
-
-    // The one script whose real words hold a line nothing crossed out of. A word of another layout that
-    // slipped in spells a rarer word there ("πες μου pew όταν είσαι έτοιμος"), so nothing crossed on its
-    // own; it goes with its neighbours like any word both languages know.
-    private Script? HeldScript()
-    {
-        Script? held = null;
-        var seen = new List<Script>();
-        foreach (var token in _tokens)
-        {
-            if (!token.IsWord || seen.Contains(token.Source.Script))
-                continue;
-
-            seen.Add(token.Source.Script);
-            if (Anchors(token.Source.Script) < Quorum)
-                continue;
-
-            if (held is not null)
-                return null;
-
-            held = token.Source.Script;
-        }
-
-        return seen.Count > 1 ? held : null;
-    }
-
-    // Keys-alone only; a spell-fix must not invent the line's direction.
-    private static bool Crossed(in TokenReading token)
-    {
-        return token.IsWord && token.Chosen.Changed && token.Edits == 0 &&
-               token.ChosenScript is { } into && into != token.Source.Script &&
-               WordScorer.IsDictionaryHit(token.Chosen.Score);
-    }
-
-    private Script? Direction()
-    {
-        Script? into = null;
-        var crossings = 0;
-
-        foreach (var token in _tokens)
-        {
-            if (!Crossed(token))
-                continue;
-
-            var script = token.ChosenScript!.Value;
-            if (into is null)
-                into = script;
-            else if (into != script)
-                return null;
-
-            crossings++;
-        }
-
-        if (crossings >= Quorum)
-            return into;
-
-        return hint is { } known && (into is null || into == known) ? known : null;
-    }
-
     private ScoredWord? IsTypoLeavingItsOwnLine(int index)
     {
         if (fixInOwnScript is null)
             return null;
 
-        var token = _tokens[index];
+        var token = Tokens[index];
         if (!token.IsWord || !token.Chosen.Changed || token.ChosenScript is not { } into ||
             into == token.Source.Script)
             return null;
 
         var anchors = 0;
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
         {
             if (i == index)
                 continue;
 
-            var other = _tokens[i];
+            var other = Tokens[i];
             if (!other.IsWord)
                 continue;
 
-            if (Crossed(other) && other.ChosenScript == into)
+            if (LineEvidence.Crossed(other) && other.ChosenScript == into)
                 return null;
 
             // A word typed right in that language says the writer is writing it: "ну да, это был deploy yf
             // prod" is на, not "of".
-            if (IsNativeWord(other, into))
+            if (LineEvidence.IsNativeWord(other, into))
                 return null;
 
             if (!other.Chosen.Changed && other.Source.Script == token.Source.Script &&
@@ -393,14 +274,14 @@ internal sealed class PhraseContext(
     // switched layouts for ("через api", "просто hotfix"), not a slip. Respelling it (ali, hottie) breaks it.
     private bool IsTermAmongAnotherLanguage(int index)
     {
-        var token = _tokens[index];
+        var token = Tokens[index];
         if (!token.IsWord || !token.Chosen.Changed || token.Edits == 0 || token.ChosenScript != token.Source.Script)
             return false;
 
         var others = 0;
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
         {
-            var other = _tokens[i];
+            var other = Tokens[i];
             if (i == index || !other.IsWord)
                 continue;
 
@@ -408,7 +289,7 @@ internal sealed class PhraseContext(
             if (other.Source.Script == token.Source.Script && other.ChosenScript == token.Source.Script)
                 return false;
 
-            if (other.Source.Script != token.Source.Script && IsNativeWord(other, other.Source.Script))
+            if (other.Source.Script != token.Source.Script && LineEvidence.IsNativeWord(other, other.Source.Script))
                 others++;
         }
 
@@ -421,21 +302,21 @@ internal sealed class PhraseContext(
     private ScoredWord? SameScriptLayoutInstead(int index)
     {
         // Keys alone or with a spell-fix on top ("ынше" is "syit", one slip from shit): either way a crossing.
-        var token = _tokens[index];
+        var token = Tokens[index];
         if (!token.IsWord || !token.Chosen.Changed || token.ChosenScript is not { } into || into == token.Source.Script ||
             !WordScorer.IsDictionaryHit(scorer.Score(token.Chosen.Text, into)))
             return null;
 
         var own = 0;
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
         {
-            if (i == index || !_tokens[i].IsWord)
+            if (i == index || !Tokens[i].IsWord)
                 continue;
 
-            if ((Crossed(_tokens[i]) && _tokens[i].ChosenScript == into) || IsNativeWord(_tokens[i], into))
+            if ((LineEvidence.Crossed(Tokens[i]) && Tokens[i].ChosenScript == into) || LineEvidence.IsNativeWord(Tokens[i], into))
                 return null;
 
-            if (IsNativeWord(_tokens[i], token.Source.Script))
+            if (LineEvidence.IsNativeWord(Tokens[i], token.Source.Script))
                 own++;
         }
 
@@ -462,107 +343,15 @@ internal sealed class PhraseContext(
 
     private bool IsFarFetchedCrossing(int index)
     {
-        var token = _tokens[index];
+        var token = Tokens[index];
         if (!token.IsWord || !token.Chosen.Changed || token.Edits < MinEditsToNeedANeighbour ||
             token.ChosenScript is not { } into || into == token.Source.Script)
             return false;
 
         // A lone word keeps its guess; one beside words that stayed in their own script gives it up.
-        var left = SideOf(index, -1);
-        var right = SideOf(index, 1);
+        var left = _line.SideOf(index, -1);
+        var right = _line.SideOf(index, 1);
         return left != into && right != into && (left is not null || right is not null);
-    }
-
-    // The one script the line's keys-alone crossings went into.
-    private Script? CrossedScript()
-    {
-        Script? into = null;
-        foreach (var token in _tokens)
-        {
-            if (!Crossed(token))
-                continue;
-
-            if (into is not null && into != token.ChosenScript)
-                return null;
-
-            into = token.ChosenScript;
-        }
-
-        return into;
-    }
-
-    // Which script the nearest settled word on that side stands in: a crossing, or a real word of its own
-    // script that is far commoner there than read elsewhere. Short words and near ties say nothing.
-    private Script? SideOf(int index, int step)
-    {
-        for (var i = index + step; i >= 0 && i < _tokens.Count; i += step)
-            if (SettledScriptOf(i) is { } script)
-                return script;
-
-        return null;
-    }
-
-    private Script? SettledScriptOf(int index)
-    {
-        var token = _tokens[index];
-        if (!token.IsWord)
-            return null;
-
-        var script = token.ChosenScript ?? token.Source.Script;
-        if (WordScanner.TrimToLetters(token.Chosen.Text, script).Length < MinAnchorLetters)
-            return null;
-
-        if (token.Chosen.Changed && script != token.Source.Script)
-            return token.Edits < MinEditsToNeedANeighbour ? script : null;
-
-        if (token.Chosen.Changed || !WordScorer.IsDictionaryHit(token.Baseline))
-            return null;
-
-        return FrequencyElsewhere(index) is { } elsewhere &&
-               token.BaselineFrequency - elsewhere < MinFrequencyLeadWithoutANeighbour
-            ? null
-            : token.Source.Script;
-    }
-
-    // The language most of the line's settled words stand in.
-    private bool HoldsTheLine(Script script, Script against)
-    {
-        var mine = 0;
-        var theirs = 0;
-        for (var i = 0; i < _tokens.Count; i++)
-        {
-            var settled = SettledScriptOf(i);
-            if (settled == script)
-                mine++;
-            else if (settled == against)
-                theirs++;
-        }
-
-        return mine >= theirs;
-    }
-
-    private double? FrequencyElsewhere(int index)
-    {
-        if (_frequencyElsewhere.TryGetValue(index, out var known))
-            return known;
-
-        var token = _tokens[index];
-        double? best = null;
-        foreach (var candidate in token.Source.Candidates)
-        {
-            var script = candidate.ScoringScript;
-            if (script == token.Source.Script ||
-                readInScript(token.Typed, token.Source, script) is not { } reading ||
-                !WordScorer.IsDictionaryHit(reading.Score))
-                continue;
-
-            var frequency = scorer.FrequencyOf(reading.Text, script);
-            if (best is null || frequency > best)
-                best = frequency;
-        }
-
-        _frequencyElsewhere[index] = best;
-        return best;
     }
 
     // A mixed line switches language mid-way, so a word both languages know goes with its neighbours:
@@ -574,15 +363,15 @@ internal sealed class PhraseContext(
         do
         {
             moved = false;
-            for (var i = 0; i < _tokens.Count; i++)
+            for (var i = 0; i < Tokens.Count; i++)
             {
-                if (listedOnly && IsKnownWithoutACount(_tokens[i]))
+                if (listedOnly && IsKnownWithoutACount(Tokens[i]))
                     continue;
 
-                if (FollowsNeighbours(i, into, settled || CrossingsInto(into) >= Quorum) is not { } pulled)
+                if (FollowsNeighbours(i, into, settled || _line.CrossingsInto(into) >= Quorum) is not { } pulled)
                     continue;
 
-                _tokens[i] = _tokens[i] with { Chosen = pulled, ChosenScript = into };
+                Tokens[i] = Tokens[i] with { Chosen = pulled, ChosenScript = into };
                 moved = true;
             }
         } while (moved);
@@ -597,9 +386,9 @@ internal sealed class PhraseContext(
 
     private ScoredWord? FollowsNeighbours(int index, Script into, bool settled)
     {
-        var token = _tokens[index];
+        var token = Tokens[index];
         if (!token.IsWord || token.Chosen.Changed || token.IsException || token.Source.Script == into ||
-            IsBlindTo(token, into))
+            _line.IsBlindTo(token, into))
             return null;
 
         if (readInScript(token.Typed, token.Source, into) is not { } pulled ||
@@ -607,13 +396,13 @@ internal sealed class PhraseContext(
             return null;
 
         var lead = scorer.FrequencyOf(pulled.Text, into) - token.BaselineFrequency;
-        var left = SideOf(index, -1);
-        var right = SideOf(index, 1);
+        var left = _line.SideOf(index, -1);
+        var right = _line.SideOf(index, 1);
         var isShort = WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length < MinAnchorLetters;
 
         // Words typed right in that language settle the line too, but only for a plain word both lists know
         // ("lf" is да). One its own list lacks, or an abbreviation ("m.o.", "t0"), was typed so on purpose.
-        settled = settled || (token.BaselineFrequency > 0 && StandsAlone(index) && IsWrittenIn(into));
+        settled = settled || (token.BaselineFrequency > 0 && _line.StandsAlone(index) && _line.IsWrittenIn(into));
 
         // Among short words only ("ой, nf ye"), a line already written in that language takes them along.
         if (isShort && settled && left is null && right is null)
@@ -626,23 +415,15 @@ internal sealed class PhraseContext(
 
         // Beside one crossing a short word is no line at all ("ghbdtn d"). At the seam it goes with the
         // language the line is written in: "στείλε μου to link" is Greek, "strength to αλήθεια" English.
-        if (isShort && (!settled || (left != right && !HoldsTheLine(into, token.Source.Script))))
+        if (isShort && (!settled || (left != right && !_line.HoldsTheLine(into, token.Source.Script))))
             return null;
 
         return lead >= 0 ? pulled : null;
     }
 
-    // Blind-pair without a source dictionary: comparison is rigged.
-    private bool IsBlindTo(in TokenReading token, Script direction)
-    {
-        return Orthography.IsPossibleWord(token.Typed, token.Source.Script) &&
-               !scorer.HasDictionaryFor(token.Source.Script) &&
-               Scripts.IsBlindPair(token.Source.Script, direction);
-    }
-
     private bool IsUncorroboratedIsland(int index)
     {
-        var token = _tokens[index];
+        var token = Tokens[index];
         if (!token.IsWord || !token.Chosen.Changed || token.Edits == 0)
             return false;
 
@@ -653,9 +434,9 @@ internal sealed class PhraseContext(
         var theirs = 0;
         var anchored = false;
 
-        for (var i = 0; i < _tokens.Count; i++)
+        for (var i = 0; i < Tokens.Count; i++)
         {
-            var other = _tokens[i];
+            var other = Tokens[i];
             if (!other.IsWord)
                 continue;
 
@@ -667,7 +448,7 @@ internal sealed class PhraseContext(
             if (i == index)
                 continue;
 
-            if (Crossed(other) && other.ChosenScript == into)
+            if (LineEvidence.Crossed(other) && other.ChosenScript == into)
                 return false;
 
             if (!other.Chosen.Changed && other.Source.Script == into &&
@@ -690,81 +471,16 @@ internal sealed class PhraseContext(
             : null;
     }
 
-    private int CrossingsInto(Script direction)
-    {
-        var crossings = 0;
-        foreach (var token in _tokens)
-            if (Crossed(token) && token.ChosenScript == direction)
-                crossings++;
-
-        return crossings;
-    }
-
-    // A word on its own between spaces, sentence punctuation after it allowed: "lf," yes; the letters of
-    // "m.o." or "t0" no, those are an abbreviation typed so on purpose.
-    private bool StandsAlone(int index)
-    {
-        if (index > 0 && _tokens[index - 1] is var before && (before.IsWord || !EndsInSpace(before.Typed)))
-            return false;
-
-        if (index + 1 >= _tokens.Count)
-            return true;
-
-        var after = _tokens[index + 1];
-        if (after.IsWord)
-            return false;
-
-        var rest = after.Typed.AsSpan().TrimStart(".,!?:;");
-        return rest.IsEmpty ? index + 2 >= _tokens.Count : char.IsWhiteSpace(rest[0]);
-    }
-
-    private static bool EndsInSpace(string text)
-    {
-        return text.Length > 0 && char.IsWhiteSpace(text[^1]);
-    }
-
-    // A word typed in its own script and listed there, however short: "ну", "да" typed on the Russian layout.
-    // Unlike a crossing it is no coincidence of keys, so it says which language the writer is in.
-    private static bool IsNativeWord(in TokenReading token, Script script)
-    {
-        return token.IsWord && !token.Chosen.Changed && token.Source.Script == script &&
-               WordScorer.IsDictionaryHit(token.Baseline);
-    }
-
-    // Two words in that language, crossed into it or typed in it: "ой, ye dct" is Russian (ой, все), and its
-    // "ye" is ну. Crossings alone left the forgotten interjections of a mixed line behind.
-    private bool IsWrittenIn(Script script)
-    {
-        var words = 0;
-        foreach (var token in _tokens)
-            if ((Crossed(token) && token.ChosenScript == script) || IsNativeWord(token, script))
-                words++;
-
-        return words >= Quorum;
-    }
-
-    private int Anchors(Script script)
-    {
-        var anchors = 0;
-        foreach (var token in _tokens)
-            if (token.IsWord && !token.Chosen.Changed && token.Source.Script == script &&
-                WordScorer.IsDictionaryHit(token.Baseline) &&
-                WordScanner.TrimToLetters(token.Typed, script).Length >= MinAnchorLetters)
-                anchors++;
-
-        return anchors;
-    }
-
     private ScoredWord? PullsIn(int index, Script direction)
     {
-        var token = _tokens[index];
-        var sandwiched = SideOf(index, -1) == direction && SideOf(index, 1) == direction;
+        var token = Tokens[index];
+        var sandwiched = _line.SideOf(index, -1) == direction && _line.SideOf(index, 1) == direction;
         if (PullsInAnywhere(token, direction, sandwiched) is not { } pulled)
             return null;
 
         // Between two real words of its own script the line's direction is not enough: "let me know πότε".
         var own = token.Source.Script;
-        return SideOf(index, -1) == own && SideOf(index, 1) == own &&
+        return _line.SideOf(index, -1) == own && _line.SideOf(index, 1) == own &&
                scorer.FrequencyOf(pulled.Text, direction) - token.BaselineFrequency < MinFrequencyLeadWithoutANeighbour
             ? null
             : pulled;
@@ -777,10 +493,10 @@ internal sealed class PhraseContext(
             return null;
 
         if (WordScanner.TrimToLetters(token.Typed, token.Source.Script).Length < MinPulledLettersBesideAnchors &&
-            Anchors(token.Source.Script) is var anchors and >= Quorum && anchors > CrossingsInto(direction))
+            _line.Anchors(token.Source.Script) is var anchors and >= Quorum && anchors > _line.CrossingsInto(direction))
             return null;
 
-        if (IsBlindTo(token, direction))
+        if (_line.IsBlindTo(token, direction))
             return null;
 
         if (readInScript(token.Typed, token.Source, direction) is not { } pulled)
@@ -799,6 +515,6 @@ internal sealed class PhraseContext(
         // The commoner reading keeps a word only while its script still holds part of the line: with every
         // other word crossed, "με" in "can you send με the report" is "me". The crossings must be this
         // line's own; a direction handed in with a single word (auto mode) says nothing about its neighbours.
-        return Anchors(token.Source.Script) == 0 && CrossingsInto(direction) >= Quorum ? pulled : null;
+        return _line.Anchors(token.Source.Script) == 0 && _line.CrossingsInto(direction) >= Quorum ? pulled : null;
     }
 }

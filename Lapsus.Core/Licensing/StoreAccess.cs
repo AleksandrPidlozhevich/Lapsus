@@ -19,8 +19,8 @@ public enum StorePlan
     Lifetime
 }
 
-// What the App Store says the user owns right now. An expired or refunded subscription is not
-// reported at all. IsTrial: the yearly subscription is still in its free introductory period.
+// An expired or refunded subscription is not reported at all. IsTrial: the yearly subscription is still
+// in its free introductory period.
 public readonly record struct StoreEntitlement(StorePlan Plan, DateTimeOffset? Expires = null, bool IsTrial = false)
 {
     public static StoreEntitlement None { get; } = new(StorePlan.None);

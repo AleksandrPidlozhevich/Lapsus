@@ -8,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Input.Dictation;
 
-// One dictation at a time, driven by a single hotkey: hold it while speaking, or tap it to start and tap again
-// to stop; what was said is typed into the field that had focus when it started. Esc cancels. The microphone opens at once and
-// the model loads while the user speaks; the text goes nowhere if focus moved to another field meanwhile.
-// Runs on the UI thread.
+// Runs on the UI thread. Text goes nowhere if focus moved to another field.
 internal sealed class DictationSession : IDisposable
 {
     public static readonly TimeSpan MaxRecording = TimeSpan.FromMinutes(5);
@@ -167,7 +164,7 @@ internal sealed class DictationSession : IDisposable
             CutPart(now);
     }
 
-    // The speech so far goes to recognition while recording goes on; parts are recognised and typed in order.
+    // Parts are recognised and typed in order while recording goes on.
     private void CutPart(DateTime now)
     {
         _lastCut = now;
@@ -213,8 +210,7 @@ internal sealed class DictationSession : IDisposable
         _untyped = _untyped.Length > 0 ? _untyped + " " + text : text;
     }
 
-    // Typed now unless the hotkey is held (the letters would arrive with Ctrl down and act as shortcuts) or the
-    // field is not in front; then it waits for the release, or for the end of the dictation.
+    // While the hotkey is held, letters would arrive with Ctrl down and act as shortcuts, so typing waits.
     private void TypeWhatIsReady()
     {
         if (_untyped.Length == 0 || _startedByPress is not null || _stopOnRelease || _target is null)

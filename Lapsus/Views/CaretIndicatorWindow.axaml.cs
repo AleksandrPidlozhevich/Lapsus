@@ -52,7 +52,6 @@ public partial class CaretIndicatorWindow : Window
         }
     }
 
-    // Loudness 0..1: a quiet microphone is dimmer, a voice lights it up.
     public void ShowLevel(float level)
     {
         _mic.Opacity = 0.45 + 0.55 * Math.Clamp(level * 12, 0, 1);

@@ -1,19 +1,3 @@
-// Stage 1 probe for voice dictation. See the csproj for what it is for.
-//
-//   record <samplesDir> <phrases.txt>        read each phrase into the microphone (Enter = start / stop)
-//   run <model.bin> <samplesDir> [options]   transcribe every NN.wav, compare with NN.txt when present
-//
-// run options:
-//   --lang ru            language for the fixed-language variants (default ru)
-//   --langs ru,uk,en     languages auto detection may choose from (default: --lang plus en)
-//   --device cpu|gpu|both (default both)
-//   --threads N          CPU threads (default: all logical cores)
-//   --prompt "..."       mixed-language prompt (default: a built-in one per language)
-//   --vad <silero.bin>   trim audio to the speech Silero VAD finds before decoding
-//   --only <name>        run only variants whose name contains this
-//   --limit N            use only the first N recordings
-//   --runtime vulkan|cpu native build to load (default vulkan; its CPU path also serves --device cpu)
-
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
@@ -78,7 +62,6 @@ sealed record Options(
     }
 }
 
-// One way of decoding: sampling strategy, fixed or detected language, prompt or not.
 sealed record Variant(string Name, bool Beam, bool Prompt, bool Detect, bool ShortCtx = false);
 
 static class Probe
@@ -282,7 +265,6 @@ static class Probe
             " " + string.Join(" / ", quiet));
     }
 
-    // Keeps only the stretches Silero VAD calls speech, glued together.
     static float[] Trim(WhisperVadProcessor vad, float[] pcm)
     {
         var kept = new List<float>();
@@ -325,7 +307,6 @@ static class Probe
         Regex.Matches(s.ToLowerInvariant().Replace('ё', 'е'), @"[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*")
             .Select(m => m.Value).ToArray();
 
-    // Latin words and phrases inside a non-Latin reference: the terms we want written as-is.
     internal static IEnumerable<string> LatinTerms(string reference)
     {
         var words = Words(reference);

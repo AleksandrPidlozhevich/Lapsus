@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 
 namespace Lapsus.Speech;
 
-// Whisper and the text passes behind dictation. The model loads when a recording starts (Prepare), not at app
-// start — a second neural model sitting in memory all day is what dictation must not cost — and is unloaded
-// after the user's idle time (SpeechUnloadAfter). Only "never unload" loads it ahead of time (Preload).
+// The model loads when a recording starts (Prepare), not at app start — a second neural model sitting in memory all day is what dictation must not cost.
+// Unloads after the user's idle time (SpeechUnloadAfter). Only "never unload" loads it ahead of time (Preload).
 internal sealed class DictationEngine : IDictationEngine, IDisposable
 {
     private static readonly TimeSpan IdleCheck = TimeSpan.FromSeconds(10);
@@ -74,7 +73,6 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         }
     }
 
-    // "Never unload": load in the background some time after start, so even the first dictation is instant.
     public void Preload() => Prepare();
 
     public async Task<string> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken)

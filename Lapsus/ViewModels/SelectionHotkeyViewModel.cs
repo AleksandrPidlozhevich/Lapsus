@@ -27,7 +27,7 @@ public sealed partial class SelectionHotkeyViewModel : ViewModelBase
         Recorder = new HotkeyRecorderViewModel(capture, trigger => Selected = recordedOption(trigger));
     }
 
-    // null: the dictation hotkey, which shares this row's look and its clash rules.
+    // null: the dictation hotkey, under the same clash rules.
     public SelectionAction? Action { get; }
 
     public IReadOnlyList<HotkeyOption> Options { get; }

@@ -6,10 +6,8 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Updates;
 
-// Avalonia's TrayIcon has no notification API, so this adds a balloon (shown as a toast on Windows 10/11)
-// to the icon Avalonia already registered: same window handle and id, NIM_MODIFY with only NIF_INFO.
-// Finding that handle and id needs Avalonia internals; if they move, TryShow returns false and the tray
-// still has its menu item, tooltip and icon dot. AppUpdateNoticeTests guards the internals.
+// Same window handle and id as Avalonia's tray icon, NIM_MODIFY with only NIF_INFO.
+// If those internals move, TryShow returns false; AppUpdateNoticeTests guards them.
 internal static class WindowsTrayBalloon
 {
     private const BindingFlags Any = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
@@ -37,7 +35,6 @@ internal static class WindowsTrayBalloon
                 szTip = string.Empty,
                 szInfo = Truncate(text, 255),
                 szInfoTitle = Truncate(title, 63),
-                // No sound, and Windows holds it back during quiet time (full-screen apps, focus assist).
                 dwInfoFlags = NIIF_NOSOUND | NIIF_RESPECT_QUIET_TIME
             };
             return Shell_NotifyIconW(NIM_MODIFY, ref data);

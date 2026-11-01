@@ -450,7 +450,6 @@ public sealed class CorrectionCycleTests : IDisposable
         backend.PressHotkey();
         backend.Type("\n");
 
-        // Enter clears the committed prefix from the line above; the new line starts at the first key.
         backend.Type("ghbdtn");
         backend.PressHotkey();
 
@@ -694,7 +693,6 @@ public sealed class CorrectionCycleTests : IDisposable
         var ruPath = WriteTemp("ru-svg", "если 900", "нужны 500", "или 800", "из 900", "приложения 300", "бери 200");
         try
         {
-            // Typed on the Russian layout, which is the active one.
             var seen = WalkCircle(EnRuBrain(enPath, ruPath),
                 "если нужны скриншоты или иконки из приложения бери ымп",
                 [FakeInputBackend.Ru, FakeInputBackend.En, FakeInputBackend.Uk]);

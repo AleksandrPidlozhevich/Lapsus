@@ -50,8 +50,6 @@ internal sealed class TestDictionaries
         return path;
     }
 
-    // Any file exactly as given (UTF-8, no BOM), at a path of its own: Hunspell .aff/.dic, a list with odd lines,
-    // a list the test cleans in place.
     public static string Text(string tag, string content, string extension = ".txt")
     {
         var path = NewPath(tag, extension);
@@ -59,7 +57,6 @@ internal sealed class TestDictionaries
         return path;
     }
 
-    // A Hunspell pair: the .dic path, with its .aff beside it.
     public static string Hunspell(string tag, string words, string affix)
     {
         var dic = Text(tag, words, ".dic");
@@ -67,7 +64,6 @@ internal sealed class TestDictionaries
         return dic;
     }
 
-    // A fresh path in the run's folder, not yet written: for a file the test writes itself, or one meant to be missing.
     public static string NewFile(string tag, string extension)
     {
         return NewPath(tag, extension);

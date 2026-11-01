@@ -8,9 +8,6 @@ namespace Lapsus.Sweep;
 
 internal sealed record LoadedModel(OnnxGenAiLlm Llm, string Name, string Device);
 
-// The neural brain as the app builds it — the model with the dictionary brain riding along as adviser —
-// measured on the same lists. Every number is shown as "dictionary alone → neural", so the question each
-// row answers is whether loading a model was worth it.
 internal static class NeuralRun
 {
     public static LoadedModel Load(string modelDirectory, ComputeDevicePreference preference)
@@ -159,9 +156,6 @@ internal static class NeuralRun
         run.Latency();
     }
 
-    // One slip of the fingers in a word of four letters or more, that does not happen to spell another word:
-    // a neighbouring key hit instead (the commonest), two letters swapped, one dropped, or a neighbour
-    // hit as well. The line stays as it is if no word allows one.
     private static (string Typed, Slip? Slip) WithTypo(
         Random random, string[] words, KeyboardMap map, Func<string, bool> isWord)
     {
@@ -251,7 +245,6 @@ internal static class NeuralRun
                 var source = SourceOf(typed, got, alone, reply, recorder.Scored);
                 sources[source] = sources.GetValueOrDefault(source) + 1;
 
-                // Losses to the dictionary first: those are what the neural path has to answer for.
                 if (aloneRight && !gotRight && examples.Count < 8)
                     examples.Insert(0, $"LOST {typed} → {got}   wanted {expected}");
                 else if (missed && examples.Count < 8)
@@ -279,8 +272,6 @@ internal static class NeuralRun
                 Report.Line(string.Empty, example);
         }
 
-        // Whether the neural path could have got the slip right at all: the dictionary's own answer, or
-        // one of the spellings it offers for the mistyped word.
         private bool Offered(Slip slip, string alone, string typed)
         {
             var aloneWords = Machine.Words(alone);
@@ -336,7 +327,6 @@ internal static class NeuralRun
 
     private readonly record struct Slip(int At, string Typo, string Meant);
 
-    // tools/Lapsus.Sweep/sentences/{code}.txt: everyday sentences written for this, one per line.
     internal static List<string> Sentences(string code)
     {
         var path = Path.Combine(Baseline.RepositoryRoot() ?? ".", "tools", "Lapsus.Sweep", "sentences", $"{code}.txt");
@@ -349,8 +339,7 @@ internal static class NeuralRun
 
     private readonly record struct Fixture(Case Case, string Status);
 
-    // Lapsus.Core.Tests/Languages/Fixtures — the hand-picked hard cases, pending rows included:
-    // those are the ones the dictionary brain still gets wrong.
+    // Pending rows included: those are the ones the dictionary brain still gets wrong.
     private static IEnumerable<Fixture> Fixtures(Machine machine)
     {
         var key = machine.Target.Key == "bg-phonetic" ? "bg" : machine.Target.Key;

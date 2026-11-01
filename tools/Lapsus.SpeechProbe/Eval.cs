@@ -1,13 +1,3 @@
-// The dictation pipeline as the app will run it, layer by layer:
-//
-//   eval <model.bin> <vad.bin> <samplesDir> <dictDir> [--lang ru] [--langs ru,en] [--device gpu|cpu]
-//        [--glossary terms.txt] [--limit N]
-//   restore <dictDir> <lang> <text…>      the term restorer alone, on text
-//
-// dictDir holds {code}.txt frequency lists (and optional {code}.aff/.dic), as the app keeps them. Each block
-// reads "raw → filtered → restored": what Whisper wrote with the prompt, after the hallucination filter, and
-// after English terms were put back into Latin.
-
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Lapsus.Core.Layout;
@@ -76,7 +66,6 @@ static class Eval
 
         foreach (var s in samples)
         {
-            // Recordings are separate phrases, so no earlier text goes into the prompt.
             var prompt = SpeechPromptBuilder.Build(lang, glossary.Select(g => g.Split('|')[0]));
             sw.Restart();
             var result = await recognizer.TranscribeAsync(s.Pcm, new SpeechRequest(lang, prompt, candidates));

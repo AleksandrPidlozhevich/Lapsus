@@ -20,7 +20,6 @@
         </Style>
     </Window.Styles>
 
-    <!-- A small pill: a microphone that is grey while idle, red while listening, and "…" while the speech is read. -->
     <Border x:Name="Pill"
             Background="{DynamicResource LapsusCardBrush}"
             BorderBrush="{DynamicResource LapsusBorderBrush}"

@@ -8,9 +8,6 @@ internal static class RuleG
 
     private static readonly string[] Lengths = ["4", "5-6", "7-9", "10+"];
 
-    // One slip of the fingers in a word typed on its own layout, as Space hands it over: is the meant word
-    // what comes back? Every kind of slip is tried on every word, so a fix that helps one kind and hurts
-    // another shows up as such.
     public static void Typos(Machine machine, FrequencyList target, int lines)
     {
         Report.Heading($"Rule G — a {machine.Target.Name} word with one typo, on its own");

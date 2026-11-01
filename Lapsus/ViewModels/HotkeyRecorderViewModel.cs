@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 
-// The Record button of one hotkey row. While recording, the backend hands the next key press here instead of the app.
 public sealed partial class HotkeyRecorderViewModel : ViewModelBase
 {
     private readonly HotkeyCapture _capture;

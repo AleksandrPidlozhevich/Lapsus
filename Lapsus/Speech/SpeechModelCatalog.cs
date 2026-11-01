@@ -13,7 +13,6 @@ public sealed record SpeechModel(string Id, string DisplayName, SpeechFile File,
     public int SizeMb => (int)(File.Size / (1024 * 1024));
 }
 
-// Whisper models for dictation (ggml, whisper.cpp's own builds) and the Silero VAD every one of them needs.
 // Stage 1 measured large-v3-turbo: q8_0 matches q5_0 for quality and is faster on a CPU, so it is the default.
 public static class SpeechModelCatalog
 {

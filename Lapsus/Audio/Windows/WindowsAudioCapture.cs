@@ -7,8 +7,7 @@ using System.Threading;
 
 namespace Lapsus.Audio;
 
-// A Windows recording device through WinMM (the default one unless the user picked another). Asking the wave mapper for 16 kHz mono 16-bit makes
-// Windows do the resampling, so Whisper gets its format with no converter of ours.
+// Asking the wave mapper for 16 kHz mono 16-bit makes Windows do the resampling, so Whisper gets its format with no converter of ours.
 [SupportedOSPlatform("windows")]
 internal sealed class WindowsAudioCapture : IAudioCapture
 {
@@ -31,7 +30,7 @@ internal sealed class WindowsAudioCapture : IAudioCapture
         _device = device;
     }
 
-    // Recording devices by WinMM name (cut to 31 characters by WinMM itself), in device order.
+    // WinMM names are cut to 31 characters by WinMM itself.
     public static IReadOnlyList<string> Microphones()
     {
         var names = new List<string>();

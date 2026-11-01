@@ -9,14 +9,10 @@ using System.Threading;
 
 namespace Lapsus.Input.Dictation;
 
-// The microphone badge, where the layout badge sits: next to the caret, or next to the mouse pointer in apps
-// that do not report a caret. The layout badge steps aside while it shows.
-// Also the start and stop tones, and the on-screen microphone button, which mirrors the badge's state.
 internal sealed class DictationIndicator : IDictationIndicator, IDisposable
 {
     private static readonly TimeSpan MessageTime = TimeSpan.FromSeconds(4);
 
-    // How long the badge says how to finish before it shrinks to the microphone alone.
     private static readonly TimeSpan HintTime = TimeSpan.FromSeconds(3);
 
     private const double MaxBadgeDip = 480;
@@ -48,7 +44,7 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
         };
     }
 
-    // The button's click; set once the session exists.
+    // Set once the session exists.
     public Action? ButtonClicked { get; set; }
 
     public void SetButton(bool visible, string hotkey, string tip)
@@ -180,8 +176,6 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
         window.MoveTo(CaretBadgePlacement.For(anchor, badge, screen?.WorkingArea ?? default, scale));
     }
 
-    // The caret if the app reports one (Windows reads it at once); null when there is none and the button is up;
-    // else a pointer-sized box at the mouse.
     private CaretBounds? Anchor()
     {
         if (OperatingSystem.IsWindows())

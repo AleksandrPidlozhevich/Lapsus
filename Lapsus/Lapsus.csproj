@@ -74,12 +74,7 @@
         <Compile Remove="Audio\Windows\**" />
     </ItemGroup>
 
-    <!--
-      The input backends and their machinery are internal on purpose — nothing outside this assembly
-      has any business calling them — but the parts that are pure decision-making (what a hotkey press
-      means, when the typing buffer is stale, what a rejected correction leaves behind) are worth
-      pinning down, and they do not need an OS to run.
-    -->
+    <!-- The input backends are internal; tests pin their decision logic, which does not need an OS to run. -->
     <ItemGroup>
         <InternalsVisibleTo Include="Lapsus.Tests" />
     </ItemGroup>

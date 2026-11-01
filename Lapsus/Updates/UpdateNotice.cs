@@ -4,9 +4,6 @@ using System;
 
 namespace Lapsus.Updates;
 
-// What the tray says about an update the silent check has downloaded. The menu item, tooltip and icon dot
-// stay until the update is installed; the pop-up notification is claimed once per version and remembered
-// in settings, so a second check or a later start does not repeat it.
 internal sealed class UpdateNotice(AppSettings settings, SettingsStore store)
 {
     public bool TryClaimAnnouncement(string? version)

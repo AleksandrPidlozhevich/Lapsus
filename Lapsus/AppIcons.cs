@@ -33,7 +33,6 @@ internal static class AppIcons
         return CreateWindowIcon(PathForTheme(variant), size);
     }
 
-    // badge: a dot in the lower right corner, set while a downloaded update waits to be installed.
     public static WindowIcon CreateTrayIcon(ThemeVariant variant, bool badge)
     {
         return CreateWindowIcon(PathForTheme(variant), 256, badge);

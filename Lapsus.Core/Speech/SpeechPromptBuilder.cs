@@ -57,7 +57,6 @@ public static class SpeechPromptBuilder
         return string.Join(' ', new[] { sample, terms.ToString(), previous }.Where(p => p.Length > 0));
     }
 
-    // The last few words of earlier text, cut at a word boundary.
     private static string Tail(string? text, int maxChars)
     {
         if (string.IsNullOrWhiteSpace(text))

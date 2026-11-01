@@ -36,11 +36,7 @@ public partial class SettingsViewModel : ViewModelBase
     private readonly bool _supported;
     private readonly Func<Task> _rebuildBrain;
     private readonly IStartupRegistration _startup;
-    private readonly WordExceptions _exceptions;
-    private readonly AppExclusions _excludedApps;
     private readonly LayoutIndicator _indicator;
-    private readonly AppUpdater _updater;
-    private readonly HotkeyCapture _capture;
 
     private bool _turningOffTheOtherBrain;
 
@@ -55,30 +51,25 @@ public partial class SettingsViewModel : ViewModelBase
         AppUpdater updater, LicenseViewModel license, StoreViewModel storeAccess)
     {
         _backend = backend;
-        _updater = updater;
-        _updater.UpdateReadyToInstall += (_, _) => Dispatcher.UIThread.Post(() =>
-        {
-            UpdateAvailable = true;
-            UpdateVersion = _updater.PendingVersion;
-        });
         _indicator = indicator;
-        _exceptions = exceptions;
-        _excludedApps = excludedApps;
         _store = store;
         _settings = settings;
         _supported = supported;
         _rebuildBrain = rebuildBrain;
         _startup = StartupRegistrationFactory.CreateForCurrentPlatform();
 
-        _selectedHotkey = ResolveHotkey(settings.HotkeyVirtualKey);
-        _capture = new HotkeyCapture(_backend, () => Enabled, message =>
+        var capture = new HotkeyCapture(_backend, () => Enabled, message =>
         {
             StatusText = message;
             RefreshPermissionState();
         });
-        MainRecorder = new HotkeyRecorderViewModel(_capture, trigger => SelectedHotkey = AddRecordedOption(trigger));
-        SelectionActions = BuildSelectionActions();
-        DictationHotkeyRow = BuildDictationHotkeyRow();
+        // Store is set later in this constructor; until then nothing is locked.
+        Shortcuts = new ShortcutsViewModel(
+            backend, store, settings, supported, capture, () => Store is not { PaidFeatures: false },
+            () => Voice?.RefreshLabels(), UpdateStatus);
+        Updates = new UpdatesViewModel(updater, message => StatusText = message);
+        Appearance = new AppearanceViewModel(store, settings);
+
         _enabled = settings.Enabled;
         _autoMode = settings.AutoMode;
         _autoFixTypos = settings.AutoFixTypos;
@@ -94,20 +85,11 @@ public partial class SettingsViewModel : ViewModelBase
         }
 
         _plainLayoutSwitch = settings.PlainLayoutSwitch;
-        _selectedInterfaceLanguage = Languages.FirstOrDefault(l => l.Code == settings.InterfaceLanguage)
-                                     ?? Languages[0];
-        _themePreference = settings.ThemePreference;
-        if (Application.Current is { } app)
-        {
-            _uiThemeVariant = app.ActualThemeVariant;
-            app.ActualThemeVariantChanged += OnUiThemeChanged;
-        }
 
         _skipPasswordFields = settings.SkipPasswordFields;
         _backend.SkipPasswordFields = _skipPasswordFields;
         _showLayoutIndicator = settings.ShowLayoutIndicator;
         _indicator.Enabled = _showLayoutIndicator;
-        _backend.HotkeyVirtualKey = _selectedHotkey.VirtualKey;
         _backend.AutoMode = _autoMode;
         _backend.AutoFixTypos = _autoFixTypos;
         _backend.SwitchSystemLayout = _switchSystemLayout;
@@ -117,10 +99,7 @@ public partial class SettingsViewModel : ViewModelBase
 
         Localizer.Instance.LanguageChanged += OnLanguageChanged;
 
-        RefreshExcludedWords();
-        _exceptions.Changed += (_, _) => Dispatcher.UIThread.Post(RefreshExcludedWords);
-
-        RefreshExcludedApps();
+        Exclusions = new ExclusionsViewModel(exceptions, excludedApps);
 
         Dictionaries = new DictionariesViewModel(dictionaryStore, _rebuildBrain);
         Dictionaries.Installed.CollectionChanged += (_, _) => BuildPreferences(_settings.PreferredLayout);
@@ -142,7 +121,6 @@ public partial class SettingsViewModel : ViewModelBase
 
         // macOS asks for Input Monitoring and Accessibility the moment capture starts. A first launch
         // explains why before that (App Store guideline 2.5.14), and capture waits for the answer.
-        // A Mac that already granted both has nothing to explain.
         if (OperatingSystem.IsMacOS() && !settings.OnboardingDone)
         {
             OnboardingPending = !SystemPermissions.AccessibilityGranted || !SystemPermissions.InputMonitoringGranted;
@@ -179,7 +157,6 @@ public partial class SettingsViewModel : ViewModelBase
 
     public ModelsViewModel Models { get; }
 
-    // Set by the app once dictation is wired up; null where it is not.
     [ObservableProperty] private VoiceViewModel? _voice;
 
     public DictionariesViewModel Dictionaries { get; }
@@ -190,68 +167,10 @@ public partial class SettingsViewModel : ViewModelBase
         Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion ?? "?";
 
-    public bool CanSelfUpdate => AppUpdater.CanSelfUpdate;
-
-    [ObservableProperty] private bool _updateAvailable;
-    [ObservableProperty] private string? _updateVersion;
-    [ObservableProperty] private bool _isCheckingForUpdate;
-
-    public string UpdateButtonGlyph => IsCheckingForUpdate ? "…" : UpdateAvailable ? "↓" : "↻";
-
-    public string UpdateButtonTooltip => UpdateAvailable ? L["Update_Tooltip"] : L["Update_CheckTooltip"];
-
-    partial void OnUpdateAvailableChanged(bool value)
-    {
-        OnPropertyChanged(nameof(UpdateButtonGlyph));
-        OnPropertyChanged(nameof(UpdateButtonTooltip));
-    }
-
-    partial void OnIsCheckingForUpdateChanged(bool value)
-    {
-        OnPropertyChanged(nameof(UpdateButtonGlyph));
-    }
-
-    [RelayCommand]
-    private async Task CheckOrInstallUpdateAsync()
-    {
-        if (UpdateAvailable)
-        {
-            _updater.ApplyAndRestart();
-            return;
-        }
-
-        if (IsCheckingForUpdate)
-            return;
-
-        IsCheckingForUpdate = true;
-        try
-        {
-            switch (await _updater.CheckNowAsync().ConfigureAwait(true))
-            {
-                case UpdateCheckResult.UpToDate:
-                    StatusText = L["Status_UpToDate"];
-                    break;
-                case UpdateCheckResult.NotSupported:
-                    StatusText = L["Status_UpdateNotSupported"];
-                    break;
-
-            }
-        }
-        catch (Exception ex)
-        {
-            StatusText = L.Format("Status_UpdateCheckFailed", ex.Message);
-        }
-        finally
-        {
-            IsCheckingForUpdate = false;
-        }
-    }
-
     private void EnableNeuralForInstalledModel()
     {
         if (NeuralLocked)
             return;
-
 
         _skipBrainRebuild = true;
         try
@@ -268,7 +187,6 @@ public partial class SettingsViewModel : ViewModelBase
 
     public StoreViewModel Store { get; }
 
-    // Only in the App Store edition, after the trial, without a subscription or lifetime purchase.
     public bool NeuralLocked => !Store.PaidFeatures;
 
     private void OnStoreAccessChanged()
@@ -288,440 +206,29 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private bool _plainLayoutSwitch;
 
-    // Recorded shortcuts are added to these lists, so every dropdown offers them again.
-    private readonly ObservableCollection<HotkeyOption> _hotkeyOptions = new(BuiltInHotkeys);
+    public ShortcutsViewModel Shortcuts { get; }
 
-    private readonly ObservableCollection<HotkeyOption> _selectionKeyOptions = new(BuiltInSelectionKeys);
+    public UpdatesViewModel Updates { get; }
 
-    private readonly ObservableCollection<HotkeyOption> _dictationKeyOptions = new(BuiltInSelectionKeys);
+    public AppearanceViewModel Appearance { get; }
 
-    public IReadOnlyList<HotkeyOption> Hotkeys => _hotkeyOptions;
-
-    private static IReadOnlyList<HotkeyOption> BuiltInHotkeys =>
-        OperatingSystem.IsMacOS()
-            ?
-            [
-                // ⌃⌥Space is macOS symbolic hotkey 61, "select the next input source". It cycles
-                // layouts on its own, so the correction never gets to replace the typed word.
-                new HotkeyOption("⇧ ×2", HotkeyTriggers.DoubleShift),
-                new HotkeyOption("⌃ ×2", HotkeyTriggers.DoubleControl),
-                new HotkeyOption("⌥ ×2", HotkeyTriggers.DoubleAlt),
-                new HotkeyOption("⌘ ×2", HotkeyTriggers.DoubleCommand)
-            ]
-            :
-            [
-                new HotkeyOption("Pause / Break", 0x13),
-                new HotkeyOption("Scroll Lock", 0x91),
-                new HotkeyOption("F12", 0x7B),
-                new HotkeyOption("F11", 0x7A),
-                new HotkeyOption("Insert", 0x2D),
-                new HotkeyOption("Caps Lock", 0x14),
-                new HotkeyOption("Shift ×2", HotkeyTriggers.DoubleShift),
-                new HotkeyOption("Ctrl ×2", HotkeyTriggers.DoubleControl),
-                new HotkeyOption("Alt ×2", HotkeyTriggers.DoubleAlt)
-            ];
-
-    private static IReadOnlyList<HotkeyOption> BuiltInSelectionKeys =>
-        OperatingSystem.IsMacOS()
-            ?
-            [
-                new HotkeyOption("—", 0),
-                new HotkeyOption("F12", 0x6F),
-                new HotkeyOption("F11", 0x67),
-                new HotkeyOption("F10", 0x6D),
-                new HotkeyOption("⇧ ×2", HotkeyTriggers.DoubleShift),
-                new HotkeyOption("⌃ ×2", HotkeyTriggers.DoubleControl),
-                new HotkeyOption("⌥ ×2", HotkeyTriggers.DoubleAlt),
-                new HotkeyOption("⌘ ×2", HotkeyTriggers.DoubleCommand)
-            ]
-            :
-            [
-                new HotkeyOption("—", 0),
-                new HotkeyOption("Scroll Lock", 0x91),
-                new HotkeyOption("F12", 0x7B),
-                new HotkeyOption("F11", 0x7A),
-                new HotkeyOption("Insert", 0x2D),
-                new HotkeyOption("Pause / Break", 0x13),
-                new HotkeyOption("Caps Lock", 0x14),
-                new HotkeyOption("Shift ×2", HotkeyTriggers.DoubleShift),
-                new HotkeyOption("Ctrl ×2", HotkeyTriggers.DoubleControl),
-                new HotkeyOption("Alt ×2", HotkeyTriggers.DoubleAlt)
-            ];
-
-    public IReadOnlyList<SelectionHotkeyViewModel> SelectionActions { get; }
-
-    private static readonly (SelectionAction Action, string Label, string Hint)[] SelectionActionRows =
-    [
-        (SelectionAction.Correct, "SelectionHotkey_Label", "SelectionHotkey_Hint"),
-        (SelectionAction.CycleCase, "SelectionCase_Label", "SelectionCase_Hint"),
-        (SelectionAction.Transliterate, "SelectionTranslit_Label", "SelectionTranslit_Hint"),
-        (SelectionAction.ReverseRtl, "SelectionRtl_Label", "SelectionRtl_Hint")
-    ];
-
-    public HotkeyRecorderViewModel MainRecorder { get; }
-
-    private IReadOnlyList<SelectionHotkeyViewModel> BuildSelectionActions()
-    {
-        var options = _selectionKeyOptions;
-        var rows = new List<SelectionHotkeyViewModel>(SelectionActionRows.Length);
-
-        var taken = new HashSet<int> { SelectedHotkey.VirtualKey };
-        var changed = false;
-
-        foreach (var (action, label, hint) in SelectionActionRows)
-        {
-            var saved = SavedSelectionHotkey(action);
-            var option = options.FirstOrDefault(o => o.VirtualKey == saved);
-            if (option is null && (HotkeyCombo.IsCombo(saved) || HotkeyNames.IsNamedKey(saved)))
-                option = AddRecordedOption(saved);
-
-            if (saved == 0 || option is null || !taken.Add(saved))
-                option = options[0];
-
-            if (option.VirtualKey != saved)
-            {
-                SaveSelectionHotkey(action, option.VirtualKey);
-                changed = true;
-            }
-
-            _backend.SetSelectionHotkey(action, option.VirtualKey);
-            rows.Add(new SelectionHotkeyViewModel(
-                action, label, hint, options, option, OnSelectionHotkeyChanged, _capture, AddRecordedOption));
-        }
-
-        if (changed)
-            _store.Save(_settings);
-
-        return rows;
-    }
-
-    private void OnSelectionHotkeyChanged(SelectionHotkeyViewModel row)
-    {
-        var key = row.Selected.VirtualKey;
-        ApplyRowKey(row, key);
-
-        if (key != 0)
-        {
-
-            foreach (var other in HotkeyRows)
-                if (other != row && other.Selected.VirtualKey == key)
-                    TurnOff(other);
-
-            if (SelectedHotkey.VirtualKey == key)
-                SelectedHotkey = Hotkeys.FirstOrDefault(h => !IsKeyTaken(h.VirtualKey)) ?? Hotkeys[0];
-        }
-
-        _store.Save(_settings);
-        UpdateStatus();
-    }
-
-    private void TurnOff(SelectionHotkeyViewModel row)
-    {
-        row.SetSilently(row.Off);
-        ApplyRowKey(row, row.Off.VirtualKey);
-    }
-
-    private bool IsKeyTaken(int virtualKey)
-    {
-        return HotkeyRows.Any(r => r.Selected.VirtualKey == virtualKey);
-    }
-
-    // Every hotkey row: the selection actions and, where dictation exists, its hotkey. No two may share a key.
-    private IEnumerable<SelectionHotkeyViewModel> HotkeyRows =>
-        DictationHotkeyRow is { } dictation ? SelectionActions.Append(dictation) : SelectionActions;
-
-    private void ApplyRowKey(SelectionHotkeyViewModel row, int key)
-    {
-        if (row.Action is { } action)
-        {
-            SaveSelectionHotkey(action, key);
-            _backend.SetSelectionHotkey(action, key);
-            return;
-        }
-
-        _settings.DictationHotkey = key;
-        ApplyDictationHotkey();
-        Voice?.RefreshLabels();
-    }
-
-    // Dictation runs where the backend can take its hotkey and the platform has a microphone backend.
-    public bool DictationSupported =>
-        _supported && (OperatingSystem.IsWindows() || OperatingSystem.IsMacOS()) && _backend is IDictationHost;
-
-    public SelectionHotkeyViewModel? DictationHotkeyRow { get; }
-
-    private SelectionHotkeyViewModel? BuildDictationHotkeyRow()
-    {
-        if (!DictationSupported)
-            return null;
-
-        // Its own list: only dictation understands modifiers held alone, so only it offers them.
-        var options = _dictationKeyOptions;
-        options.Insert(1, new HotkeyOption(HotkeyNames.Format(AppSettings.DictationChord), AppSettings.DictationChord));
-        var saved = _settings.DictationHotkey;
-        var option = options.FirstOrDefault(o => o.VirtualKey == saved);
-        if (option is null && (HotkeyCombo.IsCombo(saved) || HotkeyNames.IsNamedKey(saved)))
-            option = AddRecordedOption(saved);
-
-        // A key another action already has leaves dictation without one rather than firing both.
-        if (option is null || saved == SelectedHotkey.VirtualKey || SelectionActions.Any(r => r.Selected.VirtualKey == saved))
-            option = options[0];
-        if (option.VirtualKey != saved)
-        {
-            _settings.DictationHotkey = option.VirtualKey;
-            _store.Save(_settings);
-        }
-
-        var row = new SelectionHotkeyViewModel(
-            null, "Voice_Toggle", "Dictation_HotkeyHint", options, option, OnSelectionHotkeyChanged, _capture,
-            AddRecordedOption);
-        ApplyDictationHotkey();
-        return row;
-    }
-
-    // The backend listens for the dictation hotkey only while voice typing is on.
-    public void ApplyDictationHotkey()
-    {
-        if (_backend is IDictationHost host)
-            // Store is set later in the constructor than the first call; until then nothing is locked.
-            host.DictationHotkey = DictationSupported && _settings.DictationEnabled && Store is not { PaidFeatures: false }
-                ? _settings.DictationHotkey
-                : 0;
-    }
-
-    private int SavedSelectionHotkey(SelectionAction action)
-    {
-        return action switch
-        {
-            SelectionAction.Correct => _settings.SelectionHotkeyVirtualKey,
-            SelectionAction.CycleCase => _settings.CaseHotkeyVirtualKey,
-            SelectionAction.Transliterate => _settings.TransliterateHotkeyVirtualKey,
-            _ => _settings.ReverseRtlHotkeyVirtualKey
-        };
-    }
-
-    private void SaveSelectionHotkey(SelectionAction action, int virtualKey)
-    {
-        switch (action)
-        {
-            case SelectionAction.Correct:
-                _settings.SelectionHotkeyVirtualKey = virtualKey;
-                break;
-            case SelectionAction.CycleCase:
-                _settings.CaseHotkeyVirtualKey = virtualKey;
-                break;
-            case SelectionAction.Transliterate:
-                _settings.TransliterateHotkeyVirtualKey = virtualKey;
-                break;
-            default:
-                _settings.ReverseRtlHotkeyVirtualKey = virtualKey;
-                break;
-        }
-    }
-
-    public ObservableCollection<string> ExcludedWords { get; } = [];
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AddExcludedWordCommand))]
-    private string _newExcludedWord = string.Empty;
-
-    public bool HasExcludedWords => ExcludedWords.Count > 0;
-
-    private bool CanAddExcludedWord()
-    {
-        return !string.IsNullOrWhiteSpace(NewExcludedWord);
-    }
-
-    [RelayCommand(CanExecute = nameof(CanAddExcludedWord))]
-    private void AddExcludedWord()
-    {
-        _exceptions.Add(NewExcludedWord);
-        NewExcludedWord = string.Empty;
-    }
-
-    [RelayCommand]
-    private void RemoveExcludedWord(string? word)
-    {
-        if (word is not null)
-            _exceptions.Remove(word);
-    }
-
-    private void RefreshExcludedWords()
-    {
-        ExcludedWords.Clear();
-        foreach (var word in _exceptions.Snapshot())
-            ExcludedWords.Add(word);
-
-        OnPropertyChanged(nameof(HasExcludedWords));
-    }
-
-    public ObservableCollection<string> ExcludedApps { get; } = [];
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AddExcludedAppCommand))]
-    private string _newExcludedApp = string.Empty;
-
-    public bool HasExcludedApps => ExcludedApps.Count > 0;
-
-    private bool CanAddExcludedApp()
-    {
-        return !string.IsNullOrWhiteSpace(NewExcludedApp);
-    }
-
-    [RelayCommand(CanExecute = nameof(CanAddExcludedApp))]
-    private void AddExcludedApp()
-    {
-        _excludedApps.Add(NewExcludedApp);
-        NewExcludedApp = string.Empty;
-        RefreshExcludedApps();
-    }
-
-    [RelayCommand]
-    private void RemoveExcludedApp(string? name)
-    {
-        if (name is null)
-            return;
-
-        _excludedApps.Remove(name);
-        RefreshExcludedApps();
-        RefreshRunningApps();
-    }
-
-    private void RefreshExcludedApps()
-    {
-        ExcludedApps.Clear();
-        foreach (var name in _excludedApps.Snapshot())
-            ExcludedApps.Add(name);
-
-        OnPropertyChanged(nameof(HasExcludedApps));
-    }
-
-    public ObservableCollection<RunningApp> RunningApps { get; } = [];
-
-    public bool CanPickRunningApps => Lapsus.Input.RunningApps.IsSupported;
-
-    [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AddRunningAppCommand))]
-    private RunningApp? _selectedRunningApp;
-
-    public void RefreshRunningApps()
-    {
-        if (!CanPickRunningApps)
-            return;
-
-        var wasSelected = SelectedRunningApp?.ProcessName;
-
-        RunningApps.Clear();
-        foreach (var app in Lapsus.Input.RunningApps.List())
-            if (!_excludedApps.Contains(app.ProcessName))
-                RunningApps.Add(app);
-
-        SelectedRunningApp = RunningApps.FirstOrDefault(app => app.ProcessName == wasSelected);
-    }
-
-    private bool CanAddRunningApp()
-    {
-        return SelectedRunningApp is not null;
-    }
-
-    [RelayCommand(CanExecute = nameof(CanAddRunningApp))]
-    private void AddRunningApp()
-    {
-        if (SelectedRunningApp is null)
-            return;
-
-        _excludedApps.Add(SelectedRunningApp.ProcessName);
-        RefreshExcludedApps();
-        RefreshRunningApps();
-    }
-
-    private HotkeyOption ResolveHotkey(int savedVirtualKey)
-    {
-        if (OperatingSystem.IsMacOS() && savedVirtualKey == MacHotkeys.CtrlOptionSpace)
-        {
-            savedVirtualKey = HotkeyTriggers.DoubleShift;
-            _settings.HotkeyVirtualKey = savedVirtualKey;
-            _store.Save(_settings);
-        }
-
-        var match = Hotkeys.FirstOrDefault(h => h.VirtualKey == savedVirtualKey);
-        if (match is not null)
-            return match;
-
-        if (HotkeyCombo.IsCombo(savedVirtualKey) || HotkeyNames.IsNamedKey(savedVirtualKey))
-            return AddRecordedOption(savedVirtualKey);
-
-        var fallback = Hotkeys[0];
-        _settings.HotkeyVirtualKey = fallback.VirtualKey;
-        _store.Save(_settings);
-        return fallback;
-    }
-
-    // A recorded shortcut is one option in both lists, and the list entry is returned so rows compare equal.
-    private HotkeyOption AddRecordedOption(int trigger)
-    {
-        var option = _hotkeyOptions.FirstOrDefault(o => o.VirtualKey == trigger)
-                     ?? new HotkeyOption(HotkeyNames.Format(trigger), trigger);
-
-        if (!_hotkeyOptions.Contains(option))
-            _hotkeyOptions.Add(option);
-        if (!_selectionKeyOptions.Contains(option))
-            _selectionKeyOptions.Add(option);
-        if (!_dictationKeyOptions.Contains(option))
-            _dictationKeyOptions.Add(option);
-
-        return option;
-    }
+    public void ApplyDictationHotkey() => Shortcuts.ApplyDictationHotkey();
 
     // The settings window losing focus must not leave the keyboard hook swallowing keys.
-    public void CancelHotkeyRecording()
-    {
-        _capture.CancelActive();
-    }
+    public void CancelHotkeyRecording() => Shortcuts.CancelHotkeyRecording();
+
+    public ExclusionsViewModel Exclusions { get; }
+
+    public void RefreshRunningApps() => Exclusions.RefreshRunningApps();
 
     public Localizer L => Localizer.Instance;
 
     public FlowDirection FlowDirection =>
         Localizer.Instance.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
-    public IReadOnlyList<LanguageOption> Languages => Localizer.Instance.Languages;
-
-    [ObservableProperty] private LanguageOption _selectedInterfaceLanguage;
-
-    [ObservableProperty] private AppThemePreference _themePreference;
-
-    private ThemeVariant _uiThemeVariant = ThemeVariant.Dark;
-
-    public bool IsLightTheme => ThemePreference == AppThemePreference.Light;
-
-    public bool IsDarkTheme => ThemePreference == AppThemePreference.Dark;
-
-    public bool IsSystemTheme => ThemePreference == AppThemePreference.System;
-
-    public string SunIconPath => AppIcons.ToggleIconPath("sun", _uiThemeVariant);
-
-    public string MoonIconPath => AppIcons.ToggleIconPath("moon", _uiThemeVariant);
-
-    public string SystemIconPath => AppIcons.ToggleIconPath("system", _uiThemeVariant);
-
-    public string TrashIconPath => AppIcons.ToggleIconPath("trash", _uiThemeVariant);
-
-    [RelayCommand]
-    private void SetTheme(string mode)
-    {
-        ThemePreference = mode switch
-        {
-            "Light" => AppThemePreference.Light,
-            "Dark" => AppThemePreference.Dark,
-            _ => AppThemePreference.System
-        };
-    }
-
     [ObservableProperty] private IReadOnlyList<PreferenceOption> _preferences = [];
 
     [ObservableProperty] private bool _enabled;
-
-    [ObservableProperty] private HotkeyOption _selectedHotkey;
 
     [ObservableProperty] private bool _autoMode;
 
@@ -780,19 +287,6 @@ public partial class SettingsViewModel : ViewModelBase
         _store.Save(_settings);
         OnPropertyChanged(nameof(CaptureLabel));
         ApplyEnabled();
-    }
-
-    partial void OnSelectedHotkeyChanged(HotkeyOption value)
-    {
-        _settings.HotkeyVirtualKey = value.VirtualKey;
-        _backend.HotkeyVirtualKey = value.VirtualKey;
-
-        foreach (var row in HotkeyRows)
-            if (row.Selected.VirtualKey == value.VirtualKey)
-                TurnOff(row);
-
-        _store.Save(_settings);
-        UpdateStatus();
     }
 
     partial void OnAutoModeChanged(bool value)
@@ -910,44 +404,13 @@ public partial class SettingsViewModel : ViewModelBase
         _store.Save(_settings);
     }
 
-    partial void OnSelectedInterfaceLanguageChanged(LanguageOption value)
-    {
-        _settings.InterfaceLanguage = value.Code;
-        _store.Save(_settings);
-        Localizer.Instance.SetLanguage(value.Code);
-    }
-
-    partial void OnThemePreferenceChanged(AppThemePreference value)
-    {
-        _settings.ThemePreference = value;
-        _store.Save(_settings);
-        if (Application.Current is { } app)
-            ThemeApplier.Apply(app, value);
-        OnPropertyChanged(nameof(IsLightTheme));
-        OnPropertyChanged(nameof(IsDarkTheme));
-        OnPropertyChanged(nameof(IsSystemTheme));
-    }
-
-    private void OnUiThemeChanged(object? sender, EventArgs e)
-    {
-        if (Application.Current is not { } app)
-            return;
-
-        _uiThemeVariant = app.ActualThemeVariant;
-        OnPropertyChanged(nameof(SunIconPath));
-        OnPropertyChanged(nameof(MoonIconPath));
-        OnPropertyChanged(nameof(SystemIconPath));
-        OnPropertyChanged(nameof(TrashIconPath));
-    }
-
     private void OnLanguageChanged(object? sender, EventArgs e)
     {
 
         BuildPreferences(_settings.PreferredLayout);
-        foreach (var row in HotkeyRows)
-            row.RefreshLabels();
+        Shortcuts.RefreshLabels();
         Models.RefreshLabels();
-        OnPropertyChanged(nameof(UpdateButtonTooltip));
+        Updates.RefreshLabels();
         OnPropertyChanged(nameof(AutoModeBlockedHint));
 
         UpdateStatus();
@@ -1078,11 +541,11 @@ public partial class SettingsViewModel : ViewModelBase
 
         StatusText = NeuralCorrectionEnabled
             ? Models.IsModelLoaded
-                ? L.Format("Status_NeuralHotkeyActive", SelectedHotkey.Name)
-                : L.Format("Status_NeuralFallbackActive", SelectedHotkey.Name)
+                ? L.Format("Status_NeuralHotkeyActive", Shortcuts.SelectedHotkey.Name)
+                : L.Format("Status_NeuralFallbackActive", Shortcuts.SelectedHotkey.Name)
             : AutoMode && AutoModeAllowed
-                ? L.Format("Status_AutoActive", SelectedHotkey.Name)
-                : L.Format("Status_HotkeyActive", SelectedHotkey.Name);
+                ? L.Format("Status_AutoActive", Shortcuts.SelectedHotkey.Name)
+                : L.Format("Status_HotkeyActive", Shortcuts.SelectedHotkey.Name);
     }
 
     private void OnCorrected(object? sender, CorrectionResult result)

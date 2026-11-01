@@ -165,7 +165,6 @@ internal static class MacInstalledLayouts
         return ReadCurrentSource(out isInputMethod, out _);
     }
 
-    // One key-down through the current layout, dead-key state carried across calls as the OS carries it.
     public static bool TranslateKeyDown(
         ushort keyCode, ulong eventFlags, bool autoRepeat, ref uint deadKeyState, char[] buffer, out int length)
     {

@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 
-// The License tab of the Mac App Store edition: trial, subscription, lifetime purchase. Only
-// neural correction and features added after it are paid there; everything else stays free. In
-// every other build IsStoreBuild is false, Access gates nothing and none of this is shown.
+// Only neural correction and features added after it are paid; everything else stays free.
+// In every other build Access gates nothing.
 public sealed partial class StoreViewModel : ObservableObject
 {
     private static readonly TimeSpan RecheckInterval = TimeSpan.FromHours(1);
@@ -71,7 +70,7 @@ public sealed partial class StoreViewModel : ObservableObject
         }
     }
 
-    // Raised on the UI thread when what is paid for becomes available or stops being available.
+    // Raised on the UI thread.
     public event EventHandler? AccessChanged;
 
     public bool PaidFeatures => Access.PaidFeatures;
@@ -80,7 +79,6 @@ public sealed partial class StoreViewModel : ObservableObject
 
     [ObservableProperty] private string? _lifetimePrice;
 
-    // Set only while this user can still start the free trial.
     [ObservableProperty] private string? _yearlyTrial;
 
     [ObservableProperty] private string _message = string.Empty;
@@ -114,8 +112,6 @@ public sealed partial class StoreViewModel : ObservableObject
 
     public bool PricesKnown => YearlyPrice is not null || LifetimePrice is not null;
 
-    // A buy button without a price would be a button that cannot work; until the App Store answers
-    // there is a retry instead.
     public bool ShowSubscribe => CanSubscribe && YearlyPrice is not null;
 
     public bool ShowBuyLifetime => CanBuyLifetime && LifetimePrice is not null;

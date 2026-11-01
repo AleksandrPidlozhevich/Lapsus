@@ -5,10 +5,9 @@ using Lapsus.Input;
 
 namespace Lapsus.Tests;
 
-// The hotkey circle over every language pair and every third installed layout. The line is typed in the active
-// language and ends in one word typed on its keys but meant in another script ("…бери ымп" for "svg"). The brain
-// fixes that word; no step of the circle may re-encode the rest of the line, including words missing from the
-// list ("скриншоты") and words too short to settle it ("из").
+// The line is typed in the active language and ends in one word typed on its keys but meant in another
+// script ("…бери ымп" for "svg"). No step of the circle may re-encode the rest, including words missing
+// from the list ("скриншоты") and words too short to settle it ("из").
 public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists lists)
     : IClassFixture<CycleAcrossLanguagesTests.Lists>
 {
@@ -82,8 +81,7 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
             $"a step re-encoded the typed words: {text}\nwalk: {walk}"));
     }
 
-    // Combinations whose typed language has a short word that another installed layout reads as a listed word
-    // ("и" is "b" on English keys); the rest have nothing to trip on.
+    // "и" is "b" on English keys; the other combinations have nothing that short to trip on.
     public static TheoryData<string, string, string> CombinationsWithAShortTrap()
     {
         var data = new TheoryData<string, string, string>();
@@ -146,7 +144,6 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
         return (typed, meant, alsoInstalled.Length == 0 ? [typed, meant] : [typed, meant, Find(alsoInstalled)]);
     }
 
-    // Every text the hotkey steps through before it returns to the typed one; empty when it offers nothing.
     private List<string> Walk(string segment, Language typed, IReadOnlyList<Language> languages)
     {
         var installed = languages.Select((l, i) => l.Installed(i + 1)).ToList();
@@ -180,7 +177,6 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
                                      e.Word == LayoutTranscoder.Transcode(w, typed.Map, o.Map))));
     }
 
-    // A word of the other script typed on the active layout's keys, which nothing installed reads as typed.
     private (string Word, string OnWrongKeys) WordTypedOnWrongKeys(
         Language meant, Language typed, IReadOnlyList<Language> installed)
     {
@@ -247,7 +243,6 @@ public sealed class CycleAcrossLanguagesTests(CycleAcrossLanguagesTests.Lists li
         private readonly Dictionary<string, (Words Words, DictionarySource Source)> _byCode = [];
         private readonly List<string> _paths = [];
 
-        // Each fixture list as it ships, commonest first.
         public static readonly Dictionary<string, List<(string Word, long Count)>> Full =
             Languages.ToDictionary(l => l.Code, Read);
 

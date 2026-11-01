@@ -10,7 +10,6 @@ string? Option(string name)
 var code = Option("--lang");
 var outDir = Option("--out");
 
-// Word lists for Lapsus.Core.Tests/Languages/Fixtures, from the catalog's pinned URLs.
 if (Option("--fixtures") is { } fixtureDir)
 {
     var cache = Option("--cache") ?? Path.Combine(Path.GetTempPath(), "lapsus-fixture-downloads");
@@ -18,7 +17,6 @@ if (Option("--fixtures") is { } fixtureDir)
     return await Lapsus.Lexicons.TestFixtures.BuildAsync(fixtureDir, cache, only);
 }
 
-// The app's own cleaning (FrequencyListCleaner), for lists built or downloaded outside DictionaryStore.
 if (Option("--clean") is { } listToClean)
 {
     if (Option("--script") is not { } scriptName || !Enum.TryParse<Script>(scriptName, ignoreCase: true, out var cleanScript))
@@ -72,7 +70,7 @@ if (Option("--russian-in") is { } oldList)
     var found = new SortedSet<string>(StringComparer.Ordinal);
     foreach (var (word, count) in before)
     {
-        // ≥20 sightings; unseen in reference counts as once; skip apostrophe-word halves.
+        // Unseen in the reference counts as once; skip apostrophe-word halves.
         if (count < 20 || !word.All(char.IsLetter) || !neighbourWords.Check(word))
             continue;
 

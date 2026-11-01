@@ -1,6 +1,6 @@
 namespace Lapsus.Input.Dictation;
 
-// The microphone badge at the caret. Called on the UI thread, except SetLevel, which may come from any thread.
+// Called on the UI thread, except SetLevel, which may come from any thread.
 internal interface IDictationIndicator
 {
     void ShowListening();

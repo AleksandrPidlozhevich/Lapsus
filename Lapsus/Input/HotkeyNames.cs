@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Lapsus.Input;
 
-// Labels for recorded shortcuts, in the same style as the built-in options: symbols on macOS, words elsewhere.
 internal static class HotkeyNames
 {
     public static string Format(int trigger)

@@ -1,7 +1,7 @@
 namespace Lapsus.Input;
 
-// Pure check shared with tests. Writing selected text while the caret is still a point inserts,
-// and the characters that should have been replaced stay in front of the correction.
+// Writing selected text while the caret is still a point inserts, and the characters that
+// should have been replaced stay in front of the correction.
 internal static class MacTrailingSelection
 {
     public static bool Confirmed(

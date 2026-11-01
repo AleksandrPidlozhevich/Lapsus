@@ -1,47 +1,27 @@
-<#
-.SYNOPSIS
-    Builds the Windows installer and update feed for Lapsus.
-
-.DESCRIPTION
-    Publishes Lapsus and hands it to `vpk pack` (Velopack's CLI), which builds Lapsus-win-Setup.exe,
-    Lapsus-win.msi, a portable zip, and the release feed that AppUpdater.cs / GithubSource reads to
-    find updates. Upload everything under build/windows/Releases/ to a GitHub Release with matching
-    tag "v<version>" — that release IS the update feed, there is nothing else to host. The macOS half
-    of the same release comes from scripts/package-macos.sh; both read the same VERSION file.
-
-    Velopack installs per-user into %LocalAppData%\Lapsus (no admin, no UAC prompt): `current\` holds
-    the app files and is replaced wholesale on every update, which is why settings, dictionaries and
-    models live in %APPDATA%\Lapsus instead. The folder *name* is stable, so the autostart Run key
-    written by WindowsStartupRegistration keeps pointing at the right exe after an update.
-
-    The icon: unlike the macOS script, which generates its .icns here from Assets/icon-light.svg,
-    Lapsus/Assets/app.ico is committed — it is a compile input for Lapsus.exe, not just a packaging
-    input. Regenerate it from the SVG (16/32/48/64/128/256, edge-to-edge, PNG-compressed entries) if
-    the artwork ever changes; Svg.Skia — already an indirect dependency via Svg.Controls.Skia.Avalonia
-    — rasterizes it, and an .ico is an ICONDIR plus one ICONDIRENTRY and one PNG payload per size.
-
-.PARAMETER Rid
-    Target runtime identifier. win-x64 by default; win-arm64 also has ONNX Runtime GenAI natives.
-
-.PARAMETER Version
-    Overrides the version. Defaults to the repo-root VERSION file, which Directory.Build.props also
-    reads for the .NET assembly version — so this stays in sync with the macOS build without the
-    number being duplicated per platform.
-
-    Note for the day VERSION grows a prerelease suffix: an MSI ProductVersion is three numbers with
-    hard limits (255.255.65535) and cannot carry one, so `1.1.0-beta.2` needs `--msiVersion` passed
-    to vpk as well. Plain `major.minor.patch` needs nothing.
-
-.EXAMPLE
-    pwsh scripts/package-windows.ps1
-
-.NOTES
-    Requires the .NET SDK and the `vpk` global tool: dotnet tool install -g vpk
-
-    The output is unsigned, so Windows SmartScreen shows "Windows protected your PC" until the
-    installer earns reputation. To sign, set LAPSUS_SIGN_PARAMS to the signtool arguments, e.g.
-        $env:LAPSUS_SIGN_PARAMS = '/a /fd sha256 /tr http://timestamp.digicert.com /td sha256'
-#>
+# Upload everything under build/windows/Releases/ to a GitHub Release with matching tag "v<version>" —
+# that release IS the update feed, there is nothing else to host. The macOS half of the same release
+# comes from scripts/package-macos.sh; both read the same VERSION file.
+#
+# Velopack installs per-user into %LocalAppData%\Lapsus (no admin, no UAC prompt): `current\` holds
+# the app files and is replaced wholesale on every update, which is why settings, dictionaries and
+# models live in %APPDATA%\Lapsus instead. The folder *name* is stable, so the autostart Run key
+# written by WindowsStartupRegistration keeps pointing at the right exe after an update.
+#
+# The icon: unlike the macOS script, which generates its .icns here from Assets/icon-light.svg,
+# Lapsus/Assets/app.ico is committed — it is a compile input for Lapsus.exe, not just a packaging
+# input. Regenerate it from the SVG (16/32/48/64/128/256, edge-to-edge, PNG-compressed entries) if
+# the artwork ever changes; Svg.Skia — already an indirect dependency via Svg.Controls.Skia.Avalonia
+# — rasterizes it, and an .ico is an ICONDIR plus one ICONDIRENTRY and one PNG payload per size.
+#
+# win-arm64 also has ONNX Runtime GenAI natives.
+#
+# Note for the day VERSION grows a prerelease suffix: an MSI ProductVersion is three numbers with
+# hard limits (255.255.65535) and cannot carry one, so `1.1.0-beta.2` needs `--msiVersion` passed
+# to vpk as well. Plain `major.minor.patch` needs nothing.
+#
+# The output is unsigned, so Windows SmartScreen shows "Windows protected your PC" until the
+# installer earns reputation. To sign, set LAPSUS_SIGN_PARAMS to the signtool arguments, e.g.
+#     $env:LAPSUS_SIGN_PARAMS = '/a /fd sha256 /tr http://timestamp.digicert.com /td sha256'
 
 [CmdletBinding()]
 param(

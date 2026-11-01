@@ -1,39 +1,16 @@
-<#
-.SYNOPSIS
-    Builds the Microsoft Store package (.msixbundle) for Lapsus.
-
-.DESCRIPTION
-    Publishes Lapsus for win-x64 and win-arm64, lays each publish out as an MSIX package next to
-    Lapsus/Packaging/Store/AppxManifest.xml and its tile images, and bundles the two into
-    build/store/Lapsus_<version>.msixbundle — the one file to upload in Partner Center → Packages.
-
-    The Store build is the same binaries as the Velopack one (scripts/package-windows.ps1). What differs
-    is decided at run time, from whether the process has a package identity (Lapsus/Startup/PackageIdentity.cs):
-    no self-update (the Store updates it) and autostart through the manifest's startup task instead of
-    the HKCU Run key.
-
-    Nothing is signed: Partner Center re-signs every package it accepts. An unsigned .msix cannot be
-    installed by double-click, which is what -Register is for.
-
-    makeappx.exe and makepri.exe come from the Microsoft.Windows.SDK.BuildTools NuGet package,
-    downloaded once into build/tools — the Windows SDK itself does not need to be installed.
-
-.PARAMETER Version
-    Overrides the version. Defaults to the repo-root VERSION file. The package version is that plus
-    ".0": the Store requires four numbers with the last one zero.
-
-.PARAMETER Register
-    Local test instead of a bundle: builds this machine's architecture only and registers the unpacked
-    layout with Add-AppxPackage -Register, so Lapsus shows up in the Start menu running exactly as the
-    Store copy would (package identity, virtualized AppData, startup task). Needs Developer Mode.
-    It registers under the real Store identity, so remove it before installing Lapsus from the Store.
-
-.EXAMPLE
-    pwsh scripts/package-store.ps1
-
-.EXAMPLE
-    pwsh scripts/package-store.ps1 -Register
-#>
+# The Store build is the same binaries as the Velopack one (scripts/package-windows.ps1). What differs
+# is decided at run time, from whether the process has a package identity (Lapsus/Startup/PackageIdentity.cs):
+# no self-update (the Store updates it) and autostart through the manifest's startup task instead of
+# the HKCU Run key.
+#
+# Nothing is signed: Partner Center re-signs every package it accepts. An unsigned .msix cannot be
+# installed by double-click, which is what -Register is for. It registers under the real Store identity,
+# so remove it before installing Lapsus from the Store.
+#
+# makeappx.exe and makepri.exe come from the Microsoft.Windows.SDK.BuildTools NuGet package,
+# downloaded once into build/tools — the Windows SDK itself does not need to be installed.
+#
+# The package version is the repo VERSION plus ".0": the Store requires four numbers with the last one zero.
 
 [CmdletBinding()]
 param(
@@ -60,7 +37,6 @@ $storeDir = Join-Path $root 'Lapsus\Packaging\Store'
 $buildDir = Join-Path $root 'build\store'
 $template = Get-Content (Join-Path $storeDir 'AppxManifest.xml') -Raw
 
-# ---- makeappx / makepri -------------------------------------------------------------------------
 $toolsDir = Join-Path $root "build\tools\Microsoft.Windows.SDK.BuildTools.$buildToolsVersion"
 if (-not (Test-Path $toolsDir)) {
     Write-Host "==> Downloading Microsoft.Windows.SDK.BuildTools $buildToolsVersion"
@@ -80,7 +56,6 @@ function Invoke-Tool([string]$exe, [string[]]$arguments) {
     if ($LASTEXITCODE -ne 0) { Write-Error "$(Split-Path $exe -Leaf) failed ($LASTEXITCODE)" }
 }
 
-# ---- one package per architecture ---------------------------------------------------------------
 $architectures = if ($Register) { @($hostArch) } else { @('x64', 'arm64') }
 
 if (Test-Path $buildDir) {
@@ -123,7 +98,6 @@ foreach ($arch in $architectures) {
     }
 }
 
-# ---- local registration -------------------------------------------------------------------------
 if ($Register) {
     $unlock = Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock' `
         -Name AllowDevelopmentWithoutDevLicense -ErrorAction SilentlyContinue

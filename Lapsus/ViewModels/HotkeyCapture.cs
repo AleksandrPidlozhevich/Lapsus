@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 
-// Owns the backend's shortcut capture for the settings window. Only one recorder holds it at a time, and a backend
-// that was stopped (Capture off) is started just for the recording and stopped again afterwards.
 public sealed class HotkeyCapture(IInputBackend backend, Func<bool> isEnabled, Action<string> reportFailure)
 {
     private Action? _stopOwner;

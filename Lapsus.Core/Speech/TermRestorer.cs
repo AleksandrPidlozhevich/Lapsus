@@ -98,7 +98,6 @@ public sealed partial class TermRestorer
         return sb.Append(text, at, text.Length - at).ToString();
     }
 
-    // How many words starting at i were replaced (0 for none), longest phrase first.
     private int TryReplace(
         string text, List<Match> words, int i, string language, bool glossaryOnly, out string? replacement)
     {
@@ -166,7 +165,6 @@ public sealed partial class TermRestorer
         _spell.IsLexiconWord(word, script, language, typedInScript: true) ||
         _spell.IsLexiconWord(word, script, typedInScript: true);
 
-    // Words i..i+n-1 of one script kind, separated only by spaces or hyphens.
     private static bool Adjacent(string text, List<Match> words, int i, int n, bool latin)
     {
         for (var k = i; k < i + n; k++)

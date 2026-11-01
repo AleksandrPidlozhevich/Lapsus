@@ -4,8 +4,7 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
 
-// Stops macOS App Nap from throttling the app while keyboard capture runs. Only the App Nap part is
-// requested: the "allowing idle system sleep" variant, so the Mac still sleeps normally.
+// Only the App Nap part is requested: the "allowing idle system sleep" variant, so the Mac still sleeps normally.
 // Begin and End must be called on the UI thread.
 [SupportedOSPlatform("macos")]
 internal static class MacActivity

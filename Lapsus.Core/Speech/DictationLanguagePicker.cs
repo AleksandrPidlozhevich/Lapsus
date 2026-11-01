@@ -10,7 +10,7 @@ public static class DictationLanguagePicker
     // Below this, a detected language that is not the main one loses to the main one.
     public const float SwitchConfidence = 0.7f;
 
-    // The Lapsus language codes Whisper can decode. Every catalog language is one of Whisper's.
+    // Every catalog language is one of Whisper's.
     private static readonly HashSet<string> Whisper = new(StringComparer.OrdinalIgnoreCase)
     {
         "af", "am", "ar", "as", "az", "ba", "be", "bg", "bn", "bo", "br", "bs", "ca", "cs", "cy", "da", "de",
@@ -40,7 +40,6 @@ public static class DictationLanguagePicker
         "si", "ta", "te", "th", "yue", "zh"
     };
 
-    // The script a dictation in this language comes out in; null for scripts Lapsus does not handle.
     public static Script? ScriptOf(string language)
     {
         var code = Normalize(language);
@@ -49,7 +48,7 @@ public static class DictationLanguagePicker
         return Unsupported.Contains(code) ? null : Script.Latin;
     }
 
-    // The languages detection may choose from, main one first. A fixed language means no detection at all.
+    // A fixed language means no detection at all.
     public static IReadOnlyList<string> Candidates(
         string mainLanguage, IEnumerable<string> userLanguages, string? fixedLanguage = null)
     {
@@ -64,7 +63,6 @@ public static class DictationLanguagePicker
         return list.Count > 0 ? list : ["en"];
     }
 
-    // The language to decode in, given what detection said.
     public static string Resolve(string mainLanguage, string? detected, float probability)
     {
         var main = Normalize(mainLanguage);

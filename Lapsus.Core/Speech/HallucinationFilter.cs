@@ -111,7 +111,6 @@ public static partial class HallucinationFilter
         return SentenceEnd().Split(text).Select(s => s.Trim()).Where(s => s.Length > 0).ToList();
     }
 
-    // Lower case, letters and digits only, single spaces.
     internal static string Normalize(string text)
     {
         var sb = new StringBuilder(text.Length);
@@ -153,7 +152,6 @@ public static partial class HallucinationFilter
 
 internal static class SpeechData
 {
-    // Non-empty lines of an embedded Speech/Data file, without # comments.
     public static IEnumerable<string> Lines(string name)
     {
         using var stream = typeof(SpeechData).Assembly.GetManifestResourceStream($"Lapsus.Core.Speech.Data.{name}")

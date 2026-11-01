@@ -4,8 +4,7 @@ using System.Linq;
 
 namespace Lapsus.Input;
 
-// Recognizes apps built on Chromium or Electron from their bundle layout. Only these need the
-// AXManualAccessibility request, so native apps are never touched.
+// Only these need the AXManualAccessibility request, so native apps are never touched.
 internal static class ChromiumApps
 {
     private static readonly string[] FrameworkMarkers =

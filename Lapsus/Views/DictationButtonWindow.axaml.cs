@@ -9,8 +9,6 @@ using static Lapsus.Input.NativeMethods;
 
 namespace Lapsus.Views;
 
-// The on-screen microphone at the bottom of the screen. A click starts or stops dictation; the window never
-// takes focus, so the text still goes to the field the user was typing in.
 public partial class DictationButtonWindow : Window
 {
     private static readonly IBrush Idle = new SolidColorBrush(Color.Parse("#8B8D98"));
@@ -77,7 +75,6 @@ public partial class DictationButtonWindow : Window
 
     public event Action? Clicked;
 
-    // The hotkey shown on the idle button, and the longer explanation on hover.
     public void Describe(string hotkey, string tip)
     {
         _idleText = hotkey;
@@ -88,8 +85,7 @@ public partial class DictationButtonWindow : Window
     private bool? _state;
     private string? _text;
 
-    // null: idle; true: listening; false: working on what was said. Text, when given, replaces the usual label
-    // (the hint while listening, a message): the button stands in for the caret badge where there is no caret.
+    // Where there is no caret, this button stands in for the caret badge.
     public void ShowState(bool? listening, string? text)
     {
         _state = listening;
@@ -129,7 +125,6 @@ public partial class DictationButtonWindow : Window
             SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
     }
 
-    // Centred above the taskbar of the main screen.
     private void PlaceAtBottom()
     {
         if (Screens.Primary is not { } screen || Bounds.Width <= 0)

@@ -26,7 +26,6 @@ public sealed record MicrophoneOption(string Name, string? Device);
 
 public sealed record UnloadOption(string Name, SpeechUnloadAfter Value);
 
-// The Voice tab. Its hotkey lives with the others on the Hotkeys tab.
 public partial class VoiceViewModel : ViewModelBase
 {
     private static readonly TimeSpan GlossarySaveDelay = TimeSpan.FromMilliseconds(700);
@@ -74,17 +73,14 @@ public partial class VoiceViewModel : ViewModelBase
         };
     }
 
-    // Dictation needs a microphone backend (Windows and macOS).
     public bool IsSupported { get; }
 
-    // The Mac App Store edition after its trial, without Lapsus Plus.
     public bool Locked => _locked();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ShowDownload), nameof(ShowUsage))]
     private bool _enabled;
 
-    // The tab's two sections: the model and how to start it, or how speech is read.
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ShowMain), nameof(ShowUsage))]
     private bool _showRecognition;
@@ -117,7 +113,7 @@ public partial class VoiceViewModel : ViewModelBase
 
     [ObservableProperty] private bool _showButton;
 
-    // The on-screen button needs a window that takes clicks without taking focus; only Windows has one here.
+    // Needs a window that takes clicks without taking focus.
     public bool ButtonSupported => OperatingSystem.IsWindows();
 
     [ObservableProperty] private string _glossaryText;
@@ -155,7 +151,6 @@ public partial class VoiceViewModel : ViewModelBase
 
     public string Hint => Localizer.Instance["Voice_Hint"];
 
-    // Shown once the model is on disk: how to use it, right where it was downloaded.
     // A double tap cannot be held, so it gets the press-speak-press version.
     public string TryIt => Localizer.Instance.Format(
         HotkeyTriggers.IsDoubleTap(_settings.DictationHotkey) ? "Voice_TryItTap" : "Voice_TryIt", HotkeyName);
@@ -196,7 +191,6 @@ public partial class VoiceViewModel : ViewModelBase
 
     partial void OnGlossaryTextChanged(string value)
     {
-        // Saved once typing pauses, not on every key.
         _saveGlossary.Stop();
         _saveGlossary.Start();
     }

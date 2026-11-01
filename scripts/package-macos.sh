@@ -1,22 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Publishes Lapsus and hands it to `vpk pack` (Velopack's CLI), which builds the .app bundle, an
-# installer, and the release feed that AppUpdater.cs / GithubSource reads to find updates. Upload
-# everything under build/macos/Releases/ to a GitHub Release with matching tag "v<version>" — that
+# Upload everything under build/macos/Releases/ to a GitHub Release with matching tag "v<version>" — that
 # release IS the update feed, there is nothing else to host.
-#
-# Usage: scripts/package-macos.sh [osx-arm64|osx-x64] [version]
-#
-# Requires the .NET SDK and the `vpk` global tool: dotnet tool install -g vpk
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APP_NAME="Lapsus"
 BUNDLE_ID="com.lapsus.app"
 
 RID="${1:-osx-arm64}"
-# Single source of truth: the repo-root VERSION file (also read by Directory.Build.props for the
-# .NET assembly version, so this stays in sync with the Windows build without duplicating the number).
 VERSION="${2:-$(cat "$ROOT/VERSION")}"
 
 export PATH="$PATH:$HOME/.dotnet/tools"

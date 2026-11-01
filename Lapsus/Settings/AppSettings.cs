@@ -54,8 +54,6 @@ public sealed class AppSettings
     // macOS: the first-launch explanation of what Lapsus reads was answered (OnboardingWindow).
     public bool OnboardingDone { get; set; }
 
-    // Voice typing: the hotkey starts and stops recording; the speech model loads on first use and is unloaded
-    // after SpeechUnloadAfter of no dictation.
     public bool DictationEnabled { get; set; }
 
     public int DictationHotkey { get; set; } = DictationChord;
@@ -65,10 +63,8 @@ public sealed class AppSettings
     public static int DictationChord => HotkeyCombo.Encode(0,
         HotkeyModifiers.Control | (OperatingSystem.IsMacOS() ? HotkeyModifiers.Alt : HotkeyModifiers.Meta));
 
-    // A short tone when recording starts and stops.
     public bool DictationSounds { get; set; } = true;
 
-    // A small microphone button at the bottom of the screen: click to dictate, hover to see the hotkey.
     public bool DictationShowButton { get; set; } = true;
 
     public string SpeechModelId { get; set; } = Speech.SpeechModelCatalog.DefaultId;
@@ -76,7 +72,7 @@ public sealed class AppSettings
     [JsonConverter(typeof(JsonStringEnumConverter<SpeechUnloadAfter>))]
     public SpeechUnloadAfter SpeechUnloadAfter { get; set; } = SpeechUnloadAfter.Min5;
 
-    // A language code to always dictate in; null picks among the installed layouts' languages.
+    // Null picks among the installed layouts' languages.
     public string? DictationLanguage { get; set; }
 
     public bool KeepEnglishTermsLatin { get; set; } = true;
@@ -87,7 +83,6 @@ public sealed class AppSettings
     // "Term" or "Term|how it sounds|…", one per entry.
     public string[] DictationGlossary { get; set; } = [];
 
-    // The downloaded update the tray last popped up a notification for (UpdateNotice): once per version.
     public string? AnnouncedUpdateVersion { get; set; }
 
     public string[] ExcludedWords { get; set; } = [];

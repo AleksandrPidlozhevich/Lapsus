@@ -4,8 +4,8 @@ using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
 
-// Opens a URL the way Finder would, in process. Spawning /usr/bin/open (what Process.Start with
-// UseShellExecute does on macOS) is a child process, which the App Sandbox does not reliably allow.
+// Spawning /usr/bin/open (what Process.Start with UseShellExecute does on macOS) is a child
+// process, which the App Sandbox does not reliably allow.
 [SupportedOSPlatform("macos")]
 internal static class MacWorkspace
 {
