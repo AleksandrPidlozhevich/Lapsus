@@ -124,9 +124,15 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
         return InstalledLayouts;
     }
 
+    // The layout the system has on; the first installed unless a test sets it or follows the switches.
+    public InstalledLayout? Active { get; set; }
+
+    // As the OS does: the layout a hotkey switched to is the one active at the next press.
+    public bool FollowLayoutSwitches { get; set; }
+
     protected override InstalledLayout? FindActiveLayout(IReadOnlyList<InstalledLayout> layouts)
     {
-        return layouts[0];
+        return Active is not null && layouts.Contains(Active) ? Active : layouts[0];
     }
 
     protected override bool TryInject(int backspaces, string text)
@@ -141,6 +147,10 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
     protected override void ApplyLayoutSwitch(KeyboardLayout? target, string? layoutId)
     {
         LayoutSwitches.Add((target, layoutId));
+        if (FollowLayoutSwitches)
+            Active = InstalledLayouts.FirstOrDefault(l => !string.IsNullOrEmpty(layoutId) && l.LayoutId == layoutId)
+                     ?? InstalledLayouts.FirstOrDefault(l => target is not null && l.Target == target)
+                     ?? Active;
     }
 
     protected override string ForegroundAppName()

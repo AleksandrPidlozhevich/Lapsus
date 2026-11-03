@@ -45,15 +45,15 @@
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Arabic · without": {
-      "Value": 0.0249,
+      "Value": 0.0268,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · pulled across into Arabic · with": {
-      "Value": 0.0037,
+      "Value": 0.0056,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · spell-fixed in place, still English": {
-      "Value": 0.3124,
+      "Value": 0.2008,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary word inside a correct English line · control: known word left alone · without": {
@@ -65,27 +65,27 @@
       "Better": "Higher"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · pulled across into Arabic · without": {
-      "Value": 0.0244,
+      "Value": 0.0264,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · pulled across into Arabic · with": {
-      "Value": 0.0086,
+      "Value": 0.0106,
       "Better": "Lower"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · spell-fixed in place, still English · without": {
-      "Value": 0.2962,
+      "Value": 0.1841,
       "Better": "Either"
     },
     "Rule A — one out-of-vocabulary English word inside a correct Arabic line · spell-fixed in place, still English · with": {
-      "Value": 0,
+      "Value": 0.0026,
       "Better": "Either"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Arabic line · typo'd word still crossed into Arabic · without": {
-      "Value": 0.5291,
+      "Value": 0.5287,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Arabic line · typo'd word still crossed into Arabic · with": {
-      "Value": 0.54,
+      "Value": 0.5396,
       "Better": "Higher"
     },
     "Rule A — a typo'd word inside a wholly wrong-layout Arabic line · and came back as the word that was meant · without": {
@@ -189,11 +189,11 @@
       "Better": "Higher"
     },
     "Rule G — a Arabic word with one typo, on its own · fixed back to the meant word": {
-      "Value": 0.51,
+      "Value": 0.5075,
       "Better": "Higher"
     },
     "Rule G — a Arabic word with one typo, on its own · changed into another word": {
-      "Value": 0.3512,
+      "Value": 0.2188,
       "Better": "Lower"
     },
     "Rule G — a Arabic word with one typo, on its own · crossed into another layout": {
@@ -201,11 +201,11 @@
       "Better": "Lower"
     },
     "Rule G — a Arabic word with one typo, on its own · left as typed": {
-      "Value": 0.11,
+      "Value": 0.245,
       "Better": "Either"
     },
     "Rule G — a Arabic word with one typo, on its own · fixed, by slip · neighbour": {
-      "Value": 0.5103,
+      "Value": 0.4985,
       "Better": "Higher"
     },
     "Rule G — a Arabic word with one typo, on its own · fixed, by slip · swapped": {
@@ -225,11 +225,11 @@
       "Better": "Higher"
     },
     "Rule G — a Arabic word with one typo, on its own · fixed, by word length · 4": {
-      "Value": 0.4677,
+      "Value": 0.4662,
       "Better": "Higher"
     },
     "Rule G — a Arabic word with one typo, on its own · fixed, by word length · 5-6": {
-      "Value": 0.5627,
+      "Value": 0.5588,
       "Better": "Higher"
     },
     "Rule G — a Arabic word with one typo, on its own · fixed, by word length · 7-9": {
@@ -245,7 +245,7 @@
       "Better": "Higher"
     },
     "Rule G — a typo inside a natural Arabic sentence · changed into another word": {
-      "Value": 0.4118,
+      "Value": 0.2105,
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Arabic sentence · crossed into another layout": {
@@ -253,7 +253,7 @@
       "Better": "Lower"
     },
     "Rule G — a typo inside a natural Arabic sentence · left as typed": {
-      "Value": 0.1192,
+      "Value": 0.3204,
       "Better": "Either"
     },
     "Rule G — a typo inside a natural Arabic sentence · fixed, by slip · neighbour": {

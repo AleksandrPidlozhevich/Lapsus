@@ -12,7 +12,8 @@ public sealed record SpeechResult(
     string Language,
     double SpeechSeconds,
     float LanguageProbability = 1f,
-    float MinTokenProbability = 1f)
+    float MinTokenProbability = 1f,
+    float MeanTokenProbability = 1f)
 {
     public static SpeechResult Silence(string language) => new("", language, 0);
 }

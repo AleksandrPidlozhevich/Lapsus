@@ -360,7 +360,9 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
                 return 1;
             }
 
-            CaptureKey(vk, data.scanCode);
+            // Win alone types nothing; buffering it would wipe the line under Ctrl+Win, the dictation hotkey.
+            if (!isWin)
+                CaptureKey(vk, data.scanCode);
         }
         else if (isUp && _swallowedKeyDown == vk)
         {

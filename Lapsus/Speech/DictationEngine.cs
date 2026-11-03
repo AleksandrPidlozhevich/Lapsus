@@ -17,6 +17,9 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 {
     private static readonly TimeSpan IdleCheck = TimeSpan.FromSeconds(10);
 
+    // Mean token probability below which a CPU decode is tried again in the user's next language.
+    private const float RetryBelow = 0.75f;
+
     private readonly WhisperRecognizer _recognizer = new();
     private readonly SpeechModelStore _store;
     private readonly Func<AppSettings> _settings;
@@ -46,6 +49,9 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
     public string DeviceLabel => _recognizer.DeviceLabel;
 
+    // Raised on a worker thread once a load (and its warm-up) finishes.
+    public event Action? Loaded;
+
     public void Prepare()
     {
         var settings = _settings();
@@ -53,7 +59,7 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         if (!_store.IsInstalled(model))
             return;
 
-        var preferGpu = settings.ComputeDevice != ComputeDevicePreference.Cpu;
+        var preferGpu = settings.DictationDevice != ComputeDevicePreference.Cpu;
         var key = $"{model.Id}|{preferGpu}";
         lock (_gate)
         {
@@ -69,17 +75,23 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
                 _recognizer.Load(path, vad, preferGpu);
                 // On a GPU the first run compiles shaders (seconds, once per driver); do it now, not on the phrase.
                 await _recognizer.WarmUpAsync().ConfigureAwait(false);
+                Loaded?.Invoke();
             });
         }
     }
 
     public void Preload() => Prepare();
 
-    public async Task<string> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken)
+    public async Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken)
     {
         Interlocked.Increment(ref _busy);
+        var clock = System.Diagnostics.Stopwatch.StartNew();
+        long waited = 0, decoded = 0, retried = 0, restored = 0;
+        SpeechResult? first = null;
+        var loading = false;
         try
         {
+            loading = !_recognizer.IsLoaded;
             Prepare();
             Task? load;
             lock (_gate)
@@ -89,28 +101,52 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
             // Waiting for the model is the queue, not a failure: the recording was taken while it loaded.
             await load.WaitAsync(cancellationToken).ConfigureAwait(false);
+            waited = clock.ElapsedMilliseconds;
 
             var settings = _settings();
             var glossary = settings.DictationGlossary.Where(g => g.Trim().Length > 0).ToArray();
-            var prompt = SpeechPromptBuilder.Build(request.Language, glossary.Select(g => g.Split('|')[0]),
-                request.PreviousText);
             var among = settings.DictationLanguage is { } fixedLanguage
                 ? [fixedLanguage]
                 : DictationLanguagePicker.Candidates(request.Language, request.Languages);
             var language = settings.DictationLanguage ?? request.Language;
 
-            var result = await _recognizer
-                .TranscribeAsync(pcm, new SpeechRequest(language, prompt, among), cancellationToken)
-                .ConfigureAwait(false);
+            Task<SpeechResult> Recognize(string lang, IReadOnlyList<string> detectAmong) => _recognizer.TranscribeAsync(
+                pcm,
+                new SpeechRequest(lang, SpeechPromptBuilder.Build(lang, glossary.Select(g => g.Split('|')[0]),
+                    request.PreviousText), detectAmong),
+                cancellationToken);
+
+            var result = await Recognize(language, among).ConfigureAwait(false);
+            first = result;
+            decoded = clock.ElapsedMilliseconds;
+
+            // A CPU skips language detection (a pass of its own, ~10 s), so speech in another of the user's
+            // languages is decoded as the main one. Such a decode is unsure: ru speech read as en scored below
+            // RetryBelow in 5 of its 8 broken phrases, ru read as ru never did (22 phrases, stage 2 audio).
+            if (!_recognizer.OnGpu && result.MeanTokenProbability < RetryBelow
+                && among.FirstOrDefault(l => l != result.Language) is { } other)
+            {
+                var second = await Recognize(other, [other]).ConfigureAwait(false);
+                if (second.MeanTokenProbability > result.MeanTokenProbability)
+                    result = second;
+                retried = clock.ElapsedMilliseconds - decoded;
+            }
 
             var text = HallucinationFilter.Clean(result.Text);
             if (text.Length > 0 && settings.KeepEnglishTermsLatin)
                 text = await Task.Run(() => Restorer(glossary).Restore(text, result.Language), cancellationToken)
                     .ConfigureAwait(false);
-            return text;
+            restored = clock.ElapsedMilliseconds;
+            return new DictationResult(text, result.Language);
         }
         finally
         {
+            // Timings only, never the text.
+            var load = loading ? $"load {waited} ms (model was unloaded)" : $"model wait {waited} ms";
+            CaptureLog.Write($"dictation: {DeviceLabel}, audio {pcm.Length / 16000.0:0.0} s, speech " +
+                             $"{first?.SpeechSeconds ?? 0:0.0} s, {first?.Language ?? "-"}; {load}, decode " +
+                             $"{Math.Max(decoded - waited, 0)} ms, retry {retried} ms, terms " +
+                             $"{Math.Max(restored - decoded - retried, 0)} ms, total {clock.ElapsedMilliseconds} ms");
             Interlocked.Exchange(ref _lastUseTicks, DateTime.UtcNow.Ticks);
             Interlocked.Decrement(ref _busy);
             if (_settings().SpeechUnloadAfter == SpeechUnloadAfter.Immediately)

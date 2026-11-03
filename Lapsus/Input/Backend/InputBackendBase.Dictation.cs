@@ -2,6 +2,7 @@ using Avalonia.Threading;
 using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
+using Lapsus.Core.Speech;
 using Lapsus.Core.Text;
 using Lapsus.Input.Dictation;
 using Lapsus.Localization;
@@ -55,24 +56,64 @@ internal abstract partial class InputBackendBase<TFocus>
     public bool IsDictationTargetFocused(object target) =>
         target is TFocus focus && (focus.IsEmpty || IsStillFocused(focus));
 
+    // What was typed into this field before the caret, since the last click or caret move; "" when unknown.
+    public string DictationTextBefore() => _buffer.Segment;
+
     public bool InsertDictatedText(string text)
     {
         if (text.Length == 0)
             return false;
 
         var line = _buffer.Segment;
-        var spaced = line.Length > 0 && !char.IsWhiteSpace(line[^1]) && !char.IsWhiteSpace(text[0])
-            ? " " + text
-            : text;
+        var spaced = DictationText.FitAfter(line, text);
         if (!TryInject(0, spaced))
             return false;
 
-        // The dictated text becomes the line, committed, so the next dictation knows a word precedes the caret
+        // Parts typed one after another with nothing in between are taken back together.
+        var undo = _dictationUndo is { } last && last.Generation == _bufferGeneration && !last.Removed
+            ? last.Text + spaced
+            : spaced;
+
+        // The dictated text joins the line, committed, so the next dictation knows what precedes the caret
         // and the correction hotkey does not take it for something typed on the wrong layout.
         ResetTypingBuffer();
-        foreach (var ch in spaced)
+        foreach (var ch in line + spaced)
             _buffer.Append(ch);
         _committedLength = _buffer.Length;
+        _dictationUndo = (undo, false, _bufferGeneration);
+        return true;
+    }
+
+    // The correction hotkey right after a dictation, before any key, takes it back; pressed again, retypes it.
+    private (string Text, bool Removed, int Generation)? _dictationUndo;
+
+    private bool UndoDictation()
+    {
+        if (_dictationUndo is not { } last || last.Generation != _bufferGeneration)
+        {
+            _dictationUndo = null;
+            return false;
+        }
+
+        if (!last.Removed)
+        {
+            var line = _buffer.Segment;
+            if (!line.EndsWith(last.Text, StringComparison.Ordinal) || !TryInject(last.Text.Length, ""))
+                return false;
+            ResetTypingBuffer();
+            foreach (var ch in line[..^last.Text.Length])
+                _buffer.Append(ch);
+        }
+        else
+        {
+            if (!TryInject(0, last.Text))
+                return false;
+            foreach (var ch in last.Text)
+                _buffer.Append(ch);
+        }
+
+        _committedLength = _buffer.Length;
+        _dictationUndo = (last.Text, !last.Removed, _bufferGeneration);
         return true;
     }
 

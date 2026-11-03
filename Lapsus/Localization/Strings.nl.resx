@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Nooit (laden bij het opstarten)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Automatisch (videokaart als die er is)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Draait nu op: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Engelse termen in Latijnse letters</value>
   </data>

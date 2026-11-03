@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Asla (başlangıçta yükle)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Otomatik (varsa ekran kartı)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Şu anda çalıştığı yer: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>İngilizce terimler Latin harfleriyle</value>
   </data>

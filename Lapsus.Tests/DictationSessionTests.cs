@@ -30,7 +30,10 @@ public class DictationSessionTests
         public void LetGo(bool interrupted = false) => DictationHotkeyReleased?.Invoke(interrupted);
         public void PressEscape() => DictationCancelPressed?.Invoke();
 
+        public string Before = "";
+
         public string? DictationBlockedReason() => Blocked;
+        public string DictationTextBefore() => Before;
         public object CaptureDictationTarget() => Target;
         public bool IsDictationTargetFocused(object target) => Equals(target, Focused);
 
@@ -106,12 +109,17 @@ public class DictationSessionTests
 
         public void Prepare() => Prepared++;
 
-        public Task<string> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken ct)
+        public readonly List<DictationRequest> Requests = [];
+        public string? HeardLanguage;
+
+        public async Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken ct)
         {
             LastRequest = request;
-            if (Hold is { } hold)
-                return hold.Task.WaitAsync(ct);
-            return Task.FromResult(Answers.TryDequeue(out var next) ? next : Answer);
+            Requests.Add(request);
+            var text = Hold is { } hold
+                ? await hold.Task.WaitAsync(ct)
+                : Answers.TryDequeue(out var next) ? next : Answer;
+            return new DictationResult(text, HeardLanguage ?? request.Language);
         }
     }
 
@@ -270,6 +278,32 @@ public class DictationSessionTests
 
         Assert.Equal(["Первая часть.", "Вторая часть."], rig.Host.Typed);
         Assert.Equal("Первая часть.", rig.Engine.LastRequest!.PreviousText);
+    }
+
+    [Fact]
+    public async Task The_language_heard_in_the_first_part_is_kept_for_the_rest_of_the_dictation()
+    {
+        var rig = new Rig();
+        rig.Engine.Answers.Enqueue("First part.");
+        rig.Engine.Answers.Enqueue("Second part.");
+        rig.Engine.HeardLanguage = "en";
+
+        rig.Host.PressHotkey();
+        await SayAPartAsync(rig);
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["ru", "en"], rig.Engine.Requests[0].Languages);
+        Assert.Equal("en", rig.Engine.Requests[1].Language);
+        Assert.Equal(["en"], rig.Engine.Requests[1].Languages);
+
+        // A new dictation detects again.
+        rig.Host.PressHotkey();
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+        Assert.Equal(["ru", "en"], rig.Engine.Requests[2].Languages);
     }
 
     [Fact]
@@ -522,5 +556,67 @@ public class DictationSessionTests
         rig.Host.Target = rig.Host.Focused = "telegram";
         await rig.DictateAsync();
         Assert.Null(rig.Engine.LastRequest!.PreviousText);
+    }
+
+    [Fact]
+    public async Task What_was_typed_before_the_caret_is_the_context()
+    {
+        var rig = new Rig();
+        rig.Host.Before = "Вчера я сказал коллеге, что ";
+
+        await rig.DictateAsync();
+        Assert.Equal("Вчера я сказал коллеге, что", rig.Engine.LastRequest!.PreviousText);
+
+        // The typed line already holds the last dictation; the remembered one is only for a cleared line.
+        rig.Host.Before = "Новая строка";
+        await rig.DictateAsync();
+        Assert.Equal("Новая строка", rig.Engine.LastRequest!.PreviousText);
+    }
+}
+
+public class DictationInsertTests
+{
+    private static FakeInputBackend Backend() => new FakeInputBackend(new TableCorrector()).Focused();
+
+    [Fact]
+    public void Text_dictated_mid_sentence_continues_it()
+    {
+        var backend = Backend();
+        backend.Type("Я думаю, что");
+
+        Assert.True(backend.InsertDictatedText("Мы пойдём."));
+
+        Assert.Equal((0, " мы пойдём."), backend.Injected.Single());
+        Assert.Equal("Я думаю, что мы пойдём.", backend.DictationTextBefore());
+    }
+
+    [Fact]
+    public void The_correction_hotkey_takes_the_dictation_back_and_retypes_it()
+    {
+        var backend = Backend();
+        backend.Type("Итак,");
+        backend.InsertDictatedText("Первая часть.");
+        backend.InsertDictatedText("Вторая часть.");
+
+        backend.PressHotkey();
+        Assert.Equal((" первая часть. Вторая часть.".Length, ""), backend.Injected[^1]);
+        Assert.Equal("Итак,", backend.DictationTextBefore());
+
+        backend.PressHotkey();
+        Assert.Equal((0, " первая часть. Вторая часть."), backend.Injected[^1]);
+        Assert.Equal("Итак, первая часть. Вторая часть.", backend.DictationTextBefore());
+    }
+
+    [Fact]
+    public void A_key_typed_after_the_dictation_keeps_it()
+    {
+        var backend = Backend();
+        backend.InsertDictatedText("Готово.");
+        backend.Type(" ok");
+        var injected = backend.Injected.Count;
+
+        backend.PressHotkey();
+
+        Assert.DoesNotContain(backend.Injected.Skip(injected), i => i.Text.Length == 0);
     }
 }

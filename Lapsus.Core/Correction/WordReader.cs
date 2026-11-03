@@ -11,6 +11,16 @@ internal sealed class WordReader
     // Share of the commonest end of the list a one-edit fix must reach to replace keys no dictionary accepts.
     private const double MinFrequencyToFixPlainKeys = 0.4;
 
+    // A word typed in its own script is respelled through one slip (a neighbour, a swap, a letter dropped or
+    // extra) into any listed word; through a dearer one (a key from across the board, two slips) only into a
+    // word this common. Measured on the Russian lists: such real fixes ("кароче") land on 0.55 and up, unknown
+    // words wrongly respelled ("ревью" → речью) on 0.43 and down.
+    private const double MaxCheapSlipCost = TypoCost.Extra;
+
+    private const double MaxSlipCostToRespell = 1.6;
+
+    private const double MinFrequencyToRespell = 0.5;
+
     // The most a word no list knows can score (naturalness × WordScorer's unknown-word penalty).
     private const double UnknownWordCeiling = 0.6;
 
@@ -366,13 +376,46 @@ internal sealed class WordReader
         {
             var (fixedSame, edits) = _scorer.SpellFix(
                 word, source.Script, source.LanguageCode, typedInScript: true, source.Map);
-            Consider(fixedSame, source.Script, null, source.LanguageCode, null, edits);
+            if (edits == 0 || IsASlipOfACommonWord(word, fixedSame, source))
+                Consider(fixedSame, source.Script, null, source.LanguageCode, null, edits);
+            // A respell declined still says the word is of its own script: another layout must beat the
+            // respell it would have been, or the word stays as typed.
+            else if (!keysOnly && best.Changed &&
+                     best.Score <= _scorer.Score(fixedSame, source.Script, source.LanguageCode) - EditPenalty * edits)
+                return ScoredWord.AsTyped(word, baseline);
         }
 
         if (!best.Changed || best.Score <= baseline + _switchThreshold)
             return ScoredWord.AsTyped(word, baseline);
 
         return KeysAsTheyStand(word, source, best);
+    }
+
+    // A word the lists lack, typed in its own script, is respelled only as far as a finger slip could have made
+    // it: "сегодя" is сегодня, but "вкусняшки" (a key across the board) is no slip for the rare "вкусняшка",
+    // nor "созвон" for "позвоню".
+    private bool IsASlipOfACommonWord(string typed, string fixedWord, WordSource source)
+    {
+        var cost = TypoCost.Between(Bare(typed), Bare(fixedWord), source.Map);
+        return cost <= MaxCheapSlipCost + 1e-9 ||
+               cost <= MaxSlipCostToRespell &&
+               _scorer.FrequencyOf(fixedWord, source.Script, source.LanguageCode) >= MinFrequencyToRespell;
+
+        // An accent left off ("νεο" for νερό) is how people type, not a key missed. Not in Cyrillic, where й, ї
+        // and ў have keys of their own.
+        string Bare(string word)
+        {
+            if (source.Script == Script.Cyrillic)
+                return word.ToLowerInvariant();
+
+            var sb = new StringBuilder(word.Length);
+            foreach (var ch in word.ToLowerInvariant().Normalize(NormalizationForm.FormD))
+                if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(ch) !=
+                    System.Globalization.UnicodeCategory.NonSpacingMark)
+                    sb.Append(ch);
+
+            return sb.ToString().Normalize(NormalizationForm.FormC);
+        }
     }
 
     // Keys no list, stem or Hunspell form accepts, one edit from a common listed word: a slip, not a rare word.

@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Soha (betöltés induláskor)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Automatikus (videokártya, ha van)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Jelenleg ezen fut: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Angol kifejezések latin betűkkel</value>
   </data>

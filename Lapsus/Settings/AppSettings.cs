@@ -72,6 +72,10 @@ public sealed class AppSettings
     [JsonConverter(typeof(JsonStringEnumConverter<SpeechUnloadAfter>))]
     public SpeechUnloadAfter SpeechUnloadAfter { get; set; } = SpeechUnloadAfter.Min5;
 
+    // Separate from ComputeDevice: voice typing works with neural correction off. Auto takes a GPU when there is one.
+    [JsonConverter(typeof(JsonStringEnumConverter<ComputeDevicePreference>))]
+    public ComputeDevicePreference DictationDevice { get; set; } = ComputeDevicePreference.Auto;
+
     // Null picks among the installed layouts' languages.
     public string? DictationLanguage { get; set; }
 

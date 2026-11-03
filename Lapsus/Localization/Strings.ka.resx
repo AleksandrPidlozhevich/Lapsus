@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>არასდროს (ჩატვირთვა გაშვებისას)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>ავტომატურად (ვიდეობარათი, თუ არის)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>ახლა მუშაობს: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>ინგლისური ტერმინები ლათინური ასოებით</value>
   </data>

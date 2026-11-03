@@ -112,7 +112,7 @@ internal abstract partial class InputBackendBase<TFocus>
 
             // A cycle walks the corrected word alone, which is only the whole segment while nothing followed it.
             if (tail.Length == 0 && source is not null && Layouts is not null)
-                _cycle = LayoutCorrectionCycle.StartAuto(word, phrase, source, Layouts, Corrector.SupportsLayoutCycle);
+                _cycle = LayoutCorrectionCycle.StartAuto(word, phrase, source, Layouts, Corrector);
         }
         else
         {

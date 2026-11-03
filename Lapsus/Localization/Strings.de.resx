@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Nie (beim Start laden)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Automatisch (Grafikkarte, falls vorhanden)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Läuft gerade auf: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Englische Begriffe in lateinischer Schrift</value>
   </data>

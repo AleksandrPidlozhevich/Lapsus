@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Aldrig (läs in vid start)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Automatiskt (grafikkort om det finns)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Körs nu på: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Engelska termer med latinska bokstäver</value>
   </data>

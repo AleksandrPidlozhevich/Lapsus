@@ -5,6 +5,7 @@ using Lapsus.Audio;
 using Lapsus.Core.Input;
 using Lapsus.Core.Speech;
 using Lapsus.Input;
+using Lapsus.Core.Models;
 using Lapsus.Localization;
 using Lapsus.Settings;
 using Lapsus.Speech;
@@ -26,6 +27,8 @@ public sealed record MicrophoneOption(string Name, string? Device);
 
 public sealed record UnloadOption(string Name, SpeechUnloadAfter Value);
 
+public sealed record VoiceDeviceOption(string Name, ComputeDevicePreference Value);
+
 public partial class VoiceViewModel : ViewModelBase
 {
     private static readonly TimeSpan GlossarySaveDelay = TimeSpan.FromMilliseconds(700);
@@ -37,14 +40,17 @@ public partial class VoiceViewModel : ViewModelBase
     private readonly Action _modelReady;
     private readonly Action _releaseModel;
     private readonly Func<bool> _locked;
+    private readonly Func<string> _deviceLabel;
     private readonly DispatcherTimer _saveGlossary;
     private CancellationTokenSource? _download;
     private bool _building;
 
     public VoiceViewModel(
         AppSettings settings, SettingsStore store, SpeechModelStore speech, bool supported,
-        Action<bool> applyEnabled, Action modelReady, Action releaseModel, Func<bool>? locked = null)
+        Action<bool> applyEnabled, Action modelReady, Action releaseModel, Func<bool>? locked = null,
+        Func<string>? deviceLabel = null)
     {
+        _deviceLabel = deviceLabel ?? (() => "");
         _locked = locked ?? (() => false);
         _settings = settings;
         _store = store;
@@ -136,6 +142,15 @@ public partial class VoiceViewModel : ViewModelBase
     public ObservableCollection<UnloadOption> UnloadOptions { get; } = [];
 
     [ObservableProperty] private UnloadOption? _selectedUnload;
+
+    public ObservableCollection<VoiceDeviceOption> DeviceOptions { get; } = [];
+
+    [ObservableProperty] private VoiceDeviceOption? _selectedDevice;
+
+    // Where the loaded model actually runs (a GPU that failed falls back to the CPU); empty while not loaded.
+    public string DeviceNow => _deviceLabel() is { Length: > 0 } label
+        ? Localizer.Instance.Format("Voice_DeviceNow", label)
+        : "";
 
     private SpeechModel Model => SelectedModel?.Model ?? SpeechModelCatalog.Default;
 
@@ -229,6 +244,17 @@ public partial class VoiceViewModel : ViewModelBase
         _applyEnabled(Enabled);
     }
 
+    partial void OnSelectedDeviceChanged(VoiceDeviceOption? value)
+    {
+        if (_building || value is null || value.Value == _settings.DictationDevice)
+            return;
+        _settings.DictationDevice = value.Value;
+        _store.Save(_settings);
+        // A loaded model moves now, so the next dictation does not pay for the reload.
+        if (_deviceLabel().Length > 0)
+            _modelReady();
+    }
+
     [RelayCommand(CanExecute = nameof(CanChangeModel))]
     private async Task DownloadAsync()
     {
@@ -290,6 +316,7 @@ public partial class VoiceViewModel : ViewModelBase
         OnPropertyChanged(nameof(Hint));
         OnPropertyChanged(nameof(TryIt));
         OnPropertyChanged(nameof(UnloadHint));
+        OnPropertyChanged(nameof(DeviceNow));
     }
 
     private void SaveGlossary()
@@ -325,6 +352,12 @@ public partial class VoiceViewModel : ViewModelBase
             foreach (var value in Enum.GetValues<SpeechUnloadAfter>())
                 UnloadOptions.Add(new UnloadOption(UnloadName(value), value));
             SelectedUnload = UnloadOptions.First(o => o.Value == _settings.SpeechUnloadAfter);
+
+            // Whisper only knows "GPU if it can" or "CPU", so Auto is the GPU choice.
+            DeviceOptions.Clear();
+            DeviceOptions.Add(new VoiceDeviceOption(Localizer.Instance["Voice_DeviceAuto"], ComputeDevicePreference.Auto));
+            DeviceOptions.Add(new VoiceDeviceOption(Localizer.Instance["Model_DeviceCpu"], ComputeDevicePreference.Cpu));
+            SelectedDevice = DeviceOptions.FirstOrDefault(o => o.Value == _settings.DictationDevice) ?? DeviceOptions[0];
 
             RefreshMicrophones();
         }
