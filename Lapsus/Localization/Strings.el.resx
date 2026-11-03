@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Ποτέ (φόρτωση κατά την εκκίνηση)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Αυτόματα (κάρτα γραφικών, αν υπάρχει)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Εκτελείται τώρα σε: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Αγγλικοί όροι με λατινικά γράμματα</value>
   </data>

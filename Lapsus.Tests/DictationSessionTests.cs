@@ -109,12 +109,17 @@ public class DictationSessionTests
 
         public void Prepare() => Prepared++;
 
-        public Task<string> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken ct)
+        public readonly List<DictationRequest> Requests = [];
+        public string? HeardLanguage;
+
+        public async Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken ct)
         {
             LastRequest = request;
-            if (Hold is { } hold)
-                return hold.Task.WaitAsync(ct);
-            return Task.FromResult(Answers.TryDequeue(out var next) ? next : Answer);
+            Requests.Add(request);
+            var text = Hold is { } hold
+                ? await hold.Task.WaitAsync(ct)
+                : Answers.TryDequeue(out var next) ? next : Answer;
+            return new DictationResult(text, HeardLanguage ?? request.Language);
         }
     }
 
@@ -273,6 +278,32 @@ public class DictationSessionTests
 
         Assert.Equal(["Первая часть.", "Вторая часть."], rig.Host.Typed);
         Assert.Equal("Первая часть.", rig.Engine.LastRequest!.PreviousText);
+    }
+
+    [Fact]
+    public async Task The_language_heard_in_the_first_part_is_kept_for_the_rest_of_the_dictation()
+    {
+        var rig = new Rig();
+        rig.Engine.Answers.Enqueue("First part.");
+        rig.Engine.Answers.Enqueue("Second part.");
+        rig.Engine.HeardLanguage = "en";
+
+        rig.Host.PressHotkey();
+        await SayAPartAsync(rig);
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["ru", "en"], rig.Engine.Requests[0].Languages);
+        Assert.Equal("en", rig.Engine.Requests[1].Language);
+        Assert.Equal(["en"], rig.Engine.Requests[1].Languages);
+
+        // A new dictation detects again.
+        rig.Host.PressHotkey();
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+        Assert.Equal(["ru", "en"], rig.Engine.Requests[2].Languages);
     }
 
     [Fact]

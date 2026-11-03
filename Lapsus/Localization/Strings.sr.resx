@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Nikad (učitavanje pri pokretanju)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Аутоматски (графичка картица, ако постоји)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Тренутно ради на: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Engleski termini latinicom</value>
   </data>

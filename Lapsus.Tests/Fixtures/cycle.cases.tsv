@@ -1,0 +1,101 @@
+# layouts	line	status	note
+#
+# The hotkey pressed ten times over a line, as a writer does: once to fix it, then on and on around the circle.
+# {en:ну ладно} = "ну ладно" typed while the English layout was on (the screen shows "ye kflyj"); text outside
+# braces was typed right, on its own layout. The first listed layout of a script types that script's words.
+#
+# status: "ok", or the checks this row still fails, comma-separated — a listed check must keep failing, so a fix
+# that makes it pass fails the test until the row says so:
+#   first   the first press gives the line as written
+#   words   no press of ten changes a word typed right
+#   circle  the presses walk one circle that comes back to the typed line, the written line on it
+#
+# Every word typed right must be in the fixture list or Fixtures/cycle.extra.tsv (checked), or marked there as
+# left out on purpose.
+
+# --- Russian line, English layout forgotten -------------------------------------------------------------------
+ru en	{en:привет}, {en:как дела}?	ok	the whole line on the wrong layout, a real comma and question mark
+ru en	{en:давай} встретимся завтра утром	ok	first word on the wrong layout
+ru en	ну да, я {en:знаю} это	ok	a word in the middle, short words around it
+ru en	а ты {en:что} думаешь?	ok	a short line, question mark after the right words
+ru en	{en:да} нет, наверное	ok	a two-letter word at the start
+ru en	он сказал {en:спасибо большое} и ушел	ok	two words in the middle, "и" after them
+
+# --- English typed on the Russian layout inside a Russian line ------------------------------------------------
+ru en	пройдись внимательно как великолепный дизайнер и специалист по {ru:UX}	ok	the reported line: an acronym at the end, and "великолепный" no list has
+ru en	я сейчас на {ru:meeting}, позвоню позже	ok	an English word before a comma
+ru en	скинь мне {ru:PDF} и ссылку	ok	an acronym between short words
+ru en	мы купили новый {ru:laptop} для работы	ok	an English word in the middle
+ru en	это был {ru:deploy} на {ru:prod}, все хорошо	ok	two English words split by a short Russian one
+ru en	напиши в {ru:Slack}	ok	a capitalised name at the end after "в"
+ru en	Привет, {ru:John}! Как ты?	ok	a name between punctuation, capitals around it
+ru en	{ru:update} сделаю завтра	ok	an English word at the start
+
+# --- English line --------------------------------------------------------------------------------------------
+en ru	{ru:hello there, how are you?}	ok	the whole line on the Russian layout
+en ru	I will send the {en:отчет} tomorrow	ok	a Russian word typed on English keys inside English
+en ru	this is a good {ru:idea} for us	ok	one English word on the Russian layout in the middle
+en ru	{ru:can} you check it	ok	first word on the Russian layout
+en ru	see you at the {ru:office} later	ok	a word in the middle
+en ru	we need {ru:more time}, sorry	ok	two words before a comma
+
+# --- Ukrainian -----------------------------------------------------------------------------------------------
+uk en	{en:привіт}, {en:як справи}?	ok	the whole line on the wrong layout, a real comma and question mark
+uk en	я зараз на {uk:meeting}, подзвоню пізніше	ok	an English word before a comma
+uk en	скинь мені {uk:PDF} і посилання	ok	an acronym before "і"
+uk en	ми купили новий {uk:laptop} для роботи	ok	an English word in the middle
+uk en	{en:дякую}, все добре	ok	the first word on the wrong layout
+
+# --- Three layouts: Russian and Ukrainian both installed -----------------------------------------------------
+ru uk en	я завтра {ru:update} сделаю	ok	English inside Russian, Ukrainian installed too
+ru uk en	{en:давай} встретимся завтра утром	ok	Russian forgotten on English, Ukrainian installed too
+uk ru en	це був {uk:deploy}, все добре	ok	English inside Ukrainian, Russian installed too
+uk ru en	{en:дякую}, все добре	ok	Ukrainian forgotten on English, Russian installed too
+
+# --- Belarusian, Bulgarian -----------------------------------------------------------------------------------
+be en	{en:гэта будзе толькі пасля}	ok	the whole line on the wrong layout
+be en	гэта будзе на {be:meeting} пасля	ok	an English word in the middle
+bg en	{en:аз искам още време}	ok	the whole line on the wrong layout
+bg en	тук няма {bg:WiFi} сега	ok	a mixed-case name in the middle
+
+# --- Greek ---------------------------------------------------------------------------------------------------
+el en	{en:τι κάνεις;}	ok	the whole line on the wrong layout, accent and Greek question mark
+el en	θα στείλω το {el:email} αύριο	ok	an English word in the middle
+
+# --- Hebrew, Arabic (right to left) --------------------------------------------------------------------------
+he en	{en:אני לא יודע מה}	ok	the whole line on the wrong layout
+he en	יש לי {he:meeting} עכשיו	ok	an English word in the middle
+ar en	{en:أنا هنا الآن}	ok	the whole line on the wrong layout
+ar en	أنا في {ar:meeting} الآن	ok	an English word in the middle
+
+# --- Georgian ------------------------------------------------------------------------------------------------
+ka en	{en:ეს არის ახალი}	ok	the whole line on the wrong layout
+ka en	ეს არის ახალი {ka:email}	ok	an English word at the end
+
+# --- Harder: words no list has, slang, names in mixed case, digits, hyphens, capitals --------------------------
+ru en	кинь сюда {ru:screenshot}, пожалуйста	ok	an English word before a comma, short slang verb before it
+ru en	скриншоты кинь сюда, {en:пожалуйста}	ok	a word no list has typed right at the start
+ru en	у нас упал {ru:prod} снова	ok	jargon no English list has, in the middle
+ru en	завтра созвон по {ru:Zoom} в 10	ok	slang no list has, a name, digits at the end
+ru en	мне нужен доступ к {ru:GitHub}	ok	a name with a capital inside, after "к"
+ru en	посмотри мой {ru:pull request}, пожалуйста	ok	two English words before a comma
+ru en	{ru:ok}, закинь задачу в {ru:Jira}	first	a two-letter word at the start, slang no list has, a name at the end — fails: Jira no list has stays on the Russian keys ("Ошкф") on the first press; the next press gives it
+ru en	слушай, а ты {en:знаешь} что-то про ревью?	ok	a hyphenated word and slang no list has after the fix
+ru en	Кстати, {ru:review} кода завтра	ok	a capitalised first word typed right
+ru en	{en:Привет}, как дела?	ok	a capitalised word on the wrong layout
+ru en	он открыл {ru:iPhone} на работе	ok	a name with a lower-case first letter
+ru en	вкусняшка {en:была} очень хорошая	ok	a rare slang word typed right before the fix
+en ru	please {ru:review} my code	ok	an English word on the Russian layout in an English line
+en ru	the bug is fixed {ru:now}, check this out	ok	a short word before a comma
+en ru	we have a call at 5, {en:ок}?	first,words,circle	a two-letter Russian word on English keys after digits — fails: "jr" is a listed English word, so the brain sees nothing to fix and the press flips the whole English line
+uk en	у нас впав {uk:prod} знову	ok	jargon in a Ukrainian line
+uk en	скріншоти кинь сюди, {en:будь ласка}	ok	a word no list has typed right, the fix at the end
+uk en	слухай, до речі, {en:подивись} код	ok	commas around short words, the fix in the middle
+el en	στείλε μου το {el:file}	first,words,circle	a Greek verb no list has, English at the end — fails: στείλε → στείλω, then flipped
+el en	{en:έχουμε πρόβλημα} με το {el:server}	words	Greek on the wrong layout at the start, English at the end — fails: the next press flips με and το to me and to
+he en	תשלח לי את {he:file}	first,words,circle	a Hebrew verb no list has, English at the end — fails: תשלח → שלח (the prefix dropped), then flipped
+he en	יש לנו בעיה עם {he:server}	ok	English at the end of a Hebrew line
+bg en	изпрати ми {bg:file}	ok	English at the end of a Bulgarian line
+bg en	имаме проблем със {bg:server}	ok	English after a three-letter preposition
+ka en	გვაქვს პრობლემა {ka:server}	ok	English at the end of a Georgian line
+ar en	لدينا مشكلة مع {ar:server}	ok	English at the end of an Arabic line

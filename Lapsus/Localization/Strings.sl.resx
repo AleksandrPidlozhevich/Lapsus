@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Nikoli (naloži ob zagonu)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Samodejno (grafična kartica, če obstaja)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Trenutno teče na: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Angleški izrazi z latinico</value>
   </data>

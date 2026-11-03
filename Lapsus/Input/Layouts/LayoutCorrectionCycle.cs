@@ -8,6 +8,9 @@ namespace Lapsus.Input;
 
 internal sealed class LayoutCorrectionCycle
 {
+    // As PhraseEmitter settles a line: shorter words ("ye", "по") are too easily both languages'.
+    private const int MinKnownWordLetters = 3;
+
     private readonly List<LayoutCycleOption> _options;
 
     private LayoutCorrectionCycle(KeyboardLayout? originalLayout, List<LayoutCycleOption> options)
@@ -51,7 +54,7 @@ internal sealed class LayoutCorrectionCycle
             .ToArray();
 
         var first = corrector.CorrectPhrase(segment, activeSource, sources, candidates, preferred);
-        return FromReading(segment, first, corrector.SupportsLayoutCycle, active, installed, candidates, "");
+        return FromReading(segment, first, corrector, active, installed, candidates, "");
     }
 
     public static LayoutCorrectionCycle? StartAuto(
@@ -59,13 +62,13 @@ internal sealed class LayoutCorrectionCycle
         PhraseCorrection first,
         InstalledLayout active,
         IReadOnlyList<InstalledLayout> installed,
-        bool supportsLayoutCycle)
+        IPhraseCorrector corrector)
     {
         if (!first.Changed)
             return null;
 
         var candidates = InstalledLayoutCorrection.BuildCandidates(installed);
-        return FromReading(chunk, first, supportsLayoutCycle, active, installed, candidates, " ");
+        return FromReading(chunk, first, corrector, active, installed, candidates, " ");
     }
 
     public static LayoutCorrectionCycle? StartFromAnswer(
@@ -73,19 +76,19 @@ internal sealed class LayoutCorrectionCycle
         PhraseCorrection first,
         InstalledLayout active,
         IReadOnlyList<InstalledLayout> installed,
-        bool supportsLayoutCycle)
+        IPhraseCorrector corrector)
     {
         if (!first.Changed)
             return null;
 
         var candidates = InstalledLayoutCorrection.BuildCandidates(installed);
-        return FromReading(segment, first, supportsLayoutCycle, active, installed, candidates, "");
+        return FromReading(segment, first, corrector, active, installed, candidates, "");
     }
 
     private static LayoutCorrectionCycle? FromReading(
         string segment,
         PhraseCorrection first,
-        bool supportsLayoutCycle,
+        IPhraseCorrector corrector,
         InstalledLayout active,
         IReadOnlyList<InstalledLayout> installed,
         IReadOnlyList<LayoutCandidate> candidates,
@@ -93,10 +96,10 @@ internal sealed class LayoutCorrectionCycle
     {
         var options = new List<LayoutCycleOption>();
 
-        if (supportsLayoutCycle)
+        if (corrector.SupportsLayoutCycle)
         {
             var sourceMaps = ResolveSourceMaps(segment, active, installed);
-            var keep = SettledSpans(first, segment);
+            var keep = SettledSpans(first, segment, corrector);
 
             if (first.Changed)
                 AddOption(options, BrainOption(first, active, installed));
@@ -165,16 +168,21 @@ internal sealed class LayoutCorrectionCycle
         return new LayoutCycleOption(first.Corrected, layout, id);
     }
 
-    private static IReadOnlyList<TextSpan>? SettledSpans(PhraseCorrection first, string segment)
+    private static IReadOnlyList<TextSpan>? SettledSpans(
+        PhraseCorrection first, string segment, IPhraseCorrector corrector)
     {
         if (!string.Equals(first.Original, segment, StringComparison.Ordinal))
             return null;
 
-        IReadOnlyList<TextSpan>? spans = first.Changed && first.Kept is { Count: > 0 } kept
-            ? [.. first.Settled ?? [], .. kept]
-            : first.Settled;
+        IReadOnlyList<TextSpan> spans = [.. first.Settled ?? [], .. KnownWords(segment, corrector)];
 
-        if (spans is not { Count: > 0 })
+        // Words the brain read best as typed ("великолепный" a short list lacks) are spared while something else
+        // is left to flip ("ГЧ"); with nothing else, they are what the press flips.
+        if (first.Kept is { Count: > 0 } kept &&
+            !TextSpans.CoversEveryLetter(segment, [.. spans, .. kept]))
+            return [.. spans, .. kept];
+
+        if (spans.Count == 0)
             return null;
 
         if (!TextSpans.CoversEveryLetter(segment, spans))
@@ -182,6 +190,54 @@ internal sealed class LayoutCorrectionCycle
 
         var absolute = spans.Where(s => s.Absolute).ToArray();
         return absolute.Length == 0 ? null : absolute;
+    }
+
+    // Whatever the brain reported, a word the dictionary knows as typed ("пройдись") is never flipped into
+    // another layout's gibberish; the whole line still flips once every word is known.
+    private static List<TextSpan> KnownWords(string segment, IPhraseCorrector corrector)
+    {
+        var spans = new List<TextSpan>();
+        var shortWords = new List<(TextSpan Span, Script Script)>();
+        var settledScripts = new HashSet<Script>();
+        for (var i = 0; i < segment.Length;)
+        {
+            if (char.IsWhiteSpace(segment[i]))
+            {
+                i++;
+                continue;
+            }
+
+            var end = i;
+            while (end < segment.Length && !char.IsWhiteSpace(segment[end]))
+                end++;
+
+            var start = i;
+            var stop = end;
+            while (start < stop && !char.IsLetter(segment[start])) start++;
+            while (stop > start && !char.IsLetter(segment[stop - 1])) stop--;
+
+            var word = segment[start..stop];
+            if (Scripts.Dominant(word) is { } script && Scripts.IsWordOf(word, script) &&
+                corrector.Knows(script) && corrector.AcceptsSpelling(word, script))
+            {
+                if (word.Length >= MinKnownWordLetters)
+                {
+                    spans.Add(new TextSpan(start, stop - start));
+                    settledScripts.Add(script);
+                }
+                else
+                    shortWords.Add((new TextSpan(start, stop - start), script));
+            }
+
+            i = end;
+        }
+
+        // "и", "по" alone could be keys meant for "b", "gj"; beside a known word of their script they are not.
+        foreach (var (span, script) in shortWords)
+            if (settledScripts.Contains(script))
+                spans.Add(span);
+
+        return spans;
     }
 
     private static LayoutCycleOption? CreateTranscodeOption(

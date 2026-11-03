@@ -205,10 +205,14 @@ internal sealed class DictationSession : IDisposable
         return new DictationRequest(_language, _languages, context.Length > 0 ? context : null);
     }
 
-    private void Heard(string text)
+    private void Heard(DictationResult result)
     {
+        var text = result.Text;
         if (text.Length == 0)
             return;
+        // Detection is a pass of its own (~0.25 s on a GPU); one per dictation is enough, a speaker rarely switches mid-way.
+        _language = result.Language;
+        _languages = [result.Language];
         _said = _said.Length > 0 ? _said + " " + text : text;
         _untyped = _untyped.Length > 0 ? _untyped + " " + text : text;
     }
@@ -307,7 +311,9 @@ internal sealed class DictationSession : IDisposable
         var cancel = _dictation!.Token;
         try
         {
+            var clock = System.Diagnostics.Stopwatch.StartNew();
             await _parts.ConfigureAwait(true);
+            CaptureLog.Write($"dictation: released, earlier parts took {clock.ElapsedMilliseconds} ms more");
             cancel.ThrowIfCancellationRequested();
             if (pcm.Length > 0)
                 Heard(await _engine.TranscribeAsync(pcm, Request(), cancel).ConfigureAwait(true));

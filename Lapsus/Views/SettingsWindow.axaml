@@ -1074,7 +1074,7 @@
 
                                     <Grid IsVisible="{Binding Voice.ShowRecognition, FallbackValue=False}"
                                           ColumnDefinitions="*,Auto" ColumnSpacing="8"
-                                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
                                         <TextBlock Grid.Row="0" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
                                                    Margin="0,4,0,4" Text="{Binding L[Voice_LanguageLabel]}" />
                                         <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Margin="0,4,0,4"
@@ -1116,16 +1116,31 @@
                                                    Text="{Binding Voice.UnloadHint}" />
 
                                         <TextBlock Grid.Row="5" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                                   Margin="0,0,0,4" Text="{Binding L[Model_DeviceLabel]}" />
+                                        <ComboBox Grid.Row="5" Grid.Column="1" MinWidth="200" Margin="0,0,0,4"
+                                                  ItemsSource="{Binding Voice.DeviceOptions}"
+                                                  SelectedItem="{Binding Voice.SelectedDevice}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:VoiceDeviceOption">
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                        <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                                   Text="{Binding Voice.DeviceNow}"
+                                                   IsVisible="{Binding Voice.DeviceNow, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                                        <TextBlock Grid.Row="7" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
                                                    TextWrapping="Wrap" Margin="0,0,0,4" Text="{Binding L[Voice_KeepLatin]}" />
-                                        <ToggleSwitch Grid.Row="5" Grid.Column="1" Classes="bare" HorizontalAlignment="Right"
+                                        <ToggleSwitch Grid.Row="7" Grid.Column="1" Classes="bare" HorizontalAlignment="Right"
                                                       Margin="0,0,0,4"
                                                       IsChecked="{Binding Voice.KeepEnglishTermsLatin, FallbackValue=True}" />
-                                        <TextBlock Grid.Row="6" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                        <TextBlock Grid.Row="8" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
                                                    Text="{Binding L[Voice_KeepLatinHint]}" />
 
-                                        <TextBlock Grid.Row="7" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
+                                        <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
                                                    Text="{Binding L[Voice_GlossaryLabel]}" />
-                                        <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Spacing="4">
+                                        <StackPanel Grid.Row="10" Grid.ColumnSpan="2" Spacing="4">
                                             <TextBlock Classes="hint" Text="{Binding L[Voice_GlossaryHint]}" />
                                             <TextBox AcceptsReturn="True" TextWrapping="NoWrap" MinHeight="90" MaxHeight="200"
                                                      FontFamily="{DynamicResource ContentControlThemeFontFamily}"

@@ -100,6 +100,8 @@ internal sealed class WordScorer(SpellChecker? spell)
                    script == Script.Latin ? null : map)
                && distance > 0
                && corrected != word
+               // "ГЧ" (UX on the wrong keys) is no slip for the letter "ч": a fix keeps at least two letters.
+               && corrected.Length >= 2
             ? (corrected, distance)
             : (word, 0);
     }
@@ -116,7 +118,9 @@ internal sealed class WordScorer(SpellChecker? spell)
     // this a correct four-letter form the list lacks is respelled (جسرا → سرا).
     private bool CanSpellFixWord(string word, Script script, string? languageCode, bool typedInScript = false)
     {
+        // A capital past the first letter makes an acronym or a name ("UX", "WiFi", "GitHub"), never a slip.
         return spell is not null && word.Length >= 2 && WordScanner.IsAllLetters(word, script) &&
+               !word.Skip(1).Any(char.IsUpper) &&
                !HasInternalMark(word, script) && !spell.IsKnownWord(word, script, languageCode) &&
                !spell.IsLexiconWord(word, script, languageCode, typedInScript);
     }

@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Никога (зареждане при старт)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Автоматично (видеокарта, ако има)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>В момента работи на: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Английските термини на латиница</value>
   </data>

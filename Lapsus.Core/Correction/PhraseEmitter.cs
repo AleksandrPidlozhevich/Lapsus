@@ -116,10 +116,15 @@ internal static class PhraseEmitter
                 (settled ??= []).Add(new TextSpan(start, token.Typed.Length));
                 (settledScripts ??= []).Add(token.Source.Script);
             }
-            else if (!token.Chosen.Changed && ReadsBestAsTyped(scorer, token))
-                (kept ??= []).Add(new TextSpan(start, token.Typed.Length));
-            else if (listedAsTyped)
-                (shortListed ??= []).Add((new TextSpan(start, token.Typed.Length), token.Source.Script));
+            else
+            {
+                if (!token.Chosen.Changed && ReadsBestAsTyped(scorer, token))
+                    (kept ??= []).Add(new TextSpan(start, token.Typed.Length));
+
+                // Kept or not, a short listed word still settles beside a settled word of its script ("по").
+                if (listedAsTyped)
+                    (shortListed ??= []).Add((new TextSpan(start, token.Typed.Length), token.Source.Script));
+            }
 
             if (token.Chosen.Changed)
             {
@@ -160,6 +165,10 @@ internal static class PhraseEmitter
 
     private static bool ReadsBestAsTyped(WordScorer scorer, in TokenReading token)
     {
+        // Keys that read as nothing at all ("ГЧ" for UX) are not a word to keep, whatever else they read as.
+        if (token.Baseline <= 0)
+            return false;
+
         foreach (var candidate in token.Source.Candidates)
         {
             if (candidate.ScoringScript == token.Source.Script)

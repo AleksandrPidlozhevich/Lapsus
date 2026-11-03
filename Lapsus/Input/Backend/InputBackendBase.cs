@@ -527,7 +527,7 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
 
         if (result.Source is { } source)
             _cycle = LayoutCorrectionCycle.StartFromAnswer(
-                segment, phrase, source, ReadLayouts().All, Corrector.SupportsLayoutCycle);
+                segment, phrase, source, ReadLayouts().All, Corrector);
 
         RaiseCorrected(segment, phrase.Corrected, result.Source?.Target, phrase.TargetLayout);
         SwitchLayoutOnHotkey(phrase.TargetLayout, phrase.TargetLayoutId);

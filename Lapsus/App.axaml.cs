@@ -200,7 +200,9 @@ public partial class App : Application
         _settingsViewModel.Voice = new VoiceViewModel(settings, store, speech, supported, Apply,
             modelReady: () => _dictationEngine?.Prepare(),
             releaseModel: () => _dictationEngine?.Unload(),
-            locked: () => _settingsViewModel.NeuralLocked);
+            locked: () => _settingsViewModel.NeuralLocked,
+            deviceLabel: () => _dictationEngine?.DeviceLabel ?? "");
+        _dictationEngine.Loaded += () => Dispatcher.UIThread.Post(() => _settingsViewModel.Voice?.RefreshLabels());
         _settingsViewModel.Voice.PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(VoiceViewModel.Hint))

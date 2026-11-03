@@ -1,0 +1,42 @@
+# code	word	count — words the cycle lines use that the fixture lists (top 1500) lack, at their counts in the
+# app's real lists (FrequencyWords 2018, 50k). A count of "-" leaves a real word out on purpose, as a short
+# list lacks it: the line then tests a word no dictionary vouches for.
+ru	пройдись	213
+ru	внимательно	4677
+ru	дизайнер	608
+ru	специалист	1836
+ru	встретимся	8455
+ru	скинь	142
+ru	ссылку	314
+ru	купили	3036
+ru	напиши	1662
+ru	отчет	3928
+ru	великолепный	-
+en	laptop	6347
+en	update	5287
+en	email	6010
+uk	подзвоню	143
+uk	скинь	10
+uk	посилання	11
+uk	купили	93
+ru	скриншоты	-
+ru	кинь	284
+ru	вкусняшка	166
+ru	созвон	-
+ru	код	6507
+ru	ревью	-
+ru	закинь	-
+ru	задачу	1139
+ru	доступ	7256
+ru	открыл	4074
+ru	упал	6193
+ru	сервер	573
+en	review	9732
+uk	скріншоти	-
+uk	кинь	119
+uk	код	203
+uk	впав	123
+uk	сервер	31
+el	στείλε	-
+he	תשלח	-
+ru	кода	806

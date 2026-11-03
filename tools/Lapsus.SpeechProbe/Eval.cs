@@ -13,6 +13,7 @@ static class Eval
         string[]? langs = null;
         string? glossaryPath = null;
         var limit = int.MaxValue;
+        bool flash = true, detect = true;
         for (var i = 0; i < args.Length; i += 2)
         {
             var value = i + 1 < args.Length ? args[i + 1] : throw new ArgumentException($"{args[i]} needs a value");
@@ -23,6 +24,8 @@ static class Eval
                 case "--device": device = value; break;
                 case "--glossary": glossaryPath = value; break;
                 case "--limit": limit = int.Parse(value); break;
+                case "--flash": flash = value == "1"; break;
+                case "--detect": detect = value == "1"; break;
                 default: throw new ArgumentException($"unknown option {args[i]}");
             }
         }
@@ -36,7 +39,7 @@ static class Eval
 
         var glossary = glossaryPath is null ? [] : File.ReadAllLines(glossaryPath).Where(l => l.Trim().Length > 0).ToArray();
         var restorer = new TermRestorer(spell, glossary);
-        var candidates = DictationLanguagePicker.Candidates(lang, langs ?? [lang, "en"]);
+        IReadOnlyList<string> candidates = detect ? DictationLanguagePicker.Candidates(lang, langs ?? [lang, "en"]) : [lang];
 
         var samples = Probe.LoadSamples(samplesDir).Take(limit).ToList();
         if (samples.Count == 0)
@@ -47,7 +50,7 @@ static class Eval
         samples.Add(Sample.Made("~silence", new float[16000 * 5]));
         samples.Add(Sample.Made("~noise", Probe.Noise(16000 * 5, 0.01f)));
 
-        using var recognizer = new WhisperRecognizer();
+        using var recognizer = new WhisperRecognizer { FlashAttention = flash };
         var sw = Stopwatch.StartNew();
         recognizer.Load(modelPath, vadPath, device == "gpu");
         var loadMs = sw.ElapsedMilliseconds;

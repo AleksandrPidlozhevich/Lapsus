@@ -787,6 +787,12 @@
     <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Nikdy (načítať pri spustení)</value>
   </data>
+  <data name="Voice_DeviceAuto" xml:space="preserve">
+    <value>Automaticky (grafická karta, ak je)</value>
+  </data>
+  <data name="Voice_DeviceNow" xml:space="preserve">
+    <value>Teraz beží na: {0}</value>
+  </data>
     <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Anglické termíny latinkou</value>
   </data>
