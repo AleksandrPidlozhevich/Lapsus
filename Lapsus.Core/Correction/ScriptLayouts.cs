@@ -32,8 +32,11 @@ internal static class ScriptLayouts
     private static readonly LayoutCandidate[] ToGeorgian =
         [new(Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka, "ka")];
 
+    private static readonly LayoutCandidate[] ToArmenian =
+        [new(Script.Armenian, KeyboardLayout.Hy, BundledKeyboardMaps.Hy, "hy")];
+
     private static readonly LayoutCandidate[] All =
-        [.. ToEn, .. ToCyrillic, .. ToGreek, .. ToHebrew, .. ToArabic, .. ToGeorgian];
+        [.. ToEn, .. ToCyrillic, .. ToGreek, .. ToHebrew, .. ToArabic, .. ToGeorgian, .. ToArmenian];
 
     private static readonly Dictionary<Script, LayoutCandidate[]> OtherScripts = BuildOtherScripts();
 
@@ -60,6 +63,7 @@ internal static class ScriptLayouts
             Script.Hebrew => BundledKeyboardMaps.He,
             Script.Arabic => BundledKeyboardMaps.Ar,
             Script.Georgian => BundledKeyboardMaps.Ka,
+            Script.Armenian => BundledKeyboardMaps.Hy,
             _ => BundledKeyboardMaps.En
         };
     }
@@ -76,6 +80,7 @@ internal static class ScriptLayouts
             KeyboardLayout.He => Script.Hebrew,
             KeyboardLayout.Ar => Script.Arabic,
             KeyboardLayout.Ka => Script.Georgian,
+            KeyboardLayout.Hy => Script.Armenian,
             _ => throw new ArgumentOutOfRangeException(nameof(layout), layout, "No script for this layout.")
         };
     }
@@ -94,6 +99,7 @@ internal static class ScriptLayouts
             KeyboardLayout.He => BundledKeyboardMaps.He,
             KeyboardLayout.Ar => BundledKeyboardMaps.Ar,
             KeyboardLayout.Ka => BundledKeyboardMaps.Ka,
+            KeyboardLayout.Hy => BundledKeyboardMaps.Hy,
             _ => throw new ArgumentOutOfRangeException(nameof(layout), layout, "No bundled map for this layout.")
         };
     }

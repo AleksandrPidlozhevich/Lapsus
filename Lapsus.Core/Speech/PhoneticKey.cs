@@ -51,7 +51,7 @@ public static partial class PhoneticKey
 
         if (script == Script.Latin)
             return English(word);
-        if (script == Script.Georgian)
+        if (script is Script.Georgian or Script.Armenian)
             return "";
 
         // No language on purpose: the general Cyrillic table reads Ukrainian «г» in «гітхаб» as g, which is what

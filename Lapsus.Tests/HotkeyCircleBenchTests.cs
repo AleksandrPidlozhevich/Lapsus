@@ -26,7 +26,8 @@ public sealed class HotkeyCircleBenchTests(HotkeyCircleBenchTests.Lists lists)
         new("el", Script.Greek, KeyboardLayout.El, BundledKeyboardMaps.El),
         new("he", Script.Hebrew, KeyboardLayout.He, BundledKeyboardMaps.He),
         new("ar", Script.Arabic, KeyboardLayout.Ar, BundledKeyboardMaps.Ar),
-        new("ka", Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka)
+        new("ka", Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka),
+        new("hy", Script.Armenian, KeyboardLayout.Hy, BundledKeyboardMaps.Hy)
     ];
 
     public static TheoryData<string, string, string, string> Cases()

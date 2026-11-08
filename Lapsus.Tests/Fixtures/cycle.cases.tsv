@@ -72,6 +72,11 @@ ar en	أنا في {ar:meeting} الآن	ok	an English word in the middle
 ka en	{en:ეს არის ახალი}	ok	the whole line on the wrong layout
 ka en	ეს არის ახალი {ka:email}	ok	an English word at the end
 
+# --- Armenian (phonetic: the digit row carries letters) -------------------------------------------------------
+hy en	{en:ինչպես ես}	ok	the whole line on the wrong layout
+hy en	{en:շնորհակալություն} շատ	ok	letters on 2, 8 and backslash, the fix at the start
+hy en	շատ լավ եմ {hy:email}	ok	an English word at the end
+
 # --- Harder: words no list has, slang, names in mixed case, digits, hyphens, capitals --------------------------
 ru en	кинь сюда {ru:screenshot}, пожалуйста	ok	an English word before a comma, short slang verb before it
 ru en	скриншоты кинь сюда, {en:пожалуйста}	ok	a word no list has typed right at the start

@@ -19,6 +19,7 @@ public static class NeuralRewritePrompt
             KeyboardLayout.He => " When several readings are possible, prefer Hebrew.",
             KeyboardLayout.Ar => " When several readings are possible, prefer Arabic.",
             KeyboardLayout.Ka => " When several readings are possible, prefer Georgian.",
+            KeyboardLayout.Hy => " When several readings are possible, prefer Armenian.",
             _ => string.Empty
         };
 
@@ -164,6 +165,13 @@ public static class NeuralRewritePrompt
                     "qarTuli => ქართული\n" +
                     "wigni => წიგნი\n";
 
+            // Phonetic layout: the digit row carries letters (8 = ր, 7 = և).
+            case Script.Armenian:
+                return
+                    "haje8en => հայերեն\n" +
+                    "ba87 => բարև\n" +
+                    "das => դաս\n";
+
             case Script.Greek:
                 return
                     "geia => γεια\n" +
@@ -225,6 +233,11 @@ public static class NeuralRewritePrompt
                 "სჰიპ => ship\n" +
                 "ტეხტ => text\n" +
                 "გამარჯობა => გამარჯობა\n",
+
+            Script.Armenian =>
+                "սհիպ => ship\n" +
+                "տեղտ => text\n" +
+                "բարև => բարև\n",
 
             _ =>
                 "сфк => car\n" +

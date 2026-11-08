@@ -175,4 +175,31 @@ public static partial class BundledKeyboardMaps
         return ShiftedLetters(
             ('t', 'თ'), ('s', 'შ'), ('r', 'ღ'), ('c', 'ჩ'), ('j', 'ჟ'), ('z', 'ძ'), ('w', 'ჭ'));
     }
+
+    // Windows Armenian Phonetic (kbdarmph.dll). Letters past the 26 sit on the digit row and on = [ \ ].
+    private static char[] BuildArmenian()
+    {
+        var slots = RemapFromEn(new Dictionary<char, char>
+        {
+            ['q'] = 'ք', ['w'] = 'ո', ['e'] = 'ե', ['r'] = 'ռ', ['t'] = 'տ', ['y'] = 'ը', ['u'] = 'ւ',
+            ['i'] = 'ի', ['o'] = 'օ', ['p'] = 'պ', ['a'] = 'ա', ['s'] = 'ս', ['d'] = 'դ', ['f'] = 'ֆ',
+            ['g'] = 'գ', ['h'] = 'հ', ['j'] = 'յ', ['k'] = 'կ', ['l'] = 'լ', ['z'] = 'զ', ['x'] = 'ղ',
+            ['c'] = 'ց', ['v'] = 'վ', ['b'] = 'բ', ['n'] = 'ն', ['m'] = 'մ',
+            ['1'] = 'է', ['2'] = 'թ', ['3'] = 'փ', ['4'] = 'ձ', ['5'] = 'ջ', ['6'] = 'ւ', ['7'] = 'և',
+            ['8'] = 'ր', ['9'] = 'չ', ['0'] = 'ճ',
+            ['='] = 'ժ', ['['] = 'խ', ['\\'] = 'շ', [']'] = 'ծ',
+            ['.'] = '․', ['`'] = '՝', ['\''] = '՛'
+        });
+
+        slots[IsoKeySlot] = '»';
+        return slots;
+    }
+
+    private static char[] BuildArmenianShifted()
+    {
+        var shifted = ShiftedSymbols(
+            (';', '։'), (',', '<'), ('-', '—'), ('.', '>'), ('/', '՞'), ('`', '՜'), ('\'', '"'));
+        shifted[IsoKeySlot] = '«';
+        return shifted;
+    }
 }

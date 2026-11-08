@@ -134,6 +134,9 @@ public static class DictionaryCatalog
             Wooorm("ka", "MIT, built from Crúbadán (CC BY 4.0) and GeoWordsDatabase (MIT)",
                 "gamag; word lists by Kevin Scannell and Dato Bumbeishvili")),
 
+        Unilex("hy", Script.Armenian, "Հայերեն (Armenian)",
+            Wooorm("hy", "GPL 2.0, LGPL 2.1 or MPL 1.1", "araktransfer")),
+
         FrequencyWords("sr", Script.Latin, "Srpski (Serbian)",
             LibreOffice("sr/sr-Latn", "LGPL 3 or MPL 2.0", "Milutin Smiljanić")),
         FrequencyWords("en", Script.Latin, "English",

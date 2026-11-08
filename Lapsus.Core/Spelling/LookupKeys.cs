@@ -13,8 +13,16 @@ internal static class LookupKeys
             key = FoldArabic(key);
         else if (script == Script.Cyrillic)
             key = StripInternalMarks(key, script);
+        else if (script == Script.Armenian)
+            key = SpellOutLigature(key);
 
         return key;
+    }
+
+    // The keyboard types the ligature և; Unilex and the Hunspell list spell it out.
+    private static string SpellOutLigature(string word)
+    {
+        return word.Replace("և", "եւ");
     }
 
     // Romanian lists alone: ş/ţ (cedilla) → ș/ț (comma); Turkish ş is its own letter.
@@ -58,9 +66,10 @@ internal static class LookupKeys
 
     public static bool InLexicon(WordList lexicon, string word)
     {
-        // Keyboard apostrophe / cedilla variants must match dictionary spellings.
+        // Keyboard apostrophe / cedilla / Armenian ligature variants must match dictionary spellings.
         return lexicon.Check(word) ||
                (word.Contains('ʼ') && lexicon.Check(word.Replace('ʼ', '\''))) ||
+               (word.Contains('և') && lexicon.Check(SpellOutLigature(word))) ||
                (word.AsSpan().IndexOfAny("şţŞŢ") >= 0 &&
                 lexicon.Check(word.Replace('ş', 'ș').Replace('ţ', 'ț').Replace('Ş', 'Ș').Replace('Ţ', 'Ț')));
     }

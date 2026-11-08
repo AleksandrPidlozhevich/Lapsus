@@ -72,6 +72,17 @@ public class CaseCycleTests
         Assert.Equal("καλημέρα κόσμος", CaseCycle.Next(twice));
     }
 
+    [Theory]
+    [InlineData("բարև աշխարհ", "Բարև աշխարհ")]
+    [InlineData("Բարև աշխարհ", "ԲԱՐԵՒ ԱՇԽԱՐՀ")]
+    [InlineData("ԲԱՐԵՒ ԱՇԽԱՐՀ", "բարեւ աշխարհ")]
+    [InlineData("և նա եկավ", "Եւ նա եկավ")]
+    [InlineData("այո։ ոչ", "Այո։ Ոչ")]
+    public void Armenian_capitalises_the_ligature_as_two_letters(string input, string expected)
+    {
+        Assert.Equal(expected, CaseCycle.Next(input));
+    }
+
     [Fact]
     public void Georgian_cycles_between_mkhedruli_and_mtavruli()
     {

@@ -38,7 +38,7 @@ repaired in place — no retyping, and no waiting on the OS to switch layout.
 | `n'rcn` in `прывітанне, свет n'rcn` | `тэкст` | only the tail is wrong; the rest is left alone |
 | `hello,` | `hello,` | a real word stays a real word |
 
-Six writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian**.
+Seven writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian, Armenian**.
 
 ## Screenshots
 
@@ -153,7 +153,7 @@ push the next MSI.
    typo-fixed.
 3. **Score** — a dictionary hit wins outright; otherwise a character-trigram model built from the
    installed word lists judges how natural the word looks, times an edit penalty, and a switch happens
-   only past a threshold. Scripts that cannot be scored honestly — Hebrew, Arabic, Georgian — are
+   only past a threshold. Scripts that cannot be scored honestly — Hebrew, Arabic, Georgian, Armenian — are
    dictionary-only by design.
 4. **Inject** — the backspaces and the replacement go out as **one** `SendInput` call, as Unicode.
    Nothing waits on an OS layout switch, which is the lag every switcher of this kind is known for.
@@ -163,10 +163,10 @@ push the next MSI.
 ## Dictionaries
 
 Not bundled, and no network traffic until you click Download. In **Settings → Library**, pick from
-**33** languages across the six scripts:
+**34** languages across the seven scripts:
 
 - a frequency list — [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) for most
-  languages, Unicode Unilex for Belarusian and Georgian;
+  languages, Unicode Unilex for Belarusian, Georgian and Armenian;
 - for most of them also a Hunspell dictionary, so a rare word form no frequency list reaches still counts as a
   word — from [LibreOffice](https://github.com/LibreOffice/dictionaries) or
   [wooorm/dictionaries](https://github.com/wooorm/dictionaries); Hebrew's word forms come from Wiktionary

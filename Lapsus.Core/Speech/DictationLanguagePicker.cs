@@ -31,12 +31,12 @@ public static class DictationLanguagePicker
         ["tt"] = Script.Cyrillic, ["ba"] = Script.Cyrillic, ["mn"] = Script.Cyrillic,
         ["el"] = Script.Greek, ["he"] = Script.Hebrew, ["yi"] = Script.Hebrew,
         ["ar"] = Script.Arabic, ["fa"] = Script.Arabic, ["ur"] = Script.Arabic, ["ps"] = Script.Arabic,
-        ["sd"] = Script.Arabic, ["ka"] = Script.Georgian,
+        ["sd"] = Script.Arabic, ["ka"] = Script.Georgian, ["hy"] = Script.Armenian,
     };
 
     private static readonly HashSet<string> Unsupported = new(StringComparer.OrdinalIgnoreCase)
     {
-        "am", "as", "bn", "bo", "gu", "hi", "hy", "ja", "km", "kn", "ko", "lo", "ml", "mr", "my", "ne", "pa", "sa",
+        "am", "as", "bn", "bo", "gu", "hi", "ja", "km", "kn", "ko", "lo", "ml", "mr", "my", "ne", "pa", "sa",
         "si", "ta", "te", "th", "yue", "zh"
     };
 

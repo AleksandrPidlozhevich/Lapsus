@@ -83,17 +83,23 @@ internal static class WordScanner
     public static bool IsWordInternalMarkHere(
         char ch, Script sourceScript, KeyboardMap sourceMap, IReadOnlyList<LayoutCandidate> candidates)
     {
-        if (Alphabets.IsWordInternalMark(sourceScript, ch))
+        if (IsInWordMark(sourceScript, ch))
             return true;
 
         if (!sourceMap.TryGetKey(ch, out var slot, out var shift))
             return false;
 
         foreach (var candidate in candidates)
-            if (Alphabets.IsWordInternalMark(candidate.ScoringScript, candidate.Map.CharAtSlot(slot, shift)))
+            if (IsInWordMark(candidate.ScoringScript, candidate.Map.CharAtSlot(slot, shift)))
                 return true;
 
         return false;
+    }
+
+    // Ignorable marks stay inside the word too: Armenian ինչո՞ւ.
+    private static bool IsInWordMark(Script script, char ch)
+    {
+        return Alphabets.IsWordInternalMark(script, ch) || Alphabets.IsIgnorableMark(script, ch);
     }
 
     public static string TrimToLetters(string token, Script script)

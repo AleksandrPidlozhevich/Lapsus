@@ -14,6 +14,8 @@ public class LayoutLanguageResolverTests
     [InlineData("com.apple.keylayout.Hebrew", "he")]
     [InlineData("com.apple.keylayout.Arabic", "ar")]
     [InlineData("com.apple.keylayout.Georgian-QWERTY", "ka")]
+    [InlineData("com.apple.keylayout.Armenian-HMQWERTY", "hy")]
+    [InlineData("com.apple.keylayout.Armenian-WesternQWERTY", "hy")]
     public void A_known_mac_source_id_names_the_layout(string sourceId, string code)
     {
         Assert.Equal(code, LayoutLanguageResolver.FromMacInputSourceId(sourceId));
@@ -29,6 +31,7 @@ public class LayoutLanguageResolverTests
     [InlineData(0x0409, "en")]
     [InlineData(0x0419, "ru")]
     [InlineData(0x0422, "uk")]
+    [InlineData(0x042B, "hy")]
     public void A_windows_lang_id_names_the_layout(int langId, string code)
     {
         Assert.Equal(code, LayoutLanguageResolver.FromWindowsLangId(new IntPtr(langId)));
