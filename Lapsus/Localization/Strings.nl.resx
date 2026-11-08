@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Zet een Hebreeuwse of Arabische regel die omgekeerd binnenkwam weer goed.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Toevoegen aan dicteerwoordenlijst</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Selecteer een naam of term en druk op de toets — spraakinvoer schrijft het dan zo.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Voorkeurstaal bij gelijkspel</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Instellingen</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Recente dictaten</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Afsluiten</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Selectie: niets geselecteerd, of {0} reageert niet op kopiëren.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Toegevoegd aan de woordenlijst: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Woordenlijst: selecteer één term, geen zin.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Selectie: het klembord kon niet worden gebruikt ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Termen als pull request of GitHub worden geschreven zoals in het Engels. Woorden die je taal heeft overgenomen, blijven zoals ze zijn.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Leestekens inspreken</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Zeg "comma", "period" of "question mark" en het teken wordt geschreven. Werkt in het Engels, Russisch, Oekraïens en Wit-Russisch.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Woordenlijst</value>

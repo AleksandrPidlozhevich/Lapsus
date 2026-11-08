@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Raddrizza una riga in ebraico o arabo arrivata al contrario.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Aggiungi al glossario di dettatura</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Selezionate un nome o un termine e premete il tasto: la dettatura lo scriverà così.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Lingua preferita in caso di parità</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Impostazioni</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Dettature recenti</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Esci</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Selezione: nulla di selezionato, oppure {0} non risponde alla copia.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Aggiunto al glossario: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Glossario: selezionate un termine, non una frase.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Selezione: non è stato possibile usare gli appunti ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Termini come pull request o GitHub vengono scritti come in inglese. Le parole che la tua lingua ha adottato restano come sono.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Punteggiatura a voce</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Dite «comma», «period» o «question mark» e viene scritto il segno. Funziona in inglese, russo, ucraino e bielorusso.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Glossario</value>

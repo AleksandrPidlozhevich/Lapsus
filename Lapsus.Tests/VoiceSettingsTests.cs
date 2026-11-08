@@ -64,6 +64,18 @@ public sealed class VoiceSettingsTests : IDisposable
     }
 
     [Fact]
+    public void A_term_added_from_a_selection_is_saved_once()
+    {
+        var voice = Voice();
+        voice.GlossaryText = "GitHub";
+
+        voice.AddGlossaryTerm("Kubernetes");
+        voice.AddGlossaryTerm("Kubernetes");
+
+        Assert.Equal(["GitHub", "Kubernetes"], Saved().DictationGlossary);
+    }
+
+    [Fact]
     public void Each_choice_is_saved()
     {
         var voice = Voice();
@@ -72,12 +84,14 @@ public sealed class VoiceSettingsTests : IDisposable
         voice.SelectedModel = voice.ModelOptions.First(o => o.Model.Id == "whisper-small-q5");
         voice.SelectedUnload = voice.UnloadOptions.First(o => o.Value == SpeechUnloadAfter.Never);
         voice.KeepEnglishTermsLatin = false;
+        voice.SpokenPunctuation = false;
 
         var saved = Saved();
         Assert.Equal("uk", saved.DictationLanguage);
         Assert.Equal("whisper-small-q5", saved.SpeechModelId);
         Assert.Equal(SpeechUnloadAfter.Never, saved.SpeechUnloadAfter);
         Assert.False(saved.KeepEnglishTermsLatin);
+        Assert.False(saved.DictationSpokenPunctuation);
     }
 
     [Fact]

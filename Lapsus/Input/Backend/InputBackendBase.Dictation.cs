@@ -29,6 +29,24 @@ internal abstract partial class InputBackendBase<TFocus>
 
     public event Action? DictationCancelPressed;
 
+    public event Action<string>? GlossaryTermSelected;
+
+    // Longer than this is a sentence, not a term.
+    private const int MaxGlossaryTerm = 60;
+
+    private void AddSelectionToGlossary(string selection)
+    {
+        var term = selection.Trim();
+        if (term.Length > MaxGlossaryTerm || term.Contains('\n'))
+        {
+            RaiseDiagnostic(Localizer.Instance["Diag_GlossaryTooLong"]);
+            return;
+        }
+
+        GlossaryTermSelected?.Invoke(term);
+        RaiseDiagnosticFormat("Diag_GlossaryAdded", term);
+    }
+
     protected void RaiseDictationHotkey() => DictationHotkeyPressed?.Invoke();
 
     protected void RaiseDictationReleased(bool interrupted = false) => DictationHotkeyReleased?.Invoke(interrupted);

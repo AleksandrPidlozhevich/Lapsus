@@ -24,12 +24,22 @@ internal sealed class DictationSession : IDisposable
     private const float SpeechLevel = 0.01f;
     private const float DeadQuiet = 0.0003f;
 
+    // Speech is also measured against the speaker's own recent loudness: room noise, or a microphone's automatic
+    // gain lifting it between words, stays above SpeechLevel, and a pause then never came (logged 20–46 s
+    // dictations went out as one piece). The recent peak halves in about five seconds of 50 ms level reports.
+    private const float PauseBelowPeak = 0.2f;
+    private const float PeakDecay = 0.993f;
+
     private const int SampleRate = 16000;
 
     // A long dictation is typed part by part while it goes on: once this much has been said since the last
     // part, the next pause this long ends a part, which is recognised and typed while the user keeps talking.
-    public static readonly TimeSpan PartAfter = TimeSpan.FromSeconds(4);
+    public static readonly TimeSpan PartAfter = TimeSpan.FromSeconds(2);
     public static readonly TimeSpan PauseEndsPart = TimeSpan.FromMilliseconds(700);
+
+    // Recognition of a part starts this far into the pause, so that its text is ready (~0.4 s on a GPU) by the
+    // time the pause is long enough to end it. Speech that resumes sooner throws that work away, never the audio.
+    public static readonly TimeSpan EarlyAfter = TimeSpan.FromMilliseconds(300);
 
     public enum State { Idle, Listening, Transcribing }
 
@@ -47,6 +57,7 @@ internal sealed class DictationSession : IDisposable
     private DateTime _startedAt;
     private long _lastLoudTicks;
     private float _peak;
+    private float _recentPeak;
     private (object Target, string Text, DateTime At)? _previous;
 
     // This dictation: Esc cancels it whole; what was already typed stays.
@@ -56,6 +67,12 @@ internal sealed class DictationSession : IDisposable
     private string _said = "";
     private string _untyped = "";
     private Task _parts = Task.CompletedTask;
+
+    // A part cut at EarlyAfter whose recognition is under way, while the pause has yet to reach PauseEndsPart.
+    private (Task<DictationResult> Result, CancellationTokenSource Cancel, float[] Pcm, long LoudAt)? _early;
+
+    // Audio taken for an early part that speech then continued: it opens the next part.
+    private float[] _carry = [];
     private Exception? _partFailed;
     private DateTime _lastCut;
 
@@ -69,6 +86,7 @@ internal sealed class DictationSession : IDisposable
         _indicator = indicator;
         _enabled = enabled;
         _now = now ?? (() => DateTime.UtcNow);
+        History = new DictationHistory(_now);
 
         _host.DictationHotkeyPressed += Press;
         _host.DictationHotkeyReleased += Release;
@@ -77,13 +95,15 @@ internal sealed class DictationSession : IDisposable
 
         if (watchdog)
         {
-            _watchdog = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(200) };
+            _watchdog = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50) };
             _watchdog.Tick += (_, _) => Tick();
             _watchdog.Start();
         }
     }
 
     public State Current { get; private set; } = State.Idle;
+
+    public DictationHistory History { get; }
 
     // The transcription in flight, for tests.
     internal Task? Pending { get; private set; }
@@ -159,24 +179,68 @@ internal sealed class DictationSession : IDisposable
 
         var now = _now();
         var lastLoud = new DateTime(Interlocked.Read(ref _lastLoudTicks), DateTimeKind.Utc);
-        if (now - _startedAt >= MaxRecording || now - lastLoud >= MaxSilence)
+        DropEarlyIfSpeechResumed(lastLoud);
+        var quiet = now - lastLoud;
+        if (now - _startedAt >= MaxRecording || quiet >= MaxSilence)
             Pending = StopAsync();
-        else if (now - _lastCut >= PartAfter && now - lastLoud >= PauseEndsPart && lastLoud > _lastCut)
-            CutPart(now);
+        else if (now - _lastCut >= PartAfter && lastLoud > _lastCut)
+        {
+            if (quiet >= PauseEndsPart)
+                CutPart(now);
+            else if (quiet >= EarlyAfter && _early is null && _parts.IsCompleted)
+                StartEarly(lastLoud);
+        }
+    }
+
+    private void StartEarly(DateTime lastLoud)
+    {
+        var pcm = TakeAudio(_audio.TakeRecorded());
+        var cancel = CancellationTokenSource.CreateLinkedTokenSource(_dictation!.Token);
+        _early = (_engine.TranscribeAsync(pcm, Request(), cancel.Token), cancel, pcm, lastLoud.Ticks);
+    }
+
+    private void DropEarlyIfSpeechResumed(DateTime lastLoud)
+    {
+        if (_early is not { } early || early.LoudAt == lastLoud.Ticks)
+            return;
+        early.Cancel.Cancel();
+        _carry = early.Pcm;
+        _early = null;
+    }
+
+    private float[] TakeAudio(float[] taken)
+    {
+        if (_carry.Length == 0)
+            return taken;
+        var all = new float[_carry.Length + taken.Length];
+        _carry.CopyTo(all, 0);
+        taken.CopyTo(all, _carry.Length);
+        _carry = [];
+        return all;
     }
 
     // Parts are recognised and typed in order while recording goes on.
     private void CutPart(DateTime now)
     {
         _lastCut = now;
-        var pcm = _audio.TakeRecorded();
         var before = _parts;
-        _parts = RecognisePartAsync(before, pcm, _dictation!.Token);
+        if (_early is { } early)
+        {
+            // What was said after the early cut stays in the microphone's buffer and opens the next part.
+            _early = null;
+            _parts = RecognisePartAsync(before, () => early.Result, _dictation!.Token);
+        }
+        else
+        {
+            var pcm = TakeAudio(_audio.TakeRecorded());
+            _parts = RecognisePartAsync(before, () => _engine.TranscribeAsync(pcm, Request(), _dictation!.Token),
+                _dictation!.Token);
+        }
         Pending = _parts;
     }
 
     // Never throws: a failure is kept for the end of the dictation, which reports it if nothing was heard.
-    private async Task RecognisePartAsync(Task before, float[] pcm, CancellationToken cancel)
+    private async Task RecognisePartAsync(Task before, Func<Task<DictationResult>> recognise, CancellationToken cancel)
     {
         await before.ConfigureAwait(true);
         if (cancel.IsCancellationRequested)
@@ -184,8 +248,10 @@ internal sealed class DictationSession : IDisposable
 
         try
         {
-            Heard(await _engine.TranscribeAsync(pcm, Request(), cancel).ConfigureAwait(true));
+            Heard(await recognise().ConfigureAwait(true));
             TypeWhatIsReady();
+            if (_untyped.Length > 0 && Current == State.Listening)
+                _indicator.ShowHeard(_untyped);
         }
         catch (OperationCanceledException)
         {
@@ -284,11 +350,14 @@ internal sealed class DictationSession : IDisposable
         _said = "";
         _untyped = "";
         _parts = Task.CompletedTask;
+        _early = null;
+        _carry = [];
         _partFailed = null;
         _dictation?.Dispose();
         _dictation = new CancellationTokenSource();
         Interlocked.Exchange(ref _lastLoudTicks, _startedAt.Ticks);
         _peak = 0;
+        _recentPeak = 0;
         Current = State.Listening;
         _host.DictationListening = true;
         _indicator.ShowListening();
@@ -296,7 +365,13 @@ internal sealed class DictationSession : IDisposable
 
     private async Task StopAsync()
     {
-        var pcm = _audio.Stop();
+        DropEarlyIfSpeechResumed(new DateTime(Interlocked.Read(ref _lastLoudTicks), DateTimeKind.Utc));
+        var early = _early;
+        _early = null;
+        var pcm = TakeAudio(_audio.Stop());
+        // After an early part only the pause is left, unless a soft word hides in it.
+        if (early is not null && Loudest(pcm) < SpeechLevel)
+            pcm = [];
         _host.DictationListening = false;
         Current = State.Transcribing;
         _indicator.ShowWorking();
@@ -315,6 +390,8 @@ internal sealed class DictationSession : IDisposable
             await _parts.ConfigureAwait(true);
             CaptureLog.Write($"dictation: released, earlier parts took {clock.ElapsedMilliseconds} ms more");
             cancel.ThrowIfCancellationRequested();
+            if (early is { } part)
+                Heard(await part.Result.ConfigureAwait(true));
             if (pcm.Length > 0)
                 Heard(await _engine.TranscribeAsync(pcm, Request(), cancel).ConfigureAwait(true));
         }
@@ -341,6 +418,7 @@ internal sealed class DictationSession : IDisposable
         }
 
         _previous = (target, string.Join(' ', new[] { _continued, _said }.Where(s => !string.IsNullOrEmpty(s))), _now());
+        History.Add(_said);
         if (_untyped.Length == 0)
         {
             _indicator.Hide();
@@ -367,11 +445,28 @@ internal sealed class DictationSession : IDisposable
             _untyped = "";
     }
 
+    // The loudest 50 ms, measured as the microphone's level reports are.
+    private static float Loudest(float[] pcm)
+    {
+        const int window = SampleRate / 20;
+        var loudest = 0f;
+        for (var at = 0; at < pcm.Length; at += window)
+        {
+            var end = Math.Min(at + window, pcm.Length);
+            double sum = 0;
+            for (var i = at; i < end; i++)
+                sum += pcm[i] * pcm[i];
+            loudest = Math.Max(loudest, (float)Math.Sqrt(sum / (end - at)));
+        }
+        return loudest;
+    }
+
     private void OnLevel(float level)
     {
         if (level > _peak)
             _peak = level;
-        if (level >= SpeechLevel)
+        _recentPeak = Math.Max(level, _recentPeak * PeakDecay);
+        if (level >= Math.Max(SpeechLevel, _recentPeak * PauseBelowPeak))
             Interlocked.Exchange(ref _lastLoudTicks, _now().Ticks);
         _indicator.SetLevel(level);
     }

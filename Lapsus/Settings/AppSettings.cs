@@ -20,6 +20,8 @@ public sealed class AppSettings
 
     public int ReverseRtlHotkeyVirtualKey { get; set; }
 
+    public int GlossaryHotkeyVirtualKey { get; set; }
+
     public bool AutoMode { get; set; }
 
     public bool AutoFixTypos { get; set; }
@@ -80,6 +82,9 @@ public sealed class AppSettings
     public string? DictationLanguage { get; set; }
 
     public bool KeepEnglishTermsLatin { get; set; } = true;
+
+    // "запятая", "question mark" said aloud are written as the mark.
+    public bool DictationSpokenPunctuation { get; set; } = true;
 
     // The recording device by name (WinMM product name); null is the system default.
     public string? MicrophoneName { get; set; }

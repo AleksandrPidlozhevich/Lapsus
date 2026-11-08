@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Îndreaptă o linie în ebraică sau arabă care a sosit invers.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Adaugă în glosarul de dictare</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Selectați un nume sau un termen și apăsați tasta — dictarea îl va scrie astfel.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Limba preferată la egalitate</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Setări</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Dictări recente</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Ieșire</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Selecție: nu este nimic selectat sau {0} nu răspunde la copiere.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Adăugat în glosar: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Glosar: selectați un termen, nu o propoziție.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Selecție: clipboardul nu a putut fi folosit ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Termeni ca pull request sau GitHub se scriu ca în engleză. Cuvintele pe care limba ta le-a adoptat rămân cum sunt.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Punctuație prin voce</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Spuneți „comma”, „period” sau „question mark” și semnul este scris. Funcționează în engleză, rusă, ucraineană și belarusă.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Glosar</value>

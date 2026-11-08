@@ -1074,7 +1074,7 @@
 
                                     <Grid IsVisible="{Binding Voice.ShowRecognition, FallbackValue=False}"
                                           ColumnDefinitions="*,Auto" ColumnSpacing="8"
-                                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
                                         <TextBlock Grid.Row="0" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
                                                    Margin="0,4,0,4" Text="{Binding L[Voice_LanguageLabel]}" />
                                         <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Margin="0,4,0,4"
@@ -1138,9 +1138,17 @@
                                         <TextBlock Grid.Row="8" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
                                                    Text="{Binding L[Voice_KeepLatinHint]}" />
 
-                                        <TextBlock Grid.Row="9" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
+                                        <TextBlock Grid.Row="9" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                                   TextWrapping="Wrap" Margin="0,0,0,4" Text="{Binding L[Voice_SpokenPunctuation]}" />
+                                        <ToggleSwitch Grid.Row="9" Grid.Column="1" Classes="bare" HorizontalAlignment="Right"
+                                                      Margin="0,0,0,4"
+                                                      IsChecked="{Binding Voice.SpokenPunctuation, FallbackValue=True}" />
+                                        <TextBlock Grid.Row="10" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                                   Text="{Binding L[Voice_SpokenPunctuationHint]}" />
+
+                                        <TextBlock Grid.Row="11" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
                                                    Text="{Binding L[Voice_GlossaryLabel]}" />
-                                        <StackPanel Grid.Row="10" Grid.ColumnSpan="2" Spacing="4">
+                                        <StackPanel Grid.Row="12" Grid.ColumnSpan="2" Spacing="4">
                                             <TextBlock Classes="hint" Text="{Binding L[Voice_GlossaryHint]}" />
                                             <TextBox AcceptsReturn="True" TextWrapping="NoWrap" MinHeight="90" MaxHeight="200"
                                                      FontFamily="{DynamicResource ContentControlThemeFontFamily}"

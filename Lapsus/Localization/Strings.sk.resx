@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Zarovná hebrejský alebo arabský riadok, ktorý prišiel obrátene.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Pridať do glosára diktovania</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Označte meno alebo termín a stlačte kláves — hlasové písanie ho bude písať takto.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Preferovaný jazyk pri zhode</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Nastavenia</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Nedávne diktovanie</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Ukončiť</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Výber: nič nie je vybrané, alebo {0} nereaguje na kopírovanie.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Pridané do glosára: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Glosár: označte jeden termín, nie vetu.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Výber: schránku sa nepodarilo použiť ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Termíny ako pull request alebo GitHub sa píšu ako v angličtine. Slová, ktoré váš jazyk prijal, zostávajú bez zmeny.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Interpunkcia hlasom</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Povedzte „comma“, „period“ alebo „question mark“ a zapíše sa znamienko. Funguje v angličtine, ruštine, ukrajinčine a bieloruštine.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Glosár</value>

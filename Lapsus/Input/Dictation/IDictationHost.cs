@@ -21,6 +21,9 @@ internal interface IDictationHost
 
     event Action? DictationCancelPressed;
 
+    // The text selected when the "add to glossary" hotkey was pressed, trimmed, one line.
+    event Action<string>? GlossaryTermSelected;
+
     string? DictationBlockedReason();
 
     // An opaque token for the field that has focus now.

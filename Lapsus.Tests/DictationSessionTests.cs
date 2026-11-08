@@ -12,6 +12,7 @@ public class DictationSessionTests
         public event Action? DictationHotkeyPressed;
         public event Action<bool>? DictationHotkeyReleased;
         public event Action? DictationCancelPressed;
+        public event Action<string>? GlossaryTermSelected { add { } remove { } }
 
         public string? Blocked;
         public object Target = "notepad";
@@ -110,12 +111,16 @@ public class DictationSessionTests
         public void Prepare() => Prepared++;
 
         public readonly List<DictationRequest> Requests = [];
+        public readonly List<int> PcmLengths = [];
+        public readonly List<CancellationToken> Tokens = [];
         public string? HeardLanguage;
 
         public async Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken ct)
         {
             LastRequest = request;
             Requests.Add(request);
+            PcmLengths.Add(pcm.Length);
+            Tokens.Add(ct);
             var text = Hold is { } hold
                 ? await hold.Task.WaitAsync(ct)
                 : Answers.TryDequeue(out var next) ? next : Answer;
@@ -128,7 +133,10 @@ public class DictationSessionTests
         public string State = "hidden";
         public string? Message;
 
+        public string? Heard;
+
         public void ShowListening() => State = "listening";
+        public void ShowHeard(string text) => Heard = text;
         public void SetLevel(float level) { }
         public void ShowWorking() => State = "working";
 
@@ -259,6 +267,92 @@ public class DictationSessionTests
         await rig.Session.Pending!;
     }
 
+    // Speak past PartAfter, then fall quiet past EarlyAfter (not yet PauseEndsPart) and let the watchdog look.
+    private static void PauseBrieflyAfterAPart(Rig rig)
+    {
+        rig.Mic.Hear(0.1f);
+        rig.Now += DictationSession.PartAfter + TimeSpan.FromSeconds(1);
+        rig.Mic.Hear(0.1f);
+        rig.Now += DictationSession.EarlyAfter + TimeSpan.FromMilliseconds(50);
+        rig.Session.Tick();
+    }
+
+    [Fact]
+    public async Task A_part_is_recognised_while_the_pause_is_still_going_on()
+    {
+        var rig = new Rig();
+        rig.Engine.Answers.Enqueue("Первая часть.");
+
+        rig.Host.PressHotkey();
+        PauseBrieflyAfterAPart(rig);
+        Assert.Single(rig.Engine.Requests);
+        Assert.Empty(rig.Host.Typed);
+
+        rig.Now += DictationSession.PauseEndsPart;
+        rig.Session.Tick();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Первая часть."], rig.Host.Typed);
+        Assert.Single(rig.Engine.Requests);
+    }
+
+    [Fact]
+    public async Task Speech_that_resumes_drops_the_early_text_but_keeps_its_audio()
+    {
+        var rig = new Rig();
+
+        rig.Host.PressHotkey();
+        PauseBrieflyAfterAPart(rig);
+        rig.Mic.Hear(0.1f);
+        rig.Session.Tick();
+        Assert.True(rig.Engine.Tokens[0].IsCancellationRequested);
+
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        var part = rig.Mic.Recorded.Length;
+        Assert.Equal([part, part * 2], rig.Engine.PcmLengths);
+        Assert.Single(rig.Host.Typed);
+    }
+
+    [Fact]
+    public async Task Letting_go_after_a_pause_types_the_early_text_without_another_pass()
+    {
+        var rig = new Rig();
+
+        rig.Host.HoldHotkey();
+        PauseBrieflyAfterAPart(rig);
+        rig.Mic.Recorded = new float[16000];
+        rig.Host.LetGo();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Закинул pull request."], rig.Host.Typed);
+        Assert.Single(rig.Engine.Requests);
+    }
+
+    [Fact]
+    public async Task Room_noise_between_phrases_still_ends_a_part()
+    {
+        var rig = new Rig();
+        rig.Engine.Answers.Enqueue("Первая часть.");
+
+        rig.Host.PressHotkey();
+        rig.Mic.Hear(0.2f);
+        rig.Now += DictationSession.PartAfter + TimeSpan.FromSeconds(1);
+        rig.Mic.Hear(0.2f);
+        // Above the fixed speech level, but a fifth of the voice: a fan, or the microphone's gain between words.
+        for (var i = 0; i < 16; i++)
+        {
+            rig.Now += TimeSpan.FromMilliseconds(50);
+            rig.Mic.Hear(0.03f);
+        }
+        rig.Session.Tick();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Первая часть."], rig.Host.Typed);
+        Assert.Equal(DictationSession.State.Listening, rig.Session.Current);
+    }
+
     [Fact]
     public async Task A_long_hands_free_dictation_is_typed_part_by_part_while_it_goes_on()
     {
@@ -316,6 +410,7 @@ public class DictationSessionTests
         rig.Host.HoldHotkey();
         await SayAPartAsync(rig);
         Assert.Empty(rig.Host.Typed);
+        Assert.Equal("Первая часть.", rig.Badge.Heard);
 
         rig.Host.LetGo();
         await rig.Session.Pending!;
@@ -344,7 +439,7 @@ public class DictationSessionTests
 
         rig.Host.PressHotkey();
         rig.Mic.Hear(0.1f);
-        rig.Now += TimeSpan.FromSeconds(2);
+        rig.Now += DictationSession.PartAfter - DictationSession.PauseEndsPart - TimeSpan.FromMilliseconds(200);
         rig.Mic.Hear(0.1f);
         rig.Now += DictationSession.PauseEndsPart + TimeSpan.FromMilliseconds(100);
         rig.Session.Tick();
@@ -559,6 +654,20 @@ public class DictationSessionTests
     }
 
     [Fact]
+    public async Task A_dictation_that_lost_its_field_is_still_in_the_history()
+    {
+        var rig = new Rig();
+        rig.Host.PressHotkey();
+        rig.Mic.Hear(0.1f);
+        rig.Host.Focused = "telegram";
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        Assert.Empty(rig.Host.Typed);
+        Assert.Equal(["Закинул pull request."], rig.Session.History.Recent());
+    }
+
+    [Fact]
     public async Task What_was_typed_before_the_caret_is_the_context()
     {
         var rig = new Rig();
@@ -571,6 +680,27 @@ public class DictationSessionTests
         rig.Host.Before = "Новая строка";
         await rig.DictateAsync();
         Assert.Equal("Новая строка", rig.Engine.LastRequest!.PreviousText);
+    }
+}
+
+public class DictationHistoryTests
+{
+    [Fact]
+    public void Keeps_the_text_half_an_hour_newest_first()
+    {
+        var now = new DateTime(2026, 11, 7, 12, 0, 0, DateTimeKind.Utc);
+        var history = new DictationHistory(() => now);
+
+        history.Add("Первая.");
+        now += TimeSpan.FromMinutes(10);
+        history.Add("Вторая.");
+        Assert.Equal(["Вторая.", "Первая."], history.Recent());
+
+        now += DictationHistory.Keep - TimeSpan.FromMinutes(5);
+        Assert.Equal(["Вторая."], history.Recent());
+
+        now += TimeSpan.FromMinutes(10);
+        Assert.Empty(history.Recent());
     }
 }
 
@@ -619,4 +749,22 @@ public class DictationInsertTests
 
         Assert.DoesNotContain(backend.Injected.Skip(injected), i => i.Text.Length == 0);
     }
+
+    [Fact]
+    public async Task The_glossary_hotkey_hands_over_the_selected_term()
+    {
+        var backend = Backend().Listening();
+        var terms = new List<string>();
+        backend.GlossaryTermSelected += terms.Add;
+
+        backend.Selection = "  Kubernetes ";
+        await backend.RunSelectionAction(Lapsus.Core.Text.SelectionAction.AddToGlossary);
+        backend.Selection = "Two lines\nare not a term";
+        await backend.RunSelectionAction(Lapsus.Core.Text.SelectionAction.AddToGlossary);
+
+        Assert.Equal(["Kubernetes"], terms);
+        Assert.Empty(backend.Injected);
+        Assert.Equal(2, backend.Diagnostics.Count);
+    }
 }
+

@@ -56,6 +56,12 @@ internal abstract partial class InputBackendBase<TFocus>
 
             try
             {
+                if (action == SelectionAction.AddToGlossary)
+                {
+                    AddSelectionToGlossary(selection);
+                    return;
+                }
+
                 if (action != SelectionAction.Correct)
                 {
                     ApplySelectionTransform(action, selection);

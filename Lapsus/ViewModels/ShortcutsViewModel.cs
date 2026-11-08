@@ -109,7 +109,8 @@ public sealed partial class ShortcutsViewModel : ObservableObject
         (SelectionAction.Correct, "SelectionHotkey_Label", "SelectionHotkey_Hint"),
         (SelectionAction.CycleCase, "SelectionCase_Label", "SelectionCase_Hint"),
         (SelectionAction.Transliterate, "SelectionTranslit_Label", "SelectionTranslit_Hint"),
-        (SelectionAction.ReverseRtl, "SelectionRtl_Label", "SelectionRtl_Hint")
+        (SelectionAction.ReverseRtl, "SelectionRtl_Label", "SelectionRtl_Hint"),
+        (SelectionAction.AddToGlossary, "SelectionGlossary_Label", "SelectionGlossary_Hint")
     ];
 
     public HotkeyRecorderViewModel MainRecorder { get; }
@@ -246,6 +247,7 @@ public sealed partial class ShortcutsViewModel : ObservableObject
             SelectionAction.Correct => _settings.SelectionHotkeyVirtualKey,
             SelectionAction.CycleCase => _settings.CaseHotkeyVirtualKey,
             SelectionAction.Transliterate => _settings.TransliterateHotkeyVirtualKey,
+            SelectionAction.AddToGlossary => _settings.GlossaryHotkeyVirtualKey,
             _ => _settings.ReverseRtlHotkeyVirtualKey
         };
     }
@@ -262,6 +264,9 @@ public sealed partial class ShortcutsViewModel : ObservableObject
                 break;
             case SelectionAction.Transliterate:
                 _settings.TransliterateHotkeyVirtualKey = virtualKey;
+                break;
+            case SelectionAction.AddToGlossary:
+                _settings.GlossaryHotkeyVirtualKey = virtualKey;
                 break;
             default:
                 _settings.ReverseRtlHotkeyVirtualKey = virtualKey;

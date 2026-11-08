@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Dreht eine hebräische oder arabische Zeile, die verkehrt herum ankam, wieder richtig.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Zum Diktier-Glossar hinzufügen</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Markieren Sie einen Namen oder Begriff und drücken Sie die Taste — die Spracheingabe schreibt ihn dann so.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Bevorzugte Sprache bei Gleichstand</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Letzte Diktate</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Beenden</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Auswahl: nichts markiert, oder {0} antwortet nicht auf Kopieren.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Zum Glossar hinzugefügt: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Glossar: Markieren Sie einen Begriff, keinen Satz.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Auswahl: Die Zwischenablage konnte nicht verwendet werden ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Begriffe wie pull request oder GitHub werden wie im Englischen geschrieben. Wörter, die Ihre Sprache übernommen hat, bleiben unverändert.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Satzzeichen per Sprache</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Sagen Sie „comma“, „period“ oder „question mark“, und das Zeichen wird geschrieben. Funktioniert auf Englisch, Russisch, Ukrainisch und Belarussisch.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Glossar</value>

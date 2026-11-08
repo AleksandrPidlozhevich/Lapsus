@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Разворачивает строку на иврите или арабском, пришедшую задом наперёд.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Добавить в глоссарий диктовки</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Выделите имя или термин и нажмите клавишу — голосовой ввод будет писать его так.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Язык по умолчанию при равенстве</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Настройки</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Недавние диктовки</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Выход</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Выделение: ничего не выделено, либо {0} не отвечает на копирование.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Добавлено в глоссарий: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Глоссарий: выделите один термин, а не предложение.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Выделение: не удалось воспользоваться буфером обмена ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Термины вроде pull request или GitHub пишутся как в английском, а не вашими буквами. Прижившиеся в языке слова остаются как есть.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Пунктуация голосом</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Скажите «запятая», «точка» или «вопросительный знак» — будет написан знак. Работает для русского, украинского, белорусского и английского.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Глоссарий</value>

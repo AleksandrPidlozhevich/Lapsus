@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Helyreállít egy fordítva érkezett héber vagy arab sort.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Hozzáadás a diktálási szójegyzékhez</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Jelöljön ki egy nevet vagy kifejezést, és nyomja meg a billentyűt — a hangalapú gépelés így írja majd.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Előnyben részesített nyelv holtversenynél</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Beállítások</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Legutóbbi diktálások</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Kilépés</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Kijelölés: nincs semmi kijelölve, vagy a(z) {0} nem válaszol a másolásra.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Hozzáadva a szójegyzékhez: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Szójegyzék: egy kifejezést jelöljön ki, ne mondatot.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Kijelölés: a vágólapot nem sikerült használni ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Az olyan kifejezések, mint a pull request vagy a GitHub, angolul íródnak. A nyelvébe beépült szavak változatlanok maradnak.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Írásjelek hanggal</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Mondja: „comma”, „period” vagy „question mark”, és megjelenik az írásjel. Angolul, oroszul, ukránul és beloruszul működik.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Szójegyzék</value>

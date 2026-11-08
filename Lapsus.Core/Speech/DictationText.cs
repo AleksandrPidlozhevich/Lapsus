@@ -29,7 +29,7 @@ public static class DictationText
 
     // shortcut: a name or term that starts the text ("Москве", "Figma") is lowercased too; telling them apart
     // needs the dictionary's case, which the frequency lists do not keep.
-    private static string Decapitalize(string text)
+    internal static string Decapitalize(string text)
     {
         var end = 0;
         while (end < text.Length && char.IsLetter(text[end]))
