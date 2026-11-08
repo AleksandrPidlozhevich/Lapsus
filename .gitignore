@@ -242,3 +242,6 @@ Thumbs.db
 
 # ----- Working drafts that must not be published ----------
 /docs/COMMERCIAL-TERMS-DRAFT.md
+
+# Voice recordings for speech tests stay out of git
+*.wav

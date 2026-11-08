@@ -13,21 +13,19 @@ namespace Lapsus.Core.Speech;
 //    their glossary — or, for a built-in term, the word is rare (зум → Zoom);
 //  - an inflected form stays (задеплоил, ребейса, коммитов): the last sound must match the term's;
 //  - a match needs the same consonants in the same order and a close vowel spelling.
-// Candidates come from the user's glossary, the built-in list (Speech/Data/terms.txt) and — for single words
-// only — the English frequency list. Without a dictionary for the language, only the two lists are used: there
-// is no telling a real word from a term then.
+// Candidates come from the user's glossary and the built-in list (Speech/Data/terms.txt). Not from the English
+// frequency list: on the user's own voice it turned тикет, мерч, стендинг into ticket, merch, standing and fixed
+// nothing the built-in list did not (22 phrases, 2026-11-08).
+// Without a dictionary for the language there is no telling a real word from a term.
 public sealed partial class TermRestorer
 {
     // A built-in term may replace a word the dictionary knows if the word is rarer than this
     // (SpellChecker.Frequency, 0..1). зум ≈ 0.37, сервер ≈ 0.42, файл ≈ 0.5, мастер ≈ 0.55.
     public const double RareWordFrequency = 0.4;
 
-    // English list words rarer than this count are mostly names and noise.
-    private const long MinEnglishCount = 50;
-
     private const int MaxPhraseWords = 3;
 
-    private enum Source { Glossary, BuiltIn, English }
+    private enum Source { Glossary, BuiltIn }
 
     private sealed record Entry(string Text, string[] Parts, Source Source, double Weight)
     {
@@ -36,7 +34,6 @@ public sealed partial class TermRestorer
 
     private readonly SpellChecker _spell;
     private readonly Dictionary<string, List<Entry>> _terms = new(StringComparer.Ordinal);
-    private readonly Lazy<Dictionary<string, List<Entry>>> _english;
 
     private static readonly Lazy<IReadOnlyList<(string Canonical, string[] Heard)>> BuiltIn = new(LoadBuiltIn);
 
@@ -53,8 +50,6 @@ public sealed partial class TermRestorer
             if (parts.Length > 0)
                 AddTerm(parts[0], parts[1..], Source.Glossary);
         }
-
-        _english = new Lazy<Dictionary<string, List<Entry>>>(BuildEnglishIndex);
     }
 
     public string Restore(string text, string language)
@@ -121,16 +116,7 @@ public sealed partial class TermRestorer
             }
         }
 
-        // Single words against the English list: only a word of another script the dictionary does not know.
-        if (glossaryOnly || latin || first.Length < 4 || !KnowsLanguage(first, out var script) || Knows(first, script, language))
-            return 0;
-
-        var key = PhoneticKey.Heard(first);
-        if (key.Length < 4 || Best(_english.Value, [key]) is not { } word)
-            return 0;
-
-        replacement = Cased(first, word);
-        return 1;
+        return 0;
     }
 
     private bool MayReplace(List<Match> words, int i, int n, Entry term, string language, bool latin)
@@ -253,18 +239,6 @@ public sealed partial class TermRestorer
             Add(_terms, new Entry(canonical, parts.Select(m => PhoneticKey.Heard(m.Value)).ToArray(), source,
                 weight), minSkeleton: 1);
         }
-    }
-
-    private Dictionary<string, List<Entry>> BuildEnglishIndex()
-    {
-        var index = new Dictionary<string, List<Entry>>(StringComparer.Ordinal);
-        foreach (var (word, count) in _spell.WordsIn("en"))
-        {
-            if (count < MinEnglishCount || word.Length < 3 || !word.All(c => c is >= 'a' and <= 'z'))
-                continue;
-            Add(index, new Entry(word, [PhoneticKey.English(word)], Source.English, Math.Log(1 + count)), minSkeleton: 2);
-        }
-        return index;
     }
 
     // Listed terms may be as short as a spelled-out acronym («си ай»); English list words need two consonants,

@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Επαναφέρει μια εβραϊκή ή αραβική γραμμή που ήρθε ανάποδα.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Προσθήκη στο γλωσσάρι υπαγόρευσης</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Επιλέξτε ένα όνομα ή όρο και πατήστε το πλήκτρο — η φωνητική πληκτρολόγηση θα τον γράφει έτσι.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Προτιμώμενη γλώσσα σε ισοπαλία</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Ρυθμίσεις</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Πρόσφατες υπαγορεύσεις</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Έξοδος</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Επιλογή: δεν είναι επιλεγμένο τίποτα ή το {0} δεν απαντά σε αντιγραφή.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Προστέθηκε στο γλωσσάρι: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Γλωσσάρι: επιλέξτε έναν όρο, όχι πρόταση.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Επιλογή: δεν ήταν δυνατή η χρήση του προχείρου ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Όροι όπως pull request ή GitHub γράφονται όπως στα αγγλικά. Οι λέξεις που έχει υιοθετήσει η γλώσσα σας μένουν ως έχουν.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Στίξη με φωνή</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Πείτε «comma», «period» ή «question mark» και γράφεται το σημείο. Λειτουργεί στα αγγλικά, ρωσικά, ουκρανικά και λευκορωσικά.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Γλωσσάρι</value>

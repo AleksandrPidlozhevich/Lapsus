@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Poravna hebrejsko ali arabsko vrstico, ki je prišla obrnjena.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Dodaj v slovar nareka</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Označite ime ali izraz in pritisnite tipko — glasovno tipkanje ga bo pisalo tako.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Prednostni jezik ob izenačenju</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Nastavitve</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Nedavni nareki</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Izhod</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Izbor: nič ni izbrano ali pa {0} ne odgovori na kopiranje.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Dodano v slovar: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Slovar: označite en izraz, ne stavka.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Izbor: odložišča ni bilo mogoče uporabiti ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Izrazi, kot sta pull request ali GitHub, so zapisani kot v angleščini. Besede, ki jih je vaš jezik prevzel, ostanejo nespremenjene.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Ločila z glasom</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Recite »comma«, »period« ali »question mark« in ločilo se zapiše. Deluje v angleščini, ruščini, ukrajinščini in beloruščini.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Slovarček</value>

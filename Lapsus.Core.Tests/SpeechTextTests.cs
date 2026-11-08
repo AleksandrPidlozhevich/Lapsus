@@ -115,4 +115,31 @@ public class SpeechTextTests
     {
         Assert.Equal(expected, DictationText.FitAfter(before, text));
     }
+
+    [Theory]
+    [InlineData("ru", "Как дела вопросительный знак", "Как дела?")]
+    [InlineData("ru", "Как дела? Вопросительный знак.", "Как дела?")]
+    [InlineData("ru", "Привет. Запятая. Как дела", "Привет, как дела")]
+    [InlineData("ru", "Привет, запятая, как дела", "Привет, как дела")]
+    [InlineData("ru", "Готово. Точка. дальше", "Готово. Дальше")]
+    [InlineData("ru", "Купи хлеб. Точка.", "Купи хлеб.")]
+    [InlineData("uk", "Як справи, знак питання.", "Як справи?")]
+    [InlineData("en", "Call me, comma, tomorrow", "Call me, tomorrow")]
+    [InlineData("en", "Are you there question mark", "Are you there?")]
+    public void Spoken_punctuation_becomes_the_mark(string language, string heard, string expected)
+    {
+        Assert.Equal(expected, SpokenPunctuation.Apply(heard, language));
+    }
+
+    [Theory]
+    [InlineData("ru", "С моей точки зрения, это точка зрения автора.")]
+    [InlineData("ru", "Это конечная точка.")]
+    [InlineData("ru", "Точка входа в программу.")]
+    [InlineData("en", "The period of time was short.")]
+    [InlineData("de", "Wie geht es Fragezeichen")]
+    public void A_mark_name_used_as_a_word_stays(string language, string heard)
+    {
+        Assert.Equal(heard, SpokenPunctuation.Apply(heard, language));
+    }
 }
+

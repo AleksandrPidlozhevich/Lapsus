@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Разгортае радок на іўрыце ці арабскай, які прыйшоў задам наперад.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Дадаць у глосарый дыктоўкі</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Вылучыце імя або тэрмін і націсніце клавішу — галасавы ўвод будзе пісаць яго так.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Пажаданая мова пры роўнасці</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Налады</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Нядаўнія дыктоўкі</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Выхад</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Вылучэнне: нічога не вылучана, альбо {0} не адказвае на капіраванне.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Дададзена ў глосарый: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Глосарый: вылучыце адзін тэрмін, а не сказ.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Вылучэнне: не ўдалося скарыстацца буферам абмену ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Тэрміны накшталт pull request ці GitHub пішуцца як па-англійску, а не вашымі літарамі. Словы, што прыжыліся ў мове, застаюцца як ёсць.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Пунктуацыя голасам</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Скажыце «коска», «кропка» або «пытальнік» — будзе напісаны знак. Працуе для беларускай, рускай, украінскай і англійскай.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Гласарый</value>

@@ -1,6 +1,7 @@
 using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
+using Lapsus.Core.Text;
 using Lapsus.Input;
 
 namespace Lapsus.Tests;
@@ -174,9 +175,13 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
         return base.TypingBlockedReason();
     }
 
+    public string? Selection { get; set; }
+
+    public Task RunSelectionAction(SelectionAction action) => ApplySelectionActionAsync(action);
+
     protected override Task<string?> CopySelectionAsync()
     {
-        return Task.FromResult<string?>(null);
+        return Task.FromResult(Selection);
     }
 
     protected override bool PasteText(string text)

@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Vraća u pravi smer hebrejski ili arapski red koji je stigao obrnuto.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Додај у речник диктирања</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Означите име или термин и притисните тастер — гласовни унос ће га писати овако.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Željeni jezik pri izjednačenju</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Podešavanja</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Недавни диктати</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Izlaz</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Izbor: ništa nije izabrano ili {0} ne odgovara na kopiranje.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Додато у речник: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Речник: означите један термин, не реченицу.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Izbor: ostava nije mogla da se upotrebi ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Termini poput pull request ili GitHub pišu se kao na engleskom, a ne vašim pismom. Reči odomaćene u jeziku ostaju kakve jesu.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Интерпункција гласом</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Реците „comma“, „period“ или „question mark“ и знак се пише. Ради на енглеском, руском, украјинском и белоруском.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Rečnik</value>

@@ -136,12 +136,6 @@ public sealed class SpellChecker
         return _codesByScript.TryGetValue(script, out var codes) ? codes : [];
     }
 
-    // In lookup form (lower case, marks folded).
-    public IEnumerable<KeyValuePair<string, long>> WordsIn(string languageCode)
-    {
-        return _byLanguage.TryGetValue(languageCode, out var loaded) ? loaded.Counts : [];
-    }
-
     public bool IsKnownWord(string word, Script script, string? languageCode = null)
     {
         if (string.IsNullOrEmpty(word))

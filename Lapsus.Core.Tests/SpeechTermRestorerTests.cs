@@ -62,12 +62,13 @@ public sealed class SpeechTermRestorerTests : IDisposable
     }
 
     [Fact]
-    public void Finds_ordinary_english_words_in_the_frequency_list()
+    public void Only_listed_terms_go_latin_not_any_english_word_that_sounds_alike()
     {
         var restorer = new TermRestorer(Spell());
 
-        Assert.Equal("Сделай merge на master", restorer.Restore("Сделай мердж на мэстер", "ru"));
-        Assert.Equal("Это staging", restorer.Restore("Это стейджинг", "ru"));
+        Assert.Equal("Сделай merge, это staging", restorer.Restore("Сделай мердж, это стейджинг", "ru"));
+        // Heard on the user's own voice: the English list made these ticket, merch, standing.
+        Assert.Equal("Создай тикет, делай мерч на стендинг", restorer.Restore("Создай тикет, делай мерч на стендинг", "ru"));
     }
 
     [Theory]

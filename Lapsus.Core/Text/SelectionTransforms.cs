@@ -10,7 +10,10 @@ public enum SelectionAction
 
     Transliterate = 2,
 
-    ReverseRtl = 3
+    ReverseRtl = 3,
+
+    // Not a transform: the selected term goes to the dictation glossary.
+    AddToGlossary = 4
 }
 
 public static class SelectionTransforms

@@ -17,6 +17,9 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
 
     private const double MaxBadgeDip = 480;
 
+    // The tail of the heard text that fits the badge.
+    private const int HeardChars = 60;
+
     private readonly LayoutIndicator? _layoutIndicator;
     private readonly Func<string> _listeningHint;
     private readonly Func<bool> _sounds;
@@ -93,6 +96,14 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
             if (_button is { IsVisible: true } button)
                 button.ShowLevel(level);
         }, DispatcherPriority.Background);
+    }
+
+    public void ShowHeard(string text)
+    {
+        if (!_listening)
+            return;
+        _hideHint.Stop();
+        Show(microphone: true, text.Length > HeardChars ? "…" + text[^HeardChars..].TrimStart() : text);
     }
 
     public void ShowWorking()

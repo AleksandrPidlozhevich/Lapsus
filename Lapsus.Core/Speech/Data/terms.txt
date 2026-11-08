@@ -14,6 +14,8 @@ Bitbucket|битбакет
 GitHub Actions|гитхаб экшнс|гитхаб экшенс
 pull request|пул реквест|пулл реквест|пулреквест
 merge request|мерж реквест|мердж реквест
+merge|мердж|мерж
+staging|стейджинг|стейджин
 code review|код ревью|кодревью
 rebase|ребейс|рибейс
 cherry-pick|черри пик|черипик

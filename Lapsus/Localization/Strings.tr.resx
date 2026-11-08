@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Ters gelen bir İbranice veya Arapça satırı düzeltir.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Dikte sözlüğüne ekle</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Bir ad veya terim seçip tuşa basın; sesle yazma onu böyle yazar.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Eşitlikte tercih edilen dil</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Ayarlar</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Son dikteler</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Çıkış</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Seçim: hiçbir şey seçili değil veya {0} kopyalamaya yanıt vermiyor.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Sözlüğe eklendi: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Sözlük: cümle değil, tek bir terim seçin.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Seçim: pano kullanılamadı ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>pull request veya GitHub gibi terimler İngilizcedeki gibi yazılır. Dilinize yerleşmiş sözcükler olduğu gibi kalır.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Sesle noktalama</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>"comma", "period" veya "question mark" deyin, işaret yazılsın. İngilizce, Rusça, Ukraynaca ve Belarusçada çalışır.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Sözlük</value>

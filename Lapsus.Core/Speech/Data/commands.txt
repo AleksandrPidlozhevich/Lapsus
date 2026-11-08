@@ -1,0 +1,25 @@
+# Spoken punctuation: language<TAB>what is said<TAB>what is written<TAB>where.
+# "anywhere": the phrase is never meant literally. "alone": a word people also say as a word ("точка зрения"),
+# so it counts only where Whisper set it apart with punctuation, or at the very end.
+ru	вопросительный знак	?	anywhere
+ru	восклицательный знак	!	anywhere
+ru	двоеточие	:	alone
+ru	запятая	,	alone
+ru	точка	.	alone
+uk	знак питання	?	anywhere
+uk	знак оклику	!	anywhere
+uk	двокрапка	:	alone
+uk	кома	,	alone
+uk	крапка	.	alone
+be	пытальнік	?	anywhere
+be	клічнік	!	anywhere
+be	двукроп'е	:	alone
+be	коска	,	alone
+be	кропка	.	alone
+en	question mark	?	anywhere
+en	exclamation mark	!	anywhere
+en	exclamation point	!	anywhere
+en	colon	:	alone
+en	comma	,	alone
+en	full stop	.	alone
+en	period	.	alone

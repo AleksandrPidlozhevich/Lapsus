@@ -115,6 +115,12 @@
     <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Endereza una línea en hebreo o árabe que llegó al revés.</value>
   </data>
+    <data name="SelectionGlossary_Label" xml:space="preserve">
+    <value>Añadir al glosario de dictado</value>
+  </data>
+    <data name="SelectionGlossary_Hint" xml:space="preserve">
+    <value>Seleccione un nombre o término y pulse la tecla: el dictado lo escribirá así.</value>
+  </data>
     <data name="Pref_Label" xml:space="preserve">
     <value>Idioma preferido en caso de empate</value>
   </data>
@@ -214,6 +220,9 @@
     <data name="Tray_Settings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
+    <data name="Tray_DictationHistory" xml:space="preserve">
+    <value>Dictados recientes</value>
+  </data>
     <data name="Tray_Exit" xml:space="preserve">
     <value>Salir</value>
   </data>
@@ -261,6 +270,12 @@
   </data>
     <data name="Diag_NoSelection" xml:space="preserve">
     <value>Selección: no hay nada seleccionado, o {0} no responde a la copia.</value>
+  </data>
+    <data name="Diag_GlossaryAdded" xml:space="preserve">
+    <value>Añadido al glosario: {0}</value>
+  </data>
+    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+    <value>Glosario: seleccione un término, no una frase.</value>
   </data>
     <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Selección: no se pudo usar el portapapeles ({0}).</value>
@@ -798,6 +813,12 @@
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Términos como pull request o GitHub se escriben como en inglés. Las palabras que tu idioma ya ha adoptado se quedan como están.</value>
+  </data>
+    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+    <value>Puntuación por voz</value>
+  </data>
+    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+    <value>Diga «comma», «period» o «question mark» y se escribe el signo. Funciona en inglés, ruso, ucraniano y bielorruso.</value>
   </data>
     <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Glosario</value>

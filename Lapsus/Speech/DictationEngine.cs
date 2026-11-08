@@ -133,6 +133,8 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
             }
 
             var text = HallucinationFilter.Clean(result.Text);
+            if (text.Length > 0 && settings.DictationSpokenPunctuation)
+                text = SpokenPunctuation.Apply(text, result.Language);
             if (text.Length > 0 && settings.KeepEnglishTermsLatin)
                 text = await Task.Run(() => Restorer(glossary).Restore(text, result.Language), cancellationToken)
                     .ConfigureAwait(false);

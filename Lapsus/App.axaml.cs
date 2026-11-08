@@ -208,6 +208,7 @@ public partial class App : Application
             if (e.PropertyName == nameof(VoiceViewModel.Hint))
                 UpdateButton();
         };
+        host.GlossaryTermSelected += term => _settingsViewModel.Voice?.AddGlossaryTerm(term);
         Apply(supported && settings.DictationEnabled);
     }
 
@@ -248,10 +249,32 @@ public partial class App : Application
 
         desktop.ShutdownRequested += (_, _) => PerformExitCleanup();
 
+        // Shown only while there is something to copy; entries leave the menu as the history forgets them.
+        var historyItem = new NativeMenuItem(loc["Tray_DictationHistory"]) { Menu = new NativeMenu(), IsVisible = false };
+        void ShowHistory()
+        {
+            var recent = _dictation?.History.Recent() ?? [];
+            historyItem.IsVisible = recent.Count > 0;
+            historyItem.Menu!.Items.Clear();
+            foreach (var text in recent)
+            {
+                var line = text.ReplaceLineEndings(" ");
+                var item = new NativeMenuItem(line.Length > 50 ? line[..50] + "…" : line);
+                item.Click += (_, _) => (_backend as IDictationHost)?.CopyDictatedText(text);
+                historyItem.Menu.Items.Add(item);
+            }
+        }
+
+        if (_dictation is { } dictation)
+        {
+            dictation.History.Changed += ShowHistory;
+            _ = new DispatcherTimer(TimeSpan.FromMinutes(1), DispatcherPriority.Background, (_, _) => ShowHistory());
+        }
+
         _trayIcon = new TrayIcon
         {
             ToolTipText = loc["Tray_Tooltip"],
-            Menu = new NativeMenu { Items = { showItem, exitItem } }
+            Menu = new NativeMenu { Items = { showItem, historyItem, exitItem } }
         };
 
         _trayIcon.Clicked += (_, _) => ToggleWindow();
@@ -264,6 +287,7 @@ public partial class App : Application
         loc.LanguageChanged += (_, _) =>
         {
             showItem.Header = loc["Tray_Settings"];
+            historyItem.Header = loc["Tray_DictationHistory"];
             exitItem.Header = loc[exitKey];
             _trayIcon.ToolTipText = _updateItem is null
                 ? loc["Tray_Tooltip"]

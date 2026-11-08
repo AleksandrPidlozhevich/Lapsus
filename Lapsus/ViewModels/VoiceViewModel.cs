@@ -66,6 +66,7 @@ public partial class VoiceViewModel : ViewModelBase
         _building = true;
         _enabled = supported && settings.DictationEnabled && !_locked();
         _keepEnglishTermsLatin = settings.KeepEnglishTermsLatin;
+        _spokenPunctuation = settings.DictationSpokenPunctuation;
         _sounds = settings.DictationSounds;
         _showButton = settings.DictationShowButton;
         _glossaryText = string.Join(Environment.NewLine, settings.DictationGlossary);
@@ -114,6 +115,8 @@ public partial class VoiceViewModel : ViewModelBase
     [ObservableProperty] private string? _status;
 
     [ObservableProperty] private bool _keepEnglishTermsLatin;
+
+    [ObservableProperty] private bool _spokenPunctuation;
 
     [ObservableProperty] private bool _sounds;
 
@@ -188,6 +191,12 @@ public partial class VoiceViewModel : ViewModelBase
     partial void OnKeepEnglishTermsLatinChanged(bool value)
     {
         _settings.KeepEnglishTermsLatin = value;
+        _store.Save(_settings);
+    }
+
+    partial void OnSpokenPunctuationChanged(bool value)
+    {
+        _settings.DictationSpokenPunctuation = value;
         _store.Save(_settings);
     }
 
@@ -317,6 +326,15 @@ public partial class VoiceViewModel : ViewModelBase
         OnPropertyChanged(nameof(TryIt));
         OnPropertyChanged(nameof(UnloadHint));
         OnPropertyChanged(nameof(DeviceNow));
+    }
+
+    public void AddGlossaryTerm(string term)
+    {
+        var lines = GlossaryText.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        if (lines.Any(l => l.Split('|')[0].Trim() == term))
+            return;
+        GlossaryText = string.Join(Environment.NewLine, lines.Append(term));
+        SaveGlossary();
     }
 
     private void SaveGlossary()
