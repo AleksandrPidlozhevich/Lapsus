@@ -18,7 +18,8 @@ internal sealed record TargetLanguage(
         new("ru", "Russian", Script.Cyrillic, KeyboardLayout.Ru, BundledKeyboardMaps.Ru),
         new("be", "Belarusian", Script.Cyrillic, KeyboardLayout.Be, BundledKeyboardMaps.Be),
         new("mk", "Macedonian", Script.Cyrillic, KeyboardLayout.Mk, BundledKeyboardMaps.Mk),
-        new("ka", "Georgian", Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka)
+        new("ka", "Georgian", Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka),
+        new("hy", "Armenian", Script.Armenian, KeyboardLayout.Hy, BundledKeyboardMaps.Hy)
     ];
 
     public static readonly TargetLanguage[] Priority =
@@ -61,6 +62,7 @@ internal sealed class Machine
         Target = target;
         TargetSource = new LayoutSource(target.Script, target.Code, target.Map, $"{target.Code}-id");
         Installed = [En, TargetSource];
+        LetterDigits = AutoCorrectPolicy.LetterDigits(Installed.Select(source => source.Map));
         Candidates =
         [
             new LayoutCandidate(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en-US"),
@@ -78,6 +80,8 @@ internal sealed class Machine
     public LayoutSource TargetSource { get; }
 
     public LayoutSource[] Installed { get; }
+
+    public IReadOnlySet<char> LetterDigits { get; }
 
     public LayoutCandidate[] Candidates { get; }
 

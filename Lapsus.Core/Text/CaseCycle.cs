@@ -5,6 +5,9 @@ namespace Lapsus.Core.Text;
 
 public static class CaseCycle
 {
+    // No one-letter capital: Unicode capitalises it as Եւ and ԵՒ.
+    private const char ArmenianLigature = 'և';
+
     public static string Next(string text)
     {
         var hasUpper = false;
@@ -31,7 +34,7 @@ public static class CaseCycle
                 return sentence;
         }
 
-        return text.ToUpperInvariant();
+        return text.ToUpperInvariant().Replace(ArmenianLigature.ToString(), "ԵՒ");
     }
 
     private static string FinalSigma(string text)
@@ -49,7 +52,7 @@ public static class CaseCycle
 
     private static bool IsCased(char ch)
     {
-        return char.ToUpperInvariant(ch) != char.ToLowerInvariant(ch);
+        return ch == ArmenianLigature || char.ToUpperInvariant(ch) != char.ToLowerInvariant(ch);
     }
 
     private static bool IsCaselessScript(char ch)
@@ -67,13 +70,16 @@ public static class CaseCycle
             if (IsCased(ch))
             {
                 var openSentence = atSentenceStart && !IsCaselessScript(ch);
-                result.Append(openSentence ? char.ToUpperInvariant(ch) : char.ToLowerInvariant(ch));
+                if (openSentence && ch == ArmenianLigature)
+                    result.Append("Եւ");
+                else
+                    result.Append(openSentence ? char.ToUpperInvariant(ch) : char.ToLowerInvariant(ch));
                 atSentenceStart = false;
                 continue;
             }
 
             result.Append(ch);
-            if (ch is '.' or '!' or '?' or '…' or '\n')
+            if (ch is '.' or '!' or '?' or '…' or '\n' or '։')
                 atSentenceStart = true;
         }
 

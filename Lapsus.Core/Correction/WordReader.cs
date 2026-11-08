@@ -121,12 +121,12 @@ internal sealed class WordReader
     }
 
     // A word that crossed takes the letter keys after it whatever the list says: to someone typing Russian
-    // ";" "'" "[" "]" are ж э х ъ, never punctuation ("vbyf;" is минаж, not мина;). A full stop or comma is
-    // still the list's call.
+    // ";" "'" "[" "]" are ж э х ъ, never punctuation ("vbyf;" is минаж, not мина;). A full stop, comma or
+    // digit is still the list's call: "x86" is not ղրւ.
     private static ScoredWord? LetterKeysAfterACrossing(ScoredWord best, string tail, WordSource source)
     {
         if (!best.Changed || CandidateOf(best, source) is not { } candidate || candidate.ScoringScript == source.Script ||
-            tail.AsSpan().IndexOfAny(".,!?:") >= 0)
+            tail.AsSpan().IndexOfAny(".,!?:0123456789") >= 0)
             return null;
 
         var text = best.Text + LayoutTranscoder.Transcode(tail, source.Map, candidate.Map);

@@ -88,6 +88,7 @@ internal static class BrandFonts
                     new FontFallback { FontFamily = new FontFamily($"{Collection}#IBM Plex Sans Hebrew") },
                     new FontFallback { FontFamily = new FontFamily($"{Collection}#IBM Plex Sans Arabic") },
                     new FontFallback { FontFamily = new FontFamily($"{Collection}#Noto Sans Georgian") },
+                    new FontFallback { FontFamily = new FontFamily($"{Collection}#Noto Sans Armenian") },
                 ],
             });
 }

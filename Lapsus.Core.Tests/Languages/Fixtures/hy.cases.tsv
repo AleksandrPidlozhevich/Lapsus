@@ -1,0 +1,14 @@
+# typed	expected	status	note — what an Armenian speaker types with English (or Armenian Phonetic) active
+haje8en	հայերեն	ok	ր is on the 8 key
+in9pes es	ինչպես ես	ok	չ is on the 9 key
+\nw8hakalwu2jwun	շնորհակալություն	ok	շ on backslash, թ on 2, ու as w+u
+ajso8	այսօր	ok	ends on a digit key
+\at me]	շատ մեծ	ok	letters on backslash and ]
+na7	նաև	ok	the և key finds the list's spelled-out նաեւ
+in9w?u	ինչո՞ւ	ok	the question mark sits over the vowel, inside the word
+lav em:	լավ եմ։	ok	Shift+; is the Armenian full stop
+Haje8en	Հայերեն	ok	a capital stays a capital
+the water	the water	ok	English stays English
+haje8en text	հայերեն text	ok	one Armenian word, then English
+տհե ոատեռ	the water	ok	typed on the Armenian layout meaning English
+ինչպես ես	ինչպես ես	ok	real Armenian stays

@@ -41,6 +41,7 @@ public sealed partial class AboutViewModel : ObservableObject
         new("Avalonia 12.1.2", "MIT", "https://avaloniaui.net"),
         new("IBM Plex Sans", "SIL Open Font License 1.1", "https://github.com/IBM/plex"),
         new("Noto Sans Georgian", "SIL Open Font License 1.1", "https://github.com/notofonts/georgian"),
+        new("Noto Sans Armenian", "SIL Open Font License 1.1", "https://github.com/notofonts/armenian"),
         new("CommunityToolkit.Mvvm 8.4.2", "MIT", "https://github.com/CommunityToolkit/dotnet"),
         new("Svg.Controls.Skia.Avalonia 12.0.0.17", "MIT", "https://github.com/wieslawsoltes/Svg.Skia"),
         new("Velopack 1.2.0", "MIT", "https://github.com/velopack/velopack"),

@@ -1,4 +1,5 @@
 using Lapsus.Core.Correction;
+using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Tests.Correction;
 
@@ -53,6 +54,47 @@ public class AutoCorrectPolicyTests
     public void Skips_special_tokens(string word)
     {
         Assert.False(AutoCorrectPolicy.IsEligible(word));
+    }
+
+    [Theory]
+    [InlineData("haje8en")] // 8 is ր on Armenian Phonetic
+    [InlineData("\\nw8hakalwu2jwun")]
+    [InlineData("ajso8")]
+    [InlineData("Haje8en")]
+    public void A_digit_that_is_a_letter_on_an_installed_layout_does_not_rule_a_word_out(string word)
+    {
+        var armenian = AutoCorrectPolicy.LetterDigits([BundledKeyboardMaps.En, BundledKeyboardMaps.Hy]);
+
+        Assert.False(AutoCorrectPolicy.IsEligible(word));
+        Assert.True(AutoCorrectPolicy.IsEligible(word, letterDigits: armenian));
+    }
+
+    [Fact]
+    public void Only_layouts_with_letters_on_the_digit_row_free_any_digit()
+    {
+        Assert.Empty(AutoCorrectPolicy.LetterDigits(
+            [BundledKeyboardMaps.En, BundledKeyboardMaps.Ru, BundledKeyboardMaps.Ka, BundledKeyboardMaps.He]));
+        Assert.Equal("0123456789", string.Concat(AutoCorrectPolicy.LetterDigits([BundledKeyboardMaps.Hy]).Order()));
+    }
+
+    [Theory]
+    [InlineData("haje8en", false, true)]
+    [InlineData("h2o", false, true)]
+    [InlineData("hello", false, false)]
+    [InlineData("hello", true, true)]
+    public void A_word_with_digits_only_switches_layout(string word, bool keysOnly, bool expected)
+    {
+        Assert.Equal(expected, AutoCorrectPolicy.KeysOnlyFor(word, keysOnly));
+    }
+
+    [Theory]
+    [InlineData("2024")]
+    [InlineData("123")]
+    public void Digits_alone_stay_out_even_when_they_are_letters_elsewhere(string word)
+    {
+        var armenian = AutoCorrectPolicy.LetterDigits([BundledKeyboardMaps.Hy]);
+
+        Assert.False(AutoCorrectPolicy.IsEligible(word, letterDigits: armenian));
     }
 
     [Theory]

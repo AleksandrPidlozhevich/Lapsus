@@ -103,6 +103,8 @@ public static partial class BundledKeyboardMaps
 
     public static readonly KeyboardMap Ka = new(BuildGeorgian(), BuildGeorgianShifted());
 
+    public static readonly KeyboardMap Hy = new(BuildArmenian(), BuildArmenianShifted());
+
     public static char[] CreateRuSlots()
     {
         return BuildJcuken(JcukenVariant.Russian);
@@ -166,6 +168,11 @@ public static partial class BundledKeyboardMaps
     public static char[] CreateKaShiftedSlots()
     {
         return BuildGeorgianShifted();
+    }
+
+    public static char[] CreateHySlots()
+    {
+        return BuildArmenian();
     }
 
     public static char[] CreateEnSlots()

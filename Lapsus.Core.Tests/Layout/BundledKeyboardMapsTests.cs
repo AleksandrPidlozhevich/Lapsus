@@ -275,6 +275,33 @@ public class BundledKeyboardMapsTests
     }
 
     [Fact]
+    public void Armenian_phonetic_map_covers_all_38_letters_and_the_ligature()
+    {
+        const string alphabet = "աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆև";
+
+        var keys = LayoutTranscoder.Transcode(alphabet, BundledKeyboardMaps.Hy, BundledKeyboardMaps.En);
+        Assert.DoesNotContain(keys, c => Scripts.Of(c) == Script.Armenian);
+        Assert.Equal(alphabet, LayoutTranscoder.Transcode(keys, BundledKeyboardMaps.En, BundledKeyboardMaps.Hy));
+    }
+
+    [Theory]
+    [InlineData("haje8en", "հայերեն")]
+    [InlineData("Haje8en", "Հայերեն")]
+    [InlineData("ba87", "բարև")]
+    [InlineData("\\nw8hakalwu2jwun", "շնորհակալություն")]
+    [InlineData("in9w?u", "ինչո՞ւ")]
+    public void Armenian_phonetic_map_matches_the_windows_layout(string keys, string armenian)
+    {
+        Assert.Equal(armenian, LayoutTranscoder.Transcode(keys, BundledKeyboardMaps.En, BundledKeyboardMaps.Hy));
+    }
+
+    [Fact]
+    public void Armenian_full_stop_is_shift_semicolon()
+    {
+        Assert.Equal("բարև։", LayoutTranscoder.Transcode("ba87:", BundledKeyboardMaps.En, BundledKeyboardMaps.Hy));
+    }
+
+    [Fact]
     public void Georgian_map_puts_letters_on_the_letter_keys_only()
     {
         var slots = BundledKeyboardMaps.CreateKaSlots();

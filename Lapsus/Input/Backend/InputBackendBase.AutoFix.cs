@@ -29,6 +29,16 @@ internal abstract partial class InputBackendBase<TFocus>
         }
     }
 
+    private (List<InstalledLayout>? Layouts, IReadOnlySet<char> Digits) _letterDigits;
+
+    private IReadOnlySet<char> LetterDigits()
+    {
+        if (_letterDigits.Digits is null || !ReferenceEquals(_letterDigits.Layouts, Layouts))
+            _letterDigits = (Layouts, AutoCorrectPolicy.LetterDigits((Layouts ?? []).Select(layout => layout.Map)));
+
+        return _letterDigits.Digits;
+    }
+
     private void AutoCorrect(PendingAutoFix fix)
     {
         // Gone when a reset, a backspace into it, or a focus change ran after its space.
@@ -50,9 +60,11 @@ internal abstract partial class InputBackendBase<TFocus>
         if (!Corrector.IsReady || !_buffer.Segment.EndsWith(word + " " + tail, StringComparison.Ordinal))
             return;
 
-        if (!AutoCorrectPolicy.IsEligible(word, _lineDirection is not null))
+        // Without layout switching a digit stays a digit.
+        var letterDigits = AutoMode ? LetterDigits() : null;
+        if (!AutoCorrectPolicy.IsEligible(word, _lineDirection is not null, letterDigits: letterDigits))
         {
-            if (AutoMode && _lineDirection is null && AutoCorrectPolicy.IsEligible(word, true))
+            if (AutoMode && _lineDirection is null && AutoCorrectPolicy.IsEligible(word, true, letterDigits: letterDigits))
                 _skippedRun.Add(word);
             else
                 _skippedRun.Clear();
@@ -69,7 +81,7 @@ internal abstract partial class InputBackendBase<TFocus>
 
         // A brain that ignores the typo-only hint can still name another layout, so the result is checked below.
         var hints = AutoMode
-            ? new CorrectionHints(_lineDirection, KeysOnly: !AutoFixTypos)
+            ? new CorrectionHints(_lineDirection, KeysOnly: AutoCorrectPolicy.KeysOnlyFor(word, !AutoFixTypos))
             : new CorrectionHints(TypoOnly: true);
 
         PhraseCorrection phrase;
@@ -85,6 +97,9 @@ internal abstract partial class InputBackendBase<TFocus>
         }
 
         if (!AutoMode && (phrase.TargetLayout is not null || !string.IsNullOrEmpty(phrase.TargetLayoutId)))
+            return;
+
+        if (phrase.Changed && !AutoCorrectPolicy.ReadsThrough(word, phrase.Corrected))
             return;
 
         var crossedInto = _lineDirection is null && phrase.Changed &&
@@ -132,8 +147,10 @@ internal abstract partial class InputBackendBase<TFocus>
             var again = skipped;
             try
             {
-                var phrase = TryCorrectInstalled(skipped, new CorrectionHints(direction, KeysOnly: !AutoFixTypos), out _);
-                if (phrase.Changed && Scripts.Dominant(phrase.Corrected) == direction)
+                var hints = new CorrectionHints(direction, KeysOnly: AutoCorrectPolicy.KeysOnlyFor(skipped, !AutoFixTypos));
+                var phrase = TryCorrectInstalled(skipped, hints, out _);
+                if (phrase.Changed && Scripts.Dominant(phrase.Corrected) == direction &&
+                    AutoCorrectPolicy.ReadsThrough(skipped, phrase.Corrected))
                 {
                     again = phrase.Corrected;
                     changed = true;

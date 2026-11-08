@@ -12,6 +12,7 @@ public static class Scripts
         if (Alphabets.IsHebrewLetter(ch)) return Script.Hebrew;
         if (Alphabets.IsArabicLetter(ch)) return Script.Arabic;
         if (Alphabets.IsGeorgianLetter(ch)) return Script.Georgian;
+        if (Alphabets.IsArmenianLetter(ch)) return Script.Armenian;
         return null;
     }
 
@@ -22,7 +23,7 @@ public static class Scripts
 
     public static bool IsScoringBlind(Script script)
     {
-        return IsAbjad(script) || script is Script.Georgian;
+        return IsAbjad(script) || IsPhonetic(script);
     }
 
     // Scorer cannot tell these apart; a missing source dictionary rigs the comparison.
@@ -31,7 +32,13 @@ public static class Scripts
         if (IsAbjad(from) || IsAbjad(to))
             return true;
 
-        return (from, to) is (Script.Georgian, Script.Latin) or (Script.Latin, Script.Georgian);
+        return (from == Script.Latin && IsPhonetic(to)) || (to == Script.Latin && IsPhonetic(from));
+    }
+
+    // Their QWERTY layouts follow Latin sounds: English keys spell plausible native words.
+    private static bool IsPhonetic(Script script)
+    {
+        return script is Script.Georgian or Script.Armenian;
     }
 
     public static bool IsIgnorableMark(Script script, char ch)
@@ -46,7 +53,7 @@ public static class Scripts
 
     public static string FoldMarks(string word, Script script)
     {
-        if (!IsAbjad(script) && script != Script.Cyrillic)
+        if (!IsAbjad(script) && script is not (Script.Cyrillic or Script.Armenian))
             return word;
 
         System.Text.StringBuilder? sb = null;

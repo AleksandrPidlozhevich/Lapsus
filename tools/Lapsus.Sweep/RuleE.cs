@@ -97,7 +97,7 @@ internal static class RuleE
             var stem = !known && machine.KnowsStem(intended[i]);
             var leftAsTyped = got[i] == typed[i];
 
-            var reason = !AutoCorrectPolicy.IsEligible(typed[i], false, minLength)
+            var reason = !AutoCorrectPolicy.IsEligible(typed[i], false, minLength, machine.LetterDigits)
                 ? $"auto mode would not touch the chunk ({Letters(intended[i])} letters, or digits and capitals)"
                 : known
                     ? leftAsTyped ? "in the list, left as typed" : "in the list, another reading won"
@@ -162,11 +162,14 @@ internal static class RuleE
         foreach (var chunk in typed)
         {
             line.Add(chunk);
-            if (!AutoCorrectPolicy.IsEligible(chunk, direction is not null, minLength))
+            if (!AutoCorrectPolicy.IsEligible(chunk, direction is not null, minLength, machine.LetterDigits))
                 continue;
 
-            var verdict = machine.Correct(
-                chunk, phraseContext: true, hints: new CorrectionHints(direction, variant.KeysOnly));
+            var hints = new CorrectionHints(direction, AutoCorrectPolicy.KeysOnlyFor(chunk, variant.KeysOnly));
+            var verdict = machine.Correct(chunk, phraseContext: true, hints: hints);
+            if (!AutoCorrectPolicy.ReadsThrough(chunk, verdict.Corrected))
+                continue;
+
             line[^1] = verdict.Corrected;
 
             if (!variant.Sticky)

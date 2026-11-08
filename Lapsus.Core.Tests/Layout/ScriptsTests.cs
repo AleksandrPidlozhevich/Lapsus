@@ -24,6 +24,9 @@ public class ScriptsTests
     [InlineData('ჰ', Script.Georgian)]
     [InlineData('თ', Script.Georgian)]
     [InlineData('ჲ', Script.Georgian)]
+    [InlineData('ա', Script.Armenian)]
+    [InlineData('Ֆ', Script.Armenian)]
+    [InlineData('և', Script.Armenian)]
     public void Classifies_a_letter(char ch, Script expected)
     {
         Assert.Equal(expected, Scripts.Of(ch));
@@ -53,6 +56,27 @@ public class ScriptsTests
         Assert.Null(Scripts.Of(ch));
     }
 
+    [Theory]
+    [InlineData('՛')]
+    [InlineData('՜')]
+    [InlineData('՞')]
+    [InlineData('։')]
+    [InlineData('ՙ')]
+    public void Armenian_marks_and_punctuation_are_not_letters(char ch)
+    {
+        Assert.Null(Scripts.Of(ch));
+    }
+
+    [Theory]
+    [InlineData("ինչո՞ւ")]
+    [InlineData("ո՜վ")]
+    [InlineData("շա՛տ")]
+    public void An_armenian_word_mark_inside_a_word_keeps_it_one_word(string word)
+    {
+        Assert.True(Scripts.IsWordOf(word, Script.Armenian));
+        Assert.Equal(word.Replace("՞", "").Replace("՜", "").Replace("՛", ""), Scripts.FoldMarks(word, Script.Armenian));
+    }
+
     [Fact]
     public void Only_hebrew_is_an_abjad()
     {
@@ -69,6 +93,7 @@ public class ScriptsTests
         Assert.True(Scripts.IsCaseless(Script.Hebrew));
         Assert.True(Scripts.IsCaseless(Script.Arabic));
         Assert.True(Scripts.IsCaseless(Script.Georgian));
+        Assert.False(Scripts.IsCaseless(Script.Armenian));
         Assert.False(Scripts.IsCaseless(Script.Latin));
         Assert.False(Scripts.IsCaseless(Script.Cyrillic));
         Assert.False(Scripts.IsCaseless(Script.Greek));
@@ -89,6 +114,7 @@ public class ScriptsTests
     [InlineData("καλημέρα κόσμε", Script.Greek)]
     [InlineData("שלום עולם", Script.Hebrew)]
     [InlineData("გამარჯობა მსოფლიო", Script.Georgian)]
+    [InlineData("բարև աշխարհ", Script.Armenian)]
     public void Picks_the_dominant_script(string text, Script expected)
     {
         Assert.Equal(expected, Scripts.Dominant(text));

@@ -119,6 +119,7 @@ var script = code switch
     "ar" => Script.Arabic,
     "el" => Script.Greek,
     "ka" => Script.Georgian,
+    "hy" => Script.Armenian,
     "uk" or "ru" or "be" or "bg" or "mk" => Script.Cyrillic,
     _ => Script.Latin
 };

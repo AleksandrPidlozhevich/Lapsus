@@ -21,6 +21,7 @@ internal static class LayoutLanguageResolver
         if (id.Contains("arabic")) return "ar";
 
         if (id.Contains("georgian")) return "ka";
+        if (id.Contains("armenian")) return "hy";
         if (id.Contains("abc") || id.Contains("british") || id.Contains("english") || id.Contains("u.s."))
             return "en";
 
@@ -42,6 +43,7 @@ internal static class LayoutLanguageResolver
             0x0D => "he",
             0x01 => "ar",
             0x37 => "ka",
+            0x2B => "hy",
             _ => null
         };
     }

@@ -12,6 +12,7 @@ a dependency is added or dropped in `Lapsus.csproj`, both are part of the same e
 | [Avalonia](https://avaloniaui.net) 12.1.2 | MIT | Copyright (c) AvaloniaUI OÜ, All Rights Reserved |
 | [IBM Plex Sans](https://github.com/IBM/plex) (Sans, Sans Hebrew, Sans Arabic) | SIL Open Font License 1.1 | Copyright © 2017 IBM Corp. with Reserved Font Name "Plex" |
 | [Noto Sans Georgian](https://github.com/notofonts/georgian) | SIL Open Font License 1.1 | Copyright 2022 The Noto Project Authors |
+| [Noto Sans Armenian](https://github.com/notofonts/armenian) | SIL Open Font License 1.1 | Copyright 2022 The Noto Project Authors |
 | [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet) 8.4.2 | MIT | Copyright (c) .NET Foundation and Contributors, All rights reserved |
 | [Svg.Controls.Skia.Avalonia](https://github.com/wieslawsoltes/Svg.Skia) 12.0.0.17 | MIT | Copyright (c) 2020 Wiesław Šoltés |
 | [Velopack](https://github.com/velopack/velopack) 1.2.0 | MIT | Copyright (c) 2021 Caelan Sayler; Copyright (c) 2024 Velopack Ltd. |
@@ -91,6 +92,7 @@ same sources, licences and authors under **Dictionaries**, read from `Dictionary
 | Hebrew | FrequencyWords | Wiktionary via kaikki.org + UniMorph `heb` | CC BY-SA 4.0 (UniMorph CC BY-SA 3.0) | Wiktionary contributors; Omer Goldman (UniMorph annotator) |
 | Arabic | FrequencyWords | LibreOffice `ar` ([Ayaspell](http://ayaspell.sourceforge.net)) | MPL 1.1 (of GPL 2 / LGPL 2.1 / MPL 1.1) | Mohamed Kebdani, Taha Zerrouki; packaged by Ahmad Farghal |
 | Georgian | Unilex | wooorm `ka` ([ka_GE.spell](https://github.com/gamag/ka_GE.spell)) | MIT | gamag; built from Kevin Scannell's [Crúbadán](http://crubadan.org/languages/ka) lists (CC BY 4.0) and Dato Bumbeishvili's [GeoWordsDatabase](https://github.com/bumbeishvili/GeoWordsDatabase) (MIT) |
+| Armenian | Unilex | wooorm `hy` (from araktransfer) | MPL 1.1 (of GPL 2 / LGPL 2.1 / MPL 1.1) | araktransfer |
 | Serbian (Latin) | FrequencyWords | LibreOffice `sr-Latn` | MPL 2.0 or LGPL 3 (of those and GPL 3) | Milutin Smiljanić |
 | English | FrequencyWords | wooorm `en` (en_US, [SCOWL](http://wordlist.aspell.net) size 60) | SCOWL licence and BSD | © 2000–2018 Kevin Atkinson; © 1993 Geoff Kuenning (Ispell); © 2016 Benjamin Titze (VarCon) |
 | German | FrequencyWords | — (Hunspell is GPL only) | — | — |
@@ -196,8 +198,9 @@ the Initial Developers. All Rights Reserved.
 ## SIL Open Font License, Version 1.1
 
 Applies to IBM Plex Sans, IBM Plex Sans Hebrew and IBM Plex Sans Arabic, Copyright © 2017 IBM Corp.
-with Reserved Font Name "Plex" (https://github.com/IBM/plex), and to Noto Sans Georgian, Copyright 2022
-The Noto Project Authors (https://github.com/notofonts/georgian).
+with Reserved Font Name "Plex" (https://github.com/IBM/plex), and to Noto Sans Georgian and Noto Sans
+Armenian, Copyright 2022 The Noto Project Authors (https://github.com/notofonts/georgian,
+https://github.com/notofonts/armenian).
 
 ```
 SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007

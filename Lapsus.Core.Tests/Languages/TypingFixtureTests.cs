@@ -25,7 +25,8 @@ public sealed class TypingFixtureTests
         ["ar"] = new("ar", Script.Arabic, KeyboardLayout.Ar, BundledKeyboardMaps.Ar),
         ["el"] = new("el", Script.Greek, KeyboardLayout.El, BundledKeyboardMaps.El),
         ["bg"] = new("bg", Script.Cyrillic, KeyboardLayout.Bg, BundledKeyboardMaps.Bg),
-        ["bg-bds"] = new("bg", Script.Cyrillic, KeyboardLayout.Bg, BundledKeyboardMaps.BgBds)
+        ["bg-bds"] = new("bg", Script.Cyrillic, KeyboardLayout.Bg, BundledKeyboardMaps.BgBds),
+        ["hy"] = new("hy", Script.Armenian, KeyboardLayout.Hy, BundledKeyboardMaps.Hy)
     };
 
     public static TheoryData<string, string, string, string> Cases(string fixture)
@@ -70,6 +71,10 @@ public sealed class TypingFixtureTests
     [Theory]
     [MemberData(nameof(Cases), "bg-bds")]
     public void Bulgarian_bds(string typed, string expected, string status, string note) => Check("bg-bds", typed, expected, status, note);
+
+    [Theory]
+    [MemberData(nameof(Cases), "hy")]
+    public void Armenian(string typed, string expected, string status, string note) => Check("hy", typed, expected, status, note);
 
     private static void Check(string fixture, string typed, string expected, string status, string note)
     {

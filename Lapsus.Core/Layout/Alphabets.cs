@@ -91,6 +91,14 @@ internal static class Alphabets
         return ch is >= 'ა' and <= 'ჺ';
     }
 
+    private static readonly HashSet<char> ArmenianVowels = new("աեէըիոօ");
+
+    // Skips ՙ–՟ between the cases: a modifier letter and punctuation.
+    internal static bool IsArmenianLetter(char ch)
+    {
+        return ch is >= 'Ա' and <= 'Ֆ' or >= 'ՠ' and <= 'ֈ';
+    }
+
     internal static bool IsIgnorableMark(Script script, char ch)
     {
         return script switch
@@ -99,6 +107,8 @@ internal static class Alphabets
                 or >= 'ְ' and <= 'ֽ'
                 or 'ֿ' or 'ׁ' or 'ׂ' or 'ׄ' or 'ׅ' or 'ׇ',
             Script.Arabic => ch is >= 'ً' and <= 'ٟ' or 'ٰ' or ArabicTatweel,
+            // Stress, exclamation and question marks sit over a vowel inside the word: ինչո՞ւ.
+            Script.Armenian => ch is '՛' or '՜' or '՞',
             _ => false
         };
     }
@@ -129,6 +139,7 @@ internal static class Alphabets
             Script.Hebrew => IsHebrewLetter(ch),
             Script.Arabic => IsArabicLetter(ch),
             Script.Georgian => IsGeorgianLetter(ch),
+            Script.Armenian => IsArmenianLetter(ch),
             _ => false
         };
     }
@@ -144,6 +155,7 @@ internal static class Alphabets
             Script.Hebrew => false,
             Script.Arabic => false,
             Script.Georgian => GeorgianVowels.Contains(c),
+            Script.Armenian => ArmenianVowels.Contains(c),
             _ => false
         };
     }

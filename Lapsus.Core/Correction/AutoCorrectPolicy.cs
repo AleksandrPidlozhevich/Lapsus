@@ -27,7 +27,37 @@ public static class AutoCorrectPolicy
         return keys;
     }
 
-    public static bool IsEligible(string word, bool lineHasDirection = false, int minLength = MinLength)
+    // Digit keys that type a letter on one of these layouts (Armenian Phonetic: 8 = ր).
+    public static IReadOnlySet<char> LetterDigits(IEnumerable<KeyboardMap> maps)
+    {
+        var digits = new HashSet<char>();
+        foreach (var map in maps)
+            for (var digit = '0'; digit <= '9'; digit++)
+                if (BundledKeyboardMaps.En.TryGetSlot(digit, out var slot) && char.IsLetter(map.CharAtSlot(slot)))
+                    digits.Add(digit);
+
+        return digits;
+    }
+
+    // A typo fix on a word with digits rewrites tokens like h2o or mp3; such a word may only switch layout.
+    public static bool KeysOnlyFor(string word, bool keysOnly)
+    {
+        return keysOnly || HasDigit(word);
+    }
+
+    // A word with digits is fixed only when its digit keys read as letters too: x86 is not ղ86.
+    public static bool ReadsThrough(string word, string corrected)
+    {
+        return !HasDigit(word) || !HasDigit(corrected);
+    }
+
+    private static bool HasDigit(string text)
+    {
+        return text.AsSpan().IndexOfAnyInRange('0', '9') >= 0;
+    }
+
+    public static bool IsEligible(
+        string word, bool lineHasDirection = false, int minLength = MinLength, IReadOnlySet<char>? letterDigits = null)
     {
         var core = TrimSurroundingPunctuation(word);
 
@@ -47,7 +77,12 @@ public static class AutoCorrectPolicy
             var c = core[i];
 
             if (char.IsDigit(c))
-                return false;
+            {
+                if (letterDigits?.Contains(c) is not true)
+                    return false;
+
+                continue;
+            }
 
             if (!char.IsLetter(c))
             {

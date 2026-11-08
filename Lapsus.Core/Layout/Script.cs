@@ -10,5 +10,7 @@ public enum Script
 
     Arabic,
 
-    Georgian
+    Georgian,
+
+    Armenian
 }

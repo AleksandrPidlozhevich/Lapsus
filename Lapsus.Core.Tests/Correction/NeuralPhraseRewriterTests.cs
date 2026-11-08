@@ -252,6 +252,7 @@ public class NeuralPhraseRewriterTests
     [InlineData(Script.Hebrew, "שלום")]
     [InlineData(Script.Arabic, "مرحبا")]
     [InlineData(Script.Georgian, "გამარჯობა")]
+    [InlineData(Script.Armenian, "հայերեն")]
     public void The_installed_layout_picks_the_examples_with_no_preference_set(Script script, string expected)
     {
         var user = NeuralRewritePrompt.BuildUser(
@@ -318,6 +319,7 @@ public class NeuralPhraseRewriterTests
     [InlineData(Script.Hebrew)]
     [InlineData(Script.Arabic)]
     [InlineData(Script.Georgian)]
+    [InlineData(Script.Armenian)]
     public void Every_example_is_a_real_transcode(Script script)
     {
         var user = NeuralRewritePrompt.BuildUser(
@@ -405,6 +407,7 @@ public class NeuralPhraseRewriterTests
             Script.Greek => BundledKeyboardMaps.El,
             Script.Hebrew => BundledKeyboardMaps.He,
             Script.Arabic => BundledKeyboardMaps.Ar,
+            Script.Armenian => BundledKeyboardMaps.Hy,
             _ => BundledKeyboardMaps.Ka
         };
     }
