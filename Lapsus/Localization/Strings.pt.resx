@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: abra Definições → Biblioteca para o transferir.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Mostrar onde uma palavra foi corrigida automaticamente</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>A marca do esquema aparece por um momento junto ao cursor, a azul.</value>
+  </data>
 </root>

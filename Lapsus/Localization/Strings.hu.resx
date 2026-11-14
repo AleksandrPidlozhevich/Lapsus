@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: nyissa meg a Beállítások → Könyvtár lapot a letöltéshez.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Mutassa, hol javított ki egy szót automatikusan</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>A kiosztás jelzése egy pillanatra megjelenik a kurzornál, kék színnel.</value>
+  </data>
 </root>

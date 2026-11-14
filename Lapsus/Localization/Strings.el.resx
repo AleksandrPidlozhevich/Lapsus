@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: ανοίξτε Ρυθμίσεις → Βιβλιοθήκη για να το κατεβάσετε.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Εμφάνιση του σημείου όπου μια λέξη διορθώθηκε αυτόματα</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Η ένδειξη διάταξης εμφανίζεται για μια στιγμή δίπλα στον δρομέα, με μπλε χρώμα.</value>
+  </data>
 </root>

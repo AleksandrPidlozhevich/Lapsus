@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: indirmek için Ayarlar → Kitaplık bölümünü açın.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Bir sözcüğün otomatik düzeltildiği yeri göster</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Düzen etiketi imlecin yanında bir an için mavi renkte görünür.</value>
+  </data>
 </root>

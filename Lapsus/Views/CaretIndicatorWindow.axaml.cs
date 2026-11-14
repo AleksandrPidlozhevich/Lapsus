@@ -39,6 +39,20 @@ public partial class CaretIndicatorWindow : Window
         }
     }
 
+    private static readonly IBrush Accent = new SolidColorBrush(Color.Parse("#2F6FED"));
+
+    // The text in the accent colour: the badge is marking an automatic fix, not just naming the layout.
+    public bool Highlighted
+    {
+        set
+        {
+            if (value)
+                _label.Foreground = Accent;
+            else
+                _label.ClearValue(TextBlock.ForegroundProperty);
+        }
+    }
+
     // null: the plain text badge (layout indicator); true: the microphone listening; false: working on it.
     public bool? Microphone
     {

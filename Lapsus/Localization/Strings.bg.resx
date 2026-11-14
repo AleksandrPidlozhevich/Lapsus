@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: отворете Настройки → Библиотека, за да го изтеглите.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Показване къде дума е поправена автоматично</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Значката на подредбата се появява за миг до курсора, в синьо.</value>
+  </data>
 </root>

@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: გახსენით პარამეტრები ← ბიბლიოთეკა ჩამოსატვირთად.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>აჩვენე, სად გასწორდა სიტყვა ავტომატურად</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>განლაგების ნიშანი წამით ჩნდება კურსორთან, ლურჯად.</value>
+  </data>
 </root>

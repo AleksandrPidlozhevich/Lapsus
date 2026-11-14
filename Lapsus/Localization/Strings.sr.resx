@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: otvorite Podešavanja → Biblioteka da ga preuzmete.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Prikaži gde je reč ispravljena automatski</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Oznaka rasporeda se na trenutak pojavi kod kursora, plavom bojom.</value>
+  </data>
 </root>

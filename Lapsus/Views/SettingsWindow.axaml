@@ -484,6 +484,16 @@
                                     <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding AutoFixTypos}" />
                                 </Grid>
 
+                                <Grid ColumnDefinitions="*,Auto" IsEnabled="{Binding AutoModeSwitchEnabled}"
+                                      IsVisible="{Binding IsLayoutIndicatorSupported}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[AutoFixSignal]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[AutoFixSignal_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding AutoFixSignal}" />
+                                </Grid>
+
                                 <TextBlock Classes="hint" Text="{Binding AutoModeBlockedHint}"
                                            IsVisible="{Binding AutoModeBlockedHint, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 

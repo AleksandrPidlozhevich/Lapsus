@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: odprite Nastavitve → Knjižnica in ga prenesite.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Pokaži, kje je bila beseda samodejno popravljena</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Oznaka razporeda se za trenutek prikaže ob kazalki, v modri barvi.</value>
+  </data>
 </root>

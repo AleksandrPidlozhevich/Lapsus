@@ -49,7 +49,46 @@ public sealed class LayoutIndicator : IDisposable
         _refreshRetry = new DispatcherTimer(DispatcherPriority.Background) { Interval = TimeSpan.FromMilliseconds(50) };
         _refreshRetry.Tick += OnRefreshRetry;
 
+        _flashEnd = new DispatcherTimer(DispatcherPriority.Background) { Interval = FlashTime };
+        _flashEnd.Tick += (_, _) => EndFlash();
+
         _winEventProc = OnHostMoved;
+    }
+
+    private static readonly TimeSpan FlashTime = TimeSpan.FromMilliseconds(700);
+
+    private readonly DispatcherTimer _flashEnd;
+
+    private bool _flashing;
+
+    // The badge at the caret for a moment, its text in the accent colour: a word was just fixed unasked.
+    // Shows whether or not the badge itself is switched on.
+    public void Flash()
+    {
+        if (!IsSupported || _suspended)
+            return;
+
+        _flashing = true;
+        _flashEnd.Stop();
+        _flashEnd.Start();
+
+        // The caret has not moved to the end of the fixed word yet; the retry places the badge there.
+        Tick();
+        _refreshRetry.Stop();
+        _refreshRetry.Start();
+    }
+
+    private void EndFlash()
+    {
+        _flashEnd.Stop();
+        _flashing = false;
+        if (_window is not null)
+            _window.Highlighted = false;
+
+        if (_enabled)
+            Tick();
+        else
+            Hide();
     }
 
     // The sandbox has no Accessibility, and without it there is no caret to place the badge at.
@@ -110,6 +149,8 @@ public sealed class LayoutIndicator : IDisposable
     {
         Enabled = false;
         _refreshRetry.Stop();
+        _flashEnd.Stop();
+        _flashing = false;
         _window?.Close();
         _window = null;
     }
@@ -170,7 +211,7 @@ public sealed class LayoutIndicator : IDisposable
     private void OnRefreshRetry(object? sender, EventArgs e)
     {
         _refreshRetry.Stop();
-        if (_enabled)
+        if (_enabled || _flashing)
             Tick();
     }
 
@@ -201,7 +242,7 @@ public sealed class LayoutIndicator : IDisposable
             .ContinueWith(t => Dispatcher.UIThread.Post(() =>
             {
                 _macSampleInFlight = false;
-                if (_enabled && t.IsCompletedSuccessfully)
+                if ((_enabled || _flashing) && t.IsCompletedSuccessfully)
                     Apply(t.Result.ProcessName, t.Result.Caret);
             }), TaskScheduler.Default);
     }
@@ -319,6 +360,7 @@ public sealed class LayoutIndicator : IDisposable
     {
         var window = _window ??= new CaretIndicatorWindow();
         window.Text = text;
+        window.Highlighted = _flashing;
 
         var screen = ScreenAt(window, caret);
         var scale = screen?.Scaling ?? 1;

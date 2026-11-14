@@ -39,6 +39,9 @@ public sealed class AppSettings
 
     public bool ShowLayoutIndicator { get; set; }
 
+    // The badge flashes at the caret when a word is fixed after Space.
+    public bool AutoFixSignal { get; set; } = true;
+
     public string InterfaceLanguage { get; set; } = "en";
 
     public AppThemePreference ThemePreference { get; set; } = AppThemePreference.Dark;

@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: Öffnen Sie Einstellungen → Bibliothek, um es herunterzuladen.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Anzeigen, wo ein Wort automatisch korrigiert wurde</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Das Layout-Kennzeichen erscheint kurz am Cursor, in Blau.</value>
+  </data>
 </root>

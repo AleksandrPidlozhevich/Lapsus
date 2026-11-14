@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: åbn Indstillinger → Bibliotek for at hente den.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Vis, hvor et ord blev rettet automatisk</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Layoutmærket vises et øjeblik ved markøren, i blåt.</value>
+  </data>
 </root>
