@@ -34,6 +34,28 @@ internal sealed class WordReader
     // Trigram alone may follow a settled line; never with no direction.
     private const int MinLettersToFollowTheLine = 4;
 
+    // Enough for a word no list has to follow a line already known to be in this script.
+    private bool LooksLikeAWordOf(string word, LayoutCandidate candidate)
+    {
+        // No trigram reads Korean. What tells keys meant as Korean from keys that were not is whether every
+        // one of them found its place in a syllable: "rkwlrk" is 가지가, "hello" is ㅗ디ㅣㅐ.
+        if (candidate.ScoringScript == Script.Hangul)
+            return word.Length >= 2 && word.All(Hangul.IsSyllable);
+
+        return WordScanner.TrimToLetters(word, candidate.ScoringScript).Length >= MinLettersToFollowTheLine &&
+               _scorer.NaturalnessOf(word, candidate.ScoringScript, candidate.LanguageCode) >=
+               MinNaturalnessToFollowTheLine;
+    }
+
+    // A listed stem under a clitic or a particle is evidence only in the scripts that build words that way,
+    // and only on a word too long to be an accident: five letters of an abjad, three Korean syllables (a
+    // stem of two and its particle).
+    private static bool IsLongEnoughToCrossOnAStem(string word, Script script)
+    {
+        var letters = WordScanner.TrimToLetters(word, script).Length;
+        return script == Script.Hangul ? letters >= 3 : Scripts.IsAbjad(script) && letters >= MinLettersToCrossOnClitic;
+    }
+
     private const double MinNaturalnessToFollowTheLine = 0.7;
 
     private readonly double _switchThreshold;
@@ -190,14 +212,11 @@ internal sealed class WordReader
 
             // Clitic evidence only with a settled line direction, or where the caller crosses on the keys
             // alone as BestWord does (cliticAlone); otherwise it must not pick a script.
-            var clitic = (only is not null || cliticAlone) && Scripts.IsAbjad(candidate.ScoringScript) &&
-                         WordScorer.IsWeakDictionaryHit(score) &&
-                         WordScanner.TrimToLetters(switched, candidate.ScoringScript).Length >= MinLettersToCrossOnClitic;
+            var clitic = (only is not null || cliticAlone) && WordScorer.IsWeakDictionaryHit(score) &&
+                         IsLongEnoughToCrossOnAStem(switched, candidate.ScoringScript);
 
             var followsTheLine = only is not null && !clitic && !WordScorer.IsDictionaryHit(score) &&
-                                 WordScanner.TrimToLetters(switched, candidate.ScoringScript).Length >= MinLettersToFollowTheLine &&
-                                 _scorer.NaturalnessOf(switched, candidate.ScoringScript, candidate.LanguageCode)
-                                     >= MinNaturalnessToFollowTheLine;
+                                 LooksLikeAWordOf(switched, candidate);
 
             if (!WordScorer.IsDictionaryHit(score) && !clitic && !followsTheLine)
                 continue;
@@ -321,9 +340,8 @@ internal sealed class WordReader
             var needsDictionary = requireDictionaryHit || blindSource || Scripts.IsScoringBlind(script);
 
             // Abjad clitic stand-in: keys alone, never on the way out.
-            var clitic = edits == 0 && !blindSource && !requireDictionaryHit && Scripts.IsAbjad(script) &&
-                         WordScorer.IsWeakDictionaryHit(raw) &&
-                         WordScanner.TrimToLetters(text, script).Length >= MinLettersToCrossOnClitic;
+            var clitic = edits == 0 && !blindSource && !requireDictionaryHit &&
+                         WordScorer.IsWeakDictionaryHit(raw) && IsLongEnoughToCrossOnAStem(text, script);
 
             if (needsDictionary && !WordScorer.IsDictionaryHit(raw) && !clitic)
                 return;

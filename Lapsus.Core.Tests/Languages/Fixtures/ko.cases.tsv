@@ -1,0 +1,15 @@
+# typed	expected	status	note — what a Korean speaker types with the English layout on, and the other way round
+sork	내가	ok	two syllables, no final consonant
+rmfo	그래	ok	
+dlTdj	있어	ok	Shift doubles the consonant: T is ㅆ
+dkssud	안녕	ok	a final consonant, then the next syllable's own
+sork wha rmfo	내가 좀 그래	ok	a whole line
+tkfkacjfja	사람처럼	ok	사람 is listed, 사람처럼 is not: a listed word under a particle
+clsrngksxp	친구한테	ok	the particle 한테
+tlrksRkwl	시간까지	ok	the particle 까지, with a doubled consonant
+sork eorkfl rmfo	내가 대가리 그래	ok	대가리 is on no list here: it follows a line that is Korean
+ㅗ디ㅣㅐ	hello	ok	English typed with the Korean keyboard on
+소무ㅏ ㅛㅐㅕ	thank you	ok	letters left outside any syllable are still keys
+hello world	hello world	ok	English is left alone
+내가 좀 그래	내가 좀 그래	ok	Korean is left alone
+eorkfl	eorkfl	ok	a word no list has, alone, is not evidence enough to cross

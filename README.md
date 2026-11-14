@@ -34,11 +34,12 @@ repaired in place — no retyping, and no waiting on the OS to switch layout.
 | `ghbdtn` | `привет` | positional remap on the Russian layout |
 | `;ovek` | `čovek` | č on the semicolon key, Serbian Latin |
 | `gamarjoba` | `გამარჯობა` | a phonetic layout, letters reached through Shift |
+| `dkssud` | `안녕` | six letter keys gathered into two syllables |
 | `sch;n` | `schön` | one mistyped key between two Latin layouts |
 | `n'rcn` in `прывітанне, свет n'rcn` | `тэкст` | only the tail is wrong; the rest is left alone |
 | `hello,` | `hello,` | a real word stays a real word |
 
-Seven writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian, Armenian**.
+Eight writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian, Armenian, Korean**.
 
 ## Who it is for
 
@@ -112,7 +113,9 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
   out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own
   names. [More below.](#voice-typing-optional)
 - **Stay out of the way**: named applications are skipped entirely, password fields never reach the
-  buffer, and IME input (Chinese / Japanese / Korean) is left to the IME.
+  buffer, and IME input (Chinese / Japanese / Korean) is left to the IME. Korean is the one of the
+  three Lapsus can read: with the English layout on, `dkssud` is fixed on the hotkey like any other
+  wrong-layout word, and a selection is fixed either way round whichever keyboard is on.
 - **Take a break**: the tray menu pauses Lapsus for fifteen minutes, an hour, or until you bring it
   back, and on Windows it steps aside by itself while a full-screen game is running.
 - **Notice a new layout**: when your keyboard has a layout whose language has no dictionary yet,
@@ -178,7 +181,7 @@ push the next MSI.
    typo-fixed.
 3. **Score** — a dictionary hit wins outright; otherwise a character-trigram model built from the
    installed word lists judges how natural the word looks, times an edit penalty, and a switch happens
-   only past a threshold. Scripts that cannot be scored honestly — Hebrew, Arabic, Georgian, Armenian — are
+   only past a threshold. Scripts that cannot be scored honestly — Hebrew, Arabic, Georgian, Armenian, Korean — are
    dictionary-only by design.
 4. **Inject** — the backspaces and the replacement go out as **one** `SendInput` call, as Unicode.
    Nothing waits on an OS layout switch, which is the lag every switcher of this kind is known for.
@@ -188,7 +191,7 @@ push the next MSI.
 ## Dictionaries
 
 Not bundled, and no network traffic until you click Download. In **Settings → Library**, pick from
-**34** languages across the seven scripts:
+**35** languages across the eight scripts:
 
 - a frequency list — [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) for most
   languages, Unicode Unilex for Belarusian, Georgian and Armenian;
