@@ -67,7 +67,7 @@ internal sealed class BrainBuilder(
                             await Task.Run(() => _llm.Load(path, plan)).ConfigureAwait(true);
                             _loadedModel = wanted;
 
-                            WarmUpNeural(backend.PreferredLayout);
+                            WarmUpNeural();
                         }
 
                         corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), exceptions,
@@ -133,15 +133,13 @@ internal sealed class BrainBuilder(
             .ConfigureAwait(true);
     }
 
-    private void WarmUpNeural(KeyboardLayout? preferred)
+    private void WarmUpNeural()
     {
         if (_llm is not { } llm)
             return;
 
+        // Any prompt will do: the first run pays for graph setup, whatever it reads.
         const string sample = "ntrcn";
-        var system = NeuralRewritePrompt.BuildSystem(preferred);
-        var user = NeuralRewritePrompt.BuildUser(
-            sample, BundledKeyboardMaps.En, backend.LayoutCandidates(), preferred);
-        _ = llm.WarmUpAsync(system, user, sample.Length);
+        _ = llm.WarmUpAsync("", sample, sample.Length);
     }
 }

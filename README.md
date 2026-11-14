@@ -105,7 +105,7 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
 |-------|-------|--------------|
 | **Dictionary** (default) | a word list | Ranks every reading — as typed, remapped through each installed layout, each also typo-fixed — and switches only past a confidence threshold. |
 | **Layout switch only** | nothing at all | One character for another. No word list, no threshold: you pressed the key, and that is the whole decision. |
-| **Neural** (opt-in) | a local model | A small instruct LLM rewrites the whole fragment, with the dictionary brain riding along as its adviser when a word list is installed — and standing in for it while the model is not loaded. |
+| **Neural** (opt-in) | a local model | A small LLM reads every word's possible readings in context and picks one, with the dictionary brain riding along as its adviser when a word list is installed — and standing in for it while the model is not loaded. |
 
 ## Install
 
