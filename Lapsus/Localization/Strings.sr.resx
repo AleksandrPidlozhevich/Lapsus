@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Prikaži uvod ponovo</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pauza</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Na 15 minuta</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Na 1 sat</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Dok ne nastavim</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Nastavi</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Praćenje je pauzirano</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pauza u igrama preko celog ekrana</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Dok igra zauzima ceo ekran, Lapsus uklanja svoju kuku za tastaturu i vraća je kada se igra završi.</value>
+  </data>
 </root>

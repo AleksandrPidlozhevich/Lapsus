@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>عرض المقدمة مرة أخرى</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>إيقاف مؤقت</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>لمدة 15 دقيقة</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>لمدة ساعة</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>إلى أن أستأنف</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>استئناف</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>الالتقاط متوقف مؤقتًا</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>إيقاف مؤقت في الألعاب بملء الشاشة</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>ما دامت لعبة تشغل الشاشة كلها، يزيل Lapsus خطّاف لوحة المفاتيح الخاص به ويعيده عند انتهاء اللعبة.</value>
+  </data>
 </root>

@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Покажи въведението отново</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Пауза</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>За 15 минути</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>За 1 час</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Докато не възобновя</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Възобновяване</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Прихващането е на пауза</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Пауза в игри на цял екран</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Докато игра заема целия екран, Lapsus премахва своята кука за клавиатурата и я връща, когато играта приключи.</value>
+  </data>
 </root>

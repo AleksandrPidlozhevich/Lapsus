@@ -494,6 +494,15 @@
                                     <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding AutoFixSignal}" />
                                 </Grid>
 
+                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding IsGamePauseSupported}">
+                                    <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                        <TextBlock Text="{Binding L[PauseInGames]}"
+                                                   VerticalAlignment="Center" TextWrapping="Wrap" />
+                                        <TextBlock Classes="hint" Text="{Binding L[PauseInGames_Hint]}" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding PauseInGames}" />
+                                </Grid>
+
                                 <TextBlock Classes="hint" Text="{Binding AutoModeBlockedHint}"
                                            IsVisible="{Binding AutoModeBlockedHint, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 

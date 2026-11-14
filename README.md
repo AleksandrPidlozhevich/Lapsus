@@ -116,6 +116,8 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
   buffer, and IME input (Chinese / Japanese / Korean) is left to the IME. Korean is the one of the
   three Lapsus can read: with the English layout on, `dkssud` is fixed on the hotkey like any other
   wrong-layout word, and a selection is fixed either way round whichever keyboard is on.
+- **Take a break**: the tray menu pauses Lapsus for fifteen minutes, an hour, or until you bring it
+  back, and on Windows it steps aside by itself while a full-screen game is running.
 - **Notice a new layout**: when your keyboard has a layout whose language has no dictionary yet,
   the Library tab offers it in one click — nothing is downloaded until you ask.
 - **Move with you**: settings, the leave-alone word list and excluded apps export to one file and

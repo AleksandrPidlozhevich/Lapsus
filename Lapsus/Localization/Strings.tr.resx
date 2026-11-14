@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Tanıtımı yeniden göster</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Duraklat</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>15 dakika</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>1 saat</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Ben sürdürene kadar</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Sürdür</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Yakalama duraklatıldı</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Tam ekran oyunlarda duraklat</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Bir oyun ekranın tamamını kapladığı sürece Lapsus klavye kancasını kaldırır ve oyun bitince geri koyar.</value>
+  </data>
 </root>

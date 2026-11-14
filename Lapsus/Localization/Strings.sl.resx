@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Znova pokaži uvod</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Premor</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Za 15 minut</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Za 1 uro</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Dokler ne nadaljujem</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Nadaljuj</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Zajem je začasno ustavljen</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Premor v celozaslonskih igrah</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Dokler igra zaseda ves zaslon, Lapsus odstrani svoj kavelj za tipkovnico in ga vrne, ko se igra konča.</value>
+  </data>
 </root>

@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Εμφάνιση της εισαγωγής ξανά</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Παύση</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Για 15 λεπτά</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Για 1 ώρα</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Μέχρι να συνεχίσω</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Συνέχιση</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Η καταγραφή είναι σε παύση</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Παύση σε παιχνίδια πλήρους οθόνης</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Όσο ένα παιχνίδι καταλαμβάνει όλη την οθόνη, το Lapsus αφαιρεί το άγκιστρο πληκτρολογίου του και το επαναφέρει όταν τελειώσει το παιχνίδι.</value>
+  </data>
 </root>

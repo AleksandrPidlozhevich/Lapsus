@@ -302,10 +302,30 @@ public partial class App : Application
             _ = new DispatcherTimer(TimeSpan.FromMinutes(1), DispatcherPriority.Background, (_, _) => ShowHistory());
         }
 
+        // A break from the tray: for a while, or until asked back.
+        var pause15 = new NativeMenuItem(loc["Tray_Pause15"]);
+        pause15.Click += (_, _) => _settingsViewModel?.Pause(TimeSpan.FromMinutes(15));
+        var pause60 = new NativeMenuItem(loc["Tray_Pause60"]);
+        pause60.Click += (_, _) => _settingsViewModel?.Pause(TimeSpan.FromHours(1));
+        var pauseOpen = new NativeMenuItem(loc["Tray_PauseUntil"]);
+        pauseOpen.Click += (_, _) => _settingsViewModel?.Pause(null);
+        var pauseItem = new NativeMenuItem(loc["Tray_Pause"])
+        {
+            Menu = new NativeMenu { Items = { pause15, pause60, pauseOpen } }
+        };
+        var resumeItem = new NativeMenuItem(loc["Tray_Resume"]) { IsVisible = false };
+        resumeItem.Click += (_, _) => _settingsViewModel?.Resume();
+        if (_settingsViewModel is { } pausing)
+            pausing.PauseChanged += (_, _) =>
+            {
+                resumeItem.IsVisible = pausing.IsPaused;
+                pauseItem.IsVisible = !pausing.IsPaused;
+            };
+
         _trayIcon = new TrayIcon
         {
             ToolTipText = loc["Tray_Tooltip"],
-            Menu = new NativeMenu { Items = { showItem, historyItem, exitItem } }
+            Menu = new NativeMenu { Items = { showItem, pauseItem, resumeItem, historyItem, exitItem } }
         };
 
         _trayIcon.Clicked += (_, _) => ToggleWindow();
@@ -319,6 +339,11 @@ public partial class App : Application
         {
             showItem.Header = loc["Tray_Settings"];
             historyItem.Header = loc["Tray_DictationHistory"];
+            pauseItem.Header = loc["Tray_Pause"];
+            pause15.Header = loc["Tray_Pause15"];
+            pause60.Header = loc["Tray_Pause60"];
+            pauseOpen.Header = loc["Tray_PauseUntil"];
+            resumeItem.Header = loc["Tray_Resume"];
             exitItem.Header = loc[exitKey];
             _trayIcon.ToolTipText = _updateItem is null
                 ? loc["Tray_Tooltip"]

@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Znova zobraziť úvod</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pozastaviť</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Na 15 minút</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Na 1 hodinu</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Kým neobnovím</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Obnoviť</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Zachytávanie je pozastavené</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pozastaviť v hrách na celú obrazovku</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Kým hra zaberá celú obrazovku, Lapsus odstráni svoj háčik klávesnice a vráti ho, keď sa hra skončí.</value>
+  </data>
 </root>

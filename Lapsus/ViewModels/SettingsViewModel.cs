@@ -91,6 +91,8 @@ public partial class SettingsViewModel : ViewModelBase
         _showLayoutIndicator = settings.ShowLayoutIndicator;
         _indicator.Enabled = _showLayoutIndicator;
         _autoFixSignal = settings.AutoFixSignal;
+        _pauseInGames = settings.PauseInGames;
+        _ = new DispatcherTimer(TimeSpan.FromSeconds(3), DispatcherPriority.Background, (_, _) => CheckPause());
         _backend.AutoFixApplied += (_, _) =>
         {
             if (AutoFixSignal)
@@ -319,7 +321,60 @@ public partial class SettingsViewModel : ViewModelBase
         : PlainLayoutSwitch ? L["AutoCorrect_Blocked_Plain"]
         : null;
 
-    public string CaptureLabel => L[Enabled ? "Capture_On" : "Capture_Off"];
+    public string CaptureLabel => L[!Enabled ? "Capture_Off" : IsPaused ? "Capture_Paused" : "Capture_On"];
+
+    private readonly CapturePause _pause = new(() => DateTime.Now);
+
+    private bool _pauseApplied;
+
+    // On in Settings and not paused: the hooks are in.
+    private bool Capturing => Enabled && !_pause.IsPaused;
+
+    public bool IsPaused => _pause.IsPaused;
+
+    // The tray menu follows this.
+    public event EventHandler? PauseChanged;
+
+    public bool IsGamePauseSupported => OperatingSystem.IsWindows();
+
+    [ObservableProperty] private bool _pauseInGames;
+
+    partial void OnPauseInGamesChanged(bool value)
+    {
+        _settings.PauseInGames = value;
+        _store.Save(_settings);
+        CheckPause();
+    }
+
+    // null: until Resume.
+    public void Pause(TimeSpan? duration)
+    {
+        _pause.For(duration);
+        CheckPause();
+    }
+
+    public void Resume()
+    {
+        _pause.Resume();
+        CheckPause();
+    }
+
+    // Also on a timer: a pause runs out, a game starts or ends, and nothing else says so.
+    private void CheckPause()
+    {
+        _pause.GameRunning = PauseInGames && OperatingSystem.IsWindows() &&
+                             NativeMethods.SHQueryUserNotificationState(out var state) == 0 &&
+                             state == NativeMethods.QUNS_RUNNING_D3D_FULL_SCREEN;
+        if (_pause.IsPaused == _pauseApplied)
+            return;
+
+        _pauseApplied = _pause.IsPaused;
+        OnPropertyChanged(nameof(CaptureLabel));
+        OnPropertyChanged(nameof(IsPaused));
+        if (Enabled)
+            ApplyEnabled();
+        PauseChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     partial void OnEnabledChanged(bool value)
     {
@@ -501,7 +556,7 @@ public partial class SettingsViewModel : ViewModelBase
             // Windows: the WH_KEYBOARD_LL hook must be installed on a thread that pumps messages (the UI
             // thread). On a pool thread Windows times out every key event and silently drops the hook.
             // Stop touches UI-owned typing state and stays on this thread.
-            if (Enabled && OperatingSystem.IsMacOS())
+            if (Capturing && OperatingSystem.IsMacOS())
                 await Task.Run(() =>
                 {
                     // Surfaces macOS's own permission dialogs on first use instead of only pointing at
@@ -509,7 +564,7 @@ public partial class SettingsViewModel : ViewModelBase
                     SystemPermissions.PromptForPermissionsIfNeeded();
                     _backend.Start();
                 }).ConfigureAwait(true);
-            else if (Enabled)
+            else if (Capturing)
                 _backend.Start();
             else
                 _backend.Stop();

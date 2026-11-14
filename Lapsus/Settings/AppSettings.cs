@@ -39,6 +39,9 @@ public sealed class AppSettings
 
     public bool ShowLayoutIndicator { get; set; }
 
+    // Windows: capture is off while a Direct3D application owns the whole screen.
+    public bool PauseInGames { get; set; } = true;
+
     // The badge flashes at the caret when a word is fixed after Space.
     public bool AutoFixSignal { get; set; } = true;
 
