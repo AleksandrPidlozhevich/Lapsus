@@ -114,6 +114,41 @@ not an option: it ships inside the client, where anyone can read it back out.
 If the code must stay private, publish the releases to a second, public repository and point
 `RepoUrl` at that one.
 
+## winget
+
+`winget install AliaksandrPidlazhevich.Lapsus` installs the same `Lapsus-win-Setup.exe`, without
+the SmartScreen window a browser download gets. `.github/workflows/winget.yml` opens the pull
+request to [microsoft/winget-pkgs](https://github.com/microsoft/winget-pkgs) each time a release
+is **published** — the draft the Release workflow creates does not count — and does nothing while
+the `WINGET_TOKEN` secret is missing.
+
+Set up once, by hand:
+
+1. Fork `microsoft/winget-pkgs` under the account that will own the token.
+2. Create a classic personal access token with the `public_repo` scope and save it as the
+   repository secret `WINGET_TOKEN`.
+3. Submit the first version yourself — the workflow can only update a package that already
+   exists:
+
+   ```powershell
+   winget install wingetcreate
+   wingetcreate new https://github.com/AleksandrPidlozhevich/Lapsus/releases/download/v<version>/Lapsus-win-Setup.exe
+   ```
+
+   Answer its questions with: identifier `AliaksandrPidlazhevich.Lapsus`, publisher
+   `Aliaksandr Pidlazhevich` (the spelling in `LICENSE`; the identifier cannot be changed
+   later), installer type `exe`, scope `user`, silent switches `--silent`, license
+   `BUSL-1.1`.
+4. Before letting it submit, try the manifest it wrote on a machine without Lapsus:
+
+   ```powershell
+   winget settings --enable LocalManifestFiles
+   winget install --manifest <folder wingetcreate printed>
+   ```
+
+Microsoft's validation installs the package silently in a clean VM, so a wrong silent switch
+fails there and not here. Later versions need nothing: publishing the release is enough.
+
 ## Microsoft Store
 
 The Store takes an MSIX package instead of the Velopack installer. `vpk` is not needed for

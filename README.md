@@ -40,6 +40,17 @@ repaired in place — no retyping, and no waiting on the OS to switch layout.
 
 Seven writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian, Armenian**.
 
+## Who it is for
+
+- **Anyone who types in two or more languages** and keeps starting a sentence on the wrong layout —
+  Ukrainian and English, Greek and English, Hebrew and Russian, any pair of installed layouts.
+- **People who write a lot and fast**: support agents, translators, developers, students. A typo or
+  a wrong-layout word is repaired where it stands, in whatever program you are in.
+- **People who care where their text goes.** Everything runs on your computer; there is no account
+  and nothing you type is sent anywhere.
+- **Companies** that want the same on managed computers: an MSI for deployment tools, and a
+  per-seat license.
+
 ## Screenshots
 
 <table>
@@ -89,14 +100,17 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
   Russian, and ELOT 743 for Greek, the one on Greek passports — and turn a **visually reversed**
   Hebrew or Arabic line back the right way round.
 - **Show which layout is active** right next to the text cursor (opt-in), so the mistake
-  does not happen in the first place. Apps that draw their own cursor (browsers, Electron)
-  do not report a caret, on either OS.
+  does not happen in the first place.
 - **Type by voice** (opt-in): hold Ctrl+Win (⌃⌥ on a Mac) while you speak and let go, and what you
   said is typed at the cursor; a short press records hands-free until the next one. English terms in Russian or Ukrainian speech come
   out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own
   names. [More below.](#voice-typing-optional)
 - **Stay out of the way**: named applications are skipped entirely, password fields never reach the
   buffer, and IME input (Chinese / Japanese / Korean) is left to the IME.
+- **Notice a new layout**: when your keyboard has a layout whose language has no dictionary yet,
+  the Library tab offers it in one click — nothing is downloaded until you ask.
+- **Move with you**: settings, the leave-alone word list and excluded apps export to one file and
+  import on another computer.
 - **Speak your language**: the interface ships in 26 languages, right-to-left ones included.
 
 ### Three brains, one hotkey
@@ -112,8 +126,8 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
 From [getlapsus.com](https://getlapsus.com/) or the [latest GitHub release](https://github.com/AleksandrPidlozhevich/Lapsus/releases):
 
 - **Windows** — `Lapsus-win-Setup.exe`. Per-user install into `%LocalAppData%\Lapsus`: no admin, no
-  UAC prompt. It is unsigned, so SmartScreen says *"Windows protected your PC"* until the installer
-  earns reputation — *More info* → *Run anyway*. `Lapsus-win-Portable.zip` is published too.
+  UAC prompt. If SmartScreen says *"Windows protected your PC"*, choose *More info* → *Run anyway*.
+  `Lapsus-win-Portable.zip` is published too.
 - **Windows, managed deployment** — `Lapsus-win.msi`, for Group Policy / Intune / SCCM.
   [See below.](#deploying-the-msi)
 - **macOS** — the installer from the same release. Grant **Accessibility** and **Input Monitoring**
@@ -206,12 +220,10 @@ does not apply here — dictation reads nothing from the field, it only types in
 - **Recognition** is OpenAI's [Whisper](https://github.com/openai/whisper) large-v3-turbo through
   [whisper.cpp](https://github.com/ggml-org/whisper.cpp), on the graphics card where there is one
   (Vulkan on Windows: NVIDIA, AMD and Intel alike; Metal on Apple Silicon) and on the processor
-  otherwise. On a mid-range GPU a phrase
-  takes about a third of a second; on an 8-core CPU, two to three seconds. Four builds are offered —
-  large-v3-turbo (834 MB, the default), the same model as a smaller download (547 MB), the full large-v3
-  (1031 MB: on our test phrases 7.1% word errors and 19 of 25 English terms right against turbo's 9.3% and
-  17, at about 0.8 s a phrase on a mid-range GPU and 5 s on a CPU), and Whisper small (181 MB) for computers
-  without a graphics card.
+  otherwise. A phrase takes a fraction of a second on a graphics card and a few seconds on a
+  processor. Four builds are offered — large-v3-turbo (834 MB, the default), the same model as a
+  smaller download (547 MB), the full large-v3 (1031 MB: more accurate, and noticeably slower), and
+  Whisper small (181 MB) for computers without a graphics card.
 - **Long dictations are typed as you go.** Once a few seconds have been said, the next pause sends that
   part to recognition and it is typed while you keep talking; the earlier parts are Whisper's context for
   the next. While the hotkey is held the parts wait (letters typed with Ctrl down would act as shortcuts)
@@ -228,25 +240,9 @@ does not apply here — dictation reads nothing from the field, it only types in
 - **Memory**: the model (about 1 GB) loads when a dictation starts — the microphone opens at once, so no
   word is lost while it loads — and is freed after five idle minutes, or whenever you choose.
 - **On a Mac** the first dictation asks for the microphone (System Settings → Privacy & Security →
-  Microphone). The input device is the system's; picking another one in Lapsus is Windows-only for now.
+  Microphone).
 
 Models land in `%APPDATA%\Lapsus\speech`, each pinned to a commit and checked against its SHA-256.
-
-## Build & run
-
-```bash
-dotnet restore Lapsus.slnx
-dotnet build   Lapsus.slnx
-dotnet run --project Lapsus/Lapsus.csproj
-dotnet test    Lapsus.slnx
-```
-
-Requires the [.NET 10 SDK](https://dotnet.microsoft.com/download). Keyboard capture needs Windows or
-macOS; on Linux the app runs with a no-op backend, so the UI and the core work but nothing is
-captured yet.
-
-Building the installers ([Velopack](https://velopack.io), one script per platform) is walked through
-step by step in **[scripts/BUILDING.md](scripts/BUILDING.md)**.
 
 ## Privacy
 
@@ -275,20 +271,6 @@ the app-data folder (`%APPDATA%\Lapsus` on Windows); the Microsoft Store version
 them in its own package folder and deletes them when it is uninstalled. Full policy:
 [getlapsus.com/en/privacy/app](https://getlapsus.com/en/privacy/app/).
 
-## Not done yet
-
-- **Linux backend** (evdev / uinput) — the UI and settings run, but nothing is captured.- **Word-bigram context ranking** — next.
-- **Greek accents through the dead key on macOS** (`kal;ow` → καλός) — works on Windows only for now.
-- **macOS notarization** — outstanding.
-
-## Project layout
-
-- `Lapsus.Core` — the OS-independent brain: layouts, spelling, correction, typing buffer, text transforms
-- `Lapsus.Core.Tests` — xUnit coverage of the core
-- `Lapsus` — the Avalonia tray UI, the Windows / macOS input backends, the ONNX GenAI host
-- `Lapsus.Speech` — the Whisper host behind voice typing
-- `Lapsus.Tests` — the app-layer decisions that need no OS
-
 ## Free for private people, paid for companies
 
 **Private people use Lapsus for free — freelancers included.** Companies pay, per seat, after thirty
@@ -315,3 +297,15 @@ version is published, that version converts to the **Mozilla Public License 2.0*
 The components Lapsus ships keep their own licenses, reproduced in
 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Dictionary and model packs are not bundled and keep
 their upstream licenses.
+
+## Building from source
+
+Lapsus is written in C# on .NET 10 with [Avalonia](https://avaloniaui.net/). With the
+[.NET 10 SDK](https://dotnet.microsoft.com/download) installed:
+
+```bash
+dotnet run --project Lapsus/Lapsus.csproj
+```
+
+Building the installers is walked through step by step in
+**[scripts/BUILDING.md](scripts/BUILDING.md)**.

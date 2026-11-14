@@ -1,0 +1,30 @@
+name: WinGet
+on:
+  release:
+    types: [released]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check WINGET_TOKEN
+        id: token
+        env:
+          WINGET_TOKEN: ${{ secrets.WINGET_TOKEN }}
+        run: |
+          if [ -n "$WINGET_TOKEN" ]; then
+            echo "set=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::WINGET_TOKEN is not set; skipping the WinGet submission."
+            echo "set=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: vedantmgoyal9/winget-releaser@a8fff44b123f115ce4c21543edf8b677376fc7e0 # main, 2026-09-20
+        if: steps.token.outputs.set == 'true'
+        with:
+          identifier: AliaksandrPidlazhevich.Lapsus
+          installers-regex: '-win-Setup\.exe$'
+          token: ${{ secrets.WINGET_TOKEN }}
