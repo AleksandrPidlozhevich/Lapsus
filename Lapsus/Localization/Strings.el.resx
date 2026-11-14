@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Κάντε κλικ σε οποιοδήποτε πεδίο, πατήστε {0} και μιλήστε· πατήστε ξανά {0} και το κείμενο εμφανίζεται στον κέρσορα. Το Esc ακυρώνει.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Αντίγραφο ασφαλείας ρυθμίσεων</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Αποθηκεύστε τις ρυθμίσεις σας σε αρχείο ή φορτώστε τις σε άλλον υπολογιστή. Το κλειδί άδειας, τα λεξικά και τα μοντέλα μένουν εκεί που είναι.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Εξαγωγή…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Εισαγωγή…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Οι ρυθμίσεις εξήχθησαν.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Οι ρυθμίσεις εισήχθησαν. Κλείστε το Lapsus και ανοίξτε το ξανά για να εφαρμοστούν.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η εγγραφή του αρχείου.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Αυτό δεν είναι αρχείο ρυθμίσεων του Lapsus.</value>
+  </data>
 </root>

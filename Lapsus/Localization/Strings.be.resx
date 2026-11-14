@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Пстрыкніце ў любым полі, націсніце {0} і гаварыце; націсніце {0} яшчэ раз — тэкст з’явіцца каля курсора. Esc — адмена.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Рэзервовая копія налад</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Захавайце налады ў файл або загрузіце іх на іншым камп’ютары. Ліцэнзійны ключ, слоўнікі і мадэлі застаюцца на месцы.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Экспарт…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Імпарт…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Налады экспартаваны.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Налады імпартаваны. Закрыйце Lapsus і запусціце зноў, каб яны пачалі дзейнічаць.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Не ўдалося запісаць файл.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Гэта не файл налад Lapsus.</value>
+  </data>
 </root>

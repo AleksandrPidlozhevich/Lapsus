@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using Avalonia.Threading;
 using Lapsus.Localization;
@@ -113,6 +114,31 @@ public partial class SettingsWindow : Window
         };
         _about.Closed += (_, _) => _about = null;
         _about.Show(this);
+    }
+
+    private static readonly FilePickerFileType SettingsFile = new("JSON") { Patterns = ["*.json"] };
+
+    private async void OnExportSettingsClick(object? sender, RoutedEventArgs e)
+    {
+        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        {
+            SuggestedFileName = "lapsus-settings.json",
+            DefaultExtension = "json",
+            FileTypeChoices = [SettingsFile]
+        });
+        if (file?.TryGetLocalPath() is { } path)
+            ViewModel?.ExportSettings(path);
+    }
+
+    private async void OnImportSettingsClick(object? sender, RoutedEventArgs e)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            AllowMultiple = false,
+            FileTypeFilter = [SettingsFile]
+        });
+        if (files.Count > 0 && files[0].TryGetLocalPath() is { } path)
+            ViewModel?.ImportSettings(path);
     }
 
     private static void PinToViewport(ScrollViewer scroll, Control content)

@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Kattintson bármelyik mezőbe, nyomja meg ezt: {0}, és beszéljen; nyomja meg újra ({0}), és a szöveg megjelenik a kurzornál. Az Esc megszakítja.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Beállítások biztonsági mentése</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Mentse a beállításokat fájlba, vagy töltse be őket egy másik számítógépen. A licenckulcs, a szótárak és a modellek a helyükön maradnak.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exportálás…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importálás…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>A beállítások exportálva.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>A beállítások importálva. Lépjen ki a Lapsusból, és indítsa újra, hogy érvénybe lépjenek.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>A fájlt nem sikerült írni.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Ez nem Lapsus-beállításfájl.</value>
+  </data>
 </root>

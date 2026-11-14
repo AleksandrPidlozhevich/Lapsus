@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Klicka i valfritt fält, tryck på {0} och tala; tryck på {0} igen så visas texten vid markören. Esc avbryter.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Säkerhetskopia av inställningar</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Spara dina inställningar i en fil eller läs in dem på en annan dator. Licensnyckeln, ordlistorna och modellerna stannar där de är.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exportera…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importera…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Inställningarna har exporterats.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Inställningarna har importerats. Avsluta Lapsus och starta det igen för att de ska gälla.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Filen kunde inte skrivas.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Det här är ingen inställningsfil från Lapsus.</value>
+  </data>
 </root>

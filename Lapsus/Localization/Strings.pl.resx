@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Kliknij w dowolne pole, naciśnij {0} i mów; naciśnij {0} ponownie, a tekst pojawi się przy kursorze. Esc anuluje.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Kopia zapasowa ustawień</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Zapisz ustawienia do pliku albo wczytaj je na innym komputerze. Klucz licencyjny, słowniki i modele zostają na miejscu.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Eksportuj…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importuj…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Ustawienia wyeksportowano.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Ustawienia zaimportowano. Zamknij Lapsus i uruchom go ponownie, aby zaczęły działać.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Nie udało się zapisać pliku.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>To nie jest plik ustawień Lapsus.</value>
+  </data>
 </root>

@@ -543,6 +543,23 @@
                                                VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,12,0" />
                                     <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding RunAtStartup}" />
                                 </Grid>
+
+                                <StackPanel Spacing="6" IsVisible="{Binding IsSettingsBackupSupported}">
+                                    <Grid ColumnDefinitions="*,Auto,Auto">
+                                        <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
+                                            <TextBlock Text="{Binding L[Backup_Label]}" TextWrapping="Wrap" />
+                                            <TextBlock Classes="hint" Text="{Binding L[Backup_Hint]}" />
+                                        </StackPanel>
+                                        <Button Grid.Column="1" Content="{Binding L[Backup_Export]}"
+                                                VerticalAlignment="Center" Margin="0,0,8,0"
+                                                Click="OnExportSettingsClick" />
+                                        <Button Grid.Column="2" Content="{Binding L[Backup_Import]}"
+                                                VerticalAlignment="Center"
+                                                Click="OnImportSettingsClick" />
+                                    </Grid>
+                                    <TextBlock Classes="hint" Text="{Binding BackupStatus}"
+                                               IsVisible="{Binding BackupStatus, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                </StackPanel>
                             </StackPanel>
                         </Border>
 
