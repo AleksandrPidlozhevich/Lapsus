@@ -167,6 +167,17 @@ public partial class SettingsViewModel : ViewModelBase
         ApplyEnabled();
     }
 
+    // The introduction was shown; it does not come back on its own. While macOS permissions are still to
+    // be asked for it does, since capture has not started.
+    public void MarkIntroductionSeen()
+    {
+        if (OnboardingPending || _settings.OnboardingDone)
+            return;
+
+        _settings.OnboardingDone = true;
+        _store.Save(_settings);
+    }
+
     public AppSettings SettingsSnapshot()
     {
         return _settings;
@@ -522,7 +533,7 @@ public partial class SettingsViewModel : ViewModelBase
     }
 
     // macOS knows a layout's language only where correction needs it, so a German layout is not named there.
-    private IEnumerable<string?> LayoutLanguages()
+    internal IEnumerable<string?> LayoutLanguages()
     {
         return OperatingSystem.IsWindows()
             ? InstalledLayouts.Languages()

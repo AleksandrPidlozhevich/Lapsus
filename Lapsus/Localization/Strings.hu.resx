@@ -919,4 +919,49 @@
     <data name="Stats_Line" xml:space="preserve">
     <value>Ezen a héten: {0} ({1} rossz kiosztás, {2} elütés). A telepítés óta: {3}. Csak a számok tárolódnak, ezen a számítógépen.</value>
   </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Rossz billentyűzetkiosztással kezd el egy mondatot, megnyom egy billentyűt, és az a helyén kijavul, újragépelés nélkül. Az elütések ugyanígy javulnak.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>{0}. lépés / {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Tovább</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Vissza</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Kész</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Mit lát a Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Szólisták az Ön nyelveihez</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>A Lapsus nyelvenkénti szólista alapján különbözteti meg a valódi szót az elgépelttől. A lista egyszer töltődik le, és csak akkor, ha kéri.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>A billentyűzet minden kiosztásához megvan már a szólista.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Próbálja ki</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Kattintson az alábbi mezőbe, írja be pontosan így: {0}, majd nyomja meg ezt: {1}. Nyomja meg újra a következő olvasathoz, és még egyszer, hogy visszakapja, amit beírt.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Mi történjen magától</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>A gyorsbillentyű mindig működik. Ezek a kapcsolók a szóköz lenyomásakor rögtön kijavítják a szót; a közvetlenül utána lenyomott Backspace visszaadja, amit beírt.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>A Beállításokban több is van: billentyűk a kijelölt szöveghez (kis- és nagybetű, átírás), diktálás, helyi MI-modell. A tálcaikon nyitja meg őket.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>A bevezető újbóli megjelenítése</value>
+  </data>
 </root>

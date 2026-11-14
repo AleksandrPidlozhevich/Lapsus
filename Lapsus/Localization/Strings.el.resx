@@ -919,4 +919,49 @@
     <data name="Stats_Line" xml:space="preserve">
     <value>Αυτή την εβδομάδα: {0} ({1} λάθος διάταξη, {2} τυπογραφικά). Από την εγκατάσταση: {3}. Φυλάσσονται μόνο οι αριθμοί, σε αυτόν τον υπολογιστή.</value>
   </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Ξεκινάτε μια πρόταση με λάθος διάταξη πληκτρολογίου, πατάτε ένα πλήκτρο και διορθώνεται επιτόπου, χωρίς να την ξαναγράψετε. Τα τυπογραφικά διορθώνονται με τον ίδιο τρόπο.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Βήμα {0} από {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Επόμενο</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Πίσω</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Τέλος</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Τι βλέπει το Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Λίστες λέξεων για τις γλώσσες σας</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Το Lapsus ξεχωρίζει μια πραγματική λέξη από μια λάθος πληκτρολογημένη με μια λίστα λέξεων για κάθε γλώσσα. Η λίστα κατεβαίνει μία φορά και μόνο όταν το ζητήσετε.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Κάθε διάταξη αυτού του πληκτρολογίου έχει ήδη τη λίστα λέξεών της.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Δοκιμάστε</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Κάντε κλικ στο παρακάτω πεδίο, πληκτρολογήστε {0} ακριβώς έτσι και πατήστε {1}. Πατήστε ξανά για την επόμενη ανάγνωση και άλλη μία φορά για να πάρετε πίσω ό,τι γράψατε.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Τι να γίνεται από μόνο του</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Η συντόμευση λειτουργεί πάντα. Αυτοί οι διακόπτες διορθώνουν μια λέξη μόλις πατήσετε το πλήκτρο διαστήματος· το Backspace αμέσως μετά επαναφέρει ό,τι γράψατε.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>Στις Ρυθμίσεις υπάρχουν περισσότερα: πλήκτρα για επιλεγμένο κείμενο (πεζά-κεφαλαία, μεταγραφή), υπαγόρευση, τοπικό μοντέλο ΤΝ. Τις ανοίγει το εικονίδιο στην περιοχή ειδοποιήσεων.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Εμφάνιση της εισαγωγής ξανά</value>
+  </data>
 </root>

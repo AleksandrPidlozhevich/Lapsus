@@ -117,6 +117,9 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
   the Library tab offers it in one click — nothing is downloaded until you ask.
 - **Move with you**: settings, the leave-alone word list and excluded apps export to one file and
   import on another computer.
+- **Introduce itself**: a first launch walks through what Lapsus does, downloads the word lists for
+  your layouts, and gives you a field to try the hotkey in. Settings can show it again, and keeps a
+  count of what has been fixed.
 - **Speak your language**: the interface ships in 26 languages, right-to-left ones included.
 
 ### Three brains, one hotkey
@@ -272,7 +275,8 @@ with nothing outside Lapsus; a free install never contacts the license server at
 unreachable, nothing breaks — the app keeps correcting text.
 
 Every one of those servers sees your IP address, as any download does. Settings, the leave-alone word
-list, excluded apps, the license key, dictionaries, models and the crash log stay on your computer in
+list, excluded apps, the license key, dictionaries, models, the crash log and the count of fixes shown
+in Settings (numbers per day, never the words) stay on your computer in
 the app-data folder (`%APPDATA%\Lapsus` on Windows); the Microsoft Store version keeps
 them in its own package folder and deletes them when it is uninstalled. Full policy:
 [getlapsus.com/en/privacy/app](https://getlapsus.com/en/privacy/app/).

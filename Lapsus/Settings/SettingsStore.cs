@@ -23,6 +23,9 @@ public sealed class SettingsStore
         _path = path;
     }
 
+    // False on the very first launch: nothing has been saved yet.
+    public bool Exists => File.Exists(_path);
+
     public AppSettings Load()
     {
         try

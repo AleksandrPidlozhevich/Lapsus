@@ -919,4 +919,49 @@
     <data name="Stats_Line" xml:space="preserve">
     <value>השבוע: {0} ({1} פריסה שגויה, {2} שגיאות הקלדה). מאז ההתקנה: {3}. נשמרים רק המספרים, במחשב הזה.</value>
   </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>אתם מתחילים משפט בפריסת המקלדת הלא נכונה, לוחצים על מקש אחד והוא מתוקן במקומו, בלי להקליד שוב. שגיאות הקלדה מתוקנות באותה דרך.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>שלב {0} מתוך {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>הבא</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>הקודם</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>סיום</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>מה Lapsus רואה</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>רשימות מילים לשפות שלכם</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus מבדיל בין מילה אמיתית למילה שהוקלדה בטעות בעזרת רשימת מילים לכל שפה. הרשימה מורדת פעם אחת, ורק כשתבקשו.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>לכל פריסה במקלדת הזאת כבר יש רשימת מילים.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>נסו</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>לחצו בשדה שלמטה, הקלידו {0} בדיוק כך ולחצו על {1}. לחצו שוב לקריאה הבאה, ועוד פעם כדי לקבל בחזרה את מה שהקלדתם.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>מה יקרה מעצמו</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>מקש הקיצור פועל תמיד. המתגים האלה מתקנים מילה ברגע שלוחצים על רווח; Backspace מיד אחר כך מחזיר את מה שהקלדתם.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>בהגדרות יש עוד: מקשים לטקסט מסומן (אותיות גדולות וקטנות, תעתיק), הקלדה בקול, מודל בינה מלאכותית מקומי. הסמל שבמגש המערכת פותח אותן.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>הצגת ההקדמה שוב</value>
+  </data>
 </root>

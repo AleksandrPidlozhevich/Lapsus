@@ -919,4 +919,49 @@
     <data name="Stats_Line" xml:space="preserve">
     <value>Tento týden: {0} ({1} špatné rozložení, {2} překlepy). Od instalace: {3}. Ukládají se jen počty, v tomto počítači.</value>
   </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Začnete větu ve špatném rozložení klávesnice, stisknete jednu klávesu a opraví se na místě, bez opakovaného psaní. Stejně se opravují překlepy.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Krok {0} z {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Další</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Zpět</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Hotovo</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Co Lapsus vidí</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Slovníky pro vaše jazyky</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus rozlišuje skutečné slovo od chybného podle seznamu slov každého jazyka. Seznam se stáhne jednou a jen tehdy, když o to požádáte.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Každé rozložení této klávesnice už má svůj slovník.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Vyzkoušejte</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Klikněte do pole níže, napište {0} přesně takto a stiskněte {1}. Stiskněte znovu pro další čtení a ještě jednou, aby se vrátilo napsané.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Co se má dít samo</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Klávesová zkratka funguje vždy. Tyto přepínače opraví slovo hned, jak stisknete mezerník; Backspace hned poté vrátí napsané.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>V nastavení je toho víc: klávesy pro vybraný text (velikost písmen, přepis), psaní hlasem, místní model AI. Otevírá je ikona v oznamovací oblasti.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Znovu zobrazit úvod</value>
+  </data>
 </root>

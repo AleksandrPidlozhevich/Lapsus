@@ -919,4 +919,49 @@
     <data name="Stats_Line" xml:space="preserve">
     <value>Den här veckan: {0} ({1} fel layout, {2} skrivfel). Sedan installationen: {3}. Bara antalen sparas, på den här datorn.</value>
   </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Du börjar en mening i fel tangentbordslayout, trycker på en tangent och den rättas på plats utan att du skriver om den. Skrivfel rättas på samma sätt.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Steg {0} av {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Nästa</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Tillbaka</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Klar</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Vad Lapsus ser</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Ordlistor för dina språk</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus skiljer ett riktigt ord från ett felskrivet med hjälp av en ordlista för varje språk. En lista hämtas en gång, och bara när du ber om det.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Varje layout på det här tangentbordet har redan sin ordlista.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Prova</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Klicka i fältet nedan, skriv {0} precis så och tryck på {1}. Tryck igen för nästa läsning och en gång till för att få tillbaka det du skrev.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Vad som ska hända av sig självt</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Snabbtangenten fungerar alltid. De här reglagen rättar ett ord så fort du trycker på mellanslag; Backsteg direkt efteråt ger tillbaka det du skrev.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>Det finns mer i Inställningar: tangenter för markerad text (versaler och gemener, translitterering), diktering, en lokal AI-modell. Ikonen i meddelandefältet öppnar dem.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Visa introduktionen igen</value>
+  </data>
 </root>

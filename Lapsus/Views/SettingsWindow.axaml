@@ -559,6 +559,9 @@
                                     <TextBlock Classes="hint" Text="{Binding StatsLine}" />
                                 </StackPanel>
 
+                                <Button Content="{Binding L[Onb_Again]}" HorizontalAlignment="Left"
+                                        Click="OnShowIntroductionClick" />
+
                                 <StackPanel Spacing="6" IsVisible="{Binding IsSettingsBackupSupported}">
                                     <Grid ColumnDefinitions="*,Auto,Auto">
                                         <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
