@@ -90,7 +90,8 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
 - **Fix a word automatically** after Space (opt-in), behind a filter that leaves `myVar`, URLs,
   ALL-CAPS and very short words alone — unless the line has already switched, in which case `d`
   follows it as `в`. Out of the box it only switches layouts; fixing typos on the fly is a second
-  switch, because a name one letter from a dictionary word is not a typo.
+  switch, because a name one letter from a dictionary word is not a typo. Backspace right after a
+  fix puts back what you typed, and a word you put back three times is left alone from then on.
 - **Fix a selection** — any text, any age, even after a mouse click, through a borrowed clipboard
   that is handed back exactly as it was.
 - **Three more things a key can do to a selection**, each with its own hotkey and none of them

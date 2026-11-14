@@ -738,6 +738,90 @@ public sealed class CorrectionCycleTests : IDisposable
         ]));
     }
 
+    [Fact]
+    public void Backspace_right_after_an_auto_fix_puts_back_what_was_typed()
+    {
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();
+        backend.AutoMode = true;
+        backend.SwitchSystemLayout = true;
+        var rejected = new List<string>();
+        backend.AutoFixRejected += (_, word) => rejected.Add(word);
+
+        backend.Type("ghbdtn ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Equal("привет ", backend.Injected[^1].Text);
+
+        backend.Backspace();
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        // The field has lost the space to the Backspace itself: six letters go, the typed word and its space come back.
+        Assert.Equal((6, "ghbdtn "), backend.Injected[^1]);
+        Assert.Equal("en-US", backend.LayoutSwitches[^1].Id);
+        Assert.Equal(["ghbdtn"], rejected);
+
+        // The word is back as typed and stays: the next word is the only one read.
+        backend.Type("text ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Equal((6, "ghbdtn "), backend.Injected[^1]);
+    }
+
+    [Fact]
+    public void Backspace_after_more_typing_is_an_ordinary_backspace()
+    {
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();
+        backend.AutoMode = true;
+
+        backend.Type("ghbdtn ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        var injections = backend.Injected.Count;
+
+        backend.Type("h");
+        backend.Backspace();
+        backend.Backspace();
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal(injections, backend.Injected.Count);
+    }
+
+    [Fact]
+    public void A_word_whose_fix_is_taken_back_three_times_is_left_alone_from_then_on()
+    {
+        var settingsPath = Path.Combine(Path.GetTempPath(), $"lapsus-rejections-{Guid.NewGuid():N}.json");
+        try
+        {
+            var exceptions = new WordExceptions();
+            var settings = new Lapsus.Settings.AppSettings();
+            var rejections = new Lapsus.Input.AutoFixRejections(
+                settings, new Lapsus.Settings.SettingsStore(settingsPath), exceptions);
+            var backend = new FakeInputBackend(RealBrain(exceptions)).Listening().Focused();
+            backend.AutoMode = true;
+            backend.AutoFixRejected += (_, word) => rejections.Note(word);
+
+            for (var time = 0; time < Lapsus.Input.AutoFixRejections.Limit; time++)
+            {
+                Assert.False(exceptions.Contains("ghbdtn"));
+                backend.DiscardLine();
+                backend.Type("ghbdtn ");
+                Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+                backend.Backspace();
+                Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+            }
+
+            Assert.True(exceptions.Contains("ghbdtn"));
+            Assert.Empty(settings.RejectedAutoFixes);
+
+            var before = backend.Injected.Count;
+            backend.DiscardLine();
+            backend.Type("ghbdtn ");
+            Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+            Assert.Equal(before, backend.Injected.Count);
+        }
+        finally
+        {
+            File.Delete(settingsPath);
+        }
+    }
+
     private LayoutCorrector RealBrain(WordExceptions exceptions)
     {
         return new LayoutCorrector(

@@ -102,6 +102,8 @@ public partial class App : Application
             _backend = InputBackendFactory.CreateForCurrentPlatform(
                 new LayoutCorrector(new SpellChecker(), exceptions: _exceptions), _excludedApps);
             _brain = new BrainBuilder(_backend, _dictionaryStore, _modelStore, _exceptions);
+            var rejections = new AutoFixRejections(settings, store, _exceptions);
+            _backend.AutoFixRejected += (_, word) => rejections.Note(word);
             var supported = InputBackendFactory.IsSupported(_backend);
 
             ThemeApplier.Apply(this, settings.ThemePreference);
