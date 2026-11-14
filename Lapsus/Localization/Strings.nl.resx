@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Introductie opnieuw tonen</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pauzeren</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>15 minuten</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>1 uur</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Tot ik hervat</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Hervatten</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Vastleggen gepauzeerd</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pauzeren in schermvullende games</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Zolang een game het hele scherm in beslag neemt, verwijdert Lapsus zijn toetsenbordhook en zet die terug wanneer de game eindigt.</value>
+  </data>
 </root>

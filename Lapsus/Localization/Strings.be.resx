@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Паказаць уступ зноў</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Паўза</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>На 15 хвілін</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>На 1 гадзіну</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Пакуль не ўзнаўлю</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Узнавіць</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Перахоп на паўзе</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Паўза ў поўнаэкранных гульнях</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Пакуль гульня займае ўвесь экран, Lapsus прыбірае свой перахопнік клавіятуры і вяртае яго, калі гульня заканчваецца.</value>
+  </data>
 </root>

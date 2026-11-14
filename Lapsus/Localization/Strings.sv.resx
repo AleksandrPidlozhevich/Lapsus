@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Visa introduktionen igen</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pausa</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>I 15 minuter</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>I 1 timme</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Tills jag återupptar</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Återuppta</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Registreringen är pausad</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pausa i helskärmsspel</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Medan ett spel upptar hela skärmen tar Lapsus bort sin tangentbordshook och sätter tillbaka den när spelet avslutas.</value>
+  </data>
 </root>

@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Mostra di nuovo l’introduzione</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pausa</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Per 15 minuti</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Per 1 ora</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Finché non riprendo</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Riprendi</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Acquisizione in pausa</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pausa nei giochi a schermo intero</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Finché un gioco occupa tutto lo schermo, Lapsus rimuove il suo hook di tastiera e lo rimette quando il gioco termina.</value>
+  </data>
 </root>

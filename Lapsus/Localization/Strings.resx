@@ -969,4 +969,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Show the introduction again</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>For 15 minutes</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>For 1 hour</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Until I resume</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Capture paused</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pause in full-screen games</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>While a game owns the whole screen Lapsus takes its keyboard hook out and puts it back when the game ends.</value>
+  </data>
 </root>

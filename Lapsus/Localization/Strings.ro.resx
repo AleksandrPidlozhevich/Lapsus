@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Arată din nou introducerea</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pauză</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Pentru 15 minute</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Pentru 1 oră</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Până reiau eu</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Reia</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Captura este în pauză</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pauză în jocurile pe tot ecranul</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Cât timp un joc ocupă tot ecranul, Lapsus își scoate cârligul de tastatură și îl pune la loc când jocul se termină.</value>
+  </data>
 </root>

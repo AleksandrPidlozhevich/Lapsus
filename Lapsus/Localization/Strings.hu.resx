@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>A bevezető újbóli megjelenítése</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Szünet</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>15 percre</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>1 órára</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Amíg nem folytatom</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Folytatás</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>A figyelés szünetel</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Szünet teljes képernyős játékokban</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Amíg egy játék az egész képernyőt elfoglalja, a Lapsus eltávolítja a billentyűzetfigyelőjét, és visszateszi, amikor a játék véget ér.</value>
+  </data>
 </root>

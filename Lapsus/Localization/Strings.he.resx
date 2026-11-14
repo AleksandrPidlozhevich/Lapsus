@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>הצגת ההקדמה שוב</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>השהיה</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>למשך 15 דקות</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>למשך שעה</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>עד שאחדש</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>חידוש</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>הלכידה מושהית</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>השהיה במשחקים במסך מלא</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>כל עוד משחק תופס את כל המסך, Lapsus מסיר את וו המקלדת שלו ומחזיר אותו כשהמשחק מסתיים.</value>
+  </data>
 </root>

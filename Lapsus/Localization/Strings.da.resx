@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Vis introduktionen igen</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>I 15 minutter</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>I 1 time</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Indtil jeg fortsætter</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Fortsæt</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Registrering sat på pause</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pause i fuldskærmsspil</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Mens et spil fylder hele skærmen, fjerner Lapsus sin tastaturhook og sætter den tilbage, når spillet slutter.</value>
+  </data>
 </root>

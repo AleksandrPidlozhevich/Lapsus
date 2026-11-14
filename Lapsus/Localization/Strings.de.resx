@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Einführung erneut anzeigen</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pausieren</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Für 15 Minuten</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Für 1 Stunde</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Bis ich fortsetze</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Fortsetzen</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Erfassung pausiert</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>In Vollbildspielen pausieren</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Solange ein Spiel den ganzen Bildschirm belegt, entfernt Lapsus seinen Tastatur-Hook und setzt ihn wieder ein, wenn das Spiel endet.</value>
+  </data>
 </root>

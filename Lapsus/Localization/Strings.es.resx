@@ -964,4 +964,28 @@
     <data name="Onb_Again" xml:space="preserve">
     <value>Mostrar la introducción otra vez</value>
   </data>
+    <data name="Tray_Pause" xml:space="preserve">
+    <value>Pausar</value>
+  </data>
+    <data name="Tray_Pause15" xml:space="preserve">
+    <value>Durante 15 minutos</value>
+  </data>
+    <data name="Tray_Pause60" xml:space="preserve">
+    <value>Durante 1 hora</value>
+  </data>
+    <data name="Tray_PauseUntil" xml:space="preserve">
+    <value>Hasta que la reanude</value>
+  </data>
+    <data name="Tray_Resume" xml:space="preserve">
+    <value>Reanudar</value>
+  </data>
+    <data name="Capture_Paused" xml:space="preserve">
+    <value>Captura en pausa</value>
+  </data>
+    <data name="PauseInGames" xml:space="preserve">
+    <value>Pausar en juegos a pantalla completa</value>
+  </data>
+    <data name="PauseInGames_Hint" xml:space="preserve">
+    <value>Mientras un juego ocupa toda la pantalla, Lapsus retira su enganche de teclado y lo vuelve a poner cuando el juego termina.</value>
+  </data>
 </root>
