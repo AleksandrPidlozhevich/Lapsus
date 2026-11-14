@@ -183,7 +183,7 @@ public sealed class SpellChecker
     public bool IsKnownStem(string word, Script script, string? languageCode, out double frequency)
     {
         frequency = 0.0;
-        if (!_clitics || string.IsNullOrEmpty(word) || !Scripts.IsAbjad(script))
+        if (!_clitics || string.IsNullOrEmpty(word) || !(Scripts.IsAbjad(script) || script == Script.Hangul))
             return false;
 
         foreach (var stem in AbjadAffixes.Stems(LookupKeys.For(word, script), script))

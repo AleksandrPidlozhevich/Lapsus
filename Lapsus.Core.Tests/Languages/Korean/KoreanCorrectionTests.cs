@@ -12,7 +12,8 @@ public sealed class KoreanCorrectionTests
         "안녕 900", "한글 800", "있어요 700", "값이 600", "꽃 500", "아빠 400", "학교에 300", "고마워요 200"
     ];
 
-    private static readonly string[] EnglishWords = ["hello 900", "text 800", "world 700", "windows 600", "test 500"];
+    private static readonly string[] EnglishWords =
+        ["hello 900", "text 800", "world 700", "windows 600", "test 500", "sms 400"];
 
     private static readonly List<LayoutCandidate> ToKorean =
         [new(Script.Hangul, KeyboardLayout.Ko, BundledKeyboardMaps.Ko, "ko")];
@@ -50,6 +51,29 @@ public sealed class KoreanCorrectionTests
         Assert.Equal("안녕, 값이 있어요", result.Corrected);
     }
 
+    // The list has 한글 and 학교, never every particle on each; "sms" (는) and "dp" (에) are also English.
+    [Theory]
+    [InlineData("gksrmfsms", "한글는")]
+    [InlineData("gksrmfdmf", "한글을")]
+    [InlineData("gksrmfdptj", "한글에서")]
+    [InlineData("gksrmfgody", "한글해요")]
+    public void A_listed_word_with_a_particle_on_it_crosses_whole(string typed, string expected)
+    {
+        var result = _corrector.CorrectPhrase(typed, Script.Latin, BundledKeyboardMaps.En, ToKorean);
+
+        Assert.Equal(expected, result.Corrected);
+    }
+
+    [Theory]
+    [InlineData("dksms")] // 아는: a one-syllable stem with a particle is any two syllables
+    [InlineData("zzzqqqsms")]
+    public void A_particle_alone_does_not_make_a_word(string typed)
+    {
+        var result = _corrector.CorrectPhrase(typed, Script.Latin, BundledKeyboardMaps.En, ToKorean);
+
+        Assert.False(result.Changed);
+    }
+
     [Fact]
     public void A_korean_word_the_list_lacks_is_never_respelled_into_one_it_has()
     {
@@ -59,6 +83,25 @@ public sealed class KoreanCorrectionTests
 
         var inALine = _corrector.CorrectPhrase("dkssud gkrryrk dlTdjdy", Script.Latin, BundledKeyboardMaps.En, ToKorean);
         Assert.DoesNotContain("학교에", inALine.Corrected);
+    }
+
+    [Theory]
+    [InlineData("dkssud eorkfl dlTdjdy", "안녕 대가리 있어요")] // 대가리 is on no list here
+    [InlineData("dkssud goeorh dlTdjdy", "안녕 해대고 있어요")]
+    public void A_word_the_list_lacks_follows_a_line_that_is_korean(string typed, string expected)
+    {
+        var result = _corrector.CorrectPhrase(typed, Script.Latin, BundledKeyboardMaps.En, ToKorean);
+
+        Assert.Equal(expected, result.Corrected);
+    }
+
+    [Fact]
+    public void Keys_that_leave_a_letter_outside_any_syllable_do_not_follow_the_line()
+    {
+        // "world" is known English; "zzz" is ㅋㅋㅋ, three letters and no syllable.
+        var result = _corrector.CorrectPhrase("dkssud zzz dlTdjdy", Script.Latin, BundledKeyboardMaps.En, ToKorean);
+
+        Assert.Equal("안녕 zzz 있어요", result.Corrected);
     }
 
     [Theory]
