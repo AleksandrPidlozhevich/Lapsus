@@ -99,6 +99,12 @@ internal static class Alphabets
         return ch is >= 'Ա' and <= 'Ֆ' or >= 'ՠ' and <= 'ֈ';
     }
 
+    // Syllable blocks, and the letters a keyboard types before they gather into one.
+    internal static bool IsHangulLetter(char ch)
+    {
+        return Hangul.IsSyllable(ch) || Hangul.IsJamo(ch);
+    }
+
     internal static bool IsIgnorableMark(Script script, char ch)
     {
         return script switch
@@ -140,6 +146,7 @@ internal static class Alphabets
             Script.Arabic => IsArabicLetter(ch),
             Script.Georgian => IsGeorgianLetter(ch),
             Script.Armenian => IsArmenianLetter(ch),
+            Script.Hangul => IsHangulLetter(ch),
             _ => false
         };
     }

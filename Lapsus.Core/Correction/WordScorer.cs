@@ -118,6 +118,11 @@ internal sealed class WordScorer(SpellChecker? spell)
     // this a correct four-letter form the list lacks is respelled (جسرا → سرا).
     private bool CanSpellFixWord(string word, Script script, string? languageCode, bool typedInScript = false)
     {
+        // A Korean slip is a wrong letter inside a syllable; distance counted in syllables cannot see it and
+        // only turns a word the list lacks into a neighbour it has (해대고 → 해주고).
+        if (script == Script.Hangul)
+            return false;
+
         // A capital past the first letter makes an acronym or a name ("UX", "WiFi", "GitHub"), never a slip.
         return spell is not null && word.Length >= 2 && WordScanner.IsAllLetters(word, script) &&
                !word.Skip(1).Any(char.IsUpper) &&

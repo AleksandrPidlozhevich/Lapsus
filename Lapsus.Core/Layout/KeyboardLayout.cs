@@ -15,5 +15,7 @@ public enum KeyboardLayout
 
     Ka,
 
-    Hy
+    Hy,
+
+    Ko
 }

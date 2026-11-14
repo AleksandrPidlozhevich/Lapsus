@@ -218,7 +218,7 @@ internal static class NeuralRun
                     recorder.Elapsed.Add(clock.Elapsed.TotalMilliseconds);
 
                 // Keys typed in a script without capitals cannot carry them: "I will" comes back "i will".
-                var caseBlind = Scripts.Dominant(typed) is Script.Hebrew or Script.Arabic or Script.Georgian;
+                var caseBlind = Scripts.Dominant(typed) is Script.Hebrew or Script.Arabic or Script.Georgian or Script.Hangul;
                 var aloneRight = string.Equals(alone, expected, caseBlind ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
                 var gotRight = string.Equals(got, expected, caseBlind ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
                 if (aloneRight) dictionaryRight++;

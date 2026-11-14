@@ -12,5 +12,7 @@ public enum Script
 
     Georgian,
 
-    Armenian
+    Armenian,
+
+    Hangul
 }
