@@ -202,8 +202,6 @@ internal static class NeuralRun
             var lost = 0;
             var slips = 0;
             var offered = 0;
-            var modelRight = 0;
-            var modelCalls = 0;
             var sources = new Dictionary<string, int>();
             var examples = new List<string>();
 
@@ -213,13 +211,11 @@ internal static class NeuralRun
 
                 var alone = machine.Brain.CorrectPhrase(typed, active, machine.Installed, machine.Candidates).Corrected;
 
-                recorder.Reply = null;
                 recorder.Scored = false;
                 var clock = Stopwatch.StartNew();
                 var got = brain.CorrectPhrase(typed, active, machine.Installed, machine.Candidates).Corrected;
-                if (recorder.Reply is not null || recorder.Scored)
+                if (recorder.Scored)
                     recorder.Elapsed.Add(clock.Elapsed.TotalMilliseconds);
-                var reply = recorder.Reply is { } raw ? NeuralPhraseRewriter.SanitizeModelOutput(raw, typed) : null;
 
                 // Keys typed in a script without capitals cannot carry them: "I will" comes back "i will".
                 var caseBlind = Scripts.Dominant(typed) is Script.Hebrew or Script.Arabic or Script.Georgian;
@@ -236,13 +232,8 @@ internal static class NeuralRun
                     if (Offered(s, alone, typed)) offered++;
                     else missed = true;
                 }
-                if (reply is not null)
-                {
-                    modelCalls++;
-                    if (reply == expected.Trim()) modelRight++;
-                }
 
-                var source = SourceOf(typed, got, alone, reply, recorder.Scored);
+                var source = SourceOf(typed, got, alone, recorder.Scored);
                 sources[source] = sources.GetValueOrDefault(source) + 1;
 
                 if (aloneRight && !gotRight && examples.Count < 8)
@@ -250,7 +241,7 @@ internal static class NeuralRun
                 else if (missed && examples.Count < 8)
                     examples.Add($"NOT OFFERED {slip!.Value.Typo} → {slip.Value.Meant}   in {typed}");
                 else if (!gotRight && examples.Count < 8)
-                    examples.Add($"{typed} → {got}   wanted {expected}   ({source}{(reply is null || reply == got.Trim() ? "" : $"; model said “{reply}”")})");
+                    examples.Add($"{typed} → {got}   wanted {expected}   ({source})");
             }
 
             if (count == 0)
@@ -261,10 +252,8 @@ internal static class NeuralRun
                 [(double)won / count, (double)lost / count], Better.Either);
             if (slips > 0)
                 Report.Value("the meant word among the spellings offered", (double)offered / slips, Better.Higher);
-            if (modelCalls > 0)
-                Report.Value($"model's own answer right, of {modelCalls} asked", (double)modelRight / modelCalls, Better.Higher);
 
-            var order = new[] { Source.Model, Source.Adviser, Source.Remap, Source.AsTyped, Source.Shortcut };
+            var order = new[] { Source.Model, Source.Adviser, Source.AsTyped, Source.Shortcut };
             Report.Cells("whose answer went out", order,
                 order.Select(s => (double)sources.GetValueOrDefault(s) / count).ToList(), Better.Either);
 
@@ -282,15 +271,13 @@ internal static class NeuralRun
             return machine.Brain.SpellSuggestions(slip.Typo, script).Any(s => s.Word == slip.Meant);
         }
 
-        private static string SourceOf(string typed, string got, string alone, string? reply, bool scored)
+        private static string SourceOf(string typed, string got, string alone, bool scored)
         {
             if (got == typed)
                 return Source.AsTyped;
-            if (reply is null && !scored)
+            if (!scored)
                 return Source.Shortcut;
-            if (got == alone)
-                return Source.Adviser;
-            return scored || got.Trim() == reply ? Source.Model : Source.Remap;
+            return got == alone ? Source.Adviser : Source.Model;
         }
 
         public void Latency()
@@ -320,7 +307,6 @@ internal static class NeuralRun
     {
         public const string Model = "model";
         public const string Adviser = "dictionary";
-        public const string Remap = "remap";
         public const string AsTyped = "as typed";
         public const string Shortcut = "no model call";
     }
@@ -363,8 +349,6 @@ internal static class NeuralRun
 
     private sealed class RecordingLlm(ILocalLlm inner) : ILocalLlm
     {
-        public string? Reply { get; set; }
-
         public bool Scored { get; set; }
 
         public List<double> Elapsed { get; } = [];
@@ -373,12 +357,10 @@ internal static class NeuralRun
 
         public void Unload() => inner.Unload();
 
-        public async Task<string> CompleteAsync(
+        public Task<string> CompleteAsync(
             string systemPrompt, string userText, int answerChars, CancellationToken cancellationToken = default)
         {
-            var reply = await inner.CompleteAsync(systemPrompt, userText, answerChars, cancellationToken).ConfigureAwait(false);
-            Reply = reply;
-            return reply;
+            return inner.CompleteAsync(systemPrompt, userText, answerChars, cancellationToken);
         }
 
         public Task<IReadOnlyList<double>?> ScoreAsync(
