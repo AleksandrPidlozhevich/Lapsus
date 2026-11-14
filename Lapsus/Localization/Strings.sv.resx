@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Det här är ingen inställningsfil från Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>De här tangentbordslayouterna saknar ännu ordlista: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Hämta</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>En layout saknar ordlista</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: öppna Inställningar → Bibliotek för att hämta den.</value>
+  </data>
 </root>

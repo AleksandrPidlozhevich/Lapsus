@@ -101,7 +101,7 @@ public partial class SettingsViewModel : ViewModelBase
 
         Exclusions = new ExclusionsViewModel(exceptions, excludedApps);
 
-        Dictionaries = new DictionariesViewModel(dictionaryStore, _rebuildBrain);
+        Dictionaries = new DictionariesViewModel(dictionaryStore, _rebuildBrain, LayoutLanguages);
         Dictionaries.Installed.CollectionChanged += (_, _) => BuildPreferences(_settings.PreferredLayout);
 
         Models = new ModelsViewModel(
@@ -496,9 +496,18 @@ public partial class SettingsViewModel : ViewModelBase
         InputMonitoringGranted = SystemPermissions.InputMonitoringGranted;
     }
 
+    // macOS knows a layout's language only where correction needs it, so a German layout is not named there.
+    private IEnumerable<string?> LayoutLanguages()
+    {
+        return OperatingSystem.IsWindows()
+            ? InstalledLayouts.Languages()
+            : _backend.LayoutCandidates().Select(c => c.LanguageCode);
+    }
+
     public void OnWindowReopened()
     {
         RefreshRunningApps();
+        Dictionaries.RefreshSuggestion();
 
         var wasNeeded = PermissionsNeeded;
         RefreshPermissionState();

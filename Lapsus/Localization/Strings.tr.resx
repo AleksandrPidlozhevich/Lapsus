@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Bu bir Lapsus ayar dosyası değil.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Bu klavye düzenlerinin henüz sözlüğü yok: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>İndir</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Bir düzenin sözlüğü yok</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: indirmek için Ayarlar → Kitaplık bölümünü açın.</value>
+  </data>
 </root>

@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Das ist keine Lapsus-Einstellungsdatei.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Für diese Tastaturlayouts gibt es noch kein Wörterbuch: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Für ein Layout fehlt das Wörterbuch</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: Öffnen Sie Einstellungen → Bibliothek, um es herunterzuladen.</value>
+  </data>
 </root>

@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Ова не е датотека со поставки на Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>На тастатурата има распореди за кои сè уште нема речник: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Преземи</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>За распоред нема речник</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: отворете Поставки → Библиотека за да го преземете.</value>
+  </data>
 </root>

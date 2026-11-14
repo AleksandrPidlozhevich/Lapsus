@@ -20,6 +20,18 @@ public static class InstalledLayouts
         0x56
     ];
 
+    // The language of every installed layout, without building its key map.
+    public static IReadOnlyList<string?> Languages()
+    {
+        var count = (int)NativeMethods.GetKeyboardLayoutList(0, null);
+        if (count <= 0)
+            return [];
+
+        var hkls = new IntPtr[count];
+        NativeMethods.GetKeyboardLayoutList(count, hkls);
+        return Array.ConvertAll(hkls, LayoutLanguageResolver.IsoLanguageOf);
+    }
+
     public static IReadOnlyList<InstalledLayout> Enumerate()
     {
         var count = (int)NativeMethods.GetKeyboardLayoutList(0, null);

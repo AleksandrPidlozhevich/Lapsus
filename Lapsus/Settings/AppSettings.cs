@@ -97,4 +97,7 @@ public sealed class AppSettings
     public string[] ExcludedWords { get; set; } = [];
 
     public string[] ExcludedApps { get; set; } = [];
+
+    // Languages whose missing dictionary was already announced from the tray.
+    public string[] SuggestedDictionaries { get; set; } = [];
 }

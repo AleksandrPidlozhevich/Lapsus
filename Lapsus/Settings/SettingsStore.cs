@@ -87,6 +87,7 @@ public sealed class SettingsStore
         incoming.OnboardingDone = current.OnboardingDone;
         incoming.AnnouncedUpdateVersion = current.AnnouncedUpdateVersion;
         incoming.MicrophoneName = current.MicrophoneName;
+        incoming.SuggestedDictionaries = current.SuggestedDictionaries;
 
         Save(incoming);
         _imported = true;

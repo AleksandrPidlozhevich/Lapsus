@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Ez nem Lapsus-beállításfájl.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Ezekhez a billentyűzetkiosztásokhoz még nincs szótár: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Letöltés</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Egy kiosztáshoz nincs szótár</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: nyissa meg a Beállítások → Könyvtár lapot a letöltéshez.</value>
+  </data>
 </root>

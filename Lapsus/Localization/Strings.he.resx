@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>זה אינו קובץ הגדרות של Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>לפריסות המקלדת האלה עדיין אין מילון: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>הורדה</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>לפריסה אין מילון</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: פתחו הגדרות ← ספרייה כדי להוריד.</value>
+  </data>
 </root>

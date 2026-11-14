@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Ce n’est pas un fichier de réglages Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Ces dispositions de clavier n’ont pas encore de dictionnaire : {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Une disposition n’a pas de dictionnaire</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0} : ouvrez Réglages → Bibliothèque pour le télécharger.</value>
+  </data>
 </root>

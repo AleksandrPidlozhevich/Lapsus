@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>هذا ليس ملف إعدادات Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>تخطيطات لوحة المفاتيح هذه ليس لها قاموس بعد: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>تنزيل</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>تخطيط بلا قاموس</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: افتح الإعدادات ← المكتبة لتنزيله.</value>
+  </data>
 </root>

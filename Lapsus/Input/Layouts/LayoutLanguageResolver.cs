@@ -1,5 +1,6 @@
 using Lapsus.Core.Layout;
 using System;
+using System.Globalization;
 
 namespace Lapsus.Input;
 
@@ -46,6 +47,21 @@ internal static class LayoutLanguageResolver
             0x2B => "hy",
             _ => null
         };
+    }
+
+    // Any language Windows knows, for offering a dictionary. FromWindowsLangId names only the languages
+    // correction treats on their own; a German or Polish layout has no code there.
+    public static string? IsoLanguageOf(IntPtr hkl)
+    {
+        try
+        {
+            var name = CultureInfo.GetCultureInfo((int)(hkl.ToInt64() & 0xFFFF)).TwoLetterISOLanguageName;
+            return name is "iv" or "" ? null : name;
+        }
+        catch (Exception ex) when (ex is CultureNotFoundException or ArgumentOutOfRangeException)
+        {
+            return null;
+        }
     }
 
     public static (string? LanguageCode, KeyboardLayout? Target) Resolve(

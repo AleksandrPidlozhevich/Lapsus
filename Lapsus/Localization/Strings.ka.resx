@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>ეს არ არის Lapsus-ის პარამეტრების ფაილი.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>კლავიატურის ამ განლაგებებს ჯერ არ აქვს ლექსიკონი: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>ჩამოტვირთვა</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>განლაგებას ლექსიკონი არ აქვს</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: გახსენით პარამეტრები ← ბიბლიოთეკა ჩამოსატვირთად.</value>
+  </data>
 </root>

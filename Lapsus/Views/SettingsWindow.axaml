@@ -738,6 +738,14 @@
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[Dict_Label]}" />
                                 <TextBlock Classes="hint" Text="{Binding L[Dict_Hint]}" />
 
+                                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding Dictionaries.HasSuggestion}">
+                                    <TextBlock Grid.Column="0" Text="{Binding Dictionaries.Suggestion}"
+                                               VerticalAlignment="Center" TextWrapping="Wrap" />
+                                    <Button Grid.Column="1" Content="{Binding L[Dict_SuggestAdd]}"
+                                            Margin="8,0,0,0" VerticalAlignment="Center"
+                                            Command="{Binding Dictionaries.AddSuggestedCommand}" />
+                                </Grid>
+
                                 <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
                                     <ComboBox Grid.Column="0"
                                               ItemsSource="{Binding Dictionaries.Available}"

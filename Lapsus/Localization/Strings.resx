@@ -900,4 +900,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>This is not a Lapsus settings file.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Your keyboard has layouts with no dictionary yet: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Download</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>A layout has no dictionary</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: open Settings → Library to download it.</value>
+  </data>
 </root>
