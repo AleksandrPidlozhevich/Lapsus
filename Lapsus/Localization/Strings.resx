@@ -102,7 +102,7 @@
     <value>Change case</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Cycles the selection: UPPER CASE → lower case → Sentence case.</value>
+    <value>Cycles the selection: UPPER CASE → lower case → Sentence case → Every Word.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Transliterate</value>

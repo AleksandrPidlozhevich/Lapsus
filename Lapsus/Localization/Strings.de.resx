@@ -101,7 +101,7 @@
     <value>Groß-/Kleinschreibung ändern</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Wechselt die Auswahl: GROSSBUCHSTABEN → kleinbuchstaben → Satzanfang groß.</value>
+    <value>Wechselt die Auswahl: GROSSBUCHSTABEN → kleinbuchstaben → Satzanfang groß → Jedes Wort.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Transliterieren</value>

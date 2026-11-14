@@ -101,7 +101,7 @@
     <value>Changer la casse</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Fait défiler la sélection : MAJUSCULES → minuscules → Casse de phrase.</value>
+    <value>Fait défiler la sélection : MAJUSCULES → minuscules → Casse de phrase → Chaque Mot.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Translittérer</value>

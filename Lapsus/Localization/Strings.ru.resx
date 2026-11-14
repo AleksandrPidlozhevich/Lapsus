@@ -101,7 +101,7 @@
     <value>Сменить регистр</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>По кругу: ВЕРХНИЙ РЕГИСТР → нижний регистр → Как в предложении.</value>
+    <value>По кругу: ВЕРХНИЙ РЕГИСТР → нижний регистр → Как в предложении → Каждое Слово.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Транслитерация</value>

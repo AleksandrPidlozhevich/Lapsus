@@ -101,7 +101,7 @@
     <value>Schimbă majusculele</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Parcurge selecția: MAJUSCULE → minuscule → Prima literă mare.</value>
+    <value>Parcurge selecția: MAJUSCULE → minuscule → Prima literă mare → Fiecare Cuvânt.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Transliterează</value>

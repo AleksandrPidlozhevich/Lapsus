@@ -101,7 +101,7 @@
     <value>Смени голема/мала буква</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Го менува избраното: ГОЛЕМИ БУКВИ → мали букви → Прва буква голема.</value>
+    <value>Го менува избраното: ГОЛЕМИ БУКВИ → мали букви → Прва буква голема → Секој Збор.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Транслитерирај</value>

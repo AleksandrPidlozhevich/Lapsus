@@ -101,7 +101,7 @@
     <value>Ändra skiftläge</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Växlar markeringen: VERSALER → gemener → Stor bokstav först.</value>
+    <value>Växlar markeringen: VERSALER → gemener → Stor bokstav först → Varje Ord.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Translitterera</value>

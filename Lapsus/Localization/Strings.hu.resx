@@ -101,7 +101,7 @@
     <value>Kis- és nagybetűk váltása</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Végigjárja a kijelölést: NAGYBETŰK → kisbetűk → Mondatkezdő nagybetű.</value>
+    <value>Végigjárja a kijelölést: NAGYBETŰK → kisbetűk → Mondatkezdő nagybetű → Minden Szó.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Átírás</value>

@@ -10,19 +10,37 @@ public class CaseCycleTests
     [InlineData("Привет", "ПРИВЕТ")]
     [InlineData("ПРИВЕТ", "привет")]
     [InlineData("hello world", "Hello world")]
-    [InlineData("Hello world", "HELLO WORLD")]
+    [InlineData("Hello world", "Hello World")]
+    [InlineData("Hello World", "HELLO WORLD")]
     [InlineData("HELLO WORLD", "hello world")]
+    [InlineData("hELLO wORLD", "HELLO WORLD")]
+    [InlineData("Раз. Два", "РАЗ. ДВА")]
+    [InlineData("п'ять хвилин", "П'ять хвилин")]
+    [InlineData("П'ять хвилин", "П'ять Хвилин")]
+    [InlineData("The 5th «avenue»", "The 5th «Avenue»")]
     public void Walks_the_cycle(string input, string expected)
     {
         Assert.Equal(expected, CaseCycle.Next(input));
     }
 
     [Fact]
-    public void Three_presses_return_to_the_start()
+    public void Four_presses_return_to_the_start()
     {
-        var once = CaseCycle.Next("привет мир");
-        var twice = CaseCycle.Next(once);
-        Assert.Equal("привет мир", CaseCycle.Next(twice));
+        var text = "привет мир";
+        for (var press = 0; press < 4; press++)
+            text = CaseCycle.Next(text);
+
+        Assert.Equal("привет мир", text);
+    }
+
+    [Fact]
+    public void One_word_skips_the_step_that_would_change_nothing()
+    {
+        var text = "привет";
+        for (var press = 0; press < 3; press++)
+            text = CaseCycle.Next(text);
+
+        Assert.Equal("привет", text);
     }
 
     [Fact]
@@ -65,16 +83,21 @@ public class CaseCycleTests
     }
 
     [Fact]
-    public void Three_presses_return_to_the_start_in_greek()
+    public void Four_presses_return_to_the_start_in_greek()
     {
-        var once = CaseCycle.Next("καλημέρα κόσμος");
-        var twice = CaseCycle.Next(once);
-        Assert.Equal("καλημέρα κόσμος", CaseCycle.Next(twice));
+        var text = "καλημέρα κόσμος";
+        for (var press = 0; press < 4; press++)
+            text = CaseCycle.Next(text);
+
+        Assert.Equal("καλημέρα κόσμος", text);
     }
 
     [Theory]
     [InlineData("բարև աշխարհ", "Բարև աշխարհ")]
-    [InlineData("Բարև աշխարհ", "ԲԱՐԵՒ ԱՇԽԱՐՀ")]
+    [InlineData("Բարև աշխարհ", "Բարև Աշխարհ")]
+    [InlineData("Բարև Աշխարհ", "ԲԱՐԵՒ ԱՇԽԱՐՀ")]
+    [InlineData("նա և ես", "Նա և ես")]
+    [InlineData("Նա և ես", "Նա Եւ Ես")]
     [InlineData("ԲԱՐԵՒ ԱՇԽԱՐՀ", "բարեւ աշխարհ")]
     [InlineData("և նա եկավ", "Եւ նա եկավ")]
     [InlineData("այո։ ոչ", "Այո։ Ոչ")]

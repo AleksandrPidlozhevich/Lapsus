@@ -27,11 +27,17 @@ public static class CaseCycle
         if (hasUpper && !hasLower)
             return FinalSigma(text.ToLowerInvariant());
 
-        if (hasLower && !hasUpper)
+        // lower → Sentence → Every Word → UPPER → lower. No state is kept: the text says where it is, so
+        // one word, where Sentence and Every Word look the same, goes straight on to UPPER.
+        var sentence = FinalSigma(Capitalise(text, everyWord: false));
+        if (hasLower && !hasUpper && !string.Equals(sentence, text, StringComparison.Ordinal))
+            return sentence;
+
+        if (hasUpper && string.Equals(sentence, text, StringComparison.Ordinal))
         {
-            var sentence = FinalSigma(ToSentenceCase(text));
-            if (!string.Equals(sentence, text, StringComparison.Ordinal))
-                return sentence;
+            var title = FinalSigma(Capitalise(text, everyWord: true));
+            if (!string.Equals(title, text, StringComparison.Ordinal))
+                return title;
         }
 
         return text.ToUpperInvariant().Replace(ArmenianLigature.ToString(), "ԵՒ");
@@ -60,7 +66,7 @@ public static class CaseCycle
         return Scripts.Of(ch) is { } script && Scripts.IsCaseless(script);
     }
 
-    private static string ToSentenceCase(string text)
+    private static string Capitalise(string text, bool everyWord)
     {
         var result = new StringBuilder(text.Length);
         var atSentenceStart = true;
@@ -79,7 +85,11 @@ public static class CaseCycle
             }
 
             result.Append(ch);
-            if (ch is '.' or '!' or '?' or '…' or '\n' or '։')
+            // "5th" is a word already begun, not "5Th".
+            if (everyWord && char.IsLetterOrDigit(ch))
+                atSentenceStart = false;
+
+            if (ch is '.' or '!' or '?' or '…' or '\n' or '։' || (everyWord && char.IsWhiteSpace(ch)))
                 atSentenceStart = true;
         }
 

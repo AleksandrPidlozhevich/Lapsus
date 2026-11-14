@@ -83,7 +83,7 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
 - **Fix a selection** — any text, any age, even after a mouse click, through a borrowed clipboard
   that is handed back exactly as it was.
 - **Three more things a key can do to a selection**, each with its own hotkey and none of them
-  needing a dictionary: cycle **case** (UPPER → lower → Sentence, Greek final sigma included),
+  needing a dictionary: cycle **case** (UPPER → lower → Sentence → Every Word, Greek final sigma included),
   **transliterate** Cyrillic or Greek ⇄ Latin in each language's own romanisation — Ukrainian's 2010
   rules (Київ → Kyiv), Bulgaria's 2009 Streamlined System (Търново → Tarnovo), Belarusian, Macedonian,
   Russian, and ELOT 743 for Greek, the one on Greek passports — and turn a **visually reversed**

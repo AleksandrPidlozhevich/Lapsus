@@ -101,7 +101,7 @@
     <value>Změnit velikost písmen</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Prochází výběr: VELKÁ PÍSMENA → malá písmena → Velké první písmeno.</value>
+    <value>Prochází výběr: VELKÁ PÍSMENA → malá písmena → Velké první písmeno → Každé Slovo.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Přepsat do latinky</value>

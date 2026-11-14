@@ -101,7 +101,7 @@
     <value>Skift store/små bogstaver</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Skifter markeringen: STORE BOGSTAVER → små bogstaver → Stort begyndelsesbogstav.</value>
+    <value>Skifter markeringen: STORE BOGSTAVER → små bogstaver → Stort begyndelsesbogstav → Hvert Ord.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Translitterér</value>

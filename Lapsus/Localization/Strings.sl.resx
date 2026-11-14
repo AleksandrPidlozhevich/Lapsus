@@ -101,7 +101,7 @@
     <value>Spremeni velikost črk</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Kroži po izboru: VELIKE ČRKE → male črke → Velika začetnica.</value>
+    <value>Kroži po izboru: VELIKE ČRKE → male črke → Velika začetnica → Vsaka Beseda.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Prečrkuj</value>
