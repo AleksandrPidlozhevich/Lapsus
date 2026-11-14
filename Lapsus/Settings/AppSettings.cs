@@ -2,6 +2,7 @@ using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Models;
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Lapsus.Settings;
@@ -97,6 +98,9 @@ public sealed class AppSettings
     public string[] ExcludedWords { get; set; } = [];
 
     public string[] ExcludedApps { get; set; } = [];
+
+    // How many times each word's auto fix was taken back with Backspace (AutoFixRejections).
+    public Dictionary<string, int> RejectedAutoFixes { get; set; } = [];
 
     // Languages whose missing dictionary was already announced from the tray.
     public string[] SuggestedDictionaries { get; set; } = [];

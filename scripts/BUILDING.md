@@ -116,8 +116,9 @@ If the code must stay private, publish the releases to a second, public reposito
 
 ## winget
 
-`winget install Lapsus.Lapsus` installs the same `Lapsus-win-Setup.exe`, without
-the SmartScreen window a browser download gets. `.github/workflows/winget.yml` opens the pull
+`winget install Lapsus.Lapsus` installs the same `Lapsus-win-Setup.exe`. It does not get round
+SmartScreen: the installer is unsigned, so the "Windows protected your PC" window appears here
+too until the file earns reputation. `.github/workflows/winget.yml` opens the pull
 request to [microsoft/winget-pkgs](https://github.com/microsoft/winget-pkgs) each time a release
 is **published** — the draft the Release workflow creates does not count — and does nothing while
 the `WINGET_TOKEN` secret is missing.

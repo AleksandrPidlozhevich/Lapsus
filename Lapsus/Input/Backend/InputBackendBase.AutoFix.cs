@@ -124,6 +124,10 @@ internal abstract partial class InputBackendBase<TFocus>
         if (_buffer.TryReplaceTrailing(original, replacement))
         {
             _committedLength = _buffer.Length - replacement.Length;
+            if (tail.Length == 0)
+                _lastAutoFix = new AppliedAutoFix(
+                    word, original, replacement, source, BufferOwner,
+                    phrase.TargetLayout is not null || !string.IsNullOrEmpty(phrase.TargetLayoutId));
 
             // A cycle walks the corrected word alone, which is only the whole segment while nothing followed it.
             if (tail.Length == 0 && source is not null && Layouts is not null)
@@ -136,6 +140,45 @@ internal abstract partial class InputBackendBase<TFocus>
 
         RaiseCorrected(word, phrase.Corrected, source?.Target, phrase.TargetLayout);
         SwitchLayoutIfRequested(phrase.TargetLayout, phrase.TargetLayoutId);
+    }
+
+    // The auto fix the caret still stands right after: the next key, if it is Backspace, takes it back.
+    private AppliedAutoFix? _lastAutoFix;
+
+    private sealed record AppliedAutoFix(
+        string Word, string Typed, string Applied, InstalledLayout? Source, TFocus Owner, bool SwitchedLayout);
+
+    public event EventHandler<string>? AutoFixRejected;
+
+    // Runs after the Backspace itself: the field and the buffer have both lost the trailing space by now.
+    private void UndoAutoFix(AppliedAutoFix fix)
+    {
+        var left = fix.Applied[..^1];
+        if (!IsStillFocused(fix.Owner) || InputBlockedReason() is not null ||
+            !_buffer.Segment.EndsWith(left, StringComparison.Ordinal))
+            return;
+
+        if (!TryInject(left.Length, fix.Typed))
+            return;
+
+        _bufferGeneration++;
+        if (!_buffer.TryReplaceTrailing(left, fix.Typed))
+        {
+            ResetTypingBuffer();
+            return;
+        }
+
+        _cycle = null;
+        _committedLength = _buffer.Length - fix.Typed.Length;
+        _lineDirection = null;
+        _skippedRun.Clear();
+        _atWordStart = true;
+        _layoutChangedMidWord = false;
+
+        if (fix.SwitchedLayout && fix.Source is { } source)
+            SwitchLayoutIfRequested(source.Target, source.LayoutId);
+
+        AutoFixRejected?.Invoke(this, fix.Word);
     }
 
     private string ReadRunAgain(string[] run, Script direction)

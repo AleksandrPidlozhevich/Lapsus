@@ -251,6 +251,7 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
         _bufferGeneration++;
         _buffer.Reset();
         _pendingAutoFixes.Clear();
+        _lastAutoFix = null;
         _cycle = null;
         _committedLength = 0;
         _lineDirection = null;
@@ -280,6 +281,13 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
         {
             ResetTypingBuffer();
             return;
+        }
+
+        if (_lastAutoFix is { } rejected)
+        {
+            _lastAutoFix = null;
+            if (_buffer.Segment.EndsWith(rejected.Applied, StringComparison.Ordinal))
+                Dispatcher.UIThread.Post(() => UndoAutoFix(rejected));
         }
 
         _bufferGeneration++;
@@ -373,6 +381,8 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
             return;
         }
 
+        _lastAutoFix = null;
+
         // Keystrokes typed after a queued word's space are its tail; its correction rewrites the word and the tail.
         foreach (var pending in _pendingAutoFixes)
             pending.Tail += ch;
@@ -407,6 +417,7 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
         if (UndoDictation())
             return;
 
+        _lastAutoFix = null;
         _lineDirection = null;
         _skippedRun.Clear();
 
