@@ -114,7 +114,8 @@ public static class AutoCorrectPolicy
         if (!hasLower)
             return false;
 
-        if (hasUpperAfterFirst)
+        // "пРИВІТ" and "ПРивіт" are slips of Caps Lock and Shift, not camelCase.
+        if (hasUpperAfterFirst && !CapsSlip.LooksLikeOne(core))
             return false;
 
         return true;

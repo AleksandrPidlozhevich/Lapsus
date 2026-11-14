@@ -114,6 +114,33 @@ public sealed class LayoutCorrector : IPhraseCorrector
         IReadOnlyList<LayoutSource>? installed = null,
         CorrectionHints hints = default)
     {
+        // A slip of Shift or Caps Lock is a typo: where only the keys may be re-read it stays.
+        if (hints.KeysOnly)
+            return CorrectTokensAsTyped(text, preferred, phraseSourceLanguageCode, sourceFor, installed, hints);
+
+        // Caps Lock is undone before the words are read, since a capital inside a word reads as a name;
+        // the doubled capital after, when the word is in the script whose list can vouch for it.
+        var read = CorrectTokensAsTyped(
+            CapsSlip.UndoCapsLock(text, _exceptions.Contains), preferred, phraseSourceLanguageCode, sourceFor,
+            installed, hints);
+        var corrected = CapsSlip.UndoDoubleCapitals(read.Corrected, word =>
+            !_exceptions.Contains(word) && Scripts.Dominant(word) is { } script &&
+            (_scorer.IsListedWord(word, script) || _scorer.IsLexiconForm(word, script)));
+
+        return read with
+        {
+            Original = text,
+            Corrected = corrected,
+            Changed = read.Changed || !string.Equals(corrected, text, StringComparison.Ordinal)
+        };
+    }
+
+    private PhraseCorrection CorrectTokensAsTyped(
+        string text, KeyboardLayout? preferred, string? phraseSourceLanguageCode,
+        Func<char, WordSource> sourceFor,
+        IReadOnlyList<LayoutSource>? installed,
+        CorrectionHints hints)
+    {
         var context = new PhraseContext(
             _scorer,
             (token, source, script) => _reader.ReadAsOneWord(token, source, preferred, script),
