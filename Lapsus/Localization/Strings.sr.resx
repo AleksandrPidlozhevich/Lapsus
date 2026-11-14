@@ -101,7 +101,7 @@
     <value>Promeni veličinu slova</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Kruži kroz izbor: VELIKA SLOVA → mala slova → Prvo slovo veliko.</value>
+    <value>Kruži kroz izbor: VELIKA SLOVA → mala slova → Prvo slovo veliko → Svaka Reč.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Preslovi</value>

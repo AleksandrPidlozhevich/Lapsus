@@ -101,7 +101,7 @@
     <value>Cambiar mayúsculas</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>En ciclo: MAYÚSCULAS → minúsculas → Tipo oración.</value>
+    <value>En ciclo: MAYÚSCULAS → minúsculas → Tipo oración → Cada Palabra.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Transliterar</value>

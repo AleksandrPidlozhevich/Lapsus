@@ -101,7 +101,7 @@
     <value>Смяна на регистъра</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Обхожда избраното: ГЛАВНИ БУКВИ → малки букви → Първа буква главна.</value>
+    <value>Обхожда избраното: ГЛАВНИ БУКВИ → малки букви → Първа буква главна → Всяка Дума.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Транслитериране</value>

@@ -101,7 +101,7 @@
     <value>Hoofdlettergebruik wijzigen</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Doorloopt de selectie: HOOFDLETTERS → kleine letters → Zinsbegin met hoofdletter.</value>
+    <value>Doorloopt de selectie: HOOFDLETTERS → kleine letters → Zinsbegin met hoofdletter → Elk Woord.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Translitereren</value>

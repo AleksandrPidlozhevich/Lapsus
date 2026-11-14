@@ -101,7 +101,7 @@
     <value>Zmień wielkość liter</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Cyklicznie: WIELKIE LITERY → małe litery → Jak w zdaniu.</value>
+    <value>Cyklicznie: WIELKIE LITERY → małe litery → Jak w zdaniu → Każde Słowo.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Transliteracja</value>

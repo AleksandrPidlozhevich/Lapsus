@@ -101,7 +101,7 @@
     <value>რეგისტრის შეცვლა</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>ციკლი მონიშნულზე: მთავრული ← პატარა ასოები ← წინადადების რეგისტრი.</value>
+    <value>ციკლი მონიშნულზე: მთავრული ← პატარა ასოები ← წინადადების რეგისტრი ← ყოველი სიტყვა დიდი ასოთი.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>ტრანსლიტერაცია</value>

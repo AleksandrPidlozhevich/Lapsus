@@ -101,7 +101,7 @@
     <value>Mudar maiúsculas/minúsculas</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>Percorre a seleção: MAIÚSCULAS → minúsculas → Primeira letra maiúscula.</value>
+    <value>Percorre a seleção: MAIÚSCULAS → minúsculas → Primeira letra maiúscula → Cada Palavra.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Transliterar</value>

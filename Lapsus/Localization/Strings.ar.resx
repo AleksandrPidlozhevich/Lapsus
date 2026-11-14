@@ -101,7 +101,7 @@
     <value>تغيير حالة الأحرف</value>
   </data>
     <data name="SelectionCase_Hint" xml:space="preserve">
-    <value>يتنقّل بالتحديد: أحرف كبيرة ← أحرف صغيرة ← أول حرف كبير.</value>
+    <value>يتنقّل بالتحديد: أحرف كبيرة ← أحرف صغيرة ← أول حرف كبير ← حرف كبير في كل كلمة.</value>
   </data>
     <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>كتابة صوتية</value>
