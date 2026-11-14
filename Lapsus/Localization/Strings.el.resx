@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Αυτό δεν είναι αρχείο ρυθμίσεων του Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Αυτές οι διατάξεις πληκτρολογίου δεν έχουν ακόμη λεξικό: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Λήψη</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Μια διάταξη δεν έχει λεξικό</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: ανοίξτε Ρυθμίσεις → Βιβλιοθήκη για να το κατεβάσετε.</value>
+  </data>
 </root>

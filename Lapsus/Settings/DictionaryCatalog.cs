@@ -1,4 +1,5 @@
 using Lapsus.Core.Layout;
+using System;
 using System.Collections.Generic;
 
 namespace Lapsus.Settings;
@@ -98,6 +99,23 @@ public static class DictionaryCatalog
             $"{KaikkiUrl}/{wiktionaryName}/kaikki.org-dictionary-{wiktionaryName}.jsonl", [uniMorphUrl], WordFormsLicense);
         return new DictionaryDescriptor(code, script, name, $"{FrequencyWordsUrl}/{code}/{code}_50k.txt", null, formLists,
             $"{FrequencyWordsLicense}\n{WordFormsLicense}", version);
+    }
+
+    // Catalog languages among the keyboard's layouts that have no word list yet.
+    public static IReadOnlyList<DictionaryDescriptor> MissingFor(
+        IEnumerable<string?> layoutLanguages, Func<string, bool> isInstalled)
+    {
+        var codes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var code in layoutLanguages)
+            if (code is not null)
+                codes.Add(code);
+
+        var missing = new List<DictionaryDescriptor>();
+        foreach (var descriptor in Available)
+            if (codes.Contains(descriptor.Code) && !isInstalled(descriptor.Code))
+                missing.Add(descriptor);
+
+        return missing;
     }
 
     public static readonly IReadOnlyList<DictionaryDescriptor> Available =

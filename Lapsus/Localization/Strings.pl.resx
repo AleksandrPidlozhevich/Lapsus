@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>To nie jest plik ustawień Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Na klawiaturze są układy, dla których nie ma jeszcze słownika: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Pobierz</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Dla układu brakuje słownika</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: otwórz Ustawienia → Biblioteka, aby go pobrać.</value>
+  </data>
 </root>

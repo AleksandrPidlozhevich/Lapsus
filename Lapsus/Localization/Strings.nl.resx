@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Dit is geen instellingenbestand van Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Voor deze toetsenbordindelingen is er nog geen woordenboek: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Downloaden</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Een indeling heeft geen woordenboek</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: open Instellingen → Bibliotheek om het te downloaden.</value>
+  </data>
 </root>

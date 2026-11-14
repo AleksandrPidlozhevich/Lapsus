@@ -20,6 +20,7 @@ using Lapsus.Updates;
 using Lapsus.ViewModels;
 using Lapsus.Views;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lapsus;
@@ -152,9 +153,34 @@ public partial class App : Application
                 Dispatcher.UIThread.Post(ShowOnboarding, DispatcherPriority.Loaded);
             else if (nothingToCorrectWith)
                 Dispatcher.UIThread.Post(ShowWindow, DispatcherPriority.Loaded);
+            else
+                Dispatcher.UIThread.Post(
+                    () => AnnounceMissingDictionaries(settings, store), DispatcherPriority.Background);
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    // A layout whose language has no word list is named once; after that the Library tab keeps offering it.
+    // Nothing is downloaded until the user clicks there.
+    private void AnnounceMissingDictionaries(AppSettings settings, SettingsStore store)
+    {
+        if (_settingsViewModel is null || _trayIcon is null)
+            return;
+
+        var fresh = _settingsViewModel.Dictionaries.Suggested
+            .Where(d => Array.IndexOf(settings.SuggestedDictionaries, d.Code) < 0)
+            .ToList();
+        if (fresh.Count == 0)
+            return;
+
+        settings.SuggestedDictionaries = [.. settings.SuggestedDictionaries, .. fresh.Select(d => d.Code)];
+        store.Save(settings);
+
+        var loc = Localizer.Instance;
+        if (OperatingSystem.IsWindows())
+            WindowsTrayBalloon.TryShow(_trayIcon, loc["Notify_DictMissingTitle"],
+                loc.Format("Notify_DictMissingBody", string.Join(", ", fresh.Select(d => d.DisplayName))));
     }
 
     // The speech model loads on the first dictation (or, with "never unload", half a minute after start); the microphone opens only while recording.

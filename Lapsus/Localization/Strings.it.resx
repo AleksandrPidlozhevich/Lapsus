@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Questo non è un file di impostazioni di Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>Questi layout di tastiera non hanno ancora un dizionario: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Scarica</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Un layout non ha un dizionario</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: apri Impostazioni → Libreria per scaricarlo.</value>
+  </data>
 </root>

@@ -895,4 +895,16 @@
     <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Це не файл налаштувань Lapsus.</value>
   </data>
+    <data name="Dict_Suggest" xml:space="preserve">
+    <value>На клавіатурі є розкладки, для яких ще немає словника: {0}.</value>
+  </data>
+    <data name="Dict_SuggestAdd" xml:space="preserve">
+    <value>Завантажити</value>
+  </data>
+    <data name="Notify_DictMissingTitle" xml:space="preserve">
+    <value>Для розкладки немає словника</value>
+  </data>
+    <data name="Notify_DictMissingBody" xml:space="preserve">
+    <value>{0}: відкрийте Налаштування → Бібліотека, щоб завантажити.</value>
+  </data>
 </root>

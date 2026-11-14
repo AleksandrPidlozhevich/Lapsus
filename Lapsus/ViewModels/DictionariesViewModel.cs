@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Lapsus.Localization;
 using Lapsus.Settings;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
@@ -26,10 +27,14 @@ public sealed partial class DictionariesViewModel : ObservableObject
     private readonly DictionaryStore _store;
     private readonly Func<Task> _rebuildBrain;
 
-    public DictionariesViewModel(DictionaryStore store, Func<Task> rebuildBrain)
+    private readonly Func<IEnumerable<string?>> _layoutLanguages;
+
+    public DictionariesViewModel(
+        DictionaryStore store, Func<Task> rebuildBrain, Func<IEnumerable<string?>>? layoutLanguages = null)
     {
         _store = store;
         _rebuildBrain = rebuildBrain;
+        _layoutLanguages = layoutLanguages ?? (() => []);
 
         foreach (var descriptor in DictionaryCatalog.Available)
         {
@@ -40,7 +45,57 @@ public sealed partial class DictionariesViewModel : ObservableObject
         }
 
         _selectedAvailable = Available.FirstOrDefault();
-        Installed.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasInstalled));
+        Installed.CollectionChanged += (_, _) =>
+        {
+            OnPropertyChanged(nameof(HasInstalled));
+            RefreshSuggestion();
+        };
+        RefreshSuggestion();
+    }
+
+    private IReadOnlyList<DictionaryDescriptor> _suggested = [];
+
+    public IReadOnlyList<DictionaryDescriptor> Suggested => _suggested;
+
+    // "Deutsch (German), Polski (Polish)": layouts on this keyboard with no word list. Empty when none.
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasSuggestion))]
+    [NotifyCanExecuteChangedFor(nameof(AddSuggestedCommand))]
+    private string _suggestion = string.Empty;
+
+    public bool HasSuggestion => Suggestion.Length > 0;
+
+    // Layouts come and go while the app runs; asked again each time the window opens.
+    public void RefreshSuggestion()
+    {
+        _suggested = DictionaryCatalog.MissingFor(_layoutLanguages(), _store.IsInstalled);
+        Suggestion = _suggested.Count == 0
+            ? string.Empty
+            : L.Format("Dict_Suggest", string.Join(", ", _suggested.Select(d => d.DisplayName)));
+    }
+
+    [RelayCommand(CanExecute = nameof(CanAddSuggested))]
+    private async Task AddSuggestedAsync()
+    {
+        var added = false;
+        foreach (var descriptor in _suggested)
+        {
+            if (!await DownloadAsync(descriptor, "Dict_Installed"))
+                break;
+
+            Available.Remove(descriptor);
+            Insert(Installed, new InstalledDictionary(descriptor, false), d => d.Descriptor.DisplayName);
+            added = true;
+        }
+
+        SelectedAvailable = Available.FirstOrDefault();
+        if (added)
+            await _rebuildBrain();
+    }
+
+    private bool CanAddSuggested()
+    {
+        return HasSuggestion && !Busy;
     }
 
     private static Localizer L => Localizer.Instance;
@@ -65,7 +120,7 @@ public sealed partial class DictionariesViewModel : ObservableObject
     private DictionaryDescriptor? _selectedAvailable;
 
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(AddCommand), nameof(UpdateCommand))]
+    [NotifyCanExecuteChangedFor(nameof(AddCommand), nameof(UpdateCommand), nameof(AddSuggestedCommand))]
     private bool _busy;
 
     [ObservableProperty] private string _status = string.Empty;
