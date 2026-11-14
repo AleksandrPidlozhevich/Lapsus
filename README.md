@@ -104,7 +104,9 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
   Russian, and ELOT 743 for Greek, the one on Greek passports — and turn a **visually reversed**
   Hebrew or Arabic line back the right way round.
 - **Show which layout is active** right next to the text cursor (opt-in), so the mistake
-  does not happen in the first place.
+  does not happen in the first place. Where an app shows no cursor of its own to Lapsus — a browser,
+  an Electron app — the badge appears by the mouse pointer for a moment when the layout changes. The
+  same badge flashes blue where a word was fixed without being asked.
 - **Type by voice** (opt-in): hold Ctrl+Win (⌃⌥ on a Mac) while you speak and let go, and what you
   said is typed at the cursor; a short press records hands-free until the next one. English terms in Russian or Ukrainian speech come
   out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own

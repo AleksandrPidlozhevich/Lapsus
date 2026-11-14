@@ -68,7 +68,7 @@
     <value>Vis layoutet ved markøren</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Et mærke med det aktive layout ved siden af tekstmarkøren. Browsere viser det ikke.</value>
+    <value>Et mærke med det aktive layout ved tekstmarkøren. Hvor et program ikke oplyser markøren (browsere, Electron), vises mærket et øjeblik ved musemarkøren, når layoutet skifter.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Genvejstast</value>

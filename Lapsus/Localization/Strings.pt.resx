@@ -68,7 +68,7 @@
     <value>Mostrar o esquema junto ao cursor</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Um distintivo com o esquema ativo ao lado do cursor de texto. Os navegadores não o mostram.</value>
+    <value>Uma marca com o esquema ativo junto ao cursor de texto. Onde um programa não indica o cursor (navegadores, Electron), aparece por um momento junto ao ponteiro do rato quando o esquema muda.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tecla de atalho</value>

@@ -68,7 +68,7 @@
     <value>Mostrar la distribución junto al cursor</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Una insignia con la distribución activa junto al cursor. No aparece en navegadores.</value>
+    <value>Una marca con la distribución activa junto al cursor de texto. Donde un programa no muestra el cursor (navegadores, Electron), aparece un momento junto al puntero del ratón cuando cambia la distribución.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tecla rápida</value>

@@ -68,7 +68,7 @@
     <value>הצגת הפריסה ליד הסמן</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>תווית עם הפריסה הפעילה ליד סמן הטקסט. בדפדפנים היא לא מוצגת.</value>
+    <value>תג עם הפריסה הפעילה ליד סמן הטקסט. במקום שבו תוכנה אינה מציגה את הסמן (דפדפנים, Electron), התג מופיע לרגע ליד מצביע העכבר כשהפריסה משתנה.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>מקש חם</value>

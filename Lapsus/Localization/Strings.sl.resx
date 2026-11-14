@@ -68,7 +68,7 @@
     <value>Prikaži razporeditev ob kazalcu</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Oznaka z aktivno razporeditvijo ob besedilnem kazalcu. Brskalniki je ne prikažejo.</value>
+    <value>Oznaka dejavnega razporeda ob besedilni kazalki. Kjer program kazalke ne pokaže (brskalniki, Electron), se oznaka za trenutek prikaže ob miškinem kazalcu, ko se razpored spremeni.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Bližnjica</value>

@@ -71,6 +71,8 @@ public sealed class LayoutIndicator : IDisposable
         _flashing = true;
         _flashEnd.Stop();
         _flashEnd.Start();
+        // Without a caret the same mark shows by the mouse pointer.
+        _pointerBadge.ShowFor((int)FlashTime.TotalMilliseconds, Environment.TickCount64);
 
         // The caret has not moved to the end of the fixed word yet; the retry places the badge there.
         Tick();
@@ -261,17 +263,24 @@ public sealed class LayoutIndicator : IDisposable
             return;
         }
 
+        var text = LayoutCode();
+        var now = Environment.TickCount64;
+        _pointerBadge.Note(text, now);
+
         if (caret.IsEmpty)
         {
 
             if (_hostIsMoving)
                 return;
 
-            Hide();
+            if (text is not null && _pointerBadge.IsShowing(now) && PointerAnchor() is { } pointer)
+                Show(text, pointer);
+            else
+                Hide();
             return;
         }
 
-        if (LayoutCode() is not { } text)
+        if (text is null)
         {
             Hide();
             return;
@@ -279,6 +288,19 @@ public sealed class LayoutIndicator : IDisposable
 
         Show(text, caret);
     }
+
+    private PointerBadgeClock _pointerBadge;
+
+    private static CaretBounds? PointerAnchor()
+    {
+        if (OperatingSystem.IsWindows())
+            return GetCursorPos(out var point) ? AtPointer(point.x, point.y) : null;
+
+        return OperatingSystem.IsMacOS() && MacPointer.Location() is { } at ? AtPointer(at.X, at.Y) : null;
+    }
+
+    // As tall as a line of text, so the badge sits beside the pointer the way it sits beside a caret.
+    private static CaretBounds AtPointer(int x, int y) => new(x, y, x + 1, y + 18);
 
     // Empty carets are the common case (no focused field). After a few of them, poll slower until one appears.
     private void NoteMacCaret(bool found)

@@ -68,7 +68,7 @@
     <value>Düzeni imlecin yanında göster</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Metin imlecinin yanında etkin düzeni gösteren bir rozet. Tarayıcılar bunu göstermez.</value>
+    <value>Metin imlecinin yanında etkin düzeni gösteren etiket. Programın imleci bildirmediği yerlerde (tarayıcılar, Electron) etiket, düzen değiştiğinde fare işaretçisinin yanında bir an için görünür.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Kısayol tuşu</value>

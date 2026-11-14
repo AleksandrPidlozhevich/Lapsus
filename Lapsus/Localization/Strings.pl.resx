@@ -68,7 +68,7 @@
     <value>Pokaż układ przy kursorze</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Znacznik aktywnego układu przy kursorze tekstu. W przeglądarkach się nie pojawia.</value>
+    <value>Znacznik aktywnego układu przy kursorze tekstowym. Tam, gdzie program nie pokazuje kursora (przeglądarki, Electron), znacznik pojawia się na chwilę przy wskaźniku myszy, gdy układ się zmienia.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Skrót klawiszowy</value>

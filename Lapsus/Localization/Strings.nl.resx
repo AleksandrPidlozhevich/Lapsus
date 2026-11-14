@@ -68,7 +68,7 @@
     <value>Indeling bij de cursor tonen</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Een label met de actieve indeling naast de tekstcursor. Browsers tonen het niet.</value>
+    <value>Een label met de actieve indeling naast de tekstcursor. Waar een programma geen cursor doorgeeft (browsers, Electron), verschijnt het even bij de muisaanwijzer wanneer de indeling verandert.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Sneltoets</value>

@@ -68,7 +68,7 @@
     <value>إظهار التخطيط عند المؤشر</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>شارة بالتخطيط النشط بجوار مؤشر النص. المتصفحات لا تُظهرها.</value>
+    <value>شارة بالتخطيط النشط بجانب مؤشر النص. حيث لا يُظهر البرنامج المؤشر (المتصفحات، Electron)، تظهر الشارة للحظة عند مؤشر الفأرة عندما يتغير التخطيط.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>مفتاح الاختصار</value>
