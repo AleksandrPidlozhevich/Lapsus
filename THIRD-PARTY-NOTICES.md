@@ -93,6 +93,7 @@ same sources, licences and authors under **Dictionaries**, read from `Dictionary
 | Arabic | FrequencyWords | LibreOffice `ar` ([Ayaspell](http://ayaspell.sourceforge.net)) | MPL 1.1 (of GPL 2 / LGPL 2.1 / MPL 1.1) | Mohamed Kebdani, Taha Zerrouki; packaged by Ahmad Farghal |
 | Georgian | Unilex | wooorm `ka` ([ka_GE.spell](https://github.com/gamag/ka_GE.spell)) | MIT | gamag; built from Kevin Scannell's [Crúbadán](http://crubadan.org/languages/ka) lists (CC BY 4.0) and Dato Bumbeishvili's [GeoWordsDatabase](https://github.com/bumbeishvili/GeoWordsDatabase) (MIT) |
 | Armenian | Unilex | wooorm `hy` (from araktransfer) | MPL 1.1 (of GPL 2 / LGPL 2.1 / MPL 1.1) | araktransfer |
+| Korean | FrequencyWords | — (the Korean Hunspell works on decomposed letters, not on syllables) | — | — |
 | Serbian (Latin) | FrequencyWords | LibreOffice `sr-Latn` | MPL 2.0 or LGPL 3 (of those and GPL 3) | Milutin Smiljanić |
 | English | FrequencyWords | wooorm `en` (en_US, [SCOWL](http://wordlist.aspell.net) size 60) | SCOWL licence and BSD | © 2000–2018 Kevin Atkinson; © 1993 Geoff Kuenning (Ispell); © 2016 Benjamin Titze (VarCon) |
 | German | FrequencyWords | — (Hunspell is GPL only) | — | — |
