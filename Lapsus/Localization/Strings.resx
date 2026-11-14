@@ -69,7 +69,7 @@
     <value>Show the layout at the cursor</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>A badge with the active layout next to the text cursor. Browsers and Electron apps usually hide it — they draw their own cursor.</value>
+    <value>A badge with the active layout next to the text cursor. Where an app shows Lapsus no cursor — browsers, Electron apps — the badge appears by the mouse pointer for a moment when the layout changes.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Hotkey</value>

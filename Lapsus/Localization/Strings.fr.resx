@@ -68,7 +68,7 @@
     <value>Afficher la disposition près du curseur</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Une pastille indiquant la disposition active à côté du curseur de texte. Les navigateurs ne l&apos;affichent pas.</value>
+    <value>Un repère indiquant la disposition active près du curseur de texte. Là où un programme ne signale pas de curseur (navigateurs, Electron), il apparaît un instant près du pointeur de la souris quand la disposition change.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Raccourci</value>

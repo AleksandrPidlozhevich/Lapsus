@@ -68,7 +68,7 @@
     <value>Zobrazovat rozložení u kurzoru</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Odznak s aktivním rozložením vedle textového kurzoru. Prohlížeče jej nezobrazují.</value>
+    <value>Značka aktivního rozložení u textového kurzoru. Kde program kurzor neukazuje (prohlížeče, Electron), značka se na okamžik zobrazí u ukazatele myši, když se rozložení změní.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Klávesová zkratka</value>

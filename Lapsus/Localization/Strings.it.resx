@@ -68,7 +68,7 @@
     <value>Mostra il layout accanto al cursore</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Un badge con il layout attivo accanto al cursore. Nei browser non compare.</value>
+    <value>Un indicatore con il layout attivo accanto al cursore di testo. Dove un programma non segnala il cursore (browser, Electron), appare per un istante accanto al puntatore del mouse quando il layout cambia.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tasto di scelta rapida</value>

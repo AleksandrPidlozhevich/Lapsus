@@ -68,7 +68,7 @@
     <value>Prikaži raspored uz kursor</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Oznaka sa aktivnim rasporedom pored kursora za tekst. Pregledači je ne prikazuju.</value>
+    <value>Oznaka aktivnog rasporeda pored tekstualnog kursora. Gde program ne prikazuje kursor (pregledači, Electron), oznaka se na trenutak pojavi kod pokazivača miša kada se raspored promeni.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Prečica</value>

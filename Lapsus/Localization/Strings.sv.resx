@@ -68,7 +68,7 @@
     <value>Visa layouten vid markören</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>En bricka med den aktiva layouten bredvid textmarkören. Webbläsare visar den inte.</value>
+    <value>Ett märke med den aktiva layouten vid textmarkören. Där ett program inte visar markören (webbläsare, Electron) syns märket en kort stund vid muspekaren när layouten byts.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Snabbtangent</value>

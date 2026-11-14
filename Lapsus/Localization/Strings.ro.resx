@@ -68,7 +68,7 @@
     <value>Arată aranjamentul lângă cursor</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>O etichetă cu aranjamentul activ lângă cursorul de text. Browserele nu o afișează.</value>
+    <value>Un marcaj cu aranjamentul activ lângă cursorul de text. Unde un program nu arată cursorul (browsere, Electron), marcajul apare pentru o clipă lângă indicatorul mouse-ului când aranjamentul se schimbă.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tastă rapidă</value>

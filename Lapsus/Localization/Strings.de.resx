@@ -68,7 +68,7 @@
     <value>Layout am Cursor anzeigen</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Ein Hinweis mit dem aktiven Layout neben dem Textcursor. Browser zeigen ihn nicht.</value>
+    <value>Ein Kennzeichen mit dem aktiven Layout neben dem Textcursor. Wo ein Programm keinen Cursor meldet (Browser, Electron), erscheint es kurz am Mauszeiger, wenn das Layout wechselt.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Tastenkürzel</value>

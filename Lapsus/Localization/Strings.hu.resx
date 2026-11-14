@@ -68,7 +68,7 @@
     <value>Kiosztás megjelenítése a kurzornál</value>
   </data>
     <data name="Indicator_Hint" xml:space="preserve">
-    <value>Jelvény az aktív kiosztással a szövegkurzor mellett. A böngészők nem mutatják.</value>
+    <value>Jelzés az aktív kiosztással a szövegkurzor mellett. Ahol egy program nem mutatja a kurzort (böngészők, Electron), a jelzés egy pillanatra az egérmutatónál jelenik meg, amikor a kiosztás megváltozik.</value>
   </data>
     <data name="Hotkey_Label" xml:space="preserve">
     <value>Gyorsbillentyű</value>
