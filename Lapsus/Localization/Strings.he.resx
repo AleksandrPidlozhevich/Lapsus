@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: פתחו הגדרות ← ספרייה כדי להוריד.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>הצגת המקום שבו מילה תוקנה אוטומטית</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>תג הפריסה מופיע לרגע ליד הסמן, בכחול.</value>
+  </data>
 </root>

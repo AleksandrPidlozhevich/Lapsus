@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: відкрийте Налаштування → Бібліотека, щоб завантажити.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Показувати, де слово виправлено автоматично</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Значок розкладки на мить з’являється біля курсора, синім.</value>
+  </data>
 </root>

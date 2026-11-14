@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: otvorte Nastavenia → Knižnica a stiahnite ho.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Ukázať, kde bolo slovo opravené automaticky</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Značka rozloženia sa na okamih zobrazí pri kurzore, modrou farbou.</value>
+  </data>
 </root>

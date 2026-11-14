@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: otevřete Nastavení → Knihovna a stáhněte ho.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Ukázat, kde bylo slovo opraveno automaticky</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Značka rozložení se na okamžik zobrazí u kurzoru, modře.</value>
+  </data>
 </root>

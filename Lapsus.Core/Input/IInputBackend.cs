@@ -42,6 +42,9 @@ public interface IInputBackend : IDisposable
 
     event EventHandler<string>? Diagnostic;
 
+    /// <summary>A word was fixed after Space, unasked.</summary>
+    event EventHandler? AutoFixApplied;
+
     /// <summary>The user took an auto fix back with Backspace; the argument is the word as typed.</summary>
     event EventHandler<string>? AutoFixRejected;
 }

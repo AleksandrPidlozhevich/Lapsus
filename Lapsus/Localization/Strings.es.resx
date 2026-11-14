@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: abre Ajustes → Biblioteca para descargarlo.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Mostrar dónde se corrigió una palabra automáticamente</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>La marca de distribución aparece un momento junto al cursor, en azul.</value>
+  </data>
 </root>

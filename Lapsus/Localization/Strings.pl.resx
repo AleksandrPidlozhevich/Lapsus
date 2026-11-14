@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: otwórz Ustawienia → Biblioteka, aby go pobrać.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Pokazuj, gdzie słowo poprawiono automatycznie</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Znacznik układu pojawia się na chwilę przy kursorze, na niebiesko.</value>
+  </data>
 </root>

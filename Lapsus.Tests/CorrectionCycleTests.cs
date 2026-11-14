@@ -755,6 +755,28 @@ public sealed class CorrectionCycleTests : IDisposable
     }
 
     [Fact]
+    public void Only_a_fix_nobody_asked_for_is_announced()
+    {
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();
+        backend.AutoMode = true;
+        var announced = 0;
+        backend.AutoFixApplied += (_, _) => announced++;
+
+        backend.Type("hello ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Equal(0, announced);
+
+        backend.Type("ghbdtn ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Equal(1, announced);
+
+        backend.DiscardLine();
+        backend.Type("ghbdtn");
+        backend.PressHotkey();
+        Assert.Equal(1, announced);
+    }
+
+    [Fact]
     public void The_hotkey_undoes_caps_lock_on_the_whole_line()
     {
         var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();

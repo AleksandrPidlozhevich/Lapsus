@@ -90,6 +90,12 @@ public partial class SettingsViewModel : ViewModelBase
         _backend.SkipPasswordFields = _skipPasswordFields;
         _showLayoutIndicator = settings.ShowLayoutIndicator;
         _indicator.Enabled = _showLayoutIndicator;
+        _autoFixSignal = settings.AutoFixSignal;
+        _backend.AutoFixApplied += (_, _) =>
+        {
+            if (AutoFixSignal)
+                _indicator.Flash();
+        };
         _backend.AutoMode = _autoMode;
         _backend.AutoFixTypos = _autoFixTypos;
         _backend.SwitchSystemLayout = _switchSystemLayout;
@@ -387,6 +393,14 @@ public partial class SettingsViewModel : ViewModelBase
     {
         _settings.SkipPasswordFields = value;
         _backend.SkipPasswordFields = value;
+        _store.Save(_settings);
+    }
+
+    [ObservableProperty] private bool _autoFixSignal;
+
+    partial void OnAutoFixSignalChanged(bool value)
+    {
+        _settings.AutoFixSignal = value;
         _store.Save(_settings);
     }
 

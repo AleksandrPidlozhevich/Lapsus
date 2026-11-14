@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0} : ouvrez Réglages → Bibliothèque pour le télécharger.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Montrer où un mot a été corrigé automatiquement</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Le repère de disposition apparaît un instant près du curseur, en bleu.</value>
+  </data>
 </root>

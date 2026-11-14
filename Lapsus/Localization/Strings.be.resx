@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: адкрыйце Налады → Бібліятэка, каб спампаваць.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Паказваць, дзе слова выпраўлена аўтаматычна</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Значок раскладкі на імгненне з’яўляецца каля курсора, сінім.</value>
+  </data>
 </root>

@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: open Instellingen → Bibliotheek om het te downloaden.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Tonen waar een woord automatisch is verbeterd</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Het indelingslabel verschijnt even bij de cursor, in blauw.</value>
+  </data>
 </root>

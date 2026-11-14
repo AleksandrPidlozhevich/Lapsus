@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: افتح الإعدادات ← المكتبة لتنزيله.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>إظهار موضع الكلمة التي صُحّحت تلقائيًا</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>تظهر شارة التخطيط للحظة عند المؤشر، باللون الأزرق.</value>
+  </data>
 </root>

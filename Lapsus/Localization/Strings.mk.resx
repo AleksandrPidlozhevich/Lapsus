@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: отворете Поставки → Библиотека за да го преземете.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Покажи каде збор е поправен автоматски</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Ознаката на распоредот накратко се појавува кај курсорот, во сино.</value>
+  </data>
 </root>

@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: apri Impostazioni → Libreria per scaricarlo.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Mostra dove una parola è stata corretta automaticamente</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>L’indicatore del layout appare per un istante accanto al cursore, in blu.</value>
+  </data>
 </root>

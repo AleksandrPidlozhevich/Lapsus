@@ -37,6 +37,7 @@ public sealed class NullInputBackend : IInputBackend
     public event EventHandler<CorrectionResult>? Corrected;
     public event EventHandler<string>? Diagnostic;
     public event EventHandler<string>? AutoFixRejected;
+    public event EventHandler? AutoFixApplied;
 #pragma warning restore CS0067
 
     public void SetCorrector(IPhraseCorrector corrector)

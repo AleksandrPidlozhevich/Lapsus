@@ -907,4 +907,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: deschideți Setări → Bibliotecă pentru a-l descărca.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Arată unde a fost corectat automat un cuvânt</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>Marcajul aranjamentului apare pentru o clipă lângă cursor, în albastru.</value>
+  </data>
 </root>

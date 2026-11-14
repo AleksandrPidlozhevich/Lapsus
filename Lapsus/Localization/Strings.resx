@@ -912,4 +912,10 @@
     <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: open Settings → Library to download it.</value>
   </data>
+    <data name="AutoFixSignal" xml:space="preserve">
+    <value>Show where a word was fixed automatically</value>
+  </data>
+    <data name="AutoFixSignal_Hint" xml:space="preserve">
+    <value>The layout badge appears at the cursor for a moment, in blue.</value>
+  </data>
 </root>

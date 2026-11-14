@@ -140,7 +140,10 @@ internal abstract partial class InputBackendBase<TFocus>
 
         RaiseCorrected(word, phrase.Corrected, source?.Target, phrase.TargetLayout);
         SwitchLayoutIfRequested(phrase.TargetLayout, phrase.TargetLayoutId);
+        AutoFixApplied?.Invoke(this, EventArgs.Empty);
     }
+
+    public event EventHandler? AutoFixApplied;
 
     // The auto fix the caret still stands right after: the next key, if it is Backspace, takes it back.
     private AppliedAutoFix? _lastAutoFix;
