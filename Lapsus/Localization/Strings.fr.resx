@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Cliquez dans n’importe quel champ, appuyez sur {0} et parlez ; appuyez de nouveau sur {0} : le texte apparaît au curseur. Échap annule.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Sauvegarde des réglages</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Enregistrez vos réglages dans un fichier ou chargez-les sur un autre ordinateur. La clé de licence, les dictionnaires et les modèles restent où ils sont.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exporter…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importer…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Réglages exportés.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Réglages importés. Quittez Lapsus et relancez-le pour les appliquer.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Le fichier n’a pas pu être écrit.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Ce n’est pas un fichier de réglages Lapsus.</value>
+  </data>
 </root>

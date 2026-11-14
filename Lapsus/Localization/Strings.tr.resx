@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Herhangi bir alana tıklayın, {0} tuşuna basıp konuşun; {0} tuşuna yeniden basınca metin imlecin olduğu yerde belirir. Esc iptal eder.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Ayarların yedeği</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Ayarlarınızı bir dosyaya kaydedin veya başka bir bilgisayarda yükleyin. Lisans anahtarı, sözlükler ve modeller yerinde kalır.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Dışa aktar…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>İçe aktar…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Ayarlar dışa aktarıldı.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Ayarlar içe aktarıldı. Uygulanmaları için Lapsus’tan çıkıp yeniden başlatın.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Dosya yazılamadı.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Bu bir Lapsus ayar dosyası değil.</value>
+  </data>
 </root>

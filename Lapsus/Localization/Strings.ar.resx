@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>انقر في أي حقل، واضغط {0} وتحدّث؛ اضغط {0} مرة أخرى فيظهر النص عند المؤشر. Esc يلغي.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>نسخة احتياطية من الإعدادات</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>احفظ إعداداتك في ملف أو حمّلها على حاسوب آخر. مفتاح الترخيص والقواميس والنماذج تبقى في مكانها.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>تصدير…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>استيراد…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>تم تصدير الإعدادات.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>تم استيراد الإعدادات. أغلق Lapsus وشغّله من جديد لتطبيقها.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>تعذّرت كتابة الملف.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>هذا ليس ملف إعدادات Lapsus.</value>
+  </data>
 </root>

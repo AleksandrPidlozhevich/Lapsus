@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Klik in een willekeurig veld, druk op {0} en spreek; druk nogmaals op {0} en de tekst verschijnt bij de cursor. Esc annuleert.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Back-up van instellingen</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Sla je instellingen op in een bestand of laad ze op een andere computer. De licentiesleutel, woordenboeken en modellen blijven waar ze zijn.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exporteren…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importeren…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Instellingen geëxporteerd.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Instellingen geïmporteerd. Sluit Lapsus af en start het opnieuw om ze toe te passen.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Het bestand kon niet worden geschreven.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Dit is geen instellingenbestand van Lapsus.</value>
+  </data>
 </root>

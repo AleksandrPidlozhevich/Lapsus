@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Klik i et vilkårligt felt, tryk på {0} og tal; tryk på {0} igen, og teksten vises ved markøren. Esc annullerer.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Sikkerhedskopi af indstillinger</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Gem dine indstillinger i en fil, eller indlæs dem på en anden computer. Licensnøglen, ordbøgerne og modellerne bliver, hvor de er.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Eksportér…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importér…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Indstillingerne er eksporteret.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Indstillingerne er importeret. Afslut Lapsus, og start det igen, for at de træder i kraft.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Filen kunne ikke skrives.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Dette er ikke en indstillingsfil fra Lapsus.</value>
+  </data>
 </root>

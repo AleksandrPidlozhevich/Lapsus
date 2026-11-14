@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>לחצו בשדה כלשהו, הקישו {0} ודברו; הקישו {0} שוב והטקסט יופיע במקום הסמן. Esc מבטל.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>גיבוי הגדרות</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>שמרו את ההגדרות לקובץ או טענו אותן במחשב אחר. מפתח הרישיון, המילונים והמודלים נשארים במקומם.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>ייצוא…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>ייבוא…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>ההגדרות יוצאו.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>ההגדרות יובאו. צאו מ-Lapsus והפעילו אותו מחדש כדי להחיל אותן.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>לא ניתן היה לכתוב את הקובץ.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>זה אינו קובץ הגדרות של Lapsus.</value>
+  </data>
 </root>

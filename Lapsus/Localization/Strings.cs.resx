@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Klikněte do libovolného pole, stiskněte {0} a mluvte; stiskněte {0} znovu a text se objeví u kurzoru. Esc zruší.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Záloha nastavení</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Uložte nastavení do souboru nebo je načtěte na jiném počítači. Licenční klíč, slovníky a modely zůstávají na místě.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exportovat…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importovat…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Nastavení bylo exportováno.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Nastavení bylo importováno. Ukončete Lapsus a spusťte ho znovu, aby se projevilo.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Soubor se nepodařilo zapsat.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Toto není soubor nastavení Lapsus.</value>
+  </data>
 </root>

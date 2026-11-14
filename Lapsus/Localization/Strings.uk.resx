@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Клацніть у будь-якому полі, натисніть {0} і говоріть; натисніть {0} ще раз — текст з’явиться біля курсора. Esc — скасувати.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Резервна копія налаштувань</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Збережіть налаштування у файл або завантажте їх на іншому комп’ютері. Ліцензійний ключ, словники й моделі лишаються на місці.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Експорт…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Імпорт…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Налаштування експортовано.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Налаштування імпортовано. Закрийте Lapsus і запустіть знову, щоб вони набули чинності.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Не вдалося записати файл.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Це не файл налаштувань Lapsus.</value>
+  </data>
 </root>

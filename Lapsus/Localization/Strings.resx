@@ -876,4 +876,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Click into any text field, press {0} and speak; press {0} again and the text appears at the cursor. Esc cancels.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Settings backup</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Save your settings to a file, or load them on another computer. The license key, dictionaries and models stay where they are.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Export…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Import…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Settings exported.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Settings imported. Quit Lapsus and start it again to apply them.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>The file could not be written.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>This is not a Lapsus settings file.</value>
+  </data>
 </root>

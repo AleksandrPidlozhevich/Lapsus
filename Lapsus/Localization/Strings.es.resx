@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Haga clic en cualquier campo, pulse {0} y hable; pulse {0} otra vez y el texto aparece en el cursor. Esc cancela.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Copia de seguridad de los ajustes</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Guarda tus ajustes en un archivo o cárgalos en otro ordenador. La clave de licencia, los diccionarios y los modelos se quedan donde están.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exportar…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importar…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Ajustes exportados.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Ajustes importados. Cierra Lapsus y vuelve a abrirlo para aplicarlos.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>No se pudo escribir el archivo.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Este no es un archivo de ajustes de Lapsus.</value>
+  </data>
 </root>

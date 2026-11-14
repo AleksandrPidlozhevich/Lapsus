@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Faceți clic în orice câmp, apăsați {0} și vorbiți; apăsați din nou {0}, iar textul apare la cursor. Esc anulează.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Copie de siguranță a setărilor</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Salvați setările într-un fișier sau încărcați-le pe alt computer. Cheia de licență, dicționarele și modelele rămân unde sunt.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exportă…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importă…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Setările au fost exportate.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Setările au fost importate. Închideți Lapsus și porniți-l din nou pentru a le aplica.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Fișierul nu a putut fi scris.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Acesta nu este un fișier de setări Lapsus.</value>
+  </data>
 </root>

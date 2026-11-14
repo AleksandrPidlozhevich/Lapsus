@@ -42,8 +42,62 @@ public sealed class SettingsStore
         return new AppSettings();
     }
 
+    // After an import this copy still holds the old settings in memory; one toggle would write them back
+    // over the imported file, so nothing more is saved until the app is started again.
+    private bool _imported;
+
+    public bool Export(AppSettings settings, string path)
+    {
+        try
+        {
+            File.WriteAllText(path, JsonSerializer.Serialize(settings, SettingsJsonContext.Default.AppSettings));
+            return true;
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            return false;
+        }
+    }
+
+    // False when the file is not an exported settings file; nothing is changed then.
+    public bool Import(string path, AppSettings current)
+    {
+        AppSettings? incoming;
+        try
+        {
+            var json = File.ReadAllText(path);
+            // Any JSON object deserializes into defaults; a file of ours always names the main hotkey.
+            using var document = JsonDocument.Parse(json);
+            if (document.RootElement.ValueKind != JsonValueKind.Object ||
+                !document.RootElement.TryGetProperty(nameof(AppSettings.HotkeyVirtualKey), out _))
+                return false;
+
+            incoming = JsonSerializer.Deserialize(json, SettingsJsonContext.Default.AppSettings);
+        }
+        catch (Exception ex) when (ex is JsonException or IOException or UnauthorizedAccessException)
+        {
+            return false;
+        }
+
+        if (incoming is null)
+            return false;
+
+        // These describe this computer, not the user's choices: the evaluation clock above all.
+        incoming.OrganizationDetectedOn = current.OrganizationDetectedOn;
+        incoming.OnboardingDone = current.OnboardingDone;
+        incoming.AnnouncedUpdateVersion = current.AnnouncedUpdateVersion;
+        incoming.MicrophoneName = current.MicrophoneName;
+
+        Save(incoming);
+        _imported = true;
+        return true;
+    }
+
     public void Save(AppSettings settings)
     {
+        if (_imported)
+            return;
+
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(_path)!);

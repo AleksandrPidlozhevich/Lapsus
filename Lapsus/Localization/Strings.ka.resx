@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>დააწკაპუნეთ ნებისმიერ ველში, დააჭირეთ {0} და ილაპარაკეთ; კვლავ დააჭირეთ {0} და ტექსტი კურსორთან გამოჩნდება. Esc აუქმებს.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>პარამეტრების სარეზერვო ასლი</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>შეინახეთ პარამეტრები ფაილში ან ჩატვირთეთ სხვა კომპიუტერზე. ლიცენზიის გასაღები, ლექსიკონები და მოდელები ადგილზე რჩება.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>ექსპორტი…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>იმპორტი…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>პარამეტრები ექსპორტირებულია.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>პარამეტრები იმპორტირებულია. დახურეთ Lapsus და ხელახლა გაუშვით, რომ ამოქმედდეს.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>ფაილის ჩაწერა ვერ მოხერხდა.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>ეს არ არის Lapsus-ის პარამეტრების ფაილი.</value>
+  </data>
 </root>

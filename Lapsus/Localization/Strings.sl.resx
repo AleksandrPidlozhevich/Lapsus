@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Kliknite v poljubno polje, pritisnite {0} in govorite; znova pritisnite {0} in besedilo se prikaže pri kazalki. Esc prekliče.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Varnostna kopija nastavitev</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Shranite nastavitve v datoteko ali jih naložite na drugem računalniku. Licenčni ključ, slovarji in modeli ostanejo, kjer so.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Izvozi…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Uvozi…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Nastavitve so izvožene.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Nastavitve so uvožene. Zaprite Lapsus in ga znova zaženite, da začnejo veljati.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Datoteke ni bilo mogoče zapisati.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>To ni datoteka z nastavitvami za Lapsus.</value>
+  </data>
 </root>

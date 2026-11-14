@@ -155,6 +155,21 @@ public partial class SettingsViewModel : ViewModelBase
         return _settings;
     }
 
+    // The App Store sandbox has no entitlement for files the user picks.
+    public bool IsSettingsBackupSupported => !OperatingSystem.IsMacOS() || !MacSandbox.IsSandboxed;
+
+    [ObservableProperty] private string _backupStatus = "";
+
+    public void ExportSettings(string path)
+    {
+        BackupStatus = L[_store.Export(_settings, path) ? "Backup_Exported" : "Backup_ExportFailed"];
+    }
+
+    public void ImportSettings(string path)
+    {
+        BackupStatus = L[_store.Import(path, _settings) ? "Backup_Imported" : "Backup_ImportFailed"];
+    }
+
     public ModelsViewModel Models { get; }
 
     [ObservableProperty] private VoiceViewModel? _voice;

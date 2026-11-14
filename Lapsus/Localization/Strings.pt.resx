@@ -871,4 +871,28 @@
     <data name="Voice_TryItTap" xml:space="preserve">
     <value>Clique em qualquer campo, pressione {0} e fale; pressione {0} de novo e o texto aparece no cursor. Esc cancela.</value>
   </data>
+    <data name="Backup_Label" xml:space="preserve">
+    <value>Cópia de segurança das definições</value>
+  </data>
+    <data name="Backup_Hint" xml:space="preserve">
+    <value>Guarde as suas definições num ficheiro ou carregue-as noutro computador. A chave de licença, os dicionários e os modelos ficam onde estão.</value>
+  </data>
+    <data name="Backup_Export" xml:space="preserve">
+    <value>Exportar…</value>
+  </data>
+    <data name="Backup_Import" xml:space="preserve">
+    <value>Importar…</value>
+  </data>
+    <data name="Backup_Exported" xml:space="preserve">
+    <value>Definições exportadas.</value>
+  </data>
+    <data name="Backup_Imported" xml:space="preserve">
+    <value>Definições importadas. Feche o Lapsus e volte a abri-lo para as aplicar.</value>
+  </data>
+    <data name="Backup_ExportFailed" xml:space="preserve">
+    <value>Não foi possível gravar o ficheiro.</value>
+  </data>
+    <data name="Backup_ImportFailed" xml:space="preserve">
+    <value>Este não é um ficheiro de definições do Lapsus.</value>
+  </data>
 </root>
