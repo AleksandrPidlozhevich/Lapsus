@@ -738,6 +738,33 @@ public sealed class CorrectionCycleTests : IDisposable
         ]));
     }
 
+    [Theory]
+    [InlineData(true, "hELLO ", "Hello ")]
+    [InlineData(true, "HEllo ", "Hello ")]
+    [InlineData(false, "hELLO ", null)]
+    public void A_caps_lock_slip_is_fixed_on_space_only_with_typo_fixing_on(bool fixTypos, string typed, string? expected)
+    {
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();
+        backend.AutoMode = true;
+        backend.AutoFixTypos = fixTypos;
+
+        backend.Type(typed);
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal(expected, backend.Injected.Count > 0 ? backend.Injected[^1].Text : null);
+    }
+
+    [Fact]
+    public void The_hotkey_undoes_caps_lock_on_the_whole_line()
+    {
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();
+
+        backend.Type("hELLO TEXT");
+        backend.PressHotkey();
+
+        Assert.Equal("Hello text", backend.Injected[^1].Text);
+    }
+
     [Fact]
     public void Backspace_right_after_an_auto_fix_puts_back_what_was_typed()
     {

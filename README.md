@@ -92,6 +92,9 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
   follows it as `в`. Out of the box it only switches layouts; fixing typos on the fly is a second
   switch, because a name one letter from a dictionary word is not a typo. Backspace right after a
   fix puts back what you typed, and a word you put back three times is left alone from then on.
+- **Undo a slip of Caps Lock or Shift**: `hELLO HOW ARE YOU` becomes `Hello how are you` and `HEllo`
+  becomes `Hello`, on the same hotkey and, with typo fixing on, after Space. `iPhone`, `mRNA` and
+  `IDs` are left as they are.
 - **Fix a selection** — any text, any age, even after a mouse click, through a borrowed clipboard
   that is handed back exactly as it was.
 - **Three more things a key can do to a selection**, each with its own hotkey and none of them
