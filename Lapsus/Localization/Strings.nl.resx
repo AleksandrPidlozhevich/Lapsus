@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Het indelingslabel verschijnt even bij de cursor, in blauw.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Wat Lapsus heeft verbeterd</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Deze week: {0} ({1} verkeerde indeling, {2} typefouten). Sinds de installatie: {3}. Alleen de aantallen worden bewaard, op deze computer.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Je begint een zin in de verkeerde toetsenbordindeling, drukt op één toets en hij wordt ter plekke verbeterd, zonder opnieuw te typen. Typefouten worden op dezelfde manier verbeterd.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Stap {0} van {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Klaar</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Wat Lapsus ziet</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Woordenlijsten voor je talen</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus onderscheidt een echt woord van een fout getypt woord met een woordenlijst per taal. Een lijst wordt één keer gedownload, en alleen als je erom vraagt.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Elke indeling van dit toetsenbord heeft al een woordenlijst.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Probeer het</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Klik in het veld hieronder, typ {0} precies zo en druk op {1}. Druk nogmaals voor de volgende lezing en nog een keer om terug te krijgen wat je typte.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Wat er vanzelf moet gebeuren</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>De sneltoets werkt altijd. Deze schakelaars verbeteren een woord zodra je op de spatiebalk drukt; Backspace direct daarna zet terug wat je typte.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>In Instellingen staat meer: toetsen voor geselecteerde tekst (hoofdletters, transliteratie), typen met je stem, een lokaal AI-model. Het pictogram in het systeemvak opent ze.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Introductie opnieuw tonen</value>
+  </data>
 </root>

@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Marcajul aranjamentului apare pentru o clipă lângă cursor, în albastru.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Ce a corectat Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Săptămâna aceasta: {0} ({1} aranjament greșit, {2} greșeli de tastare). De la instalare: {3}. Se păstrează doar numerele, pe acest computer.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Începeți o propoziție cu aranjamentul de tastatură greșit, apăsați o tastă și ea este corectată pe loc, fără a o rescrie. Greșelile de tastare se corectează la fel.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Pasul {0} din {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Înainte</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Înapoi</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Gata</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Ce vede Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Liste de cuvinte pentru limbile dvs.</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus deosebește un cuvânt real de unul greșit după o listă de cuvinte pentru fiecare limbă. Lista se descarcă o singură dată și numai când cereți.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Fiecare aranjament al acestei tastaturi are deja lista sa de cuvinte.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Încercați</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Faceți clic în câmpul de mai jos, tastați {0} exact așa și apăsați {1}. Apăsați din nou pentru următoarea citire și încă o dată pentru a recupera ce ați tastat.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Ce să se întâmple de la sine</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Scurtătura funcționează întotdeauna. Aceste comutatoare corectează un cuvânt imediat ce apăsați Spațiu; Backspace imediat după aceea readuce ce ați tastat.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>În Setări găsiți mai mult: taste pentru o selecție (majuscule, transliterare), dictare vocală, un model AI local. Pictograma din zona de notificare le deschide.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Arată din nou introducerea</value>
+  </data>
 </root>

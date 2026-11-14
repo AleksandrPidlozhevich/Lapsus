@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Das Layout-Kennzeichen erscheint kurz am Cursor, in Blau.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Was Lapsus korrigiert hat</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Diese Woche: {0} ({1} falsches Layout, {2} Tippfehler). Seit der Installation: {3}. Gespeichert werden nur die Zahlen, auf diesem Computer.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Sie beginnen einen Satz im falschen Tastaturlayout, drücken eine Taste, und er wird an Ort und Stelle berichtigt – ohne neu zu tippen. Tippfehler werden genauso korrigiert.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Schritt {0} von {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Fertig</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Was Lapsus sieht</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Wortlisten für Ihre Sprachen</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus unterscheidet ein echtes Wort von einem vertippten anhand einer Wortliste je Sprache. Eine Liste wird einmal heruntergeladen, und nur auf Ihren Wunsch.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Jedes Layout dieser Tastatur hat bereits seine Wortliste.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Ausprobieren</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Klicken Sie in das Feld unten, tippen Sie {0} genau so und drücken Sie {1}. Noch einmal drücken zeigt die nächste Lesart, ein weiteres Mal bringt das Getippte zurück.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Was von selbst geschehen soll</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Die Taste funktioniert immer. Diese Schalter korrigieren ein Wort, sobald Sie die Leertaste drücken; die Rücktaste gleich danach stellt das Getippte wieder her.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>In den Einstellungen gibt es mehr: Tasten für markierten Text (Groß-/Kleinschreibung, Transliteration), Diktieren, ein lokales KI-Modell. Das Symbol im Infobereich öffnet sie.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Einführung erneut anzeigen</value>
+  </data>
 </root>

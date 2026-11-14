@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Düzen etiketi imlecin yanında bir an için mavi renkte görünür.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Lapsus neleri düzeltti</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Bu hafta: {0} ({1} yanlış düzen, {2} yazım hatası). Kurulumdan beri: {3}. Yalnızca sayılar saklanır, bu bilgisayarda.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Bir cümleye yanlış klavye düzeninde başlarsınız, tek bir tuşa basarsınız ve yeniden yazmadan yerinde düzeltilir. Yazım hataları da aynı şekilde düzeltilir.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Adım {0} / {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>İleri</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Geri</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Bitti</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Lapsus neyi görür</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Dilleriniz için sözcük listeleri</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus, gerçek bir sözcüğü yanlış yazılmış olandan her dilin sözcük listesiyle ayırır. Liste bir kez ve yalnızca siz istediğinizde indirilir.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Bu klavyedeki her düzenin sözcük listesi zaten var.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Deneyin</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Aşağıdaki alana tıklayın, {0} yazın (tam olarak böyle) ve {1} tuşuna basın. Sonraki okuma için yeniden, yazdığınızı geri almak için bir kez daha basın.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Neler kendiliğinden olsun</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Kısayol her zaman çalışır. Bu anahtarlar, Boşluk tuşuna bastığınız anda sözcüğü düzeltir; hemen ardından Geri Al tuşu yazdığınızı geri getirir.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>Ayarlar’da daha fazlası var: seçili metin için tuşlar (büyük/küçük harf, harf çevirisi), sesle yazma, yerel bir yapay zekâ modeli. Bildirim alanındaki simge bunları açar.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Tanıtımı yeniden göster</value>
+  </data>
 </root>

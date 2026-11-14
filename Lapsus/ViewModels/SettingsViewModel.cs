@@ -101,6 +101,17 @@ public partial class SettingsViewModel : ViewModelBase
         _backend.SwitchSystemLayout = _switchSystemLayout;
         _backend.HotkeyCyclesLayout = _hotkeyCyclesLayout;
         _backend.Corrected += OnCorrected;
+        // Posted: the hotkey's fix is reported from the keyboard hook, which must not wait on a file.
+        _backend.Fixed += (_, switchedLayout) => Dispatcher.UIThread.Post(() =>
+        {
+            _stats.Note(switchedLayout);
+            OnPropertyChanged(nameof(StatsLine));
+        });
+        _backend.AutoFixRejected += (_, _) => Dispatcher.UIThread.Post(() =>
+        {
+            _stats.Undo();
+            OnPropertyChanged(nameof(StatsLine));
+        });
         _backend.Diagnostic += OnDiagnostic;
 
         Localizer.Instance.LanguageChanged += OnLanguageChanged;
@@ -154,6 +165,17 @@ public partial class SettingsViewModel : ViewModelBase
         _settings.OnboardingDone = true;
         _store.Save(_settings);
         ApplyEnabled();
+    }
+
+    // The introduction was shown; it does not come back on its own. While macOS permissions are still to
+    // be asked for it does, since capture has not started.
+    public void MarkIntroductionSeen()
+    {
+        if (OnboardingPending || _settings.OnboardingDone)
+            return;
+
+        _settings.OnboardingDone = true;
+        _store.Save(_settings);
     }
 
     public AppSettings SettingsSnapshot()
@@ -511,16 +533,29 @@ public partial class SettingsViewModel : ViewModelBase
     }
 
     // macOS knows a layout's language only where correction needs it, so a German layout is not named there.
-    private IEnumerable<string?> LayoutLanguages()
+    internal IEnumerable<string?> LayoutLanguages()
     {
         return OperatingSystem.IsWindows()
             ? InstalledLayouts.Languages()
             : _backend.LayoutCandidates().Select(c => c.LanguageCode);
     }
 
+    private readonly UsageStats _stats = new();
+
+    // "This week: 42 fixes (30 wrong layout, 12 typos). Since installing: 1234."
+    public string StatsLine
+    {
+        get
+        {
+            var (layout, typos) = _stats.LastDays(7);
+            return L.Format("Stats_Line", layout + typos, layout, typos, _stats.Total);
+        }
+    }
+
     public void OnWindowReopened()
     {
         RefreshRunningApps();
+        OnPropertyChanged(nameof(StatsLine));
         Dictionaries.RefreshSuggestion();
 
         var wasNeeded = PermissionsNeeded;

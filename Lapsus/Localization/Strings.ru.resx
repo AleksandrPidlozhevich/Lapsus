@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Значок раскладки на мгновение появляется у курсора, синим.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Что исправил Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>На этой неделе: {0} ({1} не та раскладка, {2} опечатки). С установки: {3}. Хранятся только числа, на этом компьютере.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Вы начинаете фразу не в той раскладке, нажимаете одну клавишу — и она исправляется на месте, без повторного набора. Так же исправляются опечатки.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Шаг {0} из {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Что видит Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Словари для ваших языков</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus отличает настоящее слово от ошибочного по списку слов каждого языка. Список загружается один раз и только когда вы попросите.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Для каждой раскладки этой клавиатуры словарь уже есть.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Попробуйте</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Щёлкните в поле ниже, наберите {0} именно так и нажмите {1}. Нажмите ещё раз — будет следующее прочтение, и ещё раз — вернётся набранное.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Что должно происходить само</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Горячая клавиша работает всегда. Эти переключатели исправляют слово, как только вы нажмёте пробел; Backspace сразу после этого возвращает набранное.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>В настройках есть больше: клавиши для выделенного текста (регистр, транслитерация), набор голосом, локальная модель ИИ. Их открывает значок в трее.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Показать вступление снова</value>
+  </data>
 </root>

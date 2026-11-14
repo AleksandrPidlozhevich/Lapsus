@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Значок раскладкі на імгненне з’яўляецца каля курсора, сінім.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Што выправіў Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>На гэтым тыдні: {0} ({1} не тая раскладка, {2} памылкі друку). Ад усталявання: {3}. Захоўваюцца толькі лічбы, на гэтым камп’ютары.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Вы пачынаеце сказ не ў той раскладцы, націскаеце адну клавішу — і ён выпраўляецца на месцы, без паўторнага набору. Гэтак жа выпраўляюцца памылкі друку.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Крок {0} з {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Далей</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Гатова</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Што бачыць Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Слоўнікі для вашых моў</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus адрознівае сапраўднае слова ад памылковага па спісе слоў кожнай мовы. Спіс спампоўваецца адзін раз і толькі калі вы папросіце.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Для кожнай раскладкі гэтай клавіятуры слоўнік ужо ёсць.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Паспрабуйце</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Пстрыкніце ў полі ніжэй, набярыце {0} менавіта так і націсніце {1}. Націсніце яшчэ раз — будзе наступнае прачытанне, і яшчэ раз — вернецца набранае.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Што павінна адбывацца само</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Гарачая клавіша працуе заўсёды. Гэтыя пераключальнікі выпраўляюць слова, як толькі вы націснеце прабел; Backspace адразу пасля гэтага вяртае набранае.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>У наладах ёсць больш: клавішы для вылучанага тэксту (рэгістр, транслітарацыя), набор голасам, лакальная мадэль ШІ. Іх адкрывае значок у трэі.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Паказаць уступ зноў</value>
+  </data>
 </root>

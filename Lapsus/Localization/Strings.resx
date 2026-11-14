@@ -918,4 +918,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>The layout badge appears at the cursor for a moment, in blue.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>What Lapsus has fixed</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>This week: {0} ({1} wrong layout, {2} typos). Since installing: {3}. Only the counts are kept, on this computer.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>You start a sentence on the wrong keyboard layout, press one key, and it is put right where it stands — no retyping. It fixes typos the same way.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Step {0} of {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>What Lapsus sees</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Word lists for your languages</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus tells a real word from a mistyped one by a word list for each language. A list is downloaded once, and only when you ask.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Every layout on this keyboard has its word list.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Try it</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Click the field below, type {0} just like that, and press {1}. Press it again for the next reading, and once more to get back what you typed.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>How much should happen by itself</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>The hotkey always works. These fix a word the moment you press Space; Backspace right after puts back what you typed.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>There is more in Settings: keys for a selection (case, transliteration), typing by voice, a local AI model. The tray icon opens it.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Show the introduction again</value>
+  </data>
 </root>

@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>L’indicatore del layout appare per un istante accanto al cursore, in blu.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Cosa ha corretto Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Questa settimana: {0} ({1} layout sbagliato, {2} refusi). Dall’installazione: {3}. Vengono salvati solo i numeri, su questo computer.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Inizi una frase con il layout di tastiera sbagliato, premi un tasto e viene corretta sul posto, senza riscriverla. I refusi si correggono allo stesso modo.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Passaggio {0} di {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Avanti</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Indietro</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Fine</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Che cosa vede Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Elenchi di parole per le tue lingue</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus distingue una parola vera da una digitata male grazie a un elenco di parole per ogni lingua. L’elenco viene scaricato una sola volta, e solo quando lo chiedi.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Ogni layout di questa tastiera ha già il suo elenco di parole.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Prova</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Fai clic nel campo qui sotto, scrivi {0} esattamente così e premi {1}. Premi di nuovo per la lettura successiva e ancora una volta per riavere ciò che avevi scritto.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Che cosa deve accadere da solo</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>La scorciatoia funziona sempre. Questi interruttori correggono una parola appena premi Spazio; Backspace subito dopo ripristina ciò che avevi scritto.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>Nelle Impostazioni c’è altro: tasti per una selezione (maiuscole, traslitterazione), dettatura vocale, un modello di IA locale. Le apre l’icona nell’area di notifica.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Mostra di nuovo l’introduzione</value>
+  </data>
 </root>

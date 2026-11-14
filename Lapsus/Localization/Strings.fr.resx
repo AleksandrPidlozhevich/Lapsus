@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Le repère de disposition apparaît un instant près du curseur, en bleu.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Ce que Lapsus a corrigé</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Cette semaine : {0} ({1} mauvaise disposition, {2} fautes de frappe). Depuis l’installation : {3}. Seuls les nombres sont conservés, sur cet ordinateur.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Vous commencez une phrase dans la mauvaise disposition de clavier, vous appuyez sur une touche et elle est corrigée sur place, sans la retaper. Les fautes de frappe sont corrigées de la même façon.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Étape {0} sur {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Ce que voit Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Listes de mots pour vos langues</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus distingue un vrai mot d’un mot mal tapé grâce à une liste de mots par langue. Une liste est téléchargée une seule fois, et seulement à votre demande.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Chaque disposition de ce clavier a déjà sa liste de mots.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Essayez</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Cliquez dans le champ ci-dessous, tapez {0} tel quel et appuyez sur {1}. Appuyez encore pour la lecture suivante, et une fois de plus pour retrouver ce que vous aviez tapé.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Ce qui doit se faire tout seul</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Le raccourci fonctionne toujours. Ces options corrigent un mot dès que vous appuyez sur Espace ; Retour arrière juste après rétablit ce que vous aviez tapé.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>Les réglages offrent davantage : des touches pour une sélection (casse, translittération), la dictée vocale, un modèle d’IA local. L’icône de la zone de notification les ouvre.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Revoir l’introduction</value>
+  </data>
 </root>

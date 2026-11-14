@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>განლაგების ნიშანი წამით ჩნდება კურსორთან, ლურჯად.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>რა გაასწორა Lapsus-მა</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>ამ კვირაში: {0} ({1} არასწორი განლაგება, {2} ბეჭდვის შეცდომა). ინსტალაციიდან: {3}. ინახება მხოლოდ რიცხვები, ამ კომპიუტერზე.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>წინადადებას კლავიატურის არასწორ განლაგებაში იწყებთ, ერთ ღილაკს აჭერთ და ის ადგილზევე სწორდება, თავიდან აკრეფის გარეშე. ბეჭდვის შეცდომებიც ასევე სწორდება.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>ნაბიჯი {0} / {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>შემდეგი</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>უკან</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>მზადაა</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>რას ხედავს Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>სიტყვების სიები თქვენი ენებისთვის</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus ნამდვილ სიტყვას შეცდომით აკრეფილისგან თითოეული ენის სიტყვების სიით არჩევს. სია ერთხელ ჩამოიტვირთება და მხოლოდ მაშინ, როცა მოითხოვთ.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>ამ კლავიატურის ყველა განლაგებას უკვე აქვს სიტყვების სია.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>სცადეთ</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>დააწკაპუნეთ ქვემოთ მოცემულ ველში, აკრიფეთ {0} ზუსტად ასე და დააჭირეთ {1}. კიდევ ერთხელ დააჭირეთ შემდეგი წაკითხვისთვის და კიდევ ერთხელ, რომ აკრეფილი დაბრუნდეს.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>რა უნდა ხდებოდეს თავისით</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>ცხელი ღილაკი ყოველთვის მუშაობს. ეს გადამრთველები სიტყვას ასწორებს, როგორც კი ჰარს დააჭერთ; Backspace მაშინვე აბრუნებს აკრეფილს.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>პარამეტრებში მეტია: ღილაკები მონიშნული ტექსტისთვის (რეგისტრი, ტრანსლიტერაცია), ხმით აკრეფა, ლოკალური AI მოდელი. მათ სისტემური პანელის ხატულა ხსნის.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>შესავლის ხელახლა ჩვენება</value>
+  </data>
 </root>

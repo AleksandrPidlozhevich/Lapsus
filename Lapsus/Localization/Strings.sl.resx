@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Oznaka razporeda se za trenutek prikaže ob kazalki, v modri barvi.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Kaj je Lapsus popravil</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Ta teden: {0} ({1} napačen razpored, {2} tipkarske napake). Od namestitve: {3}. Shranjujejo se samo številke, v tem računalniku.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Stavek začnete v napačnem razporedu tipkovnice, pritisnete eno tipko in popravi se na mestu, brez ponovnega tipkanja. Enako se popravijo tipkarske napake.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Korak {0} od {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Naprej</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Nazaj</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Končano</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Kaj vidi Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Slovarji za vaše jezike</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus loči pravo besedo od napačne po seznamu besed za vsak jezik. Seznam se prenese enkrat in samo, ko to zahtevate.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Vsak razpored te tipkovnice že ima svoj slovar.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Poskusite</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Kliknite v polje spodaj, vtipkajte {0} natanko tako in pritisnite {1}. Pritisnite znova za naslednje branje in še enkrat, da dobite nazaj vtipkano.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Kaj naj se zgodi samo</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Bližnjica deluje vedno. Ta stikala popravijo besedo takoj, ko pritisnete presledek; Backspace takoj zatem vrne vtipkano.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>V nastavitvah je še več: tipke za izbrano besedilo (velike in male črke, prečrkovanje), narekovanje, lokalni model UI. Odpre jih ikona v opravilni vrstici.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Znova pokaži uvod</value>
+  </data>
 </root>

@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Znacznik układu pojawia się na chwilę przy kursorze, na niebiesko.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Co poprawił Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>W tym tygodniu: {0} ({1} zły układ, {2} literówki). Od instalacji: {3}. Zapisywane są tylko liczby, na tym komputerze.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Zaczynasz zdanie w złym układzie klawiatury, naciskasz jeden klawisz i zostaje poprawione na miejscu, bez przepisywania. Tak samo poprawiane są literówki.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Krok {0} z {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Dalej</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Wstecz</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Gotowe</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Co widzi Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Słowniki dla Twoich języków</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus odróżnia prawdziwe słowo od błędnego dzięki liście słów każdego języka. Lista jest pobierana raz i tylko wtedy, gdy o to poprosisz.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Każdy układ tej klawiatury ma już swój słownik.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Wypróbuj</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Kliknij pole poniżej, wpisz {0} dokładnie tak i naciśnij {1}. Naciśnij ponownie, aby zobaczyć następne odczytanie, i jeszcze raz, aby wrócić do wpisanego tekstu.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Co ma się dziać samo</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Skrót działa zawsze. Te przełączniki poprawiają słowo, gdy tylko naciśniesz spację; Backspace zaraz potem przywraca to, co wpisano.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>W ustawieniach jest więcej: klawisze dla zaznaczonego tekstu (wielkość liter, transliteracja), pisanie głosem, lokalny model AI. Otwiera je ikona w zasobniku.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Pokaż wprowadzenie ponownie</value>
+  </data>
 </root>

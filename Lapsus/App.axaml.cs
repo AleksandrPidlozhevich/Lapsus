@@ -83,6 +83,7 @@ public partial class App : Application
             var installed = _dictionaryStore.Installed();
 
             var store = new SettingsStore();
+            var firstRun = !store.Exists;
             var settings = store.Load();
 
             _exceptions = new WordExceptions(settings.ExcludedWords);
@@ -151,7 +152,9 @@ public partial class App : Application
             if (!nothingToCorrectWith)
                 _ = _brain.RebuildAsync();
 
-            if (_settingsViewModel.OnboardingPending)
+            // An install that already has settings was here before the introduction existed: it is not
+            // shown one unasked.
+            if (firstRun || _settingsViewModel.OnboardingPending)
                 Dispatcher.UIThread.Post(ShowOnboarding, DispatcherPriority.Loaded);
             else if (nothingToCorrectWith)
                 Dispatcher.UIThread.Post(ShowWindow, DispatcherPriority.Loaded);
@@ -460,7 +463,7 @@ public partial class App : Application
         _window.Activate();
     }
 
-    private void ShowOnboarding()
+    internal void ShowOnboarding()
     {
         if (_onboardingWindow is not null)
         {
@@ -468,16 +471,20 @@ public partial class App : Application
             return;
         }
 
+        if (_settingsViewModel is not { } settings)
+            return;
+
         var window = new OnboardingWindow();
-        window.DataContext = new OnboardingViewModel(
-            () =>
-            {
-                _settingsViewModel?.CompleteOnboarding();
-                window.Close();
+        window.DataContext = new OnboardingViewModel(settings, settings.LayoutLanguages(), window.Close);
+        window.Closed += (_, _) =>
+        {
+            _onboardingWindow = null;
+            settings.MarkIntroductionSeen();
+
+            // With no word list there is nothing to correct with yet; Settings is where one is added.
+            if (!settings.OnboardingPending && !settings.Dictionaries.HasInstalled)
                 ShowWindow();
-            },
-            window.Close);
-        window.Closed += (_, _) => _onboardingWindow = null;
+        };
         _onboardingWindow = window;
         window.Show();
         window.Activate();

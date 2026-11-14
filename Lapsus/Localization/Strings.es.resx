@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>La marca de distribución aparece un momento junto al cursor, en azul.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Lo que Lapsus ha corregido</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Esta semana: {0} ({1} distribución equivocada, {2} erratas). Desde la instalación: {3}. Solo se guardan los números, en este ordenador.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Empiezas una frase con la distribución de teclado equivocada, pulsas una tecla y se corrige en su sitio, sin volver a escribirla. Las erratas se corrigen igual.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Paso {0} de {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Qué ve Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Listas de palabras para tus idiomas</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus distingue una palabra real de una mal escrita con una lista de palabras por idioma. La lista se descarga una vez, y solo cuando lo pides.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>Cada distribución de este teclado ya tiene su lista de palabras.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Pruébalo</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Haz clic en el campo de abajo, escribe {0} tal cual y pulsa {1}. Pulsa otra vez para la siguiente lectura y una vez más para recuperar lo que escribiste.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Qué debe ocurrir por sí solo</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>El atajo funciona siempre. Estos interruptores corrigen una palabra en cuanto pulsas Espacio; Retroceso justo después devuelve lo que escribiste.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>En Ajustes hay más: teclas para una selección (mayúsculas, transliteración), dictado por voz, un modelo de IA local. El icono de la bandeja los abre.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Mostrar la introducción otra vez</value>
+  </data>
 </root>

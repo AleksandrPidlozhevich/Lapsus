@@ -103,6 +103,7 @@ internal abstract partial class InputBackendBase<TFocus>
                 RaiseCorrected(Shorten(selection), Shorten(result.Phrase.Corrected),
                     result.Source?.Target, result.Phrase.TargetLayout);
                 SwitchLayoutIfRequested(result.Phrase.TargetLayout, result.Phrase.TargetLayoutId);
+                RaiseFixed(result.Phrase.TargetLayout, result.Phrase.TargetLayoutId);
             }
             catch (Exception ex)
             {

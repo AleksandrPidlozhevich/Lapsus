@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>تظهر شارة التخطيط للحظة عند المؤشر، باللون الأزرق.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>ما الذي صحّحه Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>هذا الأسبوع: {0} ({1} تخطيط خاطئ، {2} أخطاء طباعة). منذ التثبيت: {3}. تُحفظ الأرقام فقط، على هذا الحاسوب.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>تبدأ جملة بتخطيط لوحة مفاتيح خاطئ، فتضغط مفتاحًا واحدًا لتُصحَّح في مكانها دون إعادة كتابتها. وتُصحَّح أخطاء الطباعة بالطريقة نفسها.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>الخطوة {0} من {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>تم</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>ما الذي يراه Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>قوائم الكلمات للغاتك</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>يميّز Lapsus الكلمة الصحيحة من الخاطئة بقائمة كلمات لكل لغة. تُنزَّل القائمة مرة واحدة، وفقط عندما تطلب ذلك.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>لكل تخطيط في لوحة المفاتيح هذه قائمة كلمات بالفعل.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>جرّب</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>انقر في الحقل أدناه، واكتب {0} كما هي تمامًا، ثم اضغط {1}. اضغط مرة أخرى للقراءة التالية، ومرة ثالثة لتستعيد ما كتبته.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>ما الذي يحدث تلقائيًا</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>مفتاح الاختصار يعمل دائمًا. هذه المفاتيح تصحّح الكلمة فور ضغط المسافة؛ والضغط على Backspace بعدها مباشرة يعيد ما كتبته.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>في الإعدادات المزيد: مفاتيح للنص المحدد (حالة الأحرف، النقل الحرفي)، الكتابة بالصوت، نموذج ذكاء اصطناعي محلي. تفتحها الأيقونة في علبة النظام.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>عرض المقدمة مرة أخرى</value>
+  </data>
 </root>

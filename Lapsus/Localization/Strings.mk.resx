@@ -913,4 +913,55 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Ознаката на распоредот накратко се појавува кај курсорот, во сино.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Што поправи Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Оваа недела: {0} ({1} погрешен распоред, {2} печатни грешки). Од инсталирањето: {3}. Се чуваат само бројките, на овој компјутер.</value>
+  </data>
+    <data name="Onb_What" xml:space="preserve">
+    <value>Почнувате реченица со погрешен распоред на тастатурата, притискате едно копче и таа се поправа на место, без повторно пишување. Така се поправаат и печатните грешки.</value>
+  </data>
+    <data name="Onb_Step" xml:space="preserve">
+    <value>Чекор {0} од {1}</value>
+  </data>
+    <data name="Onb_Next" xml:space="preserve">
+    <value>Следно</value>
+  </data>
+    <data name="Onb_Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+    <data name="Onb_Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+    <data name="Onb_Privacy_Title" xml:space="preserve">
+    <value>Што гледа Lapsus</value>
+  </data>
+    <data name="Onb_Dict_Title" xml:space="preserve">
+    <value>Речници за вашите јазици</value>
+  </data>
+    <data name="Onb_Dict_Body" xml:space="preserve">
+    <value>Lapsus разликува вистински збор од погрешен според список зборови за секој јазик. Списокот се презема еднаш и само кога ќе побарате.</value>
+  </data>
+    <data name="Onb_Dict_Ready" xml:space="preserve">
+    <value>За секој распоред на оваа тастатура веќе има речник.</value>
+  </data>
+    <data name="Onb_Try_Title" xml:space="preserve">
+    <value>Пробајте</value>
+  </data>
+    <data name="Onb_Try_Body" xml:space="preserve">
+    <value>Кликнете во полето подолу, напишете {0} токму така и притиснете {1}. Притиснете повторно за следното читање и уште еднаш за да го вратите напишаното.</value>
+  </data>
+    <data name="Onb_Options_Title" xml:space="preserve">
+    <value>Што да се случува само</value>
+  </data>
+    <data name="Onb_Options_Body" xml:space="preserve">
+    <value>Копчето работи секогаш. Овие прекинувачи го поправаат зборот штом притиснете празно место; Backspace веднаш потоа го враќа напишаното.</value>
+  </data>
+    <data name="Onb_More" xml:space="preserve">
+    <value>Во поставките има повеќе: копчиња за избран текст (големи и мали букви, транслитерација), пишување со глас, локален модел со ВИ. Ги отвора иконата во системската лента.</value>
+  </data>
+    <data name="Onb_Again" xml:space="preserve">
+    <value>Покажи го воведот повторно</value>
+  </data>
 </root>

@@ -141,6 +141,11 @@ public partial class SettingsWindow : Window
             ViewModel?.ImportSettings(path);
     }
 
+    private void OnShowIntroductionClick(object? sender, RoutedEventArgs e)
+    {
+        (Application.Current as App)?.ShowOnboarding();
+    }
+
     private static void PinToViewport(ScrollViewer scroll, Control content)
     {
         scroll.SizeChanged += (_, e) =>
