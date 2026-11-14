@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>תג הפריסה מופיע לרגע ליד הסמן, בכחול.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>מה Lapsus תיקן</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>השבוע: {0} ({1} פריסה שגויה, {2} שגיאות הקלדה). מאז ההתקנה: {3}. נשמרים רק המספרים, במחשב הזה.</value>
+  </data>
 </root>

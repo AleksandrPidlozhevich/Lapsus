@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Значок раскладки на мгновение появляется у курсора, синим.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Что исправил Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>На этой неделе: {0} ({1} не та раскладка, {2} опечатки). С установки: {3}. Хранятся только числа, на этом компьютере.</value>
+  </data>
 </root>

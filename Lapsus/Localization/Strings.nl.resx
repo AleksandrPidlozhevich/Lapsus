@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Het indelingslabel verschijnt even bij de cursor, in blauw.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Wat Lapsus heeft verbeterd</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Deze week: {0} ({1} verkeerde indeling, {2} typefouten). Sinds de installatie: {3}. Alleen de aantallen worden bewaard, op deze computer.</value>
+  </data>
 </root>

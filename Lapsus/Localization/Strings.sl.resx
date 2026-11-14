@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Oznaka razporeda se za trenutek prikaže ob kazalki, v modri barvi.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Kaj je Lapsus popravil</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Ta teden: {0} ({1} napačen razpored, {2} tipkarske napake). Od namestitve: {3}. Shranjujejo se samo številke, v tem računalniku.</value>
+  </data>
 </root>

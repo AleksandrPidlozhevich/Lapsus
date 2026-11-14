@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Ознаката на распоредот накратко се појавува кај курсорот, во сино.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Што поправи Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Оваа недела: {0} ({1} погрешен распоред, {2} печатни грешки). Од инсталирањето: {3}. Се чуваат само бројките, на овој компјутер.</value>
+  </data>
 </root>

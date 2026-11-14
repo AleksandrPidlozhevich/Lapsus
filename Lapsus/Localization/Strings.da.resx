@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Layoutmærket vises et øjeblik ved markøren, i blåt.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Hvad Lapsus har rettet</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Denne uge: {0} ({1} forkert layout, {2} tastefejl). Siden installationen: {3}. Kun tallene gemmes, på denne computer.</value>
+  </data>
 </root>

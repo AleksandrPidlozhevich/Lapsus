@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Значката на подредбата се появява за миг до курсора, в синьо.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Какво поправи Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Тази седмица: {0} ({1} грешна подредба, {2} печатни грешки). От инсталирането: {3}. Пазят се само числата, на този компютър.</value>
+  </data>
 </root>

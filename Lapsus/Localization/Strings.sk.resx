@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Značka rozloženia sa na okamih zobrazí pri kurzore, modrou farbou.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Čo Lapsus opravil</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Tento týždeň: {0} ({1} nesprávne rozloženie, {2} preklepy). Od inštalácie: {3}. Ukladajú sa iba počty, v tomto počítači.</value>
+  </data>
 </root>

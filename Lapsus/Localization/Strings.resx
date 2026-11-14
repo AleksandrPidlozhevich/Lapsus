@@ -918,4 +918,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>The layout badge appears at the cursor for a moment, in blue.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>What Lapsus has fixed</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>This week: {0} ({1} wrong layout, {2} typos). Since installing: {3}. Only the counts are kept, on this computer.</value>
+  </data>
 </root>

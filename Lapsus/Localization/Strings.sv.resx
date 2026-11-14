@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Layoutmärket visas en kort stund vid markören, i blått.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Vad Lapsus har rättat</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Den här veckan: {0} ({1} fel layout, {2} skrivfel). Sedan installationen: {3}. Bara antalen sparas, på den här datorn.</value>
+  </data>
 </root>

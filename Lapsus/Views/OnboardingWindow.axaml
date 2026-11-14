@@ -3,12 +3,12 @@
         xmlns:vm="using:Lapsus.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="360"
+        mc:Ignorable="d" d:DesignWidth="520" d:DesignHeight="420"
         x:Class="Lapsus.Views.OnboardingWindow"
         x:DataType="vm:OnboardingViewModel"
         Title="{Binding L[Onb_Title]}"
         FlowDirection="{Binding FlowDirection}"
-        Width="480"
+        Width="520"
         SizeToContent="Height"
         CanResize="False"
         ShowInTaskbar="True"
@@ -23,8 +23,18 @@
             <Setter Property="Background" Value="{DynamicResource LapsusAccentBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource LapsusAccentBrush}" />
         </Style>
+        <Style Selector="TextBlock.heading">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
         <Style Selector="TextBlock.point">
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="TextBlock.quiet">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Opacity" Value="0.7" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <Style Selector="TextBlock.bullet">
@@ -36,24 +46,94 @@
 
     <Border Background="{DynamicResource LapsusSurfaceBrush}" Padding="24"
             BorderBrush="{DynamicResource LapsusAccentBrush}" BorderThickness="0,3,0,0">
-        <StackPanel Spacing="14">
-            <TextBlock Text="{Binding L[Onb_Title]}" FontWeight="SemiBold" FontSize="18" TextWrapping="Wrap" />
-            <TextBlock Classes="point" Text="{Binding L[Onb_Intro]}" />
+        <StackPanel Spacing="18">
 
-            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
-                <TextBlock Grid.Row="0" Grid.Column="0" Classes="bullet" Text="●" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Local]}" />
-                <TextBlock Grid.Row="1" Grid.Column="0" Classes="bullet" Text="●" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Passwords]}" />
-                <TextBlock Grid.Row="2" Grid.Column="0" Classes="bullet" Text="●" />
-                <TextBlock Grid.Row="2" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Permissions]}" />
+            <!-- What it is -->
+            <StackPanel Spacing="12" IsVisible="{Binding IsWelcome}">
+                <TextBlock Classes="heading" Text="{Binding L[Onb_Title]}" />
+                <TextBlock Classes="point" Text="{Binding L[Onb_What]}" />
+                <TextBlock Classes="point" Text="{Binding L[Onb_Intro]}" />
+            </StackPanel>
+
+            <!-- What it sees, before macOS asks -->
+            <StackPanel Spacing="12" IsVisible="{Binding IsPrivacy}">
+                <TextBlock Classes="heading" Text="{Binding L[Onb_Privacy_Title]}" />
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Classes="bullet" Text="●" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Local]}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Classes="bullet" Text="●" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Passwords]}" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Classes="bullet" Text="●" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Permissions]}" />
+                </Grid>
+            </StackPanel>
+
+            <!-- Word lists -->
+            <StackPanel Spacing="12" IsVisible="{Binding IsDictionaries}">
+                <TextBlock Classes="heading" Text="{Binding L[Onb_Dict_Title]}" />
+                <TextBlock Classes="point" Text="{Binding L[Onb_Dict_Body]}" />
+
+                <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding Settings.Dictionaries.HasSuggestion}">
+                    <TextBlock Grid.Column="0" Classes="point" VerticalAlignment="Center"
+                               Text="{Binding Settings.Dictionaries.Suggestion}" />
+                    <Button Grid.Column="1" Classes="notice" Margin="8,0,0,0" VerticalAlignment="Center"
+                            Content="{Binding L[Dict_SuggestAdd]}"
+                            Command="{Binding Settings.Dictionaries.AddSuggestedCommand}" />
+                </Grid>
+
+                <TextBlock Classes="point" Text="{Binding L[Onb_Dict_Ready]}">
+                    <TextBlock.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.And}">
+                            <Binding Path="Settings.Dictionaries.HasInstalled" />
+                            <Binding Path="!Settings.Dictionaries.HasSuggestion" />
+                        </MultiBinding>
+                    </TextBlock.IsVisible>
+                </TextBlock>
+
+                <TextBlock Classes="point" Text="{Binding L[Dict_Empty]}">
+                    <TextBlock.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.And}">
+                            <Binding Path="!Settings.Dictionaries.HasInstalled" />
+                            <Binding Path="!Settings.Dictionaries.HasSuggestion" />
+                        </MultiBinding>
+                    </TextBlock.IsVisible>
+                </TextBlock>
+
+                <ProgressBar IsIndeterminate="True" Height="3" IsVisible="{Binding Settings.Dictionaries.Busy}" />
+                <TextBlock Classes="quiet" Text="{Binding Settings.Dictionaries.Status}" />
+            </StackPanel>
+
+            <!-- A field to try it in -->
+            <StackPanel Spacing="12" IsVisible="{Binding IsTry}">
+                <TextBlock Classes="heading" Text="{Binding L[Onb_Try_Title]}" />
+                <TextBlock Classes="point" Text="{Binding TryText}" />
+                <TextBox x:Name="TryField" Watermark="{Binding Sample}" FontSize="16" />
+                <TextBlock Classes="quiet" Text="{Binding Settings.StatusText}" />
+            </StackPanel>
+
+            <!-- How much happens unasked -->
+            <StackPanel Spacing="12" IsVisible="{Binding IsOptions}">
+                <TextBlock Classes="heading" Text="{Binding L[Onb_Options_Title]}" />
+                <TextBlock Classes="point" Text="{Binding L[Onb_Options_Body]}" />
+                <StackPanel Spacing="4">
+                    <CheckBox Content="{Binding L[AutoCorrect]}" IsChecked="{Binding Settings.AutoMode}"
+                              IsEnabled="{Binding Settings.AutoModeSwitchEnabled}" />
+                    <CheckBox Content="{Binding L[AutoFixTypos]}" IsChecked="{Binding Settings.AutoFixTypos}"
+                              IsEnabled="{Binding Settings.AutoFixTyposSwitchEnabled}" />
+                    <CheckBox Content="{Binding L[Indicator_Label]}"
+                              IsChecked="{Binding Settings.ShowLayoutIndicator}"
+                              IsVisible="{Binding Settings.IsLayoutIndicatorSupported}" />
+                </StackPanel>
+                <TextBlock Classes="point" Text="{Binding L[Onb_More]}" />
+            </StackPanel>
+
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                <TextBlock Grid.Column="0" Classes="quiet" VerticalAlignment="Center" Text="{Binding StepText}" />
+                <Button Grid.Column="1" Content="{Binding L[Onb_Back]}" Command="{Binding BackCommand}"
+                        IsVisible="{Binding CanGoBack}" />
+                <Button Grid.Column="2" Classes="notice" Content="{Binding NextText}"
+                        Command="{Binding NextCommand}" IsDefault="True" />
             </Grid>
-
-            <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8" Margin="0,6,0,0">
-                <Button Classes="notice" Content="{Binding L[Onb_Continue]}" Command="{Binding ContinueCommand}"
-                        IsDefault="True" />
-                <Button Content="{Binding L[Onb_Later]}" Command="{Binding LaterCommand}" />
-            </WrapPanel>
         </StackPanel>
     </Border>
 </Window>

@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Das Layout-Kennzeichen erscheint kurz am Cursor, in Blau.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Was Lapsus korrigiert hat</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Diese Woche: {0} ({1} falsches Layout, {2} Tippfehler). Seit der Installation: {3}. Gespeichert werden nur die Zahlen, auf diesem Computer.</value>
+  </data>
 </root>

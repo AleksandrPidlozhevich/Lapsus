@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Le repère de disposition apparaît un instant près du curseur, en bleu.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Ce que Lapsus a corrigé</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Cette semaine : {0} ({1} mauvaise disposition, {2} fautes de frappe). Depuis l’installation : {3}. Seuls les nombres sont conservés, sur cet ordinateur.</value>
+  </data>
 </root>

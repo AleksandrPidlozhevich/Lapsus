@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>განლაგების ნიშანი წამით ჩნდება კურსორთან, ლურჯად.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>რა გაასწორა Lapsus-მა</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>ამ კვირაში: {0} ({1} არასწორი განლაგება, {2} ბეჭდვის შეცდომა). ინსტალაციიდან: {3}. ინახება მხოლოდ რიცხვები, ამ კომპიუტერზე.</value>
+  </data>
 </root>

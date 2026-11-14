@@ -477,7 +477,8 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
 
         _cycle = cycle;
         var current = cycle.Current;
-        ApplyHotkeyStep(segment, current.Text, current.TargetLayout, current.TargetLayoutId, cycle.OriginalLayout);
+        if (ApplyHotkeyStep(segment, current.Text, current.TargetLayout, current.TargetLayoutId, cycle.OriginalLayout))
+            RaiseFixed(current.TargetLayout, current.TargetLayoutId);
     }
 
     internal Task? PendingNeuralRewrite { get; private set; }
@@ -548,6 +549,7 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
 
         RaiseCorrected(segment, phrase.Corrected, result.Source?.Target, phrase.TargetLayout);
         SwitchLayoutOnHotkey(phrase.TargetLayout, phrase.TargetLayoutId);
+        RaiseFixed(phrase.TargetLayout, phrase.TargetLayoutId);
     }
 
     // Hotkey with nothing to fix: step to the next installed layout (ru → uk → ru with two of them).

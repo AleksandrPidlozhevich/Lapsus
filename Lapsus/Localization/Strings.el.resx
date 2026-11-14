@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Η ένδειξη διάταξης εμφανίζεται για μια στιγμή δίπλα στον δρομέα, με μπλε χρώμα.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Τι διόρθωσε το Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Αυτή την εβδομάδα: {0} ({1} λάθος διάταξη, {2} τυπογραφικά). Από την εγκατάσταση: {3}. Φυλάσσονται μόνο οι αριθμοί, σε αυτόν τον υπολογιστή.</value>
+  </data>
 </root>

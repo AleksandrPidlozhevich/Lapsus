@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>تظهر شارة التخطيط للحظة عند المؤشر، باللون الأزرق.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>ما الذي صحّحه Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>هذا الأسبوع: {0} ({1} تخطيط خاطئ، {2} أخطاء طباعة). منذ التثبيت: {3}. تُحفظ الأرقام فقط، على هذا الحاسوب.</value>
+  </data>
 </root>

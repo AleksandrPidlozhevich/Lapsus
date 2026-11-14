@@ -114,4 +114,5 @@ public sealed class SettingsStore
 [JsonSourceGenerationOptions(WriteIndented = true)]
 [JsonSerializable(typeof(AppSettings))]
 [JsonSerializable(typeof(ModelManifest))]
+[JsonSerializable(typeof(UsageCounts))]
 internal partial class SettingsJsonContext : JsonSerializerContext;

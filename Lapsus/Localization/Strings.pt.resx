@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>A marca do esquema aparece por um momento junto ao cursor, a azul.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>O que o Lapsus corrigiu</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Esta semana: {0} ({1} esquema errado, {2} gralhas). Desde a instalação: {3}. Só os números são guardados, neste computador.</value>
+  </data>
 </root>

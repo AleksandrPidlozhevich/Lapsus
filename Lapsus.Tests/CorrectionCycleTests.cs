@@ -755,6 +755,27 @@ public sealed class CorrectionCycleTests : IDisposable
     }
 
     [Fact]
+    public void A_correction_is_counted_once_however_many_times_the_hotkey_walks_its_circle()
+    {
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();
+        backend.AutoMode = true;
+        backend.AutoFixTypos = true;
+        var fixes = new List<bool>();
+        backend.Fixed += (_, switchedLayout) => fixes.Add(switchedLayout);
+
+        backend.Type("ghbdtn");
+        backend.PressHotkey();
+        backend.PressHotkey();
+        backend.PressHotkey();
+        Assert.Equal([true], fixes);
+
+        backend.DiscardLine();
+        backend.Type("helo ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Equal([true, false], fixes);
+    }
+
+    [Fact]
     public void Only_a_fix_nobody_asked_for_is_announced()
     {
         var backend = new FakeInputBackend(RealBrain(new WordExceptions())).Listening().Focused();

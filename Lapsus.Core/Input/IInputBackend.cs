@@ -42,6 +42,9 @@ public interface IInputBackend : IDisposable
 
     event EventHandler<string>? Diagnostic;
 
+    /// <summary>A correction landed, by hotkey, after Space or on a selection; true when it changed the layout.</summary>
+    event EventHandler<bool>? Fixed;
+
     /// <summary>A word was fixed after Space, unasked.</summary>
     event EventHandler? AutoFixApplied;
 

@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Düzen etiketi imlecin yanında bir an için mavi renkte görünür.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Lapsus neleri düzeltti</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Bu hafta: {0} ({1} yanlış düzen, {2} yazım hatası). Kurulumdan beri: {3}. Yalnızca sayılar saklanır, bu bilgisayarda.</value>
+  </data>
 </root>

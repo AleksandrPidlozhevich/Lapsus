@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Значок розкладки на мить з’являється біля курсора, синім.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Що виправив Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Цього тижня: {0} ({1} не та розкладка, {2} одруківки). Від встановлення: {3}. Зберігаються лише числа, на цьому комп’ютері.</value>
+  </data>
 </root>

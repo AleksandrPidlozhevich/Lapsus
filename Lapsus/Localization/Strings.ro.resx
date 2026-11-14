@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Marcajul aranjamentului apare pentru o clipă lângă cursor, în albastru.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Ce a corectat Lapsus</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Săptămâna aceasta: {0} ({1} aranjament greșit, {2} greșeli de tastare). De la instalare: {3}. Se păstrează doar numerele, pe acest computer.</value>
+  </data>
 </root>

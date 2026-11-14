@@ -913,4 +913,10 @@
     <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Oznaka rasporeda se na trenutak pojavi kod kursora, plavom bojom.</value>
   </data>
+    <data name="Stats_Label" xml:space="preserve">
+    <value>Šta je Lapsus ispravio</value>
+  </data>
+    <data name="Stats_Line" xml:space="preserve">
+    <value>Ove nedelje: {0} ({1} pogrešan raspored, {2} slovne greške). Od instaliranja: {3}. Čuvaju se samo brojevi, na ovom računaru.</value>
+  </data>
 </root>
