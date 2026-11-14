@@ -195,6 +195,32 @@ public static partial class BundledKeyboardMaps
         return slots;
     }
 
+    // Two-set Korean (dubeolsik), the standard keyboard: consonants under the left hand, vowels under the
+    // right. Digits and punctuation are the US ones.
+    private static char[] BuildKorean()
+    {
+        return RemapFromEn(new Dictionary<char, char>
+        {
+            ['q'] = 'ㅂ', ['w'] = 'ㅈ', ['e'] = 'ㄷ', ['r'] = 'ㄱ', ['t'] = 'ㅅ', ['y'] = 'ㅛ', ['u'] = 'ㅕ',
+            ['i'] = 'ㅑ', ['o'] = 'ㅐ', ['p'] = 'ㅔ', ['a'] = 'ㅁ', ['s'] = 'ㄴ', ['d'] = 'ㅇ', ['f'] = 'ㄹ',
+            ['g'] = 'ㅎ', ['h'] = 'ㅗ', ['j'] = 'ㅓ', ['k'] = 'ㅏ', ['l'] = 'ㅣ', ['z'] = 'ㅋ', ['x'] = 'ㅌ',
+            ['c'] = 'ㅊ', ['v'] = 'ㅍ', ['b'] = 'ㅠ', ['n'] = 'ㅜ', ['m'] = 'ㅡ'
+        });
+    }
+
+    // Shift doubles five consonants and reaches two vowels; on every other letter key it changes nothing.
+    private static char[] BuildKoreanShifted()
+    {
+        var shifted = KeyboardMap.ShiftedSymbolsOnly(BuildEn(), BuildEnShifted());
+        var doubled = ShiftedSymbols(
+            ('q', 'ㅃ'), ('w', 'ㅉ'), ('e', 'ㄸ'), ('r', 'ㄲ'), ('t', 'ㅆ'), ('o', 'ㅒ'), ('p', 'ㅖ'));
+        for (var slot = 0; slot < shifted.Length; slot++)
+            if (doubled[slot] != '\0')
+                shifted[slot] = doubled[slot];
+
+        return shifted;
+    }
+
     private static char[] BuildArmenianShifted()
     {
         var shifted = ShiftedSymbols(

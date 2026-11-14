@@ -20,6 +20,7 @@ public static class LayoutLanguage
             "ar" => KeyboardLayout.Ar,
             "ka" => KeyboardLayout.Ka,
             "hy" => KeyboardLayout.Hy,
+            "ko" => KeyboardLayout.Ko,
             _ => null
         };
     }
@@ -39,6 +40,7 @@ public static class LayoutLanguage
             KeyboardLayout.Ar => "ar",
             KeyboardLayout.Ka => "ka",
             KeyboardLayout.Hy => "hy",
+            KeyboardLayout.Ko => "ko",
             _ => null
         };
     }

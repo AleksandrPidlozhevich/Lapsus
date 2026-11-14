@@ -23,6 +23,9 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
     public static readonly InstalledLayout Ru = new(
         "ru-RU", 3, Script.Cyrillic, "ru", KeyboardLayout.Ru, BundledKeyboardMaps.Ru);
 
+    public static readonly InstalledLayout Ko = new(
+        "ko-KR", 4, Script.Hangul, "ko", KeyboardLayout.Ko, BundledKeyboardMaps.Ko);
+
     public List<InstalledLayout> InstalledLayouts { get; set; } = [En, Uk];
 
     public string? BlockedReason { get; set; }
@@ -184,8 +187,11 @@ internal sealed class FakeInputBackend(IPhraseCorrector corrector, AppExclusions
         return Task.FromResult(Selection);
     }
 
+    public List<string> Pasted { get; } = [];
+
     protected override bool PasteText(string text)
     {
+        Pasted.Add(text);
         return true;
     }
 

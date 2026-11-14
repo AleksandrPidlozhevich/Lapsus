@@ -188,6 +188,12 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
         return InputBlockedReason();
     }
 
+    // A selection travels through the clipboard, which a platform may allow where typing is held back.
+    protected virtual string? SelectionBlockedReason()
+    {
+        return InputBlockedReason();
+    }
+
     protected abstract Task<string?> CopySelectionAsync();
 
     protected abstract bool PasteText(string text);

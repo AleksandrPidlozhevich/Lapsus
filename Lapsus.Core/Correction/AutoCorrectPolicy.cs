@@ -14,7 +14,10 @@ public static class AutoCorrectPolicy
         var keys = new HashSet<char>();
         foreach (var script in Enum.GetValues<Script>())
         {
-            if (!Scripts.IsCaseless(script))
+            // shortcut: Korean's Shift letters (Q W E R T O P) are left out, or iPhone would stop being camelCase
+            // for everyone; auto mode skips "dkQk" (아빠) and the hotkey fixes it. Take the installed layouts,
+            // as LetterDigits does, when typing under the Korean IME gets auto mode.
+            if (!Scripts.IsCaseless(script) || script == Script.Hangul)
                 continue;
 
             var map = ScriptLayouts.FallbackMapFor(script);

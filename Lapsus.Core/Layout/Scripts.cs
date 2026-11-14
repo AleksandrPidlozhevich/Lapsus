@@ -13,6 +13,7 @@ public static class Scripts
         if (Alphabets.IsArabicLetter(ch)) return Script.Arabic;
         if (Alphabets.IsGeorgianLetter(ch)) return Script.Georgian;
         if (Alphabets.IsArmenianLetter(ch)) return Script.Armenian;
+        if (Alphabets.IsHangulLetter(ch)) return Script.Hangul;
         return null;
     }
 
@@ -35,10 +36,11 @@ public static class Scripts
         return (from == Script.Latin && IsPhonetic(to)) || (to == Script.Latin && IsPhonetic(from));
     }
 
-    // Their QWERTY layouts follow Latin sounds: English keys spell plausible native words.
+    // Their QWERTY layouts follow Latin sounds: English keys spell plausible native words. Korean letter
+    // keys do the same by another road: any run of them gathers into syllables.
     private static bool IsPhonetic(Script script)
     {
-        return script is Script.Georgian or Script.Armenian;
+        return script is Script.Georgian or Script.Armenian or Script.Hangul;
     }
 
     public static bool IsIgnorableMark(Script script, char ch)
@@ -107,7 +109,7 @@ public static class Scripts
 
     public static bool IsCaseless(Script script)
     {
-        return script is Script.Hebrew or Script.Arabic or Script.Georgian;
+        return script is Script.Hebrew or Script.Arabic or Script.Georgian or Script.Hangul;
     }
 
     public static bool IsMixed(string text)

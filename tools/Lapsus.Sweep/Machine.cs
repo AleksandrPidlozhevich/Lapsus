@@ -19,7 +19,8 @@ internal sealed record TargetLanguage(
         new("be", "Belarusian", Script.Cyrillic, KeyboardLayout.Be, BundledKeyboardMaps.Be),
         new("mk", "Macedonian", Script.Cyrillic, KeyboardLayout.Mk, BundledKeyboardMaps.Mk),
         new("ka", "Georgian", Script.Georgian, KeyboardLayout.Ka, BundledKeyboardMaps.Ka),
-        new("hy", "Armenian", Script.Armenian, KeyboardLayout.Hy, BundledKeyboardMaps.Hy)
+        new("hy", "Armenian", Script.Armenian, KeyboardLayout.Hy, BundledKeyboardMaps.Hy),
+        new("ko", "Korean", Script.Hangul, KeyboardLayout.Ko, BundledKeyboardMaps.Ko)
     ];
 
     public static readonly TargetLanguage[] Priority =
@@ -33,7 +34,8 @@ internal sealed record TargetLanguage(
 
     public bool CanType(string word)
     {
-        foreach (var ch in word)
+        // A Korean syllable is typed as its letters.
+        foreach (var ch in Map.ComposesHangul ? Hangul.Decompose(word) : word)
             if (!Map.TryGetKey(ch, out _, out _) && !Map.TryDecompose(ch, out _, out _, out _))
                 return false;
 

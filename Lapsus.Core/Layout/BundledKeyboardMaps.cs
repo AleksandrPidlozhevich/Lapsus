@@ -105,6 +105,8 @@ public static partial class BundledKeyboardMaps
 
     public static readonly KeyboardMap Hy = new(BuildArmenian(), BuildArmenianShifted());
 
+    public static readonly KeyboardMap Ko = new(BuildKorean(), BuildKoreanShifted());
+
     public static char[] CreateRuSlots()
     {
         return BuildJcuken(JcukenVariant.Russian);

@@ -177,6 +177,18 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         return null;
     }
 
+    // Korean is the one IME language Lapsus reads, and a selection needs no keystrokes rebuilt.
+    protected override string? SelectionBlockedReason()
+    {
+        if (!InstalledLayouts.IsKoreanLanguage(ForegroundKeyboardLayout()))
+            return base.SelectionBlockedReason();
+
+        if (IsExcludedApp(out var process))
+            return Localizer.Instance.Format("Diag_AppExcluded", process);
+
+        return _focus.IsPassword(_focus.Read().Focus) ? Localizer.Instance["Diag_SecureField"] : null;
+    }
+
     protected override string? TypingBlockedReason()
     {
 

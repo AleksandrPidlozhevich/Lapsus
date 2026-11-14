@@ -40,6 +40,8 @@ public sealed class KeyboardMap
                     _ligatures[(ligature.Slot, ligature.Shifted)] = ligature.Text;
         }
 
+        ComposesHangul = slotChars.Any(Hangul.IsJamo);
+
         _slotToChar = new char[slotChars.Count];
         _charToSlot = new Dictionary<char, int>(slotChars.Count);
 
@@ -108,6 +110,9 @@ public sealed class KeyboardMap
 
         return keys.Count == 0 ? (null, null, null) : (compose, decompose, keys);
     }
+
+    // A Korean layout: what its keys type gathers into syllables (Hangul.Compose).
+    public bool ComposesHangul { get; }
 
     public bool HasDeadKeys => _deadKeys is not null;
 

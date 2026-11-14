@@ -50,6 +50,15 @@ public static class InstalledLayouts
             if (!seen.Add(layoutId))
                 continue;
 
+            // The Korean keyboard's own table is QWERTY, since its letters come from the IME: the arrangement
+            // is the bundled two-set one.
+            if (IsKoreanLanguage(hkl))
+            {
+                result.Add(new InstalledLayout(
+                    layoutId, hkl, Script.Hangul, "ko", KeyboardLayout.Ko, BundledKeyboardMaps.Ko));
+                continue;
+            }
+
             var deadKeys = new List<DeadKey>();
             var ligatures = new List<Ligature>();
             var slots = BuildSlots(hkl, false, deadKeys, ligatures);
@@ -73,6 +82,11 @@ public static class InstalledLayouts
     internal static string LayoutIdFor(IntPtr hkl)
     {
         return $"0x{hkl.ToInt64():X}";
+    }
+
+    public static bool IsKoreanLanguage(IntPtr hkl)
+    {
+        return ((uint)hkl.ToInt64() & 0x3FF) == LangKorean;
     }
 
     public static bool IsImeLanguage(IntPtr hkl)

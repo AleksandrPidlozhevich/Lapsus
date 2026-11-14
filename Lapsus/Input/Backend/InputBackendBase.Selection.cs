@@ -22,7 +22,7 @@ internal abstract partial class InputBackendBase<TFocus>
         if (_selectionActionRunning)
             return;
 
-        if (InputBlockedReason() is { } blocked)
+        if (SelectionBlockedReason() is { } blocked)
         {
             RaiseDiagnostic(blocked);
             return;

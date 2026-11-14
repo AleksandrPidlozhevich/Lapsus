@@ -155,6 +155,8 @@ public static class DictionaryCatalog
         Unilex("hy", Script.Armenian, "Հայերեն (Armenian)",
             Wooorm("hy", "GPL 2.0, LGPL 2.1 or MPL 1.1", "araktransfer")),
 
+        FrequencyWords("ko", Script.Hangul, "한국어 (Korean)"),
+
         FrequencyWords("sr", Script.Latin, "Srpski (Serbian)",
             LibreOffice("sr/sr-Latn", "LGPL 3 or MPL 2.0", "Milutin Smiljanić")),
         FrequencyWords("en", Script.Latin, "English",

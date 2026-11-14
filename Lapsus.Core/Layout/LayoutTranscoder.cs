@@ -47,6 +47,10 @@ public static class LayoutTranscoder
 
     private static string TranscodeKeys(string text, KeyboardMap? single, IReadOnlyList<KeyboardMap>? many, KeyboardMap to)
     {
+        // Korean syllables are not keys: the letters in them are.
+        if (single?.ComposesHangul ?? many!.Any(map => map.ComposesHangul))
+            text = Hangul.Decompose(text);
+
         var sb = new StringBuilder(text.Length);
         for (var i = 0; i < text.Length; i++)
         {
@@ -94,7 +98,7 @@ public static class LayoutTranscoder
             sb.Append(MapChar(ch, single, many, to));
         }
 
-        return sb.ToString();
+        return to.ComposesHangul ? Hangul.Compose(sb.ToString()) : sb.ToString();
     }
 
     private static char MapChar(char ch, KeyboardMap? single, IReadOnlyList<KeyboardMap>? many, KeyboardMap to)
