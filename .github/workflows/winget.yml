@@ -25,6 +25,6 @@ jobs:
       - uses: vedantmgoyal9/winget-releaser@a8fff44b123f115ce4c21543edf8b677376fc7e0 # main, 2026-09-20
         if: steps.token.outputs.set == 'true'
         with:
-          identifier: AliaksandrPidlazhevich.Lapsus
+          identifier: Lapsus.Lapsus
           installers-regex: '-win-Setup\.exe$'
           token: ${{ secrets.WINGET_TOKEN }}

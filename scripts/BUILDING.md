@@ -116,7 +116,7 @@ If the code must stay private, publish the releases to a second, public reposito
 
 ## winget
 
-`winget install AliaksandrPidlazhevich.Lapsus` installs the same `Lapsus-win-Setup.exe`, without
+`winget install Lapsus.Lapsus` installs the same `Lapsus-win-Setup.exe`, without
 the SmartScreen window a browser download gets. `.github/workflows/winget.yml` opens the pull
 request to [microsoft/winget-pkgs](https://github.com/microsoft/winget-pkgs) each time a release
 is **published** — the draft the Release workflow creates does not count — and does nothing while
@@ -135,7 +135,7 @@ Set up once, by hand:
    wingetcreate new https://github.com/AleksandrPidlozhevich/Lapsus/releases/download/v<version>/Lapsus-win-Setup.exe
    ```
 
-   Answer its questions with: identifier `AliaksandrPidlazhevich.Lapsus`, publisher
+   Answer its questions with: identifier `Lapsus.Lapsus`, publisher
    `Aliaksandr Pidlazhevich` (the spelling in `LICENSE`; the identifier cannot be changed
    later), installer type `exe`, scope `user`, silent switches `--silent`, license
    `BUSL-1.1`.
