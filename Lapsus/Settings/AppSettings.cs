@@ -105,6 +105,9 @@ public sealed class AppSettings
 
     public string[] ExcludedApps { get; set; } = [];
 
+    // Apps where the fix after Space is off but the hotkey works.
+    public string[] AutoFixOffApps { get; set; } = [];
+
     // How many times each word's auto fix was taken back with Backspace (AutoFixRejections).
     public Dictionary<string, int> RejectedAutoFixes { get; set; } = [];
 

@@ -1,6 +1,7 @@
 using Lapsus.Core.Correction;
 using Lapsus.Core.Layout;
 using Lapsus.Core.Spelling;
+using Lapsus.Input;
 
 namespace Lapsus.Tests;
 
@@ -752,6 +753,39 @@ public sealed class CorrectionCycleTests : IDisposable
         Avalonia.Threading.Dispatcher.UIThread.RunJobs();
 
         Assert.Equal(expected, backend.Injected.Count > 0 ? backend.Injected[^1].Text : null);
+    }
+
+    [Fact]
+    public void An_app_set_to_hotkey_only_gets_no_fix_after_space_but_keeps_the_hotkey()
+    {
+        var apps = new AppExclusions();
+        apps.AutoFixOff.Add("TestApp");
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions()), apps).Listening().Focused();
+        backend.AutoMode = true;
+        backend.AutoFixTypos = true;
+
+        backend.Type("ghbdtn ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        Assert.Empty(backend.Injected);
+
+        backend.DiscardLine();
+        backend.Type("ghbdtn");
+        backend.PressHotkey();
+        Assert.Equal("привет", backend.Injected[^1].Text);
+    }
+
+    [Fact]
+    public void Another_app_on_the_hotkey_only_list_leaves_this_one_fixing_after_space()
+    {
+        var apps = new AppExclusions();
+        apps.AutoFixOff.Add("SomethingElse");
+        var backend = new FakeInputBackend(RealBrain(new WordExceptions()), apps).Listening().Focused();
+        backend.AutoMode = true;
+
+        backend.Type("ghbdtn ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal("привет ", backend.Injected[^1].Text);
     }
 
     [Fact]

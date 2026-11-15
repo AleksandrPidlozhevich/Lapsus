@@ -11,6 +11,12 @@ public sealed class AppExclusions
 
     public event EventHandler? Changed;
 
+    // Apps where only the unasked fix after Space is off: the hotkey and the selection keys still work there.
+    // Made when first asked for, so a list of these has no list of its own to build.
+    private readonly Lazy<AppExclusions> _autoFixOff = new(() => new AppExclusions());
+
+    public AppExclusions AutoFixOff => _autoFixOff.Value;
+
     public AppExclusions()
     {
     }

@@ -7,12 +7,12 @@
         xmlns:loc="using:Lapsus.Localization"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="560" d:DesignHeight="720"
+        mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="720"
         x:Class="Lapsus.Views.SettingsWindow"
         x:DataType="vm:SettingsViewModel"
         Title="{Binding L[Window_Title]}"
         FlowDirection="{Binding FlowDirection}"
-        Width="560"
+        Width="640"
         MinHeight="360"
         SizeToContent="Height"
         CanResize="False"
@@ -30,6 +30,8 @@
         <StreamGeometry x:Key="TabIconAi">M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z</StreamGeometry>
 
         <StreamGeometry x:Key="TabIconVoice">M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z</StreamGeometry>
+        <StreamGeometry x:Key="TabIconStats">M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z</StreamGeometry>
+        <StreamGeometry x:Key="TabIconBackup">M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm-5 16a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm3-10H5V5h10v4z</StreamGeometry>
         <StreamGeometry x:Key="TabIconPlus">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z</StreamGeometry>
         <StreamGeometry x:Key="TabIconLicense">M12.65 10A5.99 5.99 0 0 0 7 6a6 6 0 0 0 0 12 5.99 5.99 0 0 0 5.65-4H17v4h4v-4h2v-4H12.65zM7 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z</StreamGeometry>
 
@@ -563,30 +565,8 @@
                                     <ToggleSwitch Grid.Column="1" Classes="bare" IsChecked="{Binding RunAtStartup}" />
                                 </Grid>
 
-                                <StackPanel Spacing="2">
-                                    <TextBlock Text="{Binding L[Stats_Label]}" TextWrapping="Wrap" />
-                                    <TextBlock Classes="hint" Text="{Binding StatsLine}" />
-                                </StackPanel>
-
                                 <Button Content="{Binding L[Onb_Again]}" HorizontalAlignment="Left"
                                         Click="OnShowIntroductionClick" />
-
-                                <StackPanel Spacing="6" IsVisible="{Binding IsSettingsBackupSupported}">
-                                    <Grid ColumnDefinitions="*,Auto,Auto">
-                                        <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
-                                            <TextBlock Text="{Binding L[Backup_Label]}" TextWrapping="Wrap" />
-                                            <TextBlock Classes="hint" Text="{Binding L[Backup_Hint]}" />
-                                        </StackPanel>
-                                        <Button Grid.Column="1" Content="{Binding L[Backup_Export]}"
-                                                VerticalAlignment="Center" Margin="0,0,8,0"
-                                                Click="OnExportSettingsClick" />
-                                        <Button Grid.Column="2" Content="{Binding L[Backup_Import]}"
-                                                VerticalAlignment="Center"
-                                                Click="OnImportSettingsClick" />
-                                    </Grid>
-                                    <TextBlock Classes="hint" Text="{Binding BackupStatus}"
-                                               IsVisible="{Binding BackupStatus, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
-                                </StackPanel>
                             </StackPanel>
                         </Border>
 
@@ -663,6 +643,8 @@
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[ExcludedApps_Label]}" />
                                 <TextBlock Classes="hint" TextWrapping="Wrap"
                                            Text="{Binding L[ExcludedApps_Hint]}" />
+                                <TextBlock Classes="hint" TextWrapping="Wrap"
+                                           Text="{Binding L[AppRule_Hint]}" />
 
                                 <Grid ColumnDefinitions="*,Auto" IsVisible="{Binding Exclusions.CanPickRunningApps}">
                                     <ComboBox x:Name="RunningAppsPicker" Grid.Column="0"
@@ -702,18 +684,22 @@
                                               VerticalScrollBarVisibility="Auto">
                                     <ItemsControl ItemsSource="{Binding Exclusions.ExcludedApps}">
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate x:DataType="x:String">
+                                            <DataTemplate x:DataType="vm:AppRule">
                                                 <Border Classes="row" Margin="0,2">
-                                                    <Grid ColumnDefinitions="*,Auto">
-                                                        <TextBlock Grid.Column="0" Text="{Binding}"
+                                                    <Grid ColumnDefinitions="*,Auto,Auto">
+                                                        <TextBlock Grid.Column="0" Text="{Binding Name}"
                                                                    VerticalAlignment="Center"
                                                                    TextTrimming="CharacterEllipsis" />
-                                                        <Button Grid.Column="1" Classes="icon"
+                                                        <CheckBox Grid.Column="1" Margin="8,0"
+                                                                  Content="{Binding ((vm:SettingsViewModel)DataContext).L[AppRule_HotkeyOnly],
+                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                  IsChecked="{Binding HotkeyOnly, Mode=TwoWay}" />
+                                                        <Button Grid.Column="2" Classes="icon"
                                                                 ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[ExcludedApps_RemoveTooltip],
                                                                              RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                                 Command="{Binding ((vm:SettingsViewModel)DataContext).Exclusions.RemoveExcludedAppCommand,
                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                                                CommandParameter="{Binding}">
+                                                                CommandParameter="{Binding Name}">
                                                             <Svg
                                                                 Path="{Binding ((vm:SettingsViewModel)DataContext).Appearance.TrashIconPath,
                                                                    RelativeSource={RelativeSource AncestorType=ItemsControl}}"
@@ -1236,6 +1222,54 @@
                             </StackPanel>
                         </Border>
 
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconStats}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Stats]}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="StatsScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="StatsList" Spacing="12" Margin="0,12">
+                        <Border Classes="card">
+                            <StackPanel Spacing="6">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Stats_Label]}" />
+                                <TextBlock TextWrapping="Wrap" Text="{Binding StatsLine}" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Spacing="4">
+                        <PathIcon Classes="tabIcon" Data="{StaticResource TabIconBackup}" Width="20" Height="20"
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Classes="tabLabel" Text="{Binding L[Tab_Backup]}" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ScrollViewer x:Name="BackupScroll"
+                              VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="BackupList" Spacing="12" Margin="0,12">
+                        <Border Classes="card">
+                            <StackPanel Spacing="8" IsVisible="{Binding IsSettingsBackupSupported}">
+                                <TextBlock Classes="sectionTitle" Text="{Binding L[Backup_Label]}" />
+                                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding L[Backup_Hint]}" />
+                                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
+                                    <Button Content="{Binding L[Backup_Export]}" Click="OnExportSettingsClick" />
+                                    <Button Content="{Binding L[Backup_Import]}" Click="OnImportSettingsClick" />
+                                </WrapPanel>
+                                <TextBlock Classes="hint" TextWrapping="Wrap" Text="{Binding BackupStatus}"
+                                           IsVisible="{Binding BackupStatus, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>

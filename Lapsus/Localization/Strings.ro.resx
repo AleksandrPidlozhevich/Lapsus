@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Cât timp un joc ocupă tot ecranul, Lapsus își scoate cârligul de tastatură și îl pune la loc când jocul se termină.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Doar scurtătura</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Bifați „Doar scurtătura” pentru o aplicație ca să păstrați acolo scurtătura și tastele pentru selecție, dar să opriți corecturile automate după Spațiu.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statistici</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Copie</value>
+  </data>
 </root>

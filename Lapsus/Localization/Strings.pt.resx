@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Enquanto um jogo ocupa o ecrã inteiro, o Lapsus retira o seu hook de teclado e volta a colocá-lo quando o jogo termina.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Apenas atalho</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Assinale «Apenas atalho» numa aplicação para manter aí o atalho e as teclas para uma seleção, mas desligar as correções automáticas após Espaço.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Uso</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Cópia</value>
+  </data>
 </root>

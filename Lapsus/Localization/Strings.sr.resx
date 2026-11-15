@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Dok igra zauzima ceo ekran, Lapsus uklanja svoju kuku za tastaturu i vraća je kada se igra završi.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Samo prečica</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Označite „Samo prečica“ za program da tamo rade prečica i tasteri za izabrani tekst, a automatski ispravci posle razmaka da se isključe.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statistika</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Kopija</value>
+  </data>
 </root>

@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Mens et spil fylder hele skærmen, fjerner Lapsus sin tastaturhook og sætter den tilbage, når spillet slutter.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Kun genvejstast</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Sæt kryds ved “Kun genvejstast” for et program for at beholde genvejstasten og tasterne til markeret tekst dér, men slå de automatiske rettelser efter mellemrum fra.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statistik</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
 </root>

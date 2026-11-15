@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Dokud hra zabírá celou obrazovku, Lapsus odstraní svůj háček klávesnice a vrátí ho, až hra skončí.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Jen klávesová zkratka</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Zaškrtněte „Jen klávesová zkratka“ u aplikace, aby tam fungovala zkratka a klávesy pro vybraný text, ale automatické opravy po mezerníku se vypnuly.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statistika</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Záloha</value>
+  </data>
 </root>
