@@ -129,7 +129,7 @@ public partial class SettingsWindow : Window
             FileTypeChoices = [SettingsFile]
         });
         if (file?.TryGetLocalPath() is { } path)
-            ViewModel?.ExportSettings(path);
+            ViewModel?.Backup.Export(path);
     }
 
     private async void OnImportSettingsClick(object? sender, RoutedEventArgs e)
@@ -140,7 +140,7 @@ public partial class SettingsWindow : Window
             FileTypeFilter = [SettingsFile]
         });
         if (files.Count > 0 && files[0].TryGetLocalPath() is { } path)
-            ViewModel?.ImportSettings(path);
+            ViewModel?.Backup.Import(path);
     }
 
     private void OnShowIntroductionClick(object? sender, RoutedEventArgs e)

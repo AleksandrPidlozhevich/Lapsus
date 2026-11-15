@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Doorgaan</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Niet nu</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>

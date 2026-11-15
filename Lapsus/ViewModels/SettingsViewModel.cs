@@ -91,8 +91,13 @@ public partial class SettingsViewModel : ViewModelBase
         _showLayoutIndicator = settings.ShowLayoutIndicator;
         _indicator.Enabled = _showLayoutIndicator;
         _autoFixSignal = settings.AutoFixSignal;
-        _pauseInGames = settings.PauseInGames;
-        _ = new DispatcherTimer(TimeSpan.FromSeconds(3), DispatcherPriority.Background, (_, _) => CheckPause());
+        Backup = new BackupViewModel(store, settings);
+        Pausing = new PauseViewModel(settings, store, () =>
+        {
+            OnPropertyChanged(nameof(CaptureLabel));
+            if (Enabled)
+                ApplyEnabled();
+        });
         _backend.AutoFixApplied += (_, _) =>
         {
             if (AutoFixSignal)
@@ -106,13 +111,11 @@ public partial class SettingsViewModel : ViewModelBase
         // Posted: the hotkey's fix is reported from the keyboard hook, which must not wait on a file.
         _backend.Fixed += (_, switchedLayout) => Dispatcher.UIThread.Post(() =>
         {
-            _stats.Note(switchedLayout);
-            RefreshStats();
+            Stats.Note(switchedLayout);
         });
         _backend.AutoFixRejected += (_, _) => Dispatcher.UIThread.Post(() =>
         {
-            _stats.Undo();
-            RefreshStats();
+            Stats.Undo();
         });
         _backend.Diagnostic += OnDiagnostic;
 
@@ -185,20 +188,11 @@ public partial class SettingsViewModel : ViewModelBase
         return _settings;
     }
 
-    // The App Store sandbox has no entitlement for files the user picks.
-    public bool IsSettingsBackupSupported => !OperatingSystem.IsMacOS() || !MacSandbox.IsSandboxed;
+    public BackupViewModel Backup { get; }
 
-    [ObservableProperty] private string _backupStatus = "";
+    public StatsViewModel Stats { get; } = new();
 
-    public void ExportSettings(string path)
-    {
-        BackupStatus = L[_store.Export(_settings, path) ? "Backup_Exported" : "Backup_ExportFailed"];
-    }
-
-    public void ImportSettings(string path)
-    {
-        BackupStatus = L[_store.Import(path, _settings) ? "Backup_Imported" : "Backup_ImportFailed"];
-    }
+    public PauseViewModel Pausing { get; }
 
     public ModelsViewModel Models { get; }
 
@@ -321,60 +315,10 @@ public partial class SettingsViewModel : ViewModelBase
         : PlainLayoutSwitch ? L["AutoCorrect_Blocked_Plain"]
         : null;
 
-    public string CaptureLabel => L[!Enabled ? "Capture_Off" : IsPaused ? "Capture_Paused" : "Capture_On"];
-
-    private readonly CapturePause _pause = new(() => DateTime.Now);
-
-    private bool _pauseApplied;
+    public string CaptureLabel => L[!Enabled ? "Capture_Off" : Pausing.IsPaused ? "Capture_Paused" : "Capture_On"];
 
     // On in Settings and not paused: the hooks are in.
-    private bool Capturing => Enabled && !_pause.IsPaused;
-
-    public bool IsPaused => _pause.IsPaused;
-
-    // The tray menu follows this.
-    public event EventHandler? PauseChanged;
-
-    public bool IsGamePauseSupported => OperatingSystem.IsWindows();
-
-    [ObservableProperty] private bool _pauseInGames;
-
-    partial void OnPauseInGamesChanged(bool value)
-    {
-        _settings.PauseInGames = value;
-        _store.Save(_settings);
-        CheckPause();
-    }
-
-    // null: until Resume.
-    public void Pause(TimeSpan? duration)
-    {
-        _pause.For(duration);
-        CheckPause();
-    }
-
-    public void Resume()
-    {
-        _pause.Resume();
-        CheckPause();
-    }
-
-    // Also on a timer: a pause runs out, a game starts or ends, and nothing else says so.
-    private void CheckPause()
-    {
-        _pause.GameRunning = PauseInGames && OperatingSystem.IsWindows() &&
-                             NativeMethods.SHQueryUserNotificationState(out var state) == 0 &&
-                             state == NativeMethods.QUNS_RUNNING_D3D_FULL_SCREEN;
-        if (_pause.IsPaused == _pauseApplied)
-            return;
-
-        _pauseApplied = _pause.IsPaused;
-        OnPropertyChanged(nameof(CaptureLabel));
-        OnPropertyChanged(nameof(IsPaused));
-        if (Enabled)
-            ApplyEnabled();
-        PauseChanged?.Invoke(this, EventArgs.Empty);
-    }
+    private bool Capturing => Enabled && !Pausing.IsPaused;
 
     partial void OnEnabledChanged(bool value)
     {
@@ -520,7 +464,7 @@ public partial class SettingsViewModel : ViewModelBase
         OnPropertyChanged(nameof(AutoModeBlockedHint));
 
         UpdateStatus();
-        RefreshStats();
+        Stats.Refresh();
     }
 
     private void BuildPreferences(KeyboardLayout? select)
@@ -596,55 +540,10 @@ public partial class SettingsViewModel : ViewModelBase
             : _backend.LayoutCandidates().Select(c => c.LanguageCode);
     }
 
-    private readonly UsageStats _stats = new();
-
-    public int WeekLayout => _stats.LastDays(7).Layout;
-
-    public int WeekTypos => _stats.LastDays(7).Typos;
-
-    public int WeekTotal => WeekLayout + WeekTypos;
-
-    public int TotalFixes => _stats.Total;
-
-    public IReadOnlyList<StatBar> WeekDays
-    {
-        get
-        {
-            var days = _stats.Days(7);
-            var peak = 1;
-            foreach (var day in days)
-                peak = Math.Max(peak, day.Layout + day.Typos);
-
-            var today = days[^1].Date;
-            var bars = new StatBar[days.Count];
-            for (var i = 0; i < days.Count; i++)
-            {
-                var day = days[i];
-                bars[i] = new StatBar(day.Date, day.Layout, day.Typos,
-                    BarHeight(day.Layout, peak), BarHeight(day.Typos, peak), day.Date == today);
-            }
-
-            return bars;
-        }
-    }
-
-    // A single fix still draws a bar; the fullest day fills the plot.
-    private static double BarHeight(int count, int peak) =>
-        count == 0 ? 0 : Math.Max(4, count * StatBar.Plot / peak);
-
-    private void RefreshStats()
-    {
-        OnPropertyChanged(nameof(WeekTotal));
-        OnPropertyChanged(nameof(WeekLayout));
-        OnPropertyChanged(nameof(WeekTypos));
-        OnPropertyChanged(nameof(TotalFixes));
-        OnPropertyChanged(nameof(WeekDays));
-    }
-
     public void OnWindowReopened()
     {
         RefreshRunningApps();
-        RefreshStats();
+        Stats.Refresh();
         Dictionaries.RefreshSuggestion();
 
         var wasNeeded = PermissionsNeeded;

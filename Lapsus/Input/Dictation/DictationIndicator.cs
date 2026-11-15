@@ -196,18 +196,10 @@ internal sealed class DictationIndicator : IDictationIndicator, IDisposable
                 return caret;
             if (_button is { IsVisible: true })
                 return null;
-            if (NativeMethods.GetCursorPos(out var point))
-                return AtPointer(point.x, point.y);
-        }
-        else if (OperatingSystem.IsMacOS() && MacPointer.Location() is { } pointer)
-        {
-            return AtPointer(pointer.X, pointer.Y);
         }
 
-        return new CaretBounds(0, 0, 1, 18);
+        return PointerAnchor.Read() ?? new CaretBounds(0, 0, 1, 18);
     }
-
-    private static CaretBounds AtPointer(int x, int y) => new(x, y, x + 1, y + 18);
 
     // Accessibility can stall for its whole timeout on a busy app, so on macOS the badge appears at the
     // pointer and moves to the caret once a worker has found it. The sandbox has no caret to find.
