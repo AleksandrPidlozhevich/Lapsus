@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>نسخة</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>تُترك المصطلحات كما هي أيضًا عند كتابتها: لا يُصحَّح أبدًا اسم أُضيف هنا.</value>
+  </data>
 </root>

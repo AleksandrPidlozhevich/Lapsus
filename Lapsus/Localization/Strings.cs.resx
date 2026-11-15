@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Záloha</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Pojmy se také neopravují, když je píšete: název přidaný sem se nikdy „neopraví“.</value>
+  </data>
 </root>

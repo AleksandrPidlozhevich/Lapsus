@@ -141,6 +141,61 @@ public sealed class WordExceptionsTests
         Assert.False(after.CorrectPhrase("сфк", Script.Cyrillic, BundledKeyboardMaps.Ru, ToLatin).Changed);
     }
 
+    [Fact]
+    public void A_glossary_term_is_left_alone_though_it_is_not_on_the_list()
+    {
+        var exceptions = new WordExceptions();
+        exceptions.SetGlossary(["сфк"]);
+
+        var result = Build(exceptions).CorrectPhrase("сфк", Script.Cyrillic, BundledKeyboardMaps.Ru, ToLatin);
+
+        Assert.False(result.Changed);
+        Assert.True(exceptions.Contains("сфк"));
+        Assert.False(exceptions.IsEmpty);
+        Assert.Empty(exceptions.Snapshot());
+    }
+
+    [Theory]
+    [InlineData("Kubernetes|kuber|кубер", "kubernetes")]
+    [InlineData("pull request", "request")]
+    [InlineData("  GitHub  ", "github")]
+    public void Only_the_term_of_a_glossary_line_counts_a_word_at_a_time(string line, string word)
+    {
+        var exceptions = new WordExceptions();
+        exceptions.SetGlossary([line]);
+
+        Assert.True(exceptions.Contains(word));
+        Assert.False(exceptions.Contains("kuber"));
+        Assert.False(exceptions.Contains("кубер"));
+    }
+
+    [Fact]
+    public void Setting_the_glossary_again_replaces_the_old_terms_and_the_user_list_stays()
+    {
+        var exceptions = new WordExceptions(["сфк"]);
+        exceptions.SetGlossary(["terra"]);
+        exceptions.SetGlossary(["helm"]);
+
+        Assert.False(exceptions.Contains("terra"));
+        Assert.True(exceptions.Contains("helm"));
+        Assert.True(exceptions.Contains("сфк"));
+
+        exceptions.SetGlossary([]);
+        Assert.False(exceptions.Contains("helm"));
+        Assert.False(exceptions.IsEmpty);
+    }
+
+    [Fact]
+    public void A_glossary_term_in_a_line_is_spared_the_way_a_listed_word_is()
+    {
+        var exceptions = new WordExceptions();
+        exceptions.SetGlossary(["сфк"]);
+
+        var result = Build(exceptions).CorrectPhrase("сфк сфe", Script.Cyrillic, BundledKeyboardMaps.Ru, ToLatin);
+
+        Assert.StartsWith("сфк ", result.Corrected);
+    }
+
     private static readonly List<LayoutCandidate> ToLatin =
         [new(Script.Latin, KeyboardLayout.En, BundledKeyboardMaps.En, "en", "en-id")];
 

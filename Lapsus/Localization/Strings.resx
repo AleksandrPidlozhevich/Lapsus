@@ -1014,4 +1014,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Backup</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>The terms are also left alone when you type them: a name taught here is never “corrected”.</value>
+  </data>
 </root>

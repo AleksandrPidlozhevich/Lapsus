@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Копія</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Тэрміны таксама не чапаюцца, калі вы іх набіраеце: назва, дададзеная тут, ніколі не «выпраўляецца».</value>
+  </data>
 </root>

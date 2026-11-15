@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Sicherung</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Die Begriffe bleiben auch beim Tippen unangetastet: ein hier eingetragener Name wird nie „korrigiert“.</value>
+  </data>
 </root>

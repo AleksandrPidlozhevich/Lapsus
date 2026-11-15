@@ -111,7 +111,8 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
 - **Type by voice** (opt-in): hold Ctrl+Win (⌃⌥ on a Mac) while you speak and let go, and what you
   said is typed at the cursor; a short press records hands-free until the next one. English terms in Russian or Ukrainian speech come
   out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own
-  names. [More below.](#voice-typing-optional)
+  names — which the correction then leaves alone when you type them, as it does the words on the
+  leave-alone list. [More below.](#voice-typing-optional)
 - **Stay out of the way**: named applications are skipped entirely — or, ticked “Hotkey only”, keep
   the hotkey and the selection keys but get no fix after Space, which suits an editor or a terminal —
   password fields never reach the

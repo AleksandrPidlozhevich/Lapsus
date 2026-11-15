@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Копія</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Терміни також не чіпаються, коли ви їх набираєте: назва, додана тут, ніколи не «виправляється».</value>
+  </data>
 </root>

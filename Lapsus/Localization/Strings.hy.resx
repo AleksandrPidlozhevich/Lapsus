@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Պահուստ</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Տերմինները նույնպես չեն փոփոխվում, երբ դրանք մուտքագրում եք. այստեղ ավելացված անունը երբեք «չի ուղղվում»։</value>
+  </data>
 </root>

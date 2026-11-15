@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>גיבוי</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>המונחים גם נשארים כמות שהם כשמקלידים אותם: שם שנוסף כאן לעולם לא «מתוקן».</value>
+  </data>
 </root>

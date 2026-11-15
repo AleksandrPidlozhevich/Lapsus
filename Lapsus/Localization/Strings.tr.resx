@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Yedek</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Terimler yazarken de bırakılır: buraya eklenen bir ad asla “düzeltilmez”.</value>
+  </data>
 </root>

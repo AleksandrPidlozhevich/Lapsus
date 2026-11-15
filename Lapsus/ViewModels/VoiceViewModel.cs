@@ -345,7 +345,11 @@ public partial class VoiceViewModel : ViewModelBase
             .Distinct(StringComparer.Ordinal)
             .ToArray();
         _store.Save(_settings);
+        GlossaryChanged?.Invoke(_settings.DictationGlossary);
     }
+
+    // The terms as saved: Lapsus.Core's word list leaves them alone too.
+    public event Action<string[]>? GlossaryChanged;
 
     private void BuildOptions()
     {

@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Cópia</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Os termos também são deixados em paz quando os escreve: um nome adicionado aqui nunca é «corrigido».</value>
+  </data>
 </root>

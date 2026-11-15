@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>백업</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>용어는 직접 입력할 때도 그대로 둡니다. 여기에 추가한 이름은 절대 &quot;교정&quot;되지 않습니다.</value>
+  </data>
 </root>

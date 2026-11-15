@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>ასლი</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>ტერმინები აკრეფისასაც არ იცვლება: აქ დამატებული სახელი არასდროს «სწორდება».</value>
+  </data>
 </root>
