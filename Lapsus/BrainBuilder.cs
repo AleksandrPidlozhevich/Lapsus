@@ -138,8 +138,6 @@ internal sealed class BrainBuilder(
         if (_llm is not { } llm)
             return;
 
-        // Any prompt will do: the first run pays for graph setup, whatever it reads.
-        const string sample = "ntrcn";
-        _ = llm.WarmUpAsync("", sample, sample.Length);
+        _ = llm.WarmUpAsync();
     }
 }

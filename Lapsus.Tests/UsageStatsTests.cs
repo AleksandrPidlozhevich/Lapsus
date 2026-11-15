@@ -43,6 +43,25 @@ public sealed class UsageStatsTests : IDisposable
     }
 
     [Fact]
+    public void Each_day_is_kept_separately_oldest_first()
+    {
+        var stats = Stats();
+        stats.Note(true);
+        stats.Note(true);
+
+        _today = _today.AddDays(2);
+        stats.Note(false);
+
+        Assert.Equal(
+        [
+            new DayCount(new DateOnly(2026, 11, 13), 0, 0),
+            new DayCount(new DateOnly(2026, 11, 14), 2, 0),
+            new DayCount(new DateOnly(2026, 11, 15), 0, 0),
+            new DayCount(new DateOnly(2026, 11, 16), 0, 1),
+        ], stats.Days(4));
+    }
+
+    [Fact]
     public void A_fix_taken_back_is_not_counted_and_only_the_last_one_can_be()
     {
         var stats = Stats();

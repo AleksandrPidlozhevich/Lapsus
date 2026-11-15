@@ -186,7 +186,7 @@ public sealed class SpellChecker
         if (!_clitics || string.IsNullOrEmpty(word) || !(Scripts.IsAbjad(script) || script == Script.Hangul))
             return false;
 
-        foreach (var stem in AbjadAffixes.Stems(LookupKeys.For(word, script), script))
+        foreach (var stem in WordAffixes.Stems(LookupKeys.For(word, script), script))
             foreach (var loaded in EnginesFor(languageCode, script))
             {
                 if (loaded.CountOf(stem) is not { } count)

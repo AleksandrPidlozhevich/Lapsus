@@ -50,6 +50,7 @@ public partial class App : Application
     private bool _creatingWindow;
     private readonly AppUpdater _updater = new();
     private NativeMenuItem? _updateItem;
+    private TrayMenu? _tray;
     private UpdateNotice? _updateNotice;
 
     public override void Initialize()
@@ -274,66 +275,23 @@ public partial class App : Application
     {
         var loc = Localizer.Instance;
 
-        var showItem = new NativeMenuItem(loc["Tray_Settings"]);
-        showItem.Click += (_, _) => ShowWindow();
-
-        // Apple requires "Quit <App>" on macOS; Windows keeps "Exit".
-        var exitKey = OperatingSystem.IsMacOS() ? "Tray_Quit" : "Tray_Exit";
-        var exitItem = new NativeMenuItem(loc[exitKey]);
-        exitItem.Click += (_, _) =>
-        {
-            PerformExitCleanup();
-            desktop.Shutdown();
-        };
-
         desktop.ShutdownRequested += (_, _) => PerformExitCleanup();
 
-        // Shown only while there is something to copy; entries leave the menu as the history forgets them.
-        var historyItem = new NativeMenuItem(loc["Tray_DictationHistory"]) { Menu = new NativeMenu(), IsVisible = false };
-        void ShowHistory()
-        {
-            var recent = _dictation?.History.Recent() ?? [];
-            historyItem.IsVisible = recent.Count > 0;
-            historyItem.Menu!.Items.Clear();
-            foreach (var text in recent)
+        _tray = new TrayMenu(
+            ShowWindow,
+            () =>
             {
-                var line = text.ReplaceLineEndings(" ");
-                var item = new NativeMenuItem(line.Length > 50 ? line[..50] + "…" : line);
-                item.Click += (_, _) => (_backend as IDictationHost)?.CopyDictatedText(text);
-                historyItem.Menu.Items.Add(item);
-            }
-        }
-
-        if (_dictation is { } dictation)
-        {
-            dictation.History.Changed += ShowHistory;
-            _ = new DispatcherTimer(TimeSpan.FromMinutes(1), DispatcherPriority.Background, (_, _) => ShowHistory());
-        }
-
-        // A break from the tray: for a while, or until asked back.
-        var pause15 = new NativeMenuItem(loc["Tray_Pause15"]);
-        pause15.Click += (_, _) => _settingsViewModel?.Pause(TimeSpan.FromMinutes(15));
-        var pause60 = new NativeMenuItem(loc["Tray_Pause60"]);
-        pause60.Click += (_, _) => _settingsViewModel?.Pause(TimeSpan.FromHours(1));
-        var pauseOpen = new NativeMenuItem(loc["Tray_PauseUntil"]);
-        pauseOpen.Click += (_, _) => _settingsViewModel?.Pause(null);
-        var pauseItem = new NativeMenuItem(loc["Tray_Pause"])
-        {
-            Menu = new NativeMenu { Items = { pause15, pause60, pauseOpen } }
-        };
-        var resumeItem = new NativeMenuItem(loc["Tray_Resume"]) { IsVisible = false };
-        resumeItem.Click += (_, _) => _settingsViewModel?.Resume();
-        if (_settingsViewModel is { } pausing)
-            pausing.PauseChanged += (_, _) =>
-            {
-                resumeItem.IsVisible = pausing.IsPaused;
-                pauseItem.IsVisible = !pausing.IsPaused;
-            };
+                PerformExitCleanup();
+                desktop.Shutdown();
+            },
+            _settingsViewModel?.Pausing,
+            _dictation?.History,
+            text => (_backend as IDictationHost)?.CopyDictatedText(text));
 
         _trayIcon = new TrayIcon
         {
             ToolTipText = loc["Tray_Tooltip"],
-            Menu = new NativeMenu { Items = { showItem, pauseItem, resumeItem, historyItem, exitItem } }
+            Menu = _tray.Menu
         };
 
         _trayIcon.Clicked += (_, _) => ToggleWindow();
@@ -345,14 +303,8 @@ public partial class App : Application
 
         loc.LanguageChanged += (_, _) =>
         {
-            showItem.Header = loc["Tray_Settings"];
-            historyItem.Header = loc["Tray_DictationHistory"];
-            pauseItem.Header = loc["Tray_Pause"];
-            pause15.Header = loc["Tray_Pause15"];
-            pause60.Header = loc["Tray_Pause60"];
-            pauseOpen.Header = loc["Tray_PauseUntil"];
-            resumeItem.Header = loc["Tray_Resume"];
-            exitItem.Header = loc[exitKey];
+            _tray.Relabel();
+
             _trayIcon.ToolTipText = _updateItem is null
                 ? loc["Tray_Tooltip"]
                 : UpdateNotice.TooltipText(loc, _updater.PendingVersion);

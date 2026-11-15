@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Weiter</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Nicht jetzt</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Was Lapsus korrigiert hat</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Diese Woche: {0} ({1} falsches Layout, {2} Tippfehler). Seit der Installation: {3}. Gespeichert werden nur die Zahlen, auf diesem Computer.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Diese Woche</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Falsches Layout</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Tippfehler</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Seit der Installation</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Gespeichert werden nur die Zahlen, auf diesem Computer.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Sie beginnen einen Satz im falschen Tastaturlayout, drücken eine Taste, und er wird an Ort und Stelle berichtigt – ohne neu zu tippen. Tippfehler werden genauso korrigiert.</value>

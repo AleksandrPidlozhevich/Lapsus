@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>계속</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>나중에</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Lapsus가 고친 것</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>이번 주: {0}(잘못된 레이아웃 {1}, 오타 {2}). 설치 후: {3}. 횟수만 이 컴퓨터에 보관합니다.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>이번 주</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>잘못된 레이아웃</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>오타</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>설치 후</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>횟수만 이 컴퓨터에 보관합니다.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>잘못된 키보드 레이아웃으로 문장을 시작한 뒤 키 하나를 누르면 그자리에서 바로잡힙니다 — 다시 칠 필요 없습니다. 오타도 같은 방식으로 고칩니다.</value>

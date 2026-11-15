@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Continuă</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Nu acum</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Ce a corectat Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Săptămâna aceasta: {0} ({1} aranjament greșit, {2} greșeli de tastare). De la instalare: {3}. Se păstrează doar numerele, pe acest computer.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Săptămâna aceasta</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Aranjament greșit</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Greșeli de tastare</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>De la instalare</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Se păstrează doar numerele, pe acest computer.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Începeți o propoziție cu aranjamentul de tastatură greșit, apăsați o tastă și ea este corectată pe loc, fără a o rescrie. Greșelile de tastare se corectează la fel.</value>

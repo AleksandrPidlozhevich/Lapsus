@@ -2,7 +2,7 @@ using Lapsus.Core.Layout;
 
 namespace Lapsus.Core.Spelling;
 
-public static class AbjadAffixes
+public static class WordAffixes
 {
     private static readonly string[] HebrewPrefixes =
     [

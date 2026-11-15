@@ -273,7 +273,7 @@ public sealed class LayoutIndicator : IDisposable
             if (_hostIsMoving)
                 return;
 
-            if (text is not null && _pointerBadge.IsShowing(now) && PointerAnchor() is { } pointer)
+            if (text is not null && _pointerBadge.IsShowing(now) && PointerAnchor.Read() is { } pointer)
                 Show(text, pointer);
             else
                 Hide();
@@ -290,17 +290,6 @@ public sealed class LayoutIndicator : IDisposable
     }
 
     private PointerBadgeClock _pointerBadge;
-
-    private static CaretBounds? PointerAnchor()
-    {
-        if (OperatingSystem.IsWindows())
-            return GetCursorPos(out var point) ? AtPointer(point.x, point.y) : null;
-
-        return OperatingSystem.IsMacOS() && MacPointer.Location() is { } at ? AtPointer(at.X, at.Y) : null;
-    }
-
-    // As tall as a line of text, so the badge sits beside the pointer the way it sits beside a caret.
-    private static CaretBounds AtPointer(int x, int y) => new(x, y, x + 1, y + 18);
 
     // Empty carets are the common case (no focused field). After a few of them, poll slower until one appears.
     private void NoteMacCaret(bool found)

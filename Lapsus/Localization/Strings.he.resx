@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>המשך</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>לא עכשיו</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>מה Lapsus תיקן</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>השבוע: {0} ({1} פריסה שגויה, {2} שגיאות הקלדה). מאז ההתקנה: {3}. נשמרים רק המספרים, במחשב הזה.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>השבוע</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>פריסה שגויה</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>שגיאות הקלדה</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>מאז ההתקנה</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>נשמרים רק המספרים, במחשב הזה.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>אתם מתחילים משפט בפריסת המקלדת הלא נכונה, לוחצים על מקש אחד והוא מתוקן במקומו, בלי להקליד שוב. שגיאות הקלדה מתוקנות באותה דרך.</value>

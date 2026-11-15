@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Продължи</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Не сега</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Какво поправи Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Тази седмица: {0} ({1} грешна подредба, {2} печатни грешки). От инсталирането: {3}. Пазят се само числата, на този компютър.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Тази седмица</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Грешна подредба</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Печатни грешки</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>От инсталирането</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Пазят се само числата, на този компютър.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Започвате изречение с грешната клавиатурна подредба, натискате един клавиш и то се поправя на място, без повторно писане. Така се поправят и печатните грешки.</value>

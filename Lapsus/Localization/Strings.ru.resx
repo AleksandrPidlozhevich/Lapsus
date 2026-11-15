@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Продолжить</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Не сейчас</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Что исправил Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>На этой неделе: {0} ({1} не та раскладка, {2} опечатки). С установки: {3}. Хранятся только числа, на этом компьютере.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>На этой неделе</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Не та раскладка</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Опечатки</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>С установки</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Хранятся только числа, на этом компьютере.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Вы начинаете фразу не в той раскладке, нажимаете одну клавишу — и она исправляется на месте, без повторного набора. Так же исправляются опечатки.</value>

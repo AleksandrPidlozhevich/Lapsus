@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Շարունակել</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Ոչ հիմա</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Ինչ է ուղղել Lapsus-ը</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Այս շաբաթ. {0} ({1} սխալ դասավորություն, {2} տպագրական սխալ)։ Տեղադրումից ի վեր. {3}։ Պահվում են միայն հաշվիչները՝ այս համակարգչում։</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Այս շաբաթ</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Սխալ դասավորություն</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Տպագրական սխալ</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Տեղադրումից ի վեր</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Պահվում են միայն հաշվիչները՝ այս համակարգչում։</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Սկսում եք նախադասություն սխալ ստեղնաշարի դասավորությամբ, սեղմում եք մեկ ստեղն, և այն ուղղվում է տեղում — առանց նորից մուտքագրելու։ Նույն կերպ ուղղում է տպագրական սխալները։</value>

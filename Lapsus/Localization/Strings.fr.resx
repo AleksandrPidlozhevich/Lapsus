@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Continuer</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Plus tard</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Ce que Lapsus a corrigé</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Cette semaine : {0} ({1} mauvaise disposition, {2} fautes de frappe). Depuis l’installation : {3}. Seuls les nombres sont conservés, sur cet ordinateur.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Cette semaine</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Mauvaise disposition</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Fautes de frappe</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Depuis l’installation</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Seuls les nombres sont conservés, sur cet ordinateur.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Vous commencez une phrase dans la mauvaise disposition de clavier, vous appuyez sur une touche et elle est corrigée sur place, sans la retaper. Les fautes de frappe sont corrigées de la même façon.</value>

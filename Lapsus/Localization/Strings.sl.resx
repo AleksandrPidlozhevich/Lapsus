@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Nadaljuj</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Ne zdaj</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Kaj je Lapsus popravil</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Ta teden: {0} ({1} napačen razpored, {2} tipkarske napake). Od namestitve: {3}. Shranjujejo se samo številke, v tem računalniku.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Ta teden</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Napačen razpored</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Tipkarske napake</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Od namestitve</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Shranjujejo se samo številke, v tem računalniku.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Stavek začnete v napačnem razporedu tipkovnice, pritisnete eno tipko in popravi se na mestu, brez ponovnega tipkanja. Enako se popravijo tipkarske napake.</value>

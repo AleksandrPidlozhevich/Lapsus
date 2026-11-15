@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Dalej</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Nie teraz</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Co poprawił Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>W tym tygodniu: {0} ({1} zły układ, {2} literówki). Od instalacji: {3}. Zapisywane są tylko liczby, na tym komputerze.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>W tym tygodniu</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Zły układ</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Literówki</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Od instalacji</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Zapisywane są tylko liczby, na tym komputerze.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Zaczynasz zdanie w złym układzie klawiatury, naciskasz jeden klawisz i zostaje poprawione na miejscu, bez przepisywania. Tak samo poprawiane są literówki.</value>

@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Συνέχεια</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Όχι τώρα</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Τι διόρθωσε το Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Αυτή την εβδομάδα: {0} ({1} λάθος διάταξη, {2} τυπογραφικά). Από την εγκατάσταση: {3}. Φυλάσσονται μόνο οι αριθμοί, σε αυτόν τον υπολογιστή.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Αυτή την εβδομάδα</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Λάθος διάταξη</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Τυπογραφικά</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Από την εγκατάσταση</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Φυλάσσονται μόνο οι αριθμοί, σε αυτόν τον υπολογιστή.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Ξεκινάτε μια πρόταση με λάθος διάταξη πληκτρολογίου, πατάτε ένα πλήκτρο και διορθώνεται επιτόπου, χωρίς να την ξαναγράψετε. Τα τυπογραφικά διορθώνονται με τον ίδιο τρόπο.</value>

@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Devam</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Şimdi değil</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Lapsus neleri düzeltti</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Bu hafta: {0} ({1} yanlış düzen, {2} yazım hatası). Kurulumdan beri: {3}. Yalnızca sayılar saklanır, bu bilgisayarda.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Bu hafta</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Yanlış düzen</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Yazım hatası</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Kurulumdan beri</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Yalnızca sayılar saklanır, bu bilgisayarda.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Bir cümleye yanlış klavye düzeninde başlarsınız, tek bir tuşa basarsınız ve yeniden yazmadan yerinde düzeltilir. Yazım hataları da aynı şekilde düzeltilir.</value>

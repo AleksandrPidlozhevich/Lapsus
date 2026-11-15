@@ -2,22 +2,19 @@ using Lapsus.Core.Models;
 using Microsoft.ML.OnnxRuntimeGenAI;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Lapsus.Neural;
 
 public sealed record LoadedSession(
     Model Model,
     Tokenizer Tokenizer,
-    ExecutionAttempt Attempt,
-    bool ClosesThinking);
+    ExecutionAttempt Attempt);
 
 public static class OnnxModelLoader
 {
     public static LoadedSession Load(string modelDirectory, IReadOnlyList<ExecutionAttempt> plan)
     {
         Exception? lastError = null;
-        var closesThinking = UsesThinkingTemplate(modelDirectory);
 
         foreach (var attempt in plan)
         {
@@ -27,7 +24,7 @@ public static class OnnxModelLoader
             {
                 model = CreateModel(modelDirectory, attempt.Provider);
                 tokenizer = new Tokenizer(model);
-                return new LoadedSession(model, tokenizer, attempt, closesThinking);
+                return new LoadedSession(model, tokenizer, attempt);
             }
             catch (Exception ex)
             {
@@ -38,23 +35,6 @@ public static class OnnxModelLoader
         }
 
         throw lastError ?? new InvalidOperationException("No execution provider could load the model.");
-    }
-
-    private static bool UsesThinkingTemplate(string modelDirectory)
-    {
-        foreach (var name in new[] { "chat_template.jinja", "tokenizer_config.json" })
-            try
-            {
-                var path = Path.Combine(modelDirectory, name);
-                if (File.Exists(path) && GenAiPack.UsesThinkingTemplate(File.ReadAllText(path)))
-                    return true;
-            }
-            catch (IOException)
-            {
-
-            }
-
-        return false;
     }
 
     private static Model CreateModel(string modelDirectory, string? provider)

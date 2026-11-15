@@ -718,9 +718,6 @@
     <data name="Onb_Continue" xml:space="preserve">
     <value>Pokračovať</value>
   </data>
-    <data name="Onb_Later" xml:space="preserve">
-    <value>Teraz nie</value>
-  </data>
     <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
@@ -916,8 +913,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Čo Lapsus opravil</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Tento týždeň: {0} ({1} nesprávne rozloženie, {2} preklepy). Od inštalácie: {3}. Ukladajú sa iba počty, v tomto počítači.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Tento týždeň</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Nesprávne rozloženie</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Preklepy</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Od inštalácie</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Ukladajú sa iba počty, v tomto počítači.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Začnete vetu v nesprávnom rozložení klávesnice, stlačíte jeden kláves a opraví sa na mieste, bez opätovného písania. Rovnako sa opravujú preklepy.</value>
