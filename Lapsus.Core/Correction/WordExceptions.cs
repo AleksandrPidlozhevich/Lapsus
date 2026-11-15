@@ -7,6 +7,10 @@ public sealed class WordExceptions
     private readonly Lock _gate = new();
     private readonly HashSet<string> _words = new(StringComparer.Ordinal);
 
+    // The words of the dictation glossary's terms: names and jargon the user has already taught Lapsus, so a
+    // typed "Kubernetes" is as safe as a word on the list. Not part of Snapshot, which is the user's own list.
+    private HashSet<string> _glossary = new(StringComparer.Ordinal);
+
     public event EventHandler? Changed;
 
     public WordExceptions()
@@ -27,7 +31,22 @@ public sealed class WordExceptions
 
         lock (_gate)
         {
-            return _words.Contains(normalized);
+            return _words.Contains(normalized) || _glossary.Contains(normalized);
+        }
+    }
+
+    // Lines as the glossary is written: "Term" or "Term|how it sounds|…". Only the term is kept, a word at a time.
+    public void SetGlossary(IEnumerable<string> lines)
+    {
+        var words = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var line in lines)
+            foreach (var word in line.Split('|')[0].Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries))
+                if (Normalize(word) is { } normalized)
+                    words.Add(normalized);
+
+        lock (_gate)
+        {
+            _glossary = words;
         }
     }
 
@@ -67,7 +86,7 @@ public sealed class WordExceptions
         {
             lock (_gate)
             {
-                return _words.Count == 0;
+                return _words.Count == 0 && _glossary.Count == 0;
             }
         }
     }
@@ -81,7 +100,7 @@ public sealed class WordExceptions
 
         lock (_gate)
         {
-            if (_words.Count == 0)
+            if (_words.Count == 0 && _glossary.Count == 0)
                 return null;
 
             var i = 0;
@@ -94,7 +113,8 @@ public sealed class WordExceptions
                 while (i < text.Length && !char.IsWhiteSpace(text[i]))
                     i++;
 
-                if (i > start && Normalize(text[start..i]) is { } normalized && _words.Contains(normalized))
+                if (i > start && Normalize(text[start..i]) is { } normalized &&
+                    (_words.Contains(normalized) || _glossary.Contains(normalized)))
                     (spans ??= []).Add(new TextSpan(start, i - start, true));
             }
         }

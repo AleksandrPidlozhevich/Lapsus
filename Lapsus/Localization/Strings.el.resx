@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Αντίγραφο</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Οι όροι αφήνονται ανέγγιχτοι και όταν τους πληκτρολογείτε: ένα όνομα που προστέθηκε εδώ δεν «διορθώνεται» ποτέ.</value>
+  </data>
 </root>

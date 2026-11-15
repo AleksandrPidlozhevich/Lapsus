@@ -1200,6 +1200,7 @@
                                                      FontFamily="{DynamicResource ContentControlThemeFontFamily}"
                                                      PlaceholderText="GitHub&#10;Kubernetes|kuber&#10;JSON|jason"
                                                      Text="{Binding Voice.GlossaryText}" />
+                                            <TextBlock Classes="hint" Text="{Binding L[Voice_GlossaryAlsoLeftAlone]}" />
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>

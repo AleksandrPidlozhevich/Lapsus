@@ -88,6 +88,7 @@ public partial class App : Application
             var settings = store.Load();
 
             _exceptions = new WordExceptions(settings.ExcludedWords);
+            _exceptions.SetGlossary(settings.DictationGlossary);
             _exceptions.Changed += (_, _) =>
             {
                 settings.ExcludedWords = [.. _exceptions.Snapshot()];
@@ -249,6 +250,7 @@ public partial class App : Application
                 UpdateButton();
         };
         host.GlossaryTermSelected += term => _settingsViewModel.Voice?.AddGlossaryTerm(term);
+        _settingsViewModel.Voice.GlossaryChanged += terms => _exceptions?.SetGlossary(terms);
         Apply(supported && settings.DictationEnabled);
     }
 

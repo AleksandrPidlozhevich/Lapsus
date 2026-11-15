@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Kopija</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>Izrazov se prav tako ne popravlja, ko jih tipkate: ime, dodano tukaj, se nikoli ne »popravi«.</value>
+  </data>
 </root>

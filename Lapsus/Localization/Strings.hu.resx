@@ -1009,4 +1009,7 @@
     <data name="Tab_Backup" xml:space="preserve">
     <value>Mentés</value>
   </data>
+    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+    <value>A kifejezéseket gépeléskor sem javítja ki: az itt felvett nevet soha nem „javítja”.</value>
+  </data>
 </root>
