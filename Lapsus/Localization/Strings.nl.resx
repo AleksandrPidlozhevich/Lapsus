@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Wat Lapsus heeft verbeterd</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Deze week: {0} ({1} verkeerde indeling, {2} typefouten). Sinds de installatie: {3}. Alleen de aantallen worden bewaard, op deze computer.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Deze week</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Verkeerde indeling</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Typefouten</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Sinds de installatie</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Alleen de aantallen worden bewaard, op deze computer.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Je begint een zin in de verkeerde toetsenbordindeling, drukt op één toets en hij wordt ter plekke verbeterd, zonder opnieuw te typen. Typefouten worden op dezelfde manier verbeterd.</value>

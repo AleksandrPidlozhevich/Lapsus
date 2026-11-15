@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Що виправив Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Цього тижня: {0} ({1} не та розкладка, {2} одруківки). Від встановлення: {3}. Зберігаються лише числа, на цьому комп’ютері.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Цього тижня</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Не та розкладка</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Одруківки</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Від встановлення</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Зберігаються лише числа, на цьому комп’ютері.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Ви починаєте речення не в тій розкладці, натискаєте одну клавішу — і воно виправляється на місці, без повторного набору. Так само виправляються одруківки.</value>

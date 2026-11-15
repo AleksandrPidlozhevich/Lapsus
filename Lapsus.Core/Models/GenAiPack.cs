@@ -32,13 +32,6 @@ public static class GenAiPack
         return found;
     }
 
-    public const string ClosedThinkingBlock = "<think>\n\n</think>\n\n";
-
-    public static bool UsesThinkingTemplate(string? templateText)
-    {
-        return templateText is not null && templateText.Contains("enable_thinking", StringComparison.Ordinal);
-    }
-
     public static ComputeDevice InferDevice(string subPath, IEnumerable<string>? declaredProviders = null)
     {
         var declared = declaredProviders?

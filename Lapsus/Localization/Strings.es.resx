@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Lo que Lapsus ha corregido</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Esta semana: {0} ({1} distribución equivocada, {2} erratas). Desde la instalación: {3}. Solo se guardan los números, en este ordenador.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Esta semana</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Distribución equivocada</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Erratas</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Desde la instalación</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Solo se guardan los números, en este ordenador.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Empiezas una frase con la distribución de teclado equivocada, pulsas una tecla y se corrige en su sitio, sin volver a escribirla. Las erratas se corrigen igual.</value>

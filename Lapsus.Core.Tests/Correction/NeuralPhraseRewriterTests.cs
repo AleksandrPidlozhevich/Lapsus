@@ -394,13 +394,6 @@ public class NeuralPhraseRewriterTests
             {
             }
 
-            public async Task<string> CompleteAsync(string systemPrompt, string userText, int answerChars,
-                CancellationToken cancellationToken = default)
-            {
-                await Task.Delay(Timeout.Infinite, cancellationToken);
-                return "";
-            }
-
             public async Task<IReadOnlyList<double>?> ScoreAsync(string context, IReadOnlyList<string> texts,
                 bool ends, CancellationToken cancellationToken = default)
             {
@@ -423,12 +416,6 @@ public class NeuralPhraseRewriterTests
 
             public void Unload()
             {
-            }
-
-            public Task<string> CompleteAsync(string systemPrompt, string userText, int answerChars,
-                CancellationToken cancellationToken = default)
-            {
-                return Task.FromResult("текст");
             }
 
             public Task<IReadOnlyList<double>?> ScoreAsync(string context, IReadOnlyList<string> texts, bool ends,
@@ -492,12 +479,6 @@ public class NeuralPhraseRewriterTests
 
         public void Unload()
         {
-        }
-
-        public Task<string> CompleteAsync(string systemPrompt, string userText, int answerChars,
-            CancellationToken cancellationToken = default)
-        {
-            return Task.FromResult("");
         }
 
         public Task<IReadOnlyList<double>?> ScoreAsync(string context, IReadOnlyList<string> texts, bool ends,

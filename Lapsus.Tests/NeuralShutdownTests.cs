@@ -11,7 +11,7 @@ public class NeuralShutdownTests
         llm.AbandonForShutdown();
 
         await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => llm.CompleteAsync("system", "ghbdtn", 6));
+            () => llm.ScoreAsync("\n", ["ghbdtn"], false));
         Assert.False(llm.IsLoaded);
     }
 

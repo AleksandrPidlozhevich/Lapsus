@@ -18,8 +18,10 @@ public sealed class UsageCounts
     public int TotalTypos { get; set; }
 }
 
-// Counts of corrections, for the one line in Settings that says what Lapsus has been doing. Kept beside the
-// settings and never sent anywhere.
+// One day's corrections. The chart reads this; the file still stores only the counts.
+public readonly record struct DayCount(DateOnly Date, int Layout, int Typos);
+
+// Counts of corrections, for the chart in Settings. Kept beside the settings and never sent anywhere.
 public sealed class UsageStats
 {
     private const int DaysKept = 60;
@@ -67,14 +69,29 @@ public sealed class UsageStats
     {
         var layout = 0;
         var typos = 0;
-        for (var i = 0; i < days; i++)
+        foreach (var day in Days(days))
         {
-            var day = Key(_today().AddDays(-i));
-            layout += Counts.Layout.GetValueOrDefault(day);
-            typos += Counts.Typos.GetValueOrDefault(day);
+            layout += day.Layout;
+            typos += day.Typos;
         }
 
         return (layout, typos);
+    }
+
+    // Oldest day first, including days with nothing to fix, so the chart has a column for each of them.
+    public IReadOnlyList<DayCount> Days(int days)
+    {
+        var counts = Counts;
+        var today = _today();
+        var list = new List<DayCount>(days);
+        for (var i = days - 1; i >= 0; i--)
+        {
+            var date = today.AddDays(-i);
+            var key = Key(date);
+            list.Add(new DayCount(date, counts.Layout.GetValueOrDefault(key), counts.Typos.GetValueOrDefault(key)));
+        }
+
+        return list;
     }
 
     private void Add(bool layout, int by)

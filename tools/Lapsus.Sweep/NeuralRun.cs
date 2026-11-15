@@ -22,7 +22,7 @@ internal static class NeuralRun
         llm.Load(modelDirectory, plan);
 
         // The first generation pays for graph setup; keep it out of the latency figures.
-        llm.CompleteAsync("Reply with the word.", "ok", 2).GetAwaiter().GetResult();
+        llm.WarmUpAsync().GetAwaiter().GetResult();
 
         return new LoadedModel(llm, Path.GetFileName(Path.TrimEndingDirectorySeparator(modelDirectory)), llm.ExecutionProvider);
     }
@@ -356,12 +356,6 @@ internal static class NeuralRun
         public bool IsLoaded => inner.IsLoaded;
 
         public void Unload() => inner.Unload();
-
-        public Task<string> CompleteAsync(
-            string systemPrompt, string userText, int answerChars, CancellationToken cancellationToken = default)
-        {
-            return inner.CompleteAsync(systemPrompt, userText, answerChars, cancellationToken);
-        }
 
         public Task<IReadOnlyList<double>?> ScoreAsync(
             string context, IReadOnlyList<string> texts, bool ends, CancellationToken cancellationToken = default)

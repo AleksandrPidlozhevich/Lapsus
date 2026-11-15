@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>რა გაასწორა Lapsus-მა</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>ამ კვირაში: {0} ({1} არასწორი განლაგება, {2} ბეჭდვის შეცდომა). ინსტალაციიდან: {3}. ინახება მხოლოდ რიცხვები, ამ კომპიუტერზე.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>ამ კვირაში</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>არასწორი განლაგება</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>ბეჭდვის შეცდომა</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>ინსტალაციიდან</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>ინახება მხოლოდ რიცხვები, ამ კომპიუტერზე.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>წინადადებას კლავიატურის არასწორ განლაგებაში იწყებთ, ერთ ღილაკს აჭერთ და ის ადგილზევე სწორდება, თავიდან აკრეფის გარეშე. ბეჭდვის შეცდომებიც ასევე სწორდება.</value>

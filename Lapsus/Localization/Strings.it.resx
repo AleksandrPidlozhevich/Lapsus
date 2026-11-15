@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Cosa ha corretto Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Questa settimana: {0} ({1} layout sbagliato, {2} refusi). Dall’installazione: {3}. Vengono salvati solo i numeri, su questo computer.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Questa settimana</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Layout sbagliato</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Refusi</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Dall’installazione</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Vengono salvati solo i numeri, su questo computer.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Inizi una frase con il layout di tastiera sbagliato, premi un tasto e viene corretta sul posto, senza riscriverla. I refusi si correggono allo stesso modo.</value>

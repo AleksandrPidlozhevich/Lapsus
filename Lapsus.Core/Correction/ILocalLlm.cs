@@ -6,9 +6,6 @@ public interface ILocalLlm : IDisposable
 
     void Unload();
 
-    Task<string> CompleteAsync(
-        string systemPrompt, string userText, int answerChars, CancellationToken cancellationToken = default);
-
     // Log-probability of each text following the context, as the model reads plain text; with ends, also of
     // the text stopping there. Null when the runtime cannot score.
     Task<IReadOnlyList<double>?> ScoreAsync(

@@ -80,14 +80,6 @@ public class ModelPackTests
     }
 
     [Fact]
-    public void Reasoning_template_is_recognised()
-    {
-        Assert.True(GenAiPack.UsesThinkingTemplate(
-            "{%- if enable_thinking is defined and enable_thinking is false %}"));
-        Assert.False(GenAiPack.UsesThinkingTemplate("<|im_start|>assistant"));
-    }
-
-    [Fact]
     public void Scanner_finds_every_pack_with_its_size_and_device()
     {
         var listing = new[]

@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Vad Lapsus har rättat</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Den här veckan: {0} ({1} fel layout, {2} skrivfel). Sedan installationen: {3}. Bara antalen sparas, på den här datorn.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Den här veckan</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Fel layout</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Skrivfel</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Sedan installationen</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Bara antalen sparas, på den här datorn.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Du börjar en mening i fel tangentbordslayout, trycker på en tangent och den rättas på plats utan att du skriver om den. Skrivfel rättas på samma sätt.</value>

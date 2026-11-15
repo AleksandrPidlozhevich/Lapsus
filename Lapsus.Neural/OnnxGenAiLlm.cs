@@ -60,7 +60,7 @@ public sealed class OnnxGenAiLlm : ILocalLlm
 
             _model = session.Model;
             _tokenizer = session.Tokenizer;
-            _generator = new OnnxTextGenerator(session.Model, session.Tokenizer, session.ClosesThinking);
+            _generator = new OnnxTextGenerator(session.Model, session.Tokenizer);
             Device = session.Attempt.Device;
             ExecutionProvider = ComputeDeviceProbe.Label(session.Attempt.Provider);
         }
@@ -113,17 +113,6 @@ public sealed class OnnxGenAiLlm : ILocalLlm
         }
     }
 
-    public Task<string> CompleteAsync(
-        string systemPrompt,
-        string userText,
-        int answerChars,
-        CancellationToken cancellationToken = default)
-    {
-        return RunAsync(
-            (generator, ct) => generator.Complete(systemPrompt, userText, answerChars, ct),
-            cancellationToken);
-    }
-
     public async Task<IReadOnlyList<double>?> ScoreAsync(
         string context, IReadOnlyList<string> texts, bool ends, CancellationToken cancellationToken = default)
     {
@@ -136,11 +125,8 @@ public sealed class OnnxGenAiLlm : ILocalLlm
             .ConfigureAwait(false);
     }
 
-    public async Task<bool> WarmUpAsync(
-        string systemPrompt,
-        string userText,
-        int answerChars,
-        CancellationToken cancellationToken = default)
+    // The first run pays for graph setup, whatever it reads: one short text is scored.
+    public async Task<bool> WarmUpAsync(CancellationToken cancellationToken = default)
     {
         if (_disposed || !IsLoaded)
             return false;
@@ -150,7 +136,7 @@ public sealed class OnnxGenAiLlm : ILocalLlm
             await RunAsync<object?>(
                     (generator, ct) =>
                     {
-                        generator.WarmUp(systemPrompt, userText, answerChars, ct);
+                        generator.Score("\n", ["ok"], false, ct);
                         return null;
                     },
                     cancellationToken)

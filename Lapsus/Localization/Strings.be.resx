@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Што выправіў Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>На гэтым тыдні: {0} ({1} не тая раскладка, {2} памылкі друку). Ад усталявання: {3}. Захоўваюцца толькі лічбы, на гэтым камп’ютары.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>На гэтым тыдні</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Не тая раскладка</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Памылкі друку</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Ад усталявання</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Захоўваюцца толькі лічбы, на гэтым камп’ютары.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Вы пачынаеце сказ не ў той раскладцы, націскаеце адну клавішу — і ён выпраўляецца на месцы, без паўторнага набору. Гэтак жа выпраўляюцца памылкі друку.</value>

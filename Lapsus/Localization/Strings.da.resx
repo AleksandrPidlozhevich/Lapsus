@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Hvad Lapsus har rettet</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Denne uge: {0} ({1} forkert layout, {2} tastefejl). Siden installationen: {3}. Kun tallene gemmes, på denne computer.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Denne uge</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Forkert layout</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Tastefejl</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Siden installationen</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Kun tallene gemmes, på denne computer.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Du begynder en sætning i det forkerte tastaturlayout, trykker på én tast, og den rettes på stedet uden at skrive den igen. Tastefejl rettes på samme måde.</value>

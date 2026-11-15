@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>O que o Lapsus corrigiu</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Esta semana: {0} ({1} esquema errado, {2} gralhas). Desde a instalação: {3}. Só os números são guardados, neste computador.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Esta semana</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Esquema errado</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Gralhas</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Desde a instalação</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Só os números são guardados, neste computador.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Começa uma frase no esquema de teclado errado, prime uma tecla e ela é corrigida no lugar, sem voltar a escrever. As gralhas são corrigidas da mesma forma.</value>

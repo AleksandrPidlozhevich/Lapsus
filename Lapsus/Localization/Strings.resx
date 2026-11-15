@@ -921,8 +921,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>What Lapsus has fixed</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>This week: {0} ({1} wrong layout, {2} typos). Since installing: {3}. Only the counts are kept, on this computer.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>This week</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Wrong layout</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Typos</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Since installing</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Only the counts are kept, on this computer.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>You start a sentence on the wrong keyboard layout, press one key, and it is put right where it stands — no retyping. It fixes typos the same way.</value>

@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Што поправи Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Оваа недела: {0} ({1} погрешен распоред, {2} печатни грешки). Од инсталирањето: {3}. Се чуваат само бројките, на овој компјутер.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Оваа недела</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Погрешен распоред</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Печатни грешки</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Од инсталирањето</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Се чуваат само бројките, на овој компјутер.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Почнувате реченица со погрешен распоред на тастатурата, притискате едно копче и таа се поправа на место, без повторно пишување. Така се поправаат и печатните грешки.</value>

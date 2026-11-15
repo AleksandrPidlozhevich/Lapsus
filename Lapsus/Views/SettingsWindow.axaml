@@ -126,6 +126,14 @@
             <Setter Property="FontSize" Value="11" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
+        <Style Selector="TextBlock.statValue">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style Selector="TextBlock.hint.statDay.today">
+            <Setter Property="Foreground" Value="{DynamicResource LapsusAccentBrush}" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
         <Style Selector="TextBlock.status">
             <Setter Property="Foreground" Value="{DynamicResource LapsusHintBrush}" />
             <Setter Property="FontSize" Value="11" />
@@ -1238,9 +1246,64 @@
                               VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel x:Name="StatsList" Spacing="12" Margin="0,12">
                         <Border Classes="card">
-                            <StackPanel Spacing="6">
+                            <StackPanel Spacing="14">
                                 <TextBlock Classes="sectionTitle" Text="{Binding L[Stats_Label]}" />
-                                <TextBlock TextWrapping="Wrap" Text="{Binding StatsLine}" />
+
+                                <UniformGrid Columns="4">
+                                    <StackPanel Spacing="2" Margin="0,0,8,0">
+                                        <TextBlock Classes="statValue" Text="{Binding WeekTotal}" />
+                                        <TextBlock Classes="hint" Text="{Binding L[Stats_Week]}" />
+                                    </StackPanel>
+                                    <StackPanel Spacing="2" Margin="0,0,8,0">
+                                        <TextBlock Classes="statValue" Foreground="{DynamicResource LapsusAccentBrush}"
+                                                   Text="{Binding WeekLayout}" />
+                                        <TextBlock Classes="hint" Text="{Binding L[Stats_Layout]}" />
+                                    </StackPanel>
+                                    <StackPanel Spacing="2" Margin="0,0,8,0">
+                                        <TextBlock Classes="statValue" Foreground="{DynamicResource LapsusSelectionBrush}"
+                                                   Text="{Binding WeekTypos}" />
+                                        <TextBlock Classes="hint" Text="{Binding L[Stats_Typos]}" />
+                                    </StackPanel>
+                                    <StackPanel Spacing="2">
+                                        <TextBlock Classes="statValue" Text="{Binding TotalFixes}" />
+                                        <TextBlock Classes="hint" Text="{Binding L[Stats_Since]}" />
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <ItemsControl ItemsSource="{Binding WeekDays}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="1" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:StatBar">
+                                            <StackPanel Spacing="4" ToolTip.Tip="{Binding Tip}">
+                                                <TextBlock Classes="hint" FontSize="10" Height="12"
+                                                           HorizontalAlignment="Center" Text="{Binding CountText}" />
+                                                <Border Height="{x:Static vm:StatBar.Plot}" Margin="4,0"
+                                                        CornerRadius="4" ClipToBounds="True"
+                                                        Background="{DynamicResource LapsusRowBrush}">
+                                                    <StackPanel VerticalAlignment="Bottom">
+                                                        <Border Height="{Binding TypoHeight}"
+                                                                CornerRadius="{Binding TypoRadius}"
+                                                                Background="{DynamicResource LapsusSelectionBrush}"
+                                                                IsVisible="{Binding HasTypos}" />
+                                                        <Border Height="{Binding LayoutHeight}"
+                                                                CornerRadius="{Binding LayoutRadius}"
+                                                                Background="{DynamicResource LapsusAccentBrush}"
+                                                                IsVisible="{Binding HasLayout}" />
+                                                    </StackPanel>
+                                                </Border>
+                                                <TextBlock Classes="hint statDay" Classes.today="{Binding IsToday}"
+                                                           HorizontalAlignment="Center" TextAlignment="Center"
+                                                           TextTrimming="CharacterEllipsis" Text="{Binding Label}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBlock Classes="hint" Text="{Binding L[Stats_Privacy]}" />
                             </StackPanel>
                         </Border>
                     </StackPanel>

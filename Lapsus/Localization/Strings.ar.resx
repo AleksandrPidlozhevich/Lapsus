@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>ما الذي صحّحه Lapsus</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>هذا الأسبوع: {0} ({1} تخطيط خاطئ، {2} أخطاء طباعة). منذ التثبيت: {3}. تُحفظ الأرقام فقط، على هذا الحاسوب.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>هذا الأسبوع</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>تخطيط خاطئ</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>أخطاء طباعة</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>منذ التثبيت</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>تُحفظ الأرقام فقط، على هذا الحاسوب.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>تبدأ جملة بتخطيط لوحة مفاتيح خاطئ، فتضغط مفتاحًا واحدًا لتُصحَّح في مكانها دون إعادة كتابتها. وتُصحَّح أخطاء الطباعة بالطريقة نفسها.</value>

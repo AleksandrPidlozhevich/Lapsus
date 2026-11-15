@@ -107,12 +107,12 @@ public partial class SettingsViewModel : ViewModelBase
         _backend.Fixed += (_, switchedLayout) => Dispatcher.UIThread.Post(() =>
         {
             _stats.Note(switchedLayout);
-            OnPropertyChanged(nameof(StatsLine));
+            RefreshStats();
         });
         _backend.AutoFixRejected += (_, _) => Dispatcher.UIThread.Post(() =>
         {
             _stats.Undo();
-            OnPropertyChanged(nameof(StatsLine));
+            RefreshStats();
         });
         _backend.Diagnostic += OnDiagnostic;
 
@@ -520,6 +520,7 @@ public partial class SettingsViewModel : ViewModelBase
         OnPropertyChanged(nameof(AutoModeBlockedHint));
 
         UpdateStatus();
+        RefreshStats();
     }
 
     private void BuildPreferences(KeyboardLayout? select)
@@ -597,20 +598,53 @@ public partial class SettingsViewModel : ViewModelBase
 
     private readonly UsageStats _stats = new();
 
-    // "This week: 42 fixes (30 wrong layout, 12 typos). Since installing: 1234."
-    public string StatsLine
+    public int WeekLayout => _stats.LastDays(7).Layout;
+
+    public int WeekTypos => _stats.LastDays(7).Typos;
+
+    public int WeekTotal => WeekLayout + WeekTypos;
+
+    public int TotalFixes => _stats.Total;
+
+    public IReadOnlyList<StatBar> WeekDays
     {
         get
         {
-            var (layout, typos) = _stats.LastDays(7);
-            return L.Format("Stats_Line", layout + typos, layout, typos, _stats.Total);
+            var days = _stats.Days(7);
+            var peak = 1;
+            foreach (var day in days)
+                peak = Math.Max(peak, day.Layout + day.Typos);
+
+            var today = days[^1].Date;
+            var bars = new StatBar[days.Count];
+            for (var i = 0; i < days.Count; i++)
+            {
+                var day = days[i];
+                bars[i] = new StatBar(day.Date, day.Layout, day.Typos,
+                    BarHeight(day.Layout, peak), BarHeight(day.Typos, peak), day.Date == today);
+            }
+
+            return bars;
         }
+    }
+
+    // A single fix still draws a bar; the fullest day fills the plot.
+    private static double BarHeight(int count, int peak) =>
+        count == 0 ? 0 : Math.Max(4, count * StatBar.Plot / peak);
+
+    private void RefreshStats()
+    {
+        OnPropertyChanged(nameof(WeekTotal));
+        OnPropertyChanged(nameof(WeekLayout));
+        OnPropertyChanged(nameof(WeekTypos));
+        OnPropertyChanged(nameof(TotalFixes));
+        OnPropertyChanged(nameof(WeekDays));
     }
 
     public void OnWindowReopened()
     {
         RefreshRunningApps();
-        OnPropertyChanged(nameof(StatsLine));
+        RefreshStats();
         Dictionaries.RefreshSuggestion();
 
         var wasNeeded = PermissionsNeeded;

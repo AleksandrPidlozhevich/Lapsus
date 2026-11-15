@@ -916,8 +916,20 @@
     <data name="Stats_Label" xml:space="preserve">
     <value>Šta je Lapsus ispravio</value>
   </data>
-    <data name="Stats_Line" xml:space="preserve">
-    <value>Ove nedelje: {0} ({1} pogrešan raspored, {2} slovne greške). Od instaliranja: {3}. Čuvaju se samo brojevi, na ovom računaru.</value>
+    <data name="Stats_Week" xml:space="preserve">
+    <value>Ove nedelje</value>
+  </data>
+    <data name="Stats_Layout" xml:space="preserve">
+    <value>Pogrešan raspored</value>
+  </data>
+    <data name="Stats_Typos" xml:space="preserve">
+    <value>Slovne greške</value>
+  </data>
+    <data name="Stats_Since" xml:space="preserve">
+    <value>Od instaliranja</value>
+  </data>
+    <data name="Stats_Privacy" xml:space="preserve">
+    <value>Čuvaju se samo brojevi, na ovom računaru.</value>
   </data>
     <data name="Onb_What" xml:space="preserve">
     <value>Počnete rečenicu u pogrešnom rasporedu tastature, pritisnete jedan taster i ona se ispravi na mestu, bez ponovnog kucanja. Tako se ispravljaju i slovne greške.</value>
