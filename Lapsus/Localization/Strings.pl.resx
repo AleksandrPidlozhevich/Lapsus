@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Gdy gra zajmuje cały ekran, Lapsus usuwa swój zaczep klawiatury i przywraca go po zakończeniu gry.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Tylko skrót</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Zaznacz „Tylko skrót” przy aplikacji, aby działał w niej skrót i klawisze dla zaznaczonego tekstu, a automatyczne poprawki po spacji były wyłączone.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statystyki</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Kopia</value>
+  </data>
 </root>

@@ -3,10 +3,21 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Lapsus.Core.Correction;
 using Lapsus.Input;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Lapsus.ViewModels;
+
+public sealed partial class AppRule(string name, bool hotkeyOnly, Action<string, bool> changed) : ObservableObject
+{
+    public string Name { get; } = name;
+
+    // The row is rebuilt from the lists after a change, so this setter only has to report it.
+    [ObservableProperty] private bool _hotkeyOnly = hotkeyOnly;
+
+    partial void OnHotkeyOnlyChanged(bool value) => changed(Name, value);
+}
 
 public sealed partial class ExclusionsViewModel : ObservableObject
 {
@@ -60,7 +71,22 @@ public sealed partial class ExclusionsViewModel : ObservableObject
         OnPropertyChanged(nameof(HasExcludedWords));
     }
 
-    public ObservableCollection<string> ExcludedApps { get; } = [];
+    // Off in an app altogether, or only the fix after Space (the hotkey still works there).
+    public ObservableCollection<AppRule> ExcludedApps { get; } = [];
+
+    private void SetHotkeyOnly(string name, bool hotkeyOnly)
+    {
+        if (hotkeyOnly)
+        {
+            _excludedApps.Remove(name);
+            _excludedApps.AutoFixOff.Add(name);
+        }
+        else
+        {
+            _excludedApps.AutoFixOff.Remove(name);
+            _excludedApps.Add(name);
+        }
+    }
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(AddExcludedAppCommand))]
@@ -88,6 +114,7 @@ public sealed partial class ExclusionsViewModel : ObservableObject
             return;
 
         _excludedApps.Remove(name);
+        _excludedApps.AutoFixOff.Remove(name);
         RefreshExcludedApps();
         RefreshRunningApps();
     }
@@ -95,8 +122,14 @@ public sealed partial class ExclusionsViewModel : ObservableObject
     private void RefreshExcludedApps()
     {
         ExcludedApps.Clear();
-        foreach (var name in _excludedApps.Snapshot())
-            ExcludedApps.Add(name);
+        var full = _excludedApps.Snapshot();
+        foreach (var name in full)
+            ExcludedApps.Add(new AppRule(name, false, SetHotkeyOnly));
+
+        // An app on both lists, as an imported file can leave it, counts as off altogether.
+        foreach (var name in _excludedApps.AutoFixOff.Snapshot())
+            if (!full.Contains(name))
+                ExcludedApps.Add(new AppRule(name, true, SetHotkeyOnly));
 
         OnPropertyChanged(nameof(HasExcludedApps));
     }
@@ -118,7 +151,7 @@ public sealed partial class ExclusionsViewModel : ObservableObject
 
         RunningApps.Clear();
         foreach (var app in Lapsus.Input.RunningApps.List())
-            if (!_excludedApps.Contains(app.ProcessName))
+            if (!_excludedApps.Contains(app.ProcessName) && !_excludedApps.AutoFixOff.Contains(app.ProcessName))
                 RunningApps.Add(app);
 
         SelectedRunningApp = RunningApps.FirstOrDefault(app => app.ProcessName == wasSelected);

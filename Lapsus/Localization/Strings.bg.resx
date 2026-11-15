@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Докато игра заема целия екран, Lapsus премахва своята кука за клавиатурата и я връща, когато играта приключи.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Само бърз клавиш</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Отбележете «Само бърз клавиш» за дадена програма, за да работят там бързият клавиш и клавишите за избран текст, а автоматичните поправки след интервал да се изключат.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Копие</value>
+  </data>
 </root>

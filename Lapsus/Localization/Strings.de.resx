@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Solange ein Spiel den ganzen Bildschirm belegt, entfernt Lapsus seinen Tastatur-Hook und setzt ihn wieder ein, wenn das Spiel endet.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Nur Tastenkürzel</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Haken Sie „Nur Tastenkürzel“ bei einem Programm an, damit dort das Tastenkürzel und die Tasten für markierten Text funktionieren, die automatischen Korrekturen nach der Leertaste aber ausgeschaltet sind.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statistik</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Sicherung</value>
+  </data>
 </root>

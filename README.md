@@ -112,7 +112,9 @@ The Mac App Store edition has the same window plus a Plus tab; its screenshots a
   said is typed at the cursor; a short press records hands-free until the next one. English terms in Russian or Ukrainian speech come
   out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own
   names. [More below.](#voice-typing-optional)
-- **Stay out of the way**: named applications are skipped entirely, password fields never reach the
+- **Stay out of the way**: named applications are skipped entirely — or, ticked “Hotkey only”, keep
+  the hotkey and the selection keys but get no fix after Space, which suits an editor or a terminal —
+  password fields never reach the
   buffer, and IME input (Chinese / Japanese / Korean) is left to the IME. Korean is the one of the
   three Lapsus can read: with the English layout on, `dkssud` is fixed on the hotkey like any other
   wrong-layout word, and a selection is fixed either way round whichever keyboard is on.

@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Όσο ένα παιχνίδι καταλαμβάνει όλη την οθόνη, το Lapsus αφαιρεί το άγκιστρο πληκτρολογίου του και το επαναφέρει όταν τελειώσει το παιχνίδι.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Μόνο συντόμευση</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Επιλέξτε «Μόνο συντόμευση» για μια εφαρμογή ώστε εκεί να λειτουργεί η συντόμευση και τα πλήκτρα για επιλεγμένο κείμενο, αλλά να απενεργοποιούνται οι αυτόματες διορθώσεις μετά το διάστημα.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Στατιστικά</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Αντίγραφο</value>
+  </data>
 </root>

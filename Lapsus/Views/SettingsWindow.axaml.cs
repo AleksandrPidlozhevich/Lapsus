@@ -26,6 +26,8 @@ public partial class SettingsWindow : Window
         PinToViewport(LibraryScroll, LibraryList);
         PinToViewport(AiScroll, AiList);
         PinToViewport(VoiceScroll, VoiceList);
+        PinToViewport(StatsScroll, StatsList);
+        PinToViewport(BackupScroll, BackupList);
         PinToViewport(LicenseScroll, LicenseList);
 
         KeyDown += (_, e) =>

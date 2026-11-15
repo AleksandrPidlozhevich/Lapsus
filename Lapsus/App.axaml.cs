@@ -100,6 +100,14 @@ public partial class App : Application
                 store.Save(settings);
             };
 
+            foreach (var name in settings.AutoFixOffApps)
+                _excludedApps.AutoFixOff.Add(name);
+            _excludedApps.AutoFixOff.Changed += (_, _) =>
+            {
+                settings.AutoFixOffApps = [.. _excludedApps.AutoFixOff.Snapshot()];
+                store.Save(settings);
+            };
+
             _backend = InputBackendFactory.CreateForCurrentPlatform(
                 new LayoutCorrector(new SpellChecker(), exceptions: _exceptions), _excludedApps);
             _brain = new BrainBuilder(_backend, _dictionaryStore, _modelStore, _exceptions);

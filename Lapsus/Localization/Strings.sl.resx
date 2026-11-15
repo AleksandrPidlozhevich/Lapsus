@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Dokler igra zaseda ves zaslon, Lapsus odstrani svoj kavelj za tipkovnico in ga vrne, ko se igra konča.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Samo bližnjica</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Označite „Samo bližnjica“ pri programu, da tam delujeta bližnjica in tipke za izbrano besedilo, samodejni popravki po presledku pa se izklopijo.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statistika</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Kopija</value>
+  </data>
 </root>

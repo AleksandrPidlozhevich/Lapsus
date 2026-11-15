@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>כל עוד משחק תופס את כל המסך, Lapsus מסיר את וו המקלדת שלו ומחזיר אותו כשהמשחק מסתיים.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>קיצור דרך בלבד</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>סמנו «קיצור דרך בלבד» ליד תוכנה כדי שקיצור הדרך והמקשים לטקסט מסומן ימשיכו לפעול בה, אך התיקונים האוטומטיים אחרי רווח ייכבו.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>סטטיסטיקה</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>גיבוי</value>
+  </data>
 </root>

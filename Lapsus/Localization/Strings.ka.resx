@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>სანამ თამაში მთელ ეკრანს იკავებს, Lapsus თავის კლავიატურის კაუჭს ხსნის და თამაშის დასრულებისას აბრუნებს.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>მხოლოდ ცხელი ღილაკი</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>მონიშნეთ «მხოლოდ ცხელი ღილაკი» პროგრამისთვის, რომ იქ ცხელი ღილაკი და მონიშნული ტექსტის ღილაკები მუშაობდეს, ჰარის შემდეგ ავტომატური შესწორებები კი გამოირთოს.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>სტატისტიკა</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>ასლი</value>
+  </data>
 </root>

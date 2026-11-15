@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Medan ett spel upptar hela skärmen tar Lapsus bort sin tangentbordshook och sätter tillbaka den när spelet avslutas.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Endast snabbtangent</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Bocka i “Endast snabbtangent” för ett program för att behålla snabbtangenten och tangenterna för markerad text där, men stänga av de automatiska rättelserna efter mellanslag.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Statistik</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
 </root>

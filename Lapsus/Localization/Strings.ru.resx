@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Пока игра занимает весь экран, Lapsus убирает свой перехватчик клавиатуры и возвращает его, когда игра заканчивается.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Только горячая клавиша</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Отметьте «Только горячая клавиша» для программы, чтобы горячая клавиша и клавиши для выделения там работали, а автоматические исправления после пробела отключились.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Копия</value>
+  </data>
 </root>

@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Tant qu’un jeu occupe tout l’écran, Lapsus retire son hook clavier et le remet quand le jeu se termine.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Raccourci seulement</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Cochez « Raccourci seulement » pour une application afin d’y garder le raccourci et les touches pour une sélection, tout en coupant les corrections automatiques après Espace.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Copie</value>
+  </data>
 </root>

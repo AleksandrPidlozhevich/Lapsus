@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Додека игра го зазема целиот екран, Lapsus ја отстранува својата кука за тастатурата и ја враќа кога играта ќе заврши.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>Само кратенка</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>Означете «Само кратенка» за програма за да работат таму кратенката и копчињата за избран текст, а автоматските поправки по празно место да се исклучат.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>Копија</value>
+  </data>
 </root>

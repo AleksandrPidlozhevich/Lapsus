@@ -378,6 +378,13 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
     private bool _layoutChangedMidWord;
     private bool _atWordStart = true;
 
+    // Asked on Space only, and not at all while no app has been set to hotkey-only.
+    private bool AutoFixOffHere()
+    {
+        var off = ExcludedApps.AutoFixOff;
+        return !off.IsEmpty && off.Contains(ForegroundProcessName());
+    }
+
     protected void AppendCapturedChar(char ch)
     {
         // Enter must ResetTypingBuffer (not buffer alone), or leftover _committedLength blinds the next line.
@@ -393,7 +400,8 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
         foreach (var pending in _pendingAutoFixes)
             pending.Tail += ch;
 
-        if ((AutoMode || AutoFixTypos) && Corrector.SupportsAutoMode && ch == ' ' && !_layoutChangedMidWord)
+        if ((AutoMode || AutoFixTypos) && Corrector.SupportsAutoMode && ch == ' ' && !_layoutChangedMidWord &&
+            !AutoFixOffHere())
         {
             var completed = _buffer.CurrentChunk;
             if (completed.Length > 0 && completed.Length <= _buffer.Length - _committedLength)

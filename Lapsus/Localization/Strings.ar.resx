@@ -988,4 +988,16 @@
     <data name="PauseInGames_Hint" xml:space="preserve">
     <value>ما دامت لعبة تشغل الشاشة كلها، يزيل Lapsus خطّاف لوحة المفاتيح الخاص به ويعيده عند انتهاء اللعبة.</value>
   </data>
+    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+    <value>الاختصار فقط</value>
+  </data>
+    <data name="AppRule_Hint" xml:space="preserve">
+    <value>ضع علامة على «الاختصار فقط» لتطبيق ما ليبقى الاختصار ومفاتيح النص المحدد تعمل فيه، مع إيقاف التصحيحات التلقائية بعد المسافة.</value>
+  </data>
+    <data name="Tab_Stats" xml:space="preserve">
+    <value>إحصاءات</value>
+  </data>
+    <data name="Tab_Backup" xml:space="preserve">
+    <value>نسخة</value>
+  </data>
 </root>
