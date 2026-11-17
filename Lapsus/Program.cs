@@ -61,6 +61,12 @@ internal sealed class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+            // Metal can keep drawing at the old size after SizeToContent resizes the window, leaving
+            // a blank strip below the content (AvaloniaUI/Avalonia#22424). macOS only reads this.
+            .With(new AvaloniaNativePlatformOptions
+            {
+                RenderingMode = [AvaloniaNativeRenderingMode.OpenGl, AvaloniaNativeRenderingMode.Software]
+            })
 #if DEBUG
             .WithDeveloperTools()
 #endif
