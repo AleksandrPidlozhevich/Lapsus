@@ -185,13 +185,7 @@
     <value>A billentyűzet rögzítése nem indult el. Adjon a Lapsusnak kisegítő lehetőségek hozzáférést itt: Rendszerbeállítások → Adatvédelem és biztonság → Kisegítő lehetőségek (és Beviteli figyelés, ha szerepel), majd indítsa újra az alkalmazást.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>A Lapsusnak ezekre az engedélyekre van szüksége, hogy lássa és javítsa, amit gépel. Adja meg őket alább, majd térjen ide vissza.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Kisegítő lehetőségek engedélyezése</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Beviteli figyelés engedélyezése</value>
+    <value>A Lapsusnak szüksége van ezekre az engedélyekre. Minden gomb megjeleníti a macOS párbeszédablakát, vagy megnyitja a megfelelő listát itt: Rendszerbeállítások → Adatvédelem és biztonság, ahol bekapcsolja a Lapsust. Az állapot magától frissül.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Javítva: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>A jelszómezőket nem érinti: amíg jelszót gépelsz, a macOS elrejti a billentyűket a többi alkalmazás, így a Lapsus elől is.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>A macOS most két engedélyt kér: Bevitelfigyelés, hogy lássa a billentyűket, és Kisegítő lehetőségek, hogy begépelje a javított szöveget.</value>
+    <value>Engedélyezze alább mindegyik engedélyt. A gomb megjeleníti a macOS párbeszédablakát, vagy megnyitja a megfelelő listát itt: Rendszerbeállítások, ahol bekapcsolja a Lapsust. Az állapot magától zöldre vált.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Tovább</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>A kifejezéseket gépeléskor sem javítja ki: az itt felvett nevet soha nem „javítja”.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Bevitelfigyelés</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Kisegítő lehetőségek</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>Hogy lássa, mely billentyűket nyomja le.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Hogy begépelje a javított szöveget és megtalálja a kurzort.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>A hangalapú bevitelhez. Csak diktálás közben figyel.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Engedélyezve</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Nincs engedélyezve</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Kikapcsolva</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Engedélyezés…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Rendszerbeállítások megnyitása</value>
   </data>
 </root>

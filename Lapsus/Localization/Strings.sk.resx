@@ -185,13 +185,7 @@
     <value>Zachytávanie klávesnice sa nepodarilo spustiť. Udeľte Lapsusu prístup k Sprístupneniu v Nastaveniach systému → Súkromie a bezpečnosť → Sprístupnenie (a Sledovanie vstupu, ak je uvedené), a aplikáciu reštartujte.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus potrebuje tieto povolenia, aby videl a opravoval, čo píšete. Udeľte ich nižšie a potom sa sem vráťte.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Udeliť prístup k Sprístupneniu</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Udeliť Sledovanie vstupu</value>
+    <value>Lapsus potrebuje tieto povolenia. Každé tlačidlo zobrazí dialóg macOS alebo otvorí správny zoznam v Systémové nastavenia → Súkromie a bezpečnosť, kde Lapsus zapnete. Stav sa tu aktualizuje sám.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Opravené: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>Polia pre heslá zostávajú nedotknuté: keď do nich píšete, macOS skrýva klávesy pred ostatnými aplikáciami vrátane Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS teraz požiada o dve povolenia: „Monitorovanie vstupu“, aby videl klávesy, a „Prístupnosť“, aby mohol písať opravený text.</value>
+    <value>Povoľte každé povolenie nižšie. Tlačidlo zobrazí dialóg macOS alebo otvorí správny zoznam v Systémové nastavenia, kde Lapsus zapnete. Stav sám zozelenie.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Pokračovať</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Pojmy sa tiež neopravujú, keď ich píšete: názov pridaný sem sa nikdy „neopraví“.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Monitorovanie vstupu</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Prístupnosť</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofón</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>Aby videl, ktoré klávesy stláčate.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Aby mohol písať opravený text a nájsť kurzor.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Na hlasové písanie. Počúva len počas diktovania.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Povolené</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Nepovolené</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Vypnuté</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Povoliť…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Otvoriť Systémové nastavenia</value>
   </data>
 </root>

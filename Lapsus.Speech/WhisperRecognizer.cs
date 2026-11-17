@@ -262,8 +262,9 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
     }
 
     // Never so small that Whisper loses its footing. A single word in a 7.7 s window came out as subtitle credits
-    // ("Дякую за перегляд!", "Субтитры делал…") in 4 of 10 words on an M1; 15 s read all ten. A phrase keeps the
-    // smaller window: 15 s cost it 2.5x the time and wrote "pull request" as "пул реквест".
+    // ("Дякую за перегляд!", "Субтитры делал…") in 4 of 10 words on an M1; 10 s read all ten as well as 15 s did,
+    // in 1.5 s against 2.3. A phrase keeps the smaller window: 15 s cost it 2.5x the time and wrote "pull request"
+    // as "пул реквест".
     internal static int? WindowFor(double seconds)
     {
         if (seconds < OneWord.TotalSeconds)
@@ -274,7 +275,7 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
 
     // Speech shorter than this (after VAD) is a word or two.
     public static readonly TimeSpan OneWord = TimeSpan.FromSeconds(1.5);
-    private const int OneWordFrames = 768;
+    private const int OneWordFrames = 512;
 
     private static float[] KeepSpeech(WhisperVadProcessor vad, float[] pcm)
     {

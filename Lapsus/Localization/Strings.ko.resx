@@ -185,13 +185,7 @@
     <value>키보드 캡처를 시작하지 못했습니다. 시스템 설정 → 개인 정보 보호 및 보안 → 손쉬운 사용에서 Lapsus에 접근 권한을 주고(입력 모니터링이 있으면 그것도), 앱을 다시 시작하세요.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>입력한 내용을 보고 고치려면 이 권한이 필요합니다. 아래에서 허용한 뒤 여기로 돌아오세요.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>손쉬운 사용 권한 허용</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>입력 모니터링 권한 허용</value>
+    <value>Lapsus에는 이 권한이 필요합니다. 각 버튼은 macOS 대화상자를 보여 주거나 시스템 설정 → 개인정보 보호 및 보안에서 알맞은 목록을 엽니다. 거기서 Lapsus를 켜세요. 여기 상태는 자동으로 바뀝니다.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>교정됨: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>비밀번호 필드는 건드리지 않습니다. 입력 중 macOS가 키를 다른 앱(Lapsus 포함)에서 숨깁니다.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS가 이제 두 권한을 요청합니다. 키를 보는 입력 모니터링, 교정된 텍스트를 입력하는 손쉬운 사용.</value>
+    <value>아래 권한을 각각 허용하세요. 버튼은 macOS 대화상자를 보여 주거나 시스템 설정에서 알맞은 목록을 엽니다. 거기서 Lapsus를 켜세요. 상태는 자동으로 초록색이 됩니다.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>계속</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>용어는 직접 입력할 때도 그대로 둡니다. 여기에 추가한 이름은 절대 &quot;교정&quot;되지 않습니다.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>입력 모니터링</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>손쉬운 사용</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>마이크</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>어떤 키를 누르는지 보기 위해.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>교정된 텍스트를 입력하고 커서를 찾기 위해.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>음성 입력용. 음성 입력 중에만 듣습니다.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>허용됨</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>허용 안 됨</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>꺼짐</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>허용…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>시스템 설정 열기</value>
   </data>
 </root>

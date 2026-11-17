@@ -185,13 +185,7 @@
     <value>Δεν ήταν δυνατή η έναρξη της καταγραφής πληκτρολογίου. Δώστε στο Lapsus πρόσβαση Προσβασιμότητας από Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια → Προσβασιμότητα (και Παρακολούθηση εισόδου, αν αναφέρεται) και μετά επανεκκινήστε την εφαρμογή.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Το Lapsus χρειάζεται αυτές τις άδειες για να βλέπει και να διορθώνει ό,τι πληκτρολογείτε. Δώστε τις παρακάτω και επιστρέψτε εδώ.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Παραχώρηση πρόσβασης Προσβασιμότητας</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Παραχώρηση Παρακολούθησης εισόδου</value>
+    <value>Το Lapsus χρειάζεται αυτές τις άδειες. Κάθε κουμπί δείχνει το παράθυρο του macOS ή ανοίγει τη σωστή λίστα στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια, όπου ενεργοποιείτε το Lapsus. Η κατάσταση εδώ ενημερώνεται μόνη της.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Διορθώθηκε: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>Τα πεδία κωδικών μένουν ανέγγιχτα: όσο πληκτρολογείτε σε ένα, το macOS κρύβει τα πλήκτρα από τις άλλες εφαρμογές, και από το Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Τώρα το macOS θα ζητήσει δύο άδειες: Παρακολούθηση εισόδου, για να βλέπει τα πλήκτρα, και Προσβασιμότητα, για να πληκτρολογεί το διορθωμένο κείμενο.</value>
+    <value>Επιτρέψτε κάθε άδεια παρακάτω. Το κουμπί δείχνει το παράθυρο του macOS ή ανοίγει τη σωστή λίστα στις Ρυθμίσεις συστήματος, όπου ενεργοποιείτε το Lapsus. Η κατάσταση γίνεται πράσινη μόνη της.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Συνέχεια</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Οι όροι αφήνονται ανέγγιχτοι και όταν τους πληκτρολογείτε: ένα όνομα που προστέθηκε εδώ δεν «διορθώνεται» ποτέ.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Παρακολούθηση εισόδου</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Προσβασιμότητα</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Μικρόφωνο</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>Για να βλέπει ποια πλήκτρα πατάτε.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Για να πληκτρολογεί το διορθωμένο κείμενο και να βρίσκει τον δρομέα.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Για τη φωνητική πληκτρολόγηση. Ακούει μόνο όσο τρέχει η υπαγόρευση.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Επιτρέπεται</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Δεν επιτρέπεται</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Απενεργοποιημένο</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Να επιτρέπεται…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Άνοιγμα Ρυθμίσεων συστήματος</value>
   </data>
 </root>

@@ -185,13 +185,7 @@
     <value>Не атрымалася запусціць перахоп клавіятуры. Дайце Lapsus доступ у Сістэмныя налады → Прыватнасць і бяспека → Універсальны доступ (і Маніторынг уводу, калі ёсць у спісе), затым перазапусціце праграму.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus патрэбныя гэтыя дазволы, каб бачыць і выпраўляць тое, што вы друкуеце. Дайце іх ніжэй, затым вярніцеся сюды.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Даць доступ: Універсальны доступ</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Даць доступ: Маніторынг уводу</value>
+    <value>Lapsus патрэбныя гэтыя дазволы. Кожная кнопка паказвае запыт macOS або адкрывае патрэбны спіс у «Сістэмныя налады» → «Прыватнасць і бяспека», дзе трэба ўключыць Lapsus. Статус тут абнаўляецца сам.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Выпраўлена: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>Палі пароляў не закранаюцца: пакуль вы ўводзіце пароль, macOS хавае націсканні ад іншых праграм, у тым ліку ад Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Зараз macOS папросіць два дазволы: «Маніторынг уводу» — каб бачыць націсканні, і «Універсальны доступ» — каб уводзіць выпраўлены тэкст.</value>
+    <value>Дазвольце кожны дазвол ніжэй. Кнопка паказвае запыт macOS або адкрывае патрэбны спіс у «Сістэмныя налады», дзе трэба ўключыць Lapsus. Статус стане зялёным сам.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Працягнуць</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Тэрміны таксама не чапаюцца, калі вы іх набіраеце: назва, дададзеная тут, ніколі не «выпраўляецца».</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Маніторынг уводу</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Універсальны доступ</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Мікрафон</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>Каб бачыць, якія клавішы вы націскаеце.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Каб уводзіць выпраўлены тэкст і знаходзіць курсор.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Для галасавога ўводу. Слухае толькі падчас дыктоўкі.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Дазволена</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Не дазволена</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Выключана</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Дазволіць…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Адкрыць Сістэмныя налады</value>
   </data>
 </root>

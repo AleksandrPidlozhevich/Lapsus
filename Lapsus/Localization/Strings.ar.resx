@@ -185,13 +185,7 @@
     <value>تعذّر بدء التقاط لوحة المفاتيح. امنح Lapsus صلاحية إمكانية الوصول من System Settings ← Privacy &amp; Security ← Accessibility (و‑Input Monitoring إن ظهر)، ثم أعد تشغيل التطبيق.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>يحتاج Lapsus إلى هذه الأذونات ليرى ما تكتبه ويصحّحه. امنحها بالأسفل ثم عُد إلى هنا.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>منح صلاحية إمكانية الوصول</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>منح صلاحية مراقبة الإدخال</value>
+    <value>يحتاج Lapsus إلى هذه الأذونات. كل زر يعرض نافذة macOS أو يفتح القائمة الصحيحة في إعدادات النظام ← الخصوصية والأمن، حيث تشغّل Lapsus. تتحدث الحالة هنا تلقائيًا.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>تم التصحيح: {0} ← {1}</value>
@@ -713,7 +707,7 @@
     <value>حقول كلمات المرور لا تُمس: أثناء الكتابة فيها يخفي macOS المفاتيح عن التطبيقات الأخرى، بما فيها Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>سيطلب macOS الآن إذنين: مراقبة الإدخال لرؤية المفاتيح، وتسهيلات الاستخدام لكتابة النص المصحح.</value>
+    <value>اسمح بكل إذن أدناه. يعرض الزر نافذة macOS أو يفتح القائمة الصحيحة في إعدادات النظام، حيث تشغّل Lapsus. تصبح الحالة خضراء تلقائيًا.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>متابعة</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>تُترك المصطلحات كما هي أيضًا عند كتابتها: لا يُصحَّح أبدًا اسم أُضيف هنا.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>مراقبة الإدخال</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>تسهيلات الاستخدام</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>الميكروفون</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>لرؤية المفاتيح التي تضغطها.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>لكتابة النص المصحح وإيجاد المؤشر.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>للكتابة بالصوت. يستمع فقط أثناء الإملاء.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>مسموح</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>غير مسموح</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>متوقف</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>سماح…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>فتح إعدادات النظام</value>
   </data>
 </root>

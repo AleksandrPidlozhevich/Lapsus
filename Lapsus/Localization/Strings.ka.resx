@@ -185,13 +185,7 @@
     <value>კლავიატურის აღბეჭდვა ვერ გაეშვა. მიეცით Lapsus-ს წვდომა: System Settings ← Privacy &amp; Security ← Accessibility (და Input Monitoring, თუ ჩამოთვლილია), შემდეგ გადატვირთეთ აპლიკაცია.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus-ს ეს ნებართვები სჭირდება, რომ დაინახოს და გაასწოროს აკრეფილი. მიეცით ქვემოთ და დაბრუნდით აქ.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Accessibility წვდომის მიცემა</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Input Monitoring წვდომის მიცემა</value>
+    <value>Lapsus-ს ეს ნებართვები სჭირდება. თითოეული ღილაკი აჩვენებს macOS-ის ფანჯარას ან ხსნის სწორ სიას System Settings → Privacy &amp; Security-ში, სადაც Lapsus-ს ჩართავთ. სტატუსი აქ თავად განახლდება.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>გასწორდა: {0} ← {1}</value>
@@ -713,7 +707,7 @@
     <value>პაროლის ველებს არ ეხება: სანამ პაროლს კრეფთ, macOS კლავიშებს მალავს სხვა აპებისგან, მათ შორის Lapsus-ისგანაც.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>ახლა macOS ორ ნებართვას მოითხოვს: შეყვანის მონიტორინგს — კლავიშების დასანახად, და მისაწვდომობას — გასწორებული ტექსტის ასაკრეფად.</value>
+    <value>დართეთ ნება თითოეულ ნებართვას ქვემოთ. ღილაკი აჩვენებს macOS-ის ფანჯარას ან ხსნის სწორ სიას System Settings-ში, სადაც Lapsus-ს ჩართავთ. სტატუსი თავად გამწვანდება.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>გაგრძელება</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>ტერმინები აკრეფისასაც არ იცვლება: აქ დამატებული სახელი არასდროს «სწორდება».</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Input Monitoring</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Accessibility</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>მიკროფონი</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>რომ დაინახოს, რომელ კლავიშებს აჭერთ.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>რომ აკრიფოს გასწორებული ტექსტი და იპოვოს კურსორი.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>ხმოვანი აკრეფისთვის. უსმენს მხოლოდ კარნახის დროს.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>ნებადართულია</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>არ არის ნებადართული</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>გამორთულია</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>ნების დართვა…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>System Settings-ის გახსნა</value>
   </data>
 </root>
