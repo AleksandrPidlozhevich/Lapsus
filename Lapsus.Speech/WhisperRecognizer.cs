@@ -97,7 +97,7 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
             throw;
         }
 
-        var (onGpu, card) = UsedGpu(log);
+        var (onGpu, device) = UsedGpu(log);
         onGpu &= preferGpu;
         LoadLog = log;
         lock (_gate)
@@ -114,7 +114,7 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
             _vadFactory = vadFactory;
             _vad = vad;
             OnGpu = onGpu;
-            DeviceLabel = onGpu ? $"GPU ({card ?? RuntimeOptions.LoadedLibrary?.ToString()})" : "CPU";
+            DeviceLabel = DescribeDevice(onGpu, device);
         }
     }
 
@@ -275,23 +275,48 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
     }
 
     // whisper.cpp names the backend that holds the weights ("whisper_model_load: Vulkan0 total size = 873 MB",
-    // "CPU total size" without a GPU), and the Vulkan backend names the card it found.
-    private static (bool OnGpu, string? Card) UsedGpu(List<string> log)
+    // "MTL0" for Metal, "CPU total size" without a GPU). Vulkan and Metal each name the card they found; the
+    // runtime package is no name for it: on macOS the package called Cpu is the one that carries Metal.
+    internal static (bool OnGpu, string? Device) UsedGpu(IReadOnlyList<string> log)
     {
         lock (log)
         {
-            var onGpu = log.Select(line => ModelBackend().Match(line))
-                .Any(m => m.Success && !m.Groups[1].Value.StartsWith("CPU", StringComparison.OrdinalIgnoreCase));
-            var card = log.Select(line => VulkanCard().Match(line)).FirstOrDefault(m => m.Success)?.Groups[1].Value.Trim();
-            return (onGpu, card);
+            var backend = log.Select(line => ModelBackend().Match(line))
+                .FirstOrDefault(m => m.Success && !m.Groups[1].Value.StartsWith("CPU", StringComparison.OrdinalIgnoreCase))
+                ?.Groups[1].Value;
+            if (backend is null)
+                return (false, null);
+
+            var card = log.Select(line => GpuName().Match(line)).FirstOrDefault(m => m.Success) is { } found
+                ? CardName(found)
+                : null;
+            return (true, string.IsNullOrEmpty(card) ? backend : card);
         }
     }
+
+    // Newer ggml prints the device id first ("GPU name:   MTL0 (Apple M2 Pro)"), older the chip alone.
+    private static string CardName(System.Text.RegularExpressions.Match found)
+    {
+        if (found.Groups["vulkan"].Success)
+            return found.Groups["vulkan"].Value.Trim();
+
+        var name = found.Groups["metal"].Value.Trim();
+        var detail = found.Groups["detail"].Value.Trim();
+        return MetalDeviceId().IsMatch(name) && detail.Length > 0 ? detail : name;
+    }
+
+    internal static string DescribeDevice(bool onGpu, string? device) =>
+        onGpu ? $"GPU ({device})" : "CPU";
 
     [System.Text.RegularExpressions.GeneratedRegex(@"whisper_model_load:\s+(\S+)\s+total size")]
     private static partial System.Text.RegularExpressions.Regex ModelBackend();
 
-    [System.Text.RegularExpressions.GeneratedRegex(@"ggml_vulkan: 0 = ([^|(]+)")]
-    private static partial System.Text.RegularExpressions.Regex VulkanCard();
+    [System.Text.RegularExpressions.GeneratedRegex(
+        @"ggml_vulkan: 0 = (?<vulkan>[^|(]+)|GPU name:\s+(?<metal>[^(\r\n]+)(?:\((?<detail>[^)]*)\))?")]
+    private static partial System.Text.RegularExpressions.Regex GpuName();
+
+    [System.Text.RegularExpressions.GeneratedRegex(@"^MTL\d+$")]
+    private static partial System.Text.RegularExpressions.Regex MetalDeviceId();
 
     private static void ChooseRuntime()
     {
