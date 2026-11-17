@@ -24,17 +24,10 @@ internal static class ChromiumApps
 
     // The executable of an app bundle lives at <App>.app/Contents/MacOS/<name>. Path.Combine on
     // Windows uses '\', so a bundle laid out in a test must be recognized with either separator.
-    public static string? AppBundleFrameworks(string executablePath)
-    {
-        var slash = executablePath.IndexOf(".app/", StringComparison.Ordinal);
-        var backslash = executablePath.IndexOf(".app\\", StringComparison.Ordinal);
-        var index = slash < 0 ? backslash : backslash < 0 ? slash : Math.Min(slash, backslash);
-        if (index < 0)
-            return null;
-
-        var appRoot = executablePath[..(index + ".app".Length)];
-        return Path.Combine(appRoot, "Contents", "Frameworks");
-    }
+    public static string? AppBundleFrameworks(string executablePath) =>
+        MacAppIdentity.BundleRoot(executablePath) is { } appRoot
+            ? Path.Combine(appRoot, "Contents", "Frameworks")
+            : null;
 
     private static readonly ConcurrentDictionary<string, bool> ByFrameworksDirectory = new(StringComparer.Ordinal);
 

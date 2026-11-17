@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
@@ -12,10 +11,6 @@ internal static class MacActivity
     // NSActivityUserInitiated without NSActivityIdleSystemSleepDisabled (bit 20).
     private const ulong UserInitiatedAllowingIdleSystemSleep = 0x00EF_FFFF;
 
-    private const uint Utf8 = 0x08000100;
-
-    private const string ObjC = "/usr/lib/libobjc.A.dylib";
-
     private static IntPtr _processInfo;
 
     private static IntPtr _token;
@@ -27,27 +22,27 @@ internal static class MacActivity
         if (_token != IntPtr.Zero)
             return;
 
-        var processInfo = objc_msgSend(objc_getClass("NSProcessInfo"), sel_registerName("processInfo"));
+        var processInfo = ObjC.Send(ObjC.Class("NSProcessInfo"), ObjC.Selector("processInfo"));
         if (processInfo == IntPtr.Zero)
             return;
 
         var reason = MacOSNativeMethods.CFStringCreateWithCString(
-            IntPtr.Zero, "Keyboard capture is running", Utf8);
+            IntPtr.Zero, "Keyboard capture is running", MacOSNativeMethods.CFStringEncodingUtf8);
         if (reason == IntPtr.Zero)
             return;
 
         try
         {
-            var activity = objc_msgSendBegin(
+            var activity = ObjC.Send(
                 processInfo,
-                sel_registerName("beginActivityWithOptions:reason:"),
-                UserInitiatedAllowingIdleSystemSleep,
+                ObjC.Selector("beginActivityWithOptions:reason:"),
+                (IntPtr)(long)UserInitiatedAllowingIdleSystemSleep,
                 reason);
             if (activity == IntPtr.Zero)
                 return;
 
             // beginActivity returns an autoreleased token; keep our own reference until End.
-            _token = objc_msgSend(activity, sel_registerName("retain"));
+            _token = ObjC.Send(activity, ObjC.Selector("retain"));
             _processInfo = processInfo;
         }
         finally
@@ -61,24 +56,9 @@ internal static class MacActivity
         if (_token == IntPtr.Zero)
             return;
 
-        objc_msgSendEnd(_processInfo, sel_registerName("endActivity:"), _token);
-        objc_msgSend(_token, sel_registerName("release"));
+        ObjC.Send(_processInfo, ObjC.Selector("endActivity:"), _token);
+        ObjC.Send(_token, ObjC.Selector("release"));
         _token = IntPtr.Zero;
         _processInfo = IntPtr.Zero;
     }
-
-    [DllImport(ObjC)]
-    private static extern IntPtr objc_getClass(string name);
-
-    [DllImport(ObjC)]
-    private static extern IntPtr sel_registerName(string name);
-
-    [DllImport(ObjC, EntryPoint = "objc_msgSend")]
-    private static extern IntPtr objc_msgSend(IntPtr receiver, IntPtr selector);
-
-    [DllImport(ObjC, EntryPoint = "objc_msgSend")]
-    private static extern IntPtr objc_msgSendBegin(IntPtr receiver, IntPtr selector, ulong options, IntPtr reason);
-
-    [DllImport(ObjC, EntryPoint = "objc_msgSend")]
-    private static extern void objc_msgSendEnd(IntPtr receiver, IntPtr selector, IntPtr activity);
 }

@@ -265,40 +265,20 @@ internal static class MacMicrophone
                 return null;
         }
 
-        var pool = objc_autoreleasePoolPush();
-        var mediaType = CFStringCreateWithCString(IntPtr.Zero, "soun", 0x08000100);
+        var pool = Input.ObjC.PushPool();
+        var mediaType = Input.MacOSNativeMethods.CFStringCreateWithCString(
+            IntPtr.Zero, "soun", Input.MacOSNativeMethods.CFStringEncodingUtf8);
         try
         {
-            var device = objc_getClass("AVCaptureDevice");
+            var device = Input.ObjC.Class("AVCaptureDevice");
             if (device == IntPtr.Zero)
                 return null;
-            return objc_msgSend_long(device, sel_registerName("authorizationStatusForMediaType:"), mediaType);
+            return (long)Input.ObjC.Send(device, Input.ObjC.Selector("authorizationStatusForMediaType:"), mediaType);
         }
         finally
         {
-            CFRelease(mediaType);
-            objc_autoreleasePoolPop(pool);
+            Input.MacOSNativeMethods.CFRelease(mediaType);
+            Input.ObjC.PopPool(pool);
         }
     }
-
-    [DllImport("/usr/lib/libobjc.dylib")]
-    private static extern IntPtr objc_autoreleasePoolPush();
-
-    [DllImport("/usr/lib/libobjc.dylib")]
-    private static extern void objc_autoreleasePoolPop(IntPtr pool);
-
-    [DllImport("/usr/lib/libobjc.dylib")]
-    private static extern IntPtr objc_getClass(string name);
-
-    [DllImport("/usr/lib/libobjc.dylib")]
-    private static extern IntPtr sel_registerName(string name);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-    private static extern long objc_msgSend_long(IntPtr receiver, IntPtr selector, IntPtr argument);
-
-    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
-    private static extern IntPtr CFStringCreateWithCString(IntPtr allocator, string value, uint encoding);
-
-    [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
-    private static extern void CFRelease(IntPtr value);
 }

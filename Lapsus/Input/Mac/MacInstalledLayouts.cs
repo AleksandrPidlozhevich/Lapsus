@@ -1,9 +1,7 @@
 using Lapsus.Core.Layout;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Text;
 
 namespace Lapsus.Input;
 
@@ -19,8 +17,6 @@ internal static class MacInstalledLayouts
     ];
 
     private const uint ShiftModifierKeyState = 0x02;
-
-    private const uint AlphaLockModifierKeyState = 0x04;
 
     public static IReadOnlyList<InstalledLayout> Enumerate()
     {
@@ -72,24 +68,9 @@ internal static class MacInstalledLayouts
         }
     }
 
-    public static string? ReadInputSourceId(IntPtr source)
-    {
-        var value = MacOSNativeMethods.TISGetInputSourceProperty(
-            source, MacOSNativeMethods.PropertyInputSourceId);
-        if (value == IntPtr.Zero)
-            return null;
-
-        var direct = MacOSNativeMethods.CFStringGetCStringPtr(value, MacOSNativeMethods.CFStringEncodingUtf8);
-        if (direct != IntPtr.Zero)
-            return Marshal.PtrToStringUTF8(direct);
-
-        var sb = new StringBuilder(256);
-        if (!MacOSNativeMethods.CFStringGetCString(
-                value, sb, sb.Capacity, MacOSNativeMethods.CFStringEncodingUtf8))
-            return null;
-
-        return sb.ToString();
-    }
+    public static string? ReadInputSourceId(IntPtr source) =>
+        MacOSNativeMethods.ReadCfString(
+            MacOSNativeMethods.TISGetInputSourceProperty(source, MacOSNativeMethods.PropertyInputSourceId));
 
     public static string? CurrentLanguageCode()
     {
@@ -132,81 +113,8 @@ internal static class MacInstalledLayouts
 
     public static bool CurrentSourceIsInputMethod()
     {
-        return ReadCurrentSource(out var isInputMethod) && isInputMethod;
-    }
-
-    public static bool ReadCurrentSource(out bool isInputMethod, out long token)
-    {
-        isInputMethod = false;
-        token = 0;
-
-        var source = MacOSNativeMethods.TISCopyCurrentKeyboardInputSource();
-        if (source == IntPtr.Zero)
-            return false;
-
-        try
-        {
-            isInputMethod = MacOSNativeMethods.TISGetInputSourceProperty(
-                source, MacOSNativeMethods.PropertyUnicodeKeyLayoutData) == IntPtr.Zero;
-
-            var id = MacOSNativeMethods.TISGetInputSourceProperty(
-                source, MacOSNativeMethods.PropertyInputSourceId);
-            token = id == IntPtr.Zero ? 0 : MacOSNativeMethods.CFHash(id);
-            return true;
-        }
-        finally
-        {
-            MacOSNativeMethods.CFRelease(source);
-        }
-    }
-
-    private static bool ReadCurrentSource(out bool isInputMethod)
-    {
-        return ReadCurrentSource(out isInputMethod, out _);
-    }
-
-    public static bool TranslateKeyDown(
-        ushort keyCode, ulong eventFlags, bool autoRepeat, ref uint deadKeyState, char[] buffer, out int length)
-    {
-        length = 0;
-
-        var source = MacOSNativeMethods.TISCopyCurrentKeyboardInputSource();
-        if (source == IntPtr.Zero)
-            return false;
-
-        try
-        {
-            var layoutData = MacOSNativeMethods.TISGetInputSourceProperty(
-                source, MacOSNativeMethods.PropertyUnicodeKeyLayoutData);
-            if (layoutData == IntPtr.Zero)
-                return false;
-
-            var modifiers = ((eventFlags & MacOSNativeMethods.EventFlagMaskShift) != 0 ? ShiftModifierKeyState : 0)
-                            | ((eventFlags & MacOSNativeMethods.EventFlagMaskAlphaShift) != 0 ? AlphaLockModifierKeyState : 0);
-            var state = deadKeyState;
-            nuint charCount = 0;
-            var status = MacOSNativeMethods.UCKeyTranslate(
-                MacOSNativeMethods.CFDataGetBytePtr(layoutData),
-                keyCode,
-                autoRepeat ? MacOSNativeMethods.UCKeyActionAutoKey : MacOSNativeMethods.UCKeyActionDown,
-                modifiers,
-                MacOSNativeMethods.LMGetKbdType(),
-                0,
-                ref state,
-                (nuint)buffer.Length,
-                ref charCount,
-                buffer);
-            if (status != 0)
-                return false;
-
-            deadKeyState = state;
-            length = (int)charCount;
-            return true;
-        }
-        finally
-        {
-            MacOSNativeMethods.CFRelease(source);
-        }
+        using var source = MacKeyboardSource.Current();
+        return source.IsInputMethod;
     }
 
     public static IntPtr ResolveInputSource(string layoutId)
@@ -374,62 +282,51 @@ internal static class MacInstalledLayouts
         if (layoutData == IntPtr.Zero)
             return null;
 
-        var length = MacOSNativeMethods.CFDataGetLength(layoutData);
-        if (length <= 0)
+        // The bytes belong to the input source, which the caller's source list keeps alive.
+        var layoutPtr = MacOSNativeMethods.CFDataGetBytePtr(layoutData);
+        if (layoutPtr == IntPtr.Zero || MacOSNativeMethods.CFDataGetLength(layoutData) <= 0)
             return null;
 
-        var bytes = new byte[length];
-        Marshal.Copy(MacOSNativeMethods.CFDataGetBytePtr(layoutData), bytes, 0, (int)length);
+        var keyboardType = MacOSNativeMethods.LMGetKbdType();
+        var slots = new char[KeyCodes.Length];
+        var buffer = new char[4];
 
-        var handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
-        try
+        for (var i = 0; i < KeyCodes.Length; i++)
         {
-            var layoutPtr = handle.AddrOfPinnedObject();
-            var keyboardType = MacOSNativeMethods.LMGetKbdType();
-            var slots = new char[KeyCodes.Length];
+            uint deadKeyState = 0;
+            nuint charCount = 0;
+            var status = MacOSNativeMethods.UCKeyTranslate(
+                layoutPtr,
+                KeyCodes[i],
+                MacOSNativeMethods.UCKeyActionDisplay,
+                shifted ? ShiftModifierKeyState : 0,
+                keyboardType,
+                MacOSNativeMethods.UCKeyTranslateNoDeadKeys,
+                ref deadKeyState,
+                (nuint)buffer.Length,
+                ref charCount,
+                buffer);
 
-            for (var i = 0; i < KeyCodes.Length; i++)
+            if (status != 0 || charCount == 0)
+                continue;
+
+            // With NoDeadKeys a dead key displays its accent; it owns no character, as on Windows.
+            if (IsDeadKey(layoutPtr, keyboardType, KeyCodes[i], shifted))
             {
-                var buffer = new char[4];
-                uint deadKeyState = 0;
-                nuint charCount = 0;
-                var status = MacOSNativeMethods.UCKeyTranslate(
-                    layoutPtr,
-                    KeyCodes[i],
-                    MacOSNativeMethods.UCKeyActionDisplay,
-                    shifted ? ShiftModifierKeyState : 0,
-                    keyboardType,
-                    MacOSNativeMethods.UCKeyTranslateNoDeadKeys,
-                    ref deadKeyState,
-                    (nuint)buffer.Length,
-                    ref charCount,
-                    buffer);
-
-                if (status != 0 || charCount == 0)
-                    continue;
-
-                // With NoDeadKeys a dead key displays its accent; it owns no character, as on Windows.
-                if (IsDeadKey(layoutPtr, keyboardType, KeyCodes[i], shifted))
-                {
-                    deadKeys.Add(new DeadKey(i, shifted, buffer[0]));
-                    continue;
-                }
-
-                if (charCount > 1)
-                {
-                    ligatures.Add(new Ligature(i, shifted, new string(buffer, 0, (int)charCount)));
-                    continue;
-                }
-
-                slots[i] = shifted ? buffer[0] : char.ToLowerInvariant(buffer[0]);
+                deadKeys.Add(new DeadKey(i, shifted, buffer[0]));
+                continue;
             }
 
-            return slots;
+            if (charCount > 1)
+            {
+                ligatures.Add(new Ligature(i, shifted, new string(buffer, 0, (int)charCount)));
+                continue;
+            }
+
+            slots[i] = shifted ? buffer[0] : char.ToLowerInvariant(buffer[0]);
         }
-        finally
-        {
-            handle.Free();
-        }
+
+        return slots;
     }
 
     private static bool IsDeadKey(IntPtr layoutPtr, uint keyboardType, ushort keyCode, bool shifted)

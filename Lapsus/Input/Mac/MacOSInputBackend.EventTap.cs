@@ -1,15 +1,8 @@
 using Avalonia.Threading;
-using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
-using Lapsus.Core.Layout;
 using Lapsus.Localization;
 using Lapsus.Startup;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -352,11 +345,12 @@ internal sealed partial class MacOSInputBackend
             return;
         }
 
-        MacInstalledLayouts.ReadCurrentSource(out var isInputMethod, out var layoutToken);
+        using var source = MacKeyboardSource.Current();
+        var layoutToken = source.Token;
         if (layoutToken != _deadKeyLayout)
             pendingDeadKey = 0;
 
-        if (isInputMethod)
+        if (source.IsInputMethod)
         {
             ResetTypingBuffer();
             return;
@@ -387,7 +381,7 @@ internal sealed partial class MacOSInputBackend
 
         // The event's own string knows nothing of a pending dead key: after ; on Greek it reports α, not ά.
         var state = pendingDeadKey;
-        if (MacInstalledLayouts.TranslateKeyDown(keyCode, flags, autoRepeat, ref state, _translated, out var length))
+        if (source.TranslateKeyDown(keyCode, flags, autoRepeat, ref state, _translated, out var length))
         {
             if (length == 0 && state != 0)
             {

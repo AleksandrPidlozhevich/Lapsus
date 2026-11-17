@@ -1,7 +1,6 @@
 using Lapsus.Startup;
 using System;
 using System.Runtime.Versioning;
-using System.Text;
 
 namespace Lapsus.Input;
 
@@ -19,10 +18,7 @@ internal static class MacTextInjection
 
     public static bool TypeOver(int count, string text)
     {
-        if (count == 0)
-            return SendUnicode(text, Route.Session);
-
-        return SendBackspaces(count) && SendUnicode(text, Route.Session);
+        return SendBackspaces(count) && SendUnicode(text);
     }
 
     private static AccessibilityReplacement TryReplaceViaAccessibility(int count, string text)
@@ -223,14 +219,10 @@ internal static class MacTextInjection
     // Backspaces and the paste chord are ordinary HID keys, and the tap lets them through unmarked.
     public static bool SendBackspaces(int count)
     {
-        if (count <= 0)
-            return true;
-
         for (var i = 0; i < count; i++)
         {
-            if (!PostKey(MacOSNativeMethods.DeleteKeyCode, true, route: Route.Session, hidSource: true))
-                return false;
-            if (!PostKey(MacOSNativeMethods.DeleteKeyCode, false, route: Route.Session, hidSource: true))
+            if (!PostKey(MacOSNativeMethods.DeleteKeyCode, true, 0, pid: 0, hidSource: true)
+                || !PostKey(MacOSNativeMethods.DeleteKeyCode, false, 0, pid: 0, hidSource: true))
                 return false;
         }
 
@@ -241,7 +233,7 @@ internal static class MacTextInjection
     // rest. A word fits; a dictated sentence goes out as several events, never splitting a surrogate pair.
     private const int MaxUnitsPerEvent = 20;
 
-    public static bool SendUnicode(string text, Route route = Route.Hid)
+    public static bool SendUnicode(string text)
     {
         if (string.IsNullOrEmpty(text))
             return true;
@@ -251,7 +243,7 @@ internal static class MacTextInjection
             var take = Math.Min(MaxUnitsPerEvent, text.Length - at);
             if (take < text.Length - at && char.IsHighSurrogate(text[at + take - 1]))
                 take--;
-            if (!SendUnicodeEvent(text.Substring(at, take), route))
+            if (!SendUnicodeEvent(text.AsSpan(at, take)))
                 return false;
             at += take;
         }
@@ -259,47 +251,33 @@ internal static class MacTextInjection
         return true;
     }
 
-    private static bool SendUnicodeEvent(string text, Route route)
+    private static bool SendUnicodeEvent(ReadOnlySpan<char> text)
     {
-        var bytes = Encoding.Unicode.GetBytes(text);
         var ev = MacOSNativeMethods.CGEventCreateKeyboardEvent(IntPtr.Zero, 0, true);
         if (ev == IntPtr.Zero)
             return false;
 
         MacOSNativeMethods.CGEventSetFlags(ev, 0);
-        MacOSNativeMethods.CGEventKeyboardSetUnicodeString(ev, text.Length, bytes);
-        if (route != Route.Process)
-            MarkInjected(ev);
-        Deliver(route, 0, ev);
-        MacOSNativeMethods.CFRelease(ev);
+        MacOSNativeMethods.CGEventKeyboardSetUnicodeString(ev, text.Length, text);
+        Deliver(ev, pid: 0);
         return true;
     }
 
+    // Electron records modifiers from flagsChanged, and only on the modifier key itself.
+    // A letter event that merely carries the Command flag is dropped. The HID source keeps the
+    // chord from looking like a private-source key, which Electron drops. With a pid the chord goes
+    // to that process only; without one it goes through the HID tap to the key window.
     public static bool SendCommandChord(ushort keyCode, int pid = 0)
     {
-        // Electron records modifiers from flagsChanged, and only on the modifier key itself.
-        // A letter event that merely carries the Command flag is dropped. The HID source keeps the
-        // chord from looking like a private-source key, which Electron drops.
-        return SendChord(keyCode, pid > 0 ? Route.Process : Route.Hid, pid, hidSource: true);
+        const ushort command = MacOSNativeMethods.CommandKeyCode;
+        const ulong flags = MacOSNativeMethods.EventFlagMaskCommand;
+        return PostFlagsChanged(command, flags, pid)
+               && PostKey(keyCode, true, flags, pid, hidSource: true)
+               && PostKey(keyCode, false, flags, pid, hidSource: true)
+               && PostFlagsChanged(command, 0, pid);
     }
 
-    public static bool SendSessionCommandChord(ushort keyCode)
-    {
-        return SendChord(keyCode, Route.Session, 0, hidSource: true);
-    }
-
-    private static bool SendChord(ushort keyCode, Route route, int pid, bool hidSource)
-    {
-        var command = (ushort)MacOSNativeMethods.CommandKeyCode;
-        var flags = MacOSNativeMethods.EventFlagMaskCommand;
-        return PostFlagsChanged(command, flags, route, pid, hidSource)
-               && PostKey(keyCode, true, flags, route, pid, hidSource)
-               && PostKey(keyCode, false, flags, route, pid, hidSource)
-               && PostFlagsChanged(command, 0, route, pid, hidSource);
-    }
-
-    private static bool PostKey(
-        ushort keyCode, bool keyDown, ulong flags = 0, Route route = Route.Hid, int pid = 0, bool hidSource = false)
+    private static bool PostKey(ushort keyCode, bool keyDown, ulong flags, int pid, bool hidSource)
     {
         var ev = MacOSNativeMethods.CGEventCreateKeyboardEvent(hidSource ? HidSource() : IntPtr.Zero, keyCode, keyDown);
         if (ev == IntPtr.Zero)
@@ -308,28 +286,20 @@ internal static class MacTextInjection
         MacOSNativeMethods.CGEventSetFlags(ev, flags);
         if (hidSource)
             StampHidSource(ev);
-        if (route != Route.Process)
-            MarkInjected(ev);
-        Deliver(route, pid, ev);
-        MacOSNativeMethods.CFRelease(ev);
+        Deliver(ev, pid);
         return true;
     }
 
-    private static bool PostFlagsChanged(ushort keyCode, ulong flags, Route route, int pid, bool hidSource)
+    private static bool PostFlagsChanged(ushort keyCode, ulong flags, int pid)
     {
-        var ev = MacOSNativeMethods.CGEventCreateKeyboardEvent(
-            hidSource ? HidSource() : IntPtr.Zero, keyCode, flags != 0);
+        var ev = MacOSNativeMethods.CGEventCreateKeyboardEvent(HidSource(), keyCode, flags != 0);
         if (ev == IntPtr.Zero)
             return false;
 
         MacOSNativeMethods.CGEventSetType(ev, MacOSNativeMethods.EventFlagsChanged);
         MacOSNativeMethods.CGEventSetFlags(ev, flags);
-        if (hidSource)
-            StampHidSource(ev);
-        if (route != Route.Process)
-            MarkInjected(ev);
-        Deliver(route, pid, ev);
-        MacOSNativeMethods.CFRelease(ev);
+        StampHidSource(ev);
+        Deliver(ev, pid);
         return true;
     }
 
@@ -363,18 +333,26 @@ internal static class MacTextInjection
 
     private static ulong _lastStamp;
 
-    private static void Deliver(Route route, int pid, IntPtr ev)
+    // Releases the event. A fresh event is timestamped 0, which Chromium treats as older than the
+    // last real key. Without a pid it is posted at the HID tap so the window server routes it into
+    // the key window (WebKit and Chromium ignore keys that only reach the session tap); our own tap
+    // sees the marker, keeps the key out of the typing buffer and strips it before the app does.
+    // A key posted to a pid bypasses our tap, so it carries no marker.
+    private static void Deliver(IntPtr ev, int pid)
     {
-        // A fresh event is timestamped 0, which Chromium treats as older than the last real key.
-        // Posted at the HID tap so the window server routes them into the key window. WebKit and
-        // Chromium ignore keys that only reach the session tap. Our tap strips the marker before
-        // the app sees the event.
         MacOSNativeMethods.CGEventSetTimestamp(ev, NextStamp());
 
-        if (route == Route.Process && pid > 0)
+        if (pid > 0)
+        {
             MacOSNativeMethods.CGEventPostToPid(pid, ev);
+        }
         else
-            MacOSNativeMethods.CGEventPost(0, ev);
+        {
+            MarkInjected(ev);
+            MacOSNativeMethods.CGEventPost(MacOSNativeMethods.HidEventTap, ev);
+        }
+
+        MacOSNativeMethods.CFRelease(ev);
     }
 
     private static ulong NextStamp()
@@ -403,12 +381,5 @@ internal static class MacTextInjection
         Miss,
         Replaced,
         Selected
-    }
-
-    internal enum Route
-    {
-        Hid,
-        Session,
-        Process
     }
 }

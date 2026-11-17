@@ -35,7 +35,6 @@ internal static class MacOSNativeMethods
         AxRoleAttribute = CreateCFString("AXRole");
         AxSelectedTextRangeAttribute = CreateCFString("AXSelectedTextRange");
         AxSelectedTextAttribute = CreateCFString("AXSelectedText");
-        AxValueAttribute = CreateCFString("AXValue");
         AxChildrenAttribute = CreateCFString("AXChildren");
         AxBoundsForRangeParameterizedAttribute = CreateCFString("AXBoundsForRange");
     }
@@ -78,8 +77,6 @@ internal static class MacOSNativeMethods
     public static IntPtr AxSelectedTextRangeAttribute { get; }
 
     public static IntPtr AxSelectedTextAttribute { get; }
-
-    public static IntPtr AxValueAttribute { get; }
 
     public static IntPtr AxChildrenAttribute { get; }
 
@@ -182,11 +179,7 @@ internal static class MacOSNativeMethods
     public const int EventSourceUserData = 42;
     public const int EventSourceStateId = 45;
 
-    // kCGSessionEventTap. Keys posted here are not routed to the front app, so Electron never sees them.
-    public const uint SessionEventTap = 1;
-
-    // kCGAnnotatedSessionEventTap. Still downstream of our HID tap, and delivered to the front app.
-    public const uint AnnotatedSessionEventTap = 2;
+    public const uint HidEventTap = 0;
 
     public const int EventSourceStateHidSystem = 1;
 
@@ -231,7 +224,11 @@ internal static class MacOSNativeMethods
     public static extern void CGEventSetFlags(IntPtr @event, ulong flags);
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
-    public static extern void CGEventKeyboardSetUnicodeString(IntPtr @event, long stringLength, byte[] unicodeString);
+    public static extern void CGEventKeyboardSetUnicodeString(
+        IntPtr @event, nint stringLength, in char unicodeString);
+
+    public static void CGEventKeyboardSetUnicodeString(IntPtr @event, int length, ReadOnlySpan<char> text) =>
+        CGEventKeyboardSetUnicodeString(@event, length, in System.Runtime.InteropServices.MemoryMarshal.GetReference(text));
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
     public static extern void CGEventSetTimestamp(IntPtr @event, ulong timestamp);
@@ -485,6 +482,21 @@ internal static class MacOSNativeMethods
         return CFStringGetCString(cfString, sb, sb.Capacity, CFStringEncodingUtf8)
             ? sb.ToString()
             : null;
+    }
+
+    public static string? ReadStringAttribute(IntPtr element, IntPtr attribute)
+    {
+        if (AXUIElementCopyAttributeValue(element, attribute, out var value) != 0 || value == IntPtr.Zero)
+            return null;
+
+        try
+        {
+            return ReadCfString(value);
+        }
+        finally
+        {
+            CFRelease(value);
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]

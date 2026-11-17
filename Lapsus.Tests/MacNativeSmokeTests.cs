@@ -182,10 +182,11 @@ public class MacNativeSmokeTests
             return;
 
         var buffer = new char[4];
+        using var source = MacKeyboardSource.Current();
         for (ushort key = 0; key < 0x33; key++)
         {
             uint deadKeyState = 0;
-            if (!MacInstalledLayouts.TranslateKeyDown(key, 0, false, ref deadKeyState, buffer, out var length))
+            if (!source.TranslateKeyDown(key, 0, false, ref deadKeyState, buffer, out var length))
                 return;
 
             Assert.InRange(length, 0, buffer.Length);
