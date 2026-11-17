@@ -140,6 +140,11 @@ internal sealed class MacAudioCapture : IAudioCapture
             if (count > 0)
                 Level?.Invoke((float)Math.Sqrt(sum / count));
         }
+        // An exception crossing back into the audio queue's thread would end the process.
+        catch (Exception ex)
+        {
+            CrashLog.Log(ex, "AudioQueue input callback");
+        }
         finally
         {
             if (_running)

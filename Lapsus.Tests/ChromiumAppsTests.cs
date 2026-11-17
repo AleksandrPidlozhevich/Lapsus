@@ -65,4 +65,36 @@ public class ChromiumAppsTests : IDisposable
         Assert.False(ChromiumApps.IsChromiumExecutable(null));
         Assert.False(ChromiumApps.IsChromiumExecutable(string.Empty));
     }
+
+    [Fact]
+    public void A_bundle_is_read_from_disk_once()
+    {
+        var frameworks = Path.Combine(_root, "Discord.app", "Contents", "Frameworks");
+        Directory.CreateDirectory(Path.Combine(frameworks, "Electron Framework.framework"));
+        var executable = Path.Combine(_root, "Discord.app", "Contents", "MacOS", "Discord");
+        Assert.True(ChromiumApps.IsChromiumExecutable(executable));
+
+        Directory.Delete(frameworks, recursive: true);
+
+        Assert.True(ChromiumApps.IsChromiumExecutable(executable));
+    }
+
+    [Fact]
+    public void A_frameworks_folder_that_cannot_be_listed_is_not_detected_and_does_not_throw()
+    {
+        if (OperatingSystem.IsWindows())
+            return;
+
+        var frameworks = Path.Combine(_root, "Locked.app", "Contents", "Frameworks");
+        Directory.CreateDirectory(Path.Combine(frameworks, "Electron Framework.framework"));
+        File.SetUnixFileMode(frameworks, UnixFileMode.None);
+        try
+        {
+            Assert.False(ChromiumApps.IsChromiumExecutable(Path.Combine(_root, "Locked.app", "Contents", "MacOS", "Locked")));
+        }
+        finally
+        {
+            File.SetUnixFileMode(frameworks, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
+        }
+    }
 }

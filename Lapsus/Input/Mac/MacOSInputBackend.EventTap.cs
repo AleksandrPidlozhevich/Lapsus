@@ -17,7 +17,7 @@ namespace Lapsus.Input;
 
 internal sealed partial class MacOSInputBackend
 {
-    private void RunTapThread()
+    private void RunTapThread(int sessionEpoch)
     {
         var runLoop = MacOSNativeMethods.CFRunLoopGetCurrent();
         Volatile.Write(ref _runLoop, runLoop);
@@ -65,7 +65,15 @@ internal sealed partial class MacOSInputBackend
 
         try
         {
-            MacOSNativeMethods.CFRunLoopRun();
+            // CFRunLoopStop is lost if it lands before the loop runs, and tap creation can take
+            // seconds, so the loop also wakes on its own to see whether its session was stopped.
+            while (Volatile.Read(ref _tapEpoch) == sessionEpoch)
+            {
+                if (MacOSNativeMethods.CFRunLoopRunInMode(
+                        MacOSNativeMethods.RunLoopDefaultMode, RunLoopSliceSeconds, false)
+                    == MacOSNativeMethods.RunLoopRunFinished)
+                    break;
+            }
         }
         finally
         {
@@ -201,9 +209,21 @@ internal sealed partial class MacOSInputBackend
             return IntPtr.Zero;
         }
 
-        // A held hotkey repeats its key-down; it already did its work on the first one.
-        if (_swallowedKeyDown == keyCode)
-            return IntPtr.Zero;
+        var autoRepeat = MacOSNativeMethods.CGEventGetIntegerValueField(
+            @event, MacOSNativeMethods.EventKeyboardAutorepeat) != 0;
+        switch (TapUiGate.ClassifyKeyDown(_swallowedKeyDown, keyCode, autoRepeat))
+        {
+            case HeldKeyDown.Repeat:
+                return IntPtr.Zero;
+            case HeldKeyDown.LostKeyUp:
+                // Do what the missing key-up would have done, then treat this press as new.
+                _swallowedKeyDown = null;
+                var stale = _pendingHotkeyAction;
+                _pendingHotkeyAction = null;
+                if (stale is not null)
+                    PostFromTap(epoch, stale);
+                break;
+        }
 
         PostFromTap(epoch, NoteDictationOtherKey);
 
@@ -250,8 +270,6 @@ internal sealed partial class MacOSInputBackend
         }
 
         var typed = TypedText(@event);
-        var autoRepeat = MacOSNativeMethods.CGEventGetIntegerValueField(
-            @event, MacOSNativeMethods.EventKeyboardAutorepeat) != 0;
         PostFromTap(epoch, () =>
         {
             NoteNonModifierInput();

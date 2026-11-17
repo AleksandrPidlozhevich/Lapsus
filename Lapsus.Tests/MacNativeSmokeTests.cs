@@ -174,4 +174,43 @@ public class MacNativeSmokeTests
         Assert.True(registration.IsSupported);
         _ = registration.IsEnabled;
     }
+
+    [Fact]
+    public void Key_translation_through_the_current_layout_reports_a_sane_length()
+    {
+        if (!OperatingSystem.IsMacOS())
+            return;
+
+        var buffer = new char[4];
+        for (ushort key = 0; key < 0x33; key++)
+        {
+            uint deadKeyState = 0;
+            if (!MacInstalledLayouts.TranslateKeyDown(key, 0, false, ref deadKeyState, buffer, out var length))
+                return;
+
+            Assert.InRange(length, 0, buffer.Length);
+        }
+    }
+
+    [Fact]
+    public void Installed_layouts_enumerate_through_key_translation()
+    {
+        if (!OperatingSystem.IsMacOS())
+            return;
+
+        var layouts = MacInstalledLayouts.Enumerate();
+
+        Assert.All(layouts, layout => Assert.False(string.IsNullOrEmpty(layout.LayoutId)));
+    }
+
+    [Fact]
+    public void A_clipboard_that_could_not_be_saved_is_never_cleared_on_restore()
+    {
+        if (!OperatingSystem.IsMacOS())
+            return;
+
+        Assert.False(MacClipboard.Snapshot.Unreadable.Complete);
+        Assert.False(MacClipboard.RestoreSnapshot(MacClipboard.Snapshot.Unreadable));
+        Assert.False(MacClipboard.RestoreSnapshot(null));
+    }
 }

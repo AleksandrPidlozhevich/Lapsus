@@ -204,7 +204,7 @@ internal static class MacOSNativeMethods
         uint tap,
         uint place,
         uint options,
-        uint eventsOfInterest,
+        ulong eventsOfInterest,
         EventTapCallback callback,
         IntPtr userInfo);
 
@@ -271,10 +271,13 @@ internal static class MacOSNativeMethods
     public static extern IntPtr CFRunLoopGetCurrent();
 
     [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
-    public static extern void CFRunLoopRun();
+    public static extern void CFRunLoopStop(IntPtr rl);
+
+    public const int RunLoopRunFinished = 1;
 
     [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
-    public static extern void CFRunLoopStop(IntPtr rl);
+    public static extern int CFRunLoopRunInMode(
+        IntPtr mode, double seconds, [MarshalAs(UnmanagedType.I1)] bool returnAfterSourceHandled);
 
     [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]
     public static extern void CFRelease(IntPtr cf);
@@ -330,7 +333,7 @@ internal static class MacOSNativeMethods
     public static extern IntPtr TISCopyCurrentKeyboardInputSource();
 
     [DllImport("/System/Library/Frameworks/Carbon.framework/Carbon")]
-    [return: MarshalAs(UnmanagedType.Bool)]
+    [return: MarshalAs(UnmanagedType.I1)]
     public static extern bool IsSecureEventInputEnabled();
 
     [DllImport("/System/Library/Frameworks/Carbon.framework/Carbon")]
@@ -354,8 +357,8 @@ internal static class MacOSNativeMethods
         uint keyboardType,
         uint keyTranslateOptions,
         ref uint deadKeyState,
-        uint maxStringLength,
-        ref ushort actualStringLength,
+        nuint maxStringLength,
+        ref nuint actualStringLength,
         [Out] char[] unicodeString);
 
     [DllImport("/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation")]

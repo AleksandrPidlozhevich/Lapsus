@@ -23,6 +23,8 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
 
     private const long RestartBackoffMs = 10_000;
 
+    private const double RunLoopSliceSeconds = 0.25;
+
     private readonly MacOSNativeMethods.EventTapCallback _callback;
 
     private GCHandle _callbackHandle;
@@ -111,7 +113,8 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
             {
                 _tapReady.Reset();
                 _startError = null;
-                _tapThread = new Thread(RunTapThread)
+                var sessionEpoch = Volatile.Read(ref _tapEpoch);
+                _tapThread = new Thread(() => RunTapThread(sessionEpoch))
                 {
                     IsBackground = true,
                     Name = "Lapsus CGEventTap"
@@ -289,7 +292,20 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
     private bool TryPasteOverTrailing(int count, string text)
     {
         if (!_clipboardDirty)
-            _savedClipboard = MacClipboard.CaptureSnapshot();
+        {
+            var snapshot = MacClipboard.CaptureSnapshot();
+            // A paste would cost the user a clipboard that cannot be put back (a large screenshot).
+            if (!snapshot.Complete)
+            {
+                if (MacTextInjection.TypeOver(count, text))
+                    return true;
+
+                RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
+                return false;
+            }
+
+            _savedClipboard = snapshot;
+        }
 
         // Deletes and Cmd+V are one HID sequence. A Delete posted to the pid is dropped, and the
         // paste still inserts, which leaves the old word in front of the correction.

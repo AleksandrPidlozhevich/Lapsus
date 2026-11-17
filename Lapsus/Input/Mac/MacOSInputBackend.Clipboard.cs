@@ -112,7 +112,8 @@ internal sealed partial class MacOSInputBackend
             return;
         }
 
-        MacClipboard.RestoreSnapshot(saved);
+        if (!MacClipboard.RestoreSnapshot(saved))
+            CaptureLog.Write("The clipboard could not be saved or put back; the copied text is left on it.");
         MacClipboard.WasModified();
     }
 }

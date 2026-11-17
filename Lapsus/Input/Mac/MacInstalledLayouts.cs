@@ -184,7 +184,7 @@ internal static class MacInstalledLayouts
             var modifiers = ((eventFlags & MacOSNativeMethods.EventFlagMaskShift) != 0 ? ShiftModifierKeyState : 0)
                             | ((eventFlags & MacOSNativeMethods.EventFlagMaskAlphaShift) != 0 ? AlphaLockModifierKeyState : 0);
             var state = deadKeyState;
-            ushort charCount = 0;
+            nuint charCount = 0;
             var status = MacOSNativeMethods.UCKeyTranslate(
                 MacOSNativeMethods.CFDataGetBytePtr(layoutData),
                 keyCode,
@@ -193,14 +193,14 @@ internal static class MacInstalledLayouts
                 MacOSNativeMethods.LMGetKbdType(),
                 0,
                 ref state,
-                (uint)buffer.Length,
+                (nuint)buffer.Length,
                 ref charCount,
                 buffer);
             if (status != 0)
                 return false;
 
             deadKeyState = state;
-            length = charCount;
+            length = (int)charCount;
             return true;
         }
         finally
@@ -392,7 +392,7 @@ internal static class MacInstalledLayouts
             {
                 var buffer = new char[4];
                 uint deadKeyState = 0;
-                ushort charCount = 0;
+                nuint charCount = 0;
                 var status = MacOSNativeMethods.UCKeyTranslate(
                     layoutPtr,
                     KeyCodes[i],
@@ -401,7 +401,7 @@ internal static class MacInstalledLayouts
                     keyboardType,
                     MacOSNativeMethods.UCKeyTranslateNoDeadKeys,
                     ref deadKeyState,
-                    (uint)buffer.Length,
+                    (nuint)buffer.Length,
                     ref charCount,
                     buffer);
 
@@ -417,7 +417,7 @@ internal static class MacInstalledLayouts
 
                 if (charCount > 1)
                 {
-                    ligatures.Add(new Ligature(i, shifted, new string(buffer, 0, charCount)));
+                    ligatures.Add(new Ligature(i, shifted, new string(buffer, 0, (int)charCount)));
                     continue;
                 }
 
@@ -436,7 +436,7 @@ internal static class MacInstalledLayouts
     {
         var buffer = new char[4];
         uint deadKeyState = 0;
-        ushort charCount = 0;
+        nuint charCount = 0;
 
         var status = MacOSNativeMethods.UCKeyTranslate(
             layoutPtr,
@@ -446,7 +446,7 @@ internal static class MacInstalledLayouts
             keyboardType,
             0,
             ref deadKeyState,
-            (uint)buffer.Length,
+            (nuint)buffer.Length,
             ref charCount,
             buffer);
 
