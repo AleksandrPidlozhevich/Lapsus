@@ -82,17 +82,41 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
     public void Preload() => Prepare();
 
-    public async Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken)
+    public IDisposable Hold()
     {
         Interlocked.Increment(ref _busy);
+        Prepare();
+        return new ModelHold(this);
+    }
+
+    private void Release()
+    {
+        Interlocked.Exchange(ref _lastUseTicks, DateTime.UtcNow.Ticks);
+        Interlocked.Decrement(ref _busy);
+        if (_settings().SpeechUnloadAfter == SpeechUnloadAfter.Immediately)
+            _ = Task.Run(UnloadIfIdle);
+    }
+
+    private sealed class ModelHold(DictationEngine engine) : IDisposable
+    {
+        private int _released;
+
+        public void Dispose()
+        {
+            if (Interlocked.Exchange(ref _released, 1) == 0)
+                engine.Release();
+        }
+    }
+
+    public async Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken)
+    {
+        var loading = !_recognizer.IsLoaded;
+        var hold = Hold();
         var clock = System.Diagnostics.Stopwatch.StartNew();
         long waited = 0, decoded = 0, retried = 0, restored = 0;
         SpeechResult? first = null;
-        var loading = false;
         try
         {
-            loading = !_recognizer.IsLoaded;
-            Prepare();
             Task? load;
             lock (_gate)
                 load = _load;
@@ -120,10 +144,13 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
             first = result;
             decoded = clock.ElapsedMilliseconds;
 
-            // A CPU skips language detection (a pass of its own, ~10 s), so speech in another of the user's
+            // Without a fast GPU language detection is skipped (a pass of its own, 5-10 s), so speech in another of the user's
             // languages is decoded as the main one. Such a decode is unsure: ru speech read as en scored below
             // RetryBelow in 5 of its 8 broken phrases, ru read as ru never did (22 phrases, stage 2 audio).
-            if (!_recognizer.OnGpu && result.MeanTokenProbability < RetryBelow
+            // A word or two scores low whatever the language, and a second pass doubles its wait (2.8 → 5.5 s on an
+            // M1) while it won 1 of 10 words, so a short one stays in the main language.
+            if (!_recognizer.FullWindowIsCheap && result.MeanTokenProbability < RetryBelow
+                && result.SpeechSeconds >= WhisperRecognizer.OneWord.TotalSeconds
                 && among.FirstOrDefault(l => l != result.Language) is { } other)
             {
                 var second = await Recognize(other, [other]).ConfigureAwait(false);
@@ -149,10 +176,7 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
                              $"{first?.SpeechSeconds ?? 0:0.0} s, {first?.Language ?? "-"}; {load}, decode " +
                              $"{Math.Max(decoded - waited, 0)} ms, retry {retried} ms, terms " +
                              $"{Math.Max(restored - decoded - retried, 0)} ms, total {clock.ElapsedMilliseconds} ms");
-            Interlocked.Exchange(ref _lastUseTicks, DateTime.UtcNow.Ticks);
-            Interlocked.Decrement(ref _busy);
-            if (_settings().SpeechUnloadAfter == SpeechUnloadAfter.Immediately)
-                _ = Task.Run(UnloadIfIdle);
+            hold.Dispose();
         }
     }
 
@@ -185,8 +209,10 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
                 return;
             _load = null;
             _loadKey = null;
+            // Under the gate: a Hold that comes in now waits and loads afresh, instead of loading while this unloads.
+            // Nothing is decoding (busy is 0), so this only frees memory.
+            _recognizer.Unload();
         }
-        _recognizer.Unload();
     }
 
     // Built once per glossary and dictionary set; the English index inside takes a fifth of a second.

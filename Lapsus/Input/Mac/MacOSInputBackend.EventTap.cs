@@ -220,7 +220,7 @@ internal sealed partial class MacOSInputBackend
 
         PostFromTap(epoch, NoteDictationOtherKey);
 
-        if (keyCode == MacOSNativeMethods.EscapeKeyCode && DictationListening)
+        if (keyCode == MacOSNativeMethods.EscapeKeyCode && DictationActive)
         {
             _swallowedKeyDown = keyCode;
             _pendingHotkeyAction = RaiseDictationCancel;

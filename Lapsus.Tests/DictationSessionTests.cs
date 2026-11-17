@@ -8,7 +8,7 @@ public class DictationSessionTests
     private sealed class Host : IDictationHost
     {
         public int DictationHotkey { get; set; }
-        public bool DictationListening { get; set; }
+        public bool DictationActive { get; set; }
         public event Action? DictationHotkeyPressed;
         public event Action<bool>? DictationHotkeyReleased;
         public event Action? DictationCancelPressed;
@@ -103,12 +103,30 @@ public class DictationSessionTests
     {
         public bool HasModel { get; set; } = true;
         public int Prepared;
+        public int Holding;
         public string Answer = "Закинул pull request.";
         public readonly Queue<string> Answers = new();
-        public TaskCompletionSource<string>? Hold;
+        public TaskCompletionSource<string>? Answering;
         public DictationRequest? LastRequest;
 
-        public void Prepare() => Prepared++;
+        public IDisposable Hold()
+        {
+            Prepared++;
+            Holding++;
+            return new Release(() => Holding--);
+        }
+
+        private sealed class Release(Action release) : IDisposable
+        {
+            private bool _done;
+
+            public void Dispose()
+            {
+                if (!_done)
+                    release();
+                _done = true;
+            }
+        }
 
         public readonly List<DictationRequest> Requests = [];
         public readonly List<int> PcmLengths = [];
@@ -121,7 +139,7 @@ public class DictationSessionTests
             Requests.Add(request);
             PcmLengths.Add(pcm.Length);
             Tokens.Add(ct);
-            var text = Hold is { } hold
+            var text = Answering is { } hold
                 ? await hold.Task.WaitAsync(ct)
                 : Answers.TryDequeue(out var next) ? next : Answer;
             return new DictationResult(text, HeardLanguage ?? request.Language);
@@ -184,7 +202,7 @@ public class DictationSessionTests
         rig.Host.PressHotkey();
         Assert.Equal(DictationSession.State.Listening, rig.Session.Current);
         Assert.True(rig.Mic.IsRecording);
-        Assert.True(rig.Host.DictationListening);
+        Assert.True(rig.Host.DictationActive);
         Assert.Equal("listening", rig.Badge.State);
         Assert.Equal(1, rig.Engine.Prepared);
 
@@ -194,7 +212,7 @@ public class DictationSessionTests
 
         Assert.Equal(["Закинул pull request."], rig.Host.Typed);
         Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
-        Assert.False(rig.Host.DictationListening);
+        Assert.False(rig.Host.DictationActive);
         Assert.Equal("hidden", rig.Badge.State);
         Assert.Equal("ru", rig.Engine.LastRequest!.Language);
         Assert.Equal(["ru", "en"], rig.Engine.LastRequest.Languages);
@@ -457,7 +475,7 @@ public class DictationSessionTests
 
         Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
         Assert.False(rig.Mic.IsRecording);
-        Assert.False(rig.Host.DictationListening);
+        Assert.False(rig.Host.DictationActive);
         Assert.Empty(rig.Host.Typed);
         Assert.Equal("hidden", rig.Badge.State);
     }
@@ -466,24 +484,80 @@ public class DictationSessionTests
     public async Task Esc_while_transcribing_cancels_it()
     {
         var rig = new Rig();
-        rig.Engine.Hold = new TaskCompletionSource<string>();
+        rig.Engine.Answering = new TaskCompletionSource<string>();
 
         rig.Host.PressHotkey();
         rig.Mic.Hear(0.1f);
         rig.Host.PressHotkey();
         Assert.Equal(DictationSession.State.Transcribing, rig.Session.Current);
+        Assert.True(rig.Host.DictationActive);
         rig.Host.PressEscape();
         await rig.Session.Pending!;
 
         Assert.Empty(rig.Host.Typed);
         Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
+        Assert.False(rig.Host.DictationActive);
+        Assert.Equal(0, rig.Engine.Holding);
+    }
+
+    [Fact]
+    public async Task The_model_is_held_from_the_first_word_until_the_last_part_is_typed()
+    {
+        var rig = new Rig();
+        rig.Engine.Answering = new TaskCompletionSource<string>();
+
+        rig.Host.PressHotkey();
+        Assert.Equal(1, rig.Engine.Holding);
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        Assert.Equal(1, rig.Engine.Holding);
+
+        rig.Engine.Answering.SetResult("Готово.");
+        await rig.Session.Pending!;
+        Assert.Equal(0, rig.Engine.Holding);
+    }
+
+    [Fact]
+    public void Cancelling_a_recording_lets_the_model_go()
+    {
+        var rig = new Rig();
+
+        rig.Host.PressHotkey();
+        rig.Host.PressEscape();
+
+        Assert.Equal(0, rig.Engine.Holding);
+    }
+
+    [Fact]
+    public async Task A_dead_microphone_lets_the_model_go()
+    {
+        var rig = new Rig();
+
+        rig.Host.PressHotkey();
+        rig.Mic.Recorded = new float[16000];
+        rig.Host.PressHotkey();
+        await (rig.Session.Pending ?? Task.CompletedTask);
+
+        Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
+        Assert.Equal(0, rig.Engine.Holding);
+    }
+
+    [Fact]
+    public void Disposing_mid_recording_lets_the_model_go()
+    {
+        var rig = new Rig();
+
+        rig.Host.PressHotkey();
+        rig.Session.Dispose();
+
+        Assert.Equal(0, rig.Engine.Holding);
     }
 
     [Fact]
     public async Task A_press_while_transcribing_does_not_start_another_recording()
     {
         var rig = new Rig();
-        rig.Engine.Hold = new TaskCompletionSource<string>();
+        rig.Engine.Answering = new TaskCompletionSource<string>();
 
         rig.Host.PressHotkey();
         rig.Mic.Hear(0.1f);
@@ -491,7 +565,7 @@ public class DictationSessionTests
         rig.Host.PressHotkey();
 
         Assert.Equal(1, rig.Mic.Starts);
-        rig.Engine.Hold.SetResult("Готово.");
+        rig.Engine.Answering.SetResult("Готово.");
         await rig.Session.Pending!;
         Assert.Equal(["Готово."], rig.Host.Typed);
     }
@@ -549,7 +623,7 @@ public class DictationSessionTests
 
         Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
         Assert.Contains(rig.Host.Reports, r => r.Contains("no device"));
-        Assert.False(rig.Host.DictationListening);
+        Assert.False(rig.Host.DictationActive);
     }
 
     [Fact]

@@ -161,7 +161,9 @@ public sealed class VoiceSettingsTests : IDisposable
     }
 
     [Theory]
-    [InlineData(1.0, 384)]
+    [InlineData(0.4, 768)]
+    [InlineData(1.0, 768)]
+    [InlineData(1.5, 384)]
     [InlineData(5.0, 384)]
     [InlineData(12.0, 704)]
     public void A_short_phrase_gets_a_cut_encoder_window_on_the_cpu(double seconds, int frames)

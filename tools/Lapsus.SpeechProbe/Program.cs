@@ -11,7 +11,7 @@ CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
 if (args.Length < 1)
 {
-    Console.Error.WriteLine("usage: record <samplesDir> <phrases.txt> | run <model.bin> <samplesDir> [options]");
+    Console.Error.WriteLine("usage: record <samplesDir> <phrases.txt> | run <model.bin> <samplesDir> [options] | app <model.bin> <vad.bin> <samplesDir> [--lang l] [--among a,b] [--gain g] [--pad s] [--cpu]");
     return 1;
 }
 
@@ -21,6 +21,7 @@ return args[0] switch
     "run" when args.Length >= 3 => await Probe.RunAsync(args[1], args[2], Options.Parse(args[3..])),
     "eval" when args.Length >= 5 => await Eval.RunAsync(args[1], args[2], args[3], args[4], args[5..]),
     "restore" when args.Length >= 4 => Eval.Restore(args[1], args[2], args[3..]),
+    "app" when args.Length >= 4 => await AppPath.RunAsync(args[1], args[2], args[3], args[4..]),
     _ => Usage(),
 };
 
@@ -348,11 +349,10 @@ static class Recorder
 {
     public static int Run(string samplesDir, string phrasesFile)
     {
-        if (!OperatingSystem.IsWindows())
-        {
-            Console.Error.WriteLine("recording is Windows-only in the probe");
-            return 1;
-        }
+#if !WINDOWS_AUDIO
+        Console.Error.WriteLine("recording is Windows-only in the probe");
+        return 1;
+#else
         Directory.CreateDirectory(samplesDir);
         var phrases = File.ReadAllLines(phrasesFile)
             .Select(l => l.Trim()).Where(l => l.Length > 0 && !l.StartsWith('#')).ToArray();
@@ -375,9 +375,11 @@ static class Recorder
             Console.WriteLine($"  saved {name}.wav ({seconds:F1} s)");
         }
         return 0;
+#endif
     }
 }
 
+#if WINDOWS_AUDIO
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 static class WindowsRecorder
 {
@@ -396,3 +398,4 @@ static class WindowsRecorder
         return writer.TotalTime.TotalSeconds;
     }
 }
+#endif
