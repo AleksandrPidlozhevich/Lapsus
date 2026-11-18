@@ -182,7 +182,7 @@
     <value>Impossible de mettre à jour le lancement au démarrage : {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Impossible de démarrer la capture du clavier. Accordez l&apos;accès Accessibilité à Lapsus dans Réglages Système → Confidentialité et sécurité → Accessibilité (et Surveillance de la saisie s&apos;il apparaît), puis relancez l&apos;application.</value>
+    <value>Impossible de démarrer la capture du clavier. Activez Lapsus dans Réglages Système → Confidentialité et sécurité → Accessibilité ; la capture démarre alors toute seule.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus a besoin de ces autorisations. Chaque bouton affiche la fenêtre de macOS ou ouvre la bonne liste dans Réglages Système → Confidentialité et sécurité, où vous activez Lapsus. L'état ici se met à jour tout seul.</value>
@@ -275,7 +275,7 @@
     <value>Sélection : le presse-papiers n&apos;a pas pu être utilisé ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>La capture du clavier s'est brièvement interrompue et a été relancée. Si cela se reproduit, fermez un client Accessibility surchargé ou accordez à Lapsus l'autorisation Input Monitoring.</value>
+    <value>La capture du clavier s’est brièvement bloquée et a été relancée. Si cela se répète, fermez une app qui sollicite fortement l’Accessibilité.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>La capture du clavier fonctionne à nouveau.</value>
@@ -296,7 +296,7 @@
     <value>La disposition {0} n&apos;est pas installée sur ce Mac (disponibles : {1}). Ajoutez-la dans Réglages Système → Clavier → Sources de saisie.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Impossible d&apos;envoyer les frappes à l&apos;application active ({0}). Vérifiez les autorisations Accessibilité et Surveillance de la saisie de Lapsus.</value>
+    <value>Impossible d’envoyer les frappes à l’app active ({0}). Vérifiez l’autorisation Accessibilité de Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Raccourci : ignoré — le focus est passé à une autre fenêtre ou application ({0}). Retapez dans le champ visé.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Les termes sont aussi laissés tels quels quand vous les tapez : un nom ajouté ici n’est jamais « corrigé ».</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Surveillance de l'entrée</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Accessibilité</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Microphone</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Pour voir les touches sur lesquelles vous appuyez.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Pour taper le texte corrigé et trouver le curseur.</value>

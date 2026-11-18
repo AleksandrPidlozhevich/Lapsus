@@ -182,7 +182,7 @@
     <value>Kunde inte uppdatera start vid inloggning: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Kunde inte starta tangentbordsinsamlingen. Ge Lapsus åtkomst till Hjälpmedel i Systeminställningar → Integritet och säkerhet → Hjälpmedel (och Indatabevakning om den finns med), och starta sedan om appen.</value>
+    <value>Tangentbordsavlyssningen kunde inte starta. Slå på Lapsus i Systeminställningar → Integritet och säkerhet → Hjälpmedel; avlyssningen startar av sig själv.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus behöver de här behörigheterna. Varje knapp visar macOS-dialogen eller öppnar rätt lista i Systeminställningar → Integritet och säkerhet, där du slår på Lapsus. Statusen här uppdateras av sig själv.</value>
@@ -275,7 +275,7 @@
     <value>Markering: urklipp kunde inte användas ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Tangentbordsavlyssningen stannade upp en kort stund och startades om. Om det fortsätter, stäng en hårt belastad Accessibility-klient eller ge Lapsus behörigheten Input Monitoring.</value>
+    <value>Tangentbordsavlyssningen stannade kort och startades om. Om det upprepas, stäng en app som belastar Hjälpmedel.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Tangentbordsfångsten körs igen.</value>
@@ -296,7 +296,7 @@
     <value>Layouten {0} är inte installerad på den här Macen (tillgängliga: {1}). Lägg till den under Systeminställningar → Tangentbord → Indatakällor.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Kunde inte skicka tangenttryckningar till den aktiva appen ({0}). Kontrollera behörigheterna Hjälpmedel och Indatabevakning för Lapsus.</value>
+    <value>Tangenttryckningar kunde inte skickas till den aktiva appen ({0}). Kontrollera behörigheten Hjälpmedel för Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Snabbtangent: ignorerad — fokus flyttades till ett annat fönster eller program ({0}). Skriv igen i det avsedda fältet.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Termerna lämnas också ifred när du skriver dem: ett namn som läggs till här “rättas” aldrig.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Inmatningsövervakning</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Hjälpmedel</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Mikrofon</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>För att se vilka tangenter du trycker på.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>För att skriva den rättade texten och hitta markören.</value>

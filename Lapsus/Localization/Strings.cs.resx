@@ -182,7 +182,7 @@
     <value>Spouštění po přihlášení se nepodařilo změnit: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Zachytávání klávesnice se nepodařilo spustit. Udělte Lapsusu přístup k Zpřístupnění v Nastavení systému → Soukromí a zabezpečení → Zpřístupnění (a Sledování vstupu, pokud je uvedeno), a aplikaci restartujte.</value>
+    <value>Zachytávání klávesnice se nepodařilo spustit. Zapněte Lapsus v Nastavení systému → Soukromí a zabezpečení → Zpřístupnění; zachytávání se spustí samo.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus potřebuje tato oprávnění. Každé tlačítko zobrazí dialog macOS nebo otevře správný seznam v Nastavení systému → Soukromí a zabezpečení, kde Lapsus zapnete. Stav se tu aktualizuje sám.</value>
@@ -275,7 +275,7 @@
     <value>Výběr: schránku se nepodařilo použít ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Zachytávání klávesnice se na chvíli zastavilo a bylo restartováno. Pokud se to opakuje, zavřete vytížený klient Accessibility nebo udělte Lapsusu oprávnění Input Monitoring.</value>
+    <value>Zachytávání klávesnice se na chvíli zaseklo a bylo restartováno. Pokud se to opakuje, zavřete aplikaci, která Zpřístupnění vytěžuje.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Zachytávání klávesnice znovu běží.</value>
@@ -296,7 +296,7 @@
     <value>Rozložení {0} není na tomto Macu nainstalováno (dostupná: {1}). Přidejte je v Nastavení systému → Klávesnice → Zdroje vstupu.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Stisky kláves se nepodařilo poslat do aktivní aplikace ({0}). Zkontrolujte oprávnění Zpřístupnění a Sledování vstupu pro Lapsus.</value>
+    <value>Stisky kláves se nepodařilo odeslat do aktivní aplikace ({0}). Zkontrolujte oprávnění Zpřístupnění pro Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Zkratka: ignorováno — zaměření přešlo do jiného okna nebo aplikace ({0}). Napište text znovu v cílovém poli.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Pojmy se také neopravují, když je píšete: název přidaný sem se nikdy „neopraví“.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Sledování vstupu</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Zpřístupnění</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Mikrofon</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Aby viděl, které klávesy mačkáte.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Aby mohl psát opravený text a najít kurzor.</value>

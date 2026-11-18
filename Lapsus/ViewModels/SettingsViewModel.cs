@@ -148,11 +148,11 @@ public partial class SettingsViewModel : ViewModelBase
 
         BuildPreferences(settings.PreferredLayout);
 
-        // macOS asks for Input Monitoring and Accessibility the moment capture starts. A first launch
+        // macOS asks for Accessibility the moment capture starts. A first launch
         // explains why before that (App Store guideline 2.5.14), and capture waits for the answer.
         if (OperatingSystem.IsMacOS() && !settings.OnboardingDone)
         {
-            OnboardingPending = !SystemPermissions.AccessibilityGranted || !SystemPermissions.InputMonitoringGranted;
+            OnboardingPending = !SystemPermissions.AccessibilityGranted;
             if (!OnboardingPending)
             {
                 settings.OnboardingDone = true;

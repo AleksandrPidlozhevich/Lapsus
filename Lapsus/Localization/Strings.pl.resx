@@ -182,7 +182,7 @@
     <value>Nie udało się zaktualizować autostartu: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Nie udało się uruchomić przechwytywania klawiatury. Nadaj Lapsus dostęp w Ustawienia systemu → Prywatność i bezpieczeństwo → Dostępność (oraz Monitorowanie wprowadzania, jeśli jest na liście), a następnie uruchom aplikację ponownie.</value>
+    <value>Nie udało się uruchomić przechwytywania klawiatury. Włącz Lapsus w Ustawienia systemowe → Prywatność i ochrona → Dostępność; przechwytywanie uruchomi się samo.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus potrzebuje tych uprawnień. Każdy przycisk pokazuje okno macOS lub otwiera właściwą listę w Ustawienia systemowe → Prywatność i ochrona, gdzie włączasz Lapsus. Stan tutaj odświeża się sam.</value>
@@ -275,7 +275,7 @@
     <value>Zaznaczenie: nie udało się użyć schowka ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Przechwytywanie klawiatury na chwilę się zatrzymało i zostało uruchomione ponownie. Jeśli to się powtarza, zamknij obciążonego klienta Accessibility albo przyznaj Lapsusowi uprawnienie Input Monitoring.</value>
+    <value>Przechwytywanie klawiatury na chwilę się zawiesiło i zostało uruchomione ponownie. Jeśli to się powtarza, zamknij aplikację intensywnie korzystającą z Dostępności.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Przechwytywanie klawiatury działa ponownie.</value>
@@ -296,7 +296,7 @@
     <value>Układ {0} nie jest zainstalowany na tym Macu (dostępne: {1}). Dodaj go w Ustawienia systemu → Klawiatura → Źródła wprowadzania.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Nie udało się wysłać klawiszy do aktywnej aplikacji ({0}). Sprawdź uprawnienia Dostępność i Monitorowanie wprowadzania dla Lapsus.</value>
+    <value>Nie udało się wysłać naciśnięć klawiszy do aktywnej aplikacji ({0}). Sprawdź uprawnienie „Dostępność” dla Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Skrót: zignorowano — fokus przeszedł do innego okna lub aplikacji ({0}). Wpisz tekst ponownie w docelowym polu.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Terminy nie są też poprawiane, gdy je wpisujesz: nazwa dodana tutaj nigdy nie jest „poprawiana”.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Monitorowanie wprowadzania</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Dostępność</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Mikrofon</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Aby widzieć, które klawisze naciskasz.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Aby wpisywać poprawiony tekst i znajdować kursor.</value>

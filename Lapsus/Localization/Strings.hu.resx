@@ -182,7 +182,7 @@
     <value>Az indítás bejelentkezéskor nem frissült: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>A billentyűzet rögzítése nem indult el. Adjon a Lapsusnak kisegítő lehetőségek hozzáférést itt: Rendszerbeállítások → Adatvédelem és biztonság → Kisegítő lehetőségek (és Beviteli figyelés, ha szerepel), majd indítsa újra az alkalmazást.</value>
+    <value>Nem sikerült elindítani a billentyűzetfigyelést. Kapcsolja be a Lapsust: Rendszerbeállítások → Adatvédelem és biztonság → Kisegítő lehetőségek; a figyelés magától elindul.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>A Lapsusnak szüksége van ezekre az engedélyekre. Minden gomb megjeleníti a macOS párbeszédablakát, vagy megnyitja a megfelelő listát itt: Rendszerbeállítások → Adatvédelem és biztonság, ahol bekapcsolja a Lapsust. Az állapot magától frissül.</value>
@@ -275,7 +275,7 @@
     <value>Kijelölés: a vágólapot nem sikerült használni ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>A billentyűzetfigyelés rövid időre leállt, majd újraindult. Ha ez ismétlődik, zárjon be egy leterhelt Accessibility-klienst, vagy adja meg a Lapsusnak az Input Monitoring engedélyt.</value>
+    <value>A billentyűzetfigyelés rövid időre megakadt, és újraindult. Ha ez ismétlődik, zárja be a Kisegítő lehetőségeket erősen használó alkalmazást.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>A billentyűzet-rögzítés ismét fut.</value>
@@ -296,7 +296,7 @@
     <value>A(z) {0} kiosztás nincs telepítve ezen a Macen (elérhető: {1}). Adja hozzá itt: Rendszerbeállítások → Billentyűzet → Beviteli források.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>A billentyűleütéseket nem sikerült elküldeni az aktív alkalmazásnak ({0}). Ellenőrizze a Lapsus kisegítő lehetőségek és beviteli figyelés engedélyeit.</value>
+    <value>Nem sikerült billentyűleütéseket küldeni az aktív alkalmazásnak ({0}). Ellenőrizze a Lapsus Kisegítő lehetőségek engedélyét.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Gyorsbillentyű: figyelmen kívül hagyva — a fókusz másik ablakra vagy alkalmazásra került ({0}). Gépelje be újra a célmezőben.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>A kifejezéseket gépeléskor sem javítja ki: az itt felvett nevet soha nem „javítja”.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Bevitelfigyelés</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Kisegítő lehetőségek</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Mikrofon</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Hogy lássa, mely billentyűket nyomja le.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Hogy begépelje a javított szöveget és megtalálja a kurzort.</value>

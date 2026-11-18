@@ -184,7 +184,7 @@
     <value>Couldn't update login startup: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Couldn't start keyboard capture. Grant Accessibility access to Lapsus in System Settings → Privacy &amp; Security → Accessibility (and Input Monitoring if listed), then restart the app.</value>
+    <value>Couldn't start keyboard capture. Switch Lapsus on in System Settings → Privacy &amp; Security → Accessibility; capture starts by itself.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus needs these permissions. Each button shows the macOS dialog, or opens the right list in System Settings → Privacy &amp; Security, where you switch Lapsus on. The status here updates by itself.</value>
@@ -279,7 +279,7 @@
     <value>Selection: the clipboard could not be used ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Keyboard capture briefly stalled and was restarted. If this keeps happening, close a busy Accessibility client or grant Lapsus Input Monitoring.</value>
+    <value>Keyboard capture briefly stalled and was restarted. If this keeps happening, close a busy Accessibility client.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Keyboard capture is running again.</value>
@@ -300,7 +300,7 @@
     <value>Layout {0} is not installed on this Mac (available: {1}). Add it under System Settings → Keyboard → Input Sources.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Couldn't inject keystrokes into the active app ({0}). Check Accessibility and Input Monitoring permissions for Lapsus.</value>
+    <value>Couldn't inject keystrokes into the active app ({0}). Check the Accessibility permission for Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Hotkey: ignored — focus moved to another window/app ({0}). Type again in the target field.</value>
@@ -1013,12 +1013,6 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>The terms are also left alone when you type them: a name taught here is never “corrected”.</value>
-  </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Input Monitoring</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>To see which keys you press.</value>
   </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Accessibility</value>

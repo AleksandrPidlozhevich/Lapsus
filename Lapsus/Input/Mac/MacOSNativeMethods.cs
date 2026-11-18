@@ -397,17 +397,6 @@ internal static class MacOSNativeMethods
     [return: MarshalAs(UnmanagedType.I1)]
     public static extern bool CGRequestPostEventAccess();
 
-    public const uint HidRequestTypeListenEvent = 0;
-    public const uint HidAccessTypeGranted = 0;
-    public const uint HidAccessTypeDenied = 1;
-
-    [DllImport("/System/Library/Frameworks/IOKit.framework/IOKit")]
-    public static extern uint IOHIDCheckAccess(uint requestType);
-
-    [DllImport("/System/Library/Frameworks/IOKit.framework/IOKit")]
-    [return: MarshalAs(UnmanagedType.I1)]
-    public static extern bool IOHIDRequestAccess(uint requestType);
-
     public delegate void AXObserverCallback(
         IntPtr observer, IntPtr element, IntPtr notification, IntPtr refcon);
 

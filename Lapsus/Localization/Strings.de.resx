@@ -182,7 +182,7 @@
     <value>Autostart konnte nicht aktualisiert werden: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Tastaturerfassung konnte nicht gestartet werden. Erteilen Sie Lapsus den Bedienungshilfen-Zugriff unter Systemeinstellungen → Datenschutz &amp; Sicherheit → Bedienungshilfen (und Eingabeüberwachung, falls aufgeführt), und starten Sie die App neu.</value>
+    <value>Die Tastaturerfassung konnte nicht starten. Schalten Sie Lapsus unter Systemeinstellungen → Datenschutz &amp; Sicherheit → Bedienungshilfen ein; die Erfassung startet dann von selbst.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus braucht diese Berechtigungen. Jede Taste zeigt den macOS-Dialog oder öffnet die passende Liste unter Systemeinstellungen → Datenschutz &amp; Sicherheit, wo Sie Lapsus einschalten. Der Status hier aktualisiert sich von selbst.</value>
@@ -275,7 +275,7 @@
     <value>Auswahl: Die Zwischenablage konnte nicht verwendet werden ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Die Tastaturerfassung stockte kurz und wurde neu gestartet. Wenn das häufiger vorkommt, schließen Sie einen ausgelasteten Accessibility-Client oder erteilen Sie Lapsus die Berechtigung Input Monitoring.</value>
+    <value>Die Tastaturerfassung stockte kurz und wurde neu gestartet. Wenn das öfter passiert, beenden Sie eine App, die die Bedienungshilfen stark beansprucht.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Die Tastaturerfassung läuft wieder.</value>
@@ -296,7 +296,7 @@
     <value>Layout {0} ist auf diesem Mac nicht installiert (verfügbar: {1}). Fügen Sie es unter Systemeinstellungen → Tastatur → Eingabequellen hinzu.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Tastenanschläge konnten nicht an die aktive App gesendet werden ({0}). Prüfen Sie die Berechtigungen für Bedienungshilfen und Eingabeüberwachung von Lapsus.</value>
+    <value>Tastenanschläge konnten nicht an die aktive App gesendet werden ({0}). Prüfen Sie die Berechtigung „Bedienungshilfen“ für Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Tastenkürzel: ignoriert — der Fokus ist zu einem anderen Fenster oder Programm gewechselt ({0}). Tippen Sie im Zielfeld erneut.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Die Begriffe bleiben auch beim Tippen unangetastet: ein hier eingetragener Name wird nie „korrigiert“.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Eingabeüberwachung</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Bedienungshilfen</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Mikrofon</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Um zu sehen, welche Tasten Sie drücken.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Um den korrigierten Text einzutippen und den Cursor zu finden.</value>

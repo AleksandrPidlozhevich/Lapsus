@@ -182,7 +182,7 @@
     <value>Стартувањето при најава не можеше да се ажурира: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Следењето на тастатурата не можеше да се стартува. Дајте му на Lapsus пристап до Пристапност во Системски поставки → Приватност и безбедност → Пристапност (и Надзор на внесот, ако е наведен), потоа рестартирајте ја апликацијата.</value>
+    <value>Не успеа да се вклучи следењето на тастатурата. Вклучете го Lapsus во Системски поставки → Приватност и безбедност → Пристапност; следењето ќе започне само.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>На Lapsus му се потребни овие дозволи. Секое копче го прикажува прозорецот на macOS или ја отвора вистинската листа во „Системски поставки“ → „Приватност и безбедност“, каде што го вклучувате Lapsus. Состојбата тука се ажурира сама.</value>
@@ -275,7 +275,7 @@
     <value>Избор: таблата со исечоци не можеше да се употреби ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Снимањето на тастатурата накратко застана и беше рестартирано. Ако се повторува, затворете зафатен клиент на Accessibility или дајте му на Lapsus дозвола Input Monitoring.</value>
+    <value>Следењето на тастатурата накратко запре и беше рестартирано. Ако ова се повторува, затворете ја апликацијата што ја оптоварува Пристапноста.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Снимањето на тастатурата повторно работи.</value>
@@ -296,7 +296,7 @@
     <value>Распоредот {0} не е инсталиран на овој Mac (достапни: {1}). Додајте го во Системски поставки → Тастатура → Извори на внес.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Притисоците на копчиња не можеа да се испратат до активната апликација ({0}). Проверете ги дозволите Пристапност и Надзор на внесот за Lapsus.</value>
+    <value>Не успеа да се испратат притисоци на копчиња во активната апликација ({0}). Проверете ја дозволата „Пристапност“ за Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Кратенка: игнорирана — фокусот премина на друг прозорец или апликација ({0}). Напишете повторно во саканото поле.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Термините исто така не се допираат кога ги пишувате: име додадено тука никогаш не се «поправа».</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Следење на внесувањето</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Пристапност</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Микрофон</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>За да гледа кои копчиња ги притискате.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>За да го внесува поправениот текст и да го наоѓа курсорот.</value>

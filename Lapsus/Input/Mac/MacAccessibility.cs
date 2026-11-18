@@ -6,8 +6,7 @@ namespace Lapsus.Input;
 [SupportedOSPlatform("macos")]
 internal static class MacAccessibility
 {
-    // In the sandbox CGPreflightPostEventAccess and IOHIDCheckAccess keep their first answer for the life
-    // of the process, while AXIsProcessTrusted follows the Accessibility switch as it is flipped; the event
+    // In the sandbox CGPreflightPostEventAccess keeps its first answer for the life of the process, while AXIsProcessTrusted follows the Accessibility switch as it is flipped; the event
     // tap can be created as soon as it is on, so capture starts without a restart.
     public static bool IsProcessTrusted()
     {
@@ -32,30 +31,6 @@ internal static class MacAccessibility
     public static void OpenSettings()
     {
         OpenPrivacyPane("Privacy_Accessibility");
-    }
-
-    public static bool IsInputMonitoringGranted() => InputMonitoringState() == PermissionState.Granted;
-
-    public static PermissionState InputMonitoringState() =>
-        MacOSNativeMethods.IOHIDCheckAccess(MacOSNativeMethods.HidRequestTypeListenEvent) switch
-        {
-            MacOSNativeMethods.HidAccessTypeGranted => PermissionState.Granted,
-            MacOSNativeMethods.HidAccessTypeDenied => PermissionState.Denied,
-            _ => PermissionState.NotAsked
-        };
-
-    // Shows the Input Monitoring prompt once; later calls return the cached answer.
-    public static void RequestInputMonitoringIfNeeded()
-    {
-        if (IsInputMonitoringGranted())
-            return;
-
-        MacOSNativeMethods.IOHIDRequestAccess(MacOSNativeMethods.HidRequestTypeListenEvent);
-    }
-
-    public static void OpenInputMonitoringSettings()
-    {
-        OpenPrivacyPane("Privacy_ListenEvent");
     }
 
     private static void OpenPrivacyPane(string pane)

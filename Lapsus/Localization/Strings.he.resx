@@ -182,7 +182,7 @@
     <value>לא הצלחנו לעדכן את ההפעלה עם הכניסה: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>לא הצלחנו להפעיל את לכידת המקלדת. תנו ל‑Lapsus גישת נגישות ב‑System Settings ← Privacy &amp; Security ← Accessibility (וגם Input Monitoring אם מופיע), ואז הפעילו מחדש את היישום.</value>
+    <value>לא ניתן היה להפעיל את לכידת המקלדת. הפעילו את Lapsus בהגדרות המערכת → פרטיות ואבטחה → נגישות; הלכידה תתחיל מעצמה.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus צריך את ההרשאות האלה. כל כפתור מציג את חלון macOS או פותח את הרשימה הנכונה בהגדרות המערכת ← פרטיות ואבטחה, שם מפעילים את Lapsus. המצב כאן מתעדכן מעצמו.</value>
@@ -275,7 +275,7 @@
     <value>בחירה: לא ניתן היה להשתמש בלוח ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>לכידת המקלדת נעצרה לרגע והופעלה מחדש. אם זה חוזר, סגרו לקוח Accessibility עמוס או העניקו ל‑Lapsus הרשאת Input Monitoring.</value>
+    <value>לכידת המקלדת נתקעה לרגע והופעלה מחדש. אם זה חוזר, סגרו אפליקציה שמעמיסה על הנגישות.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>לכידת המקלדת פועלת שוב.</value>
@@ -296,7 +296,7 @@
     <value>הפריסה {0} לא מותקנת ב‑Mac הזה (זמינות: {1}). הוסיפו אותה ב‑System Settings ← Keyboard ← Input Sources.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>לא הצלחנו להזין הקשות ליישום הפעיל ({0}). בדקו את הרשאות הנגישות וניטור הקלט של Lapsus.</value>
+    <value>לא ניתן היה לשלוח הקשות לאפליקציה הפעילה ({0}). בדקו את הרשאת הנגישות של Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>מקש חם: התעלמנו — המיקוד עבר לחלון או ליישום אחר ({0}). הקלידו שוב בשדה היעד.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>המונחים גם נשארים כמות שהם כשמקלידים אותם: שם שנוסף כאן לעולם לא «מתוקן».</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>ניטור קלט</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>נגישות</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>מיקרופון</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>כדי לראות אילו מקשים נלחצים.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>כדי להקליד את הטקסט המתוקן ולמצוא את הסמן.</value>

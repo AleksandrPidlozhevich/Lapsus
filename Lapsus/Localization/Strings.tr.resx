@@ -182,7 +182,7 @@
     <value>Oturum açılışında başlatma güncellenemedi: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Klavye yakalama başlatılamadı. Lapsus&apos;a Sistem Ayarları → Gizlilik ve Güvenlik → Erişilebilirlik yolundan erişim verin (listede varsa Giriş İzleme&apos;ye de), sonra uygulamayı yeniden başlatın.</value>
+    <value>Klavye yakalama başlatılamadı. Lapsus'u Sistem Ayarları → Gizlilik ve Güvenlik → Erişilebilirlik bölümünde açın; yakalama kendiliğinden başlar.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus'un bu izinlere ihtiyacı var. Her düğme macOS penceresini gösterir ya da Sistem Ayarları → Gizlilik ve Güvenlik içinde doğru listeyi açar; orada Lapsus'u açın. Buradaki durum kendiliğinden güncellenir.</value>
@@ -275,7 +275,7 @@
     <value>Seçim: pano kullanılamadı ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Klavye yakalama kısa süreliğine durdu ve yeniden başlatıldı. Bu tekrarlanıyorsa yoğun bir Accessibility istemcisini kapatın veya Lapsus'a Input Monitoring izni verin.</value>
+    <value>Klavye yakalama kısa süre takıldı ve yeniden başlatıldı. Bu tekrarlanırsa Erişilebilirliği yoğun kullanan bir uygulamayı kapatın.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Klavye yakalama yeniden çalışıyor.</value>
@@ -296,7 +296,7 @@
     <value>{0} düzeni bu Mac&apos;te kurulu değil (kullanılabilir: {1}). Sistem Ayarları → Klavye → Giriş Kaynakları yolundan ekleyin.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Tuş vuruşları etkin uygulamaya gönderilemedi ({0}). Lapsus için Erişilebilirlik ve Giriş İzleme izinlerini denetleyin.</value>
+    <value>Tuş vuruşları etkin uygulamaya gönderilemedi ({0}). Lapsus için Erişilebilirlik iznini denetleyin.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Kısayol: yok sayıldı — odak başka bir pencereye veya uygulamaya geçti ({0}). Hedef alanda yeniden yazın.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Terimler yazarken de bırakılır: buraya eklenen bir ad asla “düzeltilmez”.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Girdi İzleme</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Erişilebilirlik</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Mikrofon</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Hangi tuşlara bastığınızı görmek için.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Düzeltilmiş metni yazmak ve imleci bulmak için.</value>

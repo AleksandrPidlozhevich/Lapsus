@@ -182,7 +182,7 @@
     <value>Δεν ήταν δυνατή η ενημέρωση της εκκίνησης κατά τη σύνδεση: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Δεν ήταν δυνατή η έναρξη της καταγραφής πληκτρολογίου. Δώστε στο Lapsus πρόσβαση Προσβασιμότητας από Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια → Προσβασιμότητα (και Παρακολούθηση εισόδου, αν αναφέρεται) και μετά επανεκκινήστε την εφαρμογή.</value>
+    <value>Δεν ήταν δυνατή η έναρξη της καταγραφής πληκτρολογίου. Ενεργοποιήστε το Lapsus στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια → Προσβασιμότητα· η καταγραφή θα ξεκινήσει μόνη της.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Το Lapsus χρειάζεται αυτές τις άδειες. Κάθε κουμπί δείχνει το παράθυρο του macOS ή ανοίγει τη σωστή λίστα στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια, όπου ενεργοποιείτε το Lapsus. Η κατάσταση εδώ ενημερώνεται μόνη της.</value>
@@ -275,7 +275,7 @@
     <value>Επιλογή: δεν ήταν δυνατή η χρήση του προχείρου ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Η καταγραφή πληκτρολογίου σταμάτησε στιγμιαία και επανεκκινήθηκε. Αν επαναλαμβάνεται, κλείστε έναν απαιτητικό πελάτη Accessibility ή δώστε στο Lapsus την άδεια Input Monitoring.</value>
+    <value>Η καταγραφή πληκτρολογίου κόλλησε για λίγο και επανεκκινήθηκε. Αν επαναλαμβάνεται, κλείστε μια εφαρμογή που επιβαρύνει την Προσβασιμότητα.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Η καταγραφή πληκτρολογίου λειτουργεί ξανά.</value>
@@ -296,7 +296,7 @@
     <value>Η διάταξη {0} δεν είναι εγκατεστημένη σε αυτόν τον Mac (διαθέσιμες: {1}). Προσθέστε την από Ρυθμίσεις συστήματος → Πληκτρολόγιο → Πηγές εισόδου.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Δεν ήταν δυνατή η αποστολή πλήκτρων στην ενεργή εφαρμογή ({0}). Ελέγξτε τις άδειες Προσβασιμότητας και Παρακολούθησης εισόδου για το Lapsus.</value>
+    <value>Δεν ήταν δυνατή η αποστολή πλήκτρων στην ενεργή εφαρμογή ({0}). Ελέγξτε την άδεια Προσβασιμότητας για το Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Συντόμευση: αγνοήθηκε — η εστίαση μετακινήθηκε σε άλλο παράθυρο ή εφαρμογή ({0}). Πληκτρολογήστε ξανά στο πεδίο που θέλετε.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Οι όροι αφήνονται ανέγγιχτοι και όταν τους πληκτρολογείτε: ένα όνομα που προστέθηκε εδώ δεν «διορθώνεται» ποτέ.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Παρακολούθηση εισόδου</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Προσβασιμότητα</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Μικρόφωνο</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Για να βλέπει ποια πλήκτρα πατάτε.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Για να πληκτρολογεί το διορθωμένο κείμενο και να βρίσκει τον δρομέα.</value>

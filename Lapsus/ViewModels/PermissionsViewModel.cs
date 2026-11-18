@@ -74,7 +74,6 @@ public sealed partial class PermissionsViewModel : ObservableObject
         _microphoneWanted = microphoneWanted;
         Items =
         [
-            new PermissionItem(PermissionKind.InputMonitoring, "InputMonitoring", Refresh),
             new PermissionItem(PermissionKind.Accessibility, "Accessibility", Refresh),
             new PermissionItem(PermissionKind.Microphone, "Microphone", Refresh)
         ];
@@ -92,11 +91,9 @@ public sealed partial class PermissionsViewModel : ObservableObject
 
     public bool AnyMissing => Items.Any(i => i.IsMissing);
 
-    public bool CaptureGranted =>
-        (!SystemPermissions.InputMonitoringNeeded || Item(PermissionKind.InputMonitoring).IsGranted)
-        && Item(PermissionKind.Accessibility).IsGranted;
+    public bool CaptureGranted => Item(PermissionKind.Accessibility).IsGranted;
 
-    // Raised once the keyboard permissions are both in place after one of them was missing.
+    // Raised once the keyboard permission is in place after it was missing.
     public event Action? CaptureBecameGranted;
 
     public void Refresh()
@@ -105,12 +102,8 @@ public sealed partial class PermissionsViewModel : ObservableObject
         var wasMissing = AnyMissing;
         foreach (var item in Items)
         {
-            item.IsWanted = item.Kind switch
-            {
-                PermissionKind.Microphone => OperatingSystem.IsMacOS() && _microphoneWanted(),
-                PermissionKind.InputMonitoring => SystemPermissions.InputMonitoringNeeded,
-                _ => OperatingSystem.IsMacOS()
-            };
+            item.IsWanted = OperatingSystem.IsMacOS()
+                            && (item.Kind != PermissionKind.Microphone || _microphoneWanted());
             item.State = SystemPermissions.State(item.Kind);
         }
 

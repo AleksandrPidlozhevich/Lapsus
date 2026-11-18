@@ -182,7 +182,7 @@
     <value>Impossibile aggiornare l&apos;avvio al login: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Impossibile avviare l&apos;acquisizione della tastiera. Concedi ad Lapsus l&apos;accesso in Impostazioni di sistema → Privacy e sicurezza → Accessibilità (e Monitoraggio input se presente), poi riavvia l&apos;app.</value>
+    <value>Impossibile avviare l’acquisizione della tastiera. Attiva Lapsus in Impostazioni di Sistema → Privacy e sicurezza → Accessibilità; l’acquisizione partirà da sola.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus ha bisogno di questi permessi. Ogni pulsante mostra la finestra di macOS o apre l'elenco giusto in Impostazioni di Sistema → Privacy e sicurezza, dove attivi Lapsus. Lo stato qui si aggiorna da solo.</value>
@@ -275,7 +275,7 @@
     <value>Selezione: non è stato possibile usare gli appunti ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>L'acquisizione della tastiera si è interrotta per un istante ed è stata riavviata. Se continua a succedere, chiudi un client Accessibility sovraccarico o concedi a Lapsus il permesso Input Monitoring.</value>
+    <value>L’acquisizione della tastiera si è bloccata per un attimo ed è stata riavviata. Se succede ancora, chiudi un’app che sovraccarica l’Accessibilità.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>La cattura della tastiera è di nuovo attiva.</value>
@@ -296,7 +296,7 @@
     <value>Il layout {0} non è installato su questo Mac (disponibili: {1}). Aggiungilo in Impostazioni di sistema → Tastiera → Sorgenti di input.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Impossibile iniettare i tasti nell&apos;app attiva ({0}). Controlla i permessi Accessibilità e Monitoraggio input per Lapsus.</value>
+    <value>Impossibile inviare i tasti all’app attiva ({0}). Controlla l’autorizzazione Accessibilità di Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Scorciatoia: ignorata — il focus è passato a un&apos;altra finestra o app ({0}). Digita di nuovo nel campo di destinazione.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>I termini restano intatti anche quando li digiti: un nome aggiunto qui non viene mai «corretto».</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Monitoraggio input</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Accessibilità</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Microfono</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Per vedere quali tasti premi.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Per digitare il testo corretto e trovare il cursore.</value>

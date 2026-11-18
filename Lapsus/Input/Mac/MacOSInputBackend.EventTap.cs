@@ -37,8 +37,7 @@ internal sealed partial class MacOSInputBackend
                 Volatile.Write(ref _runLoop, IntPtr.Zero);
 
             CaptureLog.Write(
-                $"Event tap could not be created (accessibility={MacAccessibility.IsProcessTrusted()}, " +
-                $"input monitoring={MacAccessibility.IsInputMonitoringGranted()}).");
+                $"Event tap could not be created (accessibility={MacAccessibility.IsProcessTrusted()}).");
             _startError = new InvalidOperationException(Localizer.Instance["Status_AccessibilityRequired"]);
             _tapReady.Set();
             return;

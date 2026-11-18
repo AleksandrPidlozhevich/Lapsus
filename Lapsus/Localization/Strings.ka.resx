@@ -182,7 +182,7 @@
     <value>ავტოგაშვების განახლება ვერ მოხერხდა: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>კლავიატურის აღბეჭდვა ვერ გაეშვა. მიეცით Lapsus-ს წვდომა: System Settings ← Privacy &amp; Security ← Accessibility (და Input Monitoring, თუ ჩამოთვლილია), შემდეგ გადატვირთეთ აპლიკაცია.</value>
+    <value>კლავიატურის მოსმენა ვერ ჩაირთო. ჩართეთ Lapsus: სისტემის პარამეტრები → კონფიდენციალურობა და უსაფრთხოება → წვდომადობა; მოსმენა თავად დაიწყება.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus-ს ეს ნებართვები სჭირდება. თითოეული ღილაკი აჩვენებს macOS-ის ფანჯარას ან ხსნის სწორ სიას System Settings → Privacy &amp; Security-ში, სადაც Lapsus-ს ჩართავთ. სტატუსი აქ თავად განახლდება.</value>
@@ -275,7 +275,7 @@
     <value>მონიშვნა: ბუფერის გამოყენება ვერ მოხერხდა ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>კლავიატურის ჩაჭერა ხანმოკლედ შეჩერდა და თავიდან გაეშვა. თუ ეს მეორდება, დახურეთ დატვირთული Accessibility კლიენტი ან მიეცით Lapsus-ს Input Monitoring ნებართვა.</value>
+    <value>კლავიატურის მოსმენა წამით გაჩერდა და ხელახლა ჩაირთო. თუ ეს მეორდება, დახურეთ აპი, რომელიც წვდომადობას ტვირთავს.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>კლავიატურის დაფიქსირება ისევ მუშაობს.</value>
@@ -296,7 +296,7 @@
     <value>განლაგება {0} არ არის დაყენებული ამ Mac-ზე (ხელმისაწვდომია: {1}). დაამატეთ: System Settings ← Keyboard ← Input Sources.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>აქტიურ აპლიკაციაში ღილაკების ჩასმა ვერ მოხერხდა ({0}). შეამოწმეთ Lapsus-ის Accessibility და Input Monitoring ნებართვები.</value>
+    <value>კლავიშების დაჭერა აქტიურ აპში ვერ გაიგზავნა ({0}). შეამოწმეთ Lapsus-ის წვდომადობის ნებართვა.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>ცხელი ღილაკი: იგნორირებულია — ფოკუსი სხვა ფანჯარაზე ან აპლიკაციაზე გადავიდა ({0}). აკრიფეთ ხელახლა სამიზნე ველში.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>ტერმინები აკრეფისასაც არ იცვლება: აქ დამატებული სახელი არასდროს «სწორდება».</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Input Monitoring</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Accessibility</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>მიკროფონი</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>რომ დაინახოს, რომელ კლავიშებს აჭერთ.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>რომ აკრიფოს გასწორებული ტექსტი და იპოვოს კურსორი.</value>

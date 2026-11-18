@@ -182,7 +182,7 @@
     <value>Zagona ob prijavi ni bilo mogoče posodobiti: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Zajema tipkovnice ni bilo mogoče zagnati. Lapsusu dodelite dostop do pripomočkov za ljudi s posebnimi potrebami v Sistemske nastavitve → Zasebnost in varnost → Dostopnost (in Nadzor vnosa, če je naveden), nato znova zaženite aplikacijo.</value>
+    <value>Zajemanja tipkovnice ni bilo mogoče zagnati. Vklopite Lapsus v Sistemske nastavitve → Zasebnost in varnost → Dostopnost; zajemanje se bo zagnalo samo.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus potrebuje ta dovoljenja. Vsak gumb prikaže okno macOS ali odpre pravi seznam v »Sistemske nastavitve« → »Zasebnost in varnost«, kjer vklopite Lapsus. Stanje se tukaj posodablja samo.</value>
@@ -275,7 +275,7 @@
     <value>Izbor: odložišča ni bilo mogoče uporabiti ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Zajem tipkovnice se je za hip ustavil in se je znova zagnal. Če se to ponavlja, zaprite obremenjenega odjemalca Accessibility ali Lapsusu dodelite dovoljenje Input Monitoring.</value>
+    <value>Zajemanje tipkovnice je za hip obstalo in je bilo znova zagnano. Če se to ponavlja, zaprite aplikacijo, ki obremenjuje Dostopnost.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Zajemanje tipkovnice spet deluje.</value>
@@ -296,7 +296,7 @@
     <value>Razporeditev {0} na tem Macu ni nameščena (na voljo: {1}). Dodajte jo v Sistemske nastavitve → Tipkovnica → Viri vnosa.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Pritiskov tipk ni bilo mogoče poslati aktivni aplikaciji ({0}). Preverite dovoljenji za dostopnost in nadzor vnosa za Lapsus.</value>
+    <value>Pritiskov tipk ni bilo mogoče poslati aktivni aplikaciji ({0}). Preverite dovoljenje Dostopnost za Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Bližnjica: prezrto — fokus se je premaknil v drugo okno ali aplikacijo ({0}). Znova vtipkajte v ciljno polje.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Izrazov se prav tako ne popravlja, ko jih tipkate: ime, dodano tukaj, se nikoli ne »popravi«.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Spremljanje vnosa</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Dostopnost</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Mikrofon</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Da vidi, katere tipke pritiskate.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Da vnaša popravljeno besedilo in najde kazalec.</value>

@@ -1,5 +1,4 @@
 using Lapsus.Audio;
-using Lapsus.Startup;
 using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ namespace Lapsus.Input;
 public enum PermissionKind
 {
     Accessibility,
-    InputMonitoring,
     Microphone
 }
 
@@ -24,13 +22,6 @@ internal static class SystemPermissions
 {
     public static bool AccessibilityGranted => State(PermissionKind.Accessibility) == PermissionState.Granted;
 
-    public static bool InputMonitoringGranted =>
-        !InputMonitoringNeeded || State(PermissionKind.InputMonitoring) == PermissionState.Granted;
-
-    // In the sandbox the event tap runs on post-event access (the Accessibility list) alone; asking for
-    // Input Monitoring there only adds a step and a list entry Lapsus never uses.
-    public static bool InputMonitoringNeeded => OperatingSystem.IsMacOS() && !MacSandbox.IsSandboxed;
-
     public static PermissionState State(PermissionKind kind)
     {
         if (!OperatingSystem.IsMacOS())
@@ -42,7 +33,6 @@ internal static class SystemPermissions
             PermissionKind.Accessibility => MacAccessibility.IsProcessTrusted()
                 ? PermissionState.Granted
                 : PermissionState.NotAsked,
-            PermissionKind.InputMonitoring => MacAccessibility.InputMonitoringState(),
             _ => MacMicrophone.Access() switch
             {
                 MicrophoneAccess.Granted => PermissionState.Granted,
@@ -71,12 +61,6 @@ internal static class SystemPermissions
                 MacAccessibility.PromptIfNeeded();
                 MacAccessibility.OpenSettings();
                 break;
-            case PermissionKind.InputMonitoring when asked:
-                MacAccessibility.OpenInputMonitoringSettings();
-                break;
-            case PermissionKind.InputMonitoring:
-                MacAccessibility.RequestInputMonitoringIfNeeded();
-                break;
             case PermissionKind.Microphone when asked:
                 MacMicrophone.OpenSettings();
                 break;
@@ -91,8 +75,8 @@ internal static class SystemPermissions
         if (!OperatingSystem.IsMacOS())
             return;
 
+        // The event tap filters keys, which macOS allows under Accessibility alone; Input Monitoring is for
+        // taps that only listen, so Lapsus does not ask for it.
         MacAccessibility.PromptIfNeeded();
-        if (InputMonitoringNeeded)
-            MacAccessibility.RequestInputMonitoringIfNeeded();
     }
 }

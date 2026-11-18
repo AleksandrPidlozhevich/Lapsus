@@ -182,7 +182,7 @@
     <value>Não foi possível atualizar o arranque com a sessão: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Não foi possível iniciar a captura do teclado. Conceda ao Lapsus acesso de Acessibilidade em Definições do Sistema → Privacidade e Segurança → Acessibilidade (e Monitorização da Introdução, se estiver listada) e reinicie a aplicação.</value>
+    <value>Não foi possível iniciar a captura do teclado. Ative o Lapsus em Definições do Sistema → Privacidade e segurança → Acessibilidade; a captura começa sozinha.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>O Lapsus precisa destas permissões. Cada botão mostra o diálogo do macOS ou abre a lista certa em Definições do Sistema → Privacidade e segurança, onde ativa o Lapsus. O estado aqui atualiza-se sozinho.</value>
@@ -275,7 +275,7 @@
     <value>Seleção: não foi possível usar a área de transferência ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>A captura do teclado parou por instantes e foi reiniciada. Se continuar a acontecer, feche um cliente Accessibility sobrecarregado ou conceda ao Lapsus a permissão Input Monitoring.</value>
+    <value>A captura do teclado parou por instantes e foi reiniciada. Se isto se repetir, feche uma app que use intensamente a Acessibilidade.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>A captura do teclado está a funcionar novamente.</value>
@@ -296,7 +296,7 @@
     <value>O esquema {0} não está instalado neste Mac (disponíveis: {1}). Adicione-o em Definições do Sistema → Teclado → Fontes de Introdução.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Não foi possível enviar as teclas para a aplicação ativa ({0}). Verifique as permissões de Acessibilidade e Monitorização da Introdução do Lapsus.</value>
+    <value>Não foi possível enviar as teclas para a app ativa ({0}). Verifique a permissão de Acessibilidade do Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Atalho: ignorado — o foco mudou para outra janela ou aplicação ({0}). Escreva de novo no campo pretendido.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Os termos também são deixados em paz quando os escreve: um nome adicionado aqui nunca é «corrigido».</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Monitorização de entrada</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Acessibilidade</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Microfone</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Para ver que teclas prime.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Para escrever o texto corrigido e encontrar o cursor.</value>

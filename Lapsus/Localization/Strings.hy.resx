@@ -182,7 +182,7 @@
     <value>Չհաջողվեց թարմացնել մուտքի ժամանակ գործարկումը. {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Չհաջողվեց սկսել ստեղնաշարի գրավումը։ Տրամադրեք Lapsus-ին Accessibility մուտք System Settings → Privacy &amp; Security → Accessibility (և Input Monitoring, եթե կա ցանկում), ապա վերագործարկեք հավելվածը։</value>
+    <value>Ստեղնաշարի հետևումը չհաջողվեց գործարկել։ Միացրեք Lapsus-ը՝ Համակարգի կարգավորումներ → Գաղտնիություն և անվտանգություն → Մատչելիություն. հետևումը կսկսվի ինքնուրույն։</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus-ին պետք են այս թույլտվությունները։ Յուրաքանչյուր կոճակ ցույց է տալիս macOS-ի պատուհանը կամ բացում է ճիշտ ցուցակը System Settings → Privacy &amp; Security-ում, որտեղ միացնում եք Lapsus-ը։ Կարգավիճակն այստեղ ինքն է թարմացվում։</value>
@@ -275,7 +275,7 @@
     <value>Ընտրում. չհաջողվեց օգտագործել սեղմատախտակը ({0})։</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Ստեղնաշարի գրավումը կարճ ժամանակով կանգ առավ և վերագործարկվեց։ Եթե սա շարունակվում է, փակեք ծանրաբեռնված Accessibility հաճախորդը կամ տրամադրեք Lapsus-ին Input Monitoring։</value>
+    <value>Ստեղնաշարի հետևումը կարճ ժամանակով կանգ առավ և վերագործարկվեց։ Եթե դա կրկնվում է, փակեք Մատչելիությունը ծանրաբեռնող հավելվածը։</value>
   </data>
     <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Ստեղնաշարի գրավումը կրկին աշխատում է։</value>
@@ -296,7 +296,7 @@
     <value>Դասավորություն {0}-ը տեղադրված չէ այս Mac-ում (հասանելի. {1})։ Ավելացրեք System Settings → Keyboard → Input Sources բաժնում։</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Չհաջողվեց ներարկել ստեղնաշարի մուտքը ակտիվ հավելված ({0})։ Ստուգեք Lapsus-ի Accessibility և Input Monitoring թույլտվությունները։</value>
+    <value>Չհաջողվեց ստեղնասեղմումներն ուղարկել ակտիվ հավելվածին ({0})։ Ստուգեք Lapsus-ի Մատչելիության թույլտվությունը։</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Թեժ ստեղն. անտեսված է — ֆոկուսը տեղափոխվել է այլ պատուհան/հավելված ({0})։ Կրկին մուտքագրեք նպատակային դաշտում։</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Տերմինները նույնպես չեն փոփոխվում, երբ դրանք մուտքագրում եք. այստեղ ավելացված անունը երբեք «չի ուղղվում»։</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>Input Monitoring</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>Accessibility</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>Խոսափող</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>Տեսնելու համար, թե որ ստեղներն եք սեղմում։</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>Ուղղված տեքստը մուտքագրելու և կուրսորը գտնելու համար։</value>

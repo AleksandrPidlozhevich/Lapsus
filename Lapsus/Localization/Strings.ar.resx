@@ -182,7 +182,7 @@
     <value>تعذّر تحديث التشغيل عند بدء الجلسة: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>تعذّر بدء التقاط لوحة المفاتيح. امنح Lapsus صلاحية إمكانية الوصول من System Settings ← Privacy &amp; Security ← Accessibility (و‑Input Monitoring إن ظهر)، ثم أعد تشغيل التطبيق.</value>
+    <value>تعذّر بدء التقاط لوحة المفاتيح. فعّل Lapsus في إعدادات النظام ← الخصوصية والأمن ← تسهيلات الاستخدام؛ وسيبدأ الالتقاط تلقائيًا.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
     <value>يحتاج Lapsus إلى هذه الأذونات. كل زر يعرض نافذة macOS أو يفتح القائمة الصحيحة في إعدادات النظام ← الخصوصية والأمن، حيث تشغّل Lapsus. تتحدث الحالة هنا تلقائيًا.</value>
@@ -275,7 +275,7 @@
     <value>التحديد: تعذّر استخدام الحافظة ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>توقّف التقاط لوحة المفاتيح للحظة ثم أُعيد تشغيله. إذا تكرّر ذلك، أغلق تطبيق Accessibility مُثقلًا أو امنح Lapsus صلاحية Input Monitoring.</value>
+    <value>توقف التقاط لوحة المفاتيح لحظة وأُعيد تشغيله. إن تكرر ذلك فأغلق تطبيقًا يُثقل على تسهيلات الاستخدام.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>عاد التقاط لوحة المفاتيح للعمل.</value>
@@ -296,7 +296,7 @@
     <value>التخطيط {0} غير مثبّت على هذا الـ Mac (المتاح: {1}). أضفه من System Settings ← Keyboard ← Input Sources.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>تعذّر إدخال ضغطات المفاتيح إلى التطبيق النشط ({0}). تحقّق من أذونات إمكانية الوصول ومراقبة الإدخال لـ Lapsus.</value>
+    <value>تعذّر إرسال ضغطات المفاتيح إلى التطبيق النشط ({0}). تحقق من إذن تسهيلات الاستخدام لـ Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>مفتاح الاختصار: تم التجاهل — انتقل التركيز إلى نافذة أو تطبيق آخر ({0}). اكتب من جديد في الحقل الهدف.</value>
@@ -1009,17 +1009,11 @@
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>تُترك المصطلحات كما هي أيضًا عند كتابتها: لا يُصحَّح أبدًا اسم أُضيف هنا.</value>
   </data>
-  <data name="Perm_InputMonitoring" xml:space="preserve">
-    <value>مراقبة الإدخال</value>
-  </data>
   <data name="Perm_Accessibility" xml:space="preserve">
     <value>تسهيلات الاستخدام</value>
   </data>
   <data name="Perm_Microphone" xml:space="preserve">
     <value>الميكروفون</value>
-  </data>
-  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
-    <value>لرؤية المفاتيح التي تضغطها.</value>
   </data>
   <data name="Perm_Accessibility_Why" xml:space="preserve">
     <value>لكتابة النص المصحح وإيجاد المؤشر.</value>
