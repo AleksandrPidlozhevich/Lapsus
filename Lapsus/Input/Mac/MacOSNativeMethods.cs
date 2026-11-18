@@ -224,11 +224,15 @@ internal static class MacOSNativeMethods
     public static extern void CGEventSetFlags(IntPtr @event, ulong flags);
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
-    public static extern void CGEventKeyboardSetUnicodeString(
-        IntPtr @event, nint stringLength, in char unicodeString);
+    private static extern void CGEventKeyboardSetUnicodeString(
+        IntPtr @event, nint stringLength, in ushort unicodeString);
 
+    // ushort, not char: without CharSet.Unicode a by-ref char is marshaled as one ANSI byte in a temporary
+    // copy, so the event got a single mangled unit followed by stray memory ("хліб" came out as "Ñ").
     public static void CGEventKeyboardSetUnicodeString(IntPtr @event, int length, ReadOnlySpan<char> text) =>
-        CGEventKeyboardSetUnicodeString(@event, length, in System.Runtime.InteropServices.MemoryMarshal.GetReference(text));
+        CGEventKeyboardSetUnicodeString(@event, length,
+            in System.Runtime.InteropServices.MemoryMarshal.GetReference(
+                System.Runtime.InteropServices.MemoryMarshal.Cast<char, ushort>(text)));
 
     [DllImport("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")]
     public static extern void CGEventSetTimestamp(IntPtr @event, ulong timestamp);
