@@ -251,6 +251,8 @@ public partial class SettingsViewModel : ViewModelBase
 
     // Keys are neither sold nor accepted in the App Store edition, and it has nothing else to buy.
     public bool ShowLicenseTab => !AppEdition.IsAppStore;
+    // The hint promises browser accessibility, which the sandbox denies.
+    public bool ShowSkipPasswordsHint => !MacSandbox.IsSandboxed;
 
     private void OnStoreAccessChanged()
     {

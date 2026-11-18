@@ -49,7 +49,7 @@ internal sealed partial class MacOSInputBackend
         var wanted = _wantCapture;
         var now = Environment.TickCount64;
         var gap = now - Interlocked.Exchange(ref _lastWatchdogTick, now);
-        var granted = MacAccessibility.IsProcessTrusted() && MacAccessibility.IsInputMonitoringGranted();
+        var granted = MacAccessibility.IsProcessTrusted() && SystemPermissions.InputMonitoringGranted;
 
         var running = IsRunning;
         var action = CaptureWatchdogPolicy.Decide(new WatchdogObservation(

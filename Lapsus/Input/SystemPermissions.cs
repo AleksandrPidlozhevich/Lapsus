@@ -1,4 +1,5 @@
 using Lapsus.Audio;
+using Lapsus.Startup;
 using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
@@ -23,7 +24,12 @@ internal static class SystemPermissions
 {
     public static bool AccessibilityGranted => State(PermissionKind.Accessibility) == PermissionState.Granted;
 
-    public static bool InputMonitoringGranted => State(PermissionKind.InputMonitoring) == PermissionState.Granted;
+    public static bool InputMonitoringGranted =>
+        !InputMonitoringNeeded || State(PermissionKind.InputMonitoring) == PermissionState.Granted;
+
+    // In the sandbox the event tap runs on post-event access (the Accessibility list) alone; asking for
+    // Input Monitoring there only adds a step and a list entry Lapsus never uses.
+    public static bool InputMonitoringNeeded => OperatingSystem.IsMacOS() && !MacSandbox.IsSandboxed;
 
     public static PermissionState State(PermissionKind kind)
     {
@@ -86,6 +92,7 @@ internal static class SystemPermissions
             return;
 
         MacAccessibility.PromptIfNeeded();
-        MacAccessibility.RequestInputMonitoringIfNeeded();
+        if (InputMonitoringNeeded)
+            MacAccessibility.RequestInputMonitoringIfNeeded();
     }
 }

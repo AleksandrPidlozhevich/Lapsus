@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Versioning;
 
 namespace Lapsus.Startup;
 
@@ -9,6 +10,7 @@ internal static class MacSandbox
     // macOS sets this for every sandboxed process and for nothing else.
     private const string ContainerVariable = "APP_SANDBOX_CONTAINER_ID";
 
+    [SupportedOSPlatformGuard("macos")]
     public static bool IsSandboxed { get; } =
         Detect(OperatingSystem.IsMacOS(), Environment.GetEnvironmentVariable(ContainerVariable));
 
