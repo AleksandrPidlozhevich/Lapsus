@@ -21,6 +21,11 @@ internal static class MacClipboard
 
     internal sealed class Snapshot
     {
+        // Too large to hold, or the pasteboard could not be read: the clipboard cannot be put back.
+        public static Snapshot Unreadable { get; } = new() { Complete = false };
+
+        public bool Complete { get; private init; } = true;
+
         public List<Item> Items { get; } = [];
 
         public sealed class Item
@@ -36,14 +41,15 @@ internal static class MacClipboard
                (MacOSNativeMethods.PasteboardSynchronize(pasteboard) & MacOSNativeMethods.PasteboardModified) != 0;
     }
 
-    public static Snapshot? CaptureSnapshot()
+    // Empty Items means the clipboard was empty; Unreadable means it must be left alone.
+    public static Snapshot CaptureSnapshot()
     {
         if (!TryGetPasteboard(out var pasteboard))
-            return null;
+            return Snapshot.Unreadable;
 
         MacOSNativeMethods.PasteboardSynchronize(pasteboard);
-        if (MacOSNativeMethods.PasteboardGetItemCount(pasteboard, out var count) != 0 || count == 0)
-            return null;
+        if (MacOSNativeMethods.PasteboardGetItemCount(pasteboard, out var count) != 0)
+            return Snapshot.Unreadable;
 
         var snapshot = new Snapshot();
         var total = 0;
@@ -81,7 +87,7 @@ internal static class MacClipboard
 
                         total += length;
                         if (total > MaxSnapshotBytes)
-                            return null;
+                            return Snapshot.Unreadable;
 
                         var bytes = new byte[length];
                         Marshal.Copy(MacOSNativeMethods.CFDataGetBytePtr(data), bytes, 0, length);
@@ -102,12 +108,15 @@ internal static class MacClipboard
             }
         }
 
-        return snapshot.Items.Count > 0 ? snapshot : null;
+        return snapshot;
     }
 
     public static bool RestoreSnapshot(Snapshot? snapshot)
     {
-        if (snapshot is null)
+        if (snapshot is not { Complete: true })
+            return false;
+
+        if (snapshot.Items.Count == 0)
             return Clear();
 
         if (!TryGetPasteboard(out var pasteboard))

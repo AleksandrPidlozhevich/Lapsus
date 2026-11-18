@@ -7,8 +7,9 @@ namespace Lapsus.Speech;
 
 // Decoding follows what stage 1 measured on large-v3-turbo:
 //  - GPU: the full 30 s window, greedy, with the prompt — best quality and ~0.3 s a phrase;
-//  - CPU: the window cut to the audio's length, which is five times faster, with beam search, because greedy
-//    decoding on a cut window falls into loops.
+//  - CPU, and Metal: the window cut to the audio's length, with beam search, because greedy decoding on a cut
+//    window falls into loops. On an M1 the full window took 5-6 s a pass (11-14 s for one word with language
+//    detection); cut, a phrase takes ~1.4 s at the same accuracy.
 // Silence is cut with Silero VAD before decoding; without it Whisper writes subtitle credits over silence.
 public sealed partial class WhisperRecognizer : ISpeechRecognizer
 {
@@ -43,6 +44,9 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
 
     // Read from the native log while loading: whisper.cpp falls back to the CPU quietly when asked for a GPU it does not find.
     public bool OnGpu { get; private set; }
+
+    // A GPU that runs the full 30 s window in a fraction of a second (Vulkan, CUDA); Metal does not.
+    public bool FullWindowIsCheap { get; private set; }
 
     public string DeviceLabel { get; private set; } = "";
 
@@ -97,7 +101,7 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
             throw;
         }
 
-        var (onGpu, card) = UsedGpu(log);
+        var (onGpu, device) = UsedGpu(log);
         onGpu &= preferGpu;
         LoadLog = log;
         lock (_gate)
@@ -114,7 +118,8 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
             _vadFactory = vadFactory;
             _vad = vad;
             OnGpu = onGpu;
-            DeviceLabel = onGpu ? $"GPU ({card ?? RuntimeOptions.LoadedLibrary?.ToString()})" : "CPU";
+            FullWindowIsCheap = onGpu && !OperatingSystem.IsMacOS();
+            DeviceLabel = DescribeDevice(onGpu, device);
         }
     }
 
@@ -135,6 +140,7 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
             old = _runCts;
             _runCts = new CancellationTokenSource();
             OnGpu = false;
+            FullWindowIsCheap = false;
             DeviceLabel = "";
         }
 
@@ -210,9 +216,9 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
             .WithProbabilities();
         if (!string.IsNullOrWhiteSpace(request.Prompt))
             builder = builder.WithPrompt(request.Prompt);
-        // A window cut to the phrase loses accuracy on a GPU even with beam 2-3 (12% / 9.8% WER against 9.3%) for
-        // ~10% speed, so the GPU keeps the full window.
-        if (OnGpu)
+        // A window cut to the phrase loses accuracy on a fast GPU even with beam 2-3 (12% / 9.8% WER against 9.3%)
+        // for ~10% speed, so such a GPU keeps the full window.
+        if (FullWindowIsCheap)
         {
             builder = builder.WithGreedySamplingStrategy(_ => { });
         }
@@ -226,9 +232,9 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
         await using var processor = builder.Build();
 
         // Detection is a pass of its own over the full 30 s window, whatever window decoding uses: ~0.25 s on a
-        // GPU, ~10 s on a CPU. On a CPU the dictation stays in the main language.
+        // fast GPU, ~5 s on Metal, ~10 s on a CPU. Without a fast GPU the dictation stays in the main language.
         var probability = 1f;
-        if (OnGpu && request.DetectAmong is { Count: > 1 } among)
+        if (FullWindowIsCheap && request.DetectAmong is { Count: > 1 } among)
         {
             var (detected, p) = processor.DetectLanguageWithProbability(speech, among.ToArray());
             var chosen = DictationLanguagePicker.Resolve(language, detected, p);
@@ -255,12 +261,21 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
             segments > 0 ? sumP / segments : 1f);
     }
 
-    // Never so small that Whisper loses its footing.
+    // Never so small that Whisper loses its footing. A single word in a 7.7 s window came out as subtitle credits
+    // ("Дякую за перегляд!", "Субтитры делал…") in 4 of 10 words on an M1; 10 s read all ten as well as 15 s did,
+    // in 1.5 s against 2.3. A phrase keeps the smaller window: 15 s cost it 2.5x the time and wrote "pull request"
+    // as "пул реквест".
     internal static int? WindowFor(double seconds)
     {
+        if (seconds < OneWord.TotalSeconds)
+            return OneWordFrames;
         var frames = (int)Math.Ceiling((seconds + 1.0) * FramesPerSecond / 64.0) * 64;
         return frames >= FullWindowFrames ? null : Math.Max(frames, 384);
     }
+
+    // Speech shorter than this (after VAD) is a word or two.
+    public static readonly TimeSpan OneWord = TimeSpan.FromSeconds(1.5);
+    private const int OneWordFrames = 512;
 
     private static float[] KeepSpeech(WhisperVadProcessor vad, float[] pcm)
     {
@@ -275,23 +290,48 @@ public sealed partial class WhisperRecognizer : ISpeechRecognizer
     }
 
     // whisper.cpp names the backend that holds the weights ("whisper_model_load: Vulkan0 total size = 873 MB",
-    // "CPU total size" without a GPU), and the Vulkan backend names the card it found.
-    private static (bool OnGpu, string? Card) UsedGpu(List<string> log)
+    // "MTL0" for Metal, "CPU total size" without a GPU). Vulkan and Metal each name the card they found; the
+    // runtime package is no name for it: on macOS the package called Cpu is the one that carries Metal.
+    internal static (bool OnGpu, string? Device) UsedGpu(IReadOnlyList<string> log)
     {
         lock (log)
         {
-            var onGpu = log.Select(line => ModelBackend().Match(line))
-                .Any(m => m.Success && !m.Groups[1].Value.StartsWith("CPU", StringComparison.OrdinalIgnoreCase));
-            var card = log.Select(line => VulkanCard().Match(line)).FirstOrDefault(m => m.Success)?.Groups[1].Value.Trim();
-            return (onGpu, card);
+            var backend = log.Select(line => ModelBackend().Match(line))
+                .FirstOrDefault(m => m.Success && !m.Groups[1].Value.StartsWith("CPU", StringComparison.OrdinalIgnoreCase))
+                ?.Groups[1].Value;
+            if (backend is null)
+                return (false, null);
+
+            var card = log.Select(line => GpuName().Match(line)).FirstOrDefault(m => m.Success) is { } found
+                ? CardName(found)
+                : null;
+            return (true, string.IsNullOrEmpty(card) ? backend : card);
         }
     }
+
+    // Newer ggml prints the device id first ("GPU name:   MTL0 (Apple M2 Pro)"), older the chip alone.
+    private static string CardName(System.Text.RegularExpressions.Match found)
+    {
+        if (found.Groups["vulkan"].Success)
+            return found.Groups["vulkan"].Value.Trim();
+
+        var name = found.Groups["metal"].Value.Trim();
+        var detail = found.Groups["detail"].Value.Trim();
+        return MetalDeviceId().IsMatch(name) && detail.Length > 0 ? detail : name;
+    }
+
+    internal static string DescribeDevice(bool onGpu, string? device) =>
+        onGpu ? $"GPU ({device})" : "CPU";
 
     [System.Text.RegularExpressions.GeneratedRegex(@"whisper_model_load:\s+(\S+)\s+total size")]
     private static partial System.Text.RegularExpressions.Regex ModelBackend();
 
-    [System.Text.RegularExpressions.GeneratedRegex(@"ggml_vulkan: 0 = ([^|(]+)")]
-    private static partial System.Text.RegularExpressions.Regex VulkanCard();
+    [System.Text.RegularExpressions.GeneratedRegex(
+        @"ggml_vulkan: 0 = (?<vulkan>[^|(]+)|GPU name:\s+(?<metal>[^(\r\n]+)(?:\((?<detail>[^)]*)\))?")]
+    private static partial System.Text.RegularExpressions.Regex GpuName();
+
+    [System.Text.RegularExpressions.GeneratedRegex(@"^MTL\d+$")]
+    private static partial System.Text.RegularExpressions.Regex MetalDeviceId();
 
     private static void ChooseRuntime()
     {

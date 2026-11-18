@@ -185,13 +185,7 @@
     <value>Прихващането на клавиатурата не можа да се стартира. Дайте на Lapsus достъп до Достъпност в Системни настройки → Поверителност и сигурност → Достъпност (и Наблюдение на въвеждането, ако е в списъка), после рестартирайте приложението.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus се нуждае от тези разрешения, за да вижда и поправя каквото пишете. Дайте ги по-долу и се върнете тук.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Даване на достъп до Достъпност</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Даване на Наблюдение на въвеждането</value>
+    <value>Lapsus се нуждае от тези разрешения. Всеки бутон показва прозореца на macOS или отваря правилния списък в „Системни настройки“ → „Поверителност и сигурност“, където включвате Lapsus. Състоянието тук се обновява само.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Поправено: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>Полетата за пароли не се засягат: докато пишете в такова поле, macOS скрива клавишите от другите приложения, включително от Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Сега macOS ще поиска две разрешения: „Наблюдение на въвеждането“ — за да вижда клавишите, и „Достъпност“ — за да въвежда поправения текст.</value>
+    <value>Разрешете всяко разрешение по-долу. Бутонът показва прозореца на macOS или отваря правилния списък в „Системни настройки“, където включвате Lapsus. Състоянието само става зелено.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Продължи</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Термините също не се пипат, когато ги пишете: име, добавено тук, никога не се «поправя».</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Наблюдение на въвеждането</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Достъпност</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Микрофон</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>За да вижда кои клавиши натискате.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>За да въвежда поправения текст и да намира курсора.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>За гласово въвеждане. Слуша само докато тече диктовката.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Разрешено</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Не е разрешено</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Изключено</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Разреши…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Отвори Системни настройки</value>
   </data>
 </root>

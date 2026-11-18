@@ -185,13 +185,7 @@
     <value>Klavye yakalama başlatılamadı. Lapsus&apos;a Sistem Ayarları → Gizlilik ve Güvenlik → Erişilebilirlik yolundan erişim verin (listede varsa Giriş İzleme&apos;ye de), sonra uygulamayı yeniden başlatın.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus, yazdıklarınızı görüp düzeltebilmek için bu izinlere ihtiyaç duyar. Aşağıdan verin, sonra buraya dönün.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Erişilebilirlik izni ver</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Giriş İzleme izni ver</value>
+    <value>Lapsus'un bu izinlere ihtiyacı var. Her düğme macOS penceresini gösterir ya da Sistem Ayarları → Gizlilik ve Güvenlik içinde doğru listeyi açar; orada Lapsus'u açın. Buradaki durum kendiliğinden güncellenir.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Düzeltildi: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>Parola alanlarına dokunulmaz: birine yazarken macOS tuşları Lapsus dahil diğer uygulamalardan gizler.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS şimdi iki izin isteyecek: tuşları görmek için Girdi İzleme ve düzeltilmiş metni yazmak için Erişilebilirlik.</value>
+    <value>Aşağıdaki her izni verin. Düğme macOS penceresini gösterir ya da Sistem Ayarları içinde doğru listeyi açar; orada Lapsus'u açın. Durum kendiliğinden yeşile döner.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Devam</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Terimler yazarken de bırakılır: buraya eklenen bir ad asla “düzeltilmez”.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Girdi İzleme</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Erişilebilirlik</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>Hangi tuşlara bastığınızı görmek için.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Düzeltilmiş metni yazmak ve imleci bulmak için.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Sesle yazma için. Yalnızca sesle yazma çalışırken dinler.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>İzin verildi</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>İzin verilmedi</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Kapalı</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>İzin ver…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Sistem Ayarları'nı aç</value>
   </data>
 </root>

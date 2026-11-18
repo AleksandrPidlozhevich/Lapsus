@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Lapsus.ViewModels"
+        xmlns:views="using:Lapsus.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="520" d:DesignHeight="420"
@@ -58,14 +59,14 @@
             <!-- What it sees, before macOS asks -->
             <StackPanel Spacing="12" IsVisible="{Binding IsPrivacy}">
                 <TextBlock Classes="heading" Text="{Binding L[Onb_Privacy_Title]}" />
-                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="10">
                     <TextBlock Grid.Row="0" Grid.Column="0" Classes="bullet" Text="●" />
                     <TextBlock Grid.Row="0" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Local]}" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Classes="bullet" Text="●" />
                     <TextBlock Grid.Row="1" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Passwords]}" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" Classes="bullet" Text="●" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Classes="point" Text="{Binding L[Onb_Permissions]}" />
                 </Grid>
+                <TextBlock Classes="point" Text="{Binding L[Onb_Permissions]}" />
+                <views:PermissionsPanel DataContext="{Binding Settings.Permissions}" />
             </StackPanel>
 
             <!-- Word lists -->

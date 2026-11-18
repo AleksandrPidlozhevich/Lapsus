@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
@@ -147,13 +148,20 @@ public partial class SettingsWindow : Window
     {
         (Application.Current as App)?.ShowOnboarding();
     }
+    private const double PageScrollBarGutter = 12;
 
     private static void PinToViewport(ScrollViewer scroll, Control content)
     {
+        scroll.Margin = new Thickness(0, 0, -PageScrollBarGutter, 0);
+        content.HorizontalAlignment = HorizontalAlignment.Left;
         scroll.SizeChanged += (_, e) =>
         {
-            var inset = scroll.Padding.Left + scroll.Padding.Right + content.Margin.Left + content.Margin.Right;
-            content.MaxWidth = Math.Max(0, e.NewSize.Width - inset);
+            var inset = scroll.Padding.Left + scroll.Padding.Right
+                        + content.Margin.Left + content.Margin.Right
+                        + PageScrollBarGutter;
+            var width = Math.Max(0, e.NewSize.Width - inset);
+            if (double.IsNaN(content.Width) || Math.Abs(content.Width - width) > 0.5)
+                content.Width = width;
         };
     }
 

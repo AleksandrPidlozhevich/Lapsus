@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,8 +17,9 @@ internal interface IDictationEngine
     // Whether the speech model is on disk; without it a dictation does not start.
     bool HasModel { get; }
 
-    // Starts loading the model now, while the user speaks, so it is ready when the recording ends.
-    void Prepare();
+    // Starts loading the model now, while the user speaks, so it is ready when the recording ends, and keeps
+    // it loaded until the hold is disposed.
+    IDisposable Hold();
 
     Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken);
 }

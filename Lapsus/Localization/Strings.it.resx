@@ -185,13 +185,7 @@
     <value>Impossibile avviare l&apos;acquisizione della tastiera. Concedi ad Lapsus l&apos;accesso in Impostazioni di sistema → Privacy e sicurezza → Accessibilità (e Monitoraggio input se presente), poi riavvia l&apos;app.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus ha bisogno di questi permessi per vedere e correggere quello che scrivi. Concedili qui sotto, poi torna a questa finestra.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Concedi l&apos;accesso di Accessibilità</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Concedi l&apos;accesso di Monitoraggio input</value>
+    <value>Lapsus ha bisogno di questi permessi. Ogni pulsante mostra la finestra di macOS o apre l'elenco giusto in Impostazioni di Sistema → Privacy e sicurezza, dove attivi Lapsus. Lo stato qui si aggiorna da solo.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Corretto: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>I campi password restano intatti: mentre ci scrivi, macOS nasconde i tasti alle altre app, Lapsus compreso.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Ora macOS chiederà due permessi: Monitoraggio input, per vedere i tasti, e Accessibilità, per digitare il testo corretto.</value>
+    <value>Consenti ogni permesso qui sotto. Il pulsante mostra la finestra di macOS o apre l'elenco giusto in Impostazioni di Sistema, dove attivi Lapsus. Lo stato diventa verde da solo.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Continua</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>I termini restano intatti anche quando li digiti: un nome aggiunto qui non viene mai «corretto».</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Monitoraggio input</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Accessibilità</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Microfono</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>Per vedere quali tasti premi.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Per digitare il testo corretto e trovare il cursore.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Per la dettatura vocale. Ascolta solo mentre la dettatura è attiva.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Consentito</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Non consentito</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Disattivato</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Consenti…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Apri Impostazioni di Sistema</value>
   </data>
 </root>

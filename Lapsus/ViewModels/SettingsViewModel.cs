@@ -57,6 +57,13 @@ public partial class SettingsViewModel : ViewModelBase
         _supported = supported;
         _rebuildBrain = rebuildBrain;
         _startup = StartupRegistrationFactory.CreateForCurrentPlatform();
+        Permissions = new PermissionsViewModel(() => Voice is { Enabled: true });
+        // Capture that could not start for want of a permission starts as soon as it is given.
+        Permissions.CaptureBecameGranted += () =>
+        {
+            if (!OnboardingPending && Enabled && !_backend.IsRunning)
+                ApplyEnabled();
+        };
 
         var capture = new HotkeyCapture(_backend, () => Enabled, message =>
         {
@@ -198,6 +205,18 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private VoiceViewModel? _voice;
 
+    // The microphone joins the permissions once voice typing is switched on.
+    partial void OnVoiceChanged(VoiceViewModel? value)
+    {
+        if (value is not null)
+            value.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(VoiceViewModel.Enabled))
+                    Permissions.Refresh();
+            };
+        Permissions.Refresh();
+    }
+
     public DictionariesViewModel Dictionaries { get; }
 
     public LicenseViewModel License { get; }
@@ -289,15 +308,7 @@ public partial class SettingsViewModel : ViewModelBase
 
     [ObservableProperty] private string _statusText = string.Empty;
 
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(PermissionsNeeded))]
-    private bool _accessibilityGranted = true;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(PermissionsNeeded))]
-    private bool _inputMonitoringGranted = true;
-
-    public bool PermissionsNeeded => !AccessibilityGranted || !InputMonitoringGranted;
+    public PermissionsViewModel Permissions { get; }
 
     public bool IsSupported => _supported;
 
@@ -526,11 +537,7 @@ public partial class SettingsViewModel : ViewModelBase
         UpdateStatus();
     }
 
-    private void RefreshPermissionState()
-    {
-        AccessibilityGranted = SystemPermissions.AccessibilityGranted;
-        InputMonitoringGranted = SystemPermissions.InputMonitoringGranted;
-    }
+    private void RefreshPermissionState() => Permissions.Refresh();
 
     // macOS knows a layout's language only where correction needs it, so a German layout is not named there.
     internal IEnumerable<string?> LayoutLanguages()
@@ -546,23 +553,7 @@ public partial class SettingsViewModel : ViewModelBase
         Stats.Refresh();
         Dictionaries.RefreshSuggestion();
 
-        var wasNeeded = PermissionsNeeded;
         RefreshPermissionState();
-
-        if (wasNeeded && !PermissionsNeeded && Enabled && !_backend.IsRunning)
-            ApplyEnabled();
-    }
-
-    [RelayCommand]
-    private void OpenAccessibilitySettings()
-    {
-        Lapsus.Input.SystemPermissions.OpenAccessibilitySettings();
-    }
-
-    [RelayCommand]
-    private void OpenInputMonitoringSettings()
-    {
-        Lapsus.Input.SystemPermissions.OpenInputMonitoringSettings();
     }
 
     private void ApplyRunAtStartup()

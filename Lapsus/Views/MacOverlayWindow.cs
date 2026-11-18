@@ -1,6 +1,6 @@
 using Avalonia.Controls;
+using Lapsus.Input;
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 namespace Lapsus.Views;
@@ -24,44 +24,22 @@ internal static class MacOverlayWindow
         if (nsWindow == IntPtr.Zero)
             return;
 
-        var ignoresMouse = sel_registerName("setIgnoresMouseEvents:");
-        var hasShadow = sel_registerName("setHasShadow:");
-        var hides = sel_registerName("setHidesOnDeactivate:");
-        objc_msgSend_void_byte(nsWindow, ignoresMouse, 1);
-        objc_msgSend_void_byte(nsWindow, hasShadow, 0);
-        objc_msgSend_void_byte(nsWindow, hides, 0);
-        objc_msgSend_void_long(nsWindow, sel_registerName("setCollectionBehavior:"), CollectionBehavior);
-        objc_msgSend_void_long(nsWindow, sel_registerName("setLevel:"), StatusWindowLevel);
+        ObjC.SendBool(nsWindow, ObjC.Selector("setIgnoresMouseEvents:"), true);
+        ObjC.SendBool(nsWindow, ObjC.Selector("setHasShadow:"), false);
+        ObjC.SendBool(nsWindow, ObjC.Selector("setHidesOnDeactivate:"), false);
+        ObjC.Send(nsWindow, ObjC.Selector("setCollectionBehavior:"), (IntPtr)CollectionBehavior);
+        ObjC.Send(nsWindow, ObjC.Selector("setLevel:"), (IntPtr)StatusWindowLevel);
     }
 
     private static IntPtr AsNsWindow(IntPtr handle)
     {
-        var nsWindowClass = objc_getClass("NSWindow");
+        var nsWindowClass = ObjC.Class("NSWindow");
         if (nsWindowClass == IntPtr.Zero)
             return IntPtr.Zero;
 
-        if (objc_msgSend_bool_ptr(handle, sel_registerName("isKindOfClass:"), nsWindowClass))
+        if (ObjC.SendReturningBool(handle, ObjC.Selector("isKindOfClass:"), nsWindowClass))
             return handle;
 
-        return objc_msgSend_IntPtr(handle, sel_registerName("window"));
+        return ObjC.Send(handle, ObjC.Selector("window"));
     }
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_getClass")]
-    private static extern IntPtr objc_getClass(string name);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "sel_registerName")]
-    private static extern IntPtr sel_registerName(string name);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-    private static extern IntPtr objc_msgSend_IntPtr(IntPtr receiver, IntPtr selector);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-    [return: MarshalAs(UnmanagedType.I1)]
-    private static extern bool objc_msgSend_bool_ptr(IntPtr receiver, IntPtr selector, IntPtr arg);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-    private static extern void objc_msgSend_void_byte(IntPtr receiver, IntPtr selector, byte arg);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-    private static extern void objc_msgSend_void_long(IntPtr receiver, IntPtr selector, long arg);
 }

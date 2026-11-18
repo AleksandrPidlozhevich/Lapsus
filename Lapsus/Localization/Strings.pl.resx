@@ -185,13 +185,7 @@
     <value>Nie udało się uruchomić przechwytywania klawiatury. Nadaj Lapsus dostęp w Ustawienia systemu → Prywatność i bezpieczeństwo → Dostępność (oraz Monitorowanie wprowadzania, jeśli jest na liście), a następnie uruchom aplikację ponownie.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus potrzebuje tych uprawnień, aby widzieć i poprawiać to, co piszesz. Nadaj je poniżej, a potem wróć tutaj.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Nadaj dostęp: Dostępność</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Nadaj dostęp: Monitorowanie wprowadzania</value>
+    <value>Lapsus potrzebuje tych uprawnień. Każdy przycisk pokazuje okno macOS lub otwiera właściwą listę w Ustawienia systemowe → Prywatność i ochrona, gdzie włączasz Lapsus. Stan tutaj odświeża się sam.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Poprawiono: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>Pola haseł pozostają nietknięte: gdy w nich piszesz, macOS ukrywa klawisze przed innymi aplikacjami, także przed Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Teraz macOS poprosi o dwa uprawnienia: „Monitorowanie wprowadzania”, aby widzieć klawisze, i „Dostępność”, aby wpisywać poprawiony tekst.</value>
+    <value>Zezwól na każde uprawnienie poniżej. Przycisk pokazuje okno macOS lub otwiera właściwą listę w Ustawienia systemowe, gdzie włączasz Lapsus. Stan sam zmieni się na zielony.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Dalej</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Terminy nie są też poprawiane, gdy je wpisujesz: nazwa dodana tutaj nigdy nie jest „poprawiana”.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Monitorowanie wprowadzania</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Dostępność</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>Aby widzieć, które klawisze naciskasz.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Aby wpisywać poprawiony tekst i znajdować kursor.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Do pisania głosowego. Słucha tylko podczas dyktowania.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Dozwolone</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Niedozwolone</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Wyłączone</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Zezwól…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Otwórz Ustawienia systemowe</value>
   </data>
 </root>

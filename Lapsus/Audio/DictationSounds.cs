@@ -87,6 +87,7 @@ internal static class DictationSounds
         private static extern bool PlaySound(IntPtr sound, IntPtr module, uint flags);
     }
 
+    [System.Runtime.Versioning.SupportedOSPlatform("macos")]
     private static class Mac
     {
         private static IntPtr _start;
@@ -107,30 +108,15 @@ internal static class DictationSounds
             Send(sound, "play");
         }
 
-        private static IntPtr Class(string name) => objc_getClass(name);
+        private static IntPtr Class(string name) => Input.ObjC.Class(name);
 
         private static IntPtr Send(IntPtr receiver, string selector) =>
-            objc_msgSend(receiver, sel_registerName(selector));
+            Input.ObjC.Send(receiver, Input.ObjC.Selector(selector));
 
         private static IntPtr Send(IntPtr receiver, string selector, IntPtr arg) =>
-            objc_msgSend(receiver, sel_registerName(selector), arg);
+            Input.ObjC.Send(receiver, Input.ObjC.Selector(selector), arg);
 
         private static IntPtr Send(IntPtr receiver, string selector, byte[] bytes, ulong length) =>
-            objc_msgSend(receiver, sel_registerName(selector), bytes, length);
-
-        [DllImport("/usr/lib/libobjc.dylib")]
-        private static extern IntPtr objc_getClass(string name);
-
-        [DllImport("/usr/lib/libobjc.dylib")]
-        private static extern IntPtr sel_registerName(string name);
-
-        [DllImport("/usr/lib/libobjc.dylib")]
-        private static extern IntPtr objc_msgSend(IntPtr receiver, IntPtr selector);
-
-        [DllImport("/usr/lib/libobjc.dylib")]
-        private static extern IntPtr objc_msgSend(IntPtr receiver, IntPtr selector, IntPtr arg);
-
-        [DllImport("/usr/lib/libobjc.dylib")]
-        private static extern IntPtr objc_msgSend(IntPtr receiver, IntPtr selector, byte[] bytes, ulong length);
+            Input.ObjC.Send(receiver, Input.ObjC.Selector(selector), bytes, (nuint)length);
     }
 }

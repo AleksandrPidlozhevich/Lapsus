@@ -33,4 +33,26 @@ public class TapUiGateTests
     {
         Assert.Equal(swallow, TapUiGate.SwallowHotkey(eventPid, snapshotPid, excluded));
     }
+
+    [Fact]
+    public void A_held_hotkey_that_auto_repeats_stays_swallowed()
+    {
+        Assert.Equal(HeldKeyDown.Repeat, TapUiGate.ClassifyKeyDown(swallowedKey: 0x31, key: 0x31, autoRepeat: true));
+    }
+
+    [Fact]
+    public void A_fresh_press_of_the_swallowed_key_means_its_key_up_was_lost()
+    {
+        Assert.Equal(HeldKeyDown.LostKeyUp, TapUiGate.ClassifyKeyDown(swallowedKey: 0x31, key: 0x31, autoRepeat: false));
+    }
+
+    [Theory]
+    [InlineData(null, 0x31, false)]
+    [InlineData(null, 0x31, true)]
+    [InlineData(0x31, 0x00, false)]
+    [InlineData(0x31, 0x00, true)]
+    public void Other_keys_are_not_affected_by_a_swallowed_hotkey(int? swallowed, int key, bool autoRepeat)
+    {
+        Assert.Equal(HeldKeyDown.Unrelated, TapUiGate.ClassifyKeyDown(swallowed, key, autoRepeat));
+    }
 }

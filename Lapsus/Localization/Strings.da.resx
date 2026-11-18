@@ -185,13 +185,7 @@
     <value>Kunne ikke starte tastaturopsamlingen. Giv Lapsus adgang til Tilgængelighed under Systemindstillinger → Anonymitet og sikkerhed → Tilgængelighed (og Inputovervågning, hvis den er nævnt), og genstart derefter appen.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus har brug for disse tilladelser for at se og rette det, du skriver. Giv dem nedenfor, og kom så tilbage hertil.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Giv adgang til Tilgængelighed</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Giv adgang til Inputovervågning</value>
+    <value>Lapsus har brug for disse tilladelser. Hver knap viser macOS-dialogen eller åbner den rigtige liste i Systemindstillinger → Anonymitet og sikkerhed, hvor du slår Lapsus til. Status her opdateres af sig selv.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Rettet: {0} → {1}</value>
@@ -713,7 +707,7 @@
     <value>Adgangskodefelter bliver ikke rørt: mens du skriver i et, skjuler macOS tasterne for andre apps, også Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS beder nu om to tilladelser: Inputovervågning, for at se tasterne, og Tilgængelighed, for at skrive den rettede tekst.</value>
+    <value>Tillad hver tilladelse nedenfor. Knappen viser macOS-dialogen eller åbner den rigtige liste i Systemindstillinger, hvor du slår Lapsus til. Status bliver grøn af sig selv.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Fortsæt</value>
@@ -1011,5 +1005,38 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Begreberne røres heller ikke, når du skriver dem: et navn tilføjet her bliver aldrig “rettet”.</value>
+  </data>
+  <data name="Perm_InputMonitoring" xml:space="preserve">
+    <value>Inputovervågning</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Tilgængelighed</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_InputMonitoring_Why" xml:space="preserve">
+    <value>For at se, hvilke taster du trykker på.</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>For at skrive den rettede tekst og finde markøren.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Til stemmeindtastning. Lytter kun, mens stemmeindtastning kører.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Tilladt</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Ikke tilladt</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Slået fra</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Tillad…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Åbn Systemindstillinger</value>
   </data>
 </root>

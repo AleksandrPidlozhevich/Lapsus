@@ -31,6 +31,10 @@
                     <SolidColorBrush x:Key="SystemControlBackgroundListLowBrush" Color="#f4f1ea" />
                     <SolidColorBrush x:Key="SystemControlBackgroundChromeLowBrush" Color="#f4f1ea" />
                     <SolidColorBrush x:Key="SystemControlPageBackgroundAltHighBrush" Color="#f4f1ea" />
+                    <!-- Fluent draws a locked switch that is on with a knob the colour of its track. -->
+                    <SolidColorBrush x:Key="ToggleSwitchFillOnDisabled" Color="#c4bcac" />
+                    <SolidColorBrush x:Key="ToggleSwitchStrokeOnDisabled" Color="Transparent" />
+                    <SolidColorBrush x:Key="ToggleSwitchKnobFillOnDisabled" Color="#fbf9f4" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <Color x:Key="LapsusSurfaceColor">#1a1916</Color>
@@ -51,6 +55,9 @@
                     <SolidColorBrush x:Key="SystemControlBackgroundListLowBrush" Color="#1a1916" />
                     <SolidColorBrush x:Key="SystemControlBackgroundChromeLowBrush" Color="#1a1916" />
                     <SolidColorBrush x:Key="SystemControlPageBackgroundAltHighBrush" Color="#1a1916" />
+                    <SolidColorBrush x:Key="ToggleSwitchFillOnDisabled" Color="#46433c" />
+                    <SolidColorBrush x:Key="ToggleSwitchStrokeOnDisabled" Color="Transparent" />
+                    <SolidColorBrush x:Key="ToggleSwitchKnobFillOnDisabled" Color="#8a8478" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
