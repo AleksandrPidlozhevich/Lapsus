@@ -108,7 +108,7 @@
             <StackPanel Spacing="12" IsVisible="{Binding IsTry}">
                 <TextBlock Classes="heading" Text="{Binding L[Onb_Try_Title]}" />
                 <TextBlock Classes="point" Text="{Binding TryText}" />
-                <TextBox x:Name="TryField" Watermark="{Binding Sample}" FontSize="16" />
+                <TextBox x:Name="TryField" PlaceholderText="{Binding Sample}" FontSize="16" />
                 <TextBlock Classes="quiet" Text="{Binding Settings.StatusText}" />
             </StackPanel>
 
