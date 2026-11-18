@@ -238,6 +238,10 @@ internal static class MacCaretProbe
         if (TryBoundsForRange(focused, next, out var after))
             return Sliver(after, atRight: false);
 
+        // An empty field has no character on either side; AppKit answers the empty range with the caret itself.
+        if (TryBoundsForRange(focused, range, out var caret))
+            return Sliver(caret, atRight: false);
+
         if (range.Location <= 0)
             return default;
 
