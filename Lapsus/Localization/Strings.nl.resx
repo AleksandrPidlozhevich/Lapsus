@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>In Instellingen staat meer: toetsen voor geselecteerde tekst (hoofdletters, transliteratie), typen met je stem, een lokaal AI-model. Het pictogram in het systeemvak opent ze.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>In Instellingen staat meer: toetsen voor geselecteerde tekst (hoofdletters, transliteratie), uitzonderingen voor apps en woorden. Het pictogram in het systeemvak opent ze.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Introductie opnieuw tonen</value>
   </data>

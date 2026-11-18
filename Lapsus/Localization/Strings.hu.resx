@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>A Beállításokban több is van: billentyűk a kijelölt szöveghez (kis- és nagybetű, átírás), diktálás, helyi MI-modell. A tálcaikon nyitja meg őket.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>A Beállításokban több is van: billentyűk a kijelölt szöveghez (kis- és nagybetű, átírás), kivételek alkalmazásokhoz és szavakhoz. A tálcaikon nyitja meg őket.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>A bevezető újbóli megjelenítése</value>
   </data>

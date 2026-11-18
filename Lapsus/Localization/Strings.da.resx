@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Der er mere i Indstillinger: taster til markeret tekst (store og små bogstaver, translitteration), diktering, en lokal AI-model. Ikonet i meddelelsesområdet åbner dem.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Der er mere i Indstillinger: taster til markeret tekst (store og små bogstaver, translitteration), undtagelser for apps og ord. Ikonet i meddelelsesområdet åbner dem.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Vis introduktionen igen</value>
   </data>

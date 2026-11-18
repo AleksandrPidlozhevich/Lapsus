@@ -883,7 +883,7 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem>
+            <TabItem IsVisible="{Binding HasPaidModules}">
                 <TabItem.Header>
                     <StackPanel Spacing="4">
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconAi}" Width="20" Height="20"
@@ -1304,7 +1304,7 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem>
+            <TabItem IsVisible="{Binding Backup.IsSupported}">
                 <TabItem.Header>
                     <StackPanel Spacing="4">
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconBackup}" Width="20" Height="20"
@@ -1331,7 +1331,7 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem>
+            <TabItem IsVisible="{Binding ShowLicenseTab}">
                 <TabItem.Header>
                     <StackPanel Spacing="4">
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconLicense}" Width="20" Height="20"

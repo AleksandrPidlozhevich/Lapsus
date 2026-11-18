@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Ayarlar’da daha fazlası var: seçili metin için tuşlar (büyük/küçük harf, harf çevirisi), sesle yazma, yerel bir yapay zekâ modeli. Bildirim alanındaki simge bunları açar.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Ayarlar’da daha fazlası var: seçili metin için tuşlar (büyük/küçük harf, harf çevirisi), uygulamalar ve sözcükler için istisnalar. Bildirim alanındaki simge bunları açar.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Tanıtımı yeniden göster</value>
   </data>

@@ -83,8 +83,8 @@ public partial class SettingsViewModel : ViewModelBase
         _switchSystemLayout = settings.SwitchSystemLayout;
         _hotkeyCyclesLayout = settings.HotkeyCyclesLayout;
         _runAtStartup = settings.RunAtStartup;
-        // The App Store edition's trial may have ended while the app was closed.
-        _neuralCorrectionEnabled = settings.NeuralCorrectionEnabled && storeAccess.PaidFeatures;
+        // A trial may have ended while the app was closed; the App Store edition has no neural module at all.
+        _neuralCorrectionEnabled = settings.NeuralCorrectionEnabled && storeAccess.PaidFeatures && AppEdition.HasPaidModules;
         if (_neuralCorrectionEnabled != settings.NeuralCorrectionEnabled)
         {
             settings.NeuralCorrectionEnabled = false;
@@ -246,6 +246,11 @@ public partial class SettingsViewModel : ViewModelBase
     public StoreViewModel Store { get; }
 
     public bool NeuralLocked => !Store.PaidFeatures;
+
+    public bool HasPaidModules => AppEdition.HasPaidModules;
+
+    // Keys are neither sold nor accepted in the App Store edition, and it has nothing else to buy.
+    public bool ShowLicenseTab => !AppEdition.IsAppStore;
 
     private void OnStoreAccessChanged()
     {

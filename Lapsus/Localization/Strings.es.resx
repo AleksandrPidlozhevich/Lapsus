@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>En Ajustes hay más: teclas para una selección (mayúsculas, transliteración), dictado por voz, un modelo de IA local. El icono de la bandeja los abre.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>En Ajustes hay más: teclas para una selección (mayúsculas, transliteración), excepciones para apps y palabras. El icono de la bandeja los abre.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Mostrar la introducción otra vez</value>
   </data>

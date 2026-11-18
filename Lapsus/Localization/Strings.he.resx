@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>בהגדרות יש עוד: מקשים לטקסט מסומן (אותיות גדולות וקטנות, תעתיק), הקלדה בקול, מודל בינה מלאכותית מקומי. הסמל שבמגש המערכת פותח אותן.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>בהגדרות יש עוד: מקשים לטקסט מסומן (אותיות גדולות וקטנות, תעתיק), חריגים לאפליקציות ולמילים. הסמל שבמגש המערכת פותח אותן.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>הצגת ההקדמה שוב</value>
   </data>

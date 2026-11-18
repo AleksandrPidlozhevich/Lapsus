@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>In den Einstellungen gibt es mehr: Tasten für markierten Text (Groß-/Kleinschreibung, Transliteration), Diktieren, ein lokales KI-Modell. Das Symbol im Infobereich öffnet sie.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>In den Einstellungen gibt es mehr: Tasten für markierten Text (Groß-/Kleinschreibung, Transliteration), Ausnahmen für Apps und Wörter. Das Symbol im Infobereich öffnet sie.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Einführung erneut anzeigen</value>
   </data>

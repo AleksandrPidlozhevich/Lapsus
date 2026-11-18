@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Há mais nas Definições: teclas para uma seleção (maiúsculas, transliteração), ditado por voz, um modelo de IA local. O ícone na área de notificação abre-as.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Há mais nas Definições: teclas para uma seleção (maiúsculas, transliteração), exceções para apps e palavras. O ícone na área de notificação abre-as.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Mostrar a introdução novamente</value>
   </data>

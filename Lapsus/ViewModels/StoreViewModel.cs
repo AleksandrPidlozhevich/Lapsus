@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 
 namespace Lapsus.ViewModels;
 
-// Only neural correction and features added after it are paid; everything else stays free.
-// In every other build Access gates nothing.
+// Lapsus Plus: neural correction and features added after it, bought through the App Store. No build
+// sells it at the moment (the App Store edition ships without those modules, see AppEdition), so Access
+// gates nothing.
 public sealed partial class StoreViewModel : ObservableObject
 {
     private static readonly TimeSpan RecheckInterval = TimeSpan.FromHours(1);
@@ -23,7 +24,7 @@ public sealed partial class StoreViewModel : ObservableObject
     private StoreEntitlement _owned = StoreEntitlement.None;
 
     public StoreViewModel(IStorePurchases purchases)
-        : this(purchases, MacSandbox.IsSandboxed)
+        : this(purchases, MacSandbox.IsSandboxed && AppEdition.HasPaidModules)
     {
     }
 

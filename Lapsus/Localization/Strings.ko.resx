@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>설정에 더 있습니다. 선택 영역용 키(대소문자, 음역), 음성 입력, 로컬 AI 모델. 트레이 아이콘으로 엽니다.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>설정에 더 있습니다. 선택 영역용 키(대소문자, 음역), 앱과 단어 예외. 트레이 아이콘으로 엽니다.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>소개 다시 보기</value>
   </data>

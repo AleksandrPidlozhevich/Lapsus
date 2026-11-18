@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>W ustawieniach jest więcej: klawisze dla zaznaczonego tekstu (wielkość liter, transliteracja), pisanie głosem, lokalny model AI. Otwiera je ikona w zasobniku.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>W ustawieniach jest więcej: klawisze dla zaznaczonego tekstu (wielkość liter, transliteracja), wyjątki dla aplikacji i słów. Otwiera je ikona w zasobniku.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Pokaż wprowadzenie ponownie</value>
   </data>

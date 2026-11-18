@@ -1,12 +1,16 @@
 <Project>
     <!--
-      Single source of truth for the app version: the VERSION file next to this one. Every csproj in
+      Single source of truth for the app version: the VERSION file next to this one (VERSION.mas for
+      the Mac App Store edition). Every csproj in
       the tree picks it up automatically (Version, and the AssemblyVersion/FileVersion the SDK derives
       from it), so both the macOS packaging script and any future Windows installer can read the same
       VERSION file instead of the number being duplicated per platform.
     -->
     <PropertyGroup>
-        <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)VERSION').Trim())</Version>
+        <!-- The Mac App Store edition (-p:MacAppStore=true) has its own number line in VERSION.mas. -->
+        <VersionFile>$(MSBuildThisFileDirectory)VERSION</VersionFile>
+        <VersionFile Condition="'$(MacAppStore)' == 'true'">$(MSBuildThisFileDirectory)VERSION.mas</VersionFile>
+        <Version>$([System.IO.File]::ReadAllText('$(VersionFile)').Trim())</Version>
         <!-- Otherwise the SDK appends "+<git-sha>" to InformationalVersion, which is what the UI
              shows the user — a raw commit hash there is noise, not something a user reads. -->
         <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
@@ -24,5 +28,13 @@
         <!-- Inert while nothing here is packed as a NuGet package, but BUSL-1.1 is a valid SPDX
              identifier, so this is the machine-readable form of the line above. -->
         <PackageLicenseExpression>BUSL-1.1</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <!-- The App Store edition restores a different set of projects, so it keeps its own obj/bin and the
+         two editions never reuse each other's intermediates. -->
+    <PropertyGroup Condition="'$(MacAppStore)' == 'true'">
+        <BaseIntermediateOutputPath>obj/mas/</BaseIntermediateOutputPath>
+        <BaseOutputPath>bin/mas/</BaseOutputPath>
+        <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
     </PropertyGroup>
 </Project>

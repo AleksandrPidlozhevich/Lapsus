@@ -125,7 +125,8 @@
                               IsChecked="{Binding Settings.ShowLayoutIndicator}"
                               IsVisible="{Binding Settings.IsLayoutIndicatorSupported}" />
                 </StackPanel>
-                <TextBlock Classes="point" Text="{Binding L[Onb_More]}" />
+                <TextBlock Classes="point" Text="{Binding L[Onb_More]}" IsVisible="{Binding HasPaidModules}" />
+                <TextBlock Classes="point" Text="{Binding L[Onb_More_Store]}" IsVisible="{Binding !HasPaidModules}" />
             </StackPanel>
 
             <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">

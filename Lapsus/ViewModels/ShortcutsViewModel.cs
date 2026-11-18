@@ -125,6 +125,10 @@ public sealed partial class ShortcutsViewModel : ObservableObject
 
         foreach (var (action, label, hint) in SelectionActionRows)
         {
+            // The glossary feeds voice typing, which the App Store edition does not have.
+            if (action == SelectionAction.AddToGlossary && !AppEdition.HasPaidModules)
+                continue;
+
             var saved = SavedSelectionHotkey(action);
             var option = options.FirstOrDefault(o => o.VirtualKey == saved);
             if (option is null && (HotkeyCombo.IsCombo(saved) || HotkeyNames.IsNamedKey(saved)))
@@ -199,7 +203,8 @@ public sealed partial class ShortcutsViewModel : ObservableObject
     }
 
     public bool DictationSupported =>
-        _supported && (OperatingSystem.IsWindows() || OperatingSystem.IsMacOS()) && _backend is IDictationHost;
+        AppEdition.HasPaidModules && _supported && (OperatingSystem.IsWindows() || OperatingSystem.IsMacOS())
+        && _backend is IDictationHost;
 
     public SelectionHotkeyViewModel? DictationHotkeyRow { get; }
 

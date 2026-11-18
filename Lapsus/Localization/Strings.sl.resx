@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>V nastavitvah je še več: tipke za izbrano besedilo (velike in male črke, prečrkovanje), narekovanje, lokalni model UI. Odpre jih ikona v opravilni vrstici.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>V nastavitvah je še več: tipke za izbrano besedilo (velike in male črke, prečrkovanje), izjeme za aplikacije in besede. Odpre jih ikona v opravilni vrstici.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Znova pokaži uvod</value>
   </data>

@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>V nastavení je toho víc: klávesy pro vybraný text (velikost písmen, přepis), psaní hlasem, místní model AI. Otevírá je ikona v oznamovací oblasti.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>V nastavení je toho víc: klávesy pro vybraný text (velikost písmen, přepis), výjimky pro aplikace a slova. Otevírá je ikona v oznamovací oblasti.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Znovu zobrazit úvod</value>
   </data>

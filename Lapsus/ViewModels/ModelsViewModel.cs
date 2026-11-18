@@ -57,7 +57,15 @@ public sealed partial class ModelsViewModel : ObservableObject
 
     private static Localizer L => Localizer.Instance;
 
+#if MAS
+    private static RuntimeCapabilities Capabilities => RuntimeCapabilities.CpuOnly;
+
+    private static string ProviderLabel(string? provider) => provider ?? string.Empty;
+#else
     private static RuntimeCapabilities Capabilities => ComputeDeviceProbe.Capabilities();
+
+    private static string ProviderLabel(string? provider) => ComputeDeviceProbe.Label(provider);
+#endif
 
     public ObservableCollection<ModelDescriptor> Installed { get; } = [];
 
@@ -99,7 +107,7 @@ public sealed partial class ModelsViewModel : ObservableObject
     [ObservableProperty] private ComputeDeviceOption? _selectedDevice;
 
     public string DeviceHint => Capabilities.Has(ComputeDevice.Gpu)
-        ? L.Format("Model_DeviceHint", ComputeDeviceProbe.Label(
+        ? L.Format("Model_DeviceHint", ProviderLabel(
             Capabilities.ProvidersFor(ComputeDevice.Gpu).FirstOrDefault()))
         : L["Model_DeviceHintCpuOnly"];
 

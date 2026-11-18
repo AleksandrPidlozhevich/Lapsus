@@ -73,6 +73,8 @@ public sealed partial class OnboardingViewModel : ObservableObject
 
     public Localizer L => Localizer.Instance;
 
+    public bool HasPaidModules => AppEdition.HasPaidModules;
+
     public FlowDirection FlowDirection =>
         Localizer.Instance.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 

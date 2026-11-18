@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Les réglages offrent davantage : des touches pour une sélection (casse, translittération), la dictée vocale, un modèle d’IA local. L’icône de la zone de notification les ouvre.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Les réglages offrent davantage : des touches pour une sélection (casse, translittération), des exceptions pour les apps et les mots. L’icône de la zone de notification les ouvre.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Revoir l’introduction</value>
   </data>

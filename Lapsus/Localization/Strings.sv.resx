@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Det finns mer i Inställningar: tangenter för markerad text (versaler och gemener, translitterering), diktering, en lokal AI-modell. Ikonen i meddelandefältet öppnar dem.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Det finns mer i Inställningar: tangenter för markerad text (versaler och gemener, translitterering), undantag för appar och ord. Ikonen i meddelandefältet öppnar dem.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Visa introduktionen igen</value>
   </data>

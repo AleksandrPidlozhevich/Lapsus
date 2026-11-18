@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>في الإعدادات المزيد: مفاتيح للنص المحدد (حالة الأحرف، النقل الحرفي)، الكتابة بالصوت، نموذج ذكاء اصطناعي محلي. تفتحها الأيقونة في علبة النظام.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>في الإعدادات المزيد: مفاتيح للنص المحدد (حالة الأحرف، النقل الحرفي)، استثناءات للتطبيقات والكلمات. تفتحها الأيقونة في علبة النظام.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>عرض المقدمة مرة أخرى</value>
   </data>

@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Nelle Impostazioni c’è altro: tasti per una selezione (maiuscole, traslitterazione), dettatura vocale, un modello di IA locale. Le apre l’icona nell’area di notifica.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Nelle Impostazioni c’è altro: tasti per una selezione (maiuscole, traslitterazione), eccezioni per app e parole. Le apre l’icona nell’area di notifica.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Mostra di nuovo l’introduzione</value>
   </data>

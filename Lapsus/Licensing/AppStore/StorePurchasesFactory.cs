@@ -7,7 +7,8 @@ internal static class StorePurchasesFactory
 {
     public static IStorePurchases CreateForCurrentBuild()
     {
-        if (OperatingSystem.IsMacOS() && MacSandbox.IsSandboxed && MacStoreKitPurchases.TryCreate() is { } storeKit)
+        if (AppEdition.HasPaidModules && OperatingSystem.IsMacOS() && MacSandbox.IsSandboxed
+            && MacStoreKitPurchases.TryCreate() is { } storeKit)
             return storeKit;
 
         return new NullStorePurchases();

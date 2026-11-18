@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# The free App Store edition: versioned by VERSION.mas, built without neural correction, voice typing
+# and the StoreKit purchase bridge (see Lapsus/AppEdition.cs).
+
 # Store package:
 #   LAPSUS_MAS_APP_IDENTITY        "Apple Distribution: ..." (or "3rd Party Mac Developer Application: ...")
 #   LAPSUS_MAS_INSTALLER_IDENTITY  "3rd Party Mac Developer Installer: ..."
@@ -18,7 +21,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 EXECUTABLE="Lapsus"
 RID="osx-arm64"
-VERSION="$(cat "$ROOT/VERSION")"
+VERSION="$(tr -d '[:space:]' < "$ROOT/VERSION.mas")"
 ENTITLEMENTS_BASE="$ROOT/Lapsus/Packaging/Mas/Lapsus.entitlements"
 
 TEST=false
@@ -80,16 +83,11 @@ ditto "$PUBLISH_DIR" "$APP/Contents/MacOS"
 # crash dumper, so it is left out rather than signed.
 rm -f "$APP/Contents/MacOS/createdump"
 find "$APP/Contents/MacOS" -name '*.pdb' -delete
-# Whisper.net ships every OS's runtime. Linux and Windows libraries are not Mach-O, so their
-# signatures would go in extended attributes, which the store does not take; only this Mac's
-# folder stays, where Whisper.net looks for it. Its Metal shaders are compiled into
-# libggml-metal-whisper.dylib, so the loose ggml-metal.metal is not needed either.
-find "$APP/Contents/MacOS/runtimes" -mindepth 1 -maxdepth 1 ! -name "macos-${RID#osx-}" -exec rm -rf {} +
-rm -f "$APP/Contents/MacOS/ggml-metal.metal"
-
-# StoreKit 2 bridge (subscription and lifetime purchase). Beside the executable, where .NET looks
-# for a native library.
-"$ROOT/scripts/build-storekit-bridge.sh" "$APP/Contents/MacOS"
+# A package that ships every OS's runtime leaves non-Mach-O libraries whose signatures would go in
+# extended attributes, which the store does not take; only this Mac's folder may stay.
+if [ -d "$APP/Contents/MacOS/runtimes" ]; then
+  find "$APP/Contents/MacOS/runtimes" -mindepth 1 -maxdepth 1 ! -name "macos-${RID#osx-}" -exec rm -rf {} +
+fi
 
 "$ROOT/scripts/make-macos-icon.sh" "$BUILD_DIR" "$APP/Contents/Resources/AppIcon.icns"
 
@@ -128,8 +126,6 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <false/>
     <key>NSHighResolutionCapable</key>
     <true/>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Lapsus listens only while voice typing is on and you have pressed its hotkey, and turns your speech into text on this Mac.</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
 </dict>

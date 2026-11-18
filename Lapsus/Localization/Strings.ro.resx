@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>În Setări găsiți mai mult: taste pentru o selecție (majuscule, transliterare), dictare vocală, un model AI local. Pictograma din zona de notificare le deschide.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>În Setări găsiți mai mult: taste pentru o selecție (majuscule, transliterare), excepții pentru aplicații și cuvinte. Pictograma din zona de notificare le deschide.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Arată din nou introducerea</value>
   </data>

@@ -38,9 +38,11 @@ public partial class App : Application
     private WordExceptions? _exceptions;
     private AppExclusions? _excludedApps;
     private LayoutIndicator? _indicator;
+#if !MAS
     private DictationEngine? _dictationEngine;
     private DictationSession? _dictation;
     private DictationIndicator? _dictationIndicator;
+#endif
 
     private StoreViewModel? _storeViewModel;
     private LicenseReminder? _licenseReminder;
@@ -137,7 +139,9 @@ public partial class App : Application
                 _storeViewModel);
             _brain.Settings = _settingsViewModel;
 
+#if !MAS
             SetupDictation(settings, store);
+#endif
 
             SetupTrayIcon(desktop);
             ActualThemeVariantChanged += (_, _) => ApplyThemedIcon();
@@ -198,6 +202,7 @@ public partial class App : Application
                 loc.Format("Notify_DictMissingBody", string.Join(", ", fresh.Select(d => d.DisplayName))));
     }
 
+#if !MAS
     // The speech model loads on the first dictation (or, with "never unload", half a minute after start); the microphone opens only while recording.
     private void SetupDictation(AppSettings settings, SettingsStore store)
     {
@@ -265,6 +270,7 @@ public partial class App : Application
         };
         timer.Start();
     }
+#endif
 
     // Wait until startup (dictionary load, hook install) has settled so the download does not compete with it and make the machine stutter.
     private async Task CheckForUpdateLaterAsync()
@@ -287,7 +293,11 @@ public partial class App : Application
                 desktop.Shutdown();
             },
             _settingsViewModel?.Pausing,
+#if MAS
+            null,
+#else
             _dictation?.History,
+#endif
             text => (_backend as IDictationHost)?.CopyDictatedText(text));
 
         _trayIcon = new TrayIcon
@@ -335,6 +345,7 @@ public partial class App : Application
         {
         }
 
+#if !MAS
         try
         {
             _dictation?.Dispose();
@@ -345,6 +356,7 @@ public partial class App : Application
         catch
         {
         }
+#endif
 
         try
         {

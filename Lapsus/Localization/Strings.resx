@@ -969,6 +969,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>There is more in Settings: keys for a selection (case, transliteration), typing by voice, a local AI model. The tray icon opens it.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>There is more in Settings: keys for a selection (case, transliteration), exceptions for apps and words. The tray icon opens it.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Show the introduction again</value>
   </data>

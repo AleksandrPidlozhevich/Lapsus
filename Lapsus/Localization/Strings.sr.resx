@@ -964,6 +964,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>U podešavanjima ima još: tasteri za izabrani tekst (velika i mala slova, transliteracija), kucanje glasom, lokalni AI model. Otvara ih ikona u sistemskoj traci.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>U podešavanjima ima još: tasteri za izabrani tekst (velika i mala slova, transliteracija), izuzeci za programe i reči. Otvara ih ikona u sistemskoj traci.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Prikaži uvod ponovo</value>
   </data>
