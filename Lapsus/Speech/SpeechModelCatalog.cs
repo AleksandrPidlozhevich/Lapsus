@@ -8,8 +8,8 @@ namespace Lapsus.Speech;
 // so what reaches the disk is exactly what was measured.
 public sealed record SpeechFile(string Repo, string Revision, string Path, long Size, string Sha256);
 
-// Parakeet: NVIDIA NeMo models in onnx-asr's export, the TDT Parakeets and the one-language FastConformer CTCs.
-public enum SpeechEngine { Whisper, Parakeet }
+// Nemo: NVIDIA NeMo models in onnx-asr's export, the TDT Parakeets and the one-language FastConformer CTCs.
+public enum SpeechEngine { Whisper, Nemo }
 
 // Languages: what the model can hear; null means every language Whisper knows.
 public sealed record SpeechModel(
@@ -53,7 +53,7 @@ public static class SpeechModelCatalog
     private const string ArmenianRevision = "f7db1fad9af6bd8a7a9e08fca02068c403b35468";
     public const string ArmenianId = "fastconformer-hy";
 
-    // Silero VAD 6.2 for the CTC models, which write words over silence (ParakeetRecognizer); each folder takes a copy.
+    // Silero VAD 6.2 for the CTC models, which write words over silence (NemoRecognizer); each folder takes a copy.
     private static readonly SpeechFile OnnxVad = new(
         "istupakov/silero-vad-onnx", "b3e3ee3cce4c11ceb63b1a0b229d916069c1ddf6", "silero_vad.onnx", 2327524,
         "1a153a22f4509e292a94e67d6f9b85e8deb25b4988682b7e174c65279d8788e3");
@@ -101,7 +101,7 @@ public static class SpeechModelCatalog
                 new SpeechFile(ParakeetRepo, ParakeetRevision, "vocab.txt", 93939,
                     "d58544679ea4bc6ac563d1f545eb7d474bd6cfa467f0a6e2c1dc1c7d37e3c35d"),
             ],
-            RamMb: 900, License: "CC-BY-4.0", Engine: SpeechEngine.Parakeet, Languages: ParakeetLanguages),
+            RamMb: 900, License: "CC-BY-4.0", Engine: SpeechEngine.Nemo, Languages: ParakeetLanguages),
         // English only, and NVIDIA's most accurate English model (v3 trades some of that for 24 more languages).
         // Same export and decoder as v3; 295 ms on a 4 s English sample (i7-9700F, 4 threads).
         new(ParakeetEnglishId, "Parakeet TDT v2",
@@ -116,7 +116,7 @@ public static class SpeechModelCatalog
                 new SpeechFile(ParakeetEnglishRepo, ParakeetEnglishRevision, "vocab.txt", 9384,
                     "ec182b70dd42113aff6c5372c75cac58c952443eb22322f57bbd7f53977d497d"),
             ],
-            RamMb: 900, License: "CC-BY-4.0", Engine: SpeechEngine.Parakeet, Languages: EnglishOnly),
+            RamMb: 900, License: "CC-BY-4.0", Engine: SpeechEngine.Nemo, Languages: EnglishOnly),
         // ivrit.ai's Hebrew fine-tune of turbo. Its language detection is broken by the training, so every phrase
         // is read as Hebrew (DictationEngine pins a one-language model), so it is suggested only where Hebrew
         // is the main layout.
@@ -135,7 +135,7 @@ public static class SpeechModelCatalog
                     "a56cd6fbb72e8666ae3f8aab3752b3637a11a97de56724bfa25ba3915dd2f988"),
                 OnnxVad,
             ],
-            RamMb: 700, License: "CC-BY-4.0", Engine: SpeechEngine.Parakeet, Languages: GeorgianOnly),
+            RamMb: 700, License: "CC-BY-4.0", Engine: SpeechEngine.Nemo, Languages: GeorgianOnly),
         new(ArmenianId, "NVIDIA FastConformer Armenian",
             [
                 new SpeechFile(ArmenianRepo, ArmenianRevision, "model.onnx", 458160971,
@@ -144,7 +144,7 @@ public static class SpeechModelCatalog
                     "221b1dd978a2d8f4fe8a8e185e400c09f98d71c887de9099cb2f1154d321416b"),
                 OnnxVad,
             ],
-            RamMb: 700, License: "CC-BY-4.0", Engine: SpeechEngine.Parakeet, Languages: ArmenianOnly),
+            RamMb: 700, License: "CC-BY-4.0", Engine: SpeechEngine.Nemo, Languages: ArmenianOnly),
         new("whisper-large-v3-turbo-q5", "Whisper large-v3-turbo q5",
             [new SpeechFile(WhisperRepo, WhisperRevision, "ggml-large-v3-turbo-q5_0.bin", 574041195,
                 "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2")],
@@ -165,6 +165,24 @@ public static class SpeechModelCatalog
         Available.FirstOrDefault(m => string.Equals(m.Id, id, StringComparison.Ordinal));
 
     public static SpeechModel Default => Find(DefaultId)!;
+
+    // The model a dictation in `language` runs on: a downloaded model made for that language alone (turbo "hears"
+    // Georgian, but writes something else), else the chosen one if it hears it, else the downloaded model that hears
+    // it most narrowly (Parakeet v3's 25 before Whisper's all), else the chosen one.
+    public static SpeechModel ForLanguage(SpeechModel chosen, string language, Func<SpeechModel, bool> installed)
+    {
+        bool Have(SpeechModel m) => m == chosen || installed(m);
+        return Available.FirstOrDefault(m => m.Languages is { Count: 1 } && m.Hears(language) && Have(m))
+               ?? (chosen.Hears(language)
+                   ? chosen
+                   : Available.Where(m => m.Hears(language) && installed(m))
+                         .OrderBy(m => m.Languages?.Count ?? int.MaxValue)
+                         .FirstOrDefault() ?? chosen);
+    }
+
+    // The model made for this language, where Whisper is weak in it (he, ka, hy).
+    public static SpeechModel? OwnModel(string language) =>
+        ForMainLanguage.TryGetValue(language, out var id) ? Find(id) : null;
 
     // Without a graphics card turbo takes ~2.5 s a phrase, Parakeet ~0.3 s — but only if it hears every language
     // the user writes in (their installed layouts); otherwise Whisper, which hears them all. English alone gets v2.

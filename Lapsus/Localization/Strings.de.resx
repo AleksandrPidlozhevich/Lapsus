@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 ist ohne Grafikkarte die schnelle Wahl (etwa 0,3 s pro Satz), kennt aber nur 25 europäische Sprachen und schreibt englische Fachbegriffe öfter in Ihrem Alphabet. large-v3-turbo kennt alle Sprachen und ist mit Grafikkarte die beste Wahl; q5 ist dasselbe Turbo als kleinerer Download. large-v3 ist etwas genauer, braucht aber eine Grafikkarte. Whisper small ist der kleinste Download. Parakeet TDT v2 ist genauso schnell, aber nur für Englisch, und darin genauer. Das hebräische Turbo von ivrit.ai ist im Hebräischen genauer, liest aber jeden Satz als Hebräisch. Für Georgisch und Armenisch NVIDIA FastConformer: Whisper kennt sie kaum, diese sind schnell und genau, jedes nur für seine Sprache.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Layout {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Layout {0} braucht ein anderes Modell: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Sprache</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Englische Begriffe in lateinischer Schrift</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Begriffe wie pull request oder GitHub werden wie im Englischen geschrieben. Wörter, die Ihre Sprache übernommen hat, bleiben unverändert.</value>
+    <value>Begriffe wie pull request oder GitHub werden wie im Englischen geschrieben. Wörter, die Ihre Sprache übernommen hat, bleiben unverändert. Mit eingeschaltetem KI-Modell wägt es auch Begriffe ab, die die Erkennung ungenau gehört hat.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Satzzeichen per Sprache</value>
@@ -821,7 +827,7 @@
     <value>Glossar</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Namen und Begriffe, die richtig geschrieben werden sollen, einer pro Zeile, so wie sie getippt werden sollen. Klingt ein Begriff ungewöhnlich, fügen Sie nach | hinzu, wie er klingt.</value>
+    <value>Namen und Begriffe, die richtig geschrieben werden sollen, einer pro Zeile, so wie sie getippt werden sollen. Klingt ein Begriff ungewöhnlich, fügen Sie nach | hinzu, wie er klingt. Ein falsch verstandenes Wort, das Sie direkt nach dem Diktat in lateinischer Schrift neu tippen, wird hier von selbst ergänzt.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Spracheingabe ist Teil von Lapsus Plus.</value>

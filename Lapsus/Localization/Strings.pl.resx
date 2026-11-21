@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 to szybki wybór bez karty graficznej (około 0,3 s na zdanie), ale zna tylko 25 języków europejskich i częściej zapisuje angielskie terminy twoim alfabetem. large-v3-turbo zna wszystkie języki i jest najlepsza z kartą graficzną; q5 to ta sama turbo z mniejszym pobieraniem. large-v3 jest nieco dokładniejsza, ale wymaga karty graficznej. Whisper small to najmniejsze pobieranie. Parakeet TDT v2 jest równie szybka, ale tylko dla angielskiego, i w nim dokładniejsza. Turbo dla hebrajskiego od ivrit.ai jest dokładniejsza po hebrajsku, ale każde zdanie czyta jako hebrajskie. Dla gruzińskiego i ormiańskiego NVIDIA FastConformer: Whisper prawie ich nie zna, a te są szybkie i dokładne, każdy tylko dla swojego języka.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Układ {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Układ {0} potrzebuje innego modelu: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Język</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Angielskie terminy alfabetem łacińskim</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Terminy takie jak pull request czy GitHub są pisane jak po angielsku. Słowa przyswojone przez twój język zostają bez zmian.</value>
+    <value>Terminy takie jak pull request czy GitHub są pisane jak po angielsku. Słowa przyswojone przez twój język zostają bez zmian. Przy włączonym modelu AI waży też terminy, które rozpoznawanie usłyszało niedokładnie.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Interpunkcja głosem</value>
@@ -821,7 +827,7 @@
     <value>Słownik</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Nazwy i terminy, które mają być zapisane poprawnie — po jednym w wierszu, tak jak mają zostać wpisane. Jeśli termin brzmi nietypowo, po | dodaj, jak się go wymawia.</value>
+    <value>Nazwy i terminy, które mają być zapisane poprawnie — po jednym w wierszu, tak jak mają zostać wpisane. Jeśli termin brzmi nietypowo, po | dodaj, jak się go wymawia. Źle usłyszane słowo, które zaraz po dyktowaniu przepiszesz alfabetem łacińskim, dodaje się tu samo.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Pisanie głosowe jest częścią Lapsus Plus.</value>

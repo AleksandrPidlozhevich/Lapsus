@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 — быстрый выбор без видеокарты (около 0,3 с на фразу), но знает только 25 европейских языков и чаще пишет английские термины вашим алфавитом. large-v3-turbo знает все языки и лучше всего с видеокартой; q5 — та же turbo, но скачивается меньше. large-v3 немного точнее, но ей нужна видеокарта. Whisper small — самая маленькая загрузка. Parakeet TDT v2 такая же быстрая, но только для английского, и в нём точнее. Turbo для иврита от ivrit.ai точнее в иврите, но каждую фразу читает как иврит. Для грузинского и армянского — NVIDIA FastConformer: Whisper их почти не знает, а эти быстрые и точные, каждая только для своего языка.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Раскладка {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Раскладке {0} нужна другая модель: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Язык</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Английские термины латиницей</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Термины вроде pull request или GitHub пишутся как в английском, а не вашими буквами. Прижившиеся в языке слова остаются как есть.</value>
+    <value>Термины вроде pull request или GitHub пишутся как в английском, а не вашими буквами. Прижившиеся в языке слова остаются как есть. Когда включена ИИ-модель, она ещё и взвешивает термины, которые распознаватель расслышал неточно.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Пунктуация голосом</value>
@@ -821,7 +827,7 @@
     <value>Глоссарий</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Имена и термины, которые важно писать правильно, — по одному в строке, так, как их нужно напечатать. Если термин звучит необычно, после | добавьте, как он произносится.</value>
+    <value>Имена и термины, которые важно писать правильно, — по одному в строке, так, как их нужно напечатать. Если термин звучит необычно, после | добавьте, как он произносится. Неправильно расслышанное слово, которое вы сразу после диктовки перепечатаете латиницей, добавляется сюда само.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Голосовой ввод входит в Lapsus Plus.</value>

@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 är det snabba valet utan grafikkort (cirka 0,3 s per mening), men kan bara 25 europeiska språk och stavar oftare engelska facktermer med ditt alfabet. large-v3-turbo kan alla språk och är bäst med grafikkort; q5 är samma turbo som en mindre nedladdning. large-v3 är lite noggrannare men vill ha ett grafikkort. Whisper small är den minsta nedladdningen. Parakeet TDT v2 är lika snabb men bara för engelska, och noggrannare där. Den hebreiska turbon från ivrit.ai är noggrannare på hebreiska, men läser varje fras som hebreiska. För georgiska och armeniska NVIDIA FastConformer: Whisper kan dem knappt, dessa är snabba och noggranna, var och en bara för sitt språk.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Layout {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Layouten {0} behöver en annan modell: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Språk</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Engelska termer med latinska bokstäver</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Termer som pull request eller GitHub skrivs som på engelska. Ord som ditt språk har lånat in förblir som de är.</value>
+    <value>Termer som pull request eller GitHub skrivs som på engelska. Ord som ditt språk har lånat in förblir som de är. Med AI-modellen på väger den också in termer som igenkänningen hörde fel.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Skiljetecken med rösten</value>
@@ -821,7 +827,7 @@
     <value>Ordlista</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Namn och termer som ska bli rätt, en per rad, stavade som de ska skrivas. Om en term låter ovanlig, lägg till efter | hur den låter.</value>
+    <value>Namn och termer som ska bli rätt, en per rad, stavade som de ska skrivas. Om en term låter ovanlig, lägg till efter | hur den låter. Ett felhört ord som du skriver om med latinska bokstäver direkt efter dikteringen läggs till här av sig självt.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Röstinmatning ingår i Lapsus Plus.</value>

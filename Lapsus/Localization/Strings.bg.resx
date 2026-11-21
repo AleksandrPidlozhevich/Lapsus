@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 е бързият избор без видеокарта (около 0,3 с на фраза), но знае само 25 европейски езика и по-често пише английските термини с вашата азбука. large-v3-turbo знае всички езици и е най-добра с видеокарта; q5 е същата turbo, но се изтегля по-малко. large-v3 е малко по-точна, но иска видеокарта. Whisper small е най-малкото изтегляне. Parakeet TDT v2 е също толкова бърза, но само за английски, и в него е по-точна. Turbo за иврит от ivrit.ai е по-точна на иврит, но чете всяка фраза като иврит. За грузински и арменски — NVIDIA FastConformer: Whisper почти не ги знае, а тези са бързи и точни, всеки само за своя език.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Подредба {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>За подредба {0} е нужен друг модел: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Език</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Английските термини на латиница</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Термини като pull request или GitHub се пишат както на английски, а не с вашата азбука. Утвърдените в езика думи остават както са.</value>
+    <value>Термини като pull request или GitHub се пишат както на английски, а не с вашата азбука. Утвърдените в езика думи остават както са. Когато ИИ моделът е включен, той претегля и термините, които разпознавачът е дочул неточно.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Пунктуация с глас</value>
@@ -821,7 +827,7 @@
     <value>Речник</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Имена и термини, които трябва да се пишат правилно — по един на ред, както трябва да се напишат. Ако терминът звучи необичайно, след | добавете как се произнася.</value>
+    <value>Имена и термини, които трябва да се пишат правилно — по един на ред, както трябва да се напишат. Ако терминът звучи необичайно, след | добавете как се произнася. Погрешно чута дума, която веднага след диктовката напишете отново на латиница, се добавя тук сама.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Гласовото въвеждане е част от Lapsus Plus.</value>

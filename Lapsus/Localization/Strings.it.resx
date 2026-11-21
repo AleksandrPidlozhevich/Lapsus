@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 è la scelta veloce senza scheda grafica (circa 0,3 s a frase), ma conosce solo 25 lingue europee e scrive più spesso i termini inglesi con il tuo alfabeto. large-v3-turbo conosce tutte le lingue ed è la scelta migliore con una scheda grafica; q5 è lo stesso turbo con un download più piccolo. large-v3 è un po' più preciso ma vuole una scheda grafica. Whisper small è il download più piccolo. Parakeet TDT v2 è altrettanto veloce, ma solo per l'inglese, e in quello è più preciso. Il turbo ebraico di ivrit.ai è più preciso in ebraico, ma legge ogni frase come ebraico. Per georgiano e armeno, NVIDIA FastConformer: Whisper li conosce appena, questi sono veloci e precisi, ciascuno solo per la sua lingua.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Layout {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Il layout {0} ha bisogno di un altro modello: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Lingua</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Termini inglesi in lettere latine</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Termini come pull request o GitHub vengono scritti come in inglese. Le parole che la tua lingua ha adottato restano come sono.</value>
+    <value>Termini come pull request o GitHub vengono scritti come in inglese. Le parole che la tua lingua ha adottato restano come sono. Con il modello di IA attivo, valuta anche i termini che il riconoscimento ha sentito male.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Punteggiatura a voce</value>
@@ -821,7 +827,7 @@
     <value>Glossario</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Nomi e termini da scrivere correttamente, uno per riga, così come vanno digitati. Se un termine suona insolito, aggiungi dopo | come si pronuncia.</value>
+    <value>Nomi e termini da scrivere correttamente, uno per riga, così come vanno digitati. Se un termine suona insolito, aggiungi dopo | come si pronuncia. Una parola sentita male che riscrivete in caratteri latini subito dopo la dettatura viene aggiunta qui da sola.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>La dettatura vocale fa parte di Lapsus Plus.</value>

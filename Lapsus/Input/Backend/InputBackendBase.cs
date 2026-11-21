@@ -254,6 +254,7 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
 
     protected void ResetTypingBuffer()
     {
+        _dictated = null;
         _bufferGeneration++;
         _buffer.Reset();
         _pendingAutoFixes.Clear();
@@ -387,6 +388,10 @@ internal abstract partial class InputBackendBase<TFocus> : IInputBackend, IDicta
 
     protected void AppendCapturedChar(char ch)
     {
+        // A word ends here: a correction of the last dictation is now whole.
+        if (char.IsControl(ch) || char.IsWhiteSpace(ch) || char.IsPunctuation(ch))
+            LearnFromCorrection();
+
         // Enter must ResetTypingBuffer (not buffer alone), or leftover _committedLength blinds the next line.
         if (char.IsControl(ch))
         {

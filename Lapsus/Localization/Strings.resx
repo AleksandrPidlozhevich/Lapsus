@@ -771,6 +771,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 is the fast choice without a graphics card (about 0.3 s a phrase), but it knows only 25 European languages and more often spells English terms in your alphabet. large-v3-turbo knows every language and is the best pick with a graphics card; q5 is the same turbo as a smaller download. large-v3 is a little more accurate but wants a graphics card. Whisper small is the smallest download. Parakeet TDT v2 is just as fast but English only, and more accurate at it. The Hebrew turbo from ivrit.ai is more accurate in Hebrew, but reads every phrase as Hebrew. For Georgian and Armenian, NVIDIA FastConformer: Whisper barely knows them, these are fast and accurate, each for its own language only.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>{0} layout: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>{0} layout needs another model: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Language</value>
   </data>
@@ -814,7 +820,7 @@
     <value>Keep English terms in Latin letters</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Terms like pull request or GitHub are written as in English instead of in your alphabet. Words your language has adopted stay as they are.</value>
+    <value>Terms like pull request or GitHub are written as in English instead of in your alphabet. Words your language has adopted stay as they are. With the AI model on, it also weighs terms the recogniser misheard.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Spoken punctuation</value>
@@ -826,7 +832,7 @@
     <value>Glossary</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Names and terms to get right, one per line, spelled as they should be typed. If a term sounds unusual, add how it sounds after |.</value>
+    <value>Names and terms to get right, one per line, spelled as they should be typed. If a term sounds unusual, add how it sounds after |. A misheard word you retype in Latin right after dictating is added here by itself.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Voice typing is part of Lapsus Plus.</value>

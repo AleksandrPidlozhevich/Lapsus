@@ -111,7 +111,8 @@ public class DictationSessionTests
         // Runs inside each recognition: a test moves the clock here to make one slow.
         public Action? Recognising;
 
-        public void Prepare() => Prepared++;
+        public string? PreparedFor;
+        public void Prepare(string? language = null) => (Prepared, PreparedFor) = (Prepared + 1, language);
 
         public readonly List<DictationRequest> Requests = [];
         public readonly List<int> PcmLengths = [];
@@ -191,6 +192,7 @@ public class DictationSessionTests
         Assert.True(rig.Host.DictationListening);
         Assert.Equal("listening", rig.Badge.State);
         Assert.Equal(1, rig.Engine.Prepared);
+        Assert.Equal("ru", rig.Engine.PreparedFor);
 
         rig.Mic.Hear(0.1f);
         rig.Host.PressHotkey();
@@ -902,6 +904,37 @@ public class DictationInsertTests
         backend.PressHotkey();
         Assert.Equal((0, " первая часть. Вторая часть."), backend.Injected[^1]);
         Assert.Equal("Итак, первая часть. Вторая часть.", backend.DictationTextBefore());
+    }
+
+    [Fact]
+    public void A_misheard_word_retyped_in_latin_joins_the_glossary()
+    {
+        var backend = Backend();
+        var learned = new List<string>();
+        backend.GlossaryTermSelected += learned.Add;
+        backend.InsertDictatedText("Поправь конфиг для Кубнетис.");
+
+        foreach (var _ in "Кубнетис.")
+            backend.Backspace();
+        backend.Type("Kubernetes ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal(["Kubernetes|кубнетис"], learned);
+    }
+
+    [Fact]
+    public void After_the_caret_moves_a_retyped_word_teaches_nothing()
+    {
+        var backend = Backend();
+        var learned = new List<string>();
+        backend.GlossaryTermSelected += learned.Add;
+        backend.InsertDictatedText("Поправь конфиг для Кубнетис.");
+
+        backend.DiscardLine();
+        backend.Type("Kubernetes ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        Assert.Empty(learned);
     }
 
     [Fact]

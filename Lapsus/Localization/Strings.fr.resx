@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 est le choix rapide sans carte graphique (environ 0,3 s par phrase), mais il ne connaît que 25 langues européennes et écrit plus souvent les termes anglais dans votre alphabet. large-v3-turbo connaît toutes les langues et reste le meilleur choix avec une carte graphique ; q5 est le même turbo en téléchargement plus léger. large-v3 est un peu plus précis mais demande une carte graphique. Whisper small est le plus petit téléchargement. Parakeet TDT v2 est tout aussi rapide, mais uniquement pour l'anglais, et plus précis dans cette langue. Le turbo hébreu d'ivrit.ai est plus précis en hébreu, mais lit chaque phrase comme de l'hébreu. Pour le géorgien et l'arménien, NVIDIA FastConformer : Whisper les connaît à peine, ceux-ci sont rapides et précis, chacun pour sa seule langue.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Disposition {0} : {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>La disposition {0} a besoin d'un autre modèle : {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Langue</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Termes anglais en lettres latines</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Les termes comme pull request ou GitHub s&apos;écrivent comme en anglais. Les mots que votre langue a adoptés restent tels quels.</value>
+    <value>Les termes comme pull request ou GitHub s&apos;écrivent comme en anglais. Les mots que votre langue a adoptés restent tels quels. Avec le modèle d'IA activé, il pèse aussi les termes que la reconnaissance a mal entendus.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Ponctuation à la voix</value>
@@ -821,7 +827,7 @@
     <value>Glossaire</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Noms et termes à écrire correctement, un par ligne, tels qu&apos;ils doivent être tapés. Si un terme se prononce de façon inhabituelle, ajoutez après | comment il se prononce.</value>
+    <value>Noms et termes à écrire correctement, un par ligne, tels qu&apos;ils doivent être tapés. Si un terme se prononce de façon inhabituelle, ajoutez après | comment il se prononce. Un mot mal entendu que vous retapez en alphabet latin juste après la dictée s'ajoute ici tout seul.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>La saisie vocale fait partie de Lapsus Plus.</value>

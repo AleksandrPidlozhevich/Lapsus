@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>O Parakeet TDT v3 é a escolha rápida sem placa gráfica (cerca de 0,3 s por frase), mas conhece apenas 25 idiomas europeus e escreve com mais frequência os termos em inglês no seu alfabeto. O large-v3-turbo conhece todos os idiomas e é a melhor escolha com placa gráfica; o q5 é o mesmo turbo com um download menor. O large-v3 é um pouco mais preciso, mas pede uma placa gráfica. O Whisper small é o menor download. O Parakeet TDT v2 é igualmente rápido, mas só para inglês, e nele é mais preciso. O turbo hebraico da ivrit.ai é mais preciso em hebraico, mas lê cada frase como hebraico. Para georgiano e arménio, NVIDIA FastConformer: o Whisper quase não os conhece; estes são rápidos e precisos, cada um só para a sua língua.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Esquema {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>O esquema {0} precisa de outro modelo: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Idioma</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Termos ingleses em letras latinas</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Termos como pull request ou GitHub são escritos como em inglês. As palavras que o seu idioma já adotou ficam como estão.</value>
+    <value>Termos como pull request ou GitHub são escritos como em inglês. As palavras que o seu idioma já adotou ficam como estão. Com o modelo de IA ligado, também pondera termos que o reconhecimento ouviu mal.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Pontuação por voz</value>
@@ -821,7 +827,7 @@
     <value>Glossário</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Nomes e termos a escrever corretamente, um por linha, tal como devem ser escritos. Se um termo soar invulgar, acrescente depois de | como se pronuncia.</value>
+    <value>Nomes e termos a escrever corretamente, um por linha, tal como devem ser escritos. Se um termo soar invulgar, acrescente depois de | como se pronuncia. Uma palavra mal ouvida que reescreva em letras latinas logo após ditar é adicionada aqui sozinha.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>O ditado por voz faz parte do Lapsus Plus.</value>

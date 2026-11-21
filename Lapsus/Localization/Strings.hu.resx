@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>A Parakeet TDT v3 a gyors választás videokártya nélkül (kb. 0,3 mp mondatonként), de csak 25 európai nyelvet ismer, és gyakrabban írja az angol szakszavakat a saját ábécédével. A large-v3-turbo minden nyelvet ismer, és videokártyával a legjobb; a q5 ugyanez a turbo kisebb letöltéssel. A large-v3 kicsit pontosabb, de videokártyát igényel. A Whisper small a legkisebb letöltés. A Parakeet TDT v2 ugyanilyen gyors, de csak angolul tud, abban viszont pontosabb. Az ivrit.ai héber turbója pontosabb héberül, de minden mondatot héberként olvas. Grúzhoz és örményhez NVIDIA FastConformer: a Whisper alig ismeri őket, ezek gyorsak és pontosak, mindegyik csak a saját nyelvén.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>{0} kiosztás: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>A(z) {0} kiosztáshoz másik modell kell: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Nyelv</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Angol kifejezések latin betűkkel</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Az olyan kifejezések, mint a pull request vagy a GitHub, angolul íródnak. A nyelvébe beépült szavak változatlanok maradnak.</value>
+    <value>Az olyan kifejezések, mint a pull request vagy a GitHub, angolul íródnak. A nyelvébe beépült szavak változatlanok maradnak. Bekapcsolt MI-modellel a felismerő által pontatlanul hallott kifejezéseket is mérlegeli.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Írásjelek hanggal</value>
@@ -821,7 +827,7 @@
     <value>Szójegyzék</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Helyesen írandó nevek és kifejezések, soronként egy, úgy, ahogy be kell gépelni őket. Ha egy kifejezés szokatlanul hangzik, a | után írja le, hogyan hangzik.</value>
+    <value>Helyesen írandó nevek és kifejezések, soronként egy, úgy, ahogy be kell gépelni őket. Ha egy kifejezés szokatlanul hangzik, a | után írja le, hogyan hangzik. A félrehallott szó, amelyet diktálás után rögtön latin betűkkel újragépel, magától ide kerül.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>A hangalapú bevitel a Lapsus Plus része.</value>

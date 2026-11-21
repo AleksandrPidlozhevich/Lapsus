@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 هو الخيار السريع دون بطاقة رسومات (نحو 0.3 ثانية للجملة)، لكنه لا يعرف إلا 25 لغة أوروبية وليست العربية من بينها. large-v3-turbo يعرف كل اللغات وهو الأفضل مع بطاقة رسومات؛ وq5 هو نفس turbo بتنزيل أصغر. large-v3 أدق قليلًا لكنه يحتاج إلى بطاقة رسومات. Whisper small هو أصغر تنزيل. Parakeet TDT v2 بالسرعة نفسها، لكنه للإنجليزية فقط وأدق فيها. نموذج turbo العبري من ivrit.ai أدق في العبرية، لكنه يقرأ كل عبارة على أنها عبرية. للجورجية والأرمنية، NVIDIA FastConformer: يكاد Whisper لا يعرفهما، أما هذان فسريعان ودقيقان، كل منهما للغته فقط.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>تخطيط {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>يحتاج تخطيط {0} إلى نموذج آخر: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>اللغة</value>
   </data>
@@ -809,7 +815,7 @@
     <value>المصطلحات الإنجليزية بالحروف اللاتينية</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>تُكتب مصطلحات مثل pull request أو GitHub كما في الإنجليزية. وتبقى الكلمات التي تبنّتها لغتك كما هي.</value>
+    <value>تُكتب مصطلحات مثل pull request أو GitHub كما في الإنجليزية. وتبقى الكلمات التي تبنّتها لغتك كما هي. عند تشغيل نموذج الذكاء الاصطناعي، يوازن أيضًا المصطلحات التي سمعها المُتعرِّف بشكل غير دقيق.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>علامات الترقيم بالصوت</value>
@@ -821,7 +827,7 @@
     <value>المسرد</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>أسماء ومصطلحات يجب أن تُكتب صحيحة، واحد في كل سطر، كما ينبغي أن تُكتب. إذا كان نطق المصطلح غير مألوف فأضف بعد | كيف يُنطق.</value>
+    <value>أسماء ومصطلحات يجب أن تُكتب صحيحة، واحد في كل سطر، كما ينبغي أن تُكتب. إذا كان نطق المصطلح غير مألوف فأضف بعد | كيف يُنطق. الكلمة التي سُمعت خطأً وتعيدون كتابتها بالحروف اللاتينية مباشرة بعد الإملاء تُضاف هنا تلقائيًا.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>الكتابة الصوتية جزء من Lapsus Plus.</value>

@@ -18,8 +18,9 @@ internal interface IDictationEngine
     // Whether the speech model is on disk; without it a dictation does not start.
     bool HasModel { get; }
 
-    // Starts loading the model now, while the user speaks, so it is ready when the recording ends.
-    void Prepare();
+    // Starts loading the model now, while the user speaks, so it is ready when the recording ends. Language: the
+    // active layout's, which picks among the downloaded models; null for the chosen one.
+    void Prepare(string? language = null);
 
     // Whether recognition is fast enough (a fraction of a second) to run again and again while the user speaks.
     bool CanStream { get; }

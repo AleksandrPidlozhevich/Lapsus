@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 es la opción rápida sin tarjeta gráfica (unos 0,3 s por frase), pero solo conoce 25 idiomas europeos y escribe más a menudo los términos ingleses con tu alfabeto. large-v3-turbo conoce todos los idiomas y es la mejor opción con tarjeta gráfica; q5 es el mismo turbo con una descarga menor. large-v3 es algo más preciso, pero necesita tarjeta gráfica. Whisper small es la descarga más pequeña. Parakeet TDT v2 es igual de rápido, pero solo para inglés, y en él es más preciso. El turbo hebreo de ivrit.ai es más preciso en hebreo, pero lee cada frase como hebreo. Para georgiano y armenio, NVIDIA FastConformer: Whisper apenas los conoce; estos son rápidos y precisos, cada uno solo para su idioma.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Distribución {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>La distribución {0} necesita otro modelo: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Idioma</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Términos ingleses en letras latinas</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Términos como pull request o GitHub se escriben como en inglés. Las palabras que tu idioma ya ha adoptado se quedan como están.</value>
+    <value>Términos como pull request o GitHub se escriben como en inglés. Las palabras que tu idioma ya ha adoptado se quedan como están. Con el modelo de IA activado, también sopesa términos que el reconocedor oyó mal.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Puntuación por voz</value>
@@ -821,7 +827,7 @@
     <value>Glosario</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Nombres y términos que deben escribirse bien, uno por línea, tal como deben escribirse. Si un término suena raro, añade después de | cómo suena.</value>
+    <value>Nombres y términos que deben escribirse bien, uno por línea, tal como deben escribirse. Si un término suena raro, añade después de | cómo suena. Una palabra mal oída que vuelve a escribir en alfabeto latino justo después de dictar se añade aquí sola.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>El dictado por voz forma parte de Lapsus Plus.</value>

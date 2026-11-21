@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 este alegerea rapidă fără placă video (circa 0,3 s pe frază), dar cunoaște doar 25 de limbi europene și scrie mai des termenii englezești cu alfabetul tău. large-v3-turbo cunoaște toate limbile și este cea mai bună alegere cu placă video; q5 este același turbo, cu o descărcare mai mică. large-v3 este puțin mai precis, dar cere o placă video. Whisper small este cea mai mică descărcare. Parakeet TDT v2 este la fel de rapid, dar doar pentru engleză, și în ea este mai precis. Turbo pentru ebraică de la ivrit.ai este mai precis în ebraică, dar citește fiecare frază ca ebraică. Pentru georgiană și armeană, NVIDIA FastConformer: Whisper aproape nu le cunoaște, acestea sunt rapide și precise, fiecare doar pentru limba sa.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Aranjament {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Aranjamentul {0} are nevoie de alt model: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Limbă</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Termenii englezești cu litere latine</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Termeni ca pull request sau GitHub se scriu ca în engleză. Cuvintele pe care limba ta le-a adoptat rămân cum sunt.</value>
+    <value>Termeni ca pull request sau GitHub se scriu ca în engleză. Cuvintele pe care limba ta le-a adoptat rămân cum sunt. Cu modelul AI pornit, cântărește și termenii pe care recunoașterea i-a auzit greșit.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Punctuație prin voce</value>
@@ -821,7 +827,7 @@
     <value>Glosar</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Nume și termeni care trebuie scriși corect, câte unul pe rând, așa cum trebuie tastați. Dacă un termen sună neobișnuit, adaugă după | cum se pronunță.</value>
+    <value>Nume și termeni care trebuie scriși corect, câte unul pe rând, așa cum trebuie tastați. Dacă un termen sună neobișnuit, adaugă după | cum se pronunță. Un cuvânt auzit greșit pe care îl retastați cu litere latine imediat după dictare se adaugă aici singur.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Dictarea vocală face parte din Lapsus Plus.</value>

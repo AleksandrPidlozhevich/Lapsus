@@ -2,7 +2,7 @@ using Lapsus.Speech;
 
 namespace Lapsus.Tests;
 
-public sealed class ParakeetDecodingTests
+public sealed class NemoDecodingTests
 {
     private const int Blank = 9;
 
@@ -14,7 +14,7 @@ public sealed class ParakeetDecodingTests
         var seen = new List<(int Frame, int Last)>();
         var accepted = 0;
 
-        var tokens = ParakeetRecognizer.DecodeTdt(4, Blank, (t, last) =>
+        var tokens = NemoModel.DecodeTdt(4, Blank, (t, last) =>
         {
             seen.Add((t, last));
             return script.Dequeue();
@@ -28,7 +28,7 @@ public sealed class ParakeetDecodingTests
     [Fact]
     public void AFrameThatNeverStopsEmittingMovesOnAfterTenTokens()
     {
-        var tokens = ParakeetRecognizer.DecodeTdt(2, Blank, (_, _) => (5, 0), () => { });
+        var tokens = NemoModel.DecodeTdt(2, Blank, (_, _) => (5, 0), () => { });
 
         Assert.Equal(20, tokens.Count);
     }
@@ -36,7 +36,7 @@ public sealed class ParakeetDecodingTests
     [Fact]
     public void WordStartsBecomeSpacesButNotBeforePunctuation()
     {
-        var text = ParakeetRecognizer.Detokenize(["▁При", "вет", "▁", ",", "▁мир", "▁", "."]);
+        var text = NemoModel.Detokenize(["▁При", "вет", "▁", ",", "▁мир", "▁", "."]);
 
         Assert.Equal("Привет, мир.", text);
     }
@@ -45,7 +45,7 @@ public sealed class ParakeetDecodingTests
     public void CtcKeepsATokenWhereItChangesAndIsNotBlank()
     {
         // A repeat is one token unless a blank splits it.
-        Assert.Equal([1, 1, 2, 2], ParakeetRecognizer.DecodeCtc([1, 1, Blank, 1, 2, Blank, 2, 2], Blank));
+        Assert.Equal([1, 1, 2, 2], NemoModel.DecodeCtc([1, 1, Blank, 1, 2, Blank, 2, 2], Blank));
     }
 
     [Theory]
@@ -53,7 +53,7 @@ public sealed class ParakeetDecodingTests
     [InlineData("Ես եւ դու", "ru", "Ես եւ դու")]
     public void ArmenianTakesTheLigature(string text, string language, string expected)
     {
-        Assert.Equal(expected, ParakeetRecognizer.Orthography(text, language));
+        Assert.Equal(expected, NemoRecognizer.Orthography(text, language));
     }
 
     [Theory]

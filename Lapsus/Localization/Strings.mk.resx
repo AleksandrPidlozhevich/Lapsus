@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 е брзиот избор без графичка картичка (околу 0,3 с по реченица), но знае само 25 европски јазици, а македонскиот не е меѓу нив. large-v3-turbo ги знае сите јазици и е најдобра со графичка картичка; q5 е истата turbo со помало преземање. large-v3 е малку попрецизна, но бара графичка картичка. Whisper small е најмалото преземање. Parakeet TDT v2 е исто толку брза, но само за англиски, и во него е попрецизна. Turbo за хебрејски од ivrit.ai е попрецизна на хебрејски, но секоја реченица ја чита како хебрејски. За грузиски и ерменски — NVIDIA FastConformer: Whisper речиси не ги знае, а овие се брзи и прецизни, секој само за својот јазик.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Распоред {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>За распоред {0} е потребен друг модел: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Јазик</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Англиските термини на латиница</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Термините како pull request или GitHub се пишуваат како на англиски, а не со вашето писмо. Зборовите што се одомаќиле во јазикот остануваат како што се.</value>
+    <value>Термините како pull request или GitHub се пишуваат како на англиски, а не со вашето писмо. Зборовите што се одомаќиле во јазикот остануваат како што се. Кога ВИ-моделот е вклучен, ги одмерува и термините што препознавачот ги слушнал неточно.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Интерпункција со глас</value>
@@ -821,7 +827,7 @@
     <value>Речник</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Имиња и термини што треба да се пишуваат точно — по еден во ред, како што треба да се напишат. Ако терминот звучи необично, по | додадете како се изговара.</value>
+    <value>Имиња и термини што треба да се пишуваат точно — по еден во ред, како што треба да се напишат. Ако терминот звучи необично, по | додадете како се изговара. Погрешно слушнат збор што веднаш по диктирањето го претипкате на латиница се додава тука сам.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Гласовното внесување е дел од Lapsus Plus.</value>

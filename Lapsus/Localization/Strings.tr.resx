@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3, ekran kartı olmadan hızlı seçenektir (cümle başına yaklaşık 0,3 sn), ancak yalnızca 25 Avrupa dilini bilir ve Türkçe bunların arasında değildir. large-v3-turbo tüm dilleri bilir ve ekran kartıyla en iyi seçimdir; q5 aynı turbo'nun daha küçük indirmesidir. large-v3 biraz daha doğrudur ama ekran kartı ister. Whisper small en küçük indirmedir. Parakeet TDT v2 aynı hızdadır ama yalnızca İngilizce içindir ve İngilizcede daha doğrudur. ivrit.ai'nin İbranice turbo modeli İbranicede daha doğrudur ama her cümleyi İbranice olarak okur. Gürcüce ve Ermenice için NVIDIA FastConformer: Whisper bu dilleri neredeyse bilmez; bunlar hızlı ve doğrudur, her biri yalnızca kendi dili içindir.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>{0} düzeni: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>{0} düzeni için başka bir model gerekiyor: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Dil</value>
   </data>
@@ -809,7 +815,7 @@
     <value>İngilizce terimler Latin harfleriyle</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>pull request veya GitHub gibi terimler İngilizcedeki gibi yazılır. Dilinize yerleşmiş sözcükler olduğu gibi kalır.</value>
+    <value>pull request veya GitHub gibi terimler İngilizcedeki gibi yazılır. Dilinize yerleşmiş sözcükler olduğu gibi kalır. Yapay zekâ modeli açıkken, tanıyıcının yanlış duyduğu terimleri de tartar.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Sesle noktalama</value>
@@ -821,7 +827,7 @@
     <value>Sözlük</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Doğru yazılması gereken adlar ve terimler, her satıra bir tane, yazılması gerektiği gibi. Bir terim alışılmadık okunuyorsa | işaretinden sonra nasıl okunduğunu ekleyin.</value>
+    <value>Doğru yazılması gereken adlar ve terimler, her satıra bir tane, yazılması gerektiği gibi. Bir terim alışılmadık okunuyorsa | işaretinden sonra nasıl okunduğunu ekleyin. Dikteden hemen sonra Latin harfleriyle yeniden yazdığınız yanlış duyulmuş bir kelime buraya kendiliğinden eklenir.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Sesle yazma, Lapsus Plus&apos;ın bir parçasıdır.</value>

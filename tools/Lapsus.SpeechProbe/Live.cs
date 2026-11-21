@@ -21,7 +21,7 @@ static class Live
             }
 
         var samples = Probe.LoadSamples(samplesDir).Where(s => s.Reference is not null).ToList();
-        using var recognizer = new ParakeetRecognizer { Threads = threads };
+        using var recognizer = new NemoRecognizer { Threads = threads };
         recognizer.Load(modelDir);
         await recognizer.WarmUpAsync();
 

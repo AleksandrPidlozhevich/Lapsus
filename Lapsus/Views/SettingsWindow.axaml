@@ -1082,7 +1082,7 @@
                                     </Border>
 
                                     <Grid IsVisible="{Binding Voice.ShowMain, FallbackValue=True}"
-                                          ColumnDefinitions="*,Auto" ColumnSpacing="8" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                                          ColumnDefinitions="*,Auto" ColumnSpacing="8" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
                                         <ComboBox Grid.Row="0" Grid.Column="0" Margin="0,4,0,6"
                                                   HorizontalAlignment="Stretch"
                                                   ItemsSource="{Binding Voice.ModelOptions}"
@@ -1107,13 +1107,27 @@
                                         </Button>
                                         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,4"
                                                    Text="{Binding Voice.ModelStatus}" />
-                                        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,2"
+                                        <ItemsControl Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,4"
+                                                      ItemsSource="{Binding Voice.LayoutModels}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:LayoutModelOption">
+                                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" Margin="0,2">
+                                                        <TextBlock Classes="hint" VerticalAlignment="Center"
+                                                                   TextWrapping="Wrap" Text="{Binding Text}" />
+                                                        <Button Grid.Column="1" Content="{Binding DownloadLabel}"
+                                                                Command="{Binding Download}"
+                                                                IsVisible="{Binding Download, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,2"
                                                    Text="{Binding L[Voice_ModelHint]}" />
-                                        <ProgressBar Grid.Row="3" Grid.ColumnSpan="2" Height="3" Margin="0,4,0,2"
+                                        <ProgressBar Grid.Row="4" Grid.ColumnSpan="2" Height="3" Margin="0,4,0,2"
                                                      Minimum="0" Maximum="1"
                                                      Value="{Binding Voice.Progress, FallbackValue=0}"
                                                      IsVisible="{Binding Voice.Busy, FallbackValue=False}" />
-                                        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Classes="status" Margin="0,4,0,0"
+                                        <TextBlock Grid.Row="5" Grid.ColumnSpan="2" Classes="status" Margin="0,4,0,0"
                                                    Text="{Binding Voice.Status}"
                                                    IsVisible="{Binding Voice.Status, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
                                     </Grid>

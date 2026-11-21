@@ -416,7 +416,7 @@ internal sealed class DictationSession : IDisposable
         }
 
         // The microphone is open: the model may now take its time, the speech is being kept.
-        _engine.Prepare();
+        _engine.Prepare(_language);
 
         _startedAt = _now();
         _lastCut = _startedAt;

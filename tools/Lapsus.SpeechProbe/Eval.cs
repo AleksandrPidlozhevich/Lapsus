@@ -57,7 +57,7 @@ static class Eval
         string deviceLabel;
         if (Directory.Exists(modelPath))
         {
-            var parakeet = new ParakeetRecognizer { Threads = threads };
+            var parakeet = new NemoRecognizer { Threads = threads };
             parakeet.Load(modelPath);
             await parakeet.WarmUpAsync();
             recognizer = parakeet;
@@ -158,7 +158,9 @@ static class Eval
         return new SpellChecker(sources);
     }
 
-    private sealed class Score
+    internal static Lapsus.Core.Spelling.SpellChecker LoadDictionariesFor(string dictDir) => LoadDictionaries(dictDir, out _);
+
+    internal sealed class Score
     {
         private double _words, _wordErrors, _chars, _charErrors, _terms, _termsHit, _falseLatin;
 

@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 — хуткі выбар без відэакарты (каля 0,3 с на фразу), але ведае толькі 25 еўрапейскіх моў (беларускай сярод іх няма) і часцей піша англійскія тэрміны вашым алфавітам. large-v3-turbo ведае ўсе мовы і найлепшая з відэакартай; q5 — тая ж turbo, але спампоўваецца менш. large-v3 крыху дакладнейшая, але ёй патрэбна відэакарта. Whisper small — найменшая загрузка. Parakeet TDT v2 такая ж хуткая, але толькі для англійскай, і ў ёй дакладнейшая. Turbo для іўрыту ад ivrit.ai дакладнейшая ў іўрыце, але кожную фразу чытае як іўрыт. Для грузінскай і армянскай — NVIDIA FastConformer: Whisper іх амаль не ведае, а гэтыя хуткія і дакладныя, кожная толькі для сваёй мовы.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Раскладка {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Раскладцы {0} патрэбна іншая мадэль: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Мова</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Англійскія тэрміны лацінкай</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Тэрміны накшталт pull request ці GitHub пішуцца як па-англійску, а не вашымі літарамі. Словы, што прыжыліся ў мове, застаюцца як ёсць.</value>
+    <value>Тэрміны накшталт pull request ці GitHub пішуцца як па-англійску, а не вашымі літарамі. Словы, што прыжыліся ў мове, застаюцца як ёсць. Калі ўключана ШІ-мадэль, яна яшчэ і ўзважвае тэрміны, якія распазнавальнік пачуў недакладна.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Пунктуацыя голасам</value>
@@ -821,7 +827,7 @@
     <value>Гласарый</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Імёны і тэрміны, якія важна пісаць правільна, — па адным у радку, так, як іх трэба надрукаваць. Калі тэрмін гучыць незвычайна, пасля | дадайце, як ён вымаўляецца.</value>
+    <value>Імёны і тэрміны, якія важна пісаць правільна, — па адным у радку, так, як іх трэба надрукаваць. Калі тэрмін гучыць незвычайна, пасля | дадайце, як ён вымаўляецца. Няправільна пачутае слова, якое вы адразу пасля дыктоўкі перадрукуеце лацінкай, дадаецца сюды само.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Галасавы ўвод уваходзіць у Lapsus Plus.</value>

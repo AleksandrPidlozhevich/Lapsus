@@ -253,9 +253,14 @@ does not apply here — dictation reads nothing from the field, it only types in
   on a graphics card and a third on the processor, but it reads every phrase as Hebrew, English ones included.
 - **Where Georgian or Armenian is the main layout, NVIDIA's FastConformer for that language**
   ([ka](https://huggingface.co/nvidia/stt_ka_fastconformer_hybrid_large_pc),
-  [hy](https://huggingface.co/nvidia/stt_hy_fastconformer_hybrid_large_pc); 437 MB each, CC BY 4.0) is the
+  [hy](https://huggingface.co/nvidia/stt_hy_fastconformer_hybrid_large_pc); 439 MB each, CC BY 4.0) is the
   suggestion. Whisper hardly knows either language (on Georgian it writes something else altogether); these
   take about a fifth of a second a phrase on the processor and hear only their own language.
+- **The model follows the layout.** Each dictation runs on a downloaded model made for the active layout's
+  language, else on the chosen model if it hears that language, else on another downloaded model that does. With
+  Georgian and Russian layouts, say, the Georgian model and Parakeet each take their own language; the voice card
+  lists each layout's model and offers the download it lacks. With 16 GB of memory two models stay loaded, so
+  switching layouts does not wait for a reload, and each unloads after its own idle time.
 - **Long dictations are typed as you go.** Once a few seconds have been said, the next pause sends that
   part to recognition and it is typed while you keep talking; the earlier parts are Whisper's context for
   the next. While the hotkey is held the parts wait (letters typed with Ctrl down would act as shortcuts)
@@ -264,7 +269,14 @@ does not apply here — dictation reads nothing from the field, it only types in
   way people speak, then a second pass puts terms it still spelled out back into Latin by how they sound
   (`пулл реквест` → `pull request`, `гитхаб` → `GitHub`), using the English word list and a built-in list
   of tech names. Words your dictionary knows (`компьютер`, `файл`) and inflected forms (`задеплоил`) are
-  left alone. The glossary takes your own: one per line, `Kubernetes|кубер` when it sounds unusual.
+  left alone. The glossary takes your own: one per line, `Kubernetes|кубер` when it sounds unusual. It also
+  learns: a misheard word you backspace over and retype in Latin right after dictating («Кубнетис» →
+  `Kubernetes`) is added as `Kubernetes|кубнетис`, read from the keys you type, as the correction hotkey already
+  reads them; a different word, or one retyped after the caret moved, teaches nothing.
+- **With the AI model on, it judges the doubtful terms too.** A word no dictionary knows that sounds near a known
+  term (Parakeet's «стегинг», «Кубнетис», «Слэк») is read by the neural brain's model both ways, and the term goes
+  in only when it reads clearly likelier. On the 22 recorded Russian phrases Parakeet's terms went from 12 of 25
+  to 16, at about a fifth of a second a doubtful word; the model never writes text of its own.
 - **Silence stays silent.** Speech is cut out with [Silero VAD](https://github.com/snakers4/silero-vad)
   before recognition, and the subtitle credits Whisper likes to invent over quiet audio are filtered out.
 - **The language** is your active keyboard layout's, or another of your layouts' languages when the

@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 הוא הבחירה המהירה בלי כרטיס גרפי (כ־0.3 שניות למשפט), אבל הוא מכיר רק 25 שפות אירופיות, ועברית אינה ביניהן. large-v3-turbo מכיר את כל השפות והוא הבחירה הטובה ביותר עם כרטיס גרפי; q5 הוא אותו turbo בהורדה קטנה יותר. large-v3 מדויק מעט יותר אבל דורש כרטיס גרפי. Whisper small הוא ההורדה הקטנה ביותר. Parakeet TDT v2 מהיר באותה מידה, אבל לאנגלית בלבד, ומדויק יותר בה. ה-turbo לעברית של ivrit.ai מדויק יותר בעברית, אבל קורא כל משפט כעברית. לגאורגית ולארמנית — NVIDIA FastConformer: ‏Whisper כמעט לא מכיר אותן, ואלה מהירים ומדויקים, כל אחד לשפתו בלבד.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>פריסה {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>פריסה {0} צריכה מודל אחר: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>שפה</value>
   </data>
@@ -809,7 +815,7 @@
     <value>מונחים באנגלית באותיות לטיניות</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>מונחים כמו pull request או GitHub נכתבים כמו באנגלית. מילים שהשפה שלכם אימצה נשארות כמו שהן.</value>
+    <value>מונחים כמו pull request או GitHub נכתבים כמו באנגלית. מילים שהשפה שלכם אימצה נשארות כמו שהן. כשמודל הבינה המלאכותית פעיל, הוא שוקל גם מונחים שהמזהה שמע לא במדויק.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>פיסוק בקול</value>
@@ -821,7 +827,7 @@
     <value>מילון מונחים</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>שמות ומונחים שצריך לכתוב נכון, אחד בכל שורה, כפי שצריך להקליד אותם. אם מונח נשמע חריג, הוסיפו אחרי | איך הוא נשמע.</value>
+    <value>שמות ומונחים שצריך לכתוב נכון, אחד בכל שורה, כפי שצריך להקליד אותם. אם מונח נשמע חריג, הוסיפו אחרי | איך הוא נשמע. מילה שנשמעה לא נכון ושתקלידו מחדש באותיות לטיניות מיד אחרי ההכתבה תתווסף לכאן מעצמה.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>הקלדה קולית היא חלק מ-Lapsus Plus.</value>

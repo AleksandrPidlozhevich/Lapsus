@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3는 그래픽 카드가 없을 때 빠른 선택(문장당 약 0.3초)이지만 유럽 언어 25개만 알고 한국어는 포함되지 않습니다. large-v3-turbo는 모든 언어를 알고 그래픽 카드가 있으면 가장 좋습니다. q5는 다운로드가 더 작은 같은 turbo입니다. large-v3는 조금 더 정확하지만 그래픽 카드가 필요합니다. Whisper small은 가장 작은 다운로드입니다. Parakeet TDT v2는 똑같이 빠르지만 영어 전용이며 영어에서는 더 정확합니다. ivrit.ai의 히브리어 turbo는 히브리어에서 더 정확하지만 모든 문장을 히브리어로 읽습니다. 조지아어와 아르메니아어에는 NVIDIA FastConformer: Whisper는 이 언어들을 거의 모르지만, 이 모델들은 빠르고 정확하며 각각 자기 언어 전용입니다.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>{0} 자판: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>{0} 자판에는 다른 모델이 필요합니다: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>언어</value>
   </data>
@@ -809,7 +815,7 @@
     <value>영어 용어는 라틴 문자로 유지</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>pull request나 GitHub 같은 용어는 당신 문자가 아니라 영어 그대로 씁니다. 이미 받아들여진 말은 그대로 둡니다.</value>
+    <value>pull request나 GitHub 같은 용어는 당신 문자가 아니라 영어 그대로 씁니다. 이미 받아들여진 말은 그대로 둡니다. AI 모델이 켜져 있으면 인식기가 잘못 들은 용어도 따져 봅니다.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>말로 하는 구두점</value>
@@ -821,7 +827,7 @@
     <value>용어집</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>정확히 쓸 이름과 용어, 한 줄에 하나, 입력될 철자대로. 발음이 특이하면 | 뒤에 들리는 대로 적으세요.</value>
+    <value>정확히 쓸 이름과 용어, 한 줄에 하나, 입력될 철자대로. 발음이 특이하면 | 뒤에 들리는 대로 적으세요. 받아쓰기 직후 잘못 들린 단어를 로마자로 다시 입력하면 여기에 저절로 추가됩니다.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>음성 입력은 Lapsus Plus에 포함됩니다.</value>

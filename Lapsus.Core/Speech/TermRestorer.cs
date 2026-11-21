@@ -17,6 +17,9 @@ namespace Lapsus.Core.Speech;
 // frequency list: on the user's own voice it turned тикет, мерч, стендинг into ticket, merch, standing and fixed
 // nothing the built-in list did not (22 phrases, 2026-11-08).
 // Without a dictionary for the language there is no telling a real word from a term.
+// A span of the text that may be Term, for the neural brain's model to judge.
+public readonly record struct TermGuess(int Start, int Length, string Term);
+
 public sealed partial class TermRestorer
 {
     // A built-in term may replace a word the dictionary knows if the word is rarer than this
@@ -91,6 +94,69 @@ public sealed partial class TermRestorer
             at = end;
         }
         return sb.Append(text, at, text.Length - at).ToString();
+    }
+
+    // A loose match for a run of words no dictionary knows, too loose to take on its own: Parakeet writes «стегинг»,
+    // «Кубнетис», «Онэнкс рантайм», which the strict rules above never reach. DictationTermRanker has the neural
+    // brain's model decide each in context. Only where the language has a dictionary to tell unknown words by.
+    public IReadOnlyList<TermGuess> Guesses(string text, string language)
+    {
+        if (string.IsNullOrWhiteSpace(text) || DictationLanguagePicker.ScriptOf(language) == Script.Latin)
+            return [];
+
+        var words = Word().Matches(text).ToList();
+        var guesses = new List<TermGuess>();
+        for (var i = 0; i < words.Count;)
+        {
+            var taken = 0;
+            for (var n = Math.Min(MaxPhraseWords, words.Count - i); n >= 1 && taken == 0; n--)
+            {
+                if (!Adjacent(text, words, i, n, latin: false)
+                    || Enumerable.Range(i, n).Any(k => !Unknown(words[k].Value, language)))
+                    continue;
+
+                var heard = string.Concat(Enumerable.Range(i, n).Select(k => PhoneticKey.Heard(words[k].Value)));
+                if (heard.Length < MinGuessKey || Loose(heard) is not { } term)
+                    continue;
+
+                var last = words[i + n - 1];
+                guesses.Add(new TermGuess(words[i].Index, last.Index + last.Length - words[i].Index,
+                    Cased(words[i].Value, term)));
+                taken = n;
+            }
+            i += Math.Max(taken, 1);
+        }
+        return guesses;
+    }
+
+    private const int MinGuessKey = 4;
+
+    private bool Unknown(string word, string language) =>
+        Scripts.Dominant(word) is { } script && script != Script.Latin && _spell.Has(script)
+        && !Knows(word, script, language);
+
+    // The nearest term by sound: a few letters off as the key grows, the consonants nearly in order.
+    private Entry? Loose(string heard)
+    {
+        Entry? best = null;
+        var bestDistance = int.MaxValue;
+        var skeleton = PhoneticKey.Skeleton(heard);
+        foreach (var entry in _terms.Values.SelectMany(list => list))
+        {
+            var key = entry.Key;
+            var allowed = key.Length <= 5 ? 1 : key.Length <= 9 ? 2 : 3;
+            if (Math.Abs(key.Length - heard.Length) > allowed)
+                continue;
+            var distance = Distance(key, heard);
+            if (distance > allowed || Distance(PhoneticKey.Skeleton(key), skeleton) > (key.Length > 8 ? 2 : 1))
+                continue;
+            if (distance < bestDistance || (distance == bestDistance && entry.Weight > best!.Weight))
+            {
+                best = entry;
+                bestDistance = distance;
+            }
+        }
+        return best;
     }
 
     private int TryReplace(
@@ -266,7 +332,7 @@ public sealed partial class TermRestorer
             .ToList();
     }
 
-    private static int Distance(string a, string b)
+    internal static int Distance(string a, string b)
     {
         var prev = new int[b.Length + 1];
         var cur = new int[b.Length + 1];

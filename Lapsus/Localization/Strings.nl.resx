@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 is de snelle keuze zonder grafische kaart (ongeveer 0,3 s per zin), maar kent maar 25 Europese talen en schrijft Engelse vaktermen vaker in je eigen alfabet. large-v3-turbo kent alle talen en is de beste keuze met een grafische kaart; q5 is dezelfde turbo als kleinere download. large-v3 is iets nauwkeuriger maar wil een grafische kaart. Whisper small is de kleinste download. Parakeet TDT v2 is net zo snel, maar alleen voor Engels, en daarin nauwkeuriger. De Hebreeuwse turbo van ivrit.ai is nauwkeuriger in het Hebreeuws, maar leest elke zin als Hebreeuws. Voor Georgisch en Armeens NVIDIA FastConformer: Whisper kent ze nauwelijks, deze zijn snel en nauwkeurig, elk alleen voor de eigen taal.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Indeling {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Indeling {0} heeft een ander model nodig: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Taal</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Engelse termen in Latijnse letters</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Termen als pull request of GitHub worden geschreven zoals in het Engels. Woorden die je taal heeft overgenomen, blijven zoals ze zijn.</value>
+    <value>Termen als pull request of GitHub worden geschreven zoals in het Engels. Woorden die je taal heeft overgenomen, blijven zoals ze zijn. Met het AI-model aan weegt het ook termen af die de herkenning verkeerd verstond.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Leestekens inspreken</value>
@@ -821,7 +827,7 @@
     <value>Woordenlijst</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Namen en termen die goed geschreven moeten worden, één per regel, zoals ze getypt moeten worden. Klinkt een term ongewoon, zet dan na | hoe hij klinkt.</value>
+    <value>Namen en termen die goed geschreven moeten worden, één per regel, zoals ze getypt moeten worden. Klinkt een term ongewoon, zet dan na | hoe hij klinkt. Een verkeerd verstaan woord dat u direct na het dicteren in Latijnse letters opnieuw typt, wordt hier vanzelf toegevoegd.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Spraakinvoer hoort bij Lapsus Plus.</value>

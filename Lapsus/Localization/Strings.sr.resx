@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 je brz izbor bez grafičke kartice (oko 0,3 s po rečenici), ali zna samo 25 evropskih jezika, a srpski nije među njima. large-v3-turbo zna sve jezike i najbolji je izbor sa grafičkom karticom; q5 je isti turbo sa manjim preuzimanjem. large-v3 je malo tačniji, ali traži grafičku karticu. Whisper small je najmanje preuzimanje. Parakeet TDT v2 je jednako brz, ali samo za engleski, i u njemu tačniji. Turbo za hebrejski od ivrit.ai je tačniji na hebrejskom, ali svaku rečenicu čita kao hebrejski. Za gruzijski i jermenski, NVIDIA FastConformer: Whisper ih skoro ne zna, a ovi su brzi i tačni, svaki samo za svoj jezik.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Raspored {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Rasporedu {0} treba drugi model: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Jezik</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Engleski termini latinicom</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Termini poput pull request ili GitHub pišu se kao na engleskom, a ne vašim pismom. Reči odomaćene u jeziku ostaju kakve jesu.</value>
+    <value>Termini poput pull request ili GitHub pišu se kao na engleskom, a ne vašim pismom. Reči odomaćene u jeziku ostaju kakve jesu. Kada je AI model uključen, odmerava i termine koje je prepoznavač čuo netačno.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Интерпункција гласом</value>
@@ -821,7 +827,7 @@
     <value>Rečnik</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Imena i termini koje treba pisati tačno — po jedan u redu, onako kako treba da budu otkucani. Ako termin zvuči neobično, posle | dodajte kako se izgovara.</value>
+    <value>Imena i termini koje treba pisati tačno — po jedan u redu, onako kako treba da budu otkucani. Ako termin zvuči neobično, posle | dodajte kako se izgovara. Pogrešno čuta reč koju odmah posle diktiranja ponovo otkucate latinicom dodaje se ovde sama.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Glasovni unos je deo paketa Lapsus Plus.</value>

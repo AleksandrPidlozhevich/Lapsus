@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 je rýchla voľba bez grafickej karty (asi 0,3 s na vetu), ale pozná len 25 európskych jazykov a častejšie píše anglické termíny vašou abecedou. large-v3-turbo pozná všetky jazyky a s grafickou kartou je najlepšia; q5 je tá istá turbo s menším sťahovaním. large-v3 je o niečo presnejšia, ale chce grafickú kartu. Whisper small je najmenšie sťahovanie. Parakeet TDT v2 je rovnako rýchla, ale len pre angličtinu, a v nej presnejšia. Turbo pre hebrejčinu od ivrit.ai je v hebrejčine presnejšia, ale každú frázu číta ako hebrejčinu. Pre gruzínčinu a arménčinu NVIDIA FastConformer: Whisper ich takmer nepozná, tieto sú rýchle a presné, každý len pre svoj jazyk.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Rozloženie {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Rozloženie {0} potrebuje iný model: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Jazyk</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Anglické termíny latinkou</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Termíny ako pull request alebo GitHub sa píšu ako v angličtine. Slová, ktoré váš jazyk prijal, zostávajú bez zmeny.</value>
+    <value>Termíny ako pull request alebo GitHub sa píšu ako v angličtine. Slová, ktoré váš jazyk prijal, zostávajú bez zmeny. So zapnutým modelom AI zváži aj termíny, ktoré rozpoznávač počul nepresne.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Interpunkcia hlasom</value>
@@ -821,7 +827,7 @@
     <value>Glosár</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Mená a termíny, ktoré majú byť napísané správne, jeden na riadok, tak ako sa majú napísať. Ak termín znie nezvyčajne, za | doplňte, ako sa vyslovuje.</value>
+    <value>Mená a termíny, ktoré majú byť napísané správne, jeden na riadok, tak ako sa majú napísať. Ak termín znie nezvyčajne, za | doplňte, ako sa vyslovuje. Zle počuté slovo, ktoré hneď po diktovaní prepíšete latinkou, sa sem pridá samo.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Hlasové písanie je súčasťou Lapsus Plus.</value>

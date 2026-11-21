@@ -1,0 +1,9 @@
+{
+  "Model": "fastconformer-ka",
+  "Device": "cpu",
+  "Language": "ka",
+  "Phrases": 25,
+  "Wer": 17.13,
+  "Cer": 5.41,
+  "MsPerPhrase": 188
+}

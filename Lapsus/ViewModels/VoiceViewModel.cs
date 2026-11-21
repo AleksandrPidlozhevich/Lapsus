@@ -29,6 +29,9 @@ public sealed record UnloadOption(string Name, SpeechUnloadAfter Value);
 
 public sealed record VoiceDeviceOption(string Name, ComputeDevicePreference Value);
 
+// A layout the chosen model does not hear, and the model its dictations run on. Download: null once it is on disk.
+public sealed record LayoutModelOption(string Text, string DownloadLabel, IRelayCommand? Download);
+
 public partial class VoiceViewModel : ViewModelBase
 {
     private static readonly TimeSpan GlossarySaveDelay = TimeSpan.FromMilliseconds(700);
@@ -41,6 +44,8 @@ public partial class VoiceViewModel : ViewModelBase
     private readonly Action _releaseModel;
     private readonly Func<bool> _locked;
     private readonly Func<string> _deviceLabel;
+    private readonly Func<IReadOnlyList<string>> _layouts;
+    private readonly Func<IReadOnlyList<string>, SpeechModel>? _recommend;
     private readonly DispatcherTimer _saveGlossary;
     private CancellationTokenSource? _download;
     private bool _building;
@@ -48,12 +53,15 @@ public partial class VoiceViewModel : ViewModelBase
     public VoiceViewModel(
         AppSettings settings, SettingsStore store, SpeechModelStore speech, bool supported,
         Action<bool> applyEnabled, Action modelReady, Action releaseModel, Func<bool>? locked = null,
-        Func<string>? deviceLabel = null, Func<SpeechModel>? recommended = null)
+        Func<string>? deviceLabel = null, Func<IReadOnlyList<string>>? layouts = null,
+        Func<IReadOnlyList<string>, SpeechModel>? recommend = null)
     {
+        _layouts = layouts ?? (() => []);
+        _recommend = recommend;
         // Until a model is on disk the pick follows the machine (Parakeet without a graphics card); once one is,
         // the user's own choice stands. Read once at start, so a choice made before downloading is not undone.
-        if (recommended is not null && !SpeechModelCatalog.Available.Any(speech.IsInstalled))
-            settings.SpeechModelId = recommended().Id;
+        if (recommend is not null && !SpeechModelCatalog.Available.Any(speech.IsInstalled))
+            settings.SpeechModelId = recommend(_layouts()).Id;
 
         _deviceLabel = deviceLabel ?? (() => "");
         _locked = locked ?? (() => false);
@@ -138,6 +146,8 @@ public partial class VoiceViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(ModelInstalled), nameof(ShowDownload), nameof(ShowRemove), nameof(ModelStatus),
         nameof(UnloadHint))]
     private VoiceModelOption? _selectedModel;
+
+    public ObservableCollection<LayoutModelOption> LayoutModels { get; } = [];
 
     public ObservableCollection<VoiceLanguageOption> LanguageOptions { get; } = [];
 
@@ -231,6 +241,7 @@ public partial class VoiceViewModel : ViewModelBase
         _settings.SpeechModelId = value.Model.Id;
         _store.Save(_settings);
         Status = null;
+        BuildLayoutModels();
     }
 
     partial void OnSelectedLanguageChanged(VoiceLanguageOption? value)
@@ -270,13 +281,16 @@ public partial class VoiceViewModel : ViewModelBase
     }
 
     [RelayCommand(CanExecute = nameof(CanChangeModel))]
-    private async Task DownloadAsync()
+    private Task DownloadAsync() => DownloadModelAsync(Model);
+
+    private async Task DownloadModelAsync(SpeechModel model)
     {
+        if (Busy)
+            return;
         Busy = true;
         Status = null;
         Progress = 0;
         _download = new CancellationTokenSource();
-        var model = Model;
         try
         {
             var progress = new Progress<double>(p => Dispatcher.UIThread.Post(() => Progress = p));
@@ -331,14 +345,61 @@ public partial class VoiceViewModel : ViewModelBase
         OnPropertyChanged(nameof(TryIt));
         OnPropertyChanged(nameof(UnloadHint));
         OnPropertyChanged(nameof(DeviceNow));
+        BuildLayoutModels();
     }
 
-    public void AddGlossaryTerm(string term)
+    // Each layout language whose dictations run on another model than the chosen one (DictationEngine picks the same
+    // way), or should: one made for it (he, ka, hy), or one that hears it at all. Grouped by that model.
+    private void BuildLayoutModels()
     {
-        var lines = GlossaryText.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        if (lines.Any(l => l.Split('|')[0].Trim() == term))
+        if (_recommend is null)
             return;
-        GlossaryText = string.Join(Environment.NewLine, lines.Append(term));
+        var chosen = Model;
+        SpeechModel? For(string language) =>
+            SpeechModelCatalog.ForLanguage(chosen, language, _speech.IsInstalled) is var used && used != chosen ? used
+            : SpeechModelCatalog.OwnModel(language) is { } own && own != chosen ? own
+            : !chosen.Hears(language) ? _recommend([language])
+            : null;
+        var rows = _layouts()
+            .Select(DictationLanguagePicker.Normalize)
+            .Distinct()
+            .Where(DictationLanguagePicker.Supports)
+            .Select(l => (Language: l, Model: For(l)))
+            .Where(r => r.Model is not null && r.Model != chosen)
+            .GroupBy(r => r.Model!);
+
+        LayoutModels.Clear();
+        foreach (var group in rows)
+        {
+            var model = group.Key;
+            var languages = string.Join(", ", group.Select(r => LanguageName(r.Language)));
+            var name = $"{model.DisplayName} — {model.SizeMb} MB";
+            LayoutModels.Add(_speech.IsInstalled(model)
+                ? new LayoutModelOption(Localizer.Instance.Format("Voice_LayoutModelReady", languages, name), "", null)
+                : new LayoutModelOption(Localizer.Instance.Format("Voice_LayoutModelMissing", languages, name),
+                    Localizer.Instance["Action_Download"], new AsyncRelayCommand(() => DownloadModelAsync(model))));
+        }
+    }
+
+    // entry: a term, or "term|heard" as learned from a correction; a heard form joins the term's line if it is listed.
+    public void AddGlossaryTerm(string entry)
+    {
+        var parts = entry.Split('|', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 0)
+            return;
+        var lines = GlossaryText.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).ToList();
+        var at = lines.FindIndex(l => l.Split('|')[0].Trim() == parts[0]);
+        if (at < 0)
+            lines.Add(string.Join('|', parts));
+        else
+        {
+            var listed = lines[at].Split('|', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).ToList();
+            var added = parts.Skip(1).Where(h => !listed.Contains(h, StringComparer.OrdinalIgnoreCase)).ToList();
+            if (added.Count == 0)
+                return;
+            lines[at] = string.Join('|', listed.Concat(added));
+        }
+        GlossaryText = string.Join(Environment.NewLine, lines);
         SaveGlossary();
     }
 
@@ -387,6 +448,7 @@ public partial class VoiceViewModel : ViewModelBase
             SelectedDevice = DeviceOptions.FirstOrDefault(o => o.Value == _settings.DictationDevice) ?? DeviceOptions[0];
 
             RefreshMicrophones();
+            BuildLayoutModels();
         }
         finally
         {
@@ -422,7 +484,10 @@ public partial class VoiceViewModel : ViewModelBase
         try
         {
             var name = CultureInfo.GetCultureInfo(code).NativeName;
-            return name.Length > 0 ? char.ToUpper(name[0], CultureInfo.GetCultureInfo(code)) + name[1..] : code;
+            // Georgian has no capitals: ToUpper turns "ქართული" into Mtavruli, the all-caps display script.
+            return name.Length > 0 && code != "ka"
+                ? char.ToUpper(name[0], CultureInfo.GetCultureInfo(code)) + name[1..]
+                : name.Length > 0 ? name : code;
         }
         catch (CultureNotFoundException)
         {

@@ -766,6 +766,12 @@
     <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 je hitra izbira brez grafične kartice (približno 0,3 s na stavek), vendar pozna le 25 evropskih jezikov in angleške izraze pogosteje zapiše z vašo abecedo. large-v3-turbo pozna vse jezike in je z grafično kartico najboljša izbira; q5 je isti turbo z manjšim prenosom. large-v3 je nekoliko natančnejši, a zahteva grafično kartico. Whisper small je najmanjši prenos. Parakeet TDT v2 je enako hiter, a samo za angleščino, in v njej natančnejši. Turbo za hebrejščino od ivrit.ai je v hebrejščini natančnejši, a vsak stavek bere kot hebrejščino. Za gruzijščino in armenščino NVIDIA FastConformer: Whisper ju skoraj ne pozna, ta dva sta hitra in natančna, vsak le za svoj jezik.</value>
   </data>
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Razporeditev {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Razporeditev {0} potrebuje drug model: {1}</value>
+  </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Jezik</value>
   </data>
@@ -809,7 +815,7 @@
     <value>Angleški izrazi z latinico</value>
   </data>
     <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Izrazi, kot sta pull request ali GitHub, so zapisani kot v angleščini. Besede, ki jih je vaš jezik prevzel, ostanejo nespremenjene.</value>
+    <value>Izrazi, kot sta pull request ali GitHub, so zapisani kot v angleščini. Besede, ki jih je vaš jezik prevzel, ostanejo nespremenjene. Z vklopljenim modelom UI pretehta tudi izraze, ki jih je razpoznavalnik slišal nenatančno.</value>
   </data>
     <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Ločila z glasom</value>
@@ -821,7 +827,7 @@
     <value>Slovarček</value>
   </data>
     <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Imena in izrazi, ki morajo biti zapisani pravilno, po eden v vrstici, tako kot naj bodo natipkani. Če izraz zveni nenavadno, za | dodajte, kako se izgovori.</value>
+    <value>Imena in izrazi, ki morajo biti zapisani pravilno, po eden v vrstici, tako kot naj bodo natipkani. Če izraz zveni nenavadno, za | dodajte, kako se izgovori. Narobe slišana beseda, ki jo takoj po nareku znova natipkate v latinici, se sem doda sama.</value>
   </data>
     <data name="Voice_Locked" xml:space="preserve">
     <value>Glasovno tipkanje je del paketa Lapsus Plus.</value>

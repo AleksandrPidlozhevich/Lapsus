@@ -208,7 +208,8 @@ public partial class App : Application
         var supported = audio is not NullAudioCapture;
         var speech = new SpeechModelStore();
         var dictionaries = _dictionaryStore;
-        _dictationEngine = new DictationEngine(speech, _settingsViewModel.SettingsSnapshot, dictionaries.Installed);
+        _dictationEngine = new DictationEngine(speech, _settingsViewModel.SettingsSnapshot, dictionaries.Installed,
+            () => _brain?.LoadedModel);
         string HotkeyName() => HotkeyNames.Format(settings.DictationHotkey);
         _dictationIndicator = new DictationIndicator(_indicator,
             () => Localizer.Instance.Format("Voice_ListeningHint", HotkeyName()),
@@ -243,8 +244,9 @@ public partial class App : Application
             releaseModel: () => _dictationEngine?.Unload(),
             locked: () => _settingsViewModel.NeuralLocked,
             deviceLabel: () => _dictationEngine?.DeviceLabel ?? "",
-            recommended: () => SpeechModelCatalog.Recommended(
-                ComputeDeviceProbe.Capabilities().Providers.Count > 0, host.InstalledLanguages()));
+            layouts: host.InstalledLanguages,
+            recommend: languages => SpeechModelCatalog.Recommended(
+                ComputeDeviceProbe.Capabilities().Providers.Count > 0, languages));
         _dictationEngine.Loaded += () => Dispatcher.UIThread.Post(() => _settingsViewModel.Voice?.RefreshLabels());
         _settingsViewModel.Voice.PropertyChanged += (_, e) =>
         {
