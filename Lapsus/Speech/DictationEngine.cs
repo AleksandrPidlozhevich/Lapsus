@@ -21,6 +21,7 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
     private const float RetryBelow = 0.75f;
 
     private readonly WhisperRecognizer _recognizer = new();
+    private readonly ParakeetRecognizer _parakeet = new();
     private readonly SpeechModelStore _store;
     private readonly Func<AppSettings> _settings;
     private readonly Func<IReadOnlyList<DictionarySource>> _dictionaries;
@@ -29,6 +30,8 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
     private Task? _load;
     private string? _loadKey;
+    // The engine of the model being loaded or loaded; only one is in memory at a time.
+    private volatile bool _onParakeet;
     private int _busy;
     private long _lastUseTicks = DateTime.UtcNow.Ticks;
     private (string Key, TermRestorer Restorer)? _restorer;
@@ -45,9 +48,12 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
     public bool HasModel => _store.IsInstalled(Model(_settings()));
 
-    public bool IsLoaded => _recognizer.IsLoaded;
+    public bool IsLoaded => _onParakeet ? _parakeet.IsLoaded : _recognizer.IsLoaded;
 
-    public string DeviceLabel => _recognizer.DeviceLabel;
+    // Parakeet ~0.3 s a phrase on a CPU, Whisper ~0.4 s on a GPU; Whisper on a CPU (~2.5 s) would only queue up.
+    public bool CanStream => _onParakeet ? _parakeet.IsLoaded : _recognizer.IsLoaded && _recognizer.OnGpu;
+
+    public string DeviceLabel => _onParakeet ? (_parakeet.IsLoaded ? _parakeet.DeviceLabel : "") : _recognizer.DeviceLabel;
 
     // Raised on a worker thread once a load (and its warm-up) finishes.
     public event Action? Loaded;
@@ -63,18 +69,30 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         var key = $"{model.Id}|{preferGpu}";
         lock (_gate)
         {
-            if (_disposed || (_load is { IsFaulted: false, IsCanceled: false } && _loadKey == key && _recognizer.IsLoaded)
+            if (_disposed || (_load is { IsFaulted: false, IsCanceled: false } && _loadKey == key && IsLoaded)
                 || (_load is { IsCompleted: false } && _loadKey == key))
                 return;
 
             _loadKey = key;
+            var parakeet = _onParakeet = model.Engine == SpeechEngine.Parakeet;
             var path = _store.PathFor(model);
+            var folder = _store.FolderFor(model);
             var vad = _store.VadPath;
             _load = Task.Run(async () =>
             {
-                _recognizer.Load(path, vad, preferGpu);
-                // On a GPU the first run compiles shaders (seconds, once per driver); do it now, not on the phrase.
-                await _recognizer.WarmUpAsync().ConfigureAwait(false);
+                UnloadModels();
+                if (parakeet)
+                {
+                    // CPU only, whatever DictationDevice says: on DirectML it was twice as slow.
+                    _parakeet.Load(folder);
+                    await _parakeet.WarmUpAsync().ConfigureAwait(false);
+                }
+                else
+                {
+                    _recognizer.Load(path, vad, preferGpu);
+                    // On a GPU the first run compiles shaders (seconds, once per driver); do it now, not on the phrase.
+                    await _recognizer.WarmUpAsync().ConfigureAwait(false);
+                }
                 Loaded?.Invoke();
             });
         }
@@ -91,7 +109,7 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         var loading = false;
         try
         {
-            loading = !_recognizer.IsLoaded;
+            loading = !IsLoaded;
             Prepare();
             Task? load;
             lock (_gate)
@@ -105,16 +123,23 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
             var settings = _settings();
             var glossary = settings.DictationGlossary.Where(g => g.Trim().Length > 0).ToArray();
-            var among = settings.DictationLanguage is { } fixedLanguage
+            // A model that hears one language is read in it, whatever else the user writes in.
+            var fixedLanguage = Model(settings).Languages is { Count: 1 } only ? only.First() : settings.DictationLanguage;
+            var among = fixedLanguage is not null
                 ? [fixedLanguage]
                 : DictationLanguagePicker.Candidates(request.Language, request.Languages);
-            var language = settings.DictationLanguage ?? request.Language;
+            var language = fixedLanguage ?? request.Language;
 
-            Task<SpeechResult> Recognize(string lang, IReadOnlyList<string> detectAmong) => _recognizer.TranscribeAsync(
-                pcm,
-                new SpeechRequest(lang, SpeechPromptBuilder.Build(lang, glossary.Select(g => g.Split('|')[0]),
-                    request.PreviousText), detectAmong),
-                cancellationToken);
+            // Parakeet takes no prompt and picks the language itself; its text is taken to be in the main language,
+            // for spoken punctuation and the term restorer.
+            var parakeet = _onParakeet;
+            Task<SpeechResult> Recognize(string lang, IReadOnlyList<string> detectAmong) => parakeet
+                ? _parakeet.TranscribeAsync(pcm, new SpeechRequest(lang), cancellationToken)
+                : _recognizer.TranscribeAsync(
+                    pcm,
+                    new SpeechRequest(lang, SpeechPromptBuilder.Build(lang, glossary.Select(g => g.Split('|')[0]),
+                        request.PreviousText), detectAmong),
+                    cancellationToken);
 
             var result = await Recognize(language, among).ConfigureAwait(false);
             first = result;
@@ -123,7 +148,7 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
             // A CPU skips language detection (a pass of its own, ~10 s), so speech in another of the user's
             // languages is decoded as the main one. Such a decode is unsure: ru speech read as en scored below
             // RetryBelow in 5 of its 8 broken phrases, ru read as ru never did (22 phrases, stage 2 audio).
-            if (!_recognizer.OnGpu && result.MeanTokenProbability < RetryBelow
+            if (!parakeet && !_recognizer.OnGpu && result.MeanTokenProbability < RetryBelow
                 && among.FirstOrDefault(l => l != result.Language) is { } other)
             {
                 var second = await Recognize(other, [other]).ConfigureAwait(false);
@@ -145,10 +170,11 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         {
             // Timings only, never the text.
             var load = loading ? $"load {waited} ms (model was unloaded)" : $"model wait {waited} ms";
-            CaptureLog.Write($"dictation: {DeviceLabel}, audio {pcm.Length / 16000.0:0.0} s, speech " +
-                             $"{first?.SpeechSeconds ?? 0:0.0} s, {first?.Language ?? "-"}; {load}, decode " +
-                             $"{Math.Max(decoded - waited, 0)} ms, retry {retried} ms, terms " +
-                             $"{Math.Max(restored - decoded - retried, 0)} ms, total {clock.ElapsedMilliseconds} ms");
+            if (!request.Live)
+                CaptureLog.Write($"dictation: {DeviceLabel}, audio {pcm.Length / 16000.0:0.0} s, speech " +
+                                 $"{first?.SpeechSeconds ?? 0:0.0} s, {first?.Language ?? "-"}; {load}, decode " +
+                                 $"{Math.Max(decoded - waited, 0)} ms, retry {retried} ms, terms " +
+                                 $"{Math.Max(restored - decoded - retried, 0)} ms, total {clock.ElapsedMilliseconds} ms");
             Interlocked.Exchange(ref _lastUseTicks, DateTime.UtcNow.Ticks);
             Interlocked.Decrement(ref _busy);
             if (_settings().SpeechUnloadAfter == SpeechUnloadAfter.Immediately)
@@ -163,12 +189,18 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
             _load = null;
             _loadKey = null;
         }
+        UnloadModels();
+    }
+
+    private void UnloadModels()
+    {
         _recognizer.Unload();
+        _parakeet.Unload();
     }
 
     private void UnloadIfIdle()
     {
-        if (_disposed || Volatile.Read(ref _busy) > 0 || !_recognizer.IsLoaded)
+        if (_disposed || Volatile.Read(ref _busy) > 0 || !IsLoaded)
             return;
 
         if (_settings().SpeechUnloadAfter.Delay() is not { } delay)
@@ -186,7 +218,7 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
             _load = null;
             _loadKey = null;
         }
-        _recognizer.Unload();
+        UnloadModels();
     }
 
     // Built once per glossary and dictionary set; the English index inside takes a fifth of a second.
@@ -217,5 +249,6 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         _disposed = true;
         _idleTimer.Dispose();
         _recognizer.Dispose();
+        _parakeet.Dispose();
     }
 }

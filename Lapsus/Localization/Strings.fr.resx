@@ -764,7 +764,7 @@
     <value>Maintenez pendant que vous parlez et relâchez pour écrire le texte ; un appui bref enregistre en mains libres jusqu’au prochain appui. Échap annule. Le reste se trouve dans l’onglet « Voix ».</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3 est le plus précis mais demande une carte graphique (environ 5 s par phrase sans elle). large-v3-turbo est presque aussi précis et plus rapide ; q5 est le même turbo en téléchargement plus léger. Whisper small convient aux ordinateurs sans carte graphique.</value>
+    <value>Parakeet TDT v3 est le choix rapide sans carte graphique (environ 0,3 s par phrase), mais il ne connaît que 25 langues européennes et écrit plus souvent les termes anglais dans votre alphabet. large-v3-turbo connaît toutes les langues et reste le meilleur choix avec une carte graphique ; q5 est le même turbo en téléchargement plus léger. large-v3 est un peu plus précis mais demande une carte graphique. Whisper small est le plus petit téléchargement. Parakeet TDT v2 est tout aussi rapide, mais uniquement pour l'anglais, et plus précis dans cette langue. Le turbo hébreu d'ivrit.ai est plus précis en hébreu, mais lit chaque phrase comme de l'hébreu. Pour le géorgien et l'arménien, NVIDIA FastConformer : Whisper les connaît à peine, ceux-ci sont rapides et précis, chacun pour sa seule langue.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Langue</value>

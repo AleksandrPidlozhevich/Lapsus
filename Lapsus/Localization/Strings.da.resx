@@ -764,7 +764,7 @@
     <value>Hold nede, mens du taler, og slip for at skrive teksten; et kort tryk optager håndfrit til næste tryk. Esc annullerer. Resten findes på fanen “Tale”.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3 er den mest præcise, men kræver et grafikkort (uden ca. 5 s pr. sætning). large-v3-turbo er næsten lige så præcis og hurtigere; q5 er samme turbo som mindre download. Whisper small er til computere uden grafikkort.</value>
+    <value>Parakeet TDT v3 er det hurtige valg uden grafikkort (omkring 0,3 s pr. sætning), men kender kun 25 europæiske sprog og staver oftere engelske fagord med dit alfabet. large-v3-turbo kender alle sprog og er bedst med et grafikkort; q5 er den samme turbo som en mindre download. large-v3 er en smule mere præcis, men vil have et grafikkort. Whisper small er den mindste download. Parakeet TDT v2 er lige så hurtig, men kun til engelsk, og mere præcis på det. Den hebraiske turbo fra ivrit.ai er mere præcis på hebraisk, men læser hver sætning som hebraisk. Til georgisk og armensk NVIDIA FastConformer: Whisper kan dem næsten ikke, disse er hurtige og præcise, hver kun til sit eget sprog.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Sprog</value>

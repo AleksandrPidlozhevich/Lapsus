@@ -29,6 +29,37 @@ public sealed class VoiceSettingsTests : IDisposable
         Directory.Delete(_dir, true);
     }
 
+    [Theory]
+    [InlineData(false, "ru,uk,en", SpeechModelCatalog.ParakeetId)]
+    [InlineData(true, "ru,uk,en", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "en,he", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "be,ru", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "en", SpeechModelCatalog.ParakeetEnglishId)]
+    [InlineData(true, "en", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "he,en", SpeechModelCatalog.HebrewId)]
+    [InlineData(true, "he,en", SpeechModelCatalog.HebrewId)]
+    [InlineData(false, "ka,ru,en", SpeechModelCatalog.GeorgianId)]
+    [InlineData(true, "hy,ru", SpeechModelCatalog.ArmenianId)]
+    [InlineData(false, "ru,ka", SpeechModelCatalog.DefaultId)]
+    public void Parakeet_is_suggested_only_without_a_GPU_and_for_languages_it_hears(bool gpu, string languages, string expected)
+    {
+        var model = SpeechModelCatalog.Recommended(gpu, languages.Split(',', StringSplitOptions.RemoveEmptyEntries));
+
+        Assert.Equal(expected, model.Id);
+    }
+
+    [Fact]
+    public void The_suggestion_is_taken_while_no_model_is_downloaded()
+    {
+        var parakeet = SpeechModelCatalog.Find(SpeechModelCatalog.ParakeetId)!;
+        new VoiceViewModel(_settings, _store, new SpeechModelStore(directory: Path.Combine(_dir, "speech")), true,
+            _ => { }, () => { }, () => { }, recommended: () => parakeet);
+
+        Assert.Equal(SpeechModelCatalog.ParakeetId, _settings.SpeechModelId);
+        Assert.Equal(SpeechModelCatalog.ParakeetId, Voice().SelectedModel?.Model.Id);
+    }
+
     [Fact]
     public void Turning_it_on_is_saved_and_applied()
     {

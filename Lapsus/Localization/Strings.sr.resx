@@ -764,7 +764,7 @@
     <value>Držite dok govorite i pustite — tekst će biti otkucan; kratak pritisak snima bez ruku do sledećeg pritiska. Esc — otkaži. Ostala podešavanja su na kartici „Glas“.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3 je najtačniji, ali traži grafičku karticu (bez nje oko 5 s po rečenici). large-v3-turbo je skoro jednako tačan i brži; q5 je isti turbo, ali se manje preuzima. Whisper small je za računare bez grafičke kartice.</value>
+    <value>Parakeet TDT v3 je brz izbor bez grafičke kartice (oko 0,3 s po rečenici), ali zna samo 25 evropskih jezika, a srpski nije među njima. large-v3-turbo zna sve jezike i najbolji je izbor sa grafičkom karticom; q5 je isti turbo sa manjim preuzimanjem. large-v3 je malo tačniji, ali traži grafičku karticu. Whisper small je najmanje preuzimanje. Parakeet TDT v2 je jednako brz, ali samo za engleski, i u njemu tačniji. Turbo za hebrejski od ivrit.ai je tačniji na hebrejskom, ali svaku rečenicu čita kao hebrejski. Za gruzijski i jermenski, NVIDIA FastConformer: Whisper ih skoro ne zna, a ovi su brzi i tačni, svaki samo za svoj jezik.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Jezik</value>

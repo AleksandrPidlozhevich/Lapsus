@@ -240,7 +240,22 @@ does not apply here — dictation reads nothing from the field, it only types in
   otherwise. A phrase takes a fraction of a second on a graphics card and a few seconds on a
   processor. Four builds are offered — large-v3-turbo (834 MB, the default), the same model as a
   smaller download (547 MB), the full large-v3 (1031 MB: more accurate, and noticeably slower), and
-  Whisper small (181 MB) for computers without a graphics card.
+  Whisper small (181 MB), the smallest download.
+- **Without a graphics card, NVIDIA's [Parakeet TDT v3](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3)**
+  (640 MB, CC BY 4.0) is the suggested model: about a third of a second a phrase on the processor, where
+  large-v3-turbo takes two to three. It hears 25 European languages (Russian and Ukrainian among them), adds
+  punctuation itself and writes nothing over silence, but spells English terms in the local alphabet more often
+  than Whisper. Where a layout's language is not among the 25, Whisper stays the suggestion. Where every layout
+  is English, the suggestion is [Parakeet TDT v2](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2) (630 MB,
+  CC BY 4.0) instead: the same speed, English only, and more accurate at it.
+- **Where Hebrew is the main layout, [ivrit.ai](https://www.ivrit.ai)'s fine-tune of large-v3-turbo** (834 MB,
+  Apache 2.0) is the suggestion, with a graphics card or without: about half the stock turbo's errors in Hebrew
+  on a graphics card and a third on the processor, but it reads every phrase as Hebrew, English ones included.
+- **Where Georgian or Armenian is the main layout, NVIDIA's FastConformer for that language**
+  ([ka](https://huggingface.co/nvidia/stt_ka_fastconformer_hybrid_large_pc),
+  [hy](https://huggingface.co/nvidia/stt_hy_fastconformer_hybrid_large_pc); 437 MB each, CC BY 4.0) is the
+  suggestion. Whisper hardly knows either language (on Georgian it writes something else altogether); these
+  take about a fifth of a second a phrase on the processor and hear only their own language.
 - **Long dictations are typed as you go.** Once a few seconds have been said, the next pause sends that
   part to recognition and it is typed while you keep talking; the earlier parts are Whisper's context for
   the next. While the hotkey is held the parts wait (letters typed with Ctrl down would act as shortcuts)

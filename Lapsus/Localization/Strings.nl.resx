@@ -764,7 +764,7 @@
     <value>Ingedrukt houden terwijl u spreekt en loslaten om de tekst te typen; kort drukken neemt handsfree op tot de volgende druk. Esc annuleert. De rest staat op het tabblad ‘Spraak’.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3 is het nauwkeurigst, maar wil een videokaart (zonder ongeveer 5 s per zin). large-v3-turbo is bijna even nauwkeurig en sneller; q5 is dezelfde turbo als kleinere download. Whisper small is voor computers zonder videokaart.</value>
+    <value>Parakeet TDT v3 is de snelle keuze zonder grafische kaart (ongeveer 0,3 s per zin), maar kent maar 25 Europese talen en schrijft Engelse vaktermen vaker in je eigen alfabet. large-v3-turbo kent alle talen en is de beste keuze met een grafische kaart; q5 is dezelfde turbo als kleinere download. large-v3 is iets nauwkeuriger maar wil een grafische kaart. Whisper small is de kleinste download. Parakeet TDT v2 is net zo snel, maar alleen voor Engels, en daarin nauwkeuriger. De Hebreeuwse turbo van ivrit.ai is nauwkeuriger in het Hebreeuws, maar leest elke zin als Hebreeuws. Voor Georgisch en Armeens NVIDIA FastConformer: Whisper kent ze nauwelijks, deze zijn snel en nauwkeurig, elk alleen voor de eigen taal.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Taal</value>

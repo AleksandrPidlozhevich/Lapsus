@@ -6,7 +6,9 @@ namespace Lapsus.Input.Dictation;
 
 // Languages: the others detection may pick.
 // PreviousText: what precedes the caret (typed, or this field's last dictation), so the next one continues it.
-internal sealed record DictationRequest(string Language, IReadOnlyList<string> Languages, string? PreviousText = null);
+// Live: a recognition for live words, run every few hundred ms — kept out of the capture log.
+internal sealed record DictationRequest(
+    string Language, IReadOnlyList<string> Languages, string? PreviousText = null, bool Live = false);
 
 // Language: the one the text was recognised in, so the rest of the dictation can skip detection.
 internal sealed record DictationResult(string Text, string Language);
@@ -18,6 +20,9 @@ internal interface IDictationEngine
 
     // Starts loading the model now, while the user speaks, so it is ready when the recording ends.
     void Prepare();
+
+    // Whether recognition is fast enough (a fraction of a second) to run again and again while the user speaks.
+    bool CanStream { get; }
 
     Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken);
 }

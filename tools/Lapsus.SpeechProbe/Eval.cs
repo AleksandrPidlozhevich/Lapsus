@@ -13,6 +13,7 @@ static class Eval
         string[]? langs = null;
         string? glossaryPath = null;
         var limit = int.MaxValue;
+        var threads = Math.Clamp(Environment.ProcessorCount / 2, 1, 4);
         bool flash = true, detect = true;
         for (var i = 0; i < args.Length; i += 2)
         {
@@ -24,6 +25,7 @@ static class Eval
                 case "--device": device = value; break;
                 case "--glossary": glossaryPath = value; break;
                 case "--limit": limit = int.Parse(value); break;
+                case "--threads": threads = int.Parse(value); break;
                 case "--flash": flash = value == "1"; break;
                 case "--detect": detect = value == "1"; break;
                 default: throw new ArgumentException($"unknown option {args[i]}");
@@ -50,16 +52,30 @@ static class Eval
         samples.Add(Sample.Made("~silence", new float[16000 * 5]));
         samples.Add(Sample.Made("~noise", Probe.Noise(16000 * 5, 0.01f)));
 
-        using var recognizer = new WhisperRecognizer { FlashAttention = flash };
         var sw = Stopwatch.StartNew();
-        recognizer.Load(modelPath, vadPath, device == "gpu");
-        var loadMs = sw.ElapsedMilliseconds;
-        if (Environment.GetEnvironmentVariable("LAPSUS_WHISPER_LOG") is not null)
-            foreach (var line in recognizer.LoadLog)
-                Console.Write(line);
-        sw.Restart();
-        await recognizer.WarmUpAsync();
-        Console.WriteLine($"model {Path.GetFileName(modelPath)} on {recognizer.DeviceLabel}: load {loadMs} ms, warm-up {sw.ElapsedMilliseconds} ms");
+        ISpeechRecognizer recognizer;
+        string deviceLabel;
+        if (Directory.Exists(modelPath))
+        {
+            var parakeet = new ParakeetRecognizer { Threads = threads };
+            parakeet.Load(modelPath);
+            await parakeet.WarmUpAsync();
+            recognizer = parakeet;
+            deviceLabel = parakeet.DeviceLabel;
+        }
+        else
+        {
+            var whisper = new WhisperRecognizer { FlashAttention = flash };
+            whisper.Load(modelPath, vadPath, device == "gpu");
+            if (Environment.GetEnvironmentVariable("LAPSUS_WHISPER_LOG") is not null)
+                foreach (var line in whisper.LoadLog)
+                    Console.Write(line);
+            await whisper.WarmUpAsync();
+            recognizer = whisper;
+            deviceLabel = whisper.DeviceLabel;
+        }
+        using var _ = recognizer;
+        Console.WriteLine($"model {Path.GetFileName(modelPath)} on {deviceLabel}: load + warm-up {sw.ElapsedMilliseconds} ms");
         Console.WriteLine($"dictionaries {string.Join(",", loaded)}; detection among {string.Join(",", candidates)}");
 
         var stages = new[] { "raw", "filtered", "restored" };

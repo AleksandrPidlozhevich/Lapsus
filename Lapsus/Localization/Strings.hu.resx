@@ -764,7 +764,7 @@
     <value>Tartsa lenyomva, amíg beszél, és engedje fel a szöveg beírásához; rövid megnyomás kéz nélkül rögzít a következő megnyomásig. Az Esc megszakítja. A többi beállítás a „Hang” lapon van.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>A large-v3 a legpontosabb, de videokártya kell hozzá (nélküle kb. 5 mp mondatonként). A large-v3-turbo majdnem ugyanilyen pontos és gyorsabb; a q5 ugyanaz a turbo kisebb letöltéssel. A Whisper small videokártya nélküli gépekre való.</value>
+    <value>A Parakeet TDT v3 a gyors választás videokártya nélkül (kb. 0,3 mp mondatonként), de csak 25 európai nyelvet ismer, és gyakrabban írja az angol szakszavakat a saját ábécédével. A large-v3-turbo minden nyelvet ismer, és videokártyával a legjobb; a q5 ugyanez a turbo kisebb letöltéssel. A large-v3 kicsit pontosabb, de videokártyát igényel. A Whisper small a legkisebb letöltés. A Parakeet TDT v2 ugyanilyen gyors, de csak angolul tud, abban viszont pontosabb. Az ivrit.ai héber turbója pontosabb héberül, de minden mondatot héberként olvas. Grúzhoz és örményhez NVIDIA FastConformer: a Whisper alig ismeri őket, ezek gyorsak és pontosak, mindegyik csak a saját nyelvén.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Nyelv</value>

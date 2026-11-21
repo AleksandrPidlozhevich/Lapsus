@@ -764,7 +764,7 @@
     <value>Țineți apăsat cât vorbiți și eliberați pentru a scrie textul; o apăsare scurtă înregistrează fără mâini până la următoarea. Esc anulează. Restul se află în fila „Voce”.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3 este cel mai precis, dar are nevoie de placă video (fără ea, circa 5 s pe frază). large-v3-turbo este aproape la fel de precis și mai rapid; q5 este același turbo, cu descărcare mai mică. Whisper small este pentru calculatoare fără placă video.</value>
+    <value>Parakeet TDT v3 este alegerea rapidă fără placă video (circa 0,3 s pe frază), dar cunoaște doar 25 de limbi europene și scrie mai des termenii englezești cu alfabetul tău. large-v3-turbo cunoaște toate limbile și este cea mai bună alegere cu placă video; q5 este același turbo, cu o descărcare mai mică. large-v3 este puțin mai precis, dar cere o placă video. Whisper small este cea mai mică descărcare. Parakeet TDT v2 este la fel de rapid, dar doar pentru engleză, și în ea este mai precis. Turbo pentru ebraică de la ivrit.ai este mai precis în ebraică, dar citește fiecare frază ca ebraică. Pentru georgiană și armeană, NVIDIA FastConformer: Whisper aproape nu le cunoaște, acestea sunt rapide și precise, fiecare doar pentru limba sa.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Limbă</value>

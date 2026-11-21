@@ -764,7 +764,7 @@
     <value>Držte, dokud mluvíte, a pusťte — text se napíše; krátké stisknutí nahrává bez držení až do dalšího stisknutí. Esc zruší. Ostatní nastavení jsou na kartě „Hlas“.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3 je nejpřesnější, ale chce grafickou kartu (bez ní asi 5 s na větu). large-v3-turbo je skoro stejně přesný a rychlejší; q5 je tentýž turbo s menším stahováním. Whisper small je pro počítače bez grafické karty.</value>
+    <value>Parakeet TDT v3 je rychlá volba bez grafické karty (asi 0,3 s na větu), ale zná jen 25 evropských jazyků a častěji píše anglické termíny vaší abecedou. large-v3-turbo zná všechny jazyky a s grafickou kartou je nejlepší; q5 je stejná turbo s menším stahováním. large-v3 je o něco přesnější, ale chce grafickou kartu. Whisper small je nejmenší stahování. Parakeet TDT v2 je stejně rychlá, ale jen pro angličtinu, a v ní přesnější. Turbo pro hebrejštinu od ivrit.ai je v hebrejštině přesnější, ale každou frázi čte jako hebrejštinu. Pro gruzínštinu a arménštinu NVIDIA FastConformer: Whisper je skoro nezná, tyto jsou rychlé a přesné, každý jen pro svůj jazyk.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Jazyk</value>

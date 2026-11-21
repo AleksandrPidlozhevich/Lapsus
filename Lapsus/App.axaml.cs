@@ -242,7 +242,9 @@ public partial class App : Application
             modelReady: () => _dictationEngine?.Prepare(),
             releaseModel: () => _dictationEngine?.Unload(),
             locked: () => _settingsViewModel.NeuralLocked,
-            deviceLabel: () => _dictationEngine?.DeviceLabel ?? "");
+            deviceLabel: () => _dictationEngine?.DeviceLabel ?? "",
+            recommended: () => SpeechModelCatalog.Recommended(
+                ComputeDeviceProbe.Capabilities().Providers.Count > 0, host.InstalledLanguages()));
         _dictationEngine.Loaded += () => Dispatcher.UIThread.Post(() => _settingsViewModel.Voice?.RefreshLabels());
         _settingsViewModel.Voice.PropertyChanged += (_, e) =>
         {

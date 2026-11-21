@@ -764,7 +764,7 @@
     <value>Przytrzymaj podczas mówienia i puść — tekst zostanie wpisany; krótkie naciśnięcie nagrywa bez trzymania aż do następnego. Esc anuluje. Pozostałe ustawienia są na karcie „Głos”.</value>
   </data>
     <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3 jest najdokładniejszy, ale wymaga karty graficznej (bez niej około 5 s na frazę). large-v3-turbo jest prawie tak samo dokładny i szybszy; q5 to ten sam turbo, ale mniejszy do pobrania. Whisper small jest dla komputerów bez karty graficznej.</value>
+    <value>Parakeet TDT v3 to szybki wybór bez karty graficznej (około 0,3 s na zdanie), ale zna tylko 25 języków europejskich i częściej zapisuje angielskie terminy twoim alfabetem. large-v3-turbo zna wszystkie języki i jest najlepsza z kartą graficzną; q5 to ta sama turbo z mniejszym pobieraniem. large-v3 jest nieco dokładniejsza, ale wymaga karty graficznej. Whisper small to najmniejsze pobieranie. Parakeet TDT v2 jest równie szybka, ale tylko dla angielskiego, i w nim dokładniejsza. Turbo dla hebrajskiego od ivrit.ai jest dokładniejsza po hebrajsku, ale każde zdanie czyta jako hebrajskie. Dla gruzińskiego i ormiańskiego NVIDIA FastConformer: Whisper prawie ich nie zna, a te są szybkie i dokładne, każdy tylko dla swojego języka.</value>
   </data>
     <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Język</value>

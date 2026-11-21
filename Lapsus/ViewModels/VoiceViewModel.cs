@@ -48,8 +48,13 @@ public partial class VoiceViewModel : ViewModelBase
     public VoiceViewModel(
         AppSettings settings, SettingsStore store, SpeechModelStore speech, bool supported,
         Action<bool> applyEnabled, Action modelReady, Action releaseModel, Func<bool>? locked = null,
-        Func<string>? deviceLabel = null)
+        Func<string>? deviceLabel = null, Func<SpeechModel>? recommended = null)
     {
+        // Until a model is on disk the pick follows the machine (Parakeet without a graphics card); once one is,
+        // the user's own choice stands. Read once at start, so a choice made before downloading is not undone.
+        if (recommended is not null && !SpeechModelCatalog.Available.Any(speech.IsInstalled))
+            settings.SpeechModelId = recommended().Id;
+
         _deviceLabel = deviceLabel ?? (() => "");
         _locked = locked ?? (() => false);
         _settings = settings;

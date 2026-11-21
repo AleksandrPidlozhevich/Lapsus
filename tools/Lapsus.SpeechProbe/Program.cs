@@ -21,6 +21,7 @@ return args[0] switch
     "run" when args.Length >= 3 => await Probe.RunAsync(args[1], args[2], Options.Parse(args[3..])),
     "eval" when args.Length >= 5 => await Eval.RunAsync(args[1], args[2], args[3], args[4], args[5..]),
     "restore" when args.Length >= 4 => Eval.Restore(args[1], args[2], args[3..]),
+    "live" when args.Length >= 3 => await Live.RunAsync(args[1], args[2], args[3..]),
     _ => Usage(),
 };
 

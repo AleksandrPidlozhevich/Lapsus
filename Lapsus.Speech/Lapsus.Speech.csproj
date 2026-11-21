@@ -20,6 +20,13 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj"/>
+        <!-- Parakeet runs on the ONNX Runtime GenAI brings in there: one onnxruntime.dll per app. -->
+        <ProjectReference Include="..\Lapsus.Neural\Lapsus.Neural.csproj"/>
+    </ItemGroup>
+
+    <!-- The 80-band mel preprocessor of NVIDIA's FastConformer CTC models, from onnx-asr 0.12.0 (MIT, Ilya Stupakov). -->
+    <ItemGroup>
+        <None Include="Data\nemo80.onnx" Link="nemo80.onnx" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"/>
     </ItemGroup>
 
     <ItemGroup>
