@@ -721,6 +721,8 @@ public class DictationSessionTests
         rig.Host.PressHotkey();
         rig.Session.Dispose();
 
+        Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
+        Assert.False(rig.Host.DictationActive);
         Assert.Equal(0, rig.Engine.Holding);
     }
 

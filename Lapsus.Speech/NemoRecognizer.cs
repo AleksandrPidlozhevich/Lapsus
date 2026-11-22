@@ -96,8 +96,18 @@ public sealed class NemoRecognizer : ISpeechRecognizer
     {
         if (_disposed)
             return;
-        _disposed = true;
-        _model?.Dispose();
-        _model = null;
+        _gate.Wait();
+        try
+        {
+            if (_disposed)
+                return;
+            _disposed = true;
+            _model?.Dispose();
+            _model = null;
+        }
+        finally
+        {
+            _gate.Release();
+        }
     }
 }

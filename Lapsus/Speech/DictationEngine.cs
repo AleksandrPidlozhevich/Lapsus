@@ -56,9 +56,9 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
     public bool IsLoaded => _current is { } slot && (slot.Nemo?.IsLoaded ?? _recognizer.IsLoaded);
 
-    // Parakeet ~0.3 s a phrase on a CPU, Whisper ~0.4 s on a GPU; Whisper on a CPU (~2.5 s) would only queue up.
+    // Parakeet ~0.3 s a phrase on a CPU, Whisper ~0.4 s on a cheap GPU; Metal and CPU are too slow to stream.
     public bool CanStream => _current is { } slot
-                             && (slot.Nemo?.IsLoaded ?? (_recognizer.IsLoaded && _recognizer.OnGpu));
+                             && (slot.Nemo?.IsLoaded ?? (_recognizer.IsLoaded && _recognizer.FullWindowIsCheap));
 
     public string DeviceLabel => _current switch
     {
@@ -121,13 +121,29 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
             }
 
             var whisper = model.Engine == SpeechEngine.Whisper;
-            // The same model on another device, the other Whisper, then the least recently used past MaxLoaded.
-            var evicted = _slots.Where(s => s.Model.Id == model.Id || (whisper && s.Nemo is null)).ToList();
-            _slots.RemoveAll(evicted.Contains);
-            while (_slots.Count >= MaxLoaded)
+            // busy is 1 for the session Hold's own Prepare (eviction is fine). Above that a Transcribe is in
+            // flight: language detection must not unload its recognizer. Whisper shares one native instance, so
+            // keep the slot already loaded rather than Load-replacing it under a running decode.
+            var protectInFlight = Volatile.Read(ref _busy) > 1;
+            if (protectInFlight && whisper
+                && _slots.LastOrDefault(s => s.Nemo is null && s.Load is { IsFaulted: false, IsCanceled: false })
+                    is { } whispering)
             {
-                evicted.Add(_slots[0]);
-                _slots.RemoveAt(0);
+                Interlocked.Exchange(ref whispering.LastUse, DateTime.UtcNow.Ticks);
+                return _current = whispering;
+            }
+
+            var evicted = new List<Slot>();
+            if (!protectInFlight)
+            {
+                // The same model on another device, the other Whisper, then the least recently used past MaxLoaded.
+                evicted = _slots.Where(s => s.Model.Id == model.Id || (whisper && s.Nemo is null)).ToList();
+                _slots.RemoveAll(evicted.Contains);
+                while (_slots.Count >= MaxLoaded)
+                {
+                    evicted.Add(_slots[0]);
+                    _slots.RemoveAt(0);
+                }
             }
 
             var slot = new Slot(model, preferGpu, whisper ? null : new NemoRecognizer());
@@ -304,6 +320,12 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
 
     public void Unload()
     {
+        // Cancel has already been asked; wait out in-flight recognition so a shared Whisper/Nemo unload
+        // does not race a still-running part (same budget as WhisperRecognizer.Unload).
+        var deadline = Environment.TickCount64 + 20_000;
+        while (Volatile.Read(ref _busy) > 0 && Environment.TickCount64 < deadline)
+            Thread.Sleep(20);
+
         List<Slot> slots;
         lock (_gate)
         {
@@ -357,6 +379,12 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         _disposed = true;
         _idleTimer.Dispose();
         _recognizer.AbandonForShutdown();
+        // Leave Nemo models where they are: disposing under a still-running decode is worse than leaking on exit.
+        lock (_gate)
+        {
+            _slots.Clear();
+            _current = null;
+        }
     }
 
     public void Dispose()
@@ -364,8 +392,14 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
         _disposed = true;
         _idleTimer.Dispose();
         _recognizer.Dispose();
+        List<Slot> slots;
         lock (_gate)
-            foreach (var slot in _slots)
-                slot.Nemo?.Dispose();
+        {
+            slots = [.. _slots];
+            _slots.Clear();
+            _current = null;
+        }
+        foreach (var slot in slots)
+            slot.Nemo?.Dispose();
     }
 }

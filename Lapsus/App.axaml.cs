@@ -245,8 +245,17 @@ public partial class App : Application
         }
 
         _settingsViewModel.Voice = new VoiceViewModel(settings, store, speech, supported, Apply,
-            modelReady: () => _dictationEngine?.Prepare(),
-            releaseModel: () => _dictationEngine?.Unload(),
+            // Immediately would unload again on the next idle tick — warm-up would be wasted.
+            modelReady: () =>
+            {
+                if (settings.SpeechUnloadAfter != SpeechUnloadAfter.Immediately)
+                    _dictationEngine?.Prepare();
+            },
+            releaseModel: () =>
+            {
+                _dictation?.Cancel();
+                _dictationEngine?.Unload();
+            },
             locked: () => _settingsViewModel.NeuralLocked,
             deviceLabel: () => _dictationEngine?.DeviceLabel ?? "",
             layouts: host.InstalledLanguages,

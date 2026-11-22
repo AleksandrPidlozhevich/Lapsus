@@ -344,6 +344,26 @@ internal sealed class DictationSession : IDisposable
         }
     }
 
+    // Parts and live words both hold the engine busy; finish both before Idle releases the model hold.
+    private async Task SettleBackgroundAsync()
+    {
+        try
+        {
+            await _parts.ConfigureAwait(true);
+        }
+        catch (Exception)
+        {
+        }
+
+        try
+        {
+            await _stream.ConfigureAwait(true);
+        }
+        catch (Exception)
+        {
+        }
+    }
+
     // What precedes the caret and everything recognised so far: Whisper's context for the next part. The typed line
     // already holds an earlier dictation into it; the remembered one stands in when a click cleared the line.
     private DictationRequest Request()
@@ -475,6 +495,9 @@ internal sealed class DictationSession : IDisposable
 
         if (pcm.Length > SampleRate / 2 && _peak < DeadQuiet)
         {
+            // Drop in-flight parts/live words before Idle releases the model hold.
+            _dictation?.Cancel();
+            await SettleBackgroundAsync().ConfigureAwait(true);
             Fail(Localizer.Instance["Diag_MicSilent"]);
             return;
         }
@@ -484,7 +507,7 @@ internal sealed class DictationSession : IDisposable
         try
         {
             var clock = System.Diagnostics.Stopwatch.StartNew();
-            await _parts.ConfigureAwait(true);
+            await SettleBackgroundAsync().ConfigureAwait(true);
             CaptureLog.Write($"dictation: released, earlier parts took {clock.ElapsedMilliseconds} ms more");
             cancel.ThrowIfCancellationRequested();
             if (early is { } part)
@@ -585,7 +608,7 @@ internal sealed class DictationSession : IDisposable
         if (Current == State.Listening)
             _audio.Stop();
         _dictation?.Cancel();
-        _modelHold?.Dispose();
-        _modelHold = null;
+        // Idle clears DictationActive and releases the model hold.
+        Current = State.Idle;
     }
 }
