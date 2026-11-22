@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="Window_Title" xml:space="preserve">
+  </resheader>
+  <data name="Window_Title" xml:space="preserve">
     <value>Lapsus — Instellingen</value>
   </data>
-    <data name="Subtitle" xml:space="preserve">
+  <data name="Subtitle" xml:space="preserve">
     <value>Corrigeer toetsenbordindeling en typfouten met één sneltoets</value>
   </data>
-    <data name="Capture_On" xml:space="preserve">
+  <data name="Capture_On" xml:space="preserve">
     <value>Opname aan</value>
   </data>
-    <data name="Capture_Off" xml:space="preserve">
+  <data name="Capture_Off" xml:space="preserve">
     <value>Opname uit</value>
   </data>
-    <data name="AutoCorrect" xml:space="preserve">
+  <data name="AutoCorrect" xml:space="preserve">
     <value>Automatisch corrigeren na spatie</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
@@ -43,34 +43,34 @@
   <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
     <value>Automatische correctie is niet beschikbaar in de modus ‘Alleen indelingswissel’: zonder woordenboeken is er niets om woorden mee te controleren.</value>
   </data>
-    <data name="PlainSwitch" xml:space="preserve">
+  <data name="PlainSwitch" xml:space="preserve">
     <value>Alleen indelingswissel, zonder woordenboeken</value>
   </data>
-    <data name="PlainSwitch_Hint" xml:space="preserve">
+  <data name="PlainSwitch_Hint" xml:space="preserve">
     <value>Wisselt de tekens zoals ze zijn, zonder typefouten te herstellen. Werkt zonder downloads; druk nogmaals voor de volgende indeling.</value>
   </data>
-    <data name="SwitchLayout" xml:space="preserve">
+  <data name="SwitchLayout" xml:space="preserve">
     <value>Systeemindeling omschakelen na een correctie</value>
   </data>
-    <data name="SwitchLayout_Hint" xml:space="preserve">
+  <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>De sneltoets wisselt de taal altijd. Dit geldt alleen voor auto na Spatie en het corrigeren van de selectie.</value>
   </data>
-    <data name="HotkeyCyclesLayout" xml:space="preserve">
+  <data name="HotkeyCyclesLayout" xml:space="preserve">
     <value>Hotkey always switches the layout</value>
   </data>
-    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+  <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
     <value>With nothing to correct, the hotkey still switches to the next installed layout.</value>
   </data>
-    <data name="StartAtLogin" xml:space="preserve">
+  <data name="StartAtLogin" xml:space="preserve">
     <value>Starten bij aanmelden</value>
   </data>
-    <data name="Indicator_Label" xml:space="preserve">
+  <data name="Indicator_Label" xml:space="preserve">
     <value>Indeling bij de cursor tonen</value>
   </data>
-    <data name="Indicator_Hint" xml:space="preserve">
+  <data name="Indicator_Hint" xml:space="preserve">
     <value>Een label met de actieve indeling naast de tekstcursor. Waar een programma geen cursor doorgeeft (browsers, Electron), verschijnt het even bij de muisaanwijzer wanneer de indeling verandert.</value>
   </data>
-    <data name="Hotkey_Label" xml:space="preserve">
+  <data name="Hotkey_Label" xml:space="preserve">
     <value>Sneltoets</value>
   </data>
   <data name="HotkeyRecord_Button" xml:space="preserve">
@@ -88,676 +88,676 @@
   <data name="HotkeyRecord_Cancel" xml:space="preserve">
     <value>Annuleren</value>
   </data>
-    <data name="SelectionHotkey_Label" xml:space="preserve">
+  <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Selectie corrigeren</value>
   </data>
-    <data name="SelectionHotkey_Hint" xml:space="preserve">
+  <data name="SelectionHotkey_Hint" xml:space="preserve">
     <value>Corrigeert de geselecteerde tekst — in elk venster, hoe oud de tekst ook is.</value>
   </data>
-    <data name="SelectionActions_Label" xml:space="preserve">
+  <data name="SelectionActions_Label" xml:space="preserve">
     <value>Acties op de selectie</value>
   </data>
-    <data name="SelectionCase_Label" xml:space="preserve">
+  <data name="SelectionCase_Label" xml:space="preserve">
     <value>Hoofdlettergebruik wijzigen</value>
   </data>
-    <data name="SelectionCase_Hint" xml:space="preserve">
+  <data name="SelectionCase_Hint" xml:space="preserve">
     <value>Doorloopt de selectie: HOOFDLETTERS → kleine letters → Zinsbegin met hoofdletter → Elk Woord.</value>
   </data>
-    <data name="SelectionTranslit_Label" xml:space="preserve">
+  <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Translitereren</value>
   </data>
-    <data name="SelectionTranslit_Hint" xml:space="preserve">
+  <data name="SelectionTranslit_Hint" xml:space="preserve">
     <value>Cyrillisch of Grieks ⇄ Latijns. Druk opnieuw om terug te gaan.</value>
   </data>
-    <data name="SelectionRtl_Label" xml:space="preserve">
+  <data name="SelectionRtl_Label" xml:space="preserve">
     <value>Hebreeuws / Arabisch terugdraaien</value>
   </data>
-    <data name="SelectionRtl_Hint" xml:space="preserve">
+  <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Zet een Hebreeuwse of Arabische regel die omgekeerd binnenkwam weer goed.</value>
   </data>
-    <data name="SelectionGlossary_Label" xml:space="preserve">
+  <data name="SelectionGlossary_Label" xml:space="preserve">
     <value>Toevoegen aan dicteerwoordenlijst</value>
   </data>
-    <data name="SelectionGlossary_Hint" xml:space="preserve">
+  <data name="SelectionGlossary_Hint" xml:space="preserve">
     <value>Selecteer een naam of term en druk op de toets — spraakinvoer schrijft het dan zo.</value>
   </data>
-    <data name="Pref_Label" xml:space="preserve">
+  <data name="Pref_Label" xml:space="preserve">
     <value>Voorkeurstaal bij gelijkspel</value>
   </data>
-    <data name="Pref_Hint" xml:space="preserve">
+  <data name="Pref_Hint" xml:space="preserve">
     <value>Welke taal wint als een woord bij meerdere past («молоток» in ru en uk).</value>
   </data>
-    <data name="Lang_Label" xml:space="preserve">
+  <data name="Lang_Label" xml:space="preserve">
     <value>Taal van de interface</value>
   </data>
-    <data name="Theme_Light" xml:space="preserve">
+  <data name="Theme_Light" xml:space="preserve">
     <value>Licht thema</value>
   </data>
-    <data name="Theme_Dark" xml:space="preserve">
+  <data name="Theme_Dark" xml:space="preserve">
     <value>Donker thema</value>
   </data>
-    <data name="Theme_System" xml:space="preserve">
+  <data name="Theme_System" xml:space="preserve">
     <value>Systeemthema</value>
   </data>
-    <data name="Dict_Label" xml:space="preserve">
+  <data name="Dict_Label" xml:space="preserve">
     <value>Talen en woordenboeken</value>
   </data>
-    <data name="Dict_Hint" xml:space="preserve">
+  <data name="Dict_Hint" xml:space="preserve">
     <value>Eenmaal gedownload werken ze offline. Zonder woordenboek wordt een taal slechter gecorrigeerd.</value>
   </data>
-    <data name="AddLang_Label" xml:space="preserve">
+  <data name="AddLang_Label" xml:space="preserve">
     <value>Taal toevoegen</value>
   </data>
-    <data name="Add_Label" xml:space="preserve">
+  <data name="Add_Label" xml:space="preserve">
     <value>Toevoegen</value>
   </data>
-    <data name="AddLang_Placeholder" xml:space="preserve">
+  <data name="AddLang_Placeholder" xml:space="preserve">
     <value>Kies een taal</value>
   </data>
-    <data name="AddLang_Tooltip" xml:space="preserve">
+  <data name="AddLang_Tooltip" xml:space="preserve">
     <value>De gekozen taal downloaden en toevoegen</value>
   </data>
-    <data name="RemoveDict_Tooltip" xml:space="preserve">
+  <data name="RemoveDict_Tooltip" xml:space="preserve">
     <value>Woordenboek verwijderen</value>
   </data>
-    <data name="Pref_Auto" xml:space="preserve">
+  <data name="Pref_Auto" xml:space="preserve">
     <value>Automatisch (op score, dan de voorkeurstaal)</value>
   </data>
-    <data name="Status_Disabled" xml:space="preserve">
+  <data name="Status_Disabled" xml:space="preserve">
     <value>Uitgeschakeld.</value>
   </data>
-    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+  <data name="Status_UnsupportedPlatform" xml:space="preserve">
     <value>Toetsenbordopname is op dit platform nog niet beschikbaar. Instellingen, woordenboeken en starten bij aanmelden werken wel.</value>
   </data>
-    <data name="Status_AutoActive" xml:space="preserve">
+  <data name="Status_AutoActive" xml:space="preserve">
     <value>Actief. Woorden worden na de spatie automatisch gecorrigeerd (en met “{0}”).</value>
   </data>
-    <data name="Status_HotkeyActive" xml:space="preserve">
+  <data name="Status_HotkeyActive" xml:space="preserve">
     <value>Actief. Typ een woord en druk op “{0}” — Lapsus corrigeert het ter plekke.</value>
   </data>
-    <data name="Status_StartFailed" xml:space="preserve">
+  <data name="Status_StartFailed" xml:space="preserve">
     <value>Kon de opname niet starten: {0}</value>
   </data>
-    <data name="Status_StartupFailed" xml:space="preserve">
+  <data name="Status_StartupFailed" xml:space="preserve">
     <value>Kon starten bij aanmelden niet bijwerken: {0}</value>
   </data>
-    <data name="Status_AccessibilityRequired" xml:space="preserve">
+  <data name="Status_AccessibilityRequired" xml:space="preserve">
     <value>Toetsenbordregistratie kon niet starten. Zet Lapsus aan in Systeeminstellingen → Privacy en beveiliging → Toegankelijkheid; de registratie start dan vanzelf.</value>
   </data>
-    <data name="Perm_Explain" xml:space="preserve">
+  <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus heeft deze machtigingen nodig. Elke knop toont het macOS-venster of opent de juiste lijst in Systeeminstellingen → Privacy en beveiliging, waar je Lapsus inschakelt. De status hier werkt zichzelf bij.</value>
   </data>
-    <data name="Status_Corrected" xml:space="preserve">
+  <data name="Status_Corrected" xml:space="preserve">
     <value>Gecorrigeerd: {0} → {1}</value>
   </data>
-    <data name="Dict_Downloading" xml:space="preserve">
+  <data name="Dict_Downloading" xml:space="preserve">
     <value>“{0}” downloaden…</value>
   </data>
-    <data name="Dict_Installed" xml:space="preserve">
+  <data name="Dict_Installed" xml:space="preserve">
     <value>“{0}” geïnstalleerd.</value>
   </data>
-    <data name="Dict_Updated" xml:space="preserve">
+  <data name="Dict_Updated" xml:space="preserve">
     <value>“{0}” bijgewerkt.</value>
   </data>
-    <data name="UpdateDict_Tooltip" xml:space="preserve">
+  <data name="UpdateDict_Tooltip" xml:space="preserve">
     <value>Het uitgebreidere woordenboek downloaden</value>
   </data>
-    <data name="Dict_DownloadFailed" xml:space="preserve">
+  <data name="Dict_DownloadFailed" xml:space="preserve">
     <value>Downloaden mislukt: {0}</value>
   </data>
-    <data name="Dict_Removed" xml:space="preserve">
+  <data name="Dict_Removed" xml:space="preserve">
     <value>“{0}” verwijderd.</value>
   </data>
-    <data name="Dict_DownloadEmpty" xml:space="preserve">
+  <data name="Dict_DownloadEmpty" xml:space="preserve">
     <value>Het gedownloade woordenboek is leeg.</value>
   </data>
-    <data name="Tray_Settings" xml:space="preserve">
+  <data name="Tray_Settings" xml:space="preserve">
     <value>Instellingen</value>
   </data>
-    <data name="Tray_DictationHistory" xml:space="preserve">
+  <data name="Tray_DictationHistory" xml:space="preserve">
     <value>Recente dictaten</value>
   </data>
-    <data name="Tray_Exit" xml:space="preserve">
+  <data name="Tray_Exit" xml:space="preserve">
     <value>Afsluiten</value>
   </data>
-    <data name="Tray_Quit" xml:space="preserve">
+  <data name="Tray_Quit" xml:space="preserve">
     <value>Stop Lapsus</value>
   </data>
-    <data name="Tray_Tooltip" xml:space="preserve">
+  <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — indelingscorrectie</value>
   </data>
-    <data name="Tray_UpdateAvailable" xml:space="preserve">
+  <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Update beschikbaar — herstart om te installeren</value>
   </data>
-    <data name="Tray_InstallUpdate" xml:space="preserve">
+  <data name="Tray_InstallUpdate" xml:space="preserve">
     <value>Herstarten om versie {0} te installeren</value>
   </data>
-    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+  <data name="Tray_TooltipUpdateReady" xml:space="preserve">
     <value>Lapsus — versie {0} is klaar om te installeren</value>
   </data>
-    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+  <data name="Notify_UpdateReadyTitle" xml:space="preserve">
     <value>Lapsus {0} is klaar om te installeren</value>
   </data>
-    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+  <data name="Notify_UpdateReadyBody" xml:space="preserve">
     <value>Herstart via het menu van het pictogram, anders wordt de update geïnstalleerd wanneer Lapsus de volgende keer start.</value>
   </data>
-    <data name="Update_Tooltip" xml:space="preserve">
+  <data name="Update_Tooltip" xml:space="preserve">
     <value>Herstarten om deze update te installeren</value>
   </data>
-    <data name="Update_CheckTooltip" xml:space="preserve">
+  <data name="Update_CheckTooltip" xml:space="preserve">
     <value>Controleren op updates</value>
   </data>
-    <data name="Status_UpToDate" xml:space="preserve">
+  <data name="Status_UpToDate" xml:space="preserve">
     <value>Lapsus is up-to-date.</value>
   </data>
-    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+  <data name="Status_UpdateCheckFailed" xml:space="preserve">
     <value>Controle op updates mislukt: {0}</value>
   </data>
-    <data name="Status_UpdateNotSupported" xml:space="preserve">
+  <data name="Status_UpdateNotSupported" xml:space="preserve">
     <value>Deze kopie werkt zichzelf niet bij — download de nieuwste versie.</value>
   </data>
-    <data name="Diag_Empty" xml:space="preserve">
+  <data name="Diag_Empty" xml:space="preserve">
     <value>Sneltoets: er is niets getypt (venster: {0}).</value>
   </data>
-    <data name="Diag_NoChange" xml:space="preserve">
+  <data name="Diag_NoChange" xml:space="preserve">
     <value>Sneltoets: “{0}” — alle woorden zien er goed uit, niets te wijzigen.</value>
   </data>
-    <data name="Diag_NoSelection" xml:space="preserve">
+  <data name="Diag_NoSelection" xml:space="preserve">
     <value>Selectie: niets geselecteerd, of {0} reageert niet op kopiëren.</value>
   </data>
-    <data name="Diag_GlossaryAdded" xml:space="preserve">
+  <data name="Diag_GlossaryAdded" xml:space="preserve">
     <value>Toegevoegd aan de woordenlijst: {0}</value>
   </data>
-    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+  <data name="Diag_GlossaryTooLong" xml:space="preserve">
     <value>Woordenlijst: selecteer één term, geen zin.</value>
   </data>
-    <data name="Diag_ClipboardFailed" xml:space="preserve">
+  <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Selectie: het klembord kon niet worden gebruikt ({0}).</value>
   </data>
-    <data name="Diag_TapReenabled" xml:space="preserve">
+  <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Toetsenbordregistratie liep even vast en is opnieuw gestart. Gebeurt dit vaker, sluit dan een app die Toegankelijkheid zwaar belast.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Toetsenbordregistratie draait weer.</value>
   </data>
-    <data name="Diag_NoDictionaries" xml:space="preserve">
+  <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Download eerst ten minste één spellingwoordenboek in de instellingen voordat u de indeling corrigeert.</value>
   </data>
-    <data name="Diag_SendFailed" xml:space="preserve">
+  <data name="Diag_SendFailed" xml:space="preserve">
     <value>SendInput mislukt (backspaces {0}/{1}, unicode {2}/{3}, fout {4}, venster: {5}). Het doelvenster draait waarschijnlijk als beheerder.</value>
   </data>
-    <data name="Diag_NoLayoutList" xml:space="preserve">
+  <data name="Diag_NoLayoutList" xml:space="preserve">
     <value>Indeling omschakelen: het systeem gaf geen lijst met indelingen terug.</value>
   </data>
-    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+  <data name="Diag_LayoutNotInstalled" xml:space="preserve">
     <value>Indeling {0} is niet geïnstalleerd in Windows (beschikbaar: {1}). Voeg die toe via Instellingen → Tijd en taal → Taal en regio.</value>
   </data>
-    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+  <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
     <value>Indeling {0} is niet geïnstalleerd op deze Mac (beschikbaar: {1}). Voeg die toe via Systeeminstellingen → Toetsenbord → Invoerbronnen.</value>
   </data>
-    <data name="Diag_InjectFailed" xml:space="preserve">
+  <data name="Diag_InjectFailed" xml:space="preserve">
     <value>Toetsaanslagen konden niet naar de actieve app worden gestuurd ({0}). Controleer de toestemming Toegankelijkheid voor Lapsus.</value>
   </data>
-    <data name="Diag_FocusChanged" xml:space="preserve">
+  <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Sneltoets: genegeerd — de focus is naar een ander venster of programma gegaan ({0}). Typ opnieuw in het beoogde veld.</value>
   </data>
-    <data name="Diag_NoModel" xml:space="preserve">
+  <data name="Diag_NoModel" xml:space="preserve">
     <value>Sneltoets: neurale correctie staat aan, maar er is geen model geladen. Download er een in de instellingen.</value>
   </data>
-    <data name="Diag_NeuralFailed" xml:space="preserve">
+  <data name="Diag_NeuralFailed" xml:space="preserve">
     <value>Neurale correctie mislukt: {0}</value>
   </data>
-    <data name="Diag_CorrectionFailed" xml:space="preserve">
+  <data name="Diag_CorrectionFailed" xml:space="preserve">
     <value>Correctie mislukt: {0}</value>
   </data>
-    <data name="Neural_Toggle" xml:space="preserve">
+  <data name="Neural_Toggle" xml:space="preserve">
     <value>Neurale correctie (lokaal model)</value>
   </data>
-    <data name="Neural_Hint" xml:space="preserve">
+  <data name="Neural_Hint" xml:space="preserve">
     <value>Een lokaal model, ondersteund door de woordenboeken. Zet aan, download er een, druk op de sneltoets.</value>
   </data>
-    <data name="Model_AddLabel" xml:space="preserve">
+  <data name="Model_AddLabel" xml:space="preserve">
     <value>Model toevoegen</value>
   </data>
-    <data name="Model_AddPlaceholder" xml:space="preserve">
+  <data name="Model_AddPlaceholder" xml:space="preserve">
     <value>Kies een model…</value>
   </data>
-    <data name="Model_AddTooltip" xml:space="preserve">
+  <data name="Model_AddTooltip" xml:space="preserve">
     <value>Het gekozen model downloaden</value>
   </data>
-    <data name="Model_SelectPlaceholder" xml:space="preserve">
+  <data name="Model_SelectPlaceholder" xml:space="preserve">
     <value>Geen model geïnstalleerd</value>
   </data>
-    <data name="Model_RemoveTooltip" xml:space="preserve">
+  <data name="Model_RemoveTooltip" xml:space="preserve">
     <value>Gekozen model verwijderen</value>
   </data>
-    <data name="Model_Downloading" xml:space="preserve">
+  <data name="Model_Downloading" xml:space="preserve">
     <value>{0} downloaden… {1}%</value>
   </data>
-    <data name="Model_Installed" xml:space="preserve">
+  <data name="Model_Installed" xml:space="preserve">
     <value>{0} geïnstalleerd</value>
   </data>
-    <data name="Model_DownloadFailed" xml:space="preserve">
+  <data name="Model_DownloadFailed" xml:space="preserve">
     <value>Downloaden mislukt: {0}</value>
   </data>
-    <data name="Model_Removed" xml:space="preserve">
+  <data name="Model_Removed" xml:space="preserve">
     <value>{0} verwijderd</value>
   </data>
-    <data name="Model_DownloadEmpty" xml:space="preserve">
+  <data name="Model_DownloadEmpty" xml:space="preserve">
     <value>De modeldownload leverde geen bruikbare bestanden op.</value>
   </data>
-    <data name="Model_LoadFailed" xml:space="preserve">
+  <data name="Model_LoadFailed" xml:space="preserve">
     <value>Kon het model niet laden: {0}</value>
   </data>
-    <data name="Model_Loading" xml:space="preserve">
+  <data name="Model_Loading" xml:space="preserve">
     <value>{0} in het geheugen laden… (de eerste keer kan even duren)</value>
   </data>
-    <data name="Model_Ready" xml:space="preserve">
+  <data name="Model_Ready" xml:space="preserve">
     <value>{0} gereed — druk op de sneltoets om de huidige regel te herschrijven.</value>
   </data>
-    <data name="Model_ReadyOn" xml:space="preserve">
+  <data name="Model_ReadyOn" xml:space="preserve">
     <value>{0} gereed op {1} — druk op de sneltoets om de huidige regel te herschrijven.</value>
   </data>
-    <data name="Model_NeedsDownload" xml:space="preserve">
+  <data name="Model_NeedsDownload" xml:space="preserve">
     <value>Neurale correctie staat aan, maar er is geen model geïnstalleerd. Download er hierboven een.</value>
   </data>
-    <data name="Model_CustomHint" xml:space="preserve">
+  <data name="Model_CustomHint" xml:space="preserve">
     <value>Alleen modellen met een ONNX Runtime GenAI-pakket werken hier, en de zoekfunctie houdt alleen die over. Een geplakte org/name werkt ook.</value>
   </data>
-    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+  <data name="Status_NeuralHotkeyActive" xml:space="preserve">
     <value>Neurale correctie aan — druk op {0} om de huidige regel te herschrijven.</value>
   </data>
   <data name="Status_NeuralFallbackActive" xml:space="preserve">
     <value>Neurale correctie staat aan, maar er is geen model geladen — “{0}” corrigeert met het woordenboek totdat er een geladen is.</value>
   </data>
-    <data name="Diag_BufferChanged" xml:space="preserve">
+  <data name="Diag_BufferChanged" xml:space="preserve">
     <value>Neurale correctie geannuleerd — de regel veranderde terwijl het model draaide («{0}»).</value>
   </data>
-    <data name="Model_RemoveFailed" xml:space="preserve">
+  <data name="Model_RemoveFailed" xml:space="preserve">
     <value>Kon het model niet verwijderen: {0}</value>
   </data>
-    <data name="Dict_Empty" xml:space="preserve">
+  <data name="Dict_Empty" xml:space="preserve">
     <value>Nog geen woordenboeken — voeg hierboven een taal toe zodat correcties die kunnen gebruiken.</value>
   </data>
-    <data name="Action_Download" xml:space="preserve">
+  <data name="Action_Download" xml:space="preserve">
     <value>Downloaden</value>
   </data>
-    <data name="Diag_ImeActive" xml:space="preserve">
+  <data name="Diag_ImeActive" xml:space="preserve">
     <value>Sneltoets: genegeerd — de actieve invoertaal (Chinees/Japans/Koreaans) typt via een IME, dus Lapsus kan die tekst niet uit de toetsaanslagen reconstrueren.</value>
   </data>
-    <data name="Diag_DeadKeyPending" xml:space="preserve">
+  <data name="Diag_DeadKeyPending" xml:space="preserve">
     <value>Sneltoets: genegeerd — een dode toets (accent) wacht nog op zijn letter. Typ de letter of druk op ⌫ en probeer het opnieuw.</value>
   </data>
-    <data name="Diag_SecureField" xml:space="preserve">
+  <data name="Diag_SecureField" xml:space="preserve">
     <value>Sneltoets: genegeerd — dit is een wachtwoordveld. Lapsus bewaart of herschrijft daar nooit iets.</value>
   </data>
-    <data name="SkipPasswords" xml:space="preserve">
+  <data name="SkipPasswords" xml:space="preserve">
     <value>Wachtwoordvelden overslaan</value>
   </data>
-    <data name="SkipPasswords_Hint" xml:space="preserve">
+  <data name="SkipPasswords_Hint" xml:space="preserve">
     <value>Wachtwoordvelden worden nooit bewaard. In een browser schakelt dat de toegankelijkheidsengine in.</value>
   </data>
-    <data name="Tab_General" xml:space="preserve">
+  <data name="Tab_General" xml:space="preserve">
     <value>Algemeen</value>
   </data>
-    <data name="Tab_Library" xml:space="preserve">
+  <data name="Tab_Library" xml:space="preserve">
     <value>Bibliotheek</value>
   </data>
-    <data name="Tab_Ai" xml:space="preserve">
+  <data name="Tab_Ai" xml:space="preserve">
     <value>AI</value>
   </data>
-    <data name="Tab_Apps" xml:space="preserve">
+  <data name="Tab_Apps" xml:space="preserve">
     <value>Apps</value>
   </data>
   <data name="Tab_Hotkeys" xml:space="preserve">
     <value>Toetsen</value>
   </data>
-    <data name="Excluded_Label" xml:space="preserve">
+  <data name="Excluded_Label" xml:space="preserve">
     <value>Woorden om met rust te laten</value>
   </data>
-    <data name="Excluded_Hint" xml:space="preserve">
+  <data name="Excluded_Hint" xml:space="preserve">
     <value>Namen, inlognamen en merken die nooit gewijzigd mogen worden.</value>
   </data>
-    <data name="Excluded_Placeholder" xml:space="preserve">
+  <data name="Excluded_Placeholder" xml:space="preserve">
     <value>woord</value>
   </data>
-    <data name="Excluded_Empty" xml:space="preserve">
+  <data name="Excluded_Empty" xml:space="preserve">
     <value>Nog niets uitgezonderd.</value>
   </data>
-    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+  <data name="Excluded_RemoveTooltip" xml:space="preserve">
     <value>Uit de lijst verwijderen</value>
   </data>
-    <data name="ExcludedApps_Label" xml:space="preserve">
-    <value>Programma&apos;s om over te slaan</value>
+  <data name="ExcludedApps_Label" xml:space="preserve">
+    <value>Programma's om over te slaan</value>
   </data>
-    <data name="ExcludedApps_Hint" xml:space="preserve">
+  <data name="ExcludedApps_Hint" xml:space="preserve">
     <value>Hierin staat Lapsus volledig uit: geen buffer, geen sneltoetsen.</value>
   </data>
-    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+  <data name="ExcludedApps_Placeholder" xml:space="preserve">
     <value>procesnaam</value>
   </data>
-    <data name="ExcludedApps_Pick" xml:space="preserve">
+  <data name="ExcludedApps_Pick" xml:space="preserve">
     <value>Kies een draaiend programma</value>
   </data>
-    <data name="ExcludedApps_Empty" xml:space="preserve">
-    <value>Geen programma&apos;s overgeslagen.</value>
+  <data name="ExcludedApps_Empty" xml:space="preserve">
+    <value>Geen programma's overgeslagen.</value>
   </data>
-    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+  <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
     <value>Uit de lijst verwijderen</value>
   </data>
-    <data name="Diag_AppExcluded" xml:space="preserve">
+  <data name="Diag_AppExcluded" xml:space="preserve">
     <value>Sneltoets: Lapsus blijft uit {0}.</value>
   </data>
-    <data name="Model_DeviceLabel" xml:space="preserve">
+  <data name="Model_DeviceLabel" xml:space="preserve">
     <value>Model uitvoeren op</value>
   </data>
-    <data name="Model_DeviceAuto" xml:space="preserve">
+  <data name="Model_DeviceAuto" xml:space="preserve">
     <value>Automatisch</value>
   </data>
-    <data name="Model_DeviceCpu" xml:space="preserve">
+  <data name="Model_DeviceCpu" xml:space="preserve">
     <value>Processor (CPU)</value>
   </data>
-    <data name="Model_DeviceGpu" xml:space="preserve">
+  <data name="Model_DeviceGpu" xml:space="preserve">
     <value>Grafische kaart (GPU)</value>
   </data>
-    <data name="Model_DeviceNpu" xml:space="preserve">
+  <data name="Model_DeviceNpu" xml:space="preserve">
     <value>Neurale versneller (NPU)</value>
   </data>
-    <data name="Model_DeviceHint" xml:space="preserve">
+  <data name="Model_DeviceHint" xml:space="preserve">
     <value>Hier beschikbaar: {0}. Een pakket dat voor een ander apparaat is gebouwd draait ook — op de processor.</value>
   </data>
-    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+  <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
     <value>Geen ondersteunde versneller aanwezig, dus het model draait op de processor.</value>
   </data>
-    <data name="Model_SearchPlaceholder" xml:space="preserve">
+  <data name="Model_SearchPlaceholder" xml:space="preserve">
     <value>Zoek op Hugging Face, of plak org/name</value>
   </data>
-    <data name="Model_SearchLabel" xml:space="preserve">
+  <data name="Model_SearchLabel" xml:space="preserve">
     <value>Zoeken</value>
   </data>
-    <data name="Model_SearchTooltip" xml:space="preserve">
+  <data name="Model_SearchTooltip" xml:space="preserve">
     <value>Zoek op Hugging Face naar modellen met een ONNX Runtime GenAI-pakket</value>
   </data>
-    <data name="Model_FoundPlaceholder" xml:space="preserve">
+  <data name="Model_FoundPlaceholder" xml:space="preserve">
     <value>Zoekresultaten</value>
   </data>
-    <data name="Model_Searching" xml:space="preserve">
+  <data name="Model_Searching" xml:space="preserve">
     <value>Zoeken op Hugging Face…</value>
   </data>
-    <data name="Model_SearchEmpty" xml:space="preserve">
+  <data name="Model_SearchEmpty" xml:space="preserve">
     <value>Niets gevonden met een ONNX Runtime GenAI-pakket.</value>
   </data>
-    <data name="Model_SearchFound" xml:space="preserve">
+  <data name="Model_SearchFound" xml:space="preserve">
     <value>Gevonden: {0}.</value>
   </data>
-    <data name="Model_SearchFailed" xml:space="preserve">
+  <data name="Model_SearchFailed" xml:space="preserve">
     <value>Zoeken mislukt: {0}</value>
   </data>
-    <data name="Tab_License" xml:space="preserve">
+  <data name="Tab_License" xml:space="preserve">
     <value>Licentie</value>
   </data>
-    <data name="Lic_Free_Title" xml:space="preserve">
+  <data name="Lic_Free_Title" xml:space="preserve">
     <value>Gratis — persoonlijk gebruik</value>
   </data>
-    <data name="Lic_Free_Hint" xml:space="preserve">
+  <data name="Lic_Free_Hint" xml:space="preserve">
     <value>Gratis voor particulieren, freelancers inbegrepen. Niets is vergrendeld — een licentie dekt gebruik binnen een bedrijf.</value>
   </data>
-    <data name="Lic_Status_Pro" xml:space="preserve">
+  <data name="Lic_Status_Pro" xml:space="preserve">
     <value>Pro · {0}</value>
   </data>
-    <data name="Lic_Status_Business" xml:space="preserve">
+  <data name="Lic_Status_Business" xml:space="preserve">
     <value>Business · {0} · {1} plaatsen</value>
   </data>
-    <data name="Lic_Expires" xml:space="preserve">
+  <data name="Lic_Expires" xml:space="preserve">
     <value>Geldig tot {0}</value>
   </data>
-    <data name="Lic_NoExpiry" xml:space="preserve">
+  <data name="Lic_NoExpiry" xml:space="preserve">
     <value>Geen vervaldatum</value>
   </data>
-    <data name="Lic_Key_Label" xml:space="preserve">
+  <data name="Lic_Key_Label" xml:space="preserve">
     <value>Licentiesleutel</value>
   </data>
-    <data name="Lic_Key_Watermark" xml:space="preserve">
+  <data name="Lic_Key_Watermark" xml:space="preserve">
     <value>Plak de sleutel uit de aankoopmail</value>
   </data>
-    <data name="Lic_Apply" xml:space="preserve">
+  <data name="Lic_Apply" xml:space="preserve">
     <value>Activeren</value>
   </data>
-    <data name="Lic_Remove" xml:space="preserve">
+  <data name="Lic_Remove" xml:space="preserve">
     <value>Verwijderen</value>
   </data>
-    <data name="Lic_Buy_Hint" xml:space="preserve">
+  <data name="Lic_Buy_Hint" xml:space="preserve">
     <value>Pro is één particulier. Business wordt per werkplek in een bedrijf gelicentieerd.</value>
   </data>
-    <data name="Lic_BuyPro" xml:space="preserve">
+  <data name="Lic_BuyPro" xml:space="preserve">
     <value>Pro kopen</value>
   </data>
-    <data name="Lic_BuyBusiness" xml:space="preserve">
+  <data name="Lic_BuyBusiness" xml:space="preserve">
     <value>Commerciële licentie</value>
   </data>
-    <data name="Lic_Err_Malformed" xml:space="preserve">
+  <data name="Lic_Err_Malformed" xml:space="preserve">
     <value>Dit lijkt geen Lapsus-sleutel. Controleer of de hele regel is gekopieerd.</value>
   </data>
-    <data name="Lic_Err_Signature" xml:space="preserve">
+  <data name="Lic_Err_Signature" xml:space="preserve">
     <value>Deze sleutel is niet voor deze build uitgegeven.</value>
   </data>
-    <data name="Lic_Err_Expired" xml:space="preserve">
+  <data name="Lic_Err_Expired" xml:space="preserve">
     <value>Deze sleutel is verlopen op {0}.</value>
   </data>
-    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+  <data name="Lic_Err_NotConfigured" xml:space="preserve">
     <value>Deze build kan licentiesleutels niet controleren.</value>
   </data>
-    <data name="Lic_Ask_Terms" xml:space="preserve">
+  <data name="Lic_Ask_Terms" xml:space="preserve">
     <value>Wie moet betalen?</value>
   </data>
-    <data name="Lic_Free_Managed" xml:space="preserve">
+  <data name="Lic_Free_Managed" xml:space="preserve">
     <value>Deze computer wordt beheerd door een organisatie — een licentie is vereist.</value>
   </data>
-    <data name="LicRem_Title" xml:space="preserve">
+  <data name="LicRem_Title" xml:space="preserve">
     <value>Lapsus-licentie</value>
   </data>
-    <data name="LicRem_TrialHeadline" xml:space="preserve">
+  <data name="LicRem_TrialHeadline" xml:space="preserve">
     <value>In een bedrijf wordt Lapsus per werkplek gelicentieerd. Nog {0} dagen om het te proberen.</value>
   </data>
-    <data name="LicRem_DueHeadline" xml:space="preserve">
+  <data name="LicRem_DueHeadline" xml:space="preserve">
     <value>Op deze computer heeft Lapsus een licentie nodig.</value>
   </data>
-    <data name="LicRem_Body" xml:space="preserve">
+  <data name="LicRem_Body" xml:space="preserve">
     <value>Deze computer wordt beheerd door een organisatie (domein, Entra ID of een MDM-server). Voor particulieren, freelancers inbegrepen, is Lapsus gratis; gebruik binnen een bedrijf is betaald, per werkplek.</value>
   </data>
-    <data name="LicRem_Why" xml:space="preserve">
+  <data name="LicRem_Why" xml:space="preserve">
     <value>Er wordt niets uitgeschakeld en niets verstuurd — de controle gebeurt alleen op deze machine.</value>
   </data>
-    <data name="LicRem_HaveKey" xml:space="preserve">
+  <data name="LicRem_HaveKey" xml:space="preserve">
     <value>Ik heb een sleutel</value>
   </data>
-    <data name="LicRem_Later" xml:space="preserve">
+  <data name="LicRem_Later" xml:space="preserve">
     <value>Later</value>
   </data>
-    <data name="Lic_Err_Seats" xml:space="preserve">
+  <data name="Lic_Err_Seats" xml:space="preserve">
     <value>Alle plaatsen van deze licentie zijn in gebruik. Schrijf naar {0} om een plaats naar deze computer te verplaatsen of er meer te kopen.</value>
   </data>
-    <data name="Lic_Err_Offline" xml:space="preserve">
+  <data name="Lic_Err_Offline" xml:space="preserve">
     <value>De licentieserver was niet bereikbaar. De sleutel is bewaard — activering wordt opnieuw geprobeerd.</value>
   </data>
-    <data name="Lic_Err_NoMachine" xml:space="preserve">
+  <data name="Lic_Err_NoMachine" xml:space="preserve">
     <value>Deze computer kon niet worden geïdentificeerd, dus de licentie kan nergens aan gekoppeld worden.</value>
   </data>
-    <data name="Lic_Activating" xml:space="preserve">
+  <data name="Lic_Activating" xml:space="preserve">
     <value>Activeren…</value>
   </data>
-    <data name="About_Title" xml:space="preserve">
+  <data name="About_Title" xml:space="preserve">
     <value>Over Lapsus</value>
   </data>
-    <data name="About_Tooltip" xml:space="preserve">
+  <data name="About_Tooltip" xml:space="preserve">
     <value>Over Lapsus</value>
   </data>
-    <data name="About_License" xml:space="preserve">
+  <data name="About_License" xml:space="preserve">
     <value>Licentie</value>
   </data>
-    <data name="About_License_Text" xml:space="preserve">
+  <data name="About_License_Text" xml:space="preserve">
     <value>Gratis voor particulieren. Bedrijven betalen per werkplek. Niets wordt vergrendeld en niets verloopt.</value>
   </data>
-    <data name="About_Website" xml:space="preserve">
+  <data name="About_Website" xml:space="preserve">
     <value>Website</value>
   </data>
-    <data name="About_Donate" xml:space="preserve">
+  <data name="About_Donate" xml:space="preserve">
     <value>Ondersteun de ontwikkeling</value>
   </data>
-    <data name="About_Donate_Hint" xml:space="preserve">
+  <data name="About_Donate_Hint" xml:space="preserve">
     <value>Lapsus is gratis voor je, zonder advertenties en zonder tracking. Als het je tijd bespaart, kun je bijdragen.</value>
   </data>
-    <data name="About_Donate_Button" xml:space="preserve">
+  <data name="About_Donate_Button" xml:space="preserve">
     <value>Doneren</value>
   </data>
-    <data name="About_OpenSource" xml:space="preserve">
+  <data name="About_OpenSource" xml:space="preserve">
     <value>Opensourcelicenties</value>
   </data>
-    <data name="About_Tab_Components" xml:space="preserve">
+  <data name="About_Tab_Components" xml:space="preserve">
     <value>Componenten</value>
   </data>
-    <data name="About_Tab_Dictionaries" xml:space="preserve">
+  <data name="About_Tab_Dictionaries" xml:space="preserve">
     <value>Woordenboeken</value>
   </data>
-    <data name="About_Dictionaries_Hint" xml:space="preserve">
+  <data name="About_Dictionaries_Hint" xml:space="preserve">
     <value>Niet meegeleverd met Lapsus: elk wordt pas gedownload wanneer je de taal toevoegt en behoudt de licentie van de uitgever.</value>
   </data>
-    <data name="About_Dictionaries_All" xml:space="preserve">
+  <data name="About_Dictionaries_All" xml:space="preserve">
     <value>Alle bronnen en auteurs</value>
   </data>
-    <data name="About_Components_Hint" xml:space="preserve">
+  <data name="About_Components_Hint" xml:space="preserve">
     <value>Meegeleverd in Lapsus, elk onder een eigen licentie.</value>
   </data>
-    <data name="About_LicenseText" xml:space="preserve">
+  <data name="About_LicenseText" xml:space="preserve">
     <value>Licentietekst</value>
   </data>
-    <data name="Store_Title_Trial" xml:space="preserve">
+  <data name="Store_Title_Trial" xml:space="preserve">
     <value>Lapsus Plus uitproberen: nog {0} dagen</value>
   </data>
-    <data name="Store_Title_Subscription" xml:space="preserve">
+  <data name="Store_Title_Subscription" xml:space="preserve">
     <value>Lapsus Plus: abonnement actief</value>
   </data>
-    <data name="Store_Title_Lifetime" xml:space="preserve">
+  <data name="Store_Title_Lifetime" xml:space="preserve">
     <value>Lapsus Plus: voorgoed gekocht</value>
   </data>
-    <data name="Store_Title_Free" xml:space="preserve">
+  <data name="Store_Title_Free" xml:space="preserve">
     <value>Lapsus Free</value>
   </data>
-    <data name="Store_Detail" xml:space="preserve">
+  <data name="Store_Detail" xml:space="preserve">
     <value>Alles behalve neurale correctie en later toegevoegde functies blijft voorgoed gratis. Lapsus Plus voegt ze toe.</value>
   </data>
-    <data name="Store_Renews" xml:space="preserve">
+  <data name="Store_Renews" xml:space="preserve">
     <value>Wordt verlengd op {0}.</value>
   </data>
-    <data name="Store_Yearly" xml:space="preserve">
+  <data name="Store_Yearly" xml:space="preserve">
     <value>Per jaar, {0}</value>
   </data>
-    <data name="Store_YearlyTrial" xml:space="preserve">
+  <data name="Store_YearlyTrial" xml:space="preserve">
     <value>{0} gratis, daarna {1} per jaar</value>
   </data>
-    <data name="Store_TrialDetail" xml:space="preserve">
+  <data name="Store_TrialDetail" xml:space="preserve">
     <value>Gratis tot {0}. Daarna start het jaarabonnement, tenzij je het uiterlijk 24 uur van tevoren opzegt in de instellingen van je App Store-account.</value>
   </data>
-    <data name="Store_Lifetime" xml:space="preserve">
+  <data name="Store_Lifetime" xml:space="preserve">
     <value>Voorgoed, {0}</value>
   </data>
-    <data name="Store_Restore" xml:space="preserve">
+  <data name="Store_Restore" xml:space="preserve">
     <value>Aankopen herstellen</value>
   </data>
-    <data name="Store_Manage" xml:space="preserve">
+  <data name="Store_Manage" xml:space="preserve">
     <value>Abonnement beheren</value>
   </data>
-    <data name="Store_Disclosure" xml:space="preserve">
+  <data name="Store_Disclosure" xml:space="preserve">
     <value>Het jaarabonnement wordt automatisch verlengd, tenzij je het uiterlijk 24 uur voor het einde van de periode opzegt in de instellingen van je App Store-account. De betaling wordt via je Apple Account afgerekend.</value>
   </data>
-    <data name="Store_Terms" xml:space="preserve">
+  <data name="Store_Terms" xml:space="preserve">
     <value>Gebruiksvoorwaarden</value>
   </data>
-    <data name="Store_Privacy" xml:space="preserve">
+  <data name="Store_Privacy" xml:space="preserve">
     <value>Privacybeleid</value>
   </data>
-    <data name="Store_Unavailable" xml:space="preserve">
+  <data name="Store_Unavailable" xml:space="preserve">
     <value>De App Store is nu niet bereikbaar. Probeer het later opnieuw.</value>
   </data>
-    <data name="Store_Pending" xml:space="preserve">
+  <data name="Store_Pending" xml:space="preserve">
     <value>De aankoop wacht op goedkeuring.</value>
   </data>
-    <data name="Store_Failed" xml:space="preserve">
+  <data name="Store_Failed" xml:space="preserve">
     <value>De aankoop is niet gelukt: {0}</value>
   </data>
-    <data name="Store_TrialEnded" xml:space="preserve">
+  <data name="Store_TrialEnded" xml:space="preserve">
     <value>De proefperiode van Lapsus Plus is voorbij, dus neurale correctie staat uit. Al het andere blijft werken.</value>
   </data>
-    <data name="Neural_Locked" xml:space="preserve">
+  <data name="Neural_Locked" xml:space="preserve">
     <value>Neurale correctie hoort bij Lapsus Plus.</value>
   </data>
-    <data name="Neural_Locked_Button" xml:space="preserve">
+  <data name="Neural_Locked_Button" xml:space="preserve">
     <value>Over Lapsus Plus</value>
   </data>
-    <data name="Onb_Title" xml:space="preserve">
+  <data name="Onb_Title" xml:space="preserve">
     <value>Welkom bij Lapsus</value>
   </data>
-    <data name="Onb_Intro" xml:space="preserve">
+  <data name="Onb_Intro" xml:space="preserve">
     <value>Lapsus verbetert tekst die in de verkeerde toetsenbordindeling is getypt, in elke app. Daarvoor moet het de toetsen zien die je indrukt.</value>
   </data>
-    <data name="Onb_Local" xml:space="preserve">
+  <data name="Onb_Local" xml:space="preserve">
     <value>Alles gebeurt op deze Mac. Wat je typt, wordt nergens heen gestuurd en niet bewaard.</value>
   </data>
-    <data name="Onb_Passwords" xml:space="preserve">
+  <data name="Onb_Passwords" xml:space="preserve">
     <value>Wachtwoordvelden blijven onaangeroerd: terwijl je erin typt, verbergt macOS de toetsen voor andere apps, ook voor Lapsus.</value>
   </data>
-    <data name="Onb_Permissions" xml:space="preserve">
+  <data name="Onb_Permissions" xml:space="preserve">
     <value>Sta hieronder elke machtiging toe. De knop toont het macOS-venster of opent de juiste lijst in Systeeminstellingen, waar je Lapsus inschakelt. De status wordt vanzelf groen.</value>
   </data>
-    <data name="Onb_Continue" xml:space="preserve">
+  <data name="Onb_Continue" xml:space="preserve">
     <value>Doorgaan</value>
   </data>
-    <data name="Tab_Plus" xml:space="preserve">
+  <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
-    <data name="Store_Retry" xml:space="preserve">
+  <data name="Store_Retry" xml:space="preserve">
     <value>Opnieuw proberen</value>
   </data>
-    <data name="Store_RestoreFailed" xml:space="preserve">
+  <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Aankopen konden niet worden hersteld: {0}</value>
   </data>
-    <data name="Voice_Toggle" xml:space="preserve">
+  <data name="Voice_Toggle" xml:space="preserve">
     <value>Spraakinvoer</value>
   </data>
-    <data name="Voice_Hint" xml:space="preserve">
+  <data name="Voice_Hint" xml:space="preserve">
     <value>Spreek in plaats van te typen: Lapsus typt wat u zegt waar de cursor staat. Spraak wordt op deze computer herkend; het geluid wordt nergens bewaard.</value>
   </data>
-    <data name="Voice_ModelMissing" xml:space="preserve">
+  <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Het spraakmodel is nog niet gedownload ({0} MB).</value>
   </data>
-    <data name="Voice_ModelReady" xml:space="preserve">
+  <data name="Voice_ModelReady" xml:space="preserve">
     <value>Spraakmodel: {0}.</value>
   </data>
-    <data name="Voice_DownloadFailed" xml:space="preserve">
+  <data name="Voice_DownloadFailed" xml:space="preserve">
     <value>Downloaden mislukt: {0}</value>
   </data>
-    <data name="Diag_DictationNoModel" xml:space="preserve">
+  <data name="Diag_DictationNoModel" xml:space="preserve">
     <value>Spraakinvoer heeft het spraakmodel nodig: download het via Instellingen → AI.</value>
   </data>
-    <data name="Diag_MicUnavailable" xml:space="preserve">
+  <data name="Diag_MicUnavailable" xml:space="preserve">
     <value>Microfoon niet beschikbaar: {0}</value>
   </data>
-    <data name="Diag_MicSilent" xml:space="preserve">
+  <data name="Diag_MicSilent" xml:space="preserve">
     <value>De microfoon nam alleen stilte op. Controleer of hij aanstaat en of Windows apps toestaat hem te gebruiken.</value>
   </data>
-    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+  <data name="Diag_DictationNothingHeard" xml:space="preserve">
     <value>Er werd niets gehoord.</value>
   </data>
-    <data name="Diag_DictationFailed" xml:space="preserve">
+  <data name="Diag_DictationFailed" xml:space="preserve">
     <value>Spraakinvoer mislukt: {0}</value>
   </data>
-    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+  <data name="Diag_DictationFocusChanged" xml:space="preserve">
     <value>De focus ging naar een ander venster ({0}), dus de tekst is naar het klembord gekopieerd.</value>
   </data>
-    <data name="Dictation_HotkeyHint" xml:space="preserve">
+  <data name="Dictation_HotkeyHint" xml:space="preserve">
     <value>Ingedrukt houden terwijl u spreekt en loslaten om de tekst te typen; kort drukken neemt handsfree op tot de volgende druk. Esc annuleert. De rest staat op het tabblad ‘Spraak’.</value>
   </data>
-    <data name="Voice_ModelHint" xml:space="preserve">
+  <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3 is de snelle keuze zonder grafische kaart (ongeveer 0,3 s per zin), maar kent maar 25 Europese talen en schrijft Engelse vaktermen vaker in je eigen alfabet. large-v3-turbo kent alle talen en is de beste keuze met een grafische kaart; q5 is dezelfde turbo als kleinere download. large-v3 is iets nauwkeuriger maar wil een grafische kaart. Whisper small is de kleinste download. Parakeet TDT v2 is net zo snel, maar alleen voor Engels, en daarin nauwkeuriger. De Hebreeuwse turbo van ivrit.ai is nauwkeuriger in het Hebreeuws, maar leest elke zin als Hebreeuws. Voor Georgisch en Armeens NVIDIA FastConformer: Whisper kent ze nauwelijks, deze zijn snel en nauwkeurig, elk alleen voor de eigen taal.</value>
   </data>
   <data name="Voice_LayoutModelReady" xml:space="preserve">
@@ -766,37 +766,37 @@
   <data name="Voice_LayoutModelMissing" xml:space="preserve">
     <value>Indeling {0} heeft een ander model nodig: {1}</value>
   </data>
-    <data name="Voice_LanguageLabel" xml:space="preserve">
+  <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Taal</value>
   </data>
-    <data name="Voice_LanguageAuto" xml:space="preserve">
+  <data name="Voice_LanguageAuto" xml:space="preserve">
     <value>Volgens de toetsenbordindeling</value>
   </data>
-    <data name="Voice_LanguageHint" xml:space="preserve">
+  <data name="Voice_LanguageHint" xml:space="preserve">
     <value>De taal van de actieve indeling, of een andere taal van je indelingen als er duidelijk in die taal wordt gesproken.</value>
   </data>
-    <data name="Voice_MicLabel" xml:space="preserve">
+  <data name="Voice_MicLabel" xml:space="preserve">
     <value>Microfoon</value>
   </data>
-    <data name="Voice_MicDefault" xml:space="preserve">
+  <data name="Voice_MicDefault" xml:space="preserve">
     <value>Systeemstandaard</value>
   </data>
-    <data name="Voice_UnloadLabel" xml:space="preserve">
+  <data name="Voice_UnloadLabel" xml:space="preserve">
     <value>Geheugen vrijgeven</value>
   </data>
-    <data name="Voice_UnloadHint" xml:space="preserve">
+  <data name="Voice_UnloadHint" xml:space="preserve">
     <value>Geladen neemt het spraakmodel ongeveer {0} MB geheugen in. Na het vrijgeven laadt het volgende dictaat het opnieuw; de opname begint toch meteen.</value>
   </data>
-    <data name="Voice_UnloadImmediately" xml:space="preserve">
+  <data name="Voice_UnloadImmediately" xml:space="preserve">
     <value>Na elk dictaat</value>
   </data>
-    <data name="Voice_UnloadMinutes" xml:space="preserve">
+  <data name="Voice_UnloadMinutes" xml:space="preserve">
     <value>Na {0} min</value>
   </data>
-    <data name="Voice_UnloadHour" xml:space="preserve">
+  <data name="Voice_UnloadHour" xml:space="preserve">
     <value>Na 1 uur</value>
   </data>
-    <data name="Voice_UnloadNever" xml:space="preserve">
+  <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Nooit (laden bij het opstarten)</value>
   </data>
   <data name="Voice_DeviceAuto" xml:space="preserve">
@@ -805,214 +805,214 @@
   <data name="Voice_DeviceNow" xml:space="preserve">
     <value>Draait nu op: {0}</value>
   </data>
-    <data name="Voice_KeepLatin" xml:space="preserve">
+  <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Engelse termen in Latijnse letters</value>
   </data>
-    <data name="Voice_KeepLatinHint" xml:space="preserve">
+  <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>Termen als pull request of GitHub worden geschreven zoals in het Engels. Woorden die je taal heeft overgenomen, blijven zoals ze zijn. Met het AI-model aan weegt het ook termen af die de herkenning verkeerd verstond.</value>
   </data>
-    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+  <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Leestekens inspreken</value>
   </data>
-    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+  <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
     <value>Zeg "comma", "period" of "question mark" en het teken wordt geschreven. Werkt in het Engels, Russisch, Oekraïens en Wit-Russisch.</value>
   </data>
-    <data name="Voice_GlossaryLabel" xml:space="preserve">
+  <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Woordenlijst</value>
   </data>
-    <data name="Voice_GlossaryHint" xml:space="preserve">
+  <data name="Voice_GlossaryHint" xml:space="preserve">
     <value>Namen en termen die goed geschreven moeten worden, één per regel, zoals ze getypt moeten worden. Klinkt een term ongewoon, zet dan na | hoe hij klinkt. Een verkeerd verstaan woord dat u direct na het dicteren in Latijnse letters opnieuw typt, wordt hier vanzelf toegevoegd.</value>
   </data>
-    <data name="Voice_Locked" xml:space="preserve">
+  <data name="Voice_Locked" xml:space="preserve">
     <value>Spraakinvoer hoort bij Lapsus Plus.</value>
   </data>
-    <data name="Diag_MicDenied" xml:space="preserve">
+  <data name="Diag_MicDenied" xml:space="preserve">
     <value>Lapsus mag de microfoon niet gebruiken. Sta het toe via Systeeminstellingen → Privacy en beveiliging → Microfoon.</value>
   </data>
-    <data name="Diag_MicAsk" xml:space="preserve">
+  <data name="Diag_MicAsk" xml:space="preserve">
     <value>Geef Lapsus in het venster dat verschijnt toegang tot de microfoon en start daarna de spraakinvoer opnieuw.</value>
   </data>
-    <data name="Tab_Voice" xml:space="preserve">
+  <data name="Tab_Voice" xml:space="preserve">
     <value>Spraak</value>
   </data>
-    <data name="Voice_ListeningHint" xml:space="preserve">
+  <data name="Voice_ListeningHint" xml:space="preserve">
     <value>{0} — klaar · Esc — annuleren</value>
   </data>
-    <data name="Voice_TryIt" xml:space="preserve">
+  <data name="Voice_TryIt" xml:space="preserve">
     <value>Klik in een willekeurig veld, houd {0} ingedrukt en spreek — laat los en de tekst verschijnt bij de cursor. Kort op {0} drukken neemt handsfree op tot u weer drukt. Esc annuleert.</value>
   </data>
-    <data name="Voice_NoHotkey" xml:space="preserve">
+  <data name="Voice_NoHotkey" xml:space="preserve">
     <value>geen sneltoets — kies er een op het tabblad ‘Toetsen’</value>
   </data>
-    <data name="Voice_UsageTitle" xml:space="preserve">
+  <data name="Voice_UsageTitle" xml:space="preserve">
     <value>Zo werkt het</value>
   </data>
-    <data name="Voice_ShowButton" xml:space="preserve">
+  <data name="Voice_ShowButton" xml:space="preserve">
     <value>Microfoonknop op het scherm</value>
   </data>
-    <data name="Voice_ShowButtonHint" xml:space="preserve">
+  <data name="Voice_ShowButtonHint" xml:space="preserve">
     <value>Een kleine knop onder aan het scherm: een klik start of beëindigt de opname, met de muis erboven ziet u de sneltoets.</value>
   </data>
-    <data name="Voice_Sounds" xml:space="preserve">
+  <data name="Voice_Sounds" xml:space="preserve">
     <value>Geluid bij begin en einde van de opname</value>
   </data>
-    <data name="Voice_ButtonTip" xml:space="preserve">
+  <data name="Voice_ButtonTip" xml:space="preserve">
     <value>Spraakinvoer: klik of {0}</value>
   </data>
-    <data name="Voice_SectionMain" xml:space="preserve">
+  <data name="Voice_SectionMain" xml:space="preserve">
     <value>Algemeen</value>
   </data>
-    <data name="Voice_SectionRecognition" xml:space="preserve">
+  <data name="Voice_SectionRecognition" xml:space="preserve">
     <value>Herkenning</value>
   </data>
-    <data name="Voice_TryItTap" xml:space="preserve">
+  <data name="Voice_TryItTap" xml:space="preserve">
     <value>Klik in een willekeurig veld, druk op {0} en spreek; druk nogmaals op {0} en de tekst verschijnt bij de cursor. Esc annuleert.</value>
   </data>
-    <data name="Backup_Label" xml:space="preserve">
+  <data name="Backup_Label" xml:space="preserve">
     <value>Back-up van instellingen</value>
   </data>
-    <data name="Backup_Hint" xml:space="preserve">
+  <data name="Backup_Hint" xml:space="preserve">
     <value>Sla je instellingen op in een bestand of laad ze op een andere computer. De licentiesleutel, woordenboeken en modellen blijven waar ze zijn.</value>
   </data>
-    <data name="Backup_Export" xml:space="preserve">
+  <data name="Backup_Export" xml:space="preserve">
     <value>Exporteren…</value>
   </data>
-    <data name="Backup_Import" xml:space="preserve">
+  <data name="Backup_Import" xml:space="preserve">
     <value>Importeren…</value>
   </data>
-    <data name="Backup_Exported" xml:space="preserve">
+  <data name="Backup_Exported" xml:space="preserve">
     <value>Instellingen geëxporteerd.</value>
   </data>
-    <data name="Backup_Imported" xml:space="preserve">
+  <data name="Backup_Imported" xml:space="preserve">
     <value>Instellingen geïmporteerd. Sluit Lapsus af en start het opnieuw om ze toe te passen.</value>
   </data>
-    <data name="Backup_ExportFailed" xml:space="preserve">
+  <data name="Backup_ExportFailed" xml:space="preserve">
     <value>Het bestand kon niet worden geschreven.</value>
   </data>
-    <data name="Backup_ImportFailed" xml:space="preserve">
+  <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Dit is geen instellingenbestand van Lapsus.</value>
   </data>
-    <data name="Dict_Suggest" xml:space="preserve">
+  <data name="Dict_Suggest" xml:space="preserve">
     <value>Voor deze toetsenbordindelingen is er nog geen woordenboek: {0}.</value>
   </data>
-    <data name="Dict_SuggestAdd" xml:space="preserve">
+  <data name="Dict_SuggestAdd" xml:space="preserve">
     <value>Downloaden</value>
   </data>
-    <data name="Notify_DictMissingTitle" xml:space="preserve">
+  <data name="Notify_DictMissingTitle" xml:space="preserve">
     <value>Een indeling heeft geen woordenboek</value>
   </data>
-    <data name="Notify_DictMissingBody" xml:space="preserve">
+  <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: open Instellingen → Bibliotheek om het te downloaden.</value>
   </data>
-    <data name="AutoFixSignal" xml:space="preserve">
+  <data name="AutoFixSignal" xml:space="preserve">
     <value>Tonen waar een woord automatisch is verbeterd</value>
   </data>
-    <data name="AutoFixSignal_Hint" xml:space="preserve">
+  <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Het indelingslabel verschijnt even bij de cursor, in blauw.</value>
   </data>
-    <data name="Stats_Label" xml:space="preserve">
+  <data name="Stats_Label" xml:space="preserve">
     <value>Wat Lapsus heeft verbeterd</value>
   </data>
-    <data name="Stats_Week" xml:space="preserve">
+  <data name="Stats_Week" xml:space="preserve">
     <value>Deze week</value>
   </data>
-    <data name="Stats_Layout" xml:space="preserve">
+  <data name="Stats_Layout" xml:space="preserve">
     <value>Verkeerde indeling</value>
   </data>
-    <data name="Stats_Typos" xml:space="preserve">
+  <data name="Stats_Typos" xml:space="preserve">
     <value>Typefouten</value>
   </data>
-    <data name="Stats_Since" xml:space="preserve">
+  <data name="Stats_Since" xml:space="preserve">
     <value>Sinds de installatie</value>
   </data>
-    <data name="Stats_Privacy" xml:space="preserve">
+  <data name="Stats_Privacy" xml:space="preserve">
     <value>Alleen de aantallen worden bewaard, op deze computer.</value>
   </data>
-    <data name="Onb_What" xml:space="preserve">
+  <data name="Onb_What" xml:space="preserve">
     <value>Je begint een zin in de verkeerde toetsenbordindeling, drukt op één toets en hij wordt ter plekke verbeterd, zonder opnieuw te typen. Typefouten worden op dezelfde manier verbeterd.</value>
   </data>
-    <data name="Onb_Step" xml:space="preserve">
+  <data name="Onb_Step" xml:space="preserve">
     <value>Stap {0} van {1}</value>
   </data>
-    <data name="Onb_Next" xml:space="preserve">
+  <data name="Onb_Next" xml:space="preserve">
     <value>Volgende</value>
   </data>
-    <data name="Onb_Back" xml:space="preserve">
+  <data name="Onb_Back" xml:space="preserve">
     <value>Terug</value>
   </data>
-    <data name="Onb_Done" xml:space="preserve">
+  <data name="Onb_Done" xml:space="preserve">
     <value>Klaar</value>
   </data>
-    <data name="Onb_Privacy_Title" xml:space="preserve">
+  <data name="Onb_Privacy_Title" xml:space="preserve">
     <value>Wat Lapsus ziet</value>
   </data>
-    <data name="Onb_Dict_Title" xml:space="preserve">
+  <data name="Onb_Dict_Title" xml:space="preserve">
     <value>Woordenlijsten voor je talen</value>
   </data>
-    <data name="Onb_Dict_Body" xml:space="preserve">
+  <data name="Onb_Dict_Body" xml:space="preserve">
     <value>Lapsus onderscheidt een echt woord van een fout getypt woord met een woordenlijst per taal. Een lijst wordt één keer gedownload, en alleen als je erom vraagt.</value>
   </data>
-    <data name="Onb_Dict_Ready" xml:space="preserve">
+  <data name="Onb_Dict_Ready" xml:space="preserve">
     <value>Elke indeling van dit toetsenbord heeft al een woordenlijst.</value>
   </data>
-    <data name="Onb_Try_Title" xml:space="preserve">
+  <data name="Onb_Try_Title" xml:space="preserve">
     <value>Probeer het</value>
   </data>
-    <data name="Onb_Try_Body" xml:space="preserve">
+  <data name="Onb_Try_Body" xml:space="preserve">
     <value>Klik in het veld hieronder, typ {0} precies zo en druk op {1}. Druk nogmaals voor de volgende lezing en nog een keer om terug te krijgen wat je typte.</value>
   </data>
-    <data name="Onb_Options_Title" xml:space="preserve">
+  <data name="Onb_Options_Title" xml:space="preserve">
     <value>Wat er vanzelf moet gebeuren</value>
   </data>
-    <data name="Onb_Options_Body" xml:space="preserve">
+  <data name="Onb_Options_Body" xml:space="preserve">
     <value>De sneltoets werkt altijd. Deze schakelaars verbeteren een woord zodra je op de spatiebalk drukt; Backspace direct daarna zet terug wat je typte.</value>
   </data>
-    <data name="Onb_More" xml:space="preserve">
+  <data name="Onb_More" xml:space="preserve">
     <value>In Instellingen staat meer: toetsen voor geselecteerde tekst (hoofdletters, transliteratie), typen met je stem, een lokaal AI-model. Het pictogram in het systeemvak opent ze.</value>
   </data>
-    <data name="Onb_More_Store" xml:space="preserve">
+  <data name="Onb_More_Store" xml:space="preserve">
       <value>In Instellingen staat meer: toetsen voor geselecteerde tekst (hoofdletters, transliteratie), uitzonderingen voor apps en woorden. Het pictogram in het systeemvak opent ze.</value>
     </data>
-    <data name="Onb_Again" xml:space="preserve">
+  <data name="Onb_Again" xml:space="preserve">
     <value>Introductie opnieuw tonen</value>
   </data>
-    <data name="Tray_Pause" xml:space="preserve">
+  <data name="Tray_Pause" xml:space="preserve">
     <value>Pauzeren</value>
   </data>
-    <data name="Tray_Pause15" xml:space="preserve">
+  <data name="Tray_Pause15" xml:space="preserve">
     <value>15 minuten</value>
   </data>
-    <data name="Tray_Pause60" xml:space="preserve">
+  <data name="Tray_Pause60" xml:space="preserve">
     <value>1 uur</value>
   </data>
-    <data name="Tray_PauseUntil" xml:space="preserve">
+  <data name="Tray_PauseUntil" xml:space="preserve">
     <value>Tot ik hervat</value>
   </data>
-    <data name="Tray_Resume" xml:space="preserve">
+  <data name="Tray_Resume" xml:space="preserve">
     <value>Hervatten</value>
   </data>
-    <data name="Capture_Paused" xml:space="preserve">
+  <data name="Capture_Paused" xml:space="preserve">
     <value>Vastleggen gepauzeerd</value>
   </data>
-    <data name="PauseInGames" xml:space="preserve">
+  <data name="PauseInGames" xml:space="preserve">
     <value>Pauzeren in schermvullende games</value>
   </data>
-    <data name="PauseInGames_Hint" xml:space="preserve">
+  <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Zolang een game het hele scherm in beslag neemt, verwijdert Lapsus zijn toetsenbordhook en zet die terug wanneer de game eindigt.</value>
   </data>
-    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+  <data name="AppRule_HotkeyOnly" xml:space="preserve">
     <value>Alleen sneltoets</value>
   </data>
-    <data name="AppRule_Hint" xml:space="preserve">
+  <data name="AppRule_Hint" xml:space="preserve">
     <value>Vink “Alleen sneltoets” aan bij een app om daar de sneltoets en de toetsen voor geselecteerde tekst te behouden, maar de automatische verbeteringen na de spatiebalk uit te zetten.</value>
   </data>
-    <data name="Tab_Stats" xml:space="preserve">
+  <data name="Tab_Stats" xml:space="preserve">
     <value>Statistiek</value>
   </data>
-    <data name="Tab_Backup" xml:space="preserve">
+  <data name="Tab_Backup" xml:space="preserve">
     <value>Back-up</value>
   </data>
-    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+  <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>De termen blijven ook onaangetast als je ze typt: een hier toegevoegde naam wordt nooit “verbeterd”.</value>
   </data>
   <data name="Perm_Accessibility" xml:space="preserve">
@@ -1041,5 +1041,23 @@
   </data>
   <data name="Perm_OpenSettings" xml:space="preserve">
     <value>Open Systeeminstellingen</value>
+  </data>
+  <data name="Voice_RemoveFillersHint" xml:space="preserve">
+    <value>Verwijdert aarzelingen zoals «uh», «um», «э» en «эм» uit de herkende tekst.</value>
+  </data>
+  <data name="Voice_GlossaryAdd" xml:space="preserve">
+    <value>+ Toevoegen</value>
+  </data>
+  <data name="Voice_GlossaryTermPlaceholder" xml:space="preserve">
+    <value>Woord of zin</value>
+  </data>
+  <data name="Voice_RemoveFillers" xml:space="preserve">
+    <value>Stopwoordjes verwijderen</value>
+  </data>
+  <data name="Voice_GlossaryRemove" xml:space="preserve">
+    <value>Uit woordenlijst verwijderen</value>
+  </data>
+  <data name="Voice_GlossaryHeardPlaceholder" xml:space="preserve">
+    <value>Klinkt als (optioneel)</value>
   </data>
 </root>

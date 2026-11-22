@@ -1,0 +1,26 @@
+# Standalone hesitation tokens. One per line; matched case-insensitively as whole words.
+# Not single-letter conjunctions (а, и, a, i) — those are real words.
+э
+ээ
+эээ
+ээээ
+эм
+эмм
+эммм
+ее
+еее
+мм
+ммм
+гм
+гмм
+uh
+um
+uhm
+erm
+hmm
+hm
+ah
+er
+eh
+ааа
+ооо

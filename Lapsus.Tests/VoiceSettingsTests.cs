@@ -183,6 +183,7 @@ public sealed class VoiceSettingsTests : IDisposable
         voice.SelectedUnload = voice.UnloadOptions.First(o => o.Value == SpeechUnloadAfter.Never);
         voice.KeepEnglishTermsLatin = false;
         voice.SpokenPunctuation = false;
+        voice.RemoveFillers = true;
 
         var saved = Saved();
         Assert.Equal("uk", saved.DictationLanguage);
@@ -190,6 +191,21 @@ public sealed class VoiceSettingsTests : IDisposable
         Assert.Equal(SpeechUnloadAfter.Never, saved.SpeechUnloadAfter);
         Assert.False(saved.KeepEnglishTermsLatin);
         Assert.False(saved.DictationSpokenPunctuation);
+        Assert.True(saved.DictationRemoveFillers);
+    }
+
+    [Fact]
+    public void A_draft_glossary_row_is_saved_and_listed()
+    {
+        var voice = Voice();
+        voice.DraftTerm = "Kubernetes";
+        voice.DraftHeard = "кубнетис";
+        voice.AddDraftGlossaryTermCommand.Execute(null);
+
+        Assert.Equal(["Kubernetes|кубнетис"], Saved().DictationGlossary);
+        Assert.Equal("Kubernetes", Assert.Single(voice.GlossaryEntries).Term);
+        Assert.Equal("", voice.DraftTerm);
+        Assert.Equal("", voice.DraftHeard);
     }
 
     [Fact]

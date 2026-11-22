@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="Window_Title" xml:space="preserve">
+  </resheader>
+  <data name="Window_Title" xml:space="preserve">
     <value>Lapsus — Ayarlar</value>
   </data>
-    <data name="Subtitle" xml:space="preserve">
+  <data name="Subtitle" xml:space="preserve">
     <value>Klavye düzenini ve yazım hatalarını tek tuşla düzeltin</value>
   </data>
-    <data name="Capture_On" xml:space="preserve">
+  <data name="Capture_On" xml:space="preserve">
     <value>Yakalama açık</value>
   </data>
-    <data name="Capture_Off" xml:space="preserve">
+  <data name="Capture_Off" xml:space="preserve">
     <value>Yakalama kapalı</value>
   </data>
-    <data name="AutoCorrect" xml:space="preserve">
+  <data name="AutoCorrect" xml:space="preserve">
     <value>Boşluktan sonra otomatik düzelt</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
@@ -43,34 +43,34 @@
   <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
     <value>“Yalnızca düzen değişimi” modunda otomatik düzeltme kullanılamaz: sözlükler olmadan sözcükleri denetleyecek bir şey yok.</value>
   </data>
-    <data name="PlainSwitch" xml:space="preserve">
+  <data name="PlainSwitch" xml:space="preserve">
     <value>Yalnızca düzen değişimi, sözlüksüz</value>
   </data>
-    <data name="PlainSwitch_Hint" xml:space="preserve">
+  <data name="PlainSwitch_Hint" xml:space="preserve">
     <value>Karakterleri olduğu gibi değiştirir, yazım hatalarını düzeltmez. İndirme olmadan çalışır; sonraki düzen için tekrar basın.</value>
   </data>
-    <data name="SwitchLayout" xml:space="preserve">
+  <data name="SwitchLayout" xml:space="preserve">
     <value>Düzeltmeden sonra sistem düzenini değiştir</value>
   </data>
-    <data name="SwitchLayout_Hint" xml:space="preserve">
+  <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>Kısayol her zaman dili değiştirir. Bu yalnızca Boşluk sonrası otomatik ve seçimi düzeltme için geçerlidir.</value>
   </data>
-    <data name="HotkeyCyclesLayout" xml:space="preserve">
+  <data name="HotkeyCyclesLayout" xml:space="preserve">
     <value>Hotkey always switches the layout</value>
   </data>
-    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+  <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
     <value>With nothing to correct, the hotkey still switches to the next installed layout.</value>
   </data>
-    <data name="StartAtLogin" xml:space="preserve">
+  <data name="StartAtLogin" xml:space="preserve">
     <value>Oturum açıldığında başlat</value>
   </data>
-    <data name="Indicator_Label" xml:space="preserve">
+  <data name="Indicator_Label" xml:space="preserve">
     <value>Düzeni imlecin yanında göster</value>
   </data>
-    <data name="Indicator_Hint" xml:space="preserve">
+  <data name="Indicator_Hint" xml:space="preserve">
     <value>Metin imlecinin yanında etkin düzeni gösteren etiket. Programın imleci bildirmediği yerlerde (tarayıcılar, Electron) etiket, düzen değiştiğinde fare işaretçisinin yanında bir an için görünür.</value>
   </data>
-    <data name="Hotkey_Label" xml:space="preserve">
+  <data name="Hotkey_Label" xml:space="preserve">
     <value>Kısayol tuşu</value>
   </data>
   <data name="HotkeyRecord_Button" xml:space="preserve">
@@ -88,676 +88,676 @@
   <data name="HotkeyRecord_Cancel" xml:space="preserve">
     <value>İptal</value>
   </data>
-    <data name="SelectionHotkey_Label" xml:space="preserve">
+  <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Seçimi düzelt</value>
   </data>
-    <data name="SelectionHotkey_Hint" xml:space="preserve">
+  <data name="SelectionHotkey_Hint" xml:space="preserve">
     <value>Seçili metni düzeltir — hangi pencerede olursa olsun, metin ne kadar eski olursa olsun.</value>
   </data>
-    <data name="SelectionActions_Label" xml:space="preserve">
+  <data name="SelectionActions_Label" xml:space="preserve">
     <value>Seçim üzerinde işlemler</value>
   </data>
-    <data name="SelectionCase_Label" xml:space="preserve">
+  <data name="SelectionCase_Label" xml:space="preserve">
     <value>Büyük/küçük harf değiştir</value>
   </data>
-    <data name="SelectionCase_Hint" xml:space="preserve">
+  <data name="SelectionCase_Hint" xml:space="preserve">
     <value>Seçimi sırayla değiştirir: BÜYÜK HARF → küçük harf → Cümle düzeni → Her Sözcük.</value>
   </data>
-    <data name="SelectionTranslit_Label" xml:space="preserve">
+  <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Harf çevirisi</value>
   </data>
-    <data name="SelectionTranslit_Hint" xml:space="preserve">
+  <data name="SelectionTranslit_Hint" xml:space="preserve">
     <value>Kiril veya Yunan ⇄ Latin. Tekrar basınca geri döner.</value>
   </data>
-    <data name="SelectionRtl_Label" xml:space="preserve">
+  <data name="SelectionRtl_Label" xml:space="preserve">
     <value>İbranice / Arapça yönünü düzelt</value>
   </data>
-    <data name="SelectionRtl_Hint" xml:space="preserve">
+  <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Ters gelen bir İbranice veya Arapça satırı düzeltir.</value>
   </data>
-    <data name="SelectionGlossary_Label" xml:space="preserve">
+  <data name="SelectionGlossary_Label" xml:space="preserve">
     <value>Dikte sözlüğüne ekle</value>
   </data>
-    <data name="SelectionGlossary_Hint" xml:space="preserve">
+  <data name="SelectionGlossary_Hint" xml:space="preserve">
     <value>Bir ad veya terim seçip tuşa basın; sesle yazma onu böyle yazar.</value>
   </data>
-    <data name="Pref_Label" xml:space="preserve">
+  <data name="Pref_Label" xml:space="preserve">
     <value>Eşitlikte tercih edilen dil</value>
   </data>
-    <data name="Pref_Hint" xml:space="preserve">
+  <data name="Pref_Hint" xml:space="preserve">
     <value>Bir kelime birkaç dile uyduğunda hangisi kazanır («молоток» ru ve uk dillerinde).</value>
   </data>
-    <data name="Lang_Label" xml:space="preserve">
+  <data name="Lang_Label" xml:space="preserve">
     <value>Arayüz dili</value>
   </data>
-    <data name="Theme_Light" xml:space="preserve">
+  <data name="Theme_Light" xml:space="preserve">
     <value>Açık tema</value>
   </data>
-    <data name="Theme_Dark" xml:space="preserve">
+  <data name="Theme_Dark" xml:space="preserve">
     <value>Koyu tema</value>
   </data>
-    <data name="Theme_System" xml:space="preserve">
+  <data name="Theme_System" xml:space="preserve">
     <value>Sistem teması</value>
   </data>
-    <data name="Dict_Label" xml:space="preserve">
+  <data name="Dict_Label" xml:space="preserve">
     <value>Diller ve sözlükler</value>
   </data>
-    <data name="Dict_Hint" xml:space="preserve">
+  <data name="Dict_Hint" xml:space="preserve">
     <value>Bir kez indirilir, sonra çevrimdışı çalışır. Sözlük olmadan bir dil daha kötü düzeltilir.</value>
   </data>
-    <data name="AddLang_Label" xml:space="preserve">
+  <data name="AddLang_Label" xml:space="preserve">
     <value>Dil ekle</value>
   </data>
-    <data name="Add_Label" xml:space="preserve">
+  <data name="Add_Label" xml:space="preserve">
     <value>Ekle</value>
   </data>
-    <data name="AddLang_Placeholder" xml:space="preserve">
+  <data name="AddLang_Placeholder" xml:space="preserve">
     <value>Bir dil seçin</value>
   </data>
-    <data name="AddLang_Tooltip" xml:space="preserve">
+  <data name="AddLang_Tooltip" xml:space="preserve">
     <value>Seçili dili indir ve ekle</value>
   </data>
-    <data name="RemoveDict_Tooltip" xml:space="preserve">
+  <data name="RemoveDict_Tooltip" xml:space="preserve">
     <value>Sözlüğü kaldır</value>
   </data>
-    <data name="Pref_Auto" xml:space="preserve">
+  <data name="Pref_Auto" xml:space="preserve">
     <value>Otomatik (puana göre, sonra tercih edilen)</value>
   </data>
-    <data name="Status_Disabled" xml:space="preserve">
+  <data name="Status_Disabled" xml:space="preserve">
     <value>Devre dışı.</value>
   </data>
-    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+  <data name="Status_UnsupportedPlatform" xml:space="preserve">
     <value>Klavye yakalama bu platformda henüz kullanılamıyor. Ayarlar, sözlükler ve oturum açılışında başlatma çalışıyor.</value>
   </data>
-    <data name="Status_AutoActive" xml:space="preserve">
+  <data name="Status_AutoActive" xml:space="preserve">
     <value>Etkin. Kelimeler boşluktan sonra otomatik düzeltilir (ve „{0}” ile).</value>
   </data>
-    <data name="Status_HotkeyActive" xml:space="preserve">
+  <data name="Status_HotkeyActive" xml:space="preserve">
     <value>Etkin. Bir kelime yazın ve „{0}” tuşuna basın — Lapsus onu yerinde düzeltir.</value>
   </data>
-    <data name="Status_StartFailed" xml:space="preserve">
+  <data name="Status_StartFailed" xml:space="preserve">
     <value>Yakalama başlatılamadı: {0}</value>
   </data>
-    <data name="Status_StartupFailed" xml:space="preserve">
+  <data name="Status_StartupFailed" xml:space="preserve">
     <value>Oturum açılışında başlatma güncellenemedi: {0}</value>
   </data>
-    <data name="Status_AccessibilityRequired" xml:space="preserve">
+  <data name="Status_AccessibilityRequired" xml:space="preserve">
     <value>Klavye yakalama başlatılamadı. Lapsus'u Sistem Ayarları → Gizlilik ve Güvenlik → Erişilebilirlik bölümünde açın; yakalama kendiliğinden başlar.</value>
   </data>
-    <data name="Perm_Explain" xml:space="preserve">
+  <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus'un bu izinlere ihtiyacı var. Her düğme macOS penceresini gösterir ya da Sistem Ayarları → Gizlilik ve Güvenlik içinde doğru listeyi açar; orada Lapsus'u açın. Buradaki durum kendiliğinden güncellenir.</value>
   </data>
-    <data name="Status_Corrected" xml:space="preserve">
+  <data name="Status_Corrected" xml:space="preserve">
     <value>Düzeltildi: {0} → {1}</value>
   </data>
-    <data name="Dict_Downloading" xml:space="preserve">
+  <data name="Dict_Downloading" xml:space="preserve">
     <value>„{0}” indiriliyor…</value>
   </data>
-    <data name="Dict_Installed" xml:space="preserve">
+  <data name="Dict_Installed" xml:space="preserve">
     <value>„{0}” kuruldu.</value>
   </data>
-    <data name="Dict_Updated" xml:space="preserve">
+  <data name="Dict_Updated" xml:space="preserve">
     <value>„{0}” güncellendi.</value>
   </data>
-    <data name="UpdateDict_Tooltip" xml:space="preserve">
+  <data name="UpdateDict_Tooltip" xml:space="preserve">
     <value>Daha kapsamlı sözlüğü indir</value>
   </data>
-    <data name="Dict_DownloadFailed" xml:space="preserve">
+  <data name="Dict_DownloadFailed" xml:space="preserve">
     <value>İndirme başarısız: {0}</value>
   </data>
-    <data name="Dict_Removed" xml:space="preserve">
+  <data name="Dict_Removed" xml:space="preserve">
     <value>„{0}” kaldırıldı.</value>
   </data>
-    <data name="Dict_DownloadEmpty" xml:space="preserve">
+  <data name="Dict_DownloadEmpty" xml:space="preserve">
     <value>İndirilen sözlük boş.</value>
   </data>
-    <data name="Tray_Settings" xml:space="preserve">
+  <data name="Tray_Settings" xml:space="preserve">
     <value>Ayarlar</value>
   </data>
-    <data name="Tray_DictationHistory" xml:space="preserve">
+  <data name="Tray_DictationHistory" xml:space="preserve">
     <value>Son dikteler</value>
   </data>
-    <data name="Tray_Exit" xml:space="preserve">
+  <data name="Tray_Exit" xml:space="preserve">
     <value>Çıkış</value>
   </data>
-    <data name="Tray_Quit" xml:space="preserve">
+  <data name="Tray_Quit" xml:space="preserve">
     <value>Lapsus'tan Çık</value>
   </data>
-    <data name="Tray_Tooltip" xml:space="preserve">
+  <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — düzen düzeltme</value>
   </data>
-    <data name="Tray_UpdateAvailable" xml:space="preserve">
+  <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Güncelleme var — kurmak için yeniden başlatın</value>
   </data>
-    <data name="Tray_InstallUpdate" xml:space="preserve">
+  <data name="Tray_InstallUpdate" xml:space="preserve">
     <value>{0} sürümünü kurmak için yeniden başlat</value>
   </data>
-    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+  <data name="Tray_TooltipUpdateReady" xml:space="preserve">
     <value>Lapsus — {0} sürümü kurulmaya hazır</value>
   </data>
-    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+  <data name="Notify_UpdateReadyTitle" xml:space="preserve">
     <value>Lapsus {0} kurulmaya hazır</value>
   </data>
-    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+  <data name="Notify_UpdateReadyBody" xml:space="preserve">
     <value>Simgenin menüsünden yeniden başlatın; aksi halde güncelleme Lapsus bir sonraki açılışında kurulur.</value>
   </data>
-    <data name="Update_Tooltip" xml:space="preserve">
+  <data name="Update_Tooltip" xml:space="preserve">
     <value>Bu güncellemeyi kurmak için yeniden başlat</value>
   </data>
-    <data name="Update_CheckTooltip" xml:space="preserve">
+  <data name="Update_CheckTooltip" xml:space="preserve">
     <value>Güncellemeleri denetle</value>
   </data>
-    <data name="Status_UpToDate" xml:space="preserve">
+  <data name="Status_UpToDate" xml:space="preserve">
     <value>Lapsus güncel.</value>
   </data>
-    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+  <data name="Status_UpdateCheckFailed" xml:space="preserve">
     <value>Güncelleme denetimi başarısız: {0}</value>
   </data>
-    <data name="Status_UpdateNotSupported" xml:space="preserve">
+  <data name="Status_UpdateNotSupported" xml:space="preserve">
     <value>Bu kopya kendini güncellemez — en son sürümü indirin.</value>
   </data>
-    <data name="Diag_Empty" xml:space="preserve">
+  <data name="Diag_Empty" xml:space="preserve">
     <value>Kısayol: hiçbir şey yazılmadı (pencere: {0}).</value>
   </data>
-    <data name="Diag_NoChange" xml:space="preserve">
+  <data name="Diag_NoChange" xml:space="preserve">
     <value>Kısayol: „{0}” — bütün kelimeler doğru görünüyor, değiştirilecek bir şey yok.</value>
   </data>
-    <data name="Diag_NoSelection" xml:space="preserve">
+  <data name="Diag_NoSelection" xml:space="preserve">
     <value>Seçim: hiçbir şey seçili değil veya {0} kopyalamaya yanıt vermiyor.</value>
   </data>
-    <data name="Diag_GlossaryAdded" xml:space="preserve">
+  <data name="Diag_GlossaryAdded" xml:space="preserve">
     <value>Sözlüğe eklendi: {0}</value>
   </data>
-    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+  <data name="Diag_GlossaryTooLong" xml:space="preserve">
     <value>Sözlük: cümle değil, tek bir terim seçin.</value>
   </data>
-    <data name="Diag_ClipboardFailed" xml:space="preserve">
+  <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Seçim: pano kullanılamadı ({0}).</value>
   </data>
-    <data name="Diag_TapReenabled" xml:space="preserve">
+  <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Klavye yakalama kısa süre takıldı ve yeniden başlatıldı. Bu tekrarlanırsa Erişilebilirliği yoğun kullanan bir uygulamayı kapatın.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Klavye yakalama yeniden çalışıyor.</value>
   </data>
-    <data name="Diag_NoDictionaries" xml:space="preserve">
+  <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Düzeni düzeltmeden önce ayarlardan en az bir yazım sözlüğü indirin.</value>
   </data>
-    <data name="Diag_SendFailed" xml:space="preserve">
+  <data name="Diag_SendFailed" xml:space="preserve">
     <value>SendInput başarısız oldu (geri silme {0}/{1}, unicode {2}/{3}, hata {4}, pencere: {5}). Hedef pencere büyük olasılıkla yönetici olarak çalışıyor.</value>
   </data>
-    <data name="Diag_NoLayoutList" xml:space="preserve">
+  <data name="Diag_NoLayoutList" xml:space="preserve">
     <value>Düzen değiştirme: sistem hiçbir düzen listesi döndürmedi.</value>
   </data>
-    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
-    <value>{0} düzeni Windows&apos;ta kurulu değil (kullanılabilir: {1}). Ayarlar → Saat ve dil → Dil ve bölge yolundan ekleyin.</value>
+  <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+    <value>{0} düzeni Windows'ta kurulu değil (kullanılabilir: {1}). Ayarlar → Saat ve dil → Dil ve bölge yolundan ekleyin.</value>
   </data>
-    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
-    <value>{0} düzeni bu Mac&apos;te kurulu değil (kullanılabilir: {1}). Sistem Ayarları → Klavye → Giriş Kaynakları yolundan ekleyin.</value>
+  <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+    <value>{0} düzeni bu Mac'te kurulu değil (kullanılabilir: {1}). Sistem Ayarları → Klavye → Giriş Kaynakları yolundan ekleyin.</value>
   </data>
-    <data name="Diag_InjectFailed" xml:space="preserve">
+  <data name="Diag_InjectFailed" xml:space="preserve">
     <value>Tuş vuruşları etkin uygulamaya gönderilemedi ({0}). Lapsus için Erişilebilirlik iznini denetleyin.</value>
   </data>
-    <data name="Diag_FocusChanged" xml:space="preserve">
+  <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Kısayol: yok sayıldı — odak başka bir pencereye veya uygulamaya geçti ({0}). Hedef alanda yeniden yazın.</value>
   </data>
-    <data name="Diag_NoModel" xml:space="preserve">
+  <data name="Diag_NoModel" xml:space="preserve">
     <value>Kısayol: sinirsel düzeltme açık, ama yüklü model yok. Ayarlardan bir model indirin.</value>
   </data>
-    <data name="Diag_NeuralFailed" xml:space="preserve">
+  <data name="Diag_NeuralFailed" xml:space="preserve">
     <value>Sinirsel düzeltme başarısız: {0}</value>
   </data>
-    <data name="Diag_CorrectionFailed" xml:space="preserve">
+  <data name="Diag_CorrectionFailed" xml:space="preserve">
     <value>Düzeltme başarısız: {0}</value>
   </data>
-    <data name="Neural_Toggle" xml:space="preserve">
+  <data name="Neural_Toggle" xml:space="preserve">
     <value>Sinirsel düzeltme (yerel model)</value>
   </data>
-    <data name="Neural_Hint" xml:space="preserve">
+  <data name="Neural_Hint" xml:space="preserve">
     <value>Sözlüklerle desteklenen yerel bir model. Açın, bir tane indirin, kısayola basın.</value>
   </data>
-    <data name="Model_AddLabel" xml:space="preserve">
+  <data name="Model_AddLabel" xml:space="preserve">
     <value>Model ekle</value>
   </data>
-    <data name="Model_AddPlaceholder" xml:space="preserve">
+  <data name="Model_AddPlaceholder" xml:space="preserve">
     <value>Bir model seçin…</value>
   </data>
-    <data name="Model_AddTooltip" xml:space="preserve">
+  <data name="Model_AddTooltip" xml:space="preserve">
     <value>Seçili modeli indir</value>
   </data>
-    <data name="Model_SelectPlaceholder" xml:space="preserve">
+  <data name="Model_SelectPlaceholder" xml:space="preserve">
     <value>Kurulu model yok</value>
   </data>
-    <data name="Model_RemoveTooltip" xml:space="preserve">
+  <data name="Model_RemoveTooltip" xml:space="preserve">
     <value>Seçili modeli kaldır</value>
   </data>
-    <data name="Model_Downloading" xml:space="preserve">
+  <data name="Model_Downloading" xml:space="preserve">
     <value>{0} indiriliyor… %{1}</value>
   </data>
-    <data name="Model_Installed" xml:space="preserve">
+  <data name="Model_Installed" xml:space="preserve">
     <value>{0} kuruldu</value>
   </data>
-    <data name="Model_DownloadFailed" xml:space="preserve">
+  <data name="Model_DownloadFailed" xml:space="preserve">
     <value>İndirme başarısız: {0}</value>
   </data>
-    <data name="Model_Removed" xml:space="preserve">
+  <data name="Model_Removed" xml:space="preserve">
     <value>{0} kaldırıldı</value>
   </data>
-    <data name="Model_DownloadEmpty" xml:space="preserve">
+  <data name="Model_DownloadEmpty" xml:space="preserve">
     <value>Model indirmesi kullanılabilir dosya döndürmedi.</value>
   </data>
-    <data name="Model_LoadFailed" xml:space="preserve">
+  <data name="Model_LoadFailed" xml:space="preserve">
     <value>Model yüklenemedi: {0}</value>
   </data>
-    <data name="Model_Loading" xml:space="preserve">
+  <data name="Model_Loading" xml:space="preserve">
     <value>{0} belleğe yükleniyor… (ilk yükleme uzun sürebilir)</value>
   </data>
-    <data name="Model_Ready" xml:space="preserve">
+  <data name="Model_Ready" xml:space="preserve">
     <value>{0} hazır — geçerli satırı yeniden yazmak için kısayola basın.</value>
   </data>
-    <data name="Model_ReadyOn" xml:space="preserve">
+  <data name="Model_ReadyOn" xml:space="preserve">
     <value>{0} şurada hazır: {1} — geçerli satırı yeniden yazmak için kısayola basın.</value>
   </data>
-    <data name="Model_NeedsDownload" xml:space="preserve">
+  <data name="Model_NeedsDownload" xml:space="preserve">
     <value>Sinirsel düzeltme açık, ama kurulu model yok. Yukarıdan bir tane indirin.</value>
   </data>
-    <data name="Model_CustomHint" xml:space="preserve">
+  <data name="Model_CustomHint" xml:space="preserve">
     <value>Burada yalnızca ONNX Runtime GenAI paketi olan modeller çalışır ve arama yalnızca onları bırakır. Yapıştırılan org/name de çalışır.</value>
   </data>
-    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+  <data name="Status_NeuralHotkeyActive" xml:space="preserve">
     <value>Sinirsel düzeltme açık — geçerli satırı yeniden yazmak için {0} tuşuna basın.</value>
   </data>
   <data name="Status_NeuralFallbackActive" xml:space="preserve">
     <value>Sinirsel düzeltme açık, ancak yüklü model yok — “{0}” bir model yüklenene kadar sözlükle düzeltir.</value>
   </data>
-    <data name="Diag_BufferChanged" xml:space="preserve">
+  <data name="Diag_BufferChanged" xml:space="preserve">
     <value>Sinirsel düzeltme iptal edildi — model çalışırken satır değişti («{0}»).</value>
   </data>
-    <data name="Model_RemoveFailed" xml:space="preserve">
+  <data name="Model_RemoveFailed" xml:space="preserve">
     <value>Model kaldırılamadı: {0}</value>
   </data>
-    <data name="Dict_Empty" xml:space="preserve">
+  <data name="Dict_Empty" xml:space="preserve">
     <value>Henüz sözlük yok — düzeltmelerin kullanabilmesi için yukarıdan bir dil ekleyin.</value>
   </data>
-    <data name="Action_Download" xml:space="preserve">
+  <data name="Action_Download" xml:space="preserve">
     <value>İndir</value>
   </data>
-    <data name="Diag_ImeActive" xml:space="preserve">
+  <data name="Diag_ImeActive" xml:space="preserve">
     <value>Kısayol: yok sayıldı — etkin giriş dili (Çince/Japonca/Korece) bir IME üzerinden yazıyor, bu yüzden Lapsus o metni tuş vuruşlarından yeniden oluşturamaz.</value>
   </data>
-    <data name="Diag_DeadKeyPending" xml:space="preserve">
+  <data name="Diag_DeadKeyPending" xml:space="preserve">
     <value>Kısayol: yok sayıldı — bir ölü tuş (vurgu işareti) hâlâ harfini bekliyor. Harfi yazın ya da ⌫ tuşuna basın, sonra yeniden deneyin.</value>
   </data>
-    <data name="Diag_SecureField" xml:space="preserve">
+  <data name="Diag_SecureField" xml:space="preserve">
     <value>Kısayol: yok sayıldı — burası bir parola alanı. Lapsus orada yazdıklarınızı asla tutmaz ve yeniden yazmaz.</value>
   </data>
-    <data name="SkipPasswords" xml:space="preserve">
+  <data name="SkipPasswords" xml:space="preserve">
     <value>Parola alanlarını atla</value>
   </data>
-    <data name="SkipPasswords_Hint" xml:space="preserve">
+  <data name="SkipPasswords_Hint" xml:space="preserve">
     <value>Parola alanları asla arabelleğe alınmaz. Tarayıcıda bu, onun erişilebilirlik motorunu açar.</value>
   </data>
-    <data name="Tab_General" xml:space="preserve">
+  <data name="Tab_General" xml:space="preserve">
     <value>Genel</value>
   </data>
-    <data name="Tab_Library" xml:space="preserve">
+  <data name="Tab_Library" xml:space="preserve">
     <value>Kitaplık</value>
   </data>
-    <data name="Tab_Ai" xml:space="preserve">
+  <data name="Tab_Ai" xml:space="preserve">
     <value>Yapay zekâ</value>
   </data>
-    <data name="Tab_Apps" xml:space="preserve">
+  <data name="Tab_Apps" xml:space="preserve">
     <value>Uygulamalar</value>
   </data>
   <data name="Tab_Hotkeys" xml:space="preserve">
     <value>Tuşlar</value>
   </data>
-    <data name="Excluded_Label" xml:space="preserve">
+  <data name="Excluded_Label" xml:space="preserve">
     <value>Dokunulmayacak kelimeler</value>
   </data>
-    <data name="Excluded_Hint" xml:space="preserve">
+  <data name="Excluded_Hint" xml:space="preserve">
     <value>Asla değiştirilmeyecek adlar, kullanıcı adları ve markalar.</value>
   </data>
-    <data name="Excluded_Placeholder" xml:space="preserve">
+  <data name="Excluded_Placeholder" xml:space="preserve">
     <value>kelime</value>
   </data>
-    <data name="Excluded_Empty" xml:space="preserve">
+  <data name="Excluded_Empty" xml:space="preserve">
     <value>Henüz istisna yok.</value>
   </data>
-    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+  <data name="Excluded_RemoveTooltip" xml:space="preserve">
     <value>Listeden kaldır</value>
   </data>
-    <data name="ExcludedApps_Label" xml:space="preserve">
+  <data name="ExcludedApps_Label" xml:space="preserve">
     <value>Atlanacak uygulamalar</value>
   </data>
-    <data name="ExcludedApps_Hint" xml:space="preserve">
+  <data name="ExcludedApps_Hint" xml:space="preserve">
     <value>Bunlarda Lapsus tamamen kapalıdır: ne arabellek ne de kısayol.</value>
   </data>
-    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+  <data name="ExcludedApps_Placeholder" xml:space="preserve">
     <value>işlem adı</value>
   </data>
-    <data name="ExcludedApps_Pick" xml:space="preserve">
+  <data name="ExcludedApps_Pick" xml:space="preserve">
     <value>Çalışan bir uygulama seçin</value>
   </data>
-    <data name="ExcludedApps_Empty" xml:space="preserve">
+  <data name="ExcludedApps_Empty" xml:space="preserve">
     <value>Atlanan uygulama yok.</value>
   </data>
-    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+  <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
     <value>Listeden kaldır</value>
   </data>
-    <data name="Diag_AppExcluded" xml:space="preserve">
+  <data name="Diag_AppExcluded" xml:space="preserve">
     <value>Kısayol: Lapsus {0} uygulamasına karışmıyor.</value>
   </data>
-    <data name="Model_DeviceLabel" xml:space="preserve">
+  <data name="Model_DeviceLabel" xml:space="preserve">
     <value>Modeli şurada çalıştır</value>
   </data>
-    <data name="Model_DeviceAuto" xml:space="preserve">
+  <data name="Model_DeviceAuto" xml:space="preserve">
     <value>Otomatik</value>
   </data>
-    <data name="Model_DeviceCpu" xml:space="preserve">
+  <data name="Model_DeviceCpu" xml:space="preserve">
     <value>İşlemci (CPU)</value>
   </data>
-    <data name="Model_DeviceGpu" xml:space="preserve">
+  <data name="Model_DeviceGpu" xml:space="preserve">
     <value>Ekran kartı (GPU)</value>
   </data>
-    <data name="Model_DeviceNpu" xml:space="preserve">
+  <data name="Model_DeviceNpu" xml:space="preserve">
     <value>Sinirsel hızlandırıcı (NPU)</value>
   </data>
-    <data name="Model_DeviceHint" xml:space="preserve">
+  <data name="Model_DeviceHint" xml:space="preserve">
     <value>Burada kullanılabilir: {0}. Başka bir aygıt için derlenmiş paket de çalışır — işlemcide.</value>
   </data>
-    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+  <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
     <value>Burada desteklenen bir hızlandırıcı yok, bu yüzden model işlemcide çalışır.</value>
   </data>
-    <data name="Model_SearchPlaceholder" xml:space="preserve">
-    <value>Hugging Face&apos;te arayın veya org/name yapıştırın</value>
+  <data name="Model_SearchPlaceholder" xml:space="preserve">
+    <value>Hugging Face'te arayın veya org/name yapıştırın</value>
   </data>
-    <data name="Model_SearchLabel" xml:space="preserve">
+  <data name="Model_SearchLabel" xml:space="preserve">
     <value>Ara</value>
   </data>
-    <data name="Model_SearchTooltip" xml:space="preserve">
-    <value>Hugging Face&apos;te ONNX Runtime GenAI paketi sunan modelleri bulun</value>
+  <data name="Model_SearchTooltip" xml:space="preserve">
+    <value>Hugging Face'te ONNX Runtime GenAI paketi sunan modelleri bulun</value>
   </data>
-    <data name="Model_FoundPlaceholder" xml:space="preserve">
+  <data name="Model_FoundPlaceholder" xml:space="preserve">
     <value>Arama sonuçları</value>
   </data>
-    <data name="Model_Searching" xml:space="preserve">
-    <value>Hugging Face&apos;te aranıyor…</value>
+  <data name="Model_Searching" xml:space="preserve">
+    <value>Hugging Face'te aranıyor…</value>
   </data>
-    <data name="Model_SearchEmpty" xml:space="preserve">
+  <data name="Model_SearchEmpty" xml:space="preserve">
     <value>ONNX Runtime GenAI paketi sunan bir şey bulunamadı.</value>
   </data>
-    <data name="Model_SearchFound" xml:space="preserve">
+  <data name="Model_SearchFound" xml:space="preserve">
     <value>Bulundu: {0}.</value>
   </data>
-    <data name="Model_SearchFailed" xml:space="preserve">
+  <data name="Model_SearchFailed" xml:space="preserve">
     <value>Arama başarısız: {0}</value>
   </data>
-    <data name="Tab_License" xml:space="preserve">
+  <data name="Tab_License" xml:space="preserve">
     <value>Lisans</value>
   </data>
-    <data name="Lic_Free_Title" xml:space="preserve">
+  <data name="Lic_Free_Title" xml:space="preserve">
     <value>Ücretsiz — kişisel kullanım</value>
   </data>
-    <data name="Lic_Free_Hint" xml:space="preserve">
+  <data name="Lic_Free_Hint" xml:space="preserve">
     <value>Serbest çalışanlar dahil özel kişiler için ücretsiz. Hiçbir şey kilitli değil — lisans şirket içi kullanımı kapsar.</value>
   </data>
-    <data name="Lic_Status_Pro" xml:space="preserve">
+  <data name="Lic_Status_Pro" xml:space="preserve">
     <value>Pro · {0}</value>
   </data>
-    <data name="Lic_Status_Business" xml:space="preserve">
+  <data name="Lic_Status_Business" xml:space="preserve">
     <value>Business · {0} · {1} kullanıcı</value>
   </data>
-    <data name="Lic_Expires" xml:space="preserve">
+  <data name="Lic_Expires" xml:space="preserve">
     <value>{0} tarihine kadar geçerli</value>
   </data>
-    <data name="Lic_NoExpiry" xml:space="preserve">
+  <data name="Lic_NoExpiry" xml:space="preserve">
     <value>Son kullanma tarihi yok</value>
   </data>
-    <data name="Lic_Key_Label" xml:space="preserve">
+  <data name="Lic_Key_Label" xml:space="preserve">
     <value>Lisans anahtarı</value>
   </data>
-    <data name="Lic_Key_Watermark" xml:space="preserve">
+  <data name="Lic_Key_Watermark" xml:space="preserve">
     <value>Satın alma e-postasındaki anahtarı yapıştırın</value>
   </data>
-    <data name="Lic_Apply" xml:space="preserve">
+  <data name="Lic_Apply" xml:space="preserve">
     <value>Etkinleştir</value>
   </data>
-    <data name="Lic_Remove" xml:space="preserve">
+  <data name="Lic_Remove" xml:space="preserve">
     <value>Kaldır</value>
   </data>
-    <data name="Lic_Buy_Hint" xml:space="preserve">
+  <data name="Lic_Buy_Hint" xml:space="preserve">
     <value>Pro tek bir özel kişi içindir. Business şirkette kullanıcı başına lisanslanır.</value>
   </data>
-    <data name="Lic_BuyPro" xml:space="preserve">
+  <data name="Lic_BuyPro" xml:space="preserve">
     <value>Pro satın al</value>
   </data>
-    <data name="Lic_BuyBusiness" xml:space="preserve">
+  <data name="Lic_BuyBusiness" xml:space="preserve">
     <value>Ticari lisans</value>
   </data>
-    <data name="Lic_Err_Malformed" xml:space="preserve">
+  <data name="Lic_Err_Malformed" xml:space="preserve">
     <value>Bu bir Lapsus anahtarına benzemiyor. Satırın tamamının kopyalandığını kontrol edin.</value>
   </data>
-    <data name="Lic_Err_Signature" xml:space="preserve">
+  <data name="Lic_Err_Signature" xml:space="preserve">
     <value>Bu anahtar bu sürüm için verilmemiş.</value>
   </data>
-    <data name="Lic_Err_Expired" xml:space="preserve">
+  <data name="Lic_Err_Expired" xml:space="preserve">
     <value>Bu anahtarın süresi {0} tarihinde doldu.</value>
   </data>
-    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+  <data name="Lic_Err_NotConfigured" xml:space="preserve">
     <value>Bu sürüm lisans anahtarlarını doğrulayamıyor.</value>
   </data>
-    <data name="Lic_Ask_Terms" xml:space="preserve">
+  <data name="Lic_Ask_Terms" xml:space="preserve">
     <value>Kimin ödemesi gerekir?</value>
   </data>
-    <data name="Lic_Free_Managed" xml:space="preserve">
+  <data name="Lic_Free_Managed" xml:space="preserve">
     <value>Bu bilgisayarı bir kuruluş yönetiyor — lisans gerekli.</value>
   </data>
-    <data name="LicRem_Title" xml:space="preserve">
+  <data name="LicRem_Title" xml:space="preserve">
     <value>Lapsus lisansı</value>
   </data>
-    <data name="LicRem_TrialHeadline" xml:space="preserve">
+  <data name="LicRem_TrialHeadline" xml:space="preserve">
     <value>Şirkette Lapsus kullanıcı başına lisanslanır. Denemek için {0} gün kaldı.</value>
   </data>
-    <data name="LicRem_DueHeadline" xml:space="preserve">
+  <data name="LicRem_DueHeadline" xml:space="preserve">
     <value>Bu bilgisayarda Lapsus lisans gerektiriyor.</value>
   </data>
-    <data name="LicRem_Body" xml:space="preserve">
+  <data name="LicRem_Body" xml:space="preserve">
     <value>Bu bilgisayar bir kuruluş tarafından yönetiliyor (etki alanı, Entra ID veya MDM sunucusu). Serbest çalışanlar dahil özel kişiler için Lapsus ücretsizdir; şirket içi kullanım kullanıcı başına ücretlidir.</value>
   </data>
-    <data name="LicRem_Why" xml:space="preserve">
+  <data name="LicRem_Why" xml:space="preserve">
     <value>Hiçbir şey kapatılmaz ve hiçbir yere bir şey gönderilmez — denetim yalnızca bu makinede çalışır.</value>
   </data>
-    <data name="LicRem_HaveKey" xml:space="preserve">
+  <data name="LicRem_HaveKey" xml:space="preserve">
     <value>Anahtarım var</value>
   </data>
-    <data name="LicRem_Later" xml:space="preserve">
+  <data name="LicRem_Later" xml:space="preserve">
     <value>Daha sonra</value>
   </data>
-    <data name="Lic_Err_Seats" xml:space="preserve">
+  <data name="Lic_Err_Seats" xml:space="preserve">
     <value>Bu lisanstaki tüm kullanıcı hakları dolu. Bir kullanıcı hakkını bu bilgisayara taşımak ya da yenisini almak için {0} adresine yazın.</value>
   </data>
-    <data name="Lic_Err_Offline" xml:space="preserve">
+  <data name="Lic_Err_Offline" xml:space="preserve">
     <value>Lisans sunucusuna ulaşılamadı. Anahtar kaydedildi — etkinleştirme yeniden denenecek.</value>
   </data>
-    <data name="Lic_Err_NoMachine" xml:space="preserve">
+  <data name="Lic_Err_NoMachine" xml:space="preserve">
     <value>Bu bilgisayar tanımlanamadı, bu yüzden lisans bir şeye bağlanamıyor.</value>
   </data>
-    <data name="Lic_Activating" xml:space="preserve">
+  <data name="Lic_Activating" xml:space="preserve">
     <value>Etkinleştiriliyor…</value>
   </data>
-    <data name="About_Title" xml:space="preserve">
+  <data name="About_Title" xml:space="preserve">
     <value>Lapsus Hakkında</value>
   </data>
-    <data name="About_Tooltip" xml:space="preserve">
+  <data name="About_Tooltip" xml:space="preserve">
     <value>Lapsus Hakkında</value>
   </data>
-    <data name="About_License" xml:space="preserve">
+  <data name="About_License" xml:space="preserve">
     <value>Lisans</value>
   </data>
-    <data name="About_License_Text" xml:space="preserve">
+  <data name="About_License_Text" xml:space="preserve">
     <value>Bireyler için ücretsiz. Şirketler kullanıcı başına öder. Hiçbir şey kilitlenmez ve hiçbir şeyin süresi dolmaz.</value>
   </data>
-    <data name="About_Website" xml:space="preserve">
+  <data name="About_Website" xml:space="preserve">
     <value>Web sitesi</value>
   </data>
-    <data name="About_Donate" xml:space="preserve">
+  <data name="About_Donate" xml:space="preserve">
     <value>Geliştirmeyi destekleyin</value>
   </data>
-    <data name="About_Donate_Hint" xml:space="preserve">
+  <data name="About_Donate_Hint" xml:space="preserve">
     <value>Lapsus sizin için ücretsiz; reklam ve takip yok. Size zaman kazandırıyorsa katkıda bulunabilirsiniz.</value>
   </data>
-    <data name="About_Donate_Button" xml:space="preserve">
+  <data name="About_Donate_Button" xml:space="preserve">
     <value>Bağış yap</value>
   </data>
-    <data name="About_OpenSource" xml:space="preserve">
+  <data name="About_OpenSource" xml:space="preserve">
     <value>Açık kaynak lisansları</value>
   </data>
-    <data name="About_Tab_Components" xml:space="preserve">
+  <data name="About_Tab_Components" xml:space="preserve">
     <value>Bileşenler</value>
   </data>
-    <data name="About_Tab_Dictionaries" xml:space="preserve">
+  <data name="About_Tab_Dictionaries" xml:space="preserve">
     <value>Sözlükler</value>
   </data>
-    <data name="About_Dictionaries_Hint" xml:space="preserve">
+  <data name="About_Dictionaries_Hint" xml:space="preserve">
     <value>Lapsus'a dahil değildir: her biri yalnızca dilini eklediğinizde indirilir ve yayıncısının lisansını korur.</value>
   </data>
-    <data name="About_Dictionaries_All" xml:space="preserve">
+  <data name="About_Dictionaries_All" xml:space="preserve">
     <value>Tüm kaynaklar ve yazarlar</value>
   </data>
-    <data name="About_Components_Hint" xml:space="preserve">
+  <data name="About_Components_Hint" xml:space="preserve">
     <value>Lapsus içinde gelir, her biri kendi lisansıyla.</value>
   </data>
-    <data name="About_LicenseText" xml:space="preserve">
+  <data name="About_LicenseText" xml:space="preserve">
     <value>Lisans metni</value>
   </data>
-    <data name="Store_Title_Trial" xml:space="preserve">
+  <data name="Store_Title_Trial" xml:space="preserve">
     <value>Lapsus Plus denemesi: {0} gün kaldı</value>
   </data>
-    <data name="Store_Title_Subscription" xml:space="preserve">
+  <data name="Store_Title_Subscription" xml:space="preserve">
     <value>Lapsus Plus: abonelik etkin</value>
   </data>
-    <data name="Store_Title_Lifetime" xml:space="preserve">
+  <data name="Store_Title_Lifetime" xml:space="preserve">
     <value>Lapsus Plus: ömür boyu satın alındı</value>
   </data>
-    <data name="Store_Title_Free" xml:space="preserve">
+  <data name="Store_Title_Free" xml:space="preserve">
     <value>Lapsus Free</value>
   </data>
-    <data name="Store_Detail" xml:space="preserve">
+  <data name="Store_Detail" xml:space="preserve">
     <value>Sinirsel düzeltme ve sonradan eklenecek özellikler dışında her şey sonsuza dek ücretsizdir. Lapsus Plus bunları ekler.</value>
   </data>
-    <data name="Store_Renews" xml:space="preserve">
+  <data name="Store_Renews" xml:space="preserve">
     <value>{0} tarihinde yenilenir.</value>
   </data>
-    <data name="Store_Yearly" xml:space="preserve">
+  <data name="Store_Yearly" xml:space="preserve">
     <value>Yıllık, {0}</value>
   </data>
-    <data name="Store_YearlyTrial" xml:space="preserve">
+  <data name="Store_YearlyTrial" xml:space="preserve">
     <value>{0} ücretsiz, ardından yıllık {1}</value>
   </data>
-    <data name="Store_TrialDetail" xml:space="preserve">
+  <data name="Store_TrialDetail" xml:space="preserve">
     <value>{0} tarihine kadar ücretsiz. Ardından, en az 24 saat önce App Store hesap ayarlarınızdan iptal etmediğiniz sürece yıllık abonelik başlar.</value>
   </data>
-    <data name="Store_Lifetime" xml:space="preserve">
+  <data name="Store_Lifetime" xml:space="preserve">
     <value>Ömür boyu, {0}</value>
   </data>
-    <data name="Store_Restore" xml:space="preserve">
+  <data name="Store_Restore" xml:space="preserve">
     <value>Satın alımları geri yükle</value>
   </data>
-    <data name="Store_Manage" xml:space="preserve">
+  <data name="Store_Manage" xml:space="preserve">
     <value>Aboneliği yönet</value>
   </data>
-    <data name="Store_Disclosure" xml:space="preserve">
+  <data name="Store_Disclosure" xml:space="preserve">
     <value>Yıllık abonelik, dönem bitmeden en az 24 saat önce App Store hesap ayarlarınızdan iptal etmediğiniz sürece otomatik olarak yenilenir. Ödeme Apple Account hesabınızdan alınır.</value>
   </data>
-    <data name="Store_Terms" xml:space="preserve">
+  <data name="Store_Terms" xml:space="preserve">
     <value>Kullanım koşulları</value>
   </data>
-    <data name="Store_Privacy" xml:space="preserve">
+  <data name="Store_Privacy" xml:space="preserve">
     <value>Gizlilik politikası</value>
   </data>
-    <data name="Store_Unavailable" xml:space="preserve">
+  <data name="Store_Unavailable" xml:space="preserve">
     <value>App Store şu anda erişilemiyor. Daha sonra yeniden deneyin.</value>
   </data>
-    <data name="Store_Pending" xml:space="preserve">
+  <data name="Store_Pending" xml:space="preserve">
     <value>Satın alma onay bekliyor.</value>
   </data>
-    <data name="Store_Failed" xml:space="preserve">
+  <data name="Store_Failed" xml:space="preserve">
     <value>Satın alma tamamlanamadı: {0}</value>
   </data>
-    <data name="Store_TrialEnded" xml:space="preserve">
+  <data name="Store_TrialEnded" xml:space="preserve">
     <value>Lapsus Plus denemesi sona erdi, bu yüzden sinirsel düzeltme kapalı. Geri kalan her şey çalışmaya devam ediyor.</value>
   </data>
-    <data name="Neural_Locked" xml:space="preserve">
+  <data name="Neural_Locked" xml:space="preserve">
     <value>Sinirsel düzeltme Lapsus Plus'ın bir parçasıdır.</value>
   </data>
-    <data name="Neural_Locked_Button" xml:space="preserve">
+  <data name="Neural_Locked_Button" xml:space="preserve">
     <value>Lapsus Plus hakkında</value>
   </data>
-    <data name="Onb_Title" xml:space="preserve">
+  <data name="Onb_Title" xml:space="preserve">
     <value>Lapsus'a hoş geldiniz</value>
   </data>
-    <data name="Onb_Intro" xml:space="preserve">
+  <data name="Onb_Intro" xml:space="preserve">
     <value>Lapsus, yanlış klavye düzeninde yazılan metni her uygulamada düzeltir. Bunun için bastığınız tuşları görmesi gerekir.</value>
   </data>
-    <data name="Onb_Local" xml:space="preserve">
+  <data name="Onb_Local" xml:space="preserve">
     <value>Her şey bu Mac'te olur. Yazdıklarınız hiçbir yere gönderilmez ve kaydedilmez.</value>
   </data>
-    <data name="Onb_Passwords" xml:space="preserve">
+  <data name="Onb_Passwords" xml:space="preserve">
     <value>Parola alanlarına dokunulmaz: birine yazarken macOS tuşları Lapsus dahil diğer uygulamalardan gizler.</value>
   </data>
-    <data name="Onb_Permissions" xml:space="preserve">
+  <data name="Onb_Permissions" xml:space="preserve">
     <value>Aşağıdaki her izni verin. Düğme macOS penceresini gösterir ya da Sistem Ayarları içinde doğru listeyi açar; orada Lapsus'u açın. Durum kendiliğinden yeşile döner.</value>
   </data>
-    <data name="Onb_Continue" xml:space="preserve">
+  <data name="Onb_Continue" xml:space="preserve">
     <value>Devam</value>
   </data>
-    <data name="Tab_Plus" xml:space="preserve">
+  <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
-    <data name="Store_Retry" xml:space="preserve">
+  <data name="Store_Retry" xml:space="preserve">
     <value>Tekrar dene</value>
   </data>
-    <data name="Store_RestoreFailed" xml:space="preserve">
+  <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Satın alımlar geri yüklenemedi: {0}</value>
   </data>
-    <data name="Voice_Toggle" xml:space="preserve">
+  <data name="Voice_Toggle" xml:space="preserve">
     <value>Sesle yazma</value>
   </data>
-    <data name="Voice_Hint" xml:space="preserve">
+  <data name="Voice_Hint" xml:space="preserve">
     <value>Yazmak yerine konuşun: Lapsus söylediklerinizi imlecin olduğu yere yazar. Konuşma bu bilgisayarda tanınır, ses hiçbir yerde saklanmaz.</value>
   </data>
-    <data name="Voice_ModelMissing" xml:space="preserve">
+  <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Konuşma modeli henüz indirilmedi ({0} MB).</value>
   </data>
-    <data name="Voice_ModelReady" xml:space="preserve">
+  <data name="Voice_ModelReady" xml:space="preserve">
     <value>Konuşma modeli: {0}.</value>
   </data>
-    <data name="Voice_DownloadFailed" xml:space="preserve">
+  <data name="Voice_DownloadFailed" xml:space="preserve">
     <value>İndirme başarısız: {0}</value>
   </data>
-    <data name="Diag_DictationNoModel" xml:space="preserve">
+  <data name="Diag_DictationNoModel" xml:space="preserve">
     <value>Sesle yazma için konuşma modeli gerekir: Ayarlar → Yapay zekâ bölümünden indirin.</value>
   </data>
-    <data name="Diag_MicUnavailable" xml:space="preserve">
+  <data name="Diag_MicUnavailable" xml:space="preserve">
     <value>Mikrofon kullanılamıyor: {0}</value>
   </data>
-    <data name="Diag_MicSilent" xml:space="preserve">
-    <value>Mikrofon yalnızca sessizlik kaydetti. Açık olduğunu ve Windows&apos;un uygulamaların onu kullanmasına izin verdiğini kontrol edin.</value>
+  <data name="Diag_MicSilent" xml:space="preserve">
+    <value>Mikrofon yalnızca sessizlik kaydetti. Açık olduğunu ve Windows'un uygulamaların onu kullanmasına izin verdiğini kontrol edin.</value>
   </data>
-    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+  <data name="Diag_DictationNothingHeard" xml:space="preserve">
     <value>Hiçbir şey duyulmadı.</value>
   </data>
-    <data name="Diag_DictationFailed" xml:space="preserve">
+  <data name="Diag_DictationFailed" xml:space="preserve">
     <value>Sesle yazma başarısız oldu: {0}</value>
   </data>
-    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+  <data name="Diag_DictationFocusChanged" xml:space="preserve">
     <value>Odak başka bir pencereye geçti ({0}), bu yüzden metin panoya kopyalandı.</value>
   </data>
-    <data name="Dictation_HotkeyHint" xml:space="preserve">
+  <data name="Dictation_HotkeyHint" xml:space="preserve">
     <value>Konuşurken basılı tutun, metni yazdırmak için bırakın; kısa basış bir sonraki basışa kadar eller serbest kaydeder. Esc iptal eder. Diğer ayarlar Ses sekmesindedir.</value>
   </data>
-    <data name="Voice_ModelHint" xml:space="preserve">
+  <data name="Voice_ModelHint" xml:space="preserve">
     <value>Parakeet TDT v3, ekran kartı olmadan hızlı seçenektir (cümle başına yaklaşık 0,3 sn), ancak yalnızca 25 Avrupa dilini bilir ve Türkçe bunların arasında değildir. large-v3-turbo tüm dilleri bilir ve ekran kartıyla en iyi seçimdir; q5 aynı turbo'nun daha küçük indirmesidir. large-v3 biraz daha doğrudur ama ekran kartı ister. Whisper small en küçük indirmedir. Parakeet TDT v2 aynı hızdadır ama yalnızca İngilizce içindir ve İngilizcede daha doğrudur. ivrit.ai'nin İbranice turbo modeli İbranicede daha doğrudur ama her cümleyi İbranice olarak okur. Gürcüce ve Ermenice için NVIDIA FastConformer: Whisper bu dilleri neredeyse bilmez; bunlar hızlı ve doğrudur, her biri yalnızca kendi dili içindir.</value>
   </data>
   <data name="Voice_LayoutModelReady" xml:space="preserve">
@@ -766,37 +766,37 @@
   <data name="Voice_LayoutModelMissing" xml:space="preserve">
     <value>{0} düzeni için başka bir model gerekiyor: {1}</value>
   </data>
-    <data name="Voice_LanguageLabel" xml:space="preserve">
+  <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Dil</value>
   </data>
-    <data name="Voice_LanguageAuto" xml:space="preserve">
+  <data name="Voice_LanguageAuto" xml:space="preserve">
     <value>Klavye düzenine göre</value>
   </data>
-    <data name="Voice_LanguageHint" xml:space="preserve">
+  <data name="Voice_LanguageHint" xml:space="preserve">
     <value>Etkin düzenin dili ya da konuşma açıkça o dildeyse düzenlerinizin dillerinden biri.</value>
   </data>
-    <data name="Voice_MicLabel" xml:space="preserve">
+  <data name="Voice_MicLabel" xml:space="preserve">
     <value>Mikrofon</value>
   </data>
-    <data name="Voice_MicDefault" xml:space="preserve">
+  <data name="Voice_MicDefault" xml:space="preserve">
     <value>Sistem varsayılanı</value>
   </data>
-    <data name="Voice_UnloadLabel" xml:space="preserve">
+  <data name="Voice_UnloadLabel" xml:space="preserve">
     <value>Belleği boşalt</value>
   </data>
-    <data name="Voice_UnloadHint" xml:space="preserve">
+  <data name="Voice_UnloadHint" xml:space="preserve">
     <value>Yüklü konuşma modeli yaklaşık {0} MB bellek kaplar. Boşaltıldıktan sonra sonraki dikte onu yeniden yükler; kayıt yine de hemen başlar.</value>
   </data>
-    <data name="Voice_UnloadImmediately" xml:space="preserve">
+  <data name="Voice_UnloadImmediately" xml:space="preserve">
     <value>Her dikteden sonra</value>
   </data>
-    <data name="Voice_UnloadMinutes" xml:space="preserve">
+  <data name="Voice_UnloadMinutes" xml:space="preserve">
     <value>{0} dk sonra</value>
   </data>
-    <data name="Voice_UnloadHour" xml:space="preserve">
+  <data name="Voice_UnloadHour" xml:space="preserve">
     <value>1 saat sonra</value>
   </data>
-    <data name="Voice_UnloadNever" xml:space="preserve">
+  <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Asla (başlangıçta yükle)</value>
   </data>
   <data name="Voice_DeviceAuto" xml:space="preserve">
@@ -805,214 +805,214 @@
   <data name="Voice_DeviceNow" xml:space="preserve">
     <value>Şu anda çalıştığı yer: {0}</value>
   </data>
-    <data name="Voice_KeepLatin" xml:space="preserve">
+  <data name="Voice_KeepLatin" xml:space="preserve">
     <value>İngilizce terimler Latin harfleriyle</value>
   </data>
-    <data name="Voice_KeepLatinHint" xml:space="preserve">
+  <data name="Voice_KeepLatinHint" xml:space="preserve">
     <value>pull request veya GitHub gibi terimler İngilizcedeki gibi yazılır. Dilinize yerleşmiş sözcükler olduğu gibi kalır. Yapay zekâ modeli açıkken, tanıyıcının yanlış duyduğu terimleri de tartar.</value>
   </data>
-    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+  <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Sesle noktalama</value>
   </data>
-    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+  <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
     <value>"comma", "period" veya "question mark" deyin, işaret yazılsın. İngilizce, Rusça, Ukraynaca ve Belarusçada çalışır.</value>
   </data>
-    <data name="Voice_GlossaryLabel" xml:space="preserve">
+  <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Sözlük</value>
   </data>
-    <data name="Voice_GlossaryHint" xml:space="preserve">
+  <data name="Voice_GlossaryHint" xml:space="preserve">
     <value>Doğru yazılması gereken adlar ve terimler, her satıra bir tane, yazılması gerektiği gibi. Bir terim alışılmadık okunuyorsa | işaretinden sonra nasıl okunduğunu ekleyin. Dikteden hemen sonra Latin harfleriyle yeniden yazdığınız yanlış duyulmuş bir kelime buraya kendiliğinden eklenir.</value>
   </data>
-    <data name="Voice_Locked" xml:space="preserve">
-    <value>Sesle yazma, Lapsus Plus&apos;ın bir parçasıdır.</value>
+  <data name="Voice_Locked" xml:space="preserve">
+    <value>Sesle yazma, Lapsus Plus'ın bir parçasıdır.</value>
   </data>
-    <data name="Diag_MicDenied" xml:space="preserve">
-    <value>Lapsus&apos;un mikrofonu kullanma izni yok. Sistem Ayarları → Gizlilik ve Güvenlik → Mikrofon bölümünden izin verin.</value>
+  <data name="Diag_MicDenied" xml:space="preserve">
+    <value>Lapsus'un mikrofonu kullanma izni yok. Sistem Ayarları → Gizlilik ve Güvenlik → Mikrofon bölümünden izin verin.</value>
   </data>
-    <data name="Diag_MicAsk" xml:space="preserve">
-    <value>Açılan pencerede Lapsus&apos;un mikrofonu kullanmasına izin verin ve sesle yazmayı yeniden başlatın.</value>
+  <data name="Diag_MicAsk" xml:space="preserve">
+    <value>Açılan pencerede Lapsus'un mikrofonu kullanmasına izin verin ve sesle yazmayı yeniden başlatın.</value>
   </data>
-    <data name="Tab_Voice" xml:space="preserve">
+  <data name="Tab_Voice" xml:space="preserve">
     <value>Ses</value>
   </data>
-    <data name="Voice_ListeningHint" xml:space="preserve">
+  <data name="Voice_ListeningHint" xml:space="preserve">
     <value>{0} — bitti · Esc — iptal</value>
   </data>
-    <data name="Voice_TryIt" xml:space="preserve">
+  <data name="Voice_TryIt" xml:space="preserve">
     <value>Herhangi bir alana tıklayın, {0} tuşunu basılı tutup konuşun; bıraktığınızda metin imlecin olduğu yerde belirir. {0} tuşuna kısa basmak, tekrar basana kadar eller serbest kaydeder. Esc iptal eder.</value>
   </data>
-    <data name="Voice_NoHotkey" xml:space="preserve">
+  <data name="Voice_NoHotkey" xml:space="preserve">
     <value>kısayol yok — Tuşlar sekmesinden birini seçin</value>
   </data>
-    <data name="Voice_UsageTitle" xml:space="preserve">
+  <data name="Voice_UsageTitle" xml:space="preserve">
     <value>Nasıl kullanılır</value>
   </data>
-    <data name="Voice_ShowButton" xml:space="preserve">
+  <data name="Voice_ShowButton" xml:space="preserve">
     <value>Ekranda mikrofon düğmesi</value>
   </data>
-    <data name="Voice_ShowButtonHint" xml:space="preserve">
+  <data name="Voice_ShowButtonHint" xml:space="preserve">
     <value>Ekranın altında küçük bir düğme: tıklamak kaydı başlatır veya bitirir, üzerine gelince kısayol görünür.</value>
   </data>
-    <data name="Voice_Sounds" xml:space="preserve">
+  <data name="Voice_Sounds" xml:space="preserve">
     <value>Kayıt başlarken ve biterken ses</value>
   </data>
-    <data name="Voice_ButtonTip" xml:space="preserve">
+  <data name="Voice_ButtonTip" xml:space="preserve">
     <value>Sesle yazma: tıklayın veya {0}</value>
   </data>
-    <data name="Voice_SectionMain" xml:space="preserve">
+  <data name="Voice_SectionMain" xml:space="preserve">
     <value>Genel</value>
   </data>
-    <data name="Voice_SectionRecognition" xml:space="preserve">
+  <data name="Voice_SectionRecognition" xml:space="preserve">
     <value>Tanıma</value>
   </data>
-    <data name="Voice_TryItTap" xml:space="preserve">
+  <data name="Voice_TryItTap" xml:space="preserve">
     <value>Herhangi bir alana tıklayın, {0} tuşuna basıp konuşun; {0} tuşuna yeniden basınca metin imlecin olduğu yerde belirir. Esc iptal eder.</value>
   </data>
-    <data name="Backup_Label" xml:space="preserve">
+  <data name="Backup_Label" xml:space="preserve">
     <value>Ayarların yedeği</value>
   </data>
-    <data name="Backup_Hint" xml:space="preserve">
+  <data name="Backup_Hint" xml:space="preserve">
     <value>Ayarlarınızı bir dosyaya kaydedin veya başka bir bilgisayarda yükleyin. Lisans anahtarı, sözlükler ve modeller yerinde kalır.</value>
   </data>
-    <data name="Backup_Export" xml:space="preserve">
+  <data name="Backup_Export" xml:space="preserve">
     <value>Dışa aktar…</value>
   </data>
-    <data name="Backup_Import" xml:space="preserve">
+  <data name="Backup_Import" xml:space="preserve">
     <value>İçe aktar…</value>
   </data>
-    <data name="Backup_Exported" xml:space="preserve">
+  <data name="Backup_Exported" xml:space="preserve">
     <value>Ayarlar dışa aktarıldı.</value>
   </data>
-    <data name="Backup_Imported" xml:space="preserve">
+  <data name="Backup_Imported" xml:space="preserve">
     <value>Ayarlar içe aktarıldı. Uygulanmaları için Lapsus’tan çıkıp yeniden başlatın.</value>
   </data>
-    <data name="Backup_ExportFailed" xml:space="preserve">
+  <data name="Backup_ExportFailed" xml:space="preserve">
     <value>Dosya yazılamadı.</value>
   </data>
-    <data name="Backup_ImportFailed" xml:space="preserve">
+  <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Bu bir Lapsus ayar dosyası değil.</value>
   </data>
-    <data name="Dict_Suggest" xml:space="preserve">
+  <data name="Dict_Suggest" xml:space="preserve">
     <value>Bu klavye düzenlerinin henüz sözlüğü yok: {0}.</value>
   </data>
-    <data name="Dict_SuggestAdd" xml:space="preserve">
+  <data name="Dict_SuggestAdd" xml:space="preserve">
     <value>İndir</value>
   </data>
-    <data name="Notify_DictMissingTitle" xml:space="preserve">
+  <data name="Notify_DictMissingTitle" xml:space="preserve">
     <value>Bir düzenin sözlüğü yok</value>
   </data>
-    <data name="Notify_DictMissingBody" xml:space="preserve">
+  <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: indirmek için Ayarlar → Kitaplık bölümünü açın.</value>
   </data>
-    <data name="AutoFixSignal" xml:space="preserve">
+  <data name="AutoFixSignal" xml:space="preserve">
     <value>Bir sözcüğün otomatik düzeltildiği yeri göster</value>
   </data>
-    <data name="AutoFixSignal_Hint" xml:space="preserve">
+  <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Düzen etiketi imlecin yanında bir an için mavi renkte görünür.</value>
   </data>
-    <data name="Stats_Label" xml:space="preserve">
+  <data name="Stats_Label" xml:space="preserve">
     <value>Lapsus neleri düzeltti</value>
   </data>
-    <data name="Stats_Week" xml:space="preserve">
+  <data name="Stats_Week" xml:space="preserve">
     <value>Bu hafta</value>
   </data>
-    <data name="Stats_Layout" xml:space="preserve">
+  <data name="Stats_Layout" xml:space="preserve">
     <value>Yanlış düzen</value>
   </data>
-    <data name="Stats_Typos" xml:space="preserve">
+  <data name="Stats_Typos" xml:space="preserve">
     <value>Yazım hatası</value>
   </data>
-    <data name="Stats_Since" xml:space="preserve">
+  <data name="Stats_Since" xml:space="preserve">
     <value>Kurulumdan beri</value>
   </data>
-    <data name="Stats_Privacy" xml:space="preserve">
+  <data name="Stats_Privacy" xml:space="preserve">
     <value>Yalnızca sayılar saklanır, bu bilgisayarda.</value>
   </data>
-    <data name="Onb_What" xml:space="preserve">
+  <data name="Onb_What" xml:space="preserve">
     <value>Bir cümleye yanlış klavye düzeninde başlarsınız, tek bir tuşa basarsınız ve yeniden yazmadan yerinde düzeltilir. Yazım hataları da aynı şekilde düzeltilir.</value>
   </data>
-    <data name="Onb_Step" xml:space="preserve">
+  <data name="Onb_Step" xml:space="preserve">
     <value>Adım {0} / {1}</value>
   </data>
-    <data name="Onb_Next" xml:space="preserve">
+  <data name="Onb_Next" xml:space="preserve">
     <value>İleri</value>
   </data>
-    <data name="Onb_Back" xml:space="preserve">
+  <data name="Onb_Back" xml:space="preserve">
     <value>Geri</value>
   </data>
-    <data name="Onb_Done" xml:space="preserve">
+  <data name="Onb_Done" xml:space="preserve">
     <value>Bitti</value>
   </data>
-    <data name="Onb_Privacy_Title" xml:space="preserve">
+  <data name="Onb_Privacy_Title" xml:space="preserve">
     <value>Lapsus neyi görür</value>
   </data>
-    <data name="Onb_Dict_Title" xml:space="preserve">
+  <data name="Onb_Dict_Title" xml:space="preserve">
     <value>Dilleriniz için sözcük listeleri</value>
   </data>
-    <data name="Onb_Dict_Body" xml:space="preserve">
+  <data name="Onb_Dict_Body" xml:space="preserve">
     <value>Lapsus, gerçek bir sözcüğü yanlış yazılmış olandan her dilin sözcük listesiyle ayırır. Liste bir kez ve yalnızca siz istediğinizde indirilir.</value>
   </data>
-    <data name="Onb_Dict_Ready" xml:space="preserve">
+  <data name="Onb_Dict_Ready" xml:space="preserve">
     <value>Bu klavyedeki her düzenin sözcük listesi zaten var.</value>
   </data>
-    <data name="Onb_Try_Title" xml:space="preserve">
+  <data name="Onb_Try_Title" xml:space="preserve">
     <value>Deneyin</value>
   </data>
-    <data name="Onb_Try_Body" xml:space="preserve">
+  <data name="Onb_Try_Body" xml:space="preserve">
     <value>Aşağıdaki alana tıklayın, {0} yazın (tam olarak böyle) ve {1} tuşuna basın. Sonraki okuma için yeniden, yazdığınızı geri almak için bir kez daha basın.</value>
   </data>
-    <data name="Onb_Options_Title" xml:space="preserve">
+  <data name="Onb_Options_Title" xml:space="preserve">
     <value>Neler kendiliğinden olsun</value>
   </data>
-    <data name="Onb_Options_Body" xml:space="preserve">
+  <data name="Onb_Options_Body" xml:space="preserve">
     <value>Kısayol her zaman çalışır. Bu anahtarlar, Boşluk tuşuna bastığınız anda sözcüğü düzeltir; hemen ardından Geri Al tuşu yazdığınızı geri getirir.</value>
   </data>
-    <data name="Onb_More" xml:space="preserve">
+  <data name="Onb_More" xml:space="preserve">
     <value>Ayarlar’da daha fazlası var: seçili metin için tuşlar (büyük/küçük harf, harf çevirisi), sesle yazma, yerel bir yapay zekâ modeli. Bildirim alanındaki simge bunları açar.</value>
   </data>
-    <data name="Onb_More_Store" xml:space="preserve">
+  <data name="Onb_More_Store" xml:space="preserve">
       <value>Ayarlar’da daha fazlası var: seçili metin için tuşlar (büyük/küçük harf, harf çevirisi), uygulamalar ve sözcükler için istisnalar. Bildirim alanındaki simge bunları açar.</value>
     </data>
-    <data name="Onb_Again" xml:space="preserve">
+  <data name="Onb_Again" xml:space="preserve">
     <value>Tanıtımı yeniden göster</value>
   </data>
-    <data name="Tray_Pause" xml:space="preserve">
+  <data name="Tray_Pause" xml:space="preserve">
     <value>Duraklat</value>
   </data>
-    <data name="Tray_Pause15" xml:space="preserve">
+  <data name="Tray_Pause15" xml:space="preserve">
     <value>15 dakika</value>
   </data>
-    <data name="Tray_Pause60" xml:space="preserve">
+  <data name="Tray_Pause60" xml:space="preserve">
     <value>1 saat</value>
   </data>
-    <data name="Tray_PauseUntil" xml:space="preserve">
+  <data name="Tray_PauseUntil" xml:space="preserve">
     <value>Ben sürdürene kadar</value>
   </data>
-    <data name="Tray_Resume" xml:space="preserve">
+  <data name="Tray_Resume" xml:space="preserve">
     <value>Sürdür</value>
   </data>
-    <data name="Capture_Paused" xml:space="preserve">
+  <data name="Capture_Paused" xml:space="preserve">
     <value>Yakalama duraklatıldı</value>
   </data>
-    <data name="PauseInGames" xml:space="preserve">
+  <data name="PauseInGames" xml:space="preserve">
     <value>Tam ekran oyunlarda duraklat</value>
   </data>
-    <data name="PauseInGames_Hint" xml:space="preserve">
+  <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Bir oyun ekranın tamamını kapladığı sürece Lapsus klavye kancasını kaldırır ve oyun bitince geri koyar.</value>
   </data>
-    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+  <data name="AppRule_HotkeyOnly" xml:space="preserve">
     <value>Yalnızca kısayol</value>
   </data>
-    <data name="AppRule_Hint" xml:space="preserve">
+  <data name="AppRule_Hint" xml:space="preserve">
     <value>Bir uygulamada kısayolu ve seçili metin tuşlarını korumak, ancak Boşluk sonrası otomatik düzeltmeleri kapatmak için “Yalnızca kısayol” kutusunu işaretleyin.</value>
   </data>
-    <data name="Tab_Stats" xml:space="preserve">
+  <data name="Tab_Stats" xml:space="preserve">
     <value>İstatistik</value>
   </data>
-    <data name="Tab_Backup" xml:space="preserve">
+  <data name="Tab_Backup" xml:space="preserve">
     <value>Yedek</value>
   </data>
-    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+  <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Terimler yazarken de bırakılır: buraya eklenen bir ad asla “düzeltilmez”.</value>
   </data>
   <data name="Perm_Accessibility" xml:space="preserve">
@@ -1041,5 +1041,23 @@
   </data>
   <data name="Perm_OpenSettings" xml:space="preserve">
     <value>Sistem Ayarları'nı aç</value>
+  </data>
+  <data name="Voice_RemoveFillersHint" xml:space="preserve">
+    <value>Tanınan metinden «uh», «um», «э», «эм» gibi tereddüt seslerini çıkarır.</value>
+  </data>
+  <data name="Voice_GlossaryAdd" xml:space="preserve">
+    <value>+ Ekle</value>
+  </data>
+  <data name="Voice_GlossaryTermPlaceholder" xml:space="preserve">
+    <value>Sözcük veya ifade</value>
+  </data>
+  <data name="Voice_RemoveFillers" xml:space="preserve">
+    <value>Dolgu sözcükleri kaldır</value>
+  </data>
+  <data name="Voice_GlossaryRemove" xml:space="preserve">
+    <value>Sözlükten kaldır</value>
+  </data>
+  <data name="Voice_GlossaryHeardPlaceholder" xml:space="preserve">
+    <value>Şöyle duyulur (isteğe bağlı)</value>
   </data>
 </root>

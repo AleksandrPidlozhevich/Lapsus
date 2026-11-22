@@ -1128,7 +1128,7 @@
 
                                     <Grid IsVisible="{Binding Voice.ShowRecognition, FallbackValue=False}"
                                           ColumnDefinitions="*,Auto" ColumnSpacing="8"
-                                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
                                         <TextBlock Grid.Row="0" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
                                                    Margin="0,4,0,4" Text="{Binding L[Voice_LanguageLabel]}" />
                                         <ComboBox Grid.Row="0" Grid.Column="1" MinWidth="200" Margin="0,4,0,4"
@@ -1200,14 +1200,55 @@
                                         <TextBlock Grid.Row="10" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
                                                    Text="{Binding L[Voice_SpokenPunctuationHint]}" />
 
-                                        <TextBlock Grid.Row="11" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
+                                        <TextBlock Grid.Row="11" Grid.Column="0" Classes="rowTitle" VerticalAlignment="Center"
+                                                   TextWrapping="Wrap" Margin="0,0,0,4" Text="{Binding L[Voice_RemoveFillers]}" />
+                                        <ToggleSwitch Grid.Row="11" Grid.Column="1" Classes="bare" HorizontalAlignment="Right"
+                                                      Margin="0,0,0,4"
+                                                      IsChecked="{Binding Voice.RemoveFillers, FallbackValue=False}" />
+                                        <TextBlock Grid.Row="12" Grid.ColumnSpan="2" Classes="hint" Margin="0,0,0,8"
+                                                   Text="{Binding L[Voice_RemoveFillersHint]}" />
+
+                                        <TextBlock Grid.Row="13" Grid.ColumnSpan="2" Classes="rowTitle" Margin="0,0,0,4"
                                                    Text="{Binding L[Voice_GlossaryLabel]}" />
-                                        <StackPanel Grid.Row="12" Grid.ColumnSpan="2" Spacing="4">
+                                        <StackPanel Grid.Row="14" Grid.ColumnSpan="2" Spacing="6">
                                             <TextBlock Classes="hint" Text="{Binding L[Voice_GlossaryHint]}" />
-                                            <TextBox AcceptsReturn="True" TextWrapping="NoWrap" MinHeight="90" MaxHeight="200"
-                                                     FontFamily="{DynamicResource ContentControlThemeFontFamily}"
-                                                     PlaceholderText="GitHub&#10;Kubernetes|kuber&#10;JSON|jason"
-                                                     Text="{Binding Voice.GlossaryText}" />
+                                            <ItemsControl ItemsSource="{Binding Voice.GlossaryEntries}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate x:DataType="vm:GlossaryEntry">
+                                                        <Border Classes="row" Margin="0,2">
+                                                            <Grid ColumnDefinitions="*,Auto">
+                                                                <StackPanel Grid.Column="0" Spacing="0" VerticalAlignment="Center">
+                                                                    <TextBlock Text="{Binding Term}" TextTrimming="CharacterEllipsis" />
+                                                                    <TextBlock Text="{Binding Heard}" Classes="hint"
+                                                                               IsVisible="{Binding Heard, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                                                                </StackPanel>
+                                                                <Button Grid.Column="1" Classes="icon"
+                                                                        ToolTip.Tip="{Binding ((vm:SettingsViewModel)DataContext).L[Voice_GlossaryRemove],
+                                                                             RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                        Command="{Binding ((vm:SettingsViewModel)DataContext).Voice.RemoveGlossaryEntryCommand,
+                                                                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                        CommandParameter="{Binding}">
+                                                                    <Svg
+                                                                        Path="{Binding ((vm:SettingsViewModel)DataContext).Appearance.TrashIconPath,
+                                                                           RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                                        Width="16" Height="16" />
+                                                                </Button>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                            <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="8">
+                                                <TextBox Grid.Column="0"
+                                                         PlaceholderText="{Binding L[Voice_GlossaryTermPlaceholder]}"
+                                                         Text="{Binding Voice.DraftTerm}" />
+                                                <TextBox Grid.Column="1"
+                                                         PlaceholderText="{Binding L[Voice_GlossaryHeardPlaceholder]}"
+                                                         Text="{Binding Voice.DraftHeard}" />
+                                                <Button Grid.Column="2"
+                                                        Content="{Binding L[Voice_GlossaryAdd]}"
+                                                        Command="{Binding Voice.AddDraftGlossaryTermCommand}" />
+                                            </Grid>
                                             <TextBlock Classes="hint" Text="{Binding L[Voice_GlossaryAlsoLeftAlone]}" />
                                         </StackPanel>
                                     </Grid>

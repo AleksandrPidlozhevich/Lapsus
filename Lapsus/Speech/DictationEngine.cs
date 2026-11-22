@@ -285,6 +285,8 @@ internal sealed class DictationEngine : IDictationEngine, IDisposable
             }
 
             var text = HallucinationFilter.Clean(result.Text);
+            if (text.Length > 0 && settings.DictationRemoveFillers)
+                text = FillerWords.Remove(text);
             if (text.Length > 0 && settings.DictationSpokenPunctuation)
                 text = SpokenPunctuation.Apply(text, result.Language);
             if (text.Length > 0 && settings.KeepEnglishTermsLatin)

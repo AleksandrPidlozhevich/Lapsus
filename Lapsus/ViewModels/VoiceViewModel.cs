@@ -29,6 +29,9 @@ public sealed record UnloadOption(string Name, SpeechUnloadAfter Value);
 
 public sealed record VoiceDeviceOption(string Name, ComputeDevicePreference Value);
 
+// One glossary line as shown in settings: Term, and the optional "how it sounds" forms after |.
+public sealed record GlossaryEntry(string Term, string Heard, string Line);
+
 // A layout the chosen model does not hear, and the model its dictations run on. Download: null once it is on disk.
 public sealed record LayoutModelOption(string Text, string DownloadLabel, IRelayCommand? Download);
 
@@ -80,9 +83,11 @@ public partial class VoiceViewModel : ViewModelBase
         _enabled = supported && settings.DictationEnabled && !_locked();
         _keepEnglishTermsLatin = settings.KeepEnglishTermsLatin;
         _spokenPunctuation = settings.DictationSpokenPunctuation;
+        _removeFillers = settings.DictationRemoveFillers;
         _sounds = settings.DictationSounds;
         _showButton = settings.DictationShowButton;
         _glossaryText = string.Join(Environment.NewLine, settings.DictationGlossary);
+        RebuildGlossaryEntries();
         BuildOptions();
         _building = false;
 
@@ -131,6 +136,8 @@ public partial class VoiceViewModel : ViewModelBase
 
     [ObservableProperty] private bool _spokenPunctuation;
 
+    [ObservableProperty] private bool _removeFillers;
+
     [ObservableProperty] private bool _sounds;
 
     [ObservableProperty] private bool _showButton;
@@ -139,6 +146,12 @@ public partial class VoiceViewModel : ViewModelBase
     public bool ButtonSupported => OperatingSystem.IsWindows();
 
     [ObservableProperty] private string _glossaryText;
+
+    [ObservableProperty] private string _draftTerm = "";
+
+    [ObservableProperty] private string _draftHeard = "";
+
+    public ObservableCollection<GlossaryEntry> GlossaryEntries { get; } = [];
 
     public ObservableCollection<VoiceModelOption> ModelOptions { get; } = [];
 
@@ -212,6 +225,12 @@ public partial class VoiceViewModel : ViewModelBase
     partial void OnSpokenPunctuationChanged(bool value)
     {
         _settings.DictationSpokenPunctuation = value;
+        _store.Save(_settings);
+    }
+
+    partial void OnRemoveFillersChanged(bool value)
+    {
+        _settings.DictationRemoveFillers = value;
         _store.Save(_settings);
     }
 
@@ -403,6 +422,30 @@ public partial class VoiceViewModel : ViewModelBase
         SaveGlossary();
     }
 
+    [RelayCommand]
+    private void AddDraftGlossaryTerm()
+    {
+        var term = DraftTerm.Trim();
+        if (term.Length == 0)
+            return;
+        var heard = DraftHeard.Trim();
+        AddGlossaryTerm(heard.Length == 0 ? term : $"{term}|{heard}");
+        DraftTerm = "";
+        DraftHeard = "";
+    }
+
+    [RelayCommand]
+    private void RemoveGlossaryEntry(GlossaryEntry? entry)
+    {
+        if (entry is null)
+            return;
+        var lines = GlossaryText.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            .Where(l => !string.Equals(l, entry.Line, StringComparison.Ordinal))
+            .ToArray();
+        GlossaryText = string.Join(Environment.NewLine, lines);
+        SaveGlossary();
+    }
+
     private void SaveGlossary()
     {
         _saveGlossary.Stop();
@@ -411,7 +454,21 @@ public partial class VoiceViewModel : ViewModelBase
             .Distinct(StringComparer.Ordinal)
             .ToArray();
         _store.Save(_settings);
+        RebuildGlossaryEntries();
         GlossaryChanged?.Invoke(_settings.DictationGlossary);
+    }
+
+    private void RebuildGlossaryEntries()
+    {
+        GlossaryEntries.Clear();
+        foreach (var line in GlossaryText.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries))
+        {
+            var parts = line.Split('|', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 0)
+                continue;
+            var heard = parts.Length == 1 ? "" : string.Join(", ", parts.Skip(1));
+            GlossaryEntries.Add(new GlossaryEntry(parts[0], heard, line));
+        }
     }
 
     // The terms as saved: Lapsus.Core's word list leaves them alone too.
