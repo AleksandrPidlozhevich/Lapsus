@@ -129,4 +129,83 @@ public sealed class SpeechTermRestorerTests : IDisposable
     {
         Assert.Equal(PhoneticKey.English(english), PhoneticKey.Heard(heard));
     }
+
+    [Theory]
+    [InlineData("После code review я задеплою это на стегинг.", "стегинг", "staging")]
+    [InlineData("Я поправил конфиг для Кубнетис.", "Кубнетис", "Kubernetes")]
+    [InlineData("Напиши в Слэк, что всё готово.", "Слэк", "Slack")]
+    public void A_misheard_term_no_dictionary_knows_is_a_guess(string text, string heard, string term)
+    {
+        var guess = Assert.Single(new TermRestorer(Spell()).Guesses(text, "ru"));
+
+        Assert.Equal(heard, text.Substring(guess.Start, guess.Length));
+        Assert.Equal(term, guess.Term);
+    }
+
+    [Theory]
+    [InlineData("Сделай это на мастер.", "ru")]
+    [InlineData("Открой файл и запусти сервер.", "ru")]
+    [InlineData("Write it to staging.", "en")]
+    public void A_known_word_or_a_latin_language_gives_no_guess(string text, string language)
+    {
+        Assert.Empty(new TermRestorer(Spell()).Guesses(text, language));
+    }
+
+    [Fact]
+    public void Without_a_dictionary_for_the_script_nothing_is_guessed()
+    {
+        Assert.Empty(new TermRestorer(Spell(withRussian: false)).Guesses("задеплою на стегинг", "ru"));
+    }
+
+    [Fact]
+    public void The_model_takes_a_term_only_when_it_reads_clearly_likelier()
+    {
+        // "staging" reads far likelier, "Slack" only a little: one goes in, the other stays as heard.
+        var llm = new ScoringLlm(text => text.Contains("staging") ? 10 : text.Contains("Slack") ? 1 : 0);
+        var text = "Слэк и стегинг";
+        var guesses = new TermRestorer(Spell()).Guesses(text, "ru");
+
+        var ranked = new DictationTermRanker(llm).RankAsync(text, guesses, CancellationToken.None).GetAwaiter().GetResult();
+
+        Assert.Equal(2, guesses.Count);
+        Assert.Equal("Слэк и staging", ranked);
+    }
+
+    private sealed class ScoringLlm(Func<string, double> score) : Lapsus.Core.Correction.ILocalLlm
+    {
+        public bool IsLoaded => true;
+
+        public void Unload()
+        {
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public Task<IReadOnlyList<double>?> ScoreAsync(
+            string context, IReadOnlyList<string> texts, bool ends, CancellationToken cancellationToken = default) =>
+            Task.FromResult<IReadOnlyList<double>?>(texts.Select(score).ToList());
+    }
+
+    [Theory]
+    [InlineData("Я поправил конфиг для Кубнетис.", "Я поправил конфиг для Kubernetes", "Kubernetes", "кубнетис")]
+    [InlineData("Напиши в Слэк, что всё готово.", "Напиши в Slack", "Slack", "слэк")]
+    [InlineData("Закинул в гитхаб", "Закинул в GitHub", "GitHub", "гитхаб")]
+    public void A_misheard_word_retyped_in_latin_is_learned(string dictated, string corrected, string term, string heard)
+    {
+        var learned = Assert.Single(GlossaryLearner.Learn(dictated, corrected));
+
+        Assert.Equal((term, heard), learned);
+    }
+
+    [Theory]
+    [InlineData("Я поправил конфиг для Кубнетис.", "Я поправил конфиг для Docker")]  // another word: an edit
+    [InlineData("Я поправил конфиг для Кубнетис.", "Я поправил конфиг для Кубернетис")]  // still Cyrillic
+    [InlineData("Я поправил конфиг.", "Я поправил конфиг. И ещё")]  // only typed on
+    [InlineData("Я поправил конфиг.", "Я поправил")]  // only deleted
+    public void Edits_that_are_not_a_term_teach_nothing(string dictated, string corrected)
+    {
+        Assert.Empty(GlossaryLearner.Learn(dictated, corrected));
+    }
 }

@@ -73,7 +73,26 @@ commit and checked against its SHA-256 (`SpeechModelCatalog`): the Whisper weigh
 conversion ([ggerganov/whisper.cpp](https://huggingface.co/ggerganov/whisper.cpp); Whisper is MIT, Copyright (c)
 2022 OpenAI) and the Silero voice activity detector in the same format
 ([ggml-org/whisper-vad](https://huggingface.co/ggml-org/whisper-vad); Silero VAD is MIT, Copyright (c)
-2020-present Silero Team).
+2020-present Silero Team). NVIDIA's [Parakeet TDT 0.6B v3](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3)
+comes in Ilya Stupakov's ONNX export ([istupakov/parakeet-tdt-0.6b-v3-onnx](https://huggingface.co/istupakov/parakeet-tdt-0.6b-v3-onnx),
+int8 quantized); the model is © NVIDIA, licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), and the export changes only its format. It runs
+on the ONNX Runtime already listed for the neural brain. The English-only
+[Parakeet TDT 0.6B v2](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2) comes the same way
+([istupakov/parakeet-tdt-0.6b-v2-onnx](https://huggingface.co/istupakov/parakeet-tdt-0.6b-v2-onnx)), © NVIDIA, CC BY 4.0.
+The Hebrew model is ivrit.ai's [whisper-large-v3-turbo](https://huggingface.co/ivrit-ai/whisper-large-v3-turbo)
+fine-tune (Apache-2.0), from its ggml conversion quantized to q8_0
+([sivelsguy/whisper-large-v3-turbo-ivrit-q8_0-ggml](https://huggingface.co/sivelsguy/whisper-large-v3-turbo-ivrit-q8_0-ggml));
+the quantization is the only change. NVIDIA's Georgian and Armenian FastConformer models
+([stt_ka_fastconformer_hybrid_large_pc](https://huggingface.co/nvidia/stt_ka_fastconformer_hybrid_large_pc),
+[stt_hy_fastconformer_hybrid_large_pc](https://huggingface.co/nvidia/stt_hy_fastconformer_hybrid_large_pc)) come in
+OpenVoiceOS's ONNX export of their CTC head
+([ka](https://huggingface.co/OpenVoiceOS/stt_ka_fastconformer_hybrid_large_pc_onnx),
+[hy](https://huggingface.co/OpenVoiceOS/stt_hy_fastconformer_hybrid_large_pc_onnx)); © NVIDIA, CC BY 4.0, and the
+export changes only the format. Their audio preprocessor, `nemo80.onnx`, ships with the app: it is taken from
+[onnx-asr](https://github.com/istupakov/onnx-asr) 0.12.0, MIT License, Copyright (c) 2025 Ilya Stupakov. With
+them comes the same Silero VAD in ONNX ([istupakov/silero-vad-onnx](https://huggingface.co/istupakov/silero-vad-onnx);
+MIT, Copyright (c) 2020-present Silero Team).
 
 ### Every dictionary, its authors and its licence
 

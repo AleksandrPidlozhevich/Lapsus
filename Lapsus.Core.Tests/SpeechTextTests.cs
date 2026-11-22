@@ -47,6 +47,23 @@ public class SpeechTextTests
         Assert.Equal(text, HallucinationFilter.Clean(text));
     }
 
+    [Theory]
+    [InlineData("Э, привет", "привет")]
+    [InlineData("Ну эм я думаю", "Ну я думаю")]
+    [InlineData("uh well um yes", "well yes")]
+    [InlineData("Закинул pull request.", "Закинул pull request.")]
+    public void Drops_hesitation_fillers(string heard, string expected)
+    {
+        Assert.Equal(expected, FillerWords.Remove(heard));
+    }
+
+    [Fact]
+    public void Filler_removal_does_not_eat_real_short_words()
+    {
+        Assert.Equal("а я иду", FillerWords.Remove("а я иду"));
+        Assert.Equal("I am here", FillerWords.Remove("I am here"));
+    }
+
     [Fact]
     public void The_prompt_shows_the_language_mixing_with_english_then_glossary_then_earlier_text()
     {

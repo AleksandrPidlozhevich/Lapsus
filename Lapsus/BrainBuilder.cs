@@ -31,6 +31,9 @@ internal sealed class BrainBuilder(
 
     public SettingsViewModel? Settings { get; set; }
 
+    // The neural brain's model while it is loaded, for dictation to judge doubtful terms with; it serializes its runs.
+    public ILocalLlm? LoadedModel => _llm is { IsLoaded: true } llm ? llm : null;
+
     public async Task RebuildAsync()
     {
         if (_shutDown || Settings is null)

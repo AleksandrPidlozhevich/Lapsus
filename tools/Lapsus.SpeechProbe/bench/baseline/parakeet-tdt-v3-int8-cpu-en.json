@@ -1,0 +1,9 @@
+{
+  "Model": "parakeet-tdt-v3-int8",
+  "Device": "cpu",
+  "Language": "en",
+  "Phrases": 25,
+  "Wer": 6.31,
+  "Cer": 2.92,
+  "MsPerPhrase": 578
+}

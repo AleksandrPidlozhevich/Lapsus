@@ -1,1012 +1,1018 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="Window_Title" xml:space="preserve">
+  </resheader>
+  <data name="Window_Title" xml:space="preserve">
     <value>Lapsus — Կարգավորումներ</value>
   </data>
-    <data name="Subtitle" xml:space="preserve">
+  <data name="Subtitle" xml:space="preserve">
     <value>Ուղղեք ստեղնաշարի դասավորությունը և սխալները թեժ ստեղնով</value>
   </data>
-    <data name="Capture_On" xml:space="preserve">
+  <data name="Capture_On" xml:space="preserve">
     <value>Գրավումը միացված է</value>
   </data>
-    <data name="Capture_Off" xml:space="preserve">
+  <data name="Capture_Off" xml:space="preserve">
     <value>Գրավումը անջատված է</value>
   </data>
-    <data name="AutoCorrect" xml:space="preserve">
+  <data name="AutoCorrect" xml:space="preserve">
     <value>Ինքնուղղում բացատից հետո</value>
   </data>
-    <data name="AutoFixTypos" xml:space="preserve">
+  <data name="AutoFixTypos" xml:space="preserve">
     <value>Ուղղել տպագրական սխալները բացատից հետո</value>
   </data>
-    <data name="AutoFixTypos_Hint" xml:space="preserve">
+  <data name="AutoFixTypos_Hint" xml:space="preserve">
     <value>Աշխատում է նաև դասավորության ինքնուղղման առանց՝ այդ դեպքում ուղղվում են միայն տպագրական սխալները։ Թեժ ստեղնը միշտ ուղղում է երկուսն էլ։</value>
   </data>
-    <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
+  <data name="AutoCorrect_Blocked_Neural" xml:space="preserve">
     <value>Ինքնուղղումը հասանելի չէ, քանի դեռ նյարդային ուղղումը միացված է. մոդելը աշխատում է միայն թեժ ստեղնով։</value>
   </data>
-    <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
+  <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
     <value>Ինքնուղղումը հասանելի չէ «միայն դասավորության փոխարկում» ռեժիմում. բառարանների առանց ստուգելու բան չկա։</value>
   </data>
-    <data name="PlainSwitch" xml:space="preserve">
+  <data name="PlainSwitch" xml:space="preserve">
     <value>Միայն դասավորության փոխարկում, առանց բառարանների</value>
   </data>
-    <data name="PlainSwitch_Hint" xml:space="preserve">
+  <data name="PlainSwitch_Hint" xml:space="preserve">
     <value>Փոխում է նիշերը ինչպես մուտքագրվել են՝ առանց սխալները ուղղելու։ Աշխատում է առանց ներբեռնումների. կրկին սեղմեք՝ հաջորդ դասավորության համար։</value>
   </data>
-    <data name="SwitchLayout" xml:space="preserve">
+  <data name="SwitchLayout" xml:space="preserve">
     <value>Փոխել համակարգի դասավորությունը ուղղումից հետո</value>
   </data>
-    <data name="SwitchLayout_Hint" xml:space="preserve">
+  <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>Թեժ ստեղնը միշտ փոխում է լեզուն։ Սա վերաբերում է միայն բացատից հետո ինքնուղղմանը և ընտրվածի ուղղմանը։</value>
   </data>
-    <data name="HotkeyCyclesLayout" xml:space="preserve">
+  <data name="HotkeyCyclesLayout" xml:space="preserve">
     <value>Թեժ ստեղնը միշտ փոխում է դասավորությունը</value>
   </data>
-    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+  <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
     <value>Երբ ուղղելու բան չկա, թեժ ստեղնը դեռ անցնում է հաջորդ տեղադրված դասավորությանը։</value>
   </data>
-    <data name="StartAtLogin" xml:space="preserve">
+  <data name="StartAtLogin" xml:space="preserve">
     <value>Գործարկել մուտք գործելիս</value>
   </data>
-    <data name="Indicator_Label" xml:space="preserve">
+  <data name="Indicator_Label" xml:space="preserve">
     <value>Ցույց տալ դասավորությունը կուրսորի մոտ</value>
   </data>
-    <data name="Indicator_Hint" xml:space="preserve">
+  <data name="Indicator_Hint" xml:space="preserve">
     <value>Նշան ակտիվ դասավորությամբ տեքստի կուրսորի կողքին։ Այնտեղ, որտեղ ծրագիրը Lapsus-ին կուրսոր չի ցույց տալիս՝ զննարկիչներ, Electron հավելվածներ — նշանը մի պահ հայտնվում է մկնիկի ցուցիչի մոտ, երբ դասավորությունը փոխվում է։</value>
   </data>
-    <data name="Hotkey_Label" xml:space="preserve">
+  <data name="Hotkey_Label" xml:space="preserve">
     <value>Թեժ ստեղն</value>
   </data>
-    <data name="HotkeyRecord_Button" xml:space="preserve">
+  <data name="HotkeyRecord_Button" xml:space="preserve">
     <value>Գրանցել</value>
   </data>
-    <data name="HotkeyRecord_Prompt" xml:space="preserve">
+  <data name="HotkeyRecord_Prompt" xml:space="preserve">
     <value>Սեղմեք ցանկալի ստեղները</value>
   </data>
-    <data name="HotkeyRecord_Hint" xml:space="preserve">
+  <data name="HotkeyRecord_Hint" xml:space="preserve">
     <value>Պահեք մոդիֆիկատոր ստեղնը · Esc-ը չեղարկում է</value>
   </data>
-    <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
+  <data name="HotkeyRecord_NeedModifier" xml:space="preserve">
     <value>Ավելացրեք մոդիֆիկատոր ստեղն</value>
   </data>
-    <data name="HotkeyRecord_Cancel" xml:space="preserve">
+  <data name="HotkeyRecord_Cancel" xml:space="preserve">
     <value>Չեղարկել</value>
   </data>
-    <data name="SelectionHotkey_Label" xml:space="preserve">
+  <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Ուղղել ընտրվածը</value>
   </data>
-    <data name="SelectionHotkey_Hint" xml:space="preserve">
+  <data name="SelectionHotkey_Hint" xml:space="preserve">
     <value>Ուղղում է ընտրված տեքստը — ցանկացած պատուհանում, որքան էլ հին լինի։</value>
   </data>
-    <data name="SelectionActions_Label" xml:space="preserve">
+  <data name="SelectionActions_Label" xml:space="preserve">
     <value>Գործողություններ ընտրվածի վրա</value>
   </data>
-    <data name="SelectionCase_Label" xml:space="preserve">
+  <data name="SelectionCase_Label" xml:space="preserve">
     <value>Փոխել տառաչափը</value>
   </data>
-    <data name="SelectionCase_Hint" xml:space="preserve">
+  <data name="SelectionCase_Hint" xml:space="preserve">
     <value>Շրջանառություն. ՄԵԾԱՏԱՌ → փոքրատառ → Նախադասության տեսք → Ամեն Բառ։</value>
   </data>
-    <data name="SelectionTranslit_Label" xml:space="preserve">
+  <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Տրանսլիտերացիա</value>
   </data>
-    <data name="SelectionTranslit_Hint" xml:space="preserve">
+  <data name="SelectionTranslit_Hint" xml:space="preserve">
     <value>Կիրիլիցա կամ հունարեն ⇄ լատիներեն։ Կրկին սեղմեք՝ հետ վերադարձնելու համար։</value>
   </data>
-    <data name="SelectionRtl_Label" xml:space="preserve">
+  <data name="SelectionRtl_Label" xml:space="preserve">
     <value>Շրջել եբրայերեն / արաբերեն</value>
   </data>
-    <data name="SelectionRtl_Hint" xml:space="preserve">
+  <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Ուղղում է եբրայերեն կամ արաբերեն տողը, որ եկել է հետևից առաջ։</value>
   </data>
-    <data name="SelectionGlossary_Label" xml:space="preserve">
+  <data name="SelectionGlossary_Label" xml:space="preserve">
     <value>Ավելացնել թելադրման բառարանին</value>
   </data>
-    <data name="SelectionGlossary_Hint" xml:space="preserve">
+  <data name="SelectionGlossary_Hint" xml:space="preserve">
     <value>Ընտրեք անուն կամ տերմին, սեղմեք ստեղնը, և ձայնային մուտքագրումը կգրի այն այսպես։</value>
   </data>
-    <data name="Pref_Label" xml:space="preserve">
+  <data name="Pref_Label" xml:space="preserve">
     <value>Նախընտրելի լեզու հավասարության դեպքում</value>
   </data>
-    <data name="Pref_Hint" xml:space="preserve">
+  <data name="Pref_Hint" xml:space="preserve">
     <value>Որ լեզուն հաղթի, երբ բառը համապատասխանում է մի քանիսին («молоток» ru և uk)։</value>
   </data>
-    <data name="Lang_Label" xml:space="preserve">
+  <data name="Lang_Label" xml:space="preserve">
     <value>Միջերեսի լեզու</value>
   </data>
-    <data name="Theme_Light" xml:space="preserve">
+  <data name="Theme_Light" xml:space="preserve">
     <value>Բաց թեմա</value>
   </data>
-    <data name="Theme_Dark" xml:space="preserve">
+  <data name="Theme_Dark" xml:space="preserve">
     <value>Մուգ թեմա</value>
   </data>
-    <data name="Theme_System" xml:space="preserve">
+  <data name="Theme_System" xml:space="preserve">
     <value>Համակարգի թեմա</value>
   </data>
-    <data name="Dict_Label" xml:space="preserve">
+  <data name="Dict_Label" xml:space="preserve">
     <value>Լեզուներ և բառարաններ</value>
   </data>
-    <data name="Dict_Hint" xml:space="preserve">
+  <data name="Dict_Hint" xml:space="preserve">
     <value>Ներբեռնվում են մեկ անգամ, հետո աշխատում են անցանց։ Առանց բառարանի լեզուն ավելի վատ է ուղղվում։</value>
   </data>
-    <data name="AddLang_Label" xml:space="preserve">
+  <data name="AddLang_Label" xml:space="preserve">
     <value>Ավելացնել լեզու</value>
   </data>
-    <data name="Add_Label" xml:space="preserve">
+  <data name="Add_Label" xml:space="preserve">
     <value>Ավելացնել</value>
   </data>
-    <data name="AddLang_Placeholder" xml:space="preserve">
+  <data name="AddLang_Placeholder" xml:space="preserve">
     <value>Ընտրեք լեզու</value>
   </data>
-    <data name="AddLang_Tooltip" xml:space="preserve">
+  <data name="AddLang_Tooltip" xml:space="preserve">
     <value>Ներբեռնել և ավելացնել ընտրված լեզուն</value>
   </data>
-    <data name="RemoveDict_Tooltip" xml:space="preserve">
+  <data name="RemoveDict_Tooltip" xml:space="preserve">
     <value>Հեռացնել բառարանը</value>
   </data>
-    <data name="Pref_Auto" xml:space="preserve">
+  <data name="Pref_Auto" xml:space="preserve">
     <value>Ավտո (ըստ գնահատման, հետո նախընտրելի)</value>
   </data>
-    <data name="Status_Disabled" xml:space="preserve">
+  <data name="Status_Disabled" xml:space="preserve">
     <value>Անջատված է։</value>
   </data>
-    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+  <data name="Status_UnsupportedPlatform" xml:space="preserve">
     <value>Ստեղնաշարի գրավումը դեռ հասանելի չէ այս հարթակում։ Կարգավորումները, բառարանները և մուտքի ժամանակ գործարկումը աշխատում են։</value>
   </data>
-    <data name="Status_AutoActive" xml:space="preserve">
+  <data name="Status_AutoActive" xml:space="preserve">
     <value>Ակտիվ է։ Բառերը ինքնաբերաբար ուղղվում են բացատից հետո (և «{0}»-ով)։</value>
   </data>
-    <data name="Status_HotkeyActive" xml:space="preserve">
+  <data name="Status_HotkeyActive" xml:space="preserve">
     <value>Ակտիվ է։ Մուտքագրեք բառ և սեղմեք «{0}» — Lapsus-ը կուղղի տեղում։</value>
   </data>
-    <data name="Status_StartFailed" xml:space="preserve">
+  <data name="Status_StartFailed" xml:space="preserve">
     <value>Չհաջողվեց սկսել գրավումը. {0}</value>
   </data>
-    <data name="Status_StartupFailed" xml:space="preserve">
+  <data name="Status_StartupFailed" xml:space="preserve">
     <value>Չհաջողվեց թարմացնել մուտքի ժամանակ գործարկումը. {0}</value>
   </data>
-    <data name="Status_AccessibilityRequired" xml:space="preserve">
+  <data name="Status_AccessibilityRequired" xml:space="preserve">
     <value>Ստեղնաշարի հետևումը չհաջողվեց գործարկել։ Միացրեք Lapsus-ը՝ Համակարգի կարգավորումներ → Գաղտնիություն և անվտանգություն → Մատչելիություն. հետևումը կսկսվի ինքնուրույն։</value>
   </data>
-    <data name="Perm_Explain" xml:space="preserve">
+  <data name="Perm_Explain" xml:space="preserve">
     <value>Lapsus-ին պետք են այս թույլտվությունները։ Յուրաքանչյուր կոճակ ցույց է տալիս macOS-ի պատուհանը կամ բացում է ճիշտ ցուցակը System Settings → Privacy &amp; Security-ում, որտեղ միացնում եք Lapsus-ը։ Կարգավիճակն այստեղ ինքն է թարմացվում։</value>
   </data>
-    <data name="Status_Corrected" xml:space="preserve">
+  <data name="Status_Corrected" xml:space="preserve">
     <value>Ուղղված է. {0} → {1}</value>
   </data>
-    <data name="Dict_Downloading" xml:space="preserve">
+  <data name="Dict_Downloading" xml:space="preserve">
     <value>Ներբեռնվում է «{0}»…</value>
   </data>
-    <data name="Dict_Installed" xml:space="preserve">
+  <data name="Dict_Installed" xml:space="preserve">
     <value>«{0}» տեղադրված է։</value>
   </data>
-    <data name="Dict_Updated" xml:space="preserve">
+  <data name="Dict_Updated" xml:space="preserve">
     <value>«{0}» թարմացված է։</value>
   </data>
-    <data name="UpdateDict_Tooltip" xml:space="preserve">
+  <data name="UpdateDict_Tooltip" xml:space="preserve">
     <value>Ներբեռնել ավելի լիարժեք բառարանը</value>
   </data>
-    <data name="Dict_DownloadFailed" xml:space="preserve">
+  <data name="Dict_DownloadFailed" xml:space="preserve">
     <value>Ներբեռնումը ձախողվեց. {0}</value>
   </data>
-    <data name="Dict_Removed" xml:space="preserve">
+  <data name="Dict_Removed" xml:space="preserve">
     <value>«{0}» հեռացված է։</value>
   </data>
-    <data name="Dict_DownloadEmpty" xml:space="preserve">
+  <data name="Dict_DownloadEmpty" xml:space="preserve">
     <value>Ներբեռնված բառարանը դատարկ է։</value>
   </data>
-    <data name="Tray_Settings" xml:space="preserve">
+  <data name="Tray_Settings" xml:space="preserve">
     <value>Կարգավորումներ</value>
   </data>
-    <data name="Tray_DictationHistory" xml:space="preserve">
+  <data name="Tray_DictationHistory" xml:space="preserve">
     <value>Վերջին թելադրումներ</value>
   </data>
-    <data name="Tray_Exit" xml:space="preserve">
+  <data name="Tray_Exit" xml:space="preserve">
     <value>Ելք</value>
   </data>
-    <data name="Tray_Quit" xml:space="preserve">
+  <data name="Tray_Quit" xml:space="preserve">
     <value>Փակել Lapsus-ը</value>
   </data>
-    <data name="Tray_Tooltip" xml:space="preserve">
+  <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — դասավորության ուղղում</value>
   </data>
-    <data name="Tray_UpdateAvailable" xml:space="preserve">
+  <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Թարմացում կա — վերագործարկեք տեղադրելու համար</value>
   </data>
-    <data name="Tray_InstallUpdate" xml:space="preserve">
+  <data name="Tray_InstallUpdate" xml:space="preserve">
     <value>Վերագործարկեք {0} տարբերակը տեղադրելու համար</value>
   </data>
-    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+  <data name="Tray_TooltipUpdateReady" xml:space="preserve">
     <value>Lapsus — {0} տարբերակը պատրաստ է տեղադրման</value>
   </data>
-    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+  <data name="Notify_UpdateReadyTitle" xml:space="preserve">
     <value>Lapsus {0}-ը պատրաստ է տեղադրման</value>
   </data>
-    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+  <data name="Notify_UpdateReadyBody" xml:space="preserve">
     <value>Վերագործարկեք սկուտեղի պատկերակի ընտրացանկից, կամ թարմացումը կտեղադրվի Lapsus-ի հաջորդ գործարկման ժամանակ։</value>
   </data>
-    <data name="Update_Tooltip" xml:space="preserve">
+  <data name="Update_Tooltip" xml:space="preserve">
     <value>Վերագործարկեք այս թարմացումը տեղադրելու համար</value>
   </data>
-    <data name="Update_CheckTooltip" xml:space="preserve">
+  <data name="Update_CheckTooltip" xml:space="preserve">
     <value>Ստուգել թարմացումները</value>
   </data>
-    <data name="Status_UpToDate" xml:space="preserve">
+  <data name="Status_UpToDate" xml:space="preserve">
     <value>Lapsus-ը արդիական է։</value>
   </data>
-    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+  <data name="Status_UpdateCheckFailed" xml:space="preserve">
     <value>Թարմացումների ստուգումը ձախողվեց. {0}</value>
   </data>
-    <data name="Status_UpdateNotSupported" xml:space="preserve">
+  <data name="Status_UpdateNotSupported" xml:space="preserve">
     <value>Այս պատճենը չի կարող ինքնաթարմացվել — ներբեռնեք վերջին թողարկումը։</value>
   </data>
-    <data name="Diag_Empty" xml:space="preserve">
+  <data name="Diag_Empty" xml:space="preserve">
     <value>Թեժ ստեղն. ոչինչ չի մուտքագրվել (պատուհան. {0})։</value>
   </data>
-    <data name="Diag_NoChange" xml:space="preserve">
+  <data name="Diag_NoChange" xml:space="preserve">
     <value>Թեժ ստեղն. «{0}» — բոլոր բառերը ճիշտ են թվում, փոխելու բան չկա։</value>
   </data>
-    <data name="Diag_NoSelection" xml:space="preserve">
+  <data name="Diag_NoSelection" xml:space="preserve">
     <value>Ընտրում. ոչինչ չի ընտրվել, կամ {0}-ը չի պատասխանում պատճենմանը։</value>
   </data>
-    <data name="Diag_GlossaryAdded" xml:space="preserve">
+  <data name="Diag_GlossaryAdded" xml:space="preserve">
     <value>Ավելացված է բառարանին. {0}</value>
   </data>
-    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+  <data name="Diag_GlossaryTooLong" xml:space="preserve">
     <value>Բառարան. ընտրեք մեկ տերմին, ոչ թե նախադասություն։</value>
   </data>
-    <data name="Diag_ClipboardFailed" xml:space="preserve">
+  <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Ընտրում. չհաջողվեց օգտագործել սեղմատախտակը ({0})։</value>
   </data>
-    <data name="Diag_TapReenabled" xml:space="preserve">
+  <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Ստեղնաշարի հետևումը կարճ ժամանակով կանգ առավ և վերագործարկվեց։ Եթե դա կրկնվում է, փակեք Մատչելիությունը ծանրաբեռնող հավելվածը։</value>
   </data>
-    <data name="Diag_CaptureRestored" xml:space="preserve">
+  <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Ստեղնաշարի գրավումը կրկին աշխատում է։</value>
   </data>
-    <data name="Diag_NoDictionaries" xml:space="preserve">
+  <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Նախքան դասավորությունը ուղղելը Կարգավորումներում ներբեռնեք առնվազն մեկ ուղղագրական բառարան։</value>
   </data>
-    <data name="Diag_SendFailed" xml:space="preserve">
+  <data name="Diag_SendFailed" xml:space="preserve">
     <value>SendInput-ը ձախողվեց (backspaces {0}/{1}, unicode {2}/{3}, սխալ {4}, պատուհան. {5})։ Նպատակային պատուհանը հավանաբար աշխատում է որպես ադմինիստրատոր։</value>
   </data>
-    <data name="Diag_NoLayoutList" xml:space="preserve">
+  <data name="Diag_NoLayoutList" xml:space="preserve">
     <value>Դասավորության փոխարկում. համակարգը դասավորությունների ցանկ չվերադարձրեց։</value>
   </data>
-    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+  <data name="Diag_LayoutNotInstalled" xml:space="preserve">
     <value>Դասավորություն {0}-ը տեղադրված չէ Windows-ում (հասանելի. {1})։ Ավելացրեք Settings → Time &amp; language → Language &amp; region բաժնում։</value>
   </data>
-    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+  <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
     <value>Դասավորություն {0}-ը տեղադրված չէ այս Mac-ում (հասանելի. {1})։ Ավելացրեք System Settings → Keyboard → Input Sources բաժնում։</value>
   </data>
-    <data name="Diag_InjectFailed" xml:space="preserve">
+  <data name="Diag_InjectFailed" xml:space="preserve">
     <value>Չհաջողվեց ստեղնասեղմումներն ուղարկել ակտիվ հավելվածին ({0})։ Ստուգեք Lapsus-ի Մատչելիության թույլտվությունը։</value>
   </data>
-    <data name="Diag_FocusChanged" xml:space="preserve">
+  <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Թեժ ստեղն. անտեսված է — ֆոկուսը տեղափոխվել է այլ պատուհան/հավելված ({0})։ Կրկին մուտքագրեք նպատակային դաշտում։</value>
   </data>
-    <data name="Diag_NoModel" xml:space="preserve">
+  <data name="Diag_NoModel" xml:space="preserve">
     <value>Թեժ ստեղն. նյարդային ուղղումը միացված է, բայց մոդել բեռնված չէ։ Ներբեռնեք մոդել Կարգավորումներում։</value>
   </data>
-    <data name="Diag_NeuralFailed" xml:space="preserve">
+  <data name="Diag_NeuralFailed" xml:space="preserve">
     <value>Նյարդային ուղղումը ձախողվեց. {0}</value>
   </data>
-    <data name="Diag_CorrectionFailed" xml:space="preserve">
+  <data name="Diag_CorrectionFailed" xml:space="preserve">
     <value>Ուղղումը ձախողվեց. {0}</value>
   </data>
-    <data name="Neural_Toggle" xml:space="preserve">
+  <data name="Neural_Toggle" xml:space="preserve">
     <value>Նյարդային ուղղում (տեղական մոդել)</value>
   </data>
-    <data name="Neural_Hint" xml:space="preserve">
+  <data name="Neural_Hint" xml:space="preserve">
     <value>Տեղական մոդել՝ բառարանների աջակցությամբ։ Միացրեք, ներբեռնեք մեկը, սեղմեք թեժ ստեղնը։</value>
   </data>
-    <data name="Model_AddLabel" xml:space="preserve">
+  <data name="Model_AddLabel" xml:space="preserve">
     <value>Ավելացնել մոդել</value>
   </data>
-    <data name="Model_AddPlaceholder" xml:space="preserve">
+  <data name="Model_AddPlaceholder" xml:space="preserve">
     <value>Ընտրեք մոդել…</value>
   </data>
-    <data name="Model_AddTooltip" xml:space="preserve">
+  <data name="Model_AddTooltip" xml:space="preserve">
     <value>Ներբեռնել ընտրված մոդելը</value>
   </data>
-    <data name="Model_SelectPlaceholder" xml:space="preserve">
+  <data name="Model_SelectPlaceholder" xml:space="preserve">
     <value>Մոդել տեղադրված չէ</value>
   </data>
-    <data name="Model_RemoveTooltip" xml:space="preserve">
+  <data name="Model_RemoveTooltip" xml:space="preserve">
     <value>Հեռացնել ընտրված մոդելը</value>
   </data>
-    <data name="Model_Downloading" xml:space="preserve">
+  <data name="Model_Downloading" xml:space="preserve">
     <value>Ներբեռնվում է {0}… {1}%</value>
   </data>
-    <data name="Model_Installed" xml:space="preserve">
+  <data name="Model_Installed" xml:space="preserve">
     <value>Տեղադրված է {0}</value>
   </data>
-    <data name="Model_DownloadFailed" xml:space="preserve">
+  <data name="Model_DownloadFailed" xml:space="preserve">
     <value>Ներբեռնումը ձախողվեց. {0}</value>
   </data>
-    <data name="Model_Removed" xml:space="preserve">
+  <data name="Model_Removed" xml:space="preserve">
     <value>Հեռացված է {0}</value>
   </data>
-    <data name="Model_DownloadEmpty" xml:space="preserve">
+  <data name="Model_DownloadEmpty" xml:space="preserve">
     <value>Մոդելի ներբեռնումը օգտագործելի ֆայլեր չվերադարձրեց։</value>
   </data>
-    <data name="Model_LoadFailed" xml:space="preserve">
+  <data name="Model_LoadFailed" xml:space="preserve">
     <value>Չհաջողվեց բեռնել մոդելը. {0}</value>
   </data>
-    <data name="Model_Loading" xml:space="preserve">
+  <data name="Model_Loading" xml:space="preserve">
     <value>Բեռնվում է {0} հիշողության մեջ… (առաջին բեռնումը կարող է երկար տևել)</value>
   </data>
-    <data name="Model_Ready" xml:space="preserve">
+  <data name="Model_Ready" xml:space="preserve">
     <value>{0}-ը պատրաստ է — սեղմեք թեժ ստեղնը՝ ընթացիկ տողը վերագրելու համար։</value>
   </data>
-    <data name="Model_ReadyOn" xml:space="preserve">
+  <data name="Model_ReadyOn" xml:space="preserve">
     <value>{0}-ը պատրաստ է {1}-ում — սեղմեք թեժ ստեղնը՝ ընթացիկ տողը վերագրելու համար։</value>
   </data>
-    <data name="Model_NeedsDownload" xml:space="preserve">
+  <data name="Model_NeedsDownload" xml:space="preserve">
     <value>Նյարդային ուղղումը միացված է, բայց մոդել տեղադրված չէ։ Ներբեռնեք մեկը վերևում։</value>
   </data>
-    <data name="Model_CustomHint" xml:space="preserve">
+  <data name="Model_CustomHint" xml:space="preserve">
     <value>Այստեղ աշխատում են միայն ONNX Runtime GenAI փաթեթով մոդելները, և որոնումը պահում է միայն դրանք։ Կպցված org/name-ը նույնպես աշխատում է։</value>
   </data>
-    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+  <data name="Status_NeuralHotkeyActive" xml:space="preserve">
     <value>Նյարդային ուղղումը միացված է — սեղմեք {0}՝ ընթացիկ տողը վերագրելու համար։</value>
   </data>
-    <data name="Status_NeuralFallbackActive" xml:space="preserve">
+  <data name="Status_NeuralFallbackActive" xml:space="preserve">
     <value>Նյարդային ուղղումը միացված է, բայց մոդել բեռնված չէ — «{0}»-ը ուղղում է բառարանով, մինչև բեռնվի։</value>
   </data>
-    <data name="Diag_BufferChanged" xml:space="preserve">
+  <data name="Diag_BufferChanged" xml:space="preserve">
     <value>Նյարդային ուղղումը չեղարկված է — տողը փոխվել է մոդելի աշխատանքի ժամանակ («{0}»)։</value>
   </data>
-    <data name="Model_RemoveFailed" xml:space="preserve">
+  <data name="Model_RemoveFailed" xml:space="preserve">
     <value>Չհաջողվեց հեռացնել մոդելը. {0}</value>
   </data>
-    <data name="Dict_Empty" xml:space="preserve">
+  <data name="Dict_Empty" xml:space="preserve">
     <value>Բառարաններ դեռ չկան — ավելացրեք լեզու վերևում, որպեսզի ուղղումները կարողանան օգտագործել այն։</value>
   </data>
-    <data name="Action_Download" xml:space="preserve">
+  <data name="Action_Download" xml:space="preserve">
     <value>Ներբեռնել</value>
   </data>
-    <data name="Diag_ImeActive" xml:space="preserve">
+  <data name="Diag_ImeActive" xml:space="preserve">
     <value>Թեժ ստեղն. անտեսված է — ակտիվ մուտքագրման լեզուն (չինարեն/ճապոներեն/կորեերեն) մուտքագրում է IME-ով, ուստի Lapsus-ը չի կարող վերականգնել այդ տեքստը ստեղնահարվածներից։</value>
   </data>
-    <data name="Diag_DeadKeyPending" xml:space="preserve">
+  <data name="Diag_DeadKeyPending" xml:space="preserve">
     <value>Թեժ ստեղն. անտեսված է — մեռած ստեղնը դեռ սպասում է իր տառին։ Մուտքագրեք տառը կամ սեղմեք ⌫, ապա կրկին փորձեք։</value>
   </data>
-    <data name="Diag_SecureField" xml:space="preserve">
+  <data name="Diag_SecureField" xml:space="preserve">
     <value>Թեժ ստեղն. անտեսված է — գաղտնաբառ / անվտանգ մուտք։ Lapsus-ը երբեք չի բուֆերացնում և չի վերագրում այնտեղ մուտքագրվածը։</value>
   </data>
-    <data name="SkipPasswords" xml:space="preserve">
+  <data name="SkipPasswords" xml:space="preserve">
     <value>Բաց թողնել գաղտնաբառի դաշտերը</value>
   </data>
-    <data name="SkipPasswords_Hint" xml:space="preserve">
+  <data name="SkipPasswords_Hint" xml:space="preserve">
     <value>Գաղտնաբառի դաշտերը երբեք չեն բուֆերացվում, երբ ՕՀ-ն թույլ է տալիս տեսնել դրանք։ Chrome/Electron-ը հաճախ թաքցնում է դրանք. Mac-ում տեսանելի է միայն Secure Input-ը։ Անգործ տեքստը ջնջվում է մեկ րոպեից հետո։</value>
   </data>
-    <data name="Tab_General" xml:space="preserve">
+  <data name="Tab_General" xml:space="preserve">
     <value>Ընդհանուր</value>
   </data>
-    <data name="Tab_Library" xml:space="preserve">
+  <data name="Tab_Library" xml:space="preserve">
     <value>Գրադարան</value>
   </data>
-    <data name="Tab_Ai" xml:space="preserve">
+  <data name="Tab_Ai" xml:space="preserve">
     <value>AI</value>
   </data>
-    <data name="Tab_Apps" xml:space="preserve">
+  <data name="Tab_Apps" xml:space="preserve">
     <value>Հավելվածներ</value>
   </data>
-    <data name="Tab_Hotkeys" xml:space="preserve">
+  <data name="Tab_Hotkeys" xml:space="preserve">
     <value>Թեժ ստեղներ</value>
   </data>
-    <data name="Excluded_Label" xml:space="preserve">
+  <data name="Excluded_Label" xml:space="preserve">
     <value>Բառեր, որոնք չպետք է դիպչել</value>
   </data>
-    <data name="Excluded_Hint" xml:space="preserve">
+  <data name="Excluded_Hint" xml:space="preserve">
     <value>Անուններ, մուտքանուններ և ապրանքանիշներ, որոնց երբեք չպետք է դիպչել։</value>
   </data>
-    <data name="Excluded_Placeholder" xml:space="preserve">
+  <data name="Excluded_Placeholder" xml:space="preserve">
     <value>բառ</value>
   </data>
-    <data name="Excluded_Empty" xml:space="preserve">
+  <data name="Excluded_Empty" xml:space="preserve">
     <value>Դեռ ոչինչ բացառված չէ։</value>
   </data>
-    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+  <data name="Excluded_RemoveTooltip" xml:space="preserve">
     <value>Հեռացնել ցանկից</value>
   </data>
-    <data name="ExcludedApps_Label" xml:space="preserve">
+  <data name="ExcludedApps_Label" xml:space="preserve">
     <value>Բաց թողնելի հավելվածներ</value>
   </data>
-    <data name="ExcludedApps_Hint" xml:space="preserve">
+  <data name="ExcludedApps_Hint" xml:space="preserve">
     <value>Lapsus-ը այստեղ լիովին անջատված է. առանց բուֆերի, առանց թեժ ստեղների։</value>
   </data>
-    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+  <data name="ExcludedApps_Placeholder" xml:space="preserve">
     <value>պրոցեսի անուն</value>
   </data>
-    <data name="ExcludedApps_Pick" xml:space="preserve">
+  <data name="ExcludedApps_Pick" xml:space="preserve">
     <value>Ընտրել աշխատող հավելված</value>
   </data>
-    <data name="ExcludedApps_Empty" xml:space="preserve">
+  <data name="ExcludedApps_Empty" xml:space="preserve">
     <value>Բաց թողնված հավելվածներ չկան։</value>
   </data>
-    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+  <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
     <value>Հեռացնել ցանկից</value>
   </data>
-    <data name="Diag_AppExcluded" xml:space="preserve">
+  <data name="Diag_AppExcluded" xml:space="preserve">
     <value>Թեժ ստեղն. Lapsus-ը չի մտնում {0}։</value>
   </data>
-    <data name="Model_DeviceLabel" xml:space="preserve">
+  <data name="Model_DeviceLabel" xml:space="preserve">
     <value>Գործարկել մոդելը</value>
   </data>
-    <data name="Model_DeviceAuto" xml:space="preserve">
+  <data name="Model_DeviceAuto" xml:space="preserve">
     <value>Ավտոմատ</value>
   </data>
-    <data name="Model_DeviceCpu" xml:space="preserve">
+  <data name="Model_DeviceCpu" xml:space="preserve">
     <value>Պրոցեսոր (CPU)</value>
   </data>
-    <data name="Model_DeviceGpu" xml:space="preserve">
+  <data name="Model_DeviceGpu" xml:space="preserve">
     <value>Գրաֆիկական քարտ (GPU)</value>
   </data>
-    <data name="Model_DeviceNpu" xml:space="preserve">
+  <data name="Model_DeviceNpu" xml:space="preserve">
     <value>Նյարդային արագացուցիչ (NPU)</value>
   </data>
-    <data name="Model_DeviceHint" xml:space="preserve">
+  <data name="Model_DeviceHint" xml:space="preserve">
     <value>Այստեղ հասանելի է. {0}։ Այլ սարքի համար կառուցված փաթեթը դեռ աշխատում է — պրոցեսորի վրա։</value>
   </data>
-    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+  <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
     <value>Այստեղ աջակցվող արագացուցիչ չկա, ուստի մոդելը աշխատում է պրոցեսորի վրա։</value>
   </data>
-    <data name="Model_SearchPlaceholder" xml:space="preserve">
+  <data name="Model_SearchPlaceholder" xml:space="preserve">
     <value>Որոնել Hugging Face-ում կամ կպցնել org/name</value>
   </data>
-    <data name="Model_SearchLabel" xml:space="preserve">
+  <data name="Model_SearchLabel" xml:space="preserve">
     <value>Որոնել</value>
   </data>
-    <data name="Model_SearchTooltip" xml:space="preserve">
+  <data name="Model_SearchTooltip" xml:space="preserve">
     <value>Գտնել Hugging Face-ի մոդելներ ONNX Runtime GenAI փաթեթով</value>
   </data>
-    <data name="Model_FoundPlaceholder" xml:space="preserve">
+  <data name="Model_FoundPlaceholder" xml:space="preserve">
     <value>Որոնման արդյունքներ</value>
   </data>
-    <data name="Model_Searching" xml:space="preserve">
+  <data name="Model_Searching" xml:space="preserve">
     <value>Որոնվում է Hugging Face-ում…</value>
   </data>
-    <data name="Model_SearchEmpty" xml:space="preserve">
+  <data name="Model_SearchEmpty" xml:space="preserve">
     <value>Ոչինչ չի գտնվել ONNX Runtime GenAI փաթեթով։</value>
   </data>
-    <data name="Model_SearchFound" xml:space="preserve">
+  <data name="Model_SearchFound" xml:space="preserve">
     <value>Գտնված է. {0}։</value>
   </data>
-    <data name="Model_SearchFailed" xml:space="preserve">
+  <data name="Model_SearchFailed" xml:space="preserve">
     <value>Որոնումը ձախողվեց. {0}</value>
   </data>
-    <data name="Tab_License" xml:space="preserve">
+  <data name="Tab_License" xml:space="preserve">
     <value>Լիցենզիա</value>
   </data>
-    <data name="Lic_Free_Title" xml:space="preserve">
+  <data name="Lic_Free_Title" xml:space="preserve">
     <value>Անվճար — անձնական օգտագործում</value>
   </data>
-    <data name="Lic_Free_Hint" xml:space="preserve">
+  <data name="Lic_Free_Hint" xml:space="preserve">
     <value>Անվճար մասնավոր անձանց համար, այդ թվում՝ ֆրիլանսերների։ Ոչինչ չի արգելափակվում — լիցենզիան ծածկում է ընկերության ներսում օգտագործումը։</value>
   </data>
-    <data name="Lic_Status_Pro" xml:space="preserve">
+  <data name="Lic_Status_Pro" xml:space="preserve">
     <value>Pro · {0}</value>
   </data>
-    <data name="Lic_Status_Business" xml:space="preserve">
+  <data name="Lic_Status_Business" xml:space="preserve">
     <value>Business · {0} · {1} տեղ</value>
   </data>
-    <data name="Lic_Expires" xml:space="preserve">
+  <data name="Lic_Expires" xml:space="preserve">
     <value>Վավեր է մինչև {0}</value>
   </data>
-    <data name="Lic_NoExpiry" xml:space="preserve">
+  <data name="Lic_NoExpiry" xml:space="preserve">
     <value>Առանց ժամկետի</value>
   </data>
-    <data name="Lic_Key_Label" xml:space="preserve">
+  <data name="Lic_Key_Label" xml:space="preserve">
     <value>Լիցենզիայի բանալի</value>
   </data>
-    <data name="Lic_Key_Watermark" xml:space="preserve">
+  <data name="Lic_Key_Watermark" xml:space="preserve">
     <value>Կպցրեք բանալին գնման նամակից</value>
   </data>
-    <data name="Lic_Apply" xml:space="preserve">
+  <data name="Lic_Apply" xml:space="preserve">
     <value>Ակտիվացնել</value>
   </data>
-    <data name="Lic_Remove" xml:space="preserve">
+  <data name="Lic_Remove" xml:space="preserve">
     <value>Հեռացնել</value>
   </data>
-    <data name="Lic_Buy_Hint" xml:space="preserve">
+  <data name="Lic_Buy_Hint" xml:space="preserve">
     <value>Pro-ն մեկ մասնավոր անձի համար է։ Business-ը՝ ըստ տեղերի ընկերությունում։</value>
   </data>
-    <data name="Lic_BuyPro" xml:space="preserve">
+  <data name="Lic_BuyPro" xml:space="preserve">
     <value>Գնել Pro</value>
   </data>
-    <data name="Lic_BuyBusiness" xml:space="preserve">
+  <data name="Lic_BuyBusiness" xml:space="preserve">
     <value>Առևտրային լիցենզիա</value>
   </data>
-    <data name="About_Title" xml:space="preserve">
+  <data name="About_Title" xml:space="preserve">
     <value>Lapsus-ի մասին</value>
   </data>
-    <data name="About_Tooltip" xml:space="preserve">
+  <data name="About_Tooltip" xml:space="preserve">
     <value>Lapsus-ի մասին</value>
   </data>
-    <data name="About_License" xml:space="preserve">
+  <data name="About_License" xml:space="preserve">
     <value>Լիցենզիա</value>
   </data>
-    <data name="About_License_Text" xml:space="preserve">
+  <data name="About_License_Text" xml:space="preserve">
     <value>Անվճար մասնավոր անձանց համար։ Ընկերությունները վճարում են ըստ տեղերի։ Ոչինչ չի արգելափակվում և ժամկետ չունի։</value>
   </data>
-    <data name="About_Website" xml:space="preserve">
+  <data name="About_Website" xml:space="preserve">
     <value>Կայք</value>
   </data>
-    <data name="About_Donate" xml:space="preserve">
+  <data name="About_Donate" xml:space="preserve">
     <value>Աջակցել մշակմանը</value>
   </data>
-    <data name="About_Donate_Hint" xml:space="preserve">
+  <data name="About_Donate_Hint" xml:space="preserve">
     <value>Lapsus-ը ձեզ համար անվճար է՝ առանց գովազդի և հետևման։ Եթե ժամանակ է խնայում, կարող եք աջակցել։</value>
   </data>
-    <data name="About_Donate_Button" xml:space="preserve">
+  <data name="About_Donate_Button" xml:space="preserve">
     <value>Նվիրաբերել</value>
   </data>
-    <data name="About_OpenSource" xml:space="preserve">
+  <data name="About_OpenSource" xml:space="preserve">
     <value>Բաց կոդի լիցենզիաներ</value>
   </data>
-    <data name="About_Tab_Components" xml:space="preserve">
+  <data name="About_Tab_Components" xml:space="preserve">
     <value>Բաղադրիչներ</value>
   </data>
-    <data name="About_Tab_Dictionaries" xml:space="preserve">
+  <data name="About_Tab_Dictionaries" xml:space="preserve">
     <value>Բառարաններ</value>
   </data>
-    <data name="About_Dictionaries_Hint" xml:space="preserve">
+  <data name="About_Dictionaries_Hint" xml:space="preserve">
     <value>Lapsus-ի հետ չեն առաքվում. յուրաքանչյուրը ներբեռնվում է միայն լեզուն ավելացնելիս և պահում է հրատարակի լիցենզիան։</value>
   </data>
-    <data name="About_Dictionaries_All" xml:space="preserve">
+  <data name="About_Dictionaries_All" xml:space="preserve">
     <value>Բոլոր աղբյուրներն ու հեղինակները</value>
   </data>
-    <data name="About_Components_Hint" xml:space="preserve">
+  <data name="About_Components_Hint" xml:space="preserve">
     <value>Առաքվում են Lapsus-ի հետ, յուրաքանչյուրը իր լիցենզիայով։</value>
   </data>
-    <data name="About_LicenseText" xml:space="preserve">
+  <data name="About_LicenseText" xml:space="preserve">
     <value>Լիցենզիայի տեքստ</value>
   </data>
-    <data name="Lic_Err_Malformed" xml:space="preserve">
+  <data name="Lic_Err_Malformed" xml:space="preserve">
     <value>Սա Lapsus բանալու տեսք չունի։ Ստուգեք, որ ամբողջ տողը պատճենված է։</value>
   </data>
-    <data name="Lic_Err_Signature" xml:space="preserve">
+  <data name="Lic_Err_Signature" xml:space="preserve">
     <value>Այս բանալին այս կառուցման համար չի տրվել։</value>
   </data>
-    <data name="Lic_Err_Expired" xml:space="preserve">
+  <data name="Lic_Err_Expired" xml:space="preserve">
     <value>Այս բանալիի ժամկետը լրացել է {0}-ին։</value>
   </data>
-    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+  <data name="Lic_Err_NotConfigured" xml:space="preserve">
     <value>Այս կառուցումը չի կարող ստուգել լիցենզիայի բանալիները։</value>
   </data>
-    <data name="Lic_Ask_Terms" xml:space="preserve">
+  <data name="Lic_Ask_Terms" xml:space="preserve">
     <value>Ով պետք է վճարի։</value>
   </data>
-    <data name="Lic_Free_Managed" xml:space="preserve">
+  <data name="Lic_Free_Managed" xml:space="preserve">
     <value>Այս համակարգիչը կառավարում է կազմակերպությունը — լիցենզիա է պահանջվում։</value>
   </data>
-    <data name="LicRem_Title" xml:space="preserve">
+  <data name="LicRem_Title" xml:space="preserve">
     <value>Lapsus լիցենզիա</value>
   </data>
-    <data name="LicRem_TrialHeadline" xml:space="preserve">
+  <data name="LicRem_TrialHeadline" xml:space="preserve">
     <value>Lapsus-ը ընկերությունում լիցենզավորվում է ըստ տեղերի։ Փորձարկման համար մնացել է {0} օր։</value>
   </data>
-    <data name="LicRem_DueHeadline" xml:space="preserve">
+  <data name="LicRem_DueHeadline" xml:space="preserve">
     <value>Այս համակարգչում Lapsus-ին լիցենզիա է պետք։</value>
   </data>
-    <data name="LicRem_Body" xml:space="preserve">
+  <data name="LicRem_Body" xml:space="preserve">
     <value>Այս համակարգիչը կառավարվում է կազմակերպության կողմից (դոմեն, Entra ID կամ MDM սերվեր)։ Lapsus-ը անվճար է մասնավոր անձանց համար, այդ թվում՝ ֆրիլանսերների. ընկերության ներսում օգտագործումը վճարովի է՝ ըստ տեղերի։</value>
   </data>
-    <data name="LicRem_Why" xml:space="preserve">
+  <data name="LicRem_Why" xml:space="preserve">
     <value>Ոչինչ չի անջատվում և ոչինչ չի ուղարկվում — ստուգումը աշխատում է միայն այս մեքենայում։</value>
   </data>
-    <data name="LicRem_HaveKey" xml:space="preserve">
+  <data name="LicRem_HaveKey" xml:space="preserve">
     <value>Ես ունեմ բանալի</value>
   </data>
-    <data name="LicRem_Later" xml:space="preserve">
+  <data name="LicRem_Later" xml:space="preserve">
     <value>Ավելի ուշ</value>
   </data>
-    <data name="Lic_Err_Seats" xml:space="preserve">
+  <data name="Lic_Err_Seats" xml:space="preserve">
     <value>Այս լիցենզիայի բոլոր տեղերը զբաղված են։ Գրեք {0}-ին՝ տեղը այս համակարգիչ տեղափոխելու համար, կամ գնեք ավելին։</value>
   </data>
-    <data name="Lic_Err_Offline" xml:space="preserve">
+  <data name="Lic_Err_Offline" xml:space="preserve">
     <value>Չհաջողվեց հասնել լիցենզիայի սերվերին։ Բանալին պահված է — ակտիվացումը կկրկնվի։</value>
   </data>
-    <data name="Lic_Err_NoMachine" xml:space="preserve">
+  <data name="Lic_Err_NoMachine" xml:space="preserve">
     <value>Այս համակարգիչը չհաջողվեց նույնականացնել, ուստի լիցենզիան չի կարող կապվել դրան։</value>
   </data>
-    <data name="Lic_Activating" xml:space="preserve">
+  <data name="Lic_Activating" xml:space="preserve">
     <value>Ակտիվացում…</value>
   </data>
-    <data name="Store_Title_Trial" xml:space="preserve">
+  <data name="Store_Title_Trial" xml:space="preserve">
     <value>Lapsus Plus փորձարկում. մնացել է {0} օր</value>
   </data>
-    <data name="Store_Title_Subscription" xml:space="preserve">
+  <data name="Store_Title_Subscription" xml:space="preserve">
     <value>Lapsus Plus. բաժանորդագրությունը ակտիվ է</value>
   </data>
-    <data name="Store_Title_Lifetime" xml:space="preserve">
+  <data name="Store_Title_Lifetime" xml:space="preserve">
     <value>Lapsus Plus. ձերն է ընդմիշտ</value>
   </data>
-    <data name="Store_Title_Free" xml:space="preserve">
+  <data name="Store_Title_Free" xml:space="preserve">
     <value>Lapsus Free</value>
   </data>
-    <data name="Store_Detail" xml:space="preserve">
+  <data name="Store_Detail" xml:space="preserve">
     <value>Ամեն ինչ, բացի նյարդային ուղղումից և հետագայում ավելացված հնարավորություններից, անվճար է ընդմիշտ։ Lapsus Plus-ը ավելացնում է դրանք։</value>
   </data>
-    <data name="Store_Renews" xml:space="preserve">
+  <data name="Store_Renews" xml:space="preserve">
     <value>Թարմացվում է {0}-ին։</value>
   </data>
-    <data name="Store_Yearly" xml:space="preserve">
+  <data name="Store_Yearly" xml:space="preserve">
     <value>Տարեկան, {0}</value>
   </data>
-    <data name="Store_YearlyTrial" xml:space="preserve">
+  <data name="Store_YearlyTrial" xml:space="preserve">
     <value>{0} անվճար, հետո {1} տարեկան</value>
   </data>
-    <data name="Store_TrialDetail" xml:space="preserve">
+  <data name="Store_TrialDetail" xml:space="preserve">
     <value>Անվճար մինչև {0}։ Այնուհետև սկսվում է տարեկան բաժանորդագրությունը, եթե չեղարկեք App Store հաշվի կարգավորումներում առնվազն 24 ժամ առաջ։</value>
   </data>
-    <data name="Store_Lifetime" xml:space="preserve">
+  <data name="Store_Lifetime" xml:space="preserve">
     <value>Ցմահ, {0}</value>
   </data>
-    <data name="Store_Restore" xml:space="preserve">
+  <data name="Store_Restore" xml:space="preserve">
     <value>Վերականգնել գնումները</value>
   </data>
-    <data name="Store_Manage" xml:space="preserve">
+  <data name="Store_Manage" xml:space="preserve">
     <value>Կառավարել բաժանորդագրությունը</value>
   </data>
-    <data name="Store_Disclosure" xml:space="preserve">
+  <data name="Store_Disclosure" xml:space="preserve">
     <value>Տարեկան բաժանորդագրությունը ավտոմատ թարմացվում է, եթե չեղարկեք App Store հաշվի կարգավորումներում առնվազն 24 ժամ առաջ ժամկետի ավարտից։ Վճարումը գանձվում է ձեր Apple Account-ից։</value>
   </data>
-    <data name="Store_Terms" xml:space="preserve">
+  <data name="Store_Terms" xml:space="preserve">
     <value>Օգտագործման պայմաններ</value>
   </data>
-    <data name="Store_Privacy" xml:space="preserve">
+  <data name="Store_Privacy" xml:space="preserve">
     <value>Գաղտնիության քաղաքականություն</value>
   </data>
-    <data name="Store_Unavailable" xml:space="preserve">
+  <data name="Store_Unavailable" xml:space="preserve">
     <value>App Store-ը հիմա հասանելի չէ։ Փորձեք ավելի ուշ։</value>
   </data>
-    <data name="Store_Pending" xml:space="preserve">
+  <data name="Store_Pending" xml:space="preserve">
     <value>Գնումը սպասում է հաստատման։</value>
   </data>
-    <data name="Store_Failed" xml:space="preserve">
+  <data name="Store_Failed" xml:space="preserve">
     <value>Գնումը չանցավ. {0}</value>
   </data>
-    <data name="Store_TrialEnded" xml:space="preserve">
+  <data name="Store_TrialEnded" xml:space="preserve">
     <value>Lapsus Plus փորձարկումը ավարտվել է, ուստի նյարդային ուղղումը անջատված է։ Մնացածը շարունակում է աշխատել։</value>
   </data>
-    <data name="Neural_Locked" xml:space="preserve">
+  <data name="Neural_Locked" xml:space="preserve">
     <value>Նյարդային ուղղումը Lapsus Plus-ի մաս է։</value>
   </data>
-    <data name="Neural_Locked_Button" xml:space="preserve">
+  <data name="Neural_Locked_Button" xml:space="preserve">
     <value>Lapsus Plus-ի մասին</value>
   </data>
-    <data name="Onb_Title" xml:space="preserve">
+  <data name="Onb_Title" xml:space="preserve">
     <value>Բարի գալուստ Lapsus</value>
   </data>
-    <data name="Onb_Intro" xml:space="preserve">
+  <data name="Onb_Intro" xml:space="preserve">
     <value>Lapsus-ը ուղղում է սխալ ստեղնաշարի դասավորությամբ մուտքագրված տեքստը ցանկացած հավելվածում։ Դրա համար պետք է տեսնի ձեր սեղմած ստեղները։</value>
   </data>
-    <data name="Onb_Local" xml:space="preserve">
+  <data name="Onb_Local" xml:space="preserve">
     <value>Ամեն ինչ տեղի է ունենում այս Mac-ում։ Ձեր մուտքագրումը ոչ մի տեղ չի ուղարկվում և չի պահվում։</value>
   </data>
-    <data name="Onb_Passwords" xml:space="preserve">
+  <data name="Onb_Passwords" xml:space="preserve">
     <value>Գաղտնաբառի դաշտերը անտեսվում են. երբ մուտքագրում եք դրանցում, macOS-ը թաքցնում է ստեղները այլ հավելվածներից, այդ թվում՝ Lapsus-ից։</value>
   </data>
-    <data name="Onb_Permissions" xml:space="preserve">
+  <data name="Onb_Permissions" xml:space="preserve">
     <value>Թույլատրեք ներքևի յուրաքանչյուր թույլտվություն։ Կոճակը ցույց է տալիս macOS-ի պատուհանը կամ բացում է ճիշտ ցուցակը System Settings-ում, որտեղ միացնում եք Lapsus-ը։ Կարգավիճակն ինքը կկանաչի։</value>
   </data>
-    <data name="Onb_Continue" xml:space="preserve">
+  <data name="Onb_Continue" xml:space="preserve">
     <value>Շարունակել</value>
   </data>
-    <data name="Tab_Plus" xml:space="preserve">
+  <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
-    <data name="Store_Retry" xml:space="preserve">
+  <data name="Store_Retry" xml:space="preserve">
     <value>Կրկին փորձել</value>
   </data>
-    <data name="Store_RestoreFailed" xml:space="preserve">
+  <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Գնումները չհաջողվեց վերականգնել. {0}</value>
   </data>
-    <data name="Voice_Toggle" xml:space="preserve">
+  <data name="Voice_Toggle" xml:space="preserve">
     <value>Ձայնային մուտքագրում</value>
   </data>
-    <data name="Voice_Hint" xml:space="preserve">
+  <data name="Voice_Hint" xml:space="preserve">
     <value>Խոսեք մուտքագրելու փոխարեն. Lapsus-ը գրում է ասածը կուրսորի տեղում։ Խոսքը ճանաչվում է այս համակարգչում. ձայնը երբեք չի պահվում։</value>
   </data>
-    <data name="Voice_ModelMissing" xml:space="preserve">
+  <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Խոսքի մոդելը դեռ ներբեռնված չէ ({0} ՄԲ)։</value>
   </data>
-    <data name="Voice_ModelReady" xml:space="preserve">
+  <data name="Voice_ModelReady" xml:space="preserve">
     <value>Խոսքի մոդել. {0}։</value>
   </data>
-    <data name="Voice_DownloadFailed" xml:space="preserve">
+  <data name="Voice_DownloadFailed" xml:space="preserve">
     <value>Ներբեռնումը ձախողվեց. {0}</value>
   </data>
-    <data name="Diag_DictationNoModel" xml:space="preserve">
+  <data name="Diag_DictationNoModel" xml:space="preserve">
     <value>Ձայնային մուտքագրման համար պետք է խոսքի մոդելը. ներբեռնեք Կարգավորումներ → AI բաժնում։</value>
   </data>
-    <data name="Diag_MicUnavailable" xml:space="preserve">
+  <data name="Diag_MicUnavailable" xml:space="preserve">
     <value>Միկրոֆոնը հասանելի չէ. {0}</value>
   </data>
-    <data name="Diag_MicSilent" xml:space="preserve">
+  <data name="Diag_MicSilent" xml:space="preserve">
     <value>Միկրոֆոնը գրանցել է միայն լռություն։ Ստուգեք, որ միացված է և Windows-ը թույլ է տալիս հավելվածներին օգտագործել այն։</value>
   </data>
-    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+  <data name="Diag_DictationNothingHeard" xml:space="preserve">
     <value>Ոչինչ չի լսվել։</value>
   </data>
-    <data name="Diag_DictationFailed" xml:space="preserve">
+  <data name="Diag_DictationFailed" xml:space="preserve">
     <value>Ձայնային մուտքագրումը ձախողվեց. {0}</value>
   </data>
-    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+  <data name="Diag_DictationFocusChanged" xml:space="preserve">
     <value>Ֆոկուսը տեղափոխվել է այլ պատուհան ({0}), ուստի տեքստը պատճենվել է սեղմատախտակին։</value>
   </data>
-    <data name="Dictation_HotkeyHint" xml:space="preserve">
+  <data name="Dictation_HotkeyHint" xml:space="preserve">
     <value>Պահեք խոսելիս և բաց թողեք՝ տեքստը մուտքագրելու համար. կարճ սեղմումը ձայնագրում է առանց ձեռքերի մինչև հաջորդ սեղմումը։ Esc-ը չեղարկում է։ Մնացածը՝ Ձայն ներդիրում։</value>
   </data>
-    <data name="Voice_ModelHint" xml:space="preserve">
-    <value>large-v3-ն ամենաճշգրիտն է, բայց ուզում է գրաֆիկական քարտ (առանց դրա՝ մոտ 5 վրկ մեկ արտահայտության համար)։ large-v3-turbo-ն գրեթե նույնքան ճշգրիտ է և ավելի արագ. q5-ը նույն turbo-ն է՝ ավելի փոքր ներբեռնումով։ Whisper small-ը գրաֆիկական քարտ չունեցող համակարգիչների համար է։</value>
+  <data name="Voice_ModelHint" xml:space="preserve">
+    <value>Parakeet TDT v3-ը արագ ընտրություն է առանց վիդեոքարտի (մոտ 0,3 վ մեկ արտահայտության համար), բայց գիտի միայն 25 եվրոպական լեզու, և հայերենը դրանց մեջ չէ։ large-v3-turbo-ն գիտի բոլոր լեզուները և լավագույնն է վիդեոքարտով, q5-ը նույն turbo-ն է՝ ավելի փոքր ներբեռնմամբ։ large-v3-ը մի փոքր ավելի ճշգրիտ է, բայց վիդեոքարտ է պահանջում։ Whisper small-ը ամենափոքր ներբեռնումն է։ Parakeet TDT v2-ը նույնքան արագ է, բայց միայն անգլերենի համար, և դրանում ավելի ճշգրիտ է։ ivrit.ai-ի եբրայերեն turbo-ն ավելի ճշգրիտ է եբրայերենում, բայց ամեն արտահայտություն կարդում է որպես եբրայերեն։ Վրացերենի և հայերենի համար՝ NVIDIA FastConformer. Whisper-ը դրանք գրեթե չգիտի, իսկ սրանք արագ են ու ճշգրիտ, յուրաքանչյուրը միայն իր լեզվի համար։</value>
   </data>
-    <data name="Voice_LanguageLabel" xml:space="preserve">
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>{0} դասավորություն՝ {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>{0} դասավորությանն այլ մոդել է պետք՝ {1}</value>
+  </data>
+  <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Լեզու</value>
   </data>
-    <data name="Voice_LanguageAuto" xml:space="preserve">
+  <data name="Voice_LanguageAuto" xml:space="preserve">
     <value>Ստեղնաշարի դասավորությունից</value>
   </data>
-    <data name="Voice_LanguageHint" xml:space="preserve">
+  <data name="Voice_LanguageHint" xml:space="preserve">
     <value>Ակտիվ դասավորության լեզուն, կամ ձեր այլ դասավորությունների լեզուներից մեկը, երբ խոսքը հստակ այդ լեզվով է։</value>
   </data>
-    <data name="Voice_MicLabel" xml:space="preserve">
+  <data name="Voice_MicLabel" xml:space="preserve">
     <value>Միկրոֆոն</value>
   </data>
-    <data name="Voice_MicDefault" xml:space="preserve">
+  <data name="Voice_MicDefault" xml:space="preserve">
     <value>Համակարգի լռելյայն</value>
   </data>
-    <data name="Voice_UnloadLabel" xml:space="preserve">
+  <data name="Voice_UnloadLabel" xml:space="preserve">
     <value>Ազատել հիշողությունը</value>
   </data>
-    <data name="Voice_UnloadHint" xml:space="preserve">
+  <data name="Voice_UnloadHint" xml:space="preserve">
     <value>Բեռնված ժամանակ խոսքի մոդելը վերցնում է մոտ {0} ՄԲ հիշողություն։ Ազատելուց հետո հաջորդ թելադրումը կրկին բեռնում է այն. ձայնագրումը սկսվում է անմիջապես։</value>
   </data>
-    <data name="Voice_UnloadImmediately" xml:space="preserve">
+  <data name="Voice_UnloadImmediately" xml:space="preserve">
     <value>Յուրաքանչյուր թելադրումից հետո</value>
   </data>
-    <data name="Voice_UnloadMinutes" xml:space="preserve">
+  <data name="Voice_UnloadMinutes" xml:space="preserve">
     <value>{0} րոպեից հետո</value>
   </data>
-    <data name="Voice_UnloadHour" xml:space="preserve">
+  <data name="Voice_UnloadHour" xml:space="preserve">
     <value>1 ժամից հետո</value>
   </data>
-    <data name="Voice_UnloadNever" xml:space="preserve">
+  <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Երբեք (բեռնել գործարկման ժամանակ)</value>
   </data>
-    <data name="Voice_DeviceAuto" xml:space="preserve">
+  <data name="Voice_DeviceAuto" xml:space="preserve">
     <value>Ավտոմատ (գրաֆիկական քարտ, եթե կա)</value>
   </data>
-    <data name="Voice_DeviceNow" xml:space="preserve">
+  <data name="Voice_DeviceNow" xml:space="preserve">
     <value>Աշխատում է. {0}</value>
   </data>
-    <data name="Voice_KeepLatin" xml:space="preserve">
+  <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Անգլերեն տերմինները թողնել լատիներենով</value>
   </data>
-    <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Տերմիններ ինչպես pull request կամ GitHub գրվում են անգլերենով, ոչ թե ձեր այբուբենով։ Ձեր լեզվում ընդունված բառերը մնում են ինչպես կան։</value>
+  <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Տերմիններ ինչպես pull request կամ GitHub գրվում են անգլերենով, ոչ թե ձեր այբուբենով։ Ձեր լեզվում ընդունված բառերը մնում են ինչպես կան։ Երբ ԱԲ մոդելը միացված է, այն կշռում է նաև այն տերմինները, որոնք ճանաչիչն անճշտորեն է լսել։</value>
   </data>
-    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+  <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Խոսքով կետադրություն</value>
   </data>
-    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+  <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
     <value>Ասեք «ստորակետ», «կետ» կամ «հարցական նշան» — նշանը կգրվի։ Աշխատում է անգլերեն, ռուսերեն, ուկրաիներեն և բելառուսերեն։</value>
   </data>
-    <data name="Voice_GlossaryLabel" xml:space="preserve">
+  <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Բառարան</value>
   </data>
-    <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Անուններ և տերմիններ՝ ճիշտ գրելու համար, մեկը տողում, ինչպես պետք է մուտքագրվեն։ Եթե տերմինը անսովոր է հնչում, ավելացրեք ինչպես է հնչում | նշանից հետո։</value>
+  <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Անուններ և տերմիններ՝ ճիշտ գրելու համար, մեկը տողում, ինչպես պետք է մուտքագրվեն։ Եթե տերմինը անսովոր է հնչում, ավելացրեք ինչպես է հնչում | նշանից հետո։ Սխալ լսված բառը, որը թելադրելուց անմիջապես հետո լատինատառ վերամուտքագրեք, ինքն իրեն կավելանա այստեղ։</value>
   </data>
-    <data name="Voice_Locked" xml:space="preserve">
+  <data name="Voice_Locked" xml:space="preserve">
     <value>Ձայնային մուտքագրումը Lapsus Plus-ի մաս է։</value>
   </data>
-    <data name="Diag_MicDenied" xml:space="preserve">
+  <data name="Diag_MicDenied" xml:space="preserve">
     <value>Lapsus-ին չի թույլատրվում օգտագործել միկրոֆոնը։ Թույլատրեք System Settings → Privacy &amp; Security → Microphone բաժնում։</value>
   </data>
-    <data name="Diag_MicAsk" xml:space="preserve">
+  <data name="Diag_MicAsk" xml:space="preserve">
     <value>Թույլատրեք Lapsus-ին օգտագործել միկրոֆոնը երկխոսությունում, ապա կրկին սկսեք ձայնային մուտքագրումը։</value>
   </data>
-    <data name="Tab_Voice" xml:space="preserve">
+  <data name="Tab_Voice" xml:space="preserve">
     <value>Ձայն</value>
   </data>
-    <data name="Voice_ListeningHint" xml:space="preserve">
+  <data name="Voice_ListeningHint" xml:space="preserve">
     <value>{0} — պատրաստ · Esc — չեղարկել</value>
   </data>
-    <data name="Voice_TryIt" xml:space="preserve">
+  <data name="Voice_TryIt" xml:space="preserve">
     <value>Սեղմեք ցանկացած տեքստային դաշտում, պահեք {0} և խոսեք, ապա բաց թողեք. տեքստը հայտնվում է կուրսորի մոտ։ {0}-ի կարճ սեղմումը ձայնագրում է առանց ձեռքերի մինչև կրկին սեղմելը։ Esc-ը չեղարկում է։</value>
   </data>
-    <data name="Voice_NoHotkey" xml:space="preserve">
+  <data name="Voice_NoHotkey" xml:space="preserve">
     <value>թեժ ստեղն չկա — սահմանեք Թեժ ստեղներ ներդիրում</value>
   </data>
-    <data name="Voice_UsageTitle" xml:space="preserve">
+  <data name="Voice_UsageTitle" xml:space="preserve">
     <value>Ինչպես օգտագործել</value>
   </data>
-    <data name="Voice_ShowButton" xml:space="preserve">
+  <data name="Voice_ShowButton" xml:space="preserve">
     <value>Միկրոֆոնի կոճակ էկրանին</value>
   </data>
-    <data name="Voice_ShowButtonHint" xml:space="preserve">
+  <data name="Voice_ShowButtonHint" xml:space="preserve">
     <value>Փոքր կոճակ էկրանի ներքևում. սեղմեք՝ ձայնագրումը սկսելու կամ ավարտելու համար, մկնիկը պահեք՝ թեժ ստեղնը տեսնելու համար։</value>
   </data>
-    <data name="Voice_Sounds" xml:space="preserve">
+  <data name="Voice_Sounds" xml:space="preserve">
     <value>Ձայն ձայնագրման սկզբում և վերջում</value>
   </data>
-    <data name="Voice_ButtonTip" xml:space="preserve">
+  <data name="Voice_ButtonTip" xml:space="preserve">
     <value>Ձայնային մուտքագրում. սեղմեք կամ {0}</value>
   </data>
-    <data name="Voice_SectionMain" xml:space="preserve">
+  <data name="Voice_SectionMain" xml:space="preserve">
     <value>Հիմնական</value>
   </data>
-    <data name="Voice_SectionRecognition" xml:space="preserve">
+  <data name="Voice_SectionRecognition" xml:space="preserve">
     <value>Ճանաչում</value>
   </data>
-    <data name="Voice_TryItTap" xml:space="preserve">
+  <data name="Voice_TryItTap" xml:space="preserve">
     <value>Սեղմեք ցանկացած տեքստային դաշտում, սեղմեք {0} և խոսեք. կրկին սեղմեք {0} — տեքստը հայտնվում է կուրսորի մոտ։ Esc-ը չեղարկում է։</value>
   </data>
-    <data name="Backup_Label" xml:space="preserve">
+  <data name="Backup_Label" xml:space="preserve">
     <value>Կարգավորումների պահուստ</value>
   </data>
-    <data name="Backup_Hint" xml:space="preserve">
+  <data name="Backup_Hint" xml:space="preserve">
     <value>Պահեք կարգավորումները ֆայլում կամ բեռնեք մեկ այլ համակարգչում։ Լիցենզիայի բանալին, բառարանները և մոդելները մնում են իրենց տեղում։</value>
   </data>
-    <data name="Backup_Export" xml:space="preserve">
+  <data name="Backup_Export" xml:space="preserve">
     <value>Արտահանել…</value>
   </data>
-    <data name="Backup_Import" xml:space="preserve">
+  <data name="Backup_Import" xml:space="preserve">
     <value>Ներմուծել…</value>
   </data>
-    <data name="Backup_Exported" xml:space="preserve">
+  <data name="Backup_Exported" xml:space="preserve">
     <value>Կարգավորումները արտահանված են։</value>
   </data>
-    <data name="Backup_Imported" xml:space="preserve">
+  <data name="Backup_Imported" xml:space="preserve">
     <value>Կարգավորումները ներմուծված են։ Փակեք Lapsus-ը և կրկին գործարկեք՝ կիրառելու համար։</value>
   </data>
-    <data name="Backup_ExportFailed" xml:space="preserve">
+  <data name="Backup_ExportFailed" xml:space="preserve">
     <value>Ֆայլը չհաջողվեց գրել։</value>
   </data>
-    <data name="Backup_ImportFailed" xml:space="preserve">
+  <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Սա Lapsus կարգավորումների ֆայլ չէ։</value>
   </data>
-    <data name="Dict_Suggest" xml:space="preserve">
+  <data name="Dict_Suggest" xml:space="preserve">
     <value>Ձեր ստեղնաշարն ունի դասավորություններ առանց բառարանի. {0}։</value>
   </data>
-    <data name="Dict_SuggestAdd" xml:space="preserve">
+  <data name="Dict_SuggestAdd" xml:space="preserve">
     <value>Ներբեռնել</value>
   </data>
-    <data name="Notify_DictMissingTitle" xml:space="preserve">
+  <data name="Notify_DictMissingTitle" xml:space="preserve">
     <value>Դասավորությունը բառարան չունի</value>
   </data>
-    <data name="Notify_DictMissingBody" xml:space="preserve">
+  <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}. բացեք Կարգավորումներ → Գրադարան՝ ներբեռնելու համար։</value>
   </data>
-    <data name="AutoFixSignal" xml:space="preserve">
+  <data name="AutoFixSignal" xml:space="preserve">
     <value>Ցույց տալ, որտեղ բառը ինքնաբերաբար ուղղվել է</value>
   </data>
-    <data name="AutoFixSignal_Hint" xml:space="preserve">
+  <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Դասավորության նշանը մի պահ հայտնվում է կուրսորի մոտ՝ կապույտ գույնով։</value>
   </data>
-    <data name="Stats_Label" xml:space="preserve">
+  <data name="Stats_Label" xml:space="preserve">
     <value>Ինչ է ուղղել Lapsus-ը</value>
   </data>
-    <data name="Stats_Week" xml:space="preserve">
+  <data name="Stats_Week" xml:space="preserve">
     <value>Այս շաբաթ</value>
   </data>
-    <data name="Stats_Layout" xml:space="preserve">
+  <data name="Stats_Layout" xml:space="preserve">
     <value>Սխալ դասավորություն</value>
   </data>
-    <data name="Stats_Typos" xml:space="preserve">
+  <data name="Stats_Typos" xml:space="preserve">
     <value>Տպագրական սխալ</value>
   </data>
-    <data name="Stats_Since" xml:space="preserve">
+  <data name="Stats_Since" xml:space="preserve">
     <value>Տեղադրումից ի վեր</value>
   </data>
-    <data name="Stats_Privacy" xml:space="preserve">
+  <data name="Stats_Privacy" xml:space="preserve">
     <value>Պահվում են միայն հաշվիչները՝ այս համակարգչում։</value>
   </data>
-    <data name="Onb_What" xml:space="preserve">
+  <data name="Onb_What" xml:space="preserve">
     <value>Սկսում եք նախադասություն սխալ ստեղնաշարի դասավորությամբ, սեղմում եք մեկ ստեղն, և այն ուղղվում է տեղում — առանց նորից մուտքագրելու։ Նույն կերպ ուղղում է տպագրական սխալները։</value>
   </data>
-    <data name="Onb_Step" xml:space="preserve">
+  <data name="Onb_Step" xml:space="preserve">
     <value>Քայլ {0}՝ {1}-ից</value>
   </data>
-    <data name="Onb_Next" xml:space="preserve">
+  <data name="Onb_Next" xml:space="preserve">
     <value>Հաջորդ</value>
   </data>
-    <data name="Onb_Back" xml:space="preserve">
+  <data name="Onb_Back" xml:space="preserve">
     <value>Հետ</value>
   </data>
-    <data name="Onb_Done" xml:space="preserve">
+  <data name="Onb_Done" xml:space="preserve">
     <value>Պատրաստ է</value>
   </data>
-    <data name="Onb_Privacy_Title" xml:space="preserve">
+  <data name="Onb_Privacy_Title" xml:space="preserve">
     <value>Ինչ է տեսնում Lapsus-ը</value>
   </data>
-    <data name="Onb_Dict_Title" xml:space="preserve">
+  <data name="Onb_Dict_Title" xml:space="preserve">
     <value>Բառացանկեր ձեր լեզուների համար</value>
   </data>
-    <data name="Onb_Dict_Body" xml:space="preserve">
+  <data name="Onb_Dict_Body" xml:space="preserve">
     <value>Lapsus-ը իրական բառը սխալ մուտքագրվածից տարբերում է յուրաքանչյուր լեզվի բառացանկով։ Ցանկը ներբեռնվում է մեկ անգամ և միայն ձեր խնդրանքով։</value>
   </data>
-    <data name="Onb_Dict_Ready" xml:space="preserve">
+  <data name="Onb_Dict_Ready" xml:space="preserve">
     <value>Այս ստեղնաշարի բոլոր դասավորություններն ունեն իրենց բառացանկը։</value>
   </data>
-    <data name="Onb_Try_Title" xml:space="preserve">
+  <data name="Onb_Try_Title" xml:space="preserve">
     <value>Փորձեք</value>
   </data>
-    <data name="Onb_Try_Body" xml:space="preserve">
+  <data name="Onb_Try_Body" xml:space="preserve">
     <value>Սեղմեք ներքևի դաշտում, մուտքագրեք {0} հենց այդպես և սեղմեք {1}։ Կրկին սեղմեք՝ հաջորդ ընթերցման համար, և ևս մեկ անգամ՝ մուտքագրվածը վերադարձնելու համար։</value>
   </data>
-    <data name="Onb_Options_Title" xml:space="preserve">
+  <data name="Onb_Options_Title" xml:space="preserve">
     <value>Որքան պետք է լինի ինքնաբերաբար</value>
   </data>
-    <data name="Onb_Options_Body" xml:space="preserve">
+  <data name="Onb_Options_Body" xml:space="preserve">
     <value>Թեժ ստեղնը միշտ աշխատում է։ Սրանք ուղղում են բառը բացատ սեղմելուն պես. անմիջապես Backspace-ը վերադարձնում է մուտքագրվածը։</value>
   </data>
-    <data name="Onb_More" xml:space="preserve">
+  <data name="Onb_More" xml:space="preserve">
     <value>Կարգավորումներում ավելին կա. ստեղներ ընտրվածի համար (տառաչափ, տրանսլիտերացիա), ձայնային մուտքագրում, տեղական AI մոդել։ Սկուտեղի պատկերակը բացում է այն։</value>
   </data>
-    <data name="Onb_More_Store" xml:space="preserve">
+  <data name="Onb_More_Store" xml:space="preserve">
       <value>Կարգավորումներում ավելին կա. ստեղներ ընտրվածի համար (տառաչափ, տրանսլիտերացիա), բացառություններ ծրագրերի և բառերի համար։ Սկուտեղի պատկերակը բացում է այն։</value>
     </data>
-    <data name="Onb_Again" xml:space="preserve">
+  <data name="Onb_Again" xml:space="preserve">
     <value>Կրկին ցույց տալ ներածությունը</value>
   </data>
-    <data name="Tray_Pause" xml:space="preserve">
+  <data name="Tray_Pause" xml:space="preserve">
     <value>Դադար</value>
   </data>
-    <data name="Tray_Pause15" xml:space="preserve">
+  <data name="Tray_Pause15" xml:space="preserve">
     <value>15 րոպեով</value>
   </data>
-    <data name="Tray_Pause60" xml:space="preserve">
+  <data name="Tray_Pause60" xml:space="preserve">
     <value>1 ժամով</value>
   </data>
-    <data name="Tray_PauseUntil" xml:space="preserve">
+  <data name="Tray_PauseUntil" xml:space="preserve">
     <value>Մինչև վերսկսեմ</value>
   </data>
-    <data name="Tray_Resume" xml:space="preserve">
+  <data name="Tray_Resume" xml:space="preserve">
     <value>Վերսկսել</value>
   </data>
-    <data name="Capture_Paused" xml:space="preserve">
+  <data name="Capture_Paused" xml:space="preserve">
     <value>Գրավումը դադարեցված է</value>
   </data>
-    <data name="PauseInGames" xml:space="preserve">
+  <data name="PauseInGames" xml:space="preserve">
     <value>Դադար լիաէկրան խաղերում</value>
   </data>
-    <data name="PauseInGames_Hint" xml:space="preserve">
+  <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Երբ խաղը զբաղեցնում է ամբողջ էկրանը, Lapsus-ը հանում է ստեղնաշարի կեռը և վերադարձնում է խաղի ավարտին։</value>
   </data>
-    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+  <data name="AppRule_HotkeyOnly" xml:space="preserve">
     <value>Միայն թեժ ստեղն</value>
   </data>
-    <data name="AppRule_Hint" xml:space="preserve">
+  <data name="AppRule_Hint" xml:space="preserve">
     <value>Նշեք «Միայն թեժ ստեղն» հավելվածի համար՝ թեժ ստեղնը և ընտրվածի ստեղները պահելու համար, բայց բացատից հետո ինքնուղղումները անջատելու համար։</value>
   </data>
-    <data name="Tab_Stats" xml:space="preserve">
+  <data name="Tab_Stats" xml:space="preserve">
     <value>Վիճակագրություն</value>
   </data>
-    <data name="Tab_Backup" xml:space="preserve">
+  <data name="Tab_Backup" xml:space="preserve">
     <value>Պահուստ</value>
   </data>
-    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+  <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Տերմինները նույնպես չեն փոփոխվում, երբ դրանք մուտքագրում եք. այստեղ ավելացված անունը երբեք «չի ուղղվում»։</value>
   </data>
   <data name="Perm_Accessibility" xml:space="preserve">
@@ -1035,5 +1041,23 @@
   </data>
   <data name="Perm_OpenSettings" xml:space="preserve">
     <value>Բացել System Settings</value>
+  </data>
+  <data name="Voice_RemoveFillersHint" xml:space="preserve">
+    <value>Հեռացնում է «ըհը», «ըմ», «uh», «um» տատանումները ճանաչված տեքստից։</value>
+  </data>
+  <data name="Voice_GlossaryAdd" xml:space="preserve">
+    <value>+ Ավելացնել</value>
+  </data>
+  <data name="Voice_GlossaryTermPlaceholder" xml:space="preserve">
+    <value>Բառ կամ արտահայտություն</value>
+  </data>
+  <data name="Voice_RemoveFillers" xml:space="preserve">
+    <value>Հեռացնել լցոնիչ բառերը</value>
+  </data>
+  <data name="Voice_GlossaryRemove" xml:space="preserve">
+    <value>Հեռացնել բառարանից</value>
+  </data>
+  <data name="Voice_GlossaryHeardPlaceholder" xml:space="preserve">
+    <value>Լսվում է որպես (ըստ ցանկության)</value>
   </data>
 </root>

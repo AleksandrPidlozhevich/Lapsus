@@ -86,6 +86,8 @@ internal abstract partial class InputBackendBase<TFocus>
         var spaced = DictationText.FitAfter(line, text);
         if (!TryInject(0, spaced))
             return false;
+        // Parts typed one after another are one dictation to learn from.
+        var dictatedFrom = _dictated is { } earlier && earlier.Line == line ? earlier.From : line.Length;
 
         // Parts typed one after another with nothing in between are taken back together.
         var undo = _dictationUndo is { } last && last.Generation == _bufferGeneration && !last.Removed
@@ -99,7 +101,40 @@ internal abstract partial class InputBackendBase<TFocus>
             _buffer.Append(ch);
         _committedLength = _buffer.Length;
         _dictationUndo = (undo, false, _bufferGeneration);
+        _dictated = (line + spaced, dictatedFrom);
         return true;
+    }
+
+    // The line as the last dictation left it and where the dictated text starts in it, until the caret moves away: a
+    // word the user then backspaces over and retypes in Latin is a term to learn (GlossaryLearner).
+    private (string Line, int From)? _dictated;
+
+    // At the end of each word typed after a dictation. The keys typed since are in the buffer, so its line is the
+    // field's as long as the caret stayed put.
+    private void LearnFromCorrection()
+    {
+        if (_dictated is not { } dictated)
+            return;
+
+        var now = _buffer.Segment;
+        if (now.Length < dictated.From || !now.AsSpan(0, dictated.From).SequenceEqual(dictated.Line.AsSpan(0, dictated.From)))
+        {
+            _dictated = null;
+            return;
+        }
+
+        var learned = GlossaryLearner.Learn(dictated.Line[dictated.From..], now[dictated.From..]);
+        if (learned.Count == 0)
+            return;
+
+        // The corrected line is what later fixes are measured against.
+        _dictated = (now, dictated.From);
+        foreach (var (term, heard) in learned)
+            Dispatcher.UIThread.Post(() =>
+            {
+                GlossaryTermSelected?.Invoke($"{term}|{heard}");
+                RaiseDiagnosticFormat("Diag_GlossaryAdded", term);
+            });
     }
 
     // The correction hotkey right after a dictation, before any key, takes it back; pressed again, retypes it.

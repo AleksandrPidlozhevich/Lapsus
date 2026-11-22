@@ -29,6 +29,91 @@ public sealed class VoiceSettingsTests : IDisposable
         Directory.Delete(_dir, true);
     }
 
+    [Theory]
+    [InlineData(false, "ru,uk,en", SpeechModelCatalog.ParakeetId)]
+    [InlineData(true, "ru,uk,en", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "en,he", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "be,ru", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "en", SpeechModelCatalog.ParakeetEnglishId)]
+    [InlineData(true, "en", SpeechModelCatalog.DefaultId)]
+    [InlineData(false, "he,en", SpeechModelCatalog.HebrewId)]
+    [InlineData(true, "he,en", SpeechModelCatalog.HebrewId)]
+    [InlineData(false, "ka,ru,en", SpeechModelCatalog.GeorgianId)]
+    [InlineData(true, "hy,ru", SpeechModelCatalog.ArmenianId)]
+    [InlineData(false, "ru,ka", SpeechModelCatalog.DefaultId)]
+    public void Parakeet_is_suggested_only_without_a_GPU_and_for_languages_it_hears(bool gpu, string languages, string expected)
+    {
+        var model = SpeechModelCatalog.Recommended(gpu, languages.Split(',', StringSplitOptions.RemoveEmptyEntries));
+
+        Assert.Equal(expected, model.Id);
+    }
+
+    // installed: the downloaded models besides the chosen one.
+    [Theory]
+    [InlineData(SpeechModelCatalog.GeorgianId, "ru", "", SpeechModelCatalog.GeorgianId)]
+    [InlineData(SpeechModelCatalog.GeorgianId, "ru", "whisper-large-v3-turbo-q8", "whisper-large-v3-turbo-q8")]
+    [InlineData(SpeechModelCatalog.GeorgianId, "ru", "whisper-large-v3-turbo-q8,parakeet-tdt-v3-int8", "parakeet-tdt-v3-int8")]
+    [InlineData(SpeechModelCatalog.GeorgianId, "ka", "parakeet-tdt-v3-int8", SpeechModelCatalog.GeorgianId)]
+    [InlineData("whisper-large-v3-turbo-q8", "ka", SpeechModelCatalog.GeorgianId, SpeechModelCatalog.GeorgianId)]
+    [InlineData("whisper-large-v3-turbo-q8", "ru", SpeechModelCatalog.GeorgianId, "whisper-large-v3-turbo-q8")]
+    [InlineData(SpeechModelCatalog.ParakeetId, "he", "whisper-large-v3-turbo-q8", "whisper-large-v3-turbo-q8")]
+    public void A_dictation_runs_on_the_downloaded_model_for_its_layout(
+        string chosen, string language, string installed, string expected)
+    {
+        var have = installed.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        var model = SpeechModelCatalog.ForLanguage(SpeechModelCatalog.Find(chosen)!, language, m => have.Contains(m.Id));
+
+        Assert.Equal(expected, model.Id);
+    }
+
+    [Fact]
+    public void A_layout_with_a_model_of_its_own_offers_that_download()
+    {
+        var parakeet = SpeechModelCatalog.Find(SpeechModelCatalog.ParakeetId)!;
+        var voice = new VoiceViewModel(_settings, _store, new SpeechModelStore(directory: Path.Combine(_dir, "speech")),
+            true, _ => { }, () => { }, () => { }, layouts: () => ["ru", "uk", "ka"], recommend: _ => parakeet);
+
+        // Parakeet hears ru and uk; ka gets NVIDIA's Georgian model, written without capitals.
+        var row = Assert.Single(voice.LayoutModels);
+        Assert.StartsWith("ქართული", row.Text);
+        Assert.Contains(SpeechModelCatalog.Find(SpeechModelCatalog.GeorgianId)!.DisplayName, row.Text);
+        Assert.NotNull(row.Download);
+    }
+
+    [Theory]
+    [InlineData(8, 1)]
+    [InlineData(15.9, 2)]
+    [InlineData(32, 2)]
+    public void A_second_model_stays_loaded_only_with_16_GB(double gigabytes, int models)
+    {
+        Assert.Equal(models, DictationEngine.Capacity((long)(gigabytes * (1L << 30))));
+    }
+
+    [Fact]
+    public void Each_model_idles_by_its_own_last_use()
+    {
+        var now = new DateTime(2026, 11, 21, 12, 0, 0, DateTimeKind.Utc);
+        var morning = now.AddHours(-4).Ticks;
+        var justNow = now.AddSeconds(-30).Ticks;
+
+        Assert.True(DictationEngine.IsIdle(morning, now, TimeSpan.FromMinutes(5)));
+        Assert.False(DictationEngine.IsIdle(justNow, now, TimeSpan.FromMinutes(5)));
+        Assert.True(DictationEngine.IsIdle(justNow, now, TimeSpan.Zero));
+    }
+
+    [Fact]
+    public void The_suggestion_is_taken_while_no_model_is_downloaded()
+    {
+        var parakeet = SpeechModelCatalog.Find(SpeechModelCatalog.ParakeetId)!;
+        new VoiceViewModel(_settings, _store, new SpeechModelStore(directory: Path.Combine(_dir, "speech")), true,
+            _ => { }, () => { }, () => { }, layouts: () => ["ru"], recommend: _ => parakeet);
+
+        Assert.Equal(SpeechModelCatalog.ParakeetId, _settings.SpeechModelId);
+        Assert.Equal(SpeechModelCatalog.ParakeetId, Voice().SelectedModel?.Model.Id);
+    }
+
     [Fact]
     public void Turning_it_on_is_saved_and_applied()
     {
@@ -76,6 +161,19 @@ public sealed class VoiceSettingsTests : IDisposable
     }
 
     [Fact]
+    public void A_learned_spelling_joins_its_term_once()
+    {
+        var voice = Voice();
+        voice.GlossaryText = "Kubernetes|кубер";
+
+        voice.AddGlossaryTerm("Kubernetes|кубнетис");
+        voice.AddGlossaryTerm("Kubernetes|кубнетис");
+        voice.AddGlossaryTerm("Slack|слэк");
+
+        Assert.Equal(["Kubernetes|кубер|кубнетис", "Slack|слэк"], Saved().DictationGlossary);
+    }
+
+    [Fact]
     public void Each_choice_is_saved()
     {
         var voice = Voice();
@@ -85,6 +183,7 @@ public sealed class VoiceSettingsTests : IDisposable
         voice.SelectedUnload = voice.UnloadOptions.First(o => o.Value == SpeechUnloadAfter.Never);
         voice.KeepEnglishTermsLatin = false;
         voice.SpokenPunctuation = false;
+        voice.RemoveFillers = true;
 
         var saved = Saved();
         Assert.Equal("uk", saved.DictationLanguage);
@@ -92,6 +191,21 @@ public sealed class VoiceSettingsTests : IDisposable
         Assert.Equal(SpeechUnloadAfter.Never, saved.SpeechUnloadAfter);
         Assert.False(saved.KeepEnglishTermsLatin);
         Assert.False(saved.DictationSpokenPunctuation);
+        Assert.True(saved.DictationRemoveFillers);
+    }
+
+    [Fact]
+    public void A_draft_glossary_row_is_saved_and_listed()
+    {
+        var voice = Voice();
+        voice.DraftTerm = "Kubernetes";
+        voice.DraftHeard = "кубнетис";
+        voice.AddDraftGlossaryTermCommand.Execute(null);
+
+        Assert.Equal(["Kubernetes|кубнетис"], Saved().DictationGlossary);
+        Assert.Equal("Kubernetes", Assert.Single(voice.GlossaryEntries).Term);
+        Assert.Equal("", voice.DraftTerm);
+        Assert.Equal("", voice.DraftHeard);
     }
 
     [Fact]

@@ -102,16 +102,22 @@ public class DictationSessionTests
     private sealed class Engine : IDictationEngine
     {
         public bool HasModel { get; set; } = true;
+        public bool CanStream { get; set; }
         public int Prepared;
         public int Holding;
         public string Answer = "Закинул pull request.";
         public readonly Queue<string> Answers = new();
         public TaskCompletionSource<string>? Answering;
         public DictationRequest? LastRequest;
+        // Runs inside each recognition: a test moves the clock here to make one slow.
+        public Action? Recognising;
 
-        public IDisposable Hold()
+        public string? PreparedFor;
+        public void Prepare(string? language = null) => (Prepared, PreparedFor) = (Prepared + 1, language);
+
+        public IDisposable Hold(string? language = null)
         {
-            Prepared++;
+            Prepare(language);
             Holding++;
             return new Release(() => Holding--);
         }
@@ -137,6 +143,7 @@ public class DictationSessionTests
         {
             LastRequest = request;
             Requests.Add(request);
+            Recognising?.Invoke();
             PcmLengths.Add(pcm.Length);
             Tokens.Add(ct);
             var text = Answering is { } hold
@@ -205,6 +212,7 @@ public class DictationSessionTests
         Assert.True(rig.Host.DictationActive);
         Assert.Equal("listening", rig.Badge.State);
         Assert.Equal(1, rig.Engine.Prepared);
+        Assert.Equal("ru", rig.Engine.PreparedFor);
 
         rig.Mic.Hear(0.1f);
         rig.Host.PressHotkey();
@@ -216,6 +224,169 @@ public class DictationSessionTests
         Assert.Equal("hidden", rig.Badge.State);
         Assert.Equal("ru", rig.Engine.LastRequest!.Language);
         Assert.Equal(["ru", "en"], rig.Engine.LastRequest.Languages);
+    }
+
+    // Speech, then a stream tick: each call hands the engine the part so far and takes its next answer.
+    private static void SpeakAndStream(Rig rig)
+    {
+        rig.Now += TimeSpan.FromMilliseconds(100);
+        rig.Mic.Hear(0.1f);
+        rig.Now += DictationSession.StreamEvery;
+        rig.Session.Tick();
+    }
+
+    [Fact]
+    public async Task Hands_free_words_two_recognitions_agree_on_are_typed_while_speaking()
+    {
+        var rig = new Rig();
+        rig.Engine.CanStream = true;
+        rig.Engine.Answers.Enqueue("Привет, как");
+        rig.Engine.Answers.Enqueue("Привет, как дела");
+        rig.Engine.Answers.Enqueue("Привет, как дела у тебя?");
+
+        rig.Host.PressHotkey();
+        SpeakAndStream(rig);
+        Assert.Empty(rig.Host.Typed);
+        SpeakAndStream(rig);
+        Assert.Equal(["Привет, как"], rig.Host.Typed);
+
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Привет, как", "дела у тебя?"], rig.Host.Typed);
+        Assert.Equal(["Привет, как дела у тебя?"], rig.Session.History.Recent());
+    }
+
+    [Fact]
+    public async Task Held_live_words_show_in_the_badge_and_are_typed_on_letting_go()
+    {
+        var rig = new Rig();
+        rig.Engine.CanStream = true;
+        rig.Engine.Answers.Enqueue("Привет, как");
+        rig.Engine.Answers.Enqueue("Привет, как дела");
+        rig.Engine.Answers.Enqueue("Привет, как дела?");
+
+        rig.Host.HoldHotkey();
+        SpeakAndStream(rig);
+        SpeakAndStream(rig);
+        Assert.Empty(rig.Host.Typed);
+        Assert.Equal("Привет, как", rig.Badge.Heard);
+
+        rig.Now += DictationSession.HoldToTalk;
+        rig.Host.LetGo();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Привет, как дела?"], rig.Host.Typed);
+    }
+
+    [Fact]
+    public async Task A_part_cut_at_a_pause_types_only_what_its_live_words_left_out()
+    {
+        var rig = new Rig();
+        rig.Engine.CanStream = true;
+        rig.Engine.Answers.Enqueue("Раз два");
+        rig.Engine.Answers.Enqueue("Раз два три");
+        rig.Engine.Answers.Enqueue("Раз два три четыре.");
+        rig.Engine.Answers.Enqueue("Пять.");
+
+        rig.Host.PressHotkey();
+        SpeakAndStream(rig);
+        SpeakAndStream(rig);
+        await SayAPartAsync(rig);
+        Assert.Equal(["Раз два", "три четыре."], rig.Host.Typed);
+
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        Assert.Equal(["Раз два", "три четыре.", "Пять."], rig.Host.Typed);
+        Assert.Equal("Раз два три четыре.", rig.Engine.LastRequest!.PreviousText);
+    }
+
+    [Fact]
+    public void A_slow_live_recognition_is_followed_by_as_long_a_rest()
+    {
+        var rig = new Rig();
+        rig.Engine.CanStream = true;
+        rig.Engine.Recognising = () => rig.Now += TimeSpan.FromMilliseconds(500);
+
+        rig.Host.PressHotkey();
+        SpeakAndStream(rig);
+        var started = rig.Now - TimeSpan.FromMilliseconds(500);
+        rig.Engine.Recognising = null;
+
+        rig.Mic.Hear(0.1f);
+        rig.Now = started + TimeSpan.FromMilliseconds(900);
+        rig.Session.Tick();
+        Assert.Single(rig.Engine.Requests);
+
+        rig.Now = started + TimeSpan.FromMilliseconds(1000);
+        rig.Session.Tick();
+        Assert.Equal(2, rig.Engine.Requests.Count);
+    }
+
+    [Fact]
+    public async Task Live_recognitions_are_marked_and_the_parts_own_is_not()
+    {
+        var rig = new Rig();
+        rig.Engine.CanStream = true;
+
+        rig.Host.PressHotkey();
+        SpeakAndStream(rig);
+        rig.Mic.Hear(0.1f);
+        rig.Host.PressHotkey();
+        await rig.Session.Pending!;
+
+        Assert.Equal([true, false], rig.Engine.Requests.Select(r => r.Live));
+    }
+
+    [Theory]
+    [InlineData(7, true)]
+    [InlineData(4, false)]
+    public void With_live_words_a_long_part_ends_at_a_short_pause(int seconds, bool cut)
+    {
+        var rig = new Rig();
+        rig.Engine.CanStream = true;
+
+        rig.Host.PressHotkey();
+        for (var i = 0; i < seconds * 10; i++)
+        {
+            rig.Now += TimeSpan.FromMilliseconds(100);
+            rig.Mic.Hear(0.1f);
+            rig.Session.Tick();
+        }
+        rig.Now += DictationSession.ShortPauseEndsPart + TimeSpan.FromMilliseconds(50);
+        rig.Session.Tick();
+
+        // Live words typed "Закинул pull"; only a part that ended types the rest (a short one just starts its early
+        // recognition and waits for PauseEndsPart).
+        Assert.Equal(cut, string.Join(' ', rig.Host.Typed).EndsWith("request.", StringComparison.Ordinal));
+        Assert.Equal(DictationSession.State.Listening, rig.Session.Current);
+    }
+
+    [Fact]
+    public void Without_fast_recognition_nothing_is_recognised_before_a_pause()
+    {
+        var rig = new Rig();
+
+        rig.Host.PressHotkey();
+        SpeakAndStream(rig);
+        SpeakAndStream(rig);
+
+        Assert.Empty(rig.Engine.Requests);
+    }
+
+    [Theory]
+    [InlineData("", "один два", 0)]
+    [InlineData("один два", "один два три", 2)]
+    [InlineData("один два", "один два", 1)]
+    [InlineData("один дво", "один два три", 1)]
+    public void Only_words_before_the_latest_last_one_can_be_agreed_on(string previous, string latest, int agreed)
+    {
+        string[] Words(string s) => s.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        Assert.Equal(agreed, LiveWords.Agreed(Words(previous), Words(latest)));
     }
 
     [Fact]
@@ -550,6 +721,8 @@ public class DictationSessionTests
         rig.Host.PressHotkey();
         rig.Session.Dispose();
 
+        Assert.Equal(DictationSession.State.Idle, rig.Session.Current);
+        Assert.False(rig.Host.DictationActive);
         Assert.Equal(0, rig.Engine.Holding);
     }
 
@@ -809,6 +982,37 @@ public class DictationInsertTests
         backend.PressHotkey();
         Assert.Equal((0, " первая часть. Вторая часть."), backend.Injected[^1]);
         Assert.Equal("Итак, первая часть. Вторая часть.", backend.DictationTextBefore());
+    }
+
+    [Fact]
+    public void A_misheard_word_retyped_in_latin_joins_the_glossary()
+    {
+        var backend = Backend();
+        var learned = new List<string>();
+        backend.GlossaryTermSelected += learned.Add;
+        backend.InsertDictatedText("Поправь конфиг для Кубнетис.");
+
+        foreach (var _ in "Кубнетис.")
+            backend.Backspace();
+        backend.Type("Kubernetes ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        Assert.Equal(["Kubernetes|кубнетис"], learned);
+    }
+
+    [Fact]
+    public void After_the_caret_moves_a_retyped_word_teaches_nothing()
+    {
+        var backend = Backend();
+        var learned = new List<string>();
+        backend.GlossaryTermSelected += learned.Add;
+        backend.InsertDictatedText("Поправь конфиг для Кубнетис.");
+
+        backend.DiscardLine();
+        backend.Type("Kubernetes ");
+        Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+
+        Assert.Empty(learned);
     }
 
     [Fact]

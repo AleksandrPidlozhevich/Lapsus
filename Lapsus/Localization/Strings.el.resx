@@ -1,34 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="Window_Title" xml:space="preserve">
+  </resheader>
+  <data name="Window_Title" xml:space="preserve">
     <value>Lapsus — Ρυθμίσεις</value>
   </data>
-    <data name="Subtitle" xml:space="preserve">
+  <data name="Subtitle" xml:space="preserve">
     <value>Διορθώστε τη διάταξη πληκτρολογίου και τα τυπογραφικά λάθη με ένα πλήκτρο</value>
   </data>
-    <data name="Capture_On" xml:space="preserve">
+  <data name="Capture_On" xml:space="preserve">
     <value>Η καταγραφή είναι ενεργή</value>
   </data>
-    <data name="Capture_Off" xml:space="preserve">
+  <data name="Capture_Off" xml:space="preserve">
     <value>Η καταγραφή είναι ανενεργή</value>
   </data>
-    <data name="AutoCorrect" xml:space="preserve">
+  <data name="AutoCorrect" xml:space="preserve">
     <value>Αυτόματη διόρθωση μετά το κενό</value>
   </data>
   <data name="AutoFixTypos" xml:space="preserve">
@@ -43,34 +43,34 @@
   <data name="AutoCorrect_Blocked_Plain" xml:space="preserve">
     <value>Η αυτόματη διόρθωση δεν είναι διαθέσιμη στη λειτουργία «Μόνο αλλαγή διάταξης»: χωρίς λεξικά δεν υπάρχει με τι να ελεγχθούν οι λέξεις.</value>
   </data>
-    <data name="PlainSwitch" xml:space="preserve">
+  <data name="PlainSwitch" xml:space="preserve">
     <value>Μόνο αλλαγή διάταξης, χωρίς λεξικά</value>
   </data>
-    <data name="PlainSwitch_Hint" xml:space="preserve">
+  <data name="PlainSwitch_Hint" xml:space="preserve">
     <value>Αλλάζει τους χαρακτήρες όπως είναι, χωρίς διόρθωση λαθών. Λειτουργεί χωρίς λήψεις· πατήστε ξανά για την επόμενη διάταξη.</value>
   </data>
-    <data name="SwitchLayout" xml:space="preserve">
+  <data name="SwitchLayout" xml:space="preserve">
     <value>Αλλαγή διάταξης συστήματος μετά από διόρθωση</value>
   </data>
-    <data name="SwitchLayout_Hint" xml:space="preserve">
+  <data name="SwitchLayout_Hint" xml:space="preserve">
     <value>Η συντόμευση αλλάζει πάντα τη γλώσσα. Αυτό ισχύει μόνο για αυτόματο μετά το Διάστημα και τη διόρθωση της επιλογής.</value>
   </data>
-    <data name="HotkeyCyclesLayout" xml:space="preserve">
+  <data name="HotkeyCyclesLayout" xml:space="preserve">
     <value>Hotkey always switches the layout</value>
   </data>
-    <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
+  <data name="HotkeyCyclesLayout_Hint" xml:space="preserve">
     <value>With nothing to correct, the hotkey still switches to the next installed layout.</value>
   </data>
-    <data name="StartAtLogin" xml:space="preserve">
+  <data name="StartAtLogin" xml:space="preserve">
     <value>Εκκίνηση κατά τη σύνδεση</value>
   </data>
-    <data name="Indicator_Label" xml:space="preserve">
+  <data name="Indicator_Label" xml:space="preserve">
     <value>Εμφάνιση της διάταξης δίπλα στον δρομέα</value>
   </data>
-    <data name="Indicator_Hint" xml:space="preserve">
+  <data name="Indicator_Hint" xml:space="preserve">
     <value>Ένδειξη με την ενεργή διάταξη δίπλα στον δρομέα κειμένου. Όπου ένα πρόγραμμα δεν δείχνει τον δρομέα (προγράμματα περιήγησης, Electron), η ένδειξη εμφανίζεται για μια στιγμή δίπλα στον δείκτη του ποντικιού όταν αλλάζει η διάταξη.</value>
   </data>
-    <data name="Hotkey_Label" xml:space="preserve">
+  <data name="Hotkey_Label" xml:space="preserve">
     <value>Πλήκτρο συντόμευσης</value>
   </data>
   <data name="HotkeyRecord_Button" xml:space="preserve">
@@ -88,709 +88,715 @@
   <data name="HotkeyRecord_Cancel" xml:space="preserve">
     <value>Ακύρωση</value>
   </data>
-    <data name="SelectionHotkey_Label" xml:space="preserve">
+  <data name="SelectionHotkey_Label" xml:space="preserve">
     <value>Διόρθωση της επιλογής</value>
   </data>
-    <data name="SelectionHotkey_Hint" xml:space="preserve">
+  <data name="SelectionHotkey_Hint" xml:space="preserve">
     <value>Διορθώνει το επιλεγμένο κείμενο — σε οποιοδήποτε παράθυρο, όσο παλιό κι αν είναι.</value>
   </data>
-    <data name="SelectionActions_Label" xml:space="preserve">
+  <data name="SelectionActions_Label" xml:space="preserve">
     <value>Ενέργειες στην επιλογή</value>
   </data>
-    <data name="SelectionCase_Label" xml:space="preserve">
+  <data name="SelectionCase_Label" xml:space="preserve">
     <value>Αλλαγή πεζών/κεφαλαίων</value>
   </data>
-    <data name="SelectionCase_Hint" xml:space="preserve">
+  <data name="SelectionCase_Hint" xml:space="preserve">
     <value>Εναλλάσσει την επιλογή: ΚΕΦΑΛΑΙΑ → πεζά → Κεφαλαίο αρχικό → Κάθε Λέξη.</value>
   </data>
-    <data name="SelectionTranslit_Label" xml:space="preserve">
+  <data name="SelectionTranslit_Label" xml:space="preserve">
     <value>Μεταγραφή</value>
   </data>
-    <data name="SelectionTranslit_Hint" xml:space="preserve">
+  <data name="SelectionTranslit_Hint" xml:space="preserve">
     <value>Κυριλλικά ή ελληνικά ⇄ λατινικά. Νέο πάτημα επαναφέρει.</value>
   </data>
-    <data name="SelectionRtl_Label" xml:space="preserve">
+  <data name="SelectionRtl_Label" xml:space="preserve">
     <value>Επαναφορά εβραϊκών / αραβικών</value>
   </data>
-    <data name="SelectionRtl_Hint" xml:space="preserve">
+  <data name="SelectionRtl_Hint" xml:space="preserve">
     <value>Επαναφέρει μια εβραϊκή ή αραβική γραμμή που ήρθε ανάποδα.</value>
   </data>
-    <data name="SelectionGlossary_Label" xml:space="preserve">
+  <data name="SelectionGlossary_Label" xml:space="preserve">
     <value>Προσθήκη στο γλωσσάρι υπαγόρευσης</value>
   </data>
-    <data name="SelectionGlossary_Hint" xml:space="preserve">
+  <data name="SelectionGlossary_Hint" xml:space="preserve">
     <value>Επιλέξτε ένα όνομα ή όρο και πατήστε το πλήκτρο — η φωνητική πληκτρολόγηση θα τον γράφει έτσι.</value>
   </data>
-    <data name="Pref_Label" xml:space="preserve">
+  <data name="Pref_Label" xml:space="preserve">
     <value>Προτιμώμενη γλώσσα σε ισοπαλία</value>
   </data>
-    <data name="Pref_Hint" xml:space="preserve">
+  <data name="Pref_Hint" xml:space="preserve">
     <value>Ποια γλώσσα κερδίζει όταν μια λέξη ταιριάζει σε πολλές («молоток» σε ru και uk).</value>
   </data>
-    <data name="Lang_Label" xml:space="preserve">
+  <data name="Lang_Label" xml:space="preserve">
     <value>Γλώσσα περιβάλλοντος</value>
   </data>
-    <data name="Theme_Light" xml:space="preserve">
+  <data name="Theme_Light" xml:space="preserve">
     <value>Ανοιχτό θέμα</value>
   </data>
-    <data name="Theme_Dark" xml:space="preserve">
+  <data name="Theme_Dark" xml:space="preserve">
     <value>Σκούρο θέμα</value>
   </data>
-    <data name="Theme_System" xml:space="preserve">
+  <data name="Theme_System" xml:space="preserve">
     <value>Θέμα συστήματος</value>
   </data>
-    <data name="Dict_Label" xml:space="preserve">
+  <data name="Dict_Label" xml:space="preserve">
     <value>Γλώσσες και λεξικά</value>
   </data>
-    <data name="Dict_Hint" xml:space="preserve">
+  <data name="Dict_Hint" xml:space="preserve">
     <value>Κατεβαίνουν μία φορά και μετά λειτουργούν εκτός σύνδεσης. Χωρίς λεξικό μια γλώσσα διορθώνεται χειρότερα.</value>
   </data>
-    <data name="AddLang_Label" xml:space="preserve">
+  <data name="AddLang_Label" xml:space="preserve">
     <value>Προσθήκη γλώσσας</value>
   </data>
-    <data name="Add_Label" xml:space="preserve">
+  <data name="Add_Label" xml:space="preserve">
     <value>Προσθήκη</value>
   </data>
-    <data name="AddLang_Placeholder" xml:space="preserve">
+  <data name="AddLang_Placeholder" xml:space="preserve">
     <value>Επιλέξτε γλώσσα</value>
   </data>
-    <data name="AddLang_Tooltip" xml:space="preserve">
+  <data name="AddLang_Tooltip" xml:space="preserve">
     <value>Λήψη και προσθήκη της επιλεγμένης γλώσσας</value>
   </data>
-    <data name="RemoveDict_Tooltip" xml:space="preserve">
+  <data name="RemoveDict_Tooltip" xml:space="preserve">
     <value>Αφαίρεση λεξικού</value>
   </data>
-    <data name="Pref_Auto" xml:space="preserve">
+  <data name="Pref_Auto" xml:space="preserve">
     <value>Αυτόματα (με βάση τη βαθμολογία, μετά η προτιμώμενη)</value>
   </data>
-    <data name="Status_Disabled" xml:space="preserve">
+  <data name="Status_Disabled" xml:space="preserve">
     <value>Απενεργοποιημένο.</value>
   </data>
-    <data name="Status_UnsupportedPlatform" xml:space="preserve">
+  <data name="Status_UnsupportedPlatform" xml:space="preserve">
     <value>Η καταγραφή πληκτρολογίου δεν είναι ακόμη διαθέσιμη σε αυτή την πλατφόρμα. Οι ρυθμίσεις, τα λεξικά και η εκκίνηση κατά τη σύνδεση λειτουργούν.</value>
   </data>
-    <data name="Status_AutoActive" xml:space="preserve">
+  <data name="Status_AutoActive" xml:space="preserve">
     <value>Ενεργό. Οι λέξεις διορθώνονται αυτόματα μετά το κενό (και με «{0}»).</value>
   </data>
-    <data name="Status_HotkeyActive" xml:space="preserve">
+  <data name="Status_HotkeyActive" xml:space="preserve">
     <value>Ενεργό. Πληκτρολογήστε μια λέξη και πατήστε «{0}» — το Lapsus τη διορθώνει επιτόπου.</value>
   </data>
-    <data name="Status_StartFailed" xml:space="preserve">
+  <data name="Status_StartFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η έναρξη της καταγραφής: {0}</value>
   </data>
-    <data name="Status_StartupFailed" xml:space="preserve">
+  <data name="Status_StartupFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η ενημέρωση της εκκίνησης κατά τη σύνδεση: {0}</value>
   </data>
-    <data name="Status_AccessibilityRequired" xml:space="preserve">
+  <data name="Status_AccessibilityRequired" xml:space="preserve">
     <value>Δεν ήταν δυνατή η έναρξη της καταγραφής πληκτρολογίου. Ενεργοποιήστε το Lapsus στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια → Προσβασιμότητα· η καταγραφή θα ξεκινήσει μόνη της.</value>
   </data>
-    <data name="Perm_Explain" xml:space="preserve">
+  <data name="Perm_Explain" xml:space="preserve">
     <value>Το Lapsus χρειάζεται αυτές τις άδειες. Κάθε κουμπί δείχνει το παράθυρο του macOS ή ανοίγει τη σωστή λίστα στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια, όπου ενεργοποιείτε το Lapsus. Η κατάσταση εδώ ενημερώνεται μόνη της.</value>
   </data>
-    <data name="Status_Corrected" xml:space="preserve">
+  <data name="Status_Corrected" xml:space="preserve">
     <value>Διορθώθηκε: {0} → {1}</value>
   </data>
-    <data name="Dict_Downloading" xml:space="preserve">
+  <data name="Dict_Downloading" xml:space="preserve">
     <value>Γίνεται λήψη «{0}»…</value>
   </data>
-    <data name="Dict_Installed" xml:space="preserve">
+  <data name="Dict_Installed" xml:space="preserve">
     <value>Το «{0}» εγκαταστάθηκε.</value>
   </data>
-    <data name="Dict_Updated" xml:space="preserve">
+  <data name="Dict_Updated" xml:space="preserve">
     <value>Το «{0}» ενημερώθηκε.</value>
   </data>
-    <data name="UpdateDict_Tooltip" xml:space="preserve">
+  <data name="UpdateDict_Tooltip" xml:space="preserve">
     <value>Λήψη του πληρέστερου λεξικού</value>
   </data>
-    <data name="Dict_DownloadFailed" xml:space="preserve">
+  <data name="Dict_DownloadFailed" xml:space="preserve">
     <value>Η λήψη απέτυχε: {0}</value>
   </data>
-    <data name="Dict_Removed" xml:space="preserve">
+  <data name="Dict_Removed" xml:space="preserve">
     <value>Το «{0}» αφαιρέθηκε.</value>
   </data>
-    <data name="Dict_DownloadEmpty" xml:space="preserve">
+  <data name="Dict_DownloadEmpty" xml:space="preserve">
     <value>Το λεξικό που κατέβηκε είναι κενό.</value>
   </data>
-    <data name="Tray_Settings" xml:space="preserve">
+  <data name="Tray_Settings" xml:space="preserve">
     <value>Ρυθμίσεις</value>
   </data>
-    <data name="Tray_DictationHistory" xml:space="preserve">
+  <data name="Tray_DictationHistory" xml:space="preserve">
     <value>Πρόσφατες υπαγορεύσεις</value>
   </data>
-    <data name="Tray_Exit" xml:space="preserve">
+  <data name="Tray_Exit" xml:space="preserve">
     <value>Έξοδος</value>
   </data>
-    <data name="Tray_Quit" xml:space="preserve">
+  <data name="Tray_Quit" xml:space="preserve">
     <value>Τερματισμός Lapsus</value>
   </data>
-    <data name="Tray_Tooltip" xml:space="preserve">
+  <data name="Tray_Tooltip" xml:space="preserve">
     <value>Lapsus — διόρθωση διάταξης</value>
   </data>
-    <data name="Tray_UpdateAvailable" xml:space="preserve">
+  <data name="Tray_UpdateAvailable" xml:space="preserve">
     <value>Διαθέσιμη ενημέρωση — επανεκκινήστε για εγκατάσταση</value>
   </data>
-    <data name="Tray_InstallUpdate" xml:space="preserve">
+  <data name="Tray_InstallUpdate" xml:space="preserve">
     <value>Επανεκκίνηση για εγκατάσταση της έκδοσης {0}</value>
   </data>
-    <data name="Tray_TooltipUpdateReady" xml:space="preserve">
+  <data name="Tray_TooltipUpdateReady" xml:space="preserve">
     <value>Lapsus — η έκδοση {0} είναι έτοιμη για εγκατάσταση</value>
   </data>
-    <data name="Notify_UpdateReadyTitle" xml:space="preserve">
+  <data name="Notify_UpdateReadyTitle" xml:space="preserve">
     <value>Το Lapsus {0} είναι έτοιμο για εγκατάσταση</value>
   </data>
-    <data name="Notify_UpdateReadyBody" xml:space="preserve">
+  <data name="Notify_UpdateReadyBody" xml:space="preserve">
     <value>Κάντε επανεκκίνηση από το μενού του εικονιδίου ή η ενημέρωση θα εγκατασταθεί στην επόμενη εκκίνηση του Lapsus.</value>
   </data>
-    <data name="Update_Tooltip" xml:space="preserve">
+  <data name="Update_Tooltip" xml:space="preserve">
     <value>Επανεκκίνηση για εγκατάσταση αυτής της ενημέρωσης</value>
   </data>
-    <data name="Update_CheckTooltip" xml:space="preserve">
+  <data name="Update_CheckTooltip" xml:space="preserve">
     <value>Έλεγχος για ενημερώσεις</value>
   </data>
-    <data name="Status_UpToDate" xml:space="preserve">
+  <data name="Status_UpToDate" xml:space="preserve">
     <value>Το Lapsus είναι ενημερωμένο.</value>
   </data>
-    <data name="Status_UpdateCheckFailed" xml:space="preserve">
+  <data name="Status_UpdateCheckFailed" xml:space="preserve">
     <value>Ο έλεγχος ενημερώσεων απέτυχε: {0}</value>
   </data>
-    <data name="Status_UpdateNotSupported" xml:space="preserve">
+  <data name="Status_UpdateNotSupported" xml:space="preserve">
     <value>Αυτό το αντίγραφο δεν ενημερώνεται μόνο του — κατεβάστε την τελευταία έκδοση.</value>
   </data>
-    <data name="Diag_Empty" xml:space="preserve">
+  <data name="Diag_Empty" xml:space="preserve">
     <value>Συντόμευση: δεν πληκτρολογήθηκε τίποτα (παράθυρο: {0}).</value>
   </data>
-    <data name="Diag_NoChange" xml:space="preserve">
+  <data name="Diag_NoChange" xml:space="preserve">
     <value>Συντόμευση: «{0}» — όλες οι λέξεις φαίνονται σωστές, δεν υπάρχει τίποτα να αλλάξει.</value>
   </data>
-    <data name="Diag_NoSelection" xml:space="preserve">
+  <data name="Diag_NoSelection" xml:space="preserve">
     <value>Επιλογή: δεν είναι επιλεγμένο τίποτα ή το {0} δεν απαντά σε αντιγραφή.</value>
   </data>
-    <data name="Diag_GlossaryAdded" xml:space="preserve">
+  <data name="Diag_GlossaryAdded" xml:space="preserve">
     <value>Προστέθηκε στο γλωσσάρι: {0}</value>
   </data>
-    <data name="Diag_GlossaryTooLong" xml:space="preserve">
+  <data name="Diag_GlossaryTooLong" xml:space="preserve">
     <value>Γλωσσάρι: επιλέξτε έναν όρο, όχι πρόταση.</value>
   </data>
-    <data name="Diag_ClipboardFailed" xml:space="preserve">
+  <data name="Diag_ClipboardFailed" xml:space="preserve">
     <value>Επιλογή: δεν ήταν δυνατή η χρήση του προχείρου ({0}).</value>
   </data>
-    <data name="Diag_TapReenabled" xml:space="preserve">
+  <data name="Diag_TapReenabled" xml:space="preserve">
     <value>Η καταγραφή πληκτρολογίου κόλλησε για λίγο και επανεκκινήθηκε. Αν επαναλαμβάνεται, κλείστε μια εφαρμογή που επιβαρύνει την Προσβασιμότητα.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Η καταγραφή πληκτρολογίου λειτουργεί ξανά.</value>
   </data>
-    <data name="Diag_NoDictionaries" xml:space="preserve">
+  <data name="Diag_NoDictionaries" xml:space="preserve">
     <value>Πριν διορθώσετε τη διάταξη, κατεβάστε τουλάχιστον ένα ορθογραφικό λεξικό στις ρυθμίσεις.</value>
   </data>
-    <data name="Diag_SendFailed" xml:space="preserve">
+  <data name="Diag_SendFailed" xml:space="preserve">
     <value>Το SendInput απέτυχε (backspace {0}/{1}, unicode {2}/{3}, σφάλμα {4}, παράθυρο: {5}). Το παράθυρο προορισμού πιθανότατα εκτελείται ως διαχειριστής.</value>
   </data>
-    <data name="Diag_NoLayoutList" xml:space="preserve">
+  <data name="Diag_NoLayoutList" xml:space="preserve">
     <value>Αλλαγή διάταξης: το σύστημα δεν επέστρεψε καμία λίστα διατάξεων.</value>
   </data>
-    <data name="Diag_LayoutNotInstalled" xml:space="preserve">
+  <data name="Diag_LayoutNotInstalled" xml:space="preserve">
     <value>Η διάταξη {0} δεν είναι εγκατεστημένη στα Windows (διαθέσιμες: {1}). Προσθέστε την από Ρυθμίσεις → Ώρα και γλώσσα → Γλώσσα και περιοχή.</value>
   </data>
-    <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
+  <data name="Diag_LayoutNotInstalled_Mac" xml:space="preserve">
     <value>Η διάταξη {0} δεν είναι εγκατεστημένη σε αυτόν τον Mac (διαθέσιμες: {1}). Προσθέστε την από Ρυθμίσεις συστήματος → Πληκτρολόγιο → Πηγές εισόδου.</value>
   </data>
-    <data name="Diag_InjectFailed" xml:space="preserve">
+  <data name="Diag_InjectFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η αποστολή πλήκτρων στην ενεργή εφαρμογή ({0}). Ελέγξτε την άδεια Προσβασιμότητας για το Lapsus.</value>
   </data>
-    <data name="Diag_FocusChanged" xml:space="preserve">
+  <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Συντόμευση: αγνοήθηκε — η εστίαση μετακινήθηκε σε άλλο παράθυρο ή εφαρμογή ({0}). Πληκτρολογήστε ξανά στο πεδίο που θέλετε.</value>
   </data>
-    <data name="Diag_NoModel" xml:space="preserve">
+  <data name="Diag_NoModel" xml:space="preserve">
     <value>Συντόμευση: η νευρωνική διόρθωση είναι ενεργή, αλλά δεν έχει φορτωθεί μοντέλο. Κατεβάστε ένα από τις ρυθμίσεις.</value>
   </data>
-    <data name="Diag_NeuralFailed" xml:space="preserve">
+  <data name="Diag_NeuralFailed" xml:space="preserve">
     <value>Η νευρωνική διόρθωση απέτυχε: {0}</value>
   </data>
-    <data name="Diag_CorrectionFailed" xml:space="preserve">
+  <data name="Diag_CorrectionFailed" xml:space="preserve">
     <value>Η διόρθωση απέτυχε: {0}</value>
   </data>
-    <data name="Neural_Toggle" xml:space="preserve">
+  <data name="Neural_Toggle" xml:space="preserve">
     <value>Νευρωνική διόρθωση (τοπικό μοντέλο)</value>
   </data>
-    <data name="Neural_Hint" xml:space="preserve">
+  <data name="Neural_Hint" xml:space="preserve">
     <value>Ένα τοπικό μοντέλο, με τη στήριξη των λεξικών. Ενεργοποιήστε, κατεβάστε ένα, πατήστε τη συντόμευση.</value>
   </data>
-    <data name="Model_AddLabel" xml:space="preserve">
+  <data name="Model_AddLabel" xml:space="preserve">
     <value>Προσθήκη μοντέλου</value>
   </data>
-    <data name="Model_AddPlaceholder" xml:space="preserve">
+  <data name="Model_AddPlaceholder" xml:space="preserve">
     <value>Επιλέξτε μοντέλο…</value>
   </data>
-    <data name="Model_AddTooltip" xml:space="preserve">
+  <data name="Model_AddTooltip" xml:space="preserve">
     <value>Λήψη του επιλεγμένου μοντέλου</value>
   </data>
-    <data name="Model_SelectPlaceholder" xml:space="preserve">
+  <data name="Model_SelectPlaceholder" xml:space="preserve">
     <value>Δεν έχει εγκατασταθεί μοντέλο</value>
   </data>
-    <data name="Model_RemoveTooltip" xml:space="preserve">
+  <data name="Model_RemoveTooltip" xml:space="preserve">
     <value>Αφαίρεση του επιλεγμένου μοντέλου</value>
   </data>
-    <data name="Model_Downloading" xml:space="preserve">
+  <data name="Model_Downloading" xml:space="preserve">
     <value>Γίνεται λήψη {0}… {1}%</value>
   </data>
-    <data name="Model_Installed" xml:space="preserve">
+  <data name="Model_Installed" xml:space="preserve">
     <value>Το {0} εγκαταστάθηκε</value>
   </data>
-    <data name="Model_DownloadFailed" xml:space="preserve">
+  <data name="Model_DownloadFailed" xml:space="preserve">
     <value>Η λήψη απέτυχε: {0}</value>
   </data>
-    <data name="Model_Removed" xml:space="preserve">
+  <data name="Model_Removed" xml:space="preserve">
     <value>Το {0} αφαιρέθηκε</value>
   </data>
-    <data name="Model_DownloadEmpty" xml:space="preserve">
+  <data name="Model_DownloadEmpty" xml:space="preserve">
     <value>Η λήψη του μοντέλου δεν επέστρεψε χρησιμοποιήσιμα αρχεία.</value>
   </data>
-    <data name="Model_LoadFailed" xml:space="preserve">
+  <data name="Model_LoadFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η φόρτωση του μοντέλου: {0}</value>
   </data>
-    <data name="Model_Loading" xml:space="preserve">
+  <data name="Model_Loading" xml:space="preserve">
     <value>Φόρτωση του {0} στη μνήμη… (η πρώτη φόρτωση μπορεί να αργήσει)</value>
   </data>
-    <data name="Model_Ready" xml:space="preserve">
+  <data name="Model_Ready" xml:space="preserve">
     <value>Το {0} είναι έτοιμο — πατήστε τη συντόμευση για να ξαναγραφτεί η τρέχουσα γραμμή.</value>
   </data>
-    <data name="Model_ReadyOn" xml:space="preserve">
+  <data name="Model_ReadyOn" xml:space="preserve">
     <value>Το {0} είναι έτοιμο σε {1} — πατήστε τη συντόμευση για να ξαναγραφτεί η τρέχουσα γραμμή.</value>
   </data>
-    <data name="Model_NeedsDownload" xml:space="preserve">
+  <data name="Model_NeedsDownload" xml:space="preserve">
     <value>Η νευρωνική διόρθωση είναι ενεργή, αλλά δεν έχει εγκατασταθεί μοντέλο. Κατεβάστε ένα παραπάνω.</value>
   </data>
-    <data name="Model_CustomHint" xml:space="preserve">
+  <data name="Model_CustomHint" xml:space="preserve">
     <value>Εδώ τρέχουν μόνο μοντέλα με πακέτο ONNX Runtime GenAI και η αναζήτηση κρατά ακριβώς αυτά. Ένα επικολλημένο org/name λειτουργεί επίσης.</value>
   </data>
-    <data name="Status_NeuralHotkeyActive" xml:space="preserve">
+  <data name="Status_NeuralHotkeyActive" xml:space="preserve">
     <value>Νευρωνική διόρθωση ενεργή — πατήστε {0} για να ξαναγραφτεί η τρέχουσα γραμμή.</value>
   </data>
   <data name="Status_NeuralFallbackActive" xml:space="preserve">
     <value>Η νευρωνική διόρθωση είναι ενεργή, αλλά δεν έχει φορτωθεί μοντέλο — το «{0}» διορθώνει με το λεξικό μέχρι να φορτωθεί.</value>
   </data>
-    <data name="Diag_BufferChanged" xml:space="preserve">
+  <data name="Diag_BufferChanged" xml:space="preserve">
     <value>Η νευρωνική διόρθωση ακυρώθηκε — η γραμμή άλλαξε ενώ έτρεχε το μοντέλο («{0}»).</value>
   </data>
-    <data name="Model_RemoveFailed" xml:space="preserve">
+  <data name="Model_RemoveFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η αφαίρεση του μοντέλου: {0}</value>
   </data>
-    <data name="Dict_Empty" xml:space="preserve">
+  <data name="Dict_Empty" xml:space="preserve">
     <value>Δεν υπάρχουν ακόμη λεξικά — προσθέστε μια γλώσσα παραπάνω για να τη χρησιμοποιούν οι διορθώσεις.</value>
   </data>
-    <data name="Action_Download" xml:space="preserve">
+  <data name="Action_Download" xml:space="preserve">
     <value>Λήψη</value>
   </data>
-    <data name="Diag_ImeActive" xml:space="preserve">
+  <data name="Diag_ImeActive" xml:space="preserve">
     <value>Συντόμευση: αγνοήθηκε — η ενεργή γλώσσα εισαγωγής (κινεζικά/ιαπωνικά/κορεατικά) γράφει μέσω IME, οπότε το Lapsus δεν μπορεί να ανακατασκευάσει αυτό το κείμενο από τα πλήκτρα.</value>
   </data>
-    <data name="Diag_DeadKeyPending" xml:space="preserve">
+  <data name="Diag_DeadKeyPending" xml:space="preserve">
     <value>Συντόμευση: αγνοήθηκε — ένα νεκρό πλήκτρο (τόνος) περιμένει ακόμη το γράμμα του. Πληκτρολογήστε το γράμμα ή πατήστε ⌫ και δοκιμάστε ξανά.</value>
   </data>
-    <data name="Diag_SecureField" xml:space="preserve">
+  <data name="Diag_SecureField" xml:space="preserve">
     <value>Συντόμευση: αγνοήθηκε — αυτό είναι πεδίο κωδικού. Το Lapsus δεν αποθηκεύει ούτε ξαναγράφει ποτέ ό,τι πληκτρολογείτε εκεί.</value>
   </data>
-    <data name="SkipPasswords" xml:space="preserve">
+  <data name="SkipPasswords" xml:space="preserve">
     <value>Παράλειψη πεδίων κωδικού</value>
   </data>
-    <data name="SkipPasswords_Hint" xml:space="preserve">
+  <data name="SkipPasswords_Hint" xml:space="preserve">
     <value>Τα πεδία κωδικού δεν αποθηκεύονται ποτέ. Σε πρόγραμμα περιήγησης αυτό ενεργοποιεί τη μηχανή προσβασιμότητάς του.</value>
   </data>
-    <data name="Tab_General" xml:space="preserve">
+  <data name="Tab_General" xml:space="preserve">
     <value>Γενικά</value>
   </data>
-    <data name="Tab_Library" xml:space="preserve">
+  <data name="Tab_Library" xml:space="preserve">
     <value>Βιβλιοθήκη</value>
   </data>
-    <data name="Tab_Ai" xml:space="preserve">
+  <data name="Tab_Ai" xml:space="preserve">
     <value>ΤΝ</value>
   </data>
-    <data name="Tab_Apps" xml:space="preserve">
+  <data name="Tab_Apps" xml:space="preserve">
     <value>Εφαρμογές</value>
   </data>
   <data name="Tab_Hotkeys" xml:space="preserve">
     <value>Πλήκτρα</value>
   </data>
-    <data name="Excluded_Label" xml:space="preserve">
+  <data name="Excluded_Label" xml:space="preserve">
     <value>Λέξεις που δεν πειράζουμε</value>
   </data>
-    <data name="Excluded_Hint" xml:space="preserve">
+  <data name="Excluded_Hint" xml:space="preserve">
     <value>Ονόματα, λογαριασμοί και μάρκες που δεν αλλάζουν ποτέ.</value>
   </data>
-    <data name="Excluded_Placeholder" xml:space="preserve">
+  <data name="Excluded_Placeholder" xml:space="preserve">
     <value>λέξη</value>
   </data>
-    <data name="Excluded_Empty" xml:space="preserve">
+  <data name="Excluded_Empty" xml:space="preserve">
     <value>Καμία εξαίρεση ακόμη.</value>
   </data>
-    <data name="Excluded_RemoveTooltip" xml:space="preserve">
+  <data name="Excluded_RemoveTooltip" xml:space="preserve">
     <value>Αφαίρεση από τη λίστα</value>
   </data>
-    <data name="ExcludedApps_Label" xml:space="preserve">
+  <data name="ExcludedApps_Label" xml:space="preserve">
     <value>Εφαρμογές που παραλείπονται</value>
   </data>
-    <data name="ExcludedApps_Hint" xml:space="preserve">
+  <data name="ExcludedApps_Hint" xml:space="preserve">
     <value>Σε αυτές το Lapsus είναι εντελώς ανενεργό: χωρίς προσωρινή μνήμη, χωρίς συντομεύσεις.</value>
   </data>
-    <data name="ExcludedApps_Placeholder" xml:space="preserve">
+  <data name="ExcludedApps_Placeholder" xml:space="preserve">
     <value>όνομα διεργασίας</value>
   </data>
-    <data name="ExcludedApps_Pick" xml:space="preserve">
+  <data name="ExcludedApps_Pick" xml:space="preserve">
     <value>Επιλέξτε μια εφαρμογή που εκτελείται</value>
   </data>
-    <data name="ExcludedApps_Empty" xml:space="preserve">
+  <data name="ExcludedApps_Empty" xml:space="preserve">
     <value>Δεν παραλείπεται καμία εφαρμογή.</value>
   </data>
-    <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
+  <data name="ExcludedApps_RemoveTooltip" xml:space="preserve">
     <value>Αφαίρεση από τη λίστα</value>
   </data>
-    <data name="Diag_AppExcluded" xml:space="preserve">
+  <data name="Diag_AppExcluded" xml:space="preserve">
     <value>Συντόμευση: το Lapsus δεν επεμβαίνει στο {0}.</value>
   </data>
-    <data name="Model_DeviceLabel" xml:space="preserve">
+  <data name="Model_DeviceLabel" xml:space="preserve">
     <value>Εκτέλεση του μοντέλου σε</value>
   </data>
-    <data name="Model_DeviceAuto" xml:space="preserve">
+  <data name="Model_DeviceAuto" xml:space="preserve">
     <value>Αυτόματα</value>
   </data>
-    <data name="Model_DeviceCpu" xml:space="preserve">
+  <data name="Model_DeviceCpu" xml:space="preserve">
     <value>Επεξεργαστής (CPU)</value>
   </data>
-    <data name="Model_DeviceGpu" xml:space="preserve">
+  <data name="Model_DeviceGpu" xml:space="preserve">
     <value>Κάρτα γραφικών (GPU)</value>
   </data>
-    <data name="Model_DeviceNpu" xml:space="preserve">
+  <data name="Model_DeviceNpu" xml:space="preserve">
     <value>Νευρωνικός επιταχυντής (NPU)</value>
   </data>
-    <data name="Model_DeviceHint" xml:space="preserve">
+  <data name="Model_DeviceHint" xml:space="preserve">
     <value>Διαθέσιμα εδώ: {0}. Ένα πακέτο φτιαγμένο για άλλη συσκευή τρέχει κι αυτό — στον επεξεργαστή.</value>
   </data>
-    <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
+  <data name="Model_DeviceHintCpuOnly" xml:space="preserve">
     <value>Δεν υπάρχει εδώ υποστηριζόμενος επιταχυντής, οπότε το μοντέλο τρέχει στον επεξεργαστή.</value>
   </data>
-    <data name="Model_SearchPlaceholder" xml:space="preserve">
+  <data name="Model_SearchPlaceholder" xml:space="preserve">
     <value>Αναζητήστε στο Hugging Face ή επικολλήστε org/name</value>
   </data>
-    <data name="Model_SearchLabel" xml:space="preserve">
+  <data name="Model_SearchLabel" xml:space="preserve">
     <value>Αναζήτηση</value>
   </data>
-    <data name="Model_SearchTooltip" xml:space="preserve">
+  <data name="Model_SearchTooltip" xml:space="preserve">
     <value>Βρείτε στο Hugging Face μοντέλα που περιλαμβάνουν πακέτο ONNX Runtime GenAI</value>
   </data>
-    <data name="Model_FoundPlaceholder" xml:space="preserve">
+  <data name="Model_FoundPlaceholder" xml:space="preserve">
     <value>Αποτελέσματα αναζήτησης</value>
   </data>
-    <data name="Model_Searching" xml:space="preserve">
+  <data name="Model_Searching" xml:space="preserve">
     <value>Αναζήτηση στο Hugging Face…</value>
   </data>
-    <data name="Model_SearchEmpty" xml:space="preserve">
+  <data name="Model_SearchEmpty" xml:space="preserve">
     <value>Δεν βρέθηκε τίποτα με πακέτο ONNX Runtime GenAI.</value>
   </data>
-    <data name="Model_SearchFound" xml:space="preserve">
+  <data name="Model_SearchFound" xml:space="preserve">
     <value>Βρέθηκαν: {0}.</value>
   </data>
-    <data name="Model_SearchFailed" xml:space="preserve">
+  <data name="Model_SearchFailed" xml:space="preserve">
     <value>Η αναζήτηση απέτυχε: {0}</value>
   </data>
-    <data name="Tab_License" xml:space="preserve">
+  <data name="Tab_License" xml:space="preserve">
     <value>Άδεια</value>
   </data>
-    <data name="Lic_Free_Title" xml:space="preserve">
+  <data name="Lic_Free_Title" xml:space="preserve">
     <value>Δωρεάν — προσωπική χρήση</value>
   </data>
-    <data name="Lic_Free_Hint" xml:space="preserve">
+  <data name="Lic_Free_Hint" xml:space="preserve">
     <value>Δωρεάν για ιδιώτες, συμπεριλαμβανομένων των ελεύθερων επαγγελματιών. Τίποτα δεν είναι κλειδωμένο — η άδεια καλύπτει τη χρήση μέσα σε εταιρεία.</value>
   </data>
-    <data name="Lic_Status_Pro" xml:space="preserve">
+  <data name="Lic_Status_Pro" xml:space="preserve">
     <value>Pro · {0}</value>
   </data>
-    <data name="Lic_Status_Business" xml:space="preserve">
+  <data name="Lic_Status_Business" xml:space="preserve">
     <value>Business · {0} · {1} θέσεις</value>
   </data>
-    <data name="Lic_Expires" xml:space="preserve">
+  <data name="Lic_Expires" xml:space="preserve">
     <value>Ισχύει έως {0}</value>
   </data>
-    <data name="Lic_NoExpiry" xml:space="preserve">
+  <data name="Lic_NoExpiry" xml:space="preserve">
     <value>Χωρίς ημερομηνία λήξης</value>
   </data>
-    <data name="Lic_Key_Label" xml:space="preserve">
+  <data name="Lic_Key_Label" xml:space="preserve">
     <value>Κλειδί άδειας</value>
   </data>
-    <data name="Lic_Key_Watermark" xml:space="preserve">
+  <data name="Lic_Key_Watermark" xml:space="preserve">
     <value>Επικολλήστε το κλειδί από το email αγοράς</value>
   </data>
-    <data name="Lic_Apply" xml:space="preserve">
+  <data name="Lic_Apply" xml:space="preserve">
     <value>Ενεργοποίηση</value>
   </data>
-    <data name="Lic_Remove" xml:space="preserve">
+  <data name="Lic_Remove" xml:space="preserve">
     <value>Αφαίρεση</value>
   </data>
-    <data name="Lic_Buy_Hint" xml:space="preserve">
+  <data name="Lic_Buy_Hint" xml:space="preserve">
     <value>Το Pro αφορά έναν ιδιώτη. Το Business αδειοδοτείται ανά θέση σε εταιρεία.</value>
   </data>
-    <data name="Lic_BuyPro" xml:space="preserve">
+  <data name="Lic_BuyPro" xml:space="preserve">
     <value>Αγορά Pro</value>
   </data>
-    <data name="Lic_BuyBusiness" xml:space="preserve">
+  <data name="Lic_BuyBusiness" xml:space="preserve">
     <value>Εμπορική άδεια</value>
   </data>
-    <data name="Lic_Err_Malformed" xml:space="preserve">
+  <data name="Lic_Err_Malformed" xml:space="preserve">
     <value>Αυτό δεν μοιάζει με κλειδί Lapsus. Ελέγξτε ότι αντιγράφηκε ολόκληρη η γραμμή.</value>
   </data>
-    <data name="Lic_Err_Signature" xml:space="preserve">
+  <data name="Lic_Err_Signature" xml:space="preserve">
     <value>Αυτό το κλειδί δεν εκδόθηκε για αυτήν την έκδοση.</value>
   </data>
-    <data name="Lic_Err_Expired" xml:space="preserve">
+  <data name="Lic_Err_Expired" xml:space="preserve">
     <value>Αυτό το κλειδί έληξε στις {0}.</value>
   </data>
-    <data name="Lic_Err_NotConfigured" xml:space="preserve">
+  <data name="Lic_Err_NotConfigured" xml:space="preserve">
     <value>Αυτή η έκδοση δεν μπορεί να ελέγξει κλειδιά άδειας.</value>
   </data>
-    <data name="Lic_Ask_Terms" xml:space="preserve">
+  <data name="Lic_Ask_Terms" xml:space="preserve">
     <value>Ποιος πρέπει να πληρώσει;</value>
   </data>
-    <data name="Lic_Free_Managed" xml:space="preserve">
+  <data name="Lic_Free_Managed" xml:space="preserve">
     <value>Αυτόν τον υπολογιστή τον διαχειρίζεται οργανισμός — απαιτείται άδεια.</value>
   </data>
-    <data name="LicRem_Title" xml:space="preserve">
+  <data name="LicRem_Title" xml:space="preserve">
     <value>Άδεια Lapsus</value>
   </data>
-    <data name="LicRem_TrialHeadline" xml:space="preserve">
+  <data name="LicRem_TrialHeadline" xml:space="preserve">
     <value>Σε εταιρεία το Lapsus αδειοδοτείται ανά θέση. Απομένουν {0} ημέρες δοκιμής.</value>
   </data>
-    <data name="LicRem_DueHeadline" xml:space="preserve">
+  <data name="LicRem_DueHeadline" xml:space="preserve">
     <value>Σε αυτόν τον υπολογιστή το Lapsus χρειάζεται άδεια.</value>
   </data>
-    <data name="LicRem_Body" xml:space="preserve">
+  <data name="LicRem_Body" xml:space="preserve">
     <value>Αυτόν τον υπολογιστή τον διαχειρίζεται οργανισμός (τομέας, Entra ID ή διακομιστής MDM). Για ιδιώτες, συμπεριλαμβανομένων των ελεύθερων επαγγελματιών, το Lapsus είναι δωρεάν· η χρήση μέσα σε εταιρεία είναι επί πληρωμή, ανά θέση.</value>
   </data>
-    <data name="LicRem_Why" xml:space="preserve">
+  <data name="LicRem_Why" xml:space="preserve">
     <value>Τίποτα δεν απενεργοποιείται και τίποτα δεν αποστέλλεται — ο έλεγχος γίνεται μόνο σε αυτό το μηχάνημα.</value>
   </data>
-    <data name="LicRem_HaveKey" xml:space="preserve">
+  <data name="LicRem_HaveKey" xml:space="preserve">
     <value>Έχω κλειδί</value>
   </data>
-    <data name="LicRem_Later" xml:space="preserve">
+  <data name="LicRem_Later" xml:space="preserve">
     <value>Αργότερα</value>
   </data>
-    <data name="Lic_Err_Seats" xml:space="preserve">
+  <data name="Lic_Err_Seats" xml:space="preserve">
     <value>Όλες οι θέσεις αυτής της άδειας χρησιμοποιούνται. Γράψτε στο {0} για να μεταφέρετε μία θέση σε αυτόν τον υπολογιστή ή να αγοράσετε κι άλλες.</value>
   </data>
-    <data name="Lic_Err_Offline" xml:space="preserve">
+  <data name="Lic_Err_Offline" xml:space="preserve">
     <value>Δεν ήταν δυνατή η επικοινωνία με τον διακομιστή αδειών. Το κλειδί αποθηκεύτηκε — η ενεργοποίηση θα επαναληφθεί.</value>
   </data>
-    <data name="Lic_Err_NoMachine" xml:space="preserve">
+  <data name="Lic_Err_NoMachine" xml:space="preserve">
     <value>Δεν ήταν δυνατή η αναγνώριση αυτού του υπολογιστή, οπότε η άδεια δεν μπορεί να δεθεί κάπου.</value>
   </data>
-    <data name="Lic_Activating" xml:space="preserve">
+  <data name="Lic_Activating" xml:space="preserve">
     <value>Ενεργοποίηση…</value>
   </data>
-    <data name="About_Title" xml:space="preserve">
+  <data name="About_Title" xml:space="preserve">
     <value>Σχετικά με το Lapsus</value>
   </data>
-    <data name="About_Tooltip" xml:space="preserve">
+  <data name="About_Tooltip" xml:space="preserve">
     <value>Σχετικά με το Lapsus</value>
   </data>
-    <data name="About_License" xml:space="preserve">
+  <data name="About_License" xml:space="preserve">
     <value>Άδεια</value>
   </data>
-    <data name="About_License_Text" xml:space="preserve">
+  <data name="About_License_Text" xml:space="preserve">
     <value>Δωρεάν για ιδιώτες. Οι εταιρείες πληρώνουν ανά θέση. Τίποτα δεν κλειδώνει και τίποτα δεν λήγει.</value>
   </data>
-    <data name="About_Website" xml:space="preserve">
+  <data name="About_Website" xml:space="preserve">
     <value>Ιστότοπος</value>
   </data>
-    <data name="About_Donate" xml:space="preserve">
+  <data name="About_Donate" xml:space="preserve">
     <value>Στηρίξτε την ανάπτυξη</value>
   </data>
-    <data name="About_Donate_Hint" xml:space="preserve">
+  <data name="About_Donate_Hint" xml:space="preserve">
     <value>Το Lapsus είναι δωρεάν για εσάς, χωρίς διαφημίσεις και παρακολούθηση. Αν σας γλιτώνει χρόνο, μπορείτε να συνεισφέρετε.</value>
   </data>
-    <data name="About_Donate_Button" xml:space="preserve">
+  <data name="About_Donate_Button" xml:space="preserve">
     <value>Δωρεά</value>
   </data>
-    <data name="About_OpenSource" xml:space="preserve">
+  <data name="About_OpenSource" xml:space="preserve">
     <value>Άδειες ανοιχτού κώδικα</value>
   </data>
-    <data name="About_Tab_Components" xml:space="preserve">
+  <data name="About_Tab_Components" xml:space="preserve">
     <value>Στοιχεία</value>
   </data>
-    <data name="About_Tab_Dictionaries" xml:space="preserve">
+  <data name="About_Tab_Dictionaries" xml:space="preserve">
     <value>Λεξικά</value>
   </data>
-    <data name="About_Dictionaries_Hint" xml:space="preserve">
+  <data name="About_Dictionaries_Hint" xml:space="preserve">
     <value>Δεν περιλαμβάνονται στο Lapsus: το καθένα κατεβαίνει μόνο όταν προσθέσετε τη γλώσσα και διατηρεί την άδεια του εκδότη του.</value>
   </data>
-    <data name="About_Dictionaries_All" xml:space="preserve">
+  <data name="About_Dictionaries_All" xml:space="preserve">
     <value>Όλες οι πηγές και οι συγγραφείς</value>
   </data>
-    <data name="About_Components_Hint" xml:space="preserve">
+  <data name="About_Components_Hint" xml:space="preserve">
     <value>Περιλαμβάνονται στο Lapsus, καθένα με τη δική του άδεια.</value>
   </data>
-    <data name="About_LicenseText" xml:space="preserve">
+  <data name="About_LicenseText" xml:space="preserve">
     <value>Κείμενο άδειας</value>
   </data>
-    <data name="Store_Title_Trial" xml:space="preserve">
+  <data name="Store_Title_Trial" xml:space="preserve">
     <value>Δοκιμή του Lapsus Plus: απομένουν {0} ημέρες</value>
   </data>
-    <data name="Store_Title_Subscription" xml:space="preserve">
+  <data name="Store_Title_Subscription" xml:space="preserve">
     <value>Lapsus Plus: η συνδρομή είναι ενεργή</value>
   </data>
-    <data name="Store_Title_Lifetime" xml:space="preserve">
+  <data name="Store_Title_Lifetime" xml:space="preserve">
     <value>Lapsus Plus: αγορά για πάντα</value>
   </data>
-    <data name="Store_Title_Free" xml:space="preserve">
+  <data name="Store_Title_Free" xml:space="preserve">
     <value>Lapsus Free</value>
   </data>
-    <data name="Store_Detail" xml:space="preserve">
+  <data name="Store_Detail" xml:space="preserve">
     <value>Όλα, εκτός από τη νευρωνική διόρθωση και τις λειτουργίες που θα προστεθούν αργότερα, είναι δωρεάν για πάντα. Το Lapsus Plus τις προσθέτει.</value>
   </data>
-    <data name="Store_Renews" xml:space="preserve">
+  <data name="Store_Renews" xml:space="preserve">
     <value>Ανανεώνεται στις {0}.</value>
   </data>
-    <data name="Store_Yearly" xml:space="preserve">
+  <data name="Store_Yearly" xml:space="preserve">
     <value>Ετήσια, {0}</value>
   </data>
-    <data name="Store_YearlyTrial" xml:space="preserve">
+  <data name="Store_YearlyTrial" xml:space="preserve">
     <value>{0} δωρεάν, μετά {1} τον χρόνο</value>
   </data>
-    <data name="Store_TrialDetail" xml:space="preserve">
+  <data name="Store_TrialDetail" xml:space="preserve">
     <value>Δωρεάν έως {0}. Στη συνέχεια ξεκινά η ετήσια συνδρομή, εκτός αν την ακυρώσετε στις ρυθμίσεις του λογαριασμού σας στο App Store τουλάχιστον 24 ώρες νωρίτερα.</value>
   </data>
-    <data name="Store_Lifetime" xml:space="preserve">
+  <data name="Store_Lifetime" xml:space="preserve">
     <value>Για πάντα, {0}</value>
   </data>
-    <data name="Store_Restore" xml:space="preserve">
+  <data name="Store_Restore" xml:space="preserve">
     <value>Επαναφορά αγορών</value>
   </data>
-    <data name="Store_Manage" xml:space="preserve">
+  <data name="Store_Manage" xml:space="preserve">
     <value>Διαχείριση συνδρομής</value>
   </data>
-    <data name="Store_Disclosure" xml:space="preserve">
+  <data name="Store_Disclosure" xml:space="preserve">
     <value>Η ετήσια συνδρομή ανανεώνεται αυτόματα, εκτός αν την ακυρώσετε στις ρυθμίσεις του λογαριασμού σας στο App Store τουλάχιστον 24 ώρες πριν από τη λήξη της περιόδου. Η χρέωση γίνεται στον Apple Account σας.</value>
   </data>
-    <data name="Store_Terms" xml:space="preserve">
+  <data name="Store_Terms" xml:space="preserve">
     <value>Όροι χρήσης</value>
   </data>
-    <data name="Store_Privacy" xml:space="preserve">
+  <data name="Store_Privacy" xml:space="preserve">
     <value>Πολιτική απορρήτου</value>
   </data>
-    <data name="Store_Unavailable" xml:space="preserve">
+  <data name="Store_Unavailable" xml:space="preserve">
     <value>Το App Store δεν είναι διαθέσιμο αυτή τη στιγμή. Δοκιμάστε αργότερα.</value>
   </data>
-    <data name="Store_Pending" xml:space="preserve">
+  <data name="Store_Pending" xml:space="preserve">
     <value>Η αγορά περιμένει έγκριση.</value>
   </data>
-    <data name="Store_Failed" xml:space="preserve">
+  <data name="Store_Failed" xml:space="preserve">
     <value>Η αγορά δεν ολοκληρώθηκε: {0}</value>
   </data>
-    <data name="Store_TrialEnded" xml:space="preserve">
+  <data name="Store_TrialEnded" xml:space="preserve">
     <value>Η δοκιμή του Lapsus Plus έληξε, οπότε η νευρωνική διόρθωση είναι απενεργοποιημένη. Όλα τα άλλα λειτουργούν κανονικά.</value>
   </data>
-    <data name="Neural_Locked" xml:space="preserve">
+  <data name="Neural_Locked" xml:space="preserve">
     <value>Η νευρωνική διόρθωση είναι μέρος του Lapsus Plus.</value>
   </data>
-    <data name="Neural_Locked_Button" xml:space="preserve">
+  <data name="Neural_Locked_Button" xml:space="preserve">
     <value>Σχετικά με το Lapsus Plus</value>
   </data>
-    <data name="Onb_Title" xml:space="preserve">
+  <data name="Onb_Title" xml:space="preserve">
     <value>Καλώς ήρθατε στο Lapsus</value>
   </data>
-    <data name="Onb_Intro" xml:space="preserve">
+  <data name="Onb_Intro" xml:space="preserve">
     <value>Το Lapsus διορθώνει κείμενο που πληκτρολογήθηκε με λάθος διάταξη πληκτρολογίου, σε οποιαδήποτε εφαρμογή. Γι' αυτό χρειάζεται να βλέπει τα πλήκτρα που πατάτε.</value>
   </data>
-    <data name="Onb_Local" xml:space="preserve">
+  <data name="Onb_Local" xml:space="preserve">
     <value>Όλα γίνονται σε αυτό το Mac. Ό,τι πληκτρολογείτε δεν αποστέλλεται πουθενά και δεν αποθηκεύεται.</value>
   </data>
-    <data name="Onb_Passwords" xml:space="preserve">
+  <data name="Onb_Passwords" xml:space="preserve">
     <value>Τα πεδία κωδικών μένουν ανέγγιχτα: όσο πληκτρολογείτε σε ένα, το macOS κρύβει τα πλήκτρα από τις άλλες εφαρμογές, και από το Lapsus.</value>
   </data>
-    <data name="Onb_Permissions" xml:space="preserve">
+  <data name="Onb_Permissions" xml:space="preserve">
     <value>Επιτρέψτε κάθε άδεια παρακάτω. Το κουμπί δείχνει το παράθυρο του macOS ή ανοίγει τη σωστή λίστα στις Ρυθμίσεις συστήματος, όπου ενεργοποιείτε το Lapsus. Η κατάσταση γίνεται πράσινη μόνη της.</value>
   </data>
-    <data name="Onb_Continue" xml:space="preserve">
+  <data name="Onb_Continue" xml:space="preserve">
     <value>Συνέχεια</value>
   </data>
-    <data name="Tab_Plus" xml:space="preserve">
+  <data name="Tab_Plus" xml:space="preserve">
     <value>Plus</value>
   </data>
-    <data name="Store_Retry" xml:space="preserve">
+  <data name="Store_Retry" xml:space="preserve">
     <value>Δοκιμή ξανά</value>
   </data>
-    <data name="Store_RestoreFailed" xml:space="preserve">
+  <data name="Store_RestoreFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η επαναφορά των αγορών: {0}</value>
   </data>
-    <data name="Voice_Toggle" xml:space="preserve">
+  <data name="Voice_Toggle" xml:space="preserve">
     <value>Φωνητική πληκτρολόγηση</value>
   </data>
-    <data name="Voice_Hint" xml:space="preserve">
+  <data name="Voice_Hint" xml:space="preserve">
     <value>Μιλήστε αντί να πληκτρολογείτε: το Lapsus γράφει ό,τι λέτε εκεί όπου βρίσκεται ο κέρσορας. Η ομιλία αναγνωρίζεται σε αυτόν τον υπολογιστή· ο ήχος δεν αποθηκεύεται πουθενά.</value>
   </data>
-    <data name="Voice_ModelMissing" xml:space="preserve">
+  <data name="Voice_ModelMissing" xml:space="preserve">
     <value>Το μοντέλο ομιλίας δεν έχει ληφθεί ακόμη ({0} MB).</value>
   </data>
-    <data name="Voice_ModelReady" xml:space="preserve">
+  <data name="Voice_ModelReady" xml:space="preserve">
     <value>Μοντέλο ομιλίας: {0}.</value>
   </data>
-    <data name="Voice_DownloadFailed" xml:space="preserve">
+  <data name="Voice_DownloadFailed" xml:space="preserve">
     <value>Η λήψη απέτυχε: {0}</value>
   </data>
-    <data name="Diag_DictationNoModel" xml:space="preserve">
+  <data name="Diag_DictationNoModel" xml:space="preserve">
     <value>Η φωνητική πληκτρολόγηση χρειάζεται το μοντέλο ομιλίας: κατεβάστε το από Ρυθμίσεις → ΤΝ.</value>
   </data>
-    <data name="Diag_MicUnavailable" xml:space="preserve">
+  <data name="Diag_MicUnavailable" xml:space="preserve">
     <value>Το μικρόφωνο δεν είναι διαθέσιμο: {0}</value>
   </data>
-    <data name="Diag_MicSilent" xml:space="preserve">
+  <data name="Diag_MicSilent" xml:space="preserve">
     <value>Το μικρόφωνο ηχογράφησε μόνο σιωπή. Ελέγξτε ότι είναι ενεργό και ότι τα Windows επιτρέπουν στις εφαρμογές να το χρησιμοποιούν.</value>
   </data>
-    <data name="Diag_DictationNothingHeard" xml:space="preserve">
+  <data name="Diag_DictationNothingHeard" xml:space="preserve">
     <value>Δεν ακούστηκε τίποτα.</value>
   </data>
-    <data name="Diag_DictationFailed" xml:space="preserve">
+  <data name="Diag_DictationFailed" xml:space="preserve">
     <value>Η φωνητική πληκτρολόγηση απέτυχε: {0}</value>
   </data>
-    <data name="Diag_DictationFocusChanged" xml:space="preserve">
+  <data name="Diag_DictationFocusChanged" xml:space="preserve">
     <value>Η εστίαση μετακινήθηκε σε άλλο παράθυρο ({0}), οπότε το κείμενο αντιγράφηκε στο πρόχειρο.</value>
   </data>
-    <data name="Dictation_HotkeyHint" xml:space="preserve">
+  <data name="Dictation_HotkeyHint" xml:space="preserve">
     <value>Κρατήστε το πατημένο όσο μιλάτε και αφήστε το για να γραφτεί το κείμενο· ένα σύντομο πάτημα ηχογραφεί χωρίς χέρια μέχρι το επόμενο. Το Esc ακυρώνει. Τα υπόλοιπα βρίσκονται στην καρτέλα «Φωνή».</value>
   </data>
-    <data name="Voice_ModelHint" xml:space="preserve">
-    <value>Το large-v3 είναι το πιο ακριβές, αλλά θέλει κάρτα γραφικών (χωρίς αυτή περίπου 5 δευτ. ανά φράση). Το large-v3-turbo είναι σχεδόν εξίσου ακριβές και ταχύτερο· το q5 είναι το ίδιο turbo με μικρότερη λήψη. Το Whisper small είναι για υπολογιστές χωρίς κάρτα γραφικών.</value>
+  <data name="Voice_ModelHint" xml:space="preserve">
+    <value>Το Parakeet TDT v3 είναι η γρήγορη επιλογή χωρίς κάρτα γραφικών (περίπου 0,3 δ. ανά φράση), αλλά ξέρει μόνο 25 ευρωπαϊκές γλώσσες και γράφει συχνότερα τους αγγλικούς όρους με το δικό σας αλφάβητο. Το large-v3-turbo ξέρει όλες τις γλώσσες και είναι το καλύτερο με κάρτα γραφικών· το q5 είναι το ίδιο turbo με μικρότερη λήψη. Το large-v3 είναι λίγο πιο ακριβές, αλλά θέλει κάρτα γραφικών. Το Whisper small είναι η μικρότερη λήψη. Το Parakeet TDT v2 είναι εξίσου γρήγορο, αλλά μόνο για αγγλικά, και σε αυτά πιο ακριβές. Το εβραϊκό turbo του ivrit.ai είναι πιο ακριβές στα εβραϊκά, αλλά διαβάζει κάθε φράση ως εβραϊκά. Για γεωργιανά και αρμενικά, NVIDIA FastConformer: το Whisper σχεδόν δεν τα ξέρει, αυτά είναι γρήγορα και ακριβή, το καθένα μόνο για τη δική του γλώσσα.</value>
   </data>
-    <data name="Voice_LanguageLabel" xml:space="preserve">
+  <data name="Voice_LayoutModelReady" xml:space="preserve">
+    <value>Διάταξη {0}: {1}</value>
+  </data>
+  <data name="Voice_LayoutModelMissing" xml:space="preserve">
+    <value>Η διάταξη {0} χρειάζεται άλλο μοντέλο: {1}</value>
+  </data>
+  <data name="Voice_LanguageLabel" xml:space="preserve">
     <value>Γλώσσα</value>
   </data>
-    <data name="Voice_LanguageAuto" xml:space="preserve">
+  <data name="Voice_LanguageAuto" xml:space="preserve">
     <value>Από τη διάταξη πληκτρολογίου</value>
   </data>
-    <data name="Voice_LanguageHint" xml:space="preserve">
+  <data name="Voice_LanguageHint" xml:space="preserve">
     <value>Η γλώσσα της ενεργής διάταξης ή άλλη από τις γλώσσες των διατάξεών σας, αν η ομιλία είναι σαφώς σε αυτήν.</value>
   </data>
-    <data name="Voice_MicLabel" xml:space="preserve">
+  <data name="Voice_MicLabel" xml:space="preserve">
     <value>Μικρόφωνο</value>
   </data>
-    <data name="Voice_MicDefault" xml:space="preserve">
+  <data name="Voice_MicDefault" xml:space="preserve">
     <value>Προεπιλογή συστήματος</value>
   </data>
-    <data name="Voice_UnloadLabel" xml:space="preserve">
+  <data name="Voice_UnloadLabel" xml:space="preserve">
     <value>Αποδέσμευση μνήμης</value>
   </data>
-    <data name="Voice_UnloadHint" xml:space="preserve">
+  <data name="Voice_UnloadHint" xml:space="preserve">
     <value>Φορτωμένο, το μοντέλο ομιλίας καταλαμβάνει περίπου {0} MB μνήμης. Μετά την αποδέσμευση, η επόμενη υπαγόρευση το φορτώνει ξανά· η εγγραφή ξεκινά πάντως αμέσως.</value>
   </data>
-    <data name="Voice_UnloadImmediately" xml:space="preserve">
+  <data name="Voice_UnloadImmediately" xml:space="preserve">
     <value>Μετά από κάθε υπαγόρευση</value>
   </data>
-    <data name="Voice_UnloadMinutes" xml:space="preserve">
+  <data name="Voice_UnloadMinutes" xml:space="preserve">
     <value>Μετά από {0} λεπτά</value>
   </data>
-    <data name="Voice_UnloadHour" xml:space="preserve">
+  <data name="Voice_UnloadHour" xml:space="preserve">
     <value>Μετά από 1 ώρα</value>
   </data>
-    <data name="Voice_UnloadNever" xml:space="preserve">
+  <data name="Voice_UnloadNever" xml:space="preserve">
     <value>Ποτέ (φόρτωση κατά την εκκίνηση)</value>
   </data>
   <data name="Voice_DeviceAuto" xml:space="preserve">
@@ -799,214 +805,214 @@
   <data name="Voice_DeviceNow" xml:space="preserve">
     <value>Εκτελείται τώρα σε: {0}</value>
   </data>
-    <data name="Voice_KeepLatin" xml:space="preserve">
+  <data name="Voice_KeepLatin" xml:space="preserve">
     <value>Αγγλικοί όροι με λατινικά γράμματα</value>
   </data>
-    <data name="Voice_KeepLatinHint" xml:space="preserve">
-    <value>Όροι όπως pull request ή GitHub γράφονται όπως στα αγγλικά. Οι λέξεις που έχει υιοθετήσει η γλώσσα σας μένουν ως έχουν.</value>
+  <data name="Voice_KeepLatinHint" xml:space="preserve">
+    <value>Όροι όπως pull request ή GitHub γράφονται όπως στα αγγλικά. Οι λέξεις που έχει υιοθετήσει η γλώσσα σας μένουν ως έχουν. Με ενεργό το μοντέλο ΤΝ, σταθμίζει και όρους που η αναγνώριση άκουσε ανακριβώς.</value>
   </data>
-    <data name="Voice_SpokenPunctuation" xml:space="preserve">
+  <data name="Voice_SpokenPunctuation" xml:space="preserve">
     <value>Στίξη με φωνή</value>
   </data>
-    <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
+  <data name="Voice_SpokenPunctuationHint" xml:space="preserve">
     <value>Πείτε «comma», «period» ή «question mark» και γράφεται το σημείο. Λειτουργεί στα αγγλικά, ρωσικά, ουκρανικά και λευκορωσικά.</value>
   </data>
-    <data name="Voice_GlossaryLabel" xml:space="preserve">
+  <data name="Voice_GlossaryLabel" xml:space="preserve">
     <value>Γλωσσάρι</value>
   </data>
-    <data name="Voice_GlossaryHint" xml:space="preserve">
-    <value>Ονόματα και όροι που πρέπει να γράφονται σωστά, ένας ανά γραμμή, όπως πρέπει να πληκτρολογηθούν. Αν ένας όρος ακούγεται ασυνήθιστα, προσθέστε μετά το | πώς προφέρεται.</value>
+  <data name="Voice_GlossaryHint" xml:space="preserve">
+    <value>Ονόματα και όροι που πρέπει να γράφονται σωστά, ένας ανά γραμμή, όπως πρέπει να πληκτρολογηθούν. Αν ένας όρος ακούγεται ασυνήθιστα, προσθέστε μετά το | πώς προφέρεται. Μια λέξη που ακούστηκε λάθος και την ξαναγράφετε με λατινικά αμέσως μετά την υπαγόρευση προστίθεται εδώ μόνη της.</value>
   </data>
-    <data name="Voice_Locked" xml:space="preserve">
+  <data name="Voice_Locked" xml:space="preserve">
     <value>Η φωνητική πληκτρολόγηση είναι μέρος του Lapsus Plus.</value>
   </data>
-    <data name="Diag_MicDenied" xml:space="preserve">
+  <data name="Diag_MicDenied" xml:space="preserve">
     <value>Το Lapsus δεν επιτρέπεται να χρησιμοποιεί το μικρόφωνο. Επιτρέψτε το στις Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια → Μικρόφωνο.</value>
   </data>
-    <data name="Diag_MicAsk" xml:space="preserve">
+  <data name="Diag_MicAsk" xml:space="preserve">
     <value>Επιτρέψτε στο Lapsus να χρησιμοποιεί το μικρόφωνο στο παράθυρο που εμφανίστηκε και ξεκινήστε ξανά τη φωνητική πληκτρολόγηση.</value>
   </data>
-    <data name="Tab_Voice" xml:space="preserve">
+  <data name="Tab_Voice" xml:space="preserve">
     <value>Φωνή</value>
   </data>
-    <data name="Voice_ListeningHint" xml:space="preserve">
+  <data name="Voice_ListeningHint" xml:space="preserve">
     <value>{0} — τέλος · Esc — ακύρωση</value>
   </data>
-    <data name="Voice_TryIt" xml:space="preserve">
+  <data name="Voice_TryIt" xml:space="preserve">
     <value>Κάντε κλικ σε οποιοδήποτε πεδίο, κρατήστε πατημένο το {0} και μιλήστε — αφήστε το και το κείμενο εμφανίζεται στον κέρσορα. Ένα σύντομο πάτημα του {0} ηχογραφεί χωρίς χέρια μέχρι το επόμενο πάτημα. Το Esc ακυρώνει.</value>
   </data>
-    <data name="Voice_NoHotkey" xml:space="preserve">
+  <data name="Voice_NoHotkey" xml:space="preserve">
     <value>κανένα πλήκτρο — επιλέξτε ένα στην καρτέλα «Πλήκτρα»</value>
   </data>
-    <data name="Voice_UsageTitle" xml:space="preserve">
+  <data name="Voice_UsageTitle" xml:space="preserve">
     <value>Πώς χρησιμοποιείται</value>
   </data>
-    <data name="Voice_ShowButton" xml:space="preserve">
+  <data name="Voice_ShowButton" xml:space="preserve">
     <value>Κουμπί μικροφώνου στην οθόνη</value>
   </data>
-    <data name="Voice_ShowButtonHint" xml:space="preserve">
+  <data name="Voice_ShowButtonHint" xml:space="preserve">
     <value>Ένα μικρό κουμπί στο κάτω μέρος της οθόνης: ένα κλικ ξεκινά ή τερματίζει την ηχογράφηση, περνώντας το ποντίκι από πάνω βλέπετε τη συντόμευση.</value>
   </data>
-    <data name="Voice_Sounds" xml:space="preserve">
+  <data name="Voice_Sounds" xml:space="preserve">
     <value>Ήχος στην αρχή και στο τέλος της ηχογράφησης</value>
   </data>
-    <data name="Voice_ButtonTip" xml:space="preserve">
+  <data name="Voice_ButtonTip" xml:space="preserve">
     <value>Φωνητική πληκτρολόγηση: κάντε κλικ ή {0}</value>
   </data>
-    <data name="Voice_SectionMain" xml:space="preserve">
+  <data name="Voice_SectionMain" xml:space="preserve">
     <value>Γενικά</value>
   </data>
-    <data name="Voice_SectionRecognition" xml:space="preserve">
+  <data name="Voice_SectionRecognition" xml:space="preserve">
     <value>Αναγνώριση</value>
   </data>
-    <data name="Voice_TryItTap" xml:space="preserve">
+  <data name="Voice_TryItTap" xml:space="preserve">
     <value>Κάντε κλικ σε οποιοδήποτε πεδίο, πατήστε {0} και μιλήστε· πατήστε ξανά {0} και το κείμενο εμφανίζεται στον κέρσορα. Το Esc ακυρώνει.</value>
   </data>
-    <data name="Backup_Label" xml:space="preserve">
+  <data name="Backup_Label" xml:space="preserve">
     <value>Αντίγραφο ασφαλείας ρυθμίσεων</value>
   </data>
-    <data name="Backup_Hint" xml:space="preserve">
+  <data name="Backup_Hint" xml:space="preserve">
     <value>Αποθηκεύστε τις ρυθμίσεις σας σε αρχείο ή φορτώστε τις σε άλλον υπολογιστή. Το κλειδί άδειας, τα λεξικά και τα μοντέλα μένουν εκεί που είναι.</value>
   </data>
-    <data name="Backup_Export" xml:space="preserve">
+  <data name="Backup_Export" xml:space="preserve">
     <value>Εξαγωγή…</value>
   </data>
-    <data name="Backup_Import" xml:space="preserve">
+  <data name="Backup_Import" xml:space="preserve">
     <value>Εισαγωγή…</value>
   </data>
-    <data name="Backup_Exported" xml:space="preserve">
+  <data name="Backup_Exported" xml:space="preserve">
     <value>Οι ρυθμίσεις εξήχθησαν.</value>
   </data>
-    <data name="Backup_Imported" xml:space="preserve">
+  <data name="Backup_Imported" xml:space="preserve">
     <value>Οι ρυθμίσεις εισήχθησαν. Κλείστε το Lapsus και ανοίξτε το ξανά για να εφαρμοστούν.</value>
   </data>
-    <data name="Backup_ExportFailed" xml:space="preserve">
+  <data name="Backup_ExportFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η εγγραφή του αρχείου.</value>
   </data>
-    <data name="Backup_ImportFailed" xml:space="preserve">
+  <data name="Backup_ImportFailed" xml:space="preserve">
     <value>Αυτό δεν είναι αρχείο ρυθμίσεων του Lapsus.</value>
   </data>
-    <data name="Dict_Suggest" xml:space="preserve">
+  <data name="Dict_Suggest" xml:space="preserve">
     <value>Αυτές οι διατάξεις πληκτρολογίου δεν έχουν ακόμη λεξικό: {0}.</value>
   </data>
-    <data name="Dict_SuggestAdd" xml:space="preserve">
+  <data name="Dict_SuggestAdd" xml:space="preserve">
     <value>Λήψη</value>
   </data>
-    <data name="Notify_DictMissingTitle" xml:space="preserve">
+  <data name="Notify_DictMissingTitle" xml:space="preserve">
     <value>Μια διάταξη δεν έχει λεξικό</value>
   </data>
-    <data name="Notify_DictMissingBody" xml:space="preserve">
+  <data name="Notify_DictMissingBody" xml:space="preserve">
     <value>{0}: ανοίξτε Ρυθμίσεις → Βιβλιοθήκη για να το κατεβάσετε.</value>
   </data>
-    <data name="AutoFixSignal" xml:space="preserve">
+  <data name="AutoFixSignal" xml:space="preserve">
     <value>Εμφάνιση του σημείου όπου μια λέξη διορθώθηκε αυτόματα</value>
   </data>
-    <data name="AutoFixSignal_Hint" xml:space="preserve">
+  <data name="AutoFixSignal_Hint" xml:space="preserve">
     <value>Η ένδειξη διάταξης εμφανίζεται για μια στιγμή δίπλα στον δρομέα, με μπλε χρώμα.</value>
   </data>
-    <data name="Stats_Label" xml:space="preserve">
+  <data name="Stats_Label" xml:space="preserve">
     <value>Τι διόρθωσε το Lapsus</value>
   </data>
-    <data name="Stats_Week" xml:space="preserve">
+  <data name="Stats_Week" xml:space="preserve">
     <value>Αυτή την εβδομάδα</value>
   </data>
-    <data name="Stats_Layout" xml:space="preserve">
+  <data name="Stats_Layout" xml:space="preserve">
     <value>Λάθος διάταξη</value>
   </data>
-    <data name="Stats_Typos" xml:space="preserve">
+  <data name="Stats_Typos" xml:space="preserve">
     <value>Τυπογραφικά</value>
   </data>
-    <data name="Stats_Since" xml:space="preserve">
+  <data name="Stats_Since" xml:space="preserve">
     <value>Από την εγκατάσταση</value>
   </data>
-    <data name="Stats_Privacy" xml:space="preserve">
+  <data name="Stats_Privacy" xml:space="preserve">
     <value>Φυλάσσονται μόνο οι αριθμοί, σε αυτόν τον υπολογιστή.</value>
   </data>
-    <data name="Onb_What" xml:space="preserve">
+  <data name="Onb_What" xml:space="preserve">
     <value>Ξεκινάτε μια πρόταση με λάθος διάταξη πληκτρολογίου, πατάτε ένα πλήκτρο και διορθώνεται επιτόπου, χωρίς να την ξαναγράψετε. Τα τυπογραφικά διορθώνονται με τον ίδιο τρόπο.</value>
   </data>
-    <data name="Onb_Step" xml:space="preserve">
+  <data name="Onb_Step" xml:space="preserve">
     <value>Βήμα {0} από {1}</value>
   </data>
-    <data name="Onb_Next" xml:space="preserve">
+  <data name="Onb_Next" xml:space="preserve">
     <value>Επόμενο</value>
   </data>
-    <data name="Onb_Back" xml:space="preserve">
+  <data name="Onb_Back" xml:space="preserve">
     <value>Πίσω</value>
   </data>
-    <data name="Onb_Done" xml:space="preserve">
+  <data name="Onb_Done" xml:space="preserve">
     <value>Τέλος</value>
   </data>
-    <data name="Onb_Privacy_Title" xml:space="preserve">
+  <data name="Onb_Privacy_Title" xml:space="preserve">
     <value>Τι βλέπει το Lapsus</value>
   </data>
-    <data name="Onb_Dict_Title" xml:space="preserve">
+  <data name="Onb_Dict_Title" xml:space="preserve">
     <value>Λίστες λέξεων για τις γλώσσες σας</value>
   </data>
-    <data name="Onb_Dict_Body" xml:space="preserve">
+  <data name="Onb_Dict_Body" xml:space="preserve">
     <value>Το Lapsus ξεχωρίζει μια πραγματική λέξη από μια λάθος πληκτρολογημένη με μια λίστα λέξεων για κάθε γλώσσα. Η λίστα κατεβαίνει μία φορά και μόνο όταν το ζητήσετε.</value>
   </data>
-    <data name="Onb_Dict_Ready" xml:space="preserve">
+  <data name="Onb_Dict_Ready" xml:space="preserve">
     <value>Κάθε διάταξη αυτού του πληκτρολογίου έχει ήδη τη λίστα λέξεών της.</value>
   </data>
-    <data name="Onb_Try_Title" xml:space="preserve">
+  <data name="Onb_Try_Title" xml:space="preserve">
     <value>Δοκιμάστε</value>
   </data>
-    <data name="Onb_Try_Body" xml:space="preserve">
+  <data name="Onb_Try_Body" xml:space="preserve">
     <value>Κάντε κλικ στο παρακάτω πεδίο, πληκτρολογήστε {0} ακριβώς έτσι και πατήστε {1}. Πατήστε ξανά για την επόμενη ανάγνωση και άλλη μία φορά για να πάρετε πίσω ό,τι γράψατε.</value>
   </data>
-    <data name="Onb_Options_Title" xml:space="preserve">
+  <data name="Onb_Options_Title" xml:space="preserve">
     <value>Τι να γίνεται από μόνο του</value>
   </data>
-    <data name="Onb_Options_Body" xml:space="preserve">
+  <data name="Onb_Options_Body" xml:space="preserve">
     <value>Η συντόμευση λειτουργεί πάντα. Αυτοί οι διακόπτες διορθώνουν μια λέξη μόλις πατήσετε το πλήκτρο διαστήματος· το Backspace αμέσως μετά επαναφέρει ό,τι γράψατε.</value>
   </data>
-    <data name="Onb_More" xml:space="preserve">
+  <data name="Onb_More" xml:space="preserve">
     <value>Στις Ρυθμίσεις υπάρχουν περισσότερα: πλήκτρα για επιλεγμένο κείμενο (πεζά-κεφαλαία, μεταγραφή), υπαγόρευση, τοπικό μοντέλο ΤΝ. Τις ανοίγει το εικονίδιο στην περιοχή ειδοποιήσεων.</value>
   </data>
-    <data name="Onb_More_Store" xml:space="preserve">
+  <data name="Onb_More_Store" xml:space="preserve">
       <value>Στις Ρυθμίσεις υπάρχουν περισσότερα: πλήκτρα για επιλεγμένο κείμενο (πεζά-κεφαλαία, μεταγραφή), εξαιρέσεις για εφαρμογές και λέξεις. Τις ανοίγει το εικονίδιο στην περιοχή ειδοποιήσεων.</value>
     </data>
-    <data name="Onb_Again" xml:space="preserve">
+  <data name="Onb_Again" xml:space="preserve">
     <value>Εμφάνιση της εισαγωγής ξανά</value>
   </data>
-    <data name="Tray_Pause" xml:space="preserve">
+  <data name="Tray_Pause" xml:space="preserve">
     <value>Παύση</value>
   </data>
-    <data name="Tray_Pause15" xml:space="preserve">
+  <data name="Tray_Pause15" xml:space="preserve">
     <value>Για 15 λεπτά</value>
   </data>
-    <data name="Tray_Pause60" xml:space="preserve">
+  <data name="Tray_Pause60" xml:space="preserve">
     <value>Για 1 ώρα</value>
   </data>
-    <data name="Tray_PauseUntil" xml:space="preserve">
+  <data name="Tray_PauseUntil" xml:space="preserve">
     <value>Μέχρι να συνεχίσω</value>
   </data>
-    <data name="Tray_Resume" xml:space="preserve">
+  <data name="Tray_Resume" xml:space="preserve">
     <value>Συνέχιση</value>
   </data>
-    <data name="Capture_Paused" xml:space="preserve">
+  <data name="Capture_Paused" xml:space="preserve">
     <value>Η καταγραφή είναι σε παύση</value>
   </data>
-    <data name="PauseInGames" xml:space="preserve">
+  <data name="PauseInGames" xml:space="preserve">
     <value>Παύση σε παιχνίδια πλήρους οθόνης</value>
   </data>
-    <data name="PauseInGames_Hint" xml:space="preserve">
+  <data name="PauseInGames_Hint" xml:space="preserve">
     <value>Όσο ένα παιχνίδι καταλαμβάνει όλη την οθόνη, το Lapsus αφαιρεί το άγκιστρο πληκτρολογίου του και το επαναφέρει όταν τελειώσει το παιχνίδι.</value>
   </data>
-    <data name="AppRule_HotkeyOnly" xml:space="preserve">
+  <data name="AppRule_HotkeyOnly" xml:space="preserve">
     <value>Μόνο συντόμευση</value>
   </data>
-    <data name="AppRule_Hint" xml:space="preserve">
+  <data name="AppRule_Hint" xml:space="preserve">
     <value>Επιλέξτε «Μόνο συντόμευση» για μια εφαρμογή ώστε εκεί να λειτουργεί η συντόμευση και τα πλήκτρα για επιλεγμένο κείμενο, αλλά να απενεργοποιούνται οι αυτόματες διορθώσεις μετά το διάστημα.</value>
   </data>
-    <data name="Tab_Stats" xml:space="preserve">
+  <data name="Tab_Stats" xml:space="preserve">
     <value>Στατιστικά</value>
   </data>
-    <data name="Tab_Backup" xml:space="preserve">
+  <data name="Tab_Backup" xml:space="preserve">
     <value>Αντίγραφο</value>
   </data>
-    <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
+  <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Οι όροι αφήνονται ανέγγιχτοι και όταν τους πληκτρολογείτε: ένα όνομα που προστέθηκε εδώ δεν «διορθώνεται» ποτέ.</value>
   </data>
   <data name="Perm_Accessibility" xml:space="preserve">
@@ -1035,5 +1041,23 @@
   </data>
   <data name="Perm_OpenSettings" xml:space="preserve">
     <value>Άνοιγμα Ρυθμίσεων συστήματος</value>
+  </data>
+  <data name="Voice_RemoveFillersHint" xml:space="preserve">
+    <value>Αφαιρεί δισταγμούς όπως «ε», «εμ», «uh», «um» από το αναγνωρισμένο κείμενο.</value>
+  </data>
+  <data name="Voice_GlossaryAdd" xml:space="preserve">
+    <value>+ Προσθήκη</value>
+  </data>
+  <data name="Voice_GlossaryTermPlaceholder" xml:space="preserve">
+    <value>Λέξη ή φράση</value>
+  </data>
+  <data name="Voice_RemoveFillers" xml:space="preserve">
+    <value>Αφαίρεση λέξεων-παρασίτων</value>
+  </data>
+  <data name="Voice_GlossaryRemove" xml:space="preserve">
+    <value>Αφαίρεση από το γλωσσάρι</value>
+  </data>
+  <data name="Voice_GlossaryHeardPlaceholder" xml:space="preserve">
+    <value>Ακούγεται ως (προαιρετικό)</value>
   </data>
 </root>

@@ -93,6 +93,9 @@ public sealed class AppSettings
     // "запятая", "question mark" said aloud are written as the mark.
     public bool DictationSpokenPunctuation { get; set; } = true;
 
+    // Drops hesitation fillers ("э", "эм", "uh", "um") from the recognised text.
+    public bool DictationRemoveFillers { get; set; }
+
     // The recording device by name (WinMM product name); null is the system default.
     public string? MicrophoneName { get; set; }
 

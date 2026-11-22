@@ -1,0 +1,9 @@
+{
+  "Model": "fastconformer-hy",
+  "Device": "cpu",
+  "Language": "hy",
+  "Phrases": 25,
+  "Wer": 8.21,
+  "Cer": 3.04,
+  "MsPerPhrase": 197
+}

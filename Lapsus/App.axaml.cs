@@ -213,7 +213,8 @@ public partial class App : Application
         var supported = audio is not NullAudioCapture;
         var speech = new SpeechModelStore();
         var dictionaries = _dictionaryStore;
-        _dictationEngine = new DictationEngine(speech, _settingsViewModel.SettingsSnapshot, dictionaries.Installed);
+        _dictationEngine = new DictationEngine(speech, _settingsViewModel.SettingsSnapshot, dictionaries.Installed,
+            () => _brain?.LoadedModel);
         string HotkeyName() => HotkeyNames.Format(settings.DictationHotkey);
         _dictationIndicator = new DictationIndicator(_indicator,
             () => Localizer.Instance.Format("Voice_ListeningHint", HotkeyName()),
@@ -244,10 +245,22 @@ public partial class App : Application
         }
 
         _settingsViewModel.Voice = new VoiceViewModel(settings, store, speech, supported, Apply,
-            modelReady: () => _dictationEngine?.Prepare(),
-            releaseModel: () => _dictationEngine?.Unload(),
+            // Immediately would unload again on the next idle tick — warm-up would be wasted.
+            modelReady: () =>
+            {
+                if (settings.SpeechUnloadAfter != SpeechUnloadAfter.Immediately)
+                    _dictationEngine?.Prepare();
+            },
+            releaseModel: () =>
+            {
+                _dictation?.Cancel();
+                _dictationEngine?.Unload();
+            },
             locked: () => _settingsViewModel.NeuralLocked,
-            deviceLabel: () => _dictationEngine?.DeviceLabel ?? "");
+            deviceLabel: () => _dictationEngine?.DeviceLabel ?? "",
+            layouts: host.InstalledLanguages,
+            recommend: languages => SpeechModelCatalog.Recommended(
+                ComputeDeviceProbe.Capabilities().Providers.Count > 0, languages));
         _dictationEngine.Loaded += () => Dispatcher.UIThread.Post(() => _settingsViewModel.Voice?.RefreshLabels());
         _settingsViewModel.Voice.PropertyChanged += (_, e) =>
         {

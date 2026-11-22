@@ -2,6 +2,7 @@ using Lapsus.Core.Models;
 using Lapsus.Neural;
 using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,34 +23,47 @@ public sealed class SpeechModelStore
 
     public string Directory { get; }
 
-    public string PathFor(SpeechModel model) => Path.Combine(Directory, model.Id, model.File.Path);
+    // The model's folder: Parakeet reads its files from there, Whisper reads PathFor.
+    public string FolderFor(SpeechModel model) => Path.Combine(Directory, model.Id);
+
+    public string PathFor(SpeechModel model) => Path.Combine(FolderFor(model), model.Files[0].Path);
 
     public string VadPath => Path.Combine(Directory, "vad", SpeechModelCatalog.Vad.Path);
 
-    public bool IsInstalled(SpeechModel model) => IsComplete(PathFor(model), model.File) && IsComplete(VadPath, SpeechModelCatalog.Vad);
+    public bool IsInstalled(SpeechModel model) =>
+        model.Files.All(f => IsComplete(Path.Combine(FolderFor(model), f.Path), f))
+        && (!NeedsVad(model) || IsComplete(VadPath, SpeechModelCatalog.Vad));
 
     public async Task DownloadAsync(SpeechModel model, IProgress<double>? progress = null, CancellationToken ct = default)
     {
-        var total = (double)(model.File.Size + SpeechModelCatalog.Vad.Size);
-        if (!IsComplete(VadPath, SpeechModelCatalog.Vad))
-            await DownloadFileAsync(SpeechModelCatalog.Vad, VadPath,
-                new Progress<double>(p => progress?.Report(p * SpeechModelCatalog.Vad.Size / total)), ct)
-                .ConfigureAwait(false);
+        var files = model.Files.Select(f => (File: f, Target: Path.Combine(FolderFor(model), f.Path))).ToList();
+        if (NeedsVad(model))
+            files.Insert(0, (SpeechModelCatalog.Vad, VadPath));
 
-        if (!IsComplete(PathFor(model), model.File))
-            await DownloadFileAsync(model.File, PathFor(model),
-                new Progress<double>(p => progress?.Report((SpeechModelCatalog.Vad.Size + p * model.File.Size) / total)), ct)
-                .ConfigureAwait(false);
+        var total = (double)files.Sum(f => f.File.Size);
+        long done = 0;
+        foreach (var (file, target) in files)
+        {
+            var before = done;
+            if (!IsComplete(target, file))
+                await DownloadFileAsync(file, target,
+                    new Progress<double>(p => progress?.Report((before + p * file.Size) / total)), ct)
+                    .ConfigureAwait(false);
+            done += file.Size;
+        }
 
         progress?.Report(1);
     }
 
     public void Remove(SpeechModel model)
     {
-        var dir = Path.GetDirectoryName(PathFor(model))!;
+        var dir = FolderFor(model);
         if (System.IO.Directory.Exists(dir))
             System.IO.Directory.Delete(dir, true);
     }
+
+    // Whisper writes subtitle credits over silence without Silero cutting it away; Parakeet writes nothing.
+    private static bool NeedsVad(SpeechModel model) => model.Engine == SpeechEngine.Whisper;
 
     private async Task DownloadFileAsync(SpeechFile file, string target, IProgress<double> progress, CancellationToken ct)
     {

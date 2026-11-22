@@ -41,6 +41,18 @@ internal sealed class DictationSession : IDisposable
     // time the pause is long enough to end it. Speech that resumes sooner throws that work away, never the audio.
     public static readonly TimeSpan EarlyAfter = TimeSpan.FromMilliseconds(300);
 
+    // Live words: while a part is being said, its audio so far is recognised again this often, and the words two
+    // recognitions in a row agree on are typed at once (LocalAgreement-2) — a word lands ~0.6–1 s after it is said,
+    // not at the next pause. The part's own recognition then types only the words after them. Only where a
+    // recognition takes a fraction of a second (IDictationEngine.CanStream).
+    public static readonly TimeSpan StreamEvery = TimeSpan.FromMilliseconds(300);
+
+    // Each live recognition reads its part from the start, so a part said without a PauseEndsPart-long pause makes
+    // every one slower (Parakeet ~0.8 s at 15 s). Past this length, a pause this short ends it instead. The risk is
+    // a full stop mid-sentence at that boundary, only in long monologues.
+    public static readonly TimeSpan LongLivePart = TimeSpan.FromSeconds(6);
+    public static readonly TimeSpan ShortPauseEndsPart = TimeSpan.FromMilliseconds(300);
+
     public enum State { Idle, Listening, Transcribing }
 
     private readonly IDictationHost _host;
@@ -69,7 +81,15 @@ internal sealed class DictationSession : IDisposable
     private Task _parts = Task.CompletedTask;
 
     // A part cut at EarlyAfter whose recognition is under way, while the pause has yet to reach PauseEndsPart.
-    private (Task<DictationResult> Result, CancellationTokenSource Cancel, float[] Pcm, long LoudAt)? _early;
+    // Streamed: its live words, already typed.
+    private (Task<DictationResult> Result, CancellationTokenSource Cancel, float[] Pcm, long LoudAt, string[] Streamed)? _early;
+
+    // Live words of the part being said; its audio so far waits in _carry.
+    private readonly LiveWords _live = new();
+    private Task _stream = Task.CompletedTask;
+    private DateTime _streamedAt;
+    // How long the last live recognition took; kept across dictations, since it measures the machine.
+    private TimeSpan _streamTook;
 
     // Audio taken for an early part that speech then continued: it opens the next part.
     private float[] _carry = [];
@@ -201,12 +221,55 @@ internal sealed class DictationSession : IDisposable
         var quiet = now - lastLoud;
         if (now - _startedAt >= MaxRecording || quiet >= MaxSilence)
             Pending = StopAsync();
-        else if (now - _lastCut >= PartAfter && lastLoud > _lastCut)
+        else
         {
-            if (quiet >= PauseEndsPart)
-                CutPart(now);
-            else if (quiet >= EarlyAfter && _early is null && _parts.IsCompleted)
-                StartEarly(lastLoud);
+            var pauseEndsPart = now - _lastCut >= LongLivePart && _engine.CanStream ? ShortPauseEndsPart : PauseEndsPart;
+            if (now - _lastCut >= PartAfter && lastLoud > _lastCut)
+            {
+                if (quiet >= pauseEndsPart)
+                    CutPart(now);
+                else if (quiet >= EarlyAfter && _early is null && _parts.IsCompleted)
+                    StartEarly(lastLoud);
+            }
+
+            // Only on new speech: a pause has nothing to add, and an early part already holds the audio.
+            // On a slow processor a recognition can outlast StreamEvery; it is then followed by as long a rest, so
+            // live words take at most half the processor instead of running back to back.
+            if (_early is null && _stream.IsCompleted && lastLoud > _lastCut && lastLoud > _streamedAt
+                && now - _streamedAt >= (StreamEvery > 2 * _streamTook ? StreamEvery : 2 * _streamTook)
+                && _engine.CanStream)
+                Stream(now);
+        }
+    }
+
+    private void Stream(DateTime now)
+    {
+        _streamedAt = now;
+        _carry = TakeAudio(_audio.TakeRecorded());
+        _stream = StreamAsync(_carry, _live.Generation, _dictation!.Token);
+    }
+
+    private async Task StreamAsync(float[] pcm, int generation, CancellationToken cancel)
+    {
+        DictationResult result;
+        try
+        {
+            result = await _engine.TranscribeAsync(pcm, Request() with { Live = true }, cancel).ConfigureAwait(true);
+        }
+        catch (Exception)
+        {
+            // Live words are a preview of the part's own recognition, which still runs (and reports) when the part ends.
+            return;
+        }
+        finally
+        {
+            _streamTook = _now() - _streamedAt;
+        }
+
+        if (Current == State.Listening && _live.Accept(result.Text, generation) is { } fresh)
+        {
+            _untyped = Joined(_untyped, fresh);
+            TypeOrPreview();
         }
     }
 
@@ -214,7 +277,7 @@ internal sealed class DictationSession : IDisposable
     {
         var pcm = TakeAudio(_audio.TakeRecorded());
         var cancel = CancellationTokenSource.CreateLinkedTokenSource(_dictation!.Token);
-        _early = (_engine.TranscribeAsync(pcm, Request(), cancel.Token), cancel, pcm, lastLoud.Ticks);
+        _early = (_engine.TranscribeAsync(pcm, Request(), cancel.Token), cancel, pcm, lastLoud.Ticks, _live.Take());
     }
 
     private void DropEarlyIfSpeechResumed(DateTime lastLoud)
@@ -222,7 +285,9 @@ internal sealed class DictationSession : IDisposable
         if (_early is not { } early || early.LoudAt == lastLoud.Ticks)
             return;
         early.Cancel.Cancel();
+        // No streaming ran while the early part waited, so its audio and live words open the next part again.
         _carry = early.Pcm;
+        _live.Restore(early.Streamed);
         _early = null;
     }
 
@@ -246,19 +311,20 @@ internal sealed class DictationSession : IDisposable
         {
             // What was said after the early cut stays in the microphone's buffer and opens the next part.
             _early = null;
-            _parts = RecognisePartAsync(before, () => early.Result, _dictation!.Token);
+            _parts = RecognisePartAsync(before, () => early.Result, early.Streamed, _dictation!.Token);
         }
         else
         {
             var pcm = TakeAudio(_audio.TakeRecorded());
             _parts = RecognisePartAsync(before, () => _engine.TranscribeAsync(pcm, Request(), _dictation!.Token),
-                _dictation!.Token);
+                _live.Take(), _dictation!.Token);
         }
         Pending = _parts;
     }
 
     // Never throws: a failure is kept for the end of the dictation, which reports it if nothing was heard.
-    private async Task RecognisePartAsync(Task before, Func<Task<DictationResult>> recognise, CancellationToken cancel)
+    private async Task RecognisePartAsync(
+        Task before, Func<Task<DictationResult>> recognise, string[] streamed, CancellationToken cancel)
     {
         await before.ConfigureAwait(true);
         if (cancel.IsCancellationRequested)
@@ -266,10 +332,8 @@ internal sealed class DictationSession : IDisposable
 
         try
         {
-            Heard(await recognise().ConfigureAwait(true));
-            TypeWhatIsReady();
-            if (_untyped.Length > 0 && Current == State.Listening)
-                _indicator.ShowHeard(_untyped);
+            Heard(await recognise().ConfigureAwait(true), streamed);
+            TypeOrPreview();
         }
         catch (OperationCanceledException)
         {
@@ -280,25 +344,57 @@ internal sealed class DictationSession : IDisposable
         }
     }
 
+    // Parts and live words both hold the engine busy; finish both before Idle releases the model hold.
+    private async Task SettleBackgroundAsync()
+    {
+        try
+        {
+            await _parts.ConfigureAwait(true);
+        }
+        catch (Exception)
+        {
+        }
+
+        try
+        {
+            await _stream.ConfigureAwait(true);
+        }
+        catch (Exception)
+        {
+        }
+    }
+
     // What precedes the caret and everything recognised so far: Whisper's context for the next part. The typed line
     // already holds an earlier dictation into it; the remembered one stands in when a click cleared the line.
     private DictationRequest Request()
     {
         var before = _typedBefore.Trim().Length > 0 ? _typedBefore.Trim() : _continued;
-        var context = string.Join(' ', new[] { before, _said }.Where(s => !string.IsNullOrEmpty(s)));
+        var context = Joined(before ?? "", _said);
         return new DictationRequest(_language, _languages, context.Length > 0 ? context : null);
     }
 
-    private void Heard(DictationResult result)
+    // streamed: the part's live words, typed already.
+    private void Heard(DictationResult result, string[] streamed)
     {
-        var text = result.Text;
+        var text = result.Text.Length > 0 ? result.Text : string.Join(' ', streamed);
         if (text.Length == 0)
             return;
         // Detection is a pass of its own (~0.25 s on a GPU); one per dictation is enough, a speaker rarely switches mid-way.
         _language = result.Language;
         _languages = [result.Language];
-        _said = _said.Length > 0 ? _said + " " + text : text;
-        _untyped = _untyped.Length > 0 ? _untyped + " " + text : text;
+        _said = Joined(_said, text);
+        _untyped = Joined(_untyped, LiveWords.After(text, streamed));
+    }
+
+    private static string Joined(string first, string second) =>
+        first.Length == 0 ? second : second.Length == 0 ? first : first + " " + second;
+
+    // Typed now if it can be; while the hotkey is held the badge shows it instead.
+    private void TypeOrPreview()
+    {
+        TypeWhatIsReady();
+        if (_untyped.Length > 0 && Current == State.Listening)
+            _indicator.ShowHeard(_untyped);
     }
 
     // While the hotkey is held, letters would arrive with Ctrl down and act as shortcuts, so typing waits.
@@ -359,7 +455,7 @@ internal sealed class DictationSession : IDisposable
 
         // The microphone is open: the model may now take its time, the speech is being kept.
         _modelHold?.Dispose();
-        _modelHold = _engine.Hold();
+        _modelHold = _engine.Hold(_language);
 
         _startedAt = _now();
         _lastCut = _startedAt;
@@ -371,6 +467,9 @@ internal sealed class DictationSession : IDisposable
         _parts = Task.CompletedTask;
         _early = null;
         _carry = [];
+        _stream = Task.CompletedTask;
+        _streamedAt = DateTime.MinValue;
+        _live.Take();
         _partFailed = null;
         _dictation?.Dispose();
         _dictation = new CancellationTokenSource();
@@ -387,6 +486,7 @@ internal sealed class DictationSession : IDisposable
         var early = _early;
         _early = null;
         var pcm = TakeAudio(_audio.Stop());
+        var streamed = _live.Take();
         // After an early part only the pause is left, unless a soft word hides in it.
         if (early is not null && Loudest(pcm) < SpeechLevel)
             pcm = [];
@@ -395,6 +495,9 @@ internal sealed class DictationSession : IDisposable
 
         if (pcm.Length > SampleRate / 2 && _peak < DeadQuiet)
         {
+            // Drop in-flight parts/live words before Idle releases the model hold.
+            _dictation?.Cancel();
+            await SettleBackgroundAsync().ConfigureAwait(true);
             Fail(Localizer.Instance["Diag_MicSilent"]);
             return;
         }
@@ -404,13 +507,13 @@ internal sealed class DictationSession : IDisposable
         try
         {
             var clock = System.Diagnostics.Stopwatch.StartNew();
-            await _parts.ConfigureAwait(true);
+            await SettleBackgroundAsync().ConfigureAwait(true);
             CaptureLog.Write($"dictation: released, earlier parts took {clock.ElapsedMilliseconds} ms more");
             cancel.ThrowIfCancellationRequested();
             if (early is { } part)
-                Heard(await part.Result.ConfigureAwait(true));
+                Heard(await part.Result.ConfigureAwait(true), part.Streamed);
             if (pcm.Length > 0)
-                Heard(await _engine.TranscribeAsync(pcm, Request(), cancel).ConfigureAwait(true));
+                Heard(await _engine.TranscribeAsync(pcm, Request(), cancel).ConfigureAwait(true), streamed);
         }
         catch (OperationCanceledException)
         {
@@ -434,7 +537,7 @@ internal sealed class DictationSession : IDisposable
             return;
         }
 
-        _previous = (target, string.Join(' ', new[] { _continued, _said }.Where(s => !string.IsNullOrEmpty(s))), _now());
+        _previous = (target, Joined(_continued ?? "", _said), _now());
         History.Add(_said);
         if (_untyped.Length == 0)
         {
@@ -505,7 +608,7 @@ internal sealed class DictationSession : IDisposable
         if (Current == State.Listening)
             _audio.Stop();
         _dictation?.Cancel();
-        _modelHold?.Dispose();
-        _modelHold = null;
+        // Idle clears DictationActive and releases the model hold.
+        Current = State.Idle;
     }
 }

@@ -1,0 +1,9 @@
+{
+  "Model": "whisper-large-v3-turbo-q8",
+  "Device": "gpu",
+  "Language": "en",
+  "Phrases": 25,
+  "Wer": 6.49,
+  "Cer": 2.66,
+  "MsPerPhrase": 288
+}
