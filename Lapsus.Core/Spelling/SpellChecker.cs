@@ -34,12 +34,28 @@ public sealed class SpellChecker
         _ngrams = ngrams;
         _clitics = clitics;
         _minLexiconLetters = minLexiconLetters;
-        foreach (var source in sources)
+        // Each language on its own thread: a list, its n-grams and its Hunspell forms take 0.2–1 s apiece, and one
+        // after another three languages kept the brain off for 3.5 s after start (en, ru, uk; 0.9 s side by side).
+        var read = sources.ToArray().AsParallel().AsOrdered().Select(source =>
+        (
+            Source: source,
+            Ok: DictionaryFiles.TryLoad(source.Path, source.Script, source.Code, suggestionIndexSize, out var loaded),
+            Loaded: loaded,
+            Words: lexicon && source.WordFormsPath is { } wordForms ? DictionaryFiles.TryLoadLexicon(wordForms) : null
+        )).ToList();
+
+        // The typo indexes once the lists are in: built during the load they fought it for the CPU and the GC (1.2 s
+        // became 2.6 s); after it, side by side, all three are ready ~1 s later.
+        var indexes = read.Where(r => r.Ok && !r.Loaded.Index.IsValueCreated).Select(r => r.Loaded.Index).ToArray();
+        if (indexes.Length > 0)
+            ThreadPool.QueueUserWorkItem(_ => Parallel.ForEach(indexes, index => _ = index.Value));
+
+        foreach (var (source, ok, loaded, words) in read)
         {
-            if (!DictionaryFiles.TryLoad(source.Path, source.Script, source.Code, suggestionIndexSize, out var loaded))
+            if (!ok)
                 continue;
 
-            if (lexicon && source.WordFormsPath is { } wordForms && DictionaryFiles.TryLoadLexicon(wordForms) is { } words)
+            if (words is not null)
             {
                 _lexiconByLanguage[source.Code] = words;
                 if (!_lexiconsByScript.TryGetValue(source.Script, out var lexicons))
@@ -368,7 +384,7 @@ public sealed class SpellChecker
         {
             if (languageCode is not null &&
                 _byLanguage.TryGetValue(languageCode, out var preferredEngine) &&
-                ReferenceEquals(loaded.Engine, preferredEngine.Engine))
+                ReferenceEquals(loaded.Index, preferredEngine.Index))
                 continue;
 
             yield return loaded;

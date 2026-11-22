@@ -46,14 +46,14 @@ internal static class DictionaryFiles
 
             var stamp = Math.Max(File.GetLastWriteTimeUtc(wordFormsPath).Ticks, File.GetLastWriteTimeUtc(affixPath).Ticks);
             lock (CacheLock)
-            {
                 if (LexiconCache.TryGetValue(wordFormsPath, out var cached) && cached.Stamp == stamp)
                     return cached.Words;
 
-                var words = WordList.CreateFromFiles(wordFormsPath, affixPath);
+            // Built outside the lock, so languages load side by side; two threads after one file both build it once.
+            var words = WordList.CreateFromFiles(wordFormsPath, affixPath);
+            lock (CacheLock)
                 LexiconCache[wordFormsPath] = (stamp, words);
-                return words;
-            }
+            return words;
         }
         catch
         {
@@ -79,14 +79,17 @@ internal static class DictionaryFiles
                     loaded = cached.Loaded;
                     return true;
                 }
+            }
 
-                if (!TryBuild(path, script, languageCode, suggestionIndexSize, out loaded))
-                    return false;
+            // Built outside the lock, as the lexicon is.
+            if (!TryBuild(path, script, languageCode, suggestionIndexSize, out loaded))
+                return false;
 
+            lock (CacheLock)
+            {
                 EngineCache[key] = (stamp, loaded);
                 PruneDeletedFiles();
             }
-
             return true;
         }
         catch
@@ -138,19 +141,22 @@ internal static class DictionaryFiles
             return false;
         }
 
-        var engine = new SymSpellEngine(Math.Min(counts.Count, suggestionIndexSize), SpellChecker.MaxEditDistance, 7);
-        var max = 0L;
-        foreach (var (word, count) in counts
-                     .OrderByDescending(e => e.Value)
-                     .ThenBy(e => e.Key, StringComparer.Ordinal)
-                     .Take(suggestionIndexSize))
+        var max = counts.Values.Max();
+        // The index is 70% of a list's load (0.5–0.9 s for 30–50k words): the list is usable without it, and only a
+        // typo suggestion waits for it, so it is built after the load (SpellChecker starts it), not in it.
+        var index = new Lazy<SymSpellEngine>(() =>
         {
-            engine.CreateDictionaryEntry(word, count);
-            max = Math.Max(max, count);
-        }
+            var engine = new SymSpellEngine(Math.Min(counts.Count, suggestionIndexSize), SpellChecker.MaxEditDistance, 7);
+            foreach (var (word, count) in counts
+                         .OrderByDescending(e => e.Value)
+                         .ThenBy(e => e.Key, StringComparer.Ordinal)
+                         .Take(suggestionIndexSize))
+                engine.CreateDictionaryEntry(word, count);
+            return engine;
+        });
 
         var ngrams = CharNgramModel.Build(counts.Select(e => (e.Key, e.Value)), script);
-        loaded = new LoadedDictionary(counts, engine, Math.Log(1 + max), ngrams, script, commaBelow);
+        loaded = new LoadedDictionary(counts, index, Math.Log(1 + max), ngrams, script, commaBelow);
         return true;
     }
 

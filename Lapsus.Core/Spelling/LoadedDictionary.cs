@@ -3,11 +3,14 @@ using SymSpellEngine = SymSpell;
 
 namespace Lapsus.Core.Spelling;
 
-// Built once per file by DictionaryFiles and shared between SpellCheckers.
+// Built once per file by DictionaryFiles and shared between SpellCheckers. Index: the SymSpell index for typo
+// suggestions, built on first use (DictionaryFiles starts it in the background as soon as the list is read).
 internal readonly record struct LoadedDictionary(
-    Dictionary<string, long> Counts, SymSpellEngine Engine, double LogMaxCount, CharNgramModel? Ngrams,
+    Dictionary<string, long> Counts, Lazy<SymSpellEngine> Index, double LogMaxCount, CharNgramModel? Ngrams,
     Script Script, bool CommaBelow)
 {
+    public SymSpellEngine Engine => Index.Value;
+
     public string Key(string word)
     {
         var key = LookupKeys.For(word, Script);
