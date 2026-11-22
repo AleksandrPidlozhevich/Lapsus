@@ -182,16 +182,10 @@
     <value>לא הצלחנו לעדכן את ההפעלה עם הכניסה: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>לא הצלחנו להפעיל את לכידת המקלדת. תנו ל‑Lapsus גישת נגישות ב‑System Settings ← Privacy &amp; Security ← Accessibility (וגם Input Monitoring אם מופיע), ואז הפעילו מחדש את היישום.</value>
+    <value>לא ניתן היה להפעיל את לכידת המקלדת. הפעילו את Lapsus בהגדרות המערכת → פרטיות ואבטחה → נגישות; הלכידה תתחיל מעצמה.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus זקוק להרשאות האלה כדי לראות ולתקן את מה שאתם מקלידים. אשרו אותן למטה וחזרו לכאן.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>מתן גישת נגישות</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>מתן גישת ניטור קלט</value>
+    <value>Lapsus צריך את ההרשאות האלה. כל כפתור מציג את חלון macOS או פותח את הרשימה הנכונה בהגדרות המערכת ← פרטיות ואבטחה, שם מפעילים את Lapsus. המצב כאן מתעדכן מעצמו.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>תוקן: {0} ← {1}</value>
@@ -281,7 +275,7 @@
     <value>בחירה: לא ניתן היה להשתמש בלוח ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>לכידת המקלדת נעצרה לרגע והופעלה מחדש. אם זה חוזר, סגרו לקוח Accessibility עמוס או העניקו ל‑Lapsus הרשאת Input Monitoring.</value>
+    <value>לכידת המקלדת נתקעה לרגע והופעלה מחדש. אם זה חוזר, סגרו אפליקציה שמעמיסה על הנגישות.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>לכידת המקלדת פועלת שוב.</value>
@@ -302,7 +296,7 @@
     <value>הפריסה {0} לא מותקנת ב‑Mac הזה (זמינות: {1}). הוסיפו אותה ב‑System Settings ← Keyboard ← Input Sources.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>לא הצלחנו להזין הקשות ליישום הפעיל ({0}). בדקו את הרשאות הנגישות וניטור הקלט של Lapsus.</value>
+    <value>לא ניתן היה לשלוח הקשות לאפליקציה הפעילה ({0}). בדקו את הרשאת הנגישות של Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>מקש חם: התעלמנו — המיקוד עבר לחלון או ליישום אחר ({0}). הקלידו שוב בשדה היעד.</value>
@@ -713,7 +707,7 @@
     <value>שדות סיסמה נשארים מחוץ לתחום: בזמן ההקלדה בהם macOS מסתיר את המקשים מאפליקציות אחרות, כולל Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>כעת macOS יבקש שתי הרשאות: ניטור קלט, כדי לראות את המקשים, ונגישות, כדי להקליד את הטקסט המתוקן.</value>
+    <value>אפשרו כל הרשאה למטה. הכפתור מציג את חלון macOS או פותח את הרשימה הנכונה בהגדרות המערכת, שם מפעילים את Lapsus. המצב יהפוך לירוק מעצמו.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>המשך</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>בהגדרות יש עוד: מקשים לטקסט מסומן (אותיות גדולות וקטנות, תעתיק), הקלדה בקול, מודל בינה מלאכותית מקומי. הסמל שבמגש המערכת פותח אותן.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>בהגדרות יש עוד: מקשים לטקסט מסומן (אותיות גדולות וקטנות, תעתיק), חריגים לאפליקציות ולמילים. הסמל שבמגש המערכת פותח אותן.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>הצגת ההקדמה שוב</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>המונחים גם נשארים כמות שהם כשמקלידים אותם: שם שנוסף כאן לעולם לא «מתוקן».</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>נגישות</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>מיקרופון</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>כדי להקליד את הטקסט המתוקן ולמצוא את הסמן.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>להקלדה קולית. מאזין רק בזמן הכתבה.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>מותר</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>לא מותר</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>כבוי</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>לאפשר…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>פתיחת הגדרות המערכת</value>
   </data>
 </root>

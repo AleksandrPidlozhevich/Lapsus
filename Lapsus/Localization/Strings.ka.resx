@@ -182,16 +182,10 @@
     <value>ავტოგაშვების განახლება ვერ მოხერხდა: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>კლავიატურის აღბეჭდვა ვერ გაეშვა. მიეცით Lapsus-ს წვდომა: System Settings ← Privacy &amp; Security ← Accessibility (და Input Monitoring, თუ ჩამოთვლილია), შემდეგ გადატვირთეთ აპლიკაცია.</value>
+    <value>კლავიატურის მოსმენა ვერ ჩაირთო. ჩართეთ Lapsus: სისტემის პარამეტრები → კონფიდენციალურობა და უსაფრთხოება → წვდომადობა; მოსმენა თავად დაიწყება.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus-ს ეს ნებართვები სჭირდება, რომ დაინახოს და გაასწოროს აკრეფილი. მიეცით ქვემოთ და დაბრუნდით აქ.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Accessibility წვდომის მიცემა</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Input Monitoring წვდომის მიცემა</value>
+    <value>Lapsus-ს ეს ნებართვები სჭირდება. თითოეული ღილაკი აჩვენებს macOS-ის ფანჯარას ან ხსნის სწორ სიას System Settings → Privacy &amp; Security-ში, სადაც Lapsus-ს ჩართავთ. სტატუსი აქ თავად განახლდება.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>გასწორდა: {0} ← {1}</value>
@@ -281,7 +275,7 @@
     <value>მონიშვნა: ბუფერის გამოყენება ვერ მოხერხდა ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>კლავიატურის ჩაჭერა ხანმოკლედ შეჩერდა და თავიდან გაეშვა. თუ ეს მეორდება, დახურეთ დატვირთული Accessibility კლიენტი ან მიეცით Lapsus-ს Input Monitoring ნებართვა.</value>
+    <value>კლავიატურის მოსმენა წამით გაჩერდა და ხელახლა ჩაირთო. თუ ეს მეორდება, დახურეთ აპი, რომელიც წვდომადობას ტვირთავს.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>კლავიატურის დაფიქსირება ისევ მუშაობს.</value>
@@ -302,7 +296,7 @@
     <value>განლაგება {0} არ არის დაყენებული ამ Mac-ზე (ხელმისაწვდომია: {1}). დაამატეთ: System Settings ← Keyboard ← Input Sources.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>აქტიურ აპლიკაციაში ღილაკების ჩასმა ვერ მოხერხდა ({0}). შეამოწმეთ Lapsus-ის Accessibility და Input Monitoring ნებართვები.</value>
+    <value>კლავიშების დაჭერა აქტიურ აპში ვერ გაიგზავნა ({0}). შეამოწმეთ Lapsus-ის წვდომადობის ნებართვა.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>ცხელი ღილაკი: იგნორირებულია — ფოკუსი სხვა ფანჯარაზე ან აპლიკაციაზე გადავიდა ({0}). აკრიფეთ ხელახლა სამიზნე ველში.</value>
@@ -713,7 +707,7 @@
     <value>პაროლის ველებს არ ეხება: სანამ პაროლს კრეფთ, macOS კლავიშებს მალავს სხვა აპებისგან, მათ შორის Lapsus-ისგანაც.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>ახლა macOS ორ ნებართვას მოითხოვს: შეყვანის მონიტორინგს — კლავიშების დასანახად, და მისაწვდომობას — გასწორებული ტექსტის ასაკრეფად.</value>
+    <value>დართეთ ნება თითოეულ ნებართვას ქვემოთ. ღილაკი აჩვენებს macOS-ის ფანჯარას ან ხსნის სწორ სიას System Settings-ში, სადაც Lapsus-ს ჩართავთ. სტატუსი თავად გამწვანდება.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>გაგრძელება</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>პარამეტრებში მეტია: ღილაკები მონიშნული ტექსტისთვის (რეგისტრი, ტრანსლიტერაცია), ხმით აკრეფა, ლოკალური AI მოდელი. მათ სისტემური პანელის ხატულა ხსნის.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>პარამეტრებში მეტია: ღილაკები მონიშნული ტექსტისთვის (რეგისტრი, ტრანსლიტერაცია), გამონაკლისები პროგრამებისა და სიტყვებისთვის. მათ სისტემური პანელის ხატულა ხსნის.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>შესავლის ხელახლა ჩვენება</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>ტერმინები აკრეფისასაც არ იცვლება: აქ დამატებული სახელი არასდროს «სწორდება».</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Accessibility</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>მიკროფონი</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>რომ აკრიფოს გასწორებული ტექსტი და იპოვოს კურსორი.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>ხმოვანი აკრეფისთვის. უსმენს მხოლოდ კარნახის დროს.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>ნებადართულია</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>არ არის ნებადართული</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>გამორთულია</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>ნების დართვა…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>System Settings-ის გახსნა</value>
   </data>
 </root>

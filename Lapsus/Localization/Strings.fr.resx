@@ -182,16 +182,10 @@
     <value>Impossible de mettre à jour le lancement au démarrage : {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Impossible de démarrer la capture du clavier. Accordez l&apos;accès Accessibilité à Lapsus dans Réglages Système → Confidentialité et sécurité → Accessibilité (et Surveillance de la saisie s&apos;il apparaît), puis relancez l&apos;application.</value>
+    <value>Impossible de démarrer la capture du clavier. Activez Lapsus dans Réglages Système → Confidentialité et sécurité → Accessibilité ; la capture démarre alors toute seule.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus a besoin de ces autorisations pour voir et corriger ce que vous tapez. Accordez-les ci-dessous, puis revenez ici.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Accorder l&apos;accès Accessibilité</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Accorder la surveillance de la saisie</value>
+    <value>Lapsus a besoin de ces autorisations. Chaque bouton affiche la fenêtre de macOS ou ouvre la bonne liste dans Réglages Système → Confidentialité et sécurité, où vous activez Lapsus. L'état ici se met à jour tout seul.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Corrigé : {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Sélection : le presse-papiers n&apos;a pas pu être utilisé ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>La capture du clavier s'est brièvement interrompue et a été relancée. Si cela se reproduit, fermez un client Accessibility surchargé ou accordez à Lapsus l'autorisation Input Monitoring.</value>
+    <value>La capture du clavier s’est brièvement bloquée et a été relancée. Si cela se répète, fermez une app qui sollicite fortement l’Accessibilité.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>La capture du clavier fonctionne à nouveau.</value>
@@ -302,7 +296,7 @@
     <value>La disposition {0} n&apos;est pas installée sur ce Mac (disponibles : {1}). Ajoutez-la dans Réglages Système → Clavier → Sources de saisie.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Impossible d&apos;envoyer les frappes à l&apos;application active ({0}). Vérifiez les autorisations Accessibilité et Surveillance de la saisie de Lapsus.</value>
+    <value>Impossible d’envoyer les frappes à l’app active ({0}). Vérifiez l’autorisation Accessibilité de Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Raccourci : ignoré — le focus est passé à une autre fenêtre ou application ({0}). Retapez dans le champ visé.</value>
@@ -713,7 +707,7 @@
     <value>Les champs de mot de passe ne sont pas touchés : quand vous y tapez, macOS cache les touches aux autres apps, Lapsus compris.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS va maintenant demander deux autorisations : Surveillance de l'entrée, pour voir les touches, et Accessibilité, pour taper le texte corrigé.</value>
+    <value>Autorisez chaque permission ci-dessous. Le bouton affiche la fenêtre de macOS ou ouvre la bonne liste dans Réglages Système, où vous activez Lapsus. L'état passe au vert tout seul.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Continuer</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Les réglages offrent davantage : des touches pour une sélection (casse, translittération), la dictée vocale, un modèle d’IA local. L’icône de la zone de notification les ouvre.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Les réglages offrent davantage : des touches pour une sélection (casse, translittération), des exceptions pour les apps et les mots. L’icône de la zone de notification les ouvre.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Revoir l’introduction</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Les termes sont aussi laissés tels quels quand vous les tapez : un nom ajouté ici n’est jamais « corrigé ».</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Accessibilité</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Pour taper le texte corrigé et trouver le curseur.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Pour la saisie vocale. Il n'écoute que pendant la saisie vocale.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Autorisé</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Non autorisé</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Autoriser…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Ouvrir Réglages Système</value>
   </data>
 </root>

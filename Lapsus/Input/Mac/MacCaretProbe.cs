@@ -2,7 +2,6 @@ using Lapsus.Startup;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
-using System.Text;
 
 namespace Lapsus.Input;
 
@@ -35,8 +34,7 @@ internal static class MacCaretProbe
 
         try
         {
-            EnsureEnhancedAccessibility(focused);
-            var chromium = IsChromiumElement(focused);
+            var chromium = PrepareWebEngine(focused) == WebEngineKind.Chromium;
             // The element copied above was built before the manual-accessibility bit. Electron only
             // fills in the document tree after that, so the focused element has to be read again.
             if (chromium && TryCopyFocused(out var refreshed))
@@ -195,11 +193,6 @@ internal static class MacCaretProbe
         }
     }
 
-    private static void EnsureEnhancedAccessibility(IntPtr focused)
-    {
-        PrepareWebEngine(focused);
-    }
-
     public static string? ForegroundProcessName()
     {
         var pid = FocusedPid();
@@ -244,6 +237,10 @@ internal static class MacCaretProbe
         var next = new MacOSNativeMethods.CFRange { Location = range.Location, Length = 1 };
         if (TryBoundsForRange(focused, next, out var after))
             return Sliver(after, atRight: false);
+
+        // An empty field has no character on either side; AppKit answers the empty range with the caret itself.
+        if (TryBoundsForRange(focused, range, out var caret))
+            return Sliver(caret, atRight: false);
 
         if (range.Location <= 0)
             return default;
@@ -298,22 +295,6 @@ internal static class MacCaretProbe
         var x = atRight ? right : left;
         var caret = new CaretBounds(x, top, x + 1, bottom);
         return CaretScreenMapping.IsPlausibleSliver(caret) ? caret : default;
-    }
-
-    private static int _chromiumCheckPid;
-    private static bool _chromiumCheck;
-
-    private static bool IsChromiumElement(IntPtr element)
-    {
-        if (MacOSNativeMethods.AXUIElementGetPid(element, out var pid) != 0 || pid <= 0)
-            return false;
-
-        if (pid == _chromiumCheckPid)
-            return _chromiumCheck;
-
-        _chromiumCheckPid = pid;
-        _chromiumCheck = ChromiumApps.IsChromiumExecutable(MacProcessNames.ExecutablePath(pid));
-        return _chromiumCheck;
     }
 
     // Monaco keeps the editable text below the focused group. A native field already answered above.
@@ -453,24 +434,6 @@ internal static class MacCaretProbe
         return ranked;
     }
 
-    private static string ReadRole(IntPtr element)
-    {
-        if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
-                element, MacOSNativeMethods.AxRoleAttribute, out var role) != 0
-            || role == IntPtr.Zero)
-            return string.Empty;
-
-        try
-        {
-            var sb = new StringBuilder(64);
-            return MacOSNativeMethods.CFStringGetCString(
-                role, sb, sb.Capacity, MacOSNativeMethods.CFStringEncodingUtf8)
-                ? sb.ToString()
-                : string.Empty;
-        }
-        finally
-        {
-            MacOSNativeMethods.CFRelease(role);
-        }
-    }
+    private static string ReadRole(IntPtr element) =>
+        MacOSNativeMethods.ReadStringAttribute(element, MacOSNativeMethods.AxRoleAttribute) ?? string.Empty;
 }

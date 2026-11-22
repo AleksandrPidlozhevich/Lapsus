@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,6 +25,10 @@ internal interface IDictationEngine
 
     // Whether recognition is fast enough (a fraction of a second) to run again and again while the user speaks.
     bool CanStream { get; }
+
+    // Starts loading the model (see Prepare) and keeps it loaded until the hold is disposed, so an idle unload
+    // never lands between listening and the last part.
+    IDisposable Hold(string? language = null);
 
     Task<DictationResult> TranscribeAsync(float[] pcm, DictationRequest request, CancellationToken cancellationToken);
 }

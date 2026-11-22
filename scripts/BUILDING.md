@@ -183,6 +183,13 @@ version is not higher than the one already published.
 
 ## Mac App Store
 
+The App Store edition is free and has its own version line: `VERSION.mas` (2.x), separate from
+`VERSION`, which numbers the website builds for Windows and macOS. Bump the file of the edition you
+are releasing. Neural correction and voice typing are not compiled into it (`Lapsus/AppEdition.cs`):
+`Lapsus.Neural` and `Lapsus.Speech` are not referenced, so no ONNX Runtime or Whisper libraries ship,
+and nothing is sold there. Its intermediates go to `obj/mas`/`bin/mas`, so building both editions
+side by side is safe.
+
 The App Store takes a sandboxed `.pkg` instead of the Velopack bundle. `scripts/package-mas.sh`
 publishes with `-p:MacAppStore=true` (Velopack is left out: the store updates the app), builds the
 `.app` itself, signs it with `Lapsus/Packaging/Mas/Lapsus.entitlements` and wraps it with
@@ -207,6 +214,11 @@ and higher one; App Store Connect refuses a repeated number and anything with mo
 `LAPSUS_MAS_BUILD` overrides it.
 
 ### Lapsus Plus in App Store Connect
+
+Not sold at the moment: the current App Store edition ships without the paid modules, so
+`package-mas.sh` no longer builds the StoreKit bridge and the app never asks for these products.
+The code stays in the tree (`StoreViewModel`, `MacStoreKitPurchases`) for when Plus returns. What
+follows is how it was set up.
 
 Neural correction (and features added after it) is paid for in this edition only; see
 `COMMERCIAL-USE.md`. The app asks the App Store for exactly these two products
@@ -238,15 +250,16 @@ Accessibility and Input Monitoring grants and keeps its settings in
 `~/Library/Containers/com.lapsus.app.sandboxtest/`. Without `LAPSUS_MAC_APP_IDENTITY` it is signed
 ad hoc and macOS asks for the grants again after every rebuild.
 
-What the sandboxed build does differently, all decided at run time by `MacSandbox.IsSandboxed`:
+What the sandboxed build does differently, decided at run time by `MacSandbox.IsSandboxed` (the
+missing AI and Voice tabs are the compile-time `MAS` switch instead):
 
 - no Accessibility API: text is replaced by backspacing and retyping, or by pasting in browsers
   and Electron apps; the layout badge at the caret is not offered;
 - "Run at startup" is a login item (`SMAppService`, System Settings → General → Login Items),
   off by default;
 - no update button;
-- the License tab sells Lapsus Plus through the App Store instead of taking keys; no links to the
-  website's prices or to Ko-fi (guideline 3.1.1);
+- no License tab: keys are not accepted and nothing is sold; no links to the website's prices or
+  to Ko-fi (guideline 3.1.1);
 - one copy at a time through `LSMultipleInstancesProhibited`; opening the app again shows Settings.
 
 ## Issuing license keys

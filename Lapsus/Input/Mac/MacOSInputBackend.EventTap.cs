@@ -1,15 +1,8 @@
 using Avalonia.Threading;
-using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
-using Lapsus.Core.Layout;
 using Lapsus.Localization;
 using Lapsus.Startup;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +10,7 @@ namespace Lapsus.Input;
 
 internal sealed partial class MacOSInputBackend
 {
-    private void RunTapThread()
+    private void RunTapThread(int sessionEpoch)
     {
         var runLoop = MacOSNativeMethods.CFRunLoopGetCurrent();
         Volatile.Write(ref _runLoop, runLoop);
@@ -44,8 +37,7 @@ internal sealed partial class MacOSInputBackend
                 Volatile.Write(ref _runLoop, IntPtr.Zero);
 
             CaptureLog.Write(
-                $"Event tap could not be created (accessibility={MacAccessibility.IsProcessTrusted()}, " +
-                $"input monitoring={MacAccessibility.IsInputMonitoringGranted()}).");
+                $"Event tap could not be created (accessibility={MacAccessibility.IsProcessTrusted()}).");
             _startError = new InvalidOperationException(Localizer.Instance["Status_AccessibilityRequired"]);
             _tapReady.Set();
             return;
@@ -65,7 +57,15 @@ internal sealed partial class MacOSInputBackend
 
         try
         {
-            MacOSNativeMethods.CFRunLoopRun();
+            // CFRunLoopStop is lost if it lands before the loop runs, and tap creation can take
+            // seconds, so the loop also wakes on its own to see whether its session was stopped.
+            while (Volatile.Read(ref _tapEpoch) == sessionEpoch)
+            {
+                if (MacOSNativeMethods.CFRunLoopRunInMode(
+                        MacOSNativeMethods.RunLoopDefaultMode, RunLoopSliceSeconds, false)
+                    == MacOSNativeMethods.RunLoopRunFinished)
+                    break;
+            }
         }
         finally
         {
@@ -201,13 +201,25 @@ internal sealed partial class MacOSInputBackend
             return IntPtr.Zero;
         }
 
-        // A held hotkey repeats its key-down; it already did its work on the first one.
-        if (_swallowedKeyDown == keyCode)
-            return IntPtr.Zero;
+        var autoRepeat = MacOSNativeMethods.CGEventGetIntegerValueField(
+            @event, MacOSNativeMethods.EventKeyboardAutorepeat) != 0;
+        switch (TapUiGate.ClassifyKeyDown(_swallowedKeyDown, keyCode, autoRepeat))
+        {
+            case HeldKeyDown.Repeat:
+                return IntPtr.Zero;
+            case HeldKeyDown.LostKeyUp:
+                // Do what the missing key-up would have done, then treat this press as new.
+                _swallowedKeyDown = null;
+                var stale = _pendingHotkeyAction;
+                _pendingHotkeyAction = null;
+                if (stale is not null)
+                    PostFromTap(epoch, stale);
+                break;
+        }
 
         PostFromTap(epoch, NoteDictationOtherKey);
 
-        if (keyCode == MacOSNativeMethods.EscapeKeyCode && DictationListening)
+        if (keyCode == MacOSNativeMethods.EscapeKeyCode && DictationActive)
         {
             _swallowedKeyDown = keyCode;
             _pendingHotkeyAction = RaiseDictationCancel;
@@ -250,8 +262,6 @@ internal sealed partial class MacOSInputBackend
         }
 
         var typed = TypedText(@event);
-        var autoRepeat = MacOSNativeMethods.CGEventGetIntegerValueField(
-            @event, MacOSNativeMethods.EventKeyboardAutorepeat) != 0;
         PostFromTap(epoch, () =>
         {
             NoteNonModifierInput();
@@ -334,11 +344,12 @@ internal sealed partial class MacOSInputBackend
             return;
         }
 
-        MacInstalledLayouts.ReadCurrentSource(out var isInputMethod, out var layoutToken);
+        using var source = MacKeyboardSource.Current();
+        var layoutToken = source.Token;
         if (layoutToken != _deadKeyLayout)
             pendingDeadKey = 0;
 
-        if (isInputMethod)
+        if (source.IsInputMethod)
         {
             ResetTypingBuffer();
             return;
@@ -369,7 +380,7 @@ internal sealed partial class MacOSInputBackend
 
         // The event's own string knows nothing of a pending dead key: after ; on Greek it reports α, not ά.
         var state = pendingDeadKey;
-        if (MacInstalledLayouts.TranslateKeyDown(keyCode, flags, autoRepeat, ref state, _translated, out var length))
+        if (source.TranslateKeyDown(keyCode, flags, autoRepeat, ref state, _translated, out var length))
         {
             if (length == 0 && state != 0)
             {

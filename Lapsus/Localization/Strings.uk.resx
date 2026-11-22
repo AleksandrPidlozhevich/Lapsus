@@ -182,16 +182,10 @@
     <value>Не вдалося оновити автозапуск: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Не вдалося запустити перехоплення клавіатури. Надайте Lapsus доступ у Системні налаштування → Конфіденційність і безпека → Універсальний доступ (і Моніторинг введення, якщо є в списку), потім перезапустіть застосунок.</value>
+    <value>Не вдалося запустити перехоплення клавіатури. Увімкніть Lapsus у Системні параметри → Конфіденційність і безпека → Універсальний доступ; перехоплення запуститься саме.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus потрібні ці дозволи, щоб бачити та виправляти те, що ви друкуєте. Надайте їх нижче, а потім поверніться сюди.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Надати доступ: Універсальний доступ</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Надати доступ: Моніторинг введення</value>
+    <value>Lapsus потрібні ці дозволи. Кожна кнопка показує запит macOS або відкриває потрібний список у «Системні параметри» → «Приватність і безпека», де треба увімкнути Lapsus. Статус тут оновлюється сам.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Виправлено: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Виділення: не вдалося скористатися буфером обміну ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Захоплення клавіатури ненадовго зупинилося та було перезапущено. Якщо це повторюється, закрийте завантажений клієнт Accessibility або надайте Lapsus дозвіл Input Monitoring.</value>
+    <value>Перехоплення клавіатури ненадовго зависло й було перезапущене. Якщо це повторюється, закрийте застосунок, що активно використовує Універсальний доступ.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Захоплення клавіатури знову працює.</value>
@@ -302,7 +296,7 @@
     <value>Розкладка {0} не встановлена на цьому Mac (є: {1}). Додайте її в Системні налаштування → Клавіатура → Джерела введення.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Не вдалося надіслати натискання клавіш у активний застосунок ({0}). Перевірте дозволи Універсальний доступ і Моніторинг введення для Lapsus.</value>
+    <value>Не вдалося надіслати натискання клавіш у активний застосунок ({0}). Перевірте дозвіл «Універсальний доступ» для Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Гаряча клавіша: проігноровано — фокус перейшов до іншого вікна чи застосунку ({0}). Наберіть текст ще раз у потрібному полі.</value>
@@ -713,7 +707,7 @@
     <value>Поля паролів не зачіпаються: поки ви вводите пароль, macOS приховує натискання від інших програм, зокрема від Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Зараз macOS попросить два дозволи: «Моніторинг вводу» — щоб бачити натискання, і «Доступність» — щоб вводити виправлений текст.</value>
+    <value>Дозвольте кожен дозвіл нижче. Кнопка показує запит macOS або відкриває потрібний список у «Системні параметри», де треба увімкнути Lapsus. Статус стане зеленим сам.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Продовжити</value>
@@ -833,10 +827,10 @@
     <value>Голосове введення входить до Lapsus Plus.</value>
   </data>
     <data name="Diag_MicDenied" xml:space="preserve">
-    <value>Lapsus не дозволено користуватися мікрофоном. Дозвольте в «Системні параметри» → «Приватність і безпека» → «Мікрофон».</value>
+    <value>Доступ до мікрофона вимкнено. Увімкніть Lapsus у «Системні параметри» → «Приватність і безпека» → «Мікрофон».</value>
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
-    <value>Дозвольте Lapsus доступ до мікрофона у вікні, що з&apos;явилося, і знову запустіть голосове введення.</value>
+    <value>Дозвольте Lapsus доступ до мікрофона у запиті macOS і знову запустіть голосове введення.</value>
   </data>
     <data name="Tab_Voice" xml:space="preserve">
     <value>Голос</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>У налаштуваннях є більше: клавіші для виділеного тексту (регістр, транслітерація), набір голосом, локальна модель ШІ. Їх відкриває значок у треї.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>У налаштуваннях є більше: клавіші для виділеного тексту (регістр, транслітерація), винятки для програм і слів. Їх відкриває значок у треї.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Показати вступ знову</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Терміни також не чіпаються, коли ви їх набираєте: назва, додана тут, ніколи не «виправляється».</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Універсальний доступ</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Щоб вводити виправлений текст і знаходити курсор.</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Мікрофон</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Для голосового введення. Слухає лише під час диктування.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Дозволено</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Не дозволено</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Вимкнено</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Дозволити…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Відкрити Системні параметри</value>
   </data>
 </root>

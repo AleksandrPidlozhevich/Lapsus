@@ -182,16 +182,10 @@
     <value>Pornirea la autentificare nu a putut fi actualizată: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Captura tastaturii nu a putut porni. Acordă-i lui Lapsus acces la Accesibilitate în Setări sistem → Confidențialitate și securitate → Accesibilitate (și Monitorizarea introducerii, dacă apare), apoi repornește aplicația.</value>
+    <value>Captura tastaturii nu a putut porni. Activați Lapsus în Configurări sistem → Confidențialitate și securitate → Accesibilitate; captura pornește singură.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus are nevoie de aceste permisiuni ca să vadă și să corecteze ce scrii. Acordă-le mai jos, apoi revino aici.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Acordă acces la Accesibilitate</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Acordă Monitorizarea introducerii</value>
+    <value>Lapsus are nevoie de aceste permisiuni. Fiecare buton afișează dialogul macOS sau deschide lista potrivită în Configurări sistem → Confidențialitate și securitate, unde activați Lapsus. Starea de aici se actualizează singură.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Corectat: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Selecție: clipboardul nu a putut fi folosit ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Capturarea tastaturii s-a oprit pentru o clipă și a fost repornită. Dacă se repetă, închide un client Accessibility supraîncărcat sau acordă-i lui Lapsus permisiunea Input Monitoring.</value>
+    <value>Captura tastaturii s-a blocat scurt și a fost repornită. Dacă se repetă, închideți o aplicație care solicită intens Accesibilitatea.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Captarea tastaturii rulează din nou.</value>
@@ -302,7 +296,7 @@
     <value>Aranjamentul {0} nu este instalat pe acest Mac (disponibile: {1}). Adaugă-l din Setări sistem → Tastatură → Surse de introducere.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Tastele nu au putut fi trimise aplicației active ({0}). Verifică permisiunile de Accesibilitate și Monitorizare a introducerii pentru Lapsus.</value>
+    <value>Apăsările de taste nu au putut fi trimise aplicației active ({0}). Verificați permisiunea Accesibilitate pentru Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Tastă rapidă: ignorată — focalizarea a trecut la altă fereastră sau aplicație ({0}). Scrie din nou în câmpul dorit.</value>
@@ -713,7 +707,7 @@
     <value>Câmpurile pentru parole nu sunt atinse: cât timp tastați într-unul, macOS ascunde tastele de celelalte aplicații, inclusiv de Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Acum macOS va cere două permisiuni: Monitorizarea introducerii, pentru a vedea tastele, și Accesibilitate, pentru a tasta textul corectat.</value>
+    <value>Permiteți fiecare permisiune de mai jos. Butonul afișează dialogul macOS sau deschide lista potrivită în Configurări sistem, unde activați Lapsus. Starea devine verde singură.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Continuă</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>În Setări găsiți mai mult: taste pentru o selecție (majuscule, transliterare), dictare vocală, un model AI local. Pictograma din zona de notificare le deschide.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>În Setări găsiți mai mult: taste pentru o selecție (majuscule, transliterare), excepții pentru aplicații și cuvinte. Pictograma din zona de notificare le deschide.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Arată din nou introducerea</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Termenii sunt lăsați neschimbați și când îi tastați: un nume adăugat aici nu este niciodată „corectat”.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Accesibilitate</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Microfon</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Ca să tasteze textul corectat și să găsească cursorul.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Pentru tastarea vocală. Ascultă doar cât timp rulează dictarea.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Permis</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Nepermis</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Dezactivat</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Permite…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Deschide Configurări sistem</value>
   </data>
 </root>

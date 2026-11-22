@@ -182,16 +182,10 @@
     <value>Spouštění po přihlášení se nepodařilo změnit: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Zachytávání klávesnice se nepodařilo spustit. Udělte Lapsusu přístup k Zpřístupnění v Nastavení systému → Soukromí a zabezpečení → Zpřístupnění (a Sledování vstupu, pokud je uvedeno), a aplikaci restartujte.</value>
+    <value>Zachytávání klávesnice se nepodařilo spustit. Zapněte Lapsus v Nastavení systému → Soukromí a zabezpečení → Zpřístupnění; zachytávání se spustí samo.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus potřebuje tato oprávnění, aby viděl a opravoval, co píšete. Udělte je níže a pak se sem vraťte.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Udělit přístup k Zpřístupnění</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Udělit Sledování vstupu</value>
+    <value>Lapsus potřebuje tato oprávnění. Každé tlačítko zobrazí dialog macOS nebo otevře správný seznam v Nastavení systému → Soukromí a zabezpečení, kde Lapsus zapnete. Stav se tu aktualizuje sám.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Opraveno: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Výběr: schránku se nepodařilo použít ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Zachytávání klávesnice se na chvíli zastavilo a bylo restartováno. Pokud se to opakuje, zavřete vytížený klient Accessibility nebo udělte Lapsusu oprávnění Input Monitoring.</value>
+    <value>Zachytávání klávesnice se na chvíli zaseklo a bylo restartováno. Pokud se to opakuje, zavřete aplikaci, která Zpřístupnění vytěžuje.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Zachytávání klávesnice znovu běží.</value>
@@ -302,7 +296,7 @@
     <value>Rozložení {0} není na tomto Macu nainstalováno (dostupná: {1}). Přidejte je v Nastavení systému → Klávesnice → Zdroje vstupu.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Stisky kláves se nepodařilo poslat do aktivní aplikace ({0}). Zkontrolujte oprávnění Zpřístupnění a Sledování vstupu pro Lapsus.</value>
+    <value>Stisky kláves se nepodařilo odeslat do aktivní aplikace ({0}). Zkontrolujte oprávnění Zpřístupnění pro Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Zkratka: ignorováno — zaměření přešlo do jiného okna nebo aplikace ({0}). Napište text znovu v cílovém poli.</value>
@@ -713,7 +707,7 @@
     <value>Pole pro hesla zůstávají nedotčená: když do nich píšete, macOS skrývá klávesy před ostatními aplikacemi, včetně Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS teď požádá o dvě oprávnění: „Sledování vstupu“, aby viděl klávesy, a „Zpřístupnění“, aby mohl psát opravený text.</value>
+    <value>Povolte každé oprávnění níže. Tlačítko zobrazí dialog macOS nebo otevře správný seznam v Nastavení systému, kde Lapsus zapnete. Stav sám zezelená.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Pokračovat</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>V nastavení je toho víc: klávesy pro vybraný text (velikost písmen, přepis), psaní hlasem, místní model AI. Otevírá je ikona v oznamovací oblasti.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>V nastavení je toho víc: klávesy pro vybraný text (velikost písmen, přepis), výjimky pro aplikace a slova. Otevírá je ikona v oznamovací oblasti.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Znovu zobrazit úvod</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Pojmy se také neopravují, když je píšete: název přidaný sem se nikdy „neopraví“.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Zpřístupnění</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Aby mohl psát opravený text a najít kurzor.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Pro hlasové psaní. Poslouchá jen během diktování.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Povoleno</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Nepovoleno</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Vypnuto</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Povolit…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Otevřít Nastavení systému</value>
   </data>
 </root>

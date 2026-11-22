@@ -12,14 +12,22 @@ using System.Threading.Tasks;
 
 namespace Lapsus;
 
+#if MAS
+#pragma warning disable CS9113 // modelStore serves only the neural path, which this edition leaves out.
+#endif
 internal sealed class BrainBuilder(
     IInputBackend backend, DictionaryStore dictionaryStore, ModelStore modelStore, WordExceptions exceptions)
 {
+
     private readonly SemaphoreSlim _gate = new(1, 1);
 
+#if !MAS
     private OnnxGenAiLlm? _llm = new();
 
     private (string Path, ComputeDevicePreference Device)? _loadedModel;
+#endif
+
+    private bool _shutDown;
 
     public SettingsViewModel? Settings { get; set; }
 
@@ -28,7 +36,7 @@ internal sealed class BrainBuilder(
 
     public async Task RebuildAsync()
     {
-        if (_llm is null || Settings is null)
+        if (_shutDown || Settings is null)
             return;
 
         await _gate.WaitAsync().ConfigureAwait(true);
@@ -42,59 +50,18 @@ internal sealed class BrainBuilder(
 
             backend.SetCorrector(new InactiveCorrector(settings.NeuralCorrectionEnabled));
 
+#if MAS
+            if (settings.PlainLayoutSwitch)
+#else
             if (!settings.NeuralCorrectionEnabled)
-            {
-                _loadedModel = null;
-                _ = Task.Run(() => _llm.Unload());
-            }
+                UnloadNeural();
 
             if (settings.NeuralCorrectionEnabled)
             {
-                if (settings.SelectedModelId is { } modelId && modelStore.IsInstalled(modelId))
-                {
-                    var path = modelStore.PathFor(modelId);
-                    var display = modelStore.Describe(modelId)?.DisplayName ?? modelId;
-                    var plan = ExecutionPlan.Build(
-                        settings.ComputeDevice,
-                        ComputeDeviceProbe.Capabilities(),
-                        modelStore.InstalledVariant(modelId).Device,
-                        modelStore.DeclaredProviders(modelId));
-                    try
-                    {
-                        var wanted = (path, settings.ComputeDevice);
-                        if (!_llm.IsLoaded || _loadedModel != wanted)
-                        {
-                            Settings.Models.ReportLoading(display);
-                            _loadedModel = null;
-
-                            await Task.Run(() => _llm.Load(path, plan)).ConfigureAwait(true);
-                            _loadedModel = wanted;
-
-                            WarmUpNeural();
-                        }
-
-                        corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), exceptions,
-                            spellingLanguages: SpellingLanguages.For(modelId));
-                        Settings.Models.ReportReady(display, _llm.ExecutionProvider);
-                    }
-                    catch (Exception ex)
-                    {
-                        _loadedModel = null;
-                        await Task.Run(() => _llm.Unload()).ConfigureAwait(true);
-                        Settings.Models.ReportLoadFailed(ex.Message);
-
-                        corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), exceptions);
-                    }
-                }
-                else
-                {
-                    _loadedModel = null;
-                    await Task.Run(() => _llm.Unload()).ConfigureAwait(true);
-                    Settings.Models.ReportNeedsModel();
-                    corrector = new NeuralPhraseRewriter(_llm, await BuildAdviserAsync(), exceptions);
-                }
+                corrector = await BuildNeuralAsync(settings, Settings.Models);
             }
             else if (settings.PlainLayoutSwitch)
+#endif
             {
                 corrector = new PlainLayoutSwitcher(exceptions);
             }
@@ -119,9 +86,67 @@ internal sealed class BrainBuilder(
     // Native threads may still be decoding at exit, so the model is abandoned rather than freed.
     public void AbandonForShutdown()
     {
+        _shutDown = true;
+#if !MAS
         var llm = _llm;
         _llm = null;
         llm?.AbandonForShutdown();
+#endif
+    }
+
+#if !MAS
+    private void UnloadNeural()
+    {
+        _loadedModel = null;
+        if (_llm is { } llm)
+            _ = Task.Run(llm.Unload);
+    }
+
+    private async Task<IPhraseCorrector> BuildNeuralAsync(AppSettings settings, ModelsViewModel models)
+    {
+        var llm = _llm!;
+        if (settings.SelectedModelId is not { } modelId || !modelStore.IsInstalled(modelId))
+        {
+            _loadedModel = null;
+            await Task.Run(llm.Unload).ConfigureAwait(true);
+            models.ReportNeedsModel();
+            return new NeuralPhraseRewriter(llm, await BuildAdviserAsync(), exceptions);
+        }
+
+        var path = modelStore.PathFor(modelId);
+        var display = modelStore.Describe(modelId)?.DisplayName ?? modelId;
+        var plan = ExecutionPlan.Build(
+            settings.ComputeDevice,
+            ComputeDeviceProbe.Capabilities(),
+            modelStore.InstalledVariant(modelId).Device,
+            modelStore.DeclaredProviders(modelId));
+        try
+        {
+            var wanted = (path, settings.ComputeDevice);
+            if (!llm.IsLoaded || _loadedModel != wanted)
+            {
+                models.ReportLoading(display);
+                _loadedModel = null;
+
+                await Task.Run(() => llm.Load(path, plan)).ConfigureAwait(true);
+                _loadedModel = wanted;
+
+                _ = llm.WarmUpAsync();
+            }
+
+            var corrector = new NeuralPhraseRewriter(llm, await BuildAdviserAsync(), exceptions,
+                spellingLanguages: SpellingLanguages.For(modelId));
+            models.ReportReady(display, llm.ExecutionProvider);
+            return corrector;
+        }
+        catch (Exception ex)
+        {
+            _loadedModel = null;
+            await Task.Run(llm.Unload).ConfigureAwait(true);
+            models.ReportLoadFailed(ex.Message);
+
+            return new NeuralPhraseRewriter(llm, await BuildAdviserAsync(), exceptions);
+        }
     }
 
     private async Task<IPhraseCorrector?> BuildAdviserAsync()
@@ -135,12 +160,5 @@ internal sealed class BrainBuilder(
                 new LayoutCorrector(new SpellChecker(installed), exceptions: exceptions))
             .ConfigureAwait(true);
     }
-
-    private void WarmUpNeural()
-    {
-        if (_llm is not { } llm)
-            return;
-
-        _ = llm.WarmUpAsync();
-    }
+#endif
 }

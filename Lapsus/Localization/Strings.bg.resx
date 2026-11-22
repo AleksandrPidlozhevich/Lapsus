@@ -182,16 +182,10 @@
     <value>Стартирането при влизане не можа да се обнови: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Прихващането на клавиатурата не можа да се стартира. Дайте на Lapsus достъп до Достъпност в Системни настройки → Поверителност и сигурност → Достъпност (и Наблюдение на въвеждането, ако е в списъка), после рестартирайте приложението.</value>
+    <value>Прихващането на клавиатурата не можа да стартира. Включете Lapsus в Системни настройки → Поверителност и сигурност → Достъпност; прихващането ще започне само.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus се нуждае от тези разрешения, за да вижда и поправя каквото пишете. Дайте ги по-долу и се върнете тук.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Даване на достъп до Достъпност</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Даване на Наблюдение на въвеждането</value>
+    <value>Lapsus се нуждае от тези разрешения. Всеки бутон показва прозореца на macOS или отваря правилния списък в „Системни настройки“ → „Поверителност и сигурност“, където включвате Lapsus. Състоянието тук се обновява само.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Поправено: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Избор: клипбордът не можа да се използва ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Прихващането на клавиатурата спря за кратко и беше рестартирано. Ако се повтаря, затворете натоварен клиент на Accessibility или дайте на Lapsus разрешението Input Monitoring.</value>
+    <value>Прихващането на клавиатурата за кратко блокира и беше рестартирано. Ако това се повтаря, затворете приложението, което натоварва Достъпност.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Записът на клавиатурата отново работи.</value>
@@ -302,7 +296,7 @@
     <value>Подредбата {0} не е инсталирана на този Mac (налични: {1}). Добавете я от Системни настройки → Клавиатура → Източници на въвеждане.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Натисканията на клавиши не можаха да се изпратят към активното приложение ({0}). Проверете разрешенията Достъпност и Наблюдение на въвеждането за Lapsus.</value>
+    <value>Натисканията на клавиши не можаха да се изпратят към активното приложение ({0}). Проверете разрешението „Достъпност“ за Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Бърз клавиш: пренебрегнат — фокусът премина към друг прозорец или приложение ({0}). Напишете отново в желаното поле.</value>
@@ -713,7 +707,7 @@
     <value>Полетата за пароли не се засягат: докато пишете в такова поле, macOS скрива клавишите от другите приложения, включително от Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>Сега macOS ще поиска две разрешения: „Наблюдение на въвеждането“ — за да вижда клавишите, и „Достъпност“ — за да въвежда поправения текст.</value>
+    <value>Разрешете всяко разрешение по-долу. Бутонът показва прозореца на macOS или отваря правилния списък в „Системни настройки“, където включвате Lapsus. Състоянието само става зелено.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Продължи</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>В настройките има още: клавиши за избран текст (регистър, транслитерация), писане с глас, локален модел с ИИ. Отваря ги иконата в областта за уведомяване.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>В настройките има още: клавиши за избран текст (регистър, транслитерация), изключения за програми и думи. Отваря ги иконата в областта за уведомяване.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Покажи въведението отново</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Термините също не се пипат, когато ги пишете: име, добавено тук, никога не се «поправя».</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Достъпност</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Микрофон</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>За да въвежда поправения текст и да намира курсора.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>За гласово въвеждане. Слуша само докато тече диктовката.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Разрешено</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Не е разрешено</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Изключено</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Разреши…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Отвори Системни настройки</value>
   </data>
 </root>

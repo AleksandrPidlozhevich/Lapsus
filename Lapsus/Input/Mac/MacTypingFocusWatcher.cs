@@ -2,7 +2,6 @@ using Lapsus.Startup;
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Text;
 
 namespace Lapsus.Input;
 
@@ -46,10 +45,19 @@ internal sealed class MacTypingFocusWatcher : IDisposable
             return false;
         }
 
-        MacOSNativeMethods.AXObserverAddNotification(
+        var window = MacOSNativeMethods.AXObserverAddNotification(
             _observer, _systemWide, MacOSNativeMethods.AxFocusedWindowChangedNotification, IntPtr.Zero);
-        MacOSNativeMethods.AXObserverAddNotification(
+        var element = MacOSNativeMethods.AXObserverAddNotification(
             _observer, _systemWide, MacOSNativeMethods.AxFocusedUiElementChangedNotification, IntPtr.Zero);
+        if (window != 0 && element != 0)
+        {
+            CaptureLog.Write($"Focus notifications were refused (AXError {window}, {element}).");
+            MacOSNativeMethods.CFRelease(_observer);
+            _observer = IntPtr.Zero;
+            MacOSNativeMethods.CFRelease(_systemWide);
+            _systemWide = IntPtr.Zero;
+            return false;
+        }
 
         _runLoopSource = MacOSNativeMethods.AXObserverGetRunLoopSource(_observer);
         MacOSNativeMethods.CFRetain(_runLoopSource);
@@ -198,26 +206,8 @@ internal sealed class MacTypingFocusWatcher : IDisposable
         return new MacTypingFocus(pid, hash);
     }
 
-    private static string ReadRole(IntPtr element)
-    {
-        if (MacOSNativeMethods.AXUIElementCopyAttributeValue(
-                element, MacOSNativeMethods.AxRoleAttribute, out var role) != 0
-            || role == IntPtr.Zero)
-            return string.Empty;
-
-        try
-        {
-            var sb = new StringBuilder(64);
-            return MacOSNativeMethods.CFStringGetCString(
-                role, sb, sb.Capacity, MacOSNativeMethods.CFStringEncodingUtf8)
-                ? sb.ToString()
-                : string.Empty;
-        }
-        finally
-        {
-            MacOSNativeMethods.CFRelease(role);
-        }
-    }
+    private static string ReadRole(IntPtr element) =>
+        MacOSNativeMethods.ReadStringAttribute(element, MacOSNativeMethods.AxRoleAttribute) ?? string.Empty;
 
     private static bool IsTransientRole(string role)
     {

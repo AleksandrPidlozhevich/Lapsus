@@ -1,15 +1,7 @@
 using Avalonia.Threading;
-using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
-using Lapsus.Core.Layout;
 using Lapsus.Localization;
-using Lapsus.Startup;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -57,7 +49,7 @@ internal sealed partial class MacOSInputBackend
         var wanted = _wantCapture;
         var now = Environment.TickCount64;
         var gap = now - Interlocked.Exchange(ref _lastWatchdogTick, now);
-        var granted = MacAccessibility.IsProcessTrusted() && MacAccessibility.IsInputMonitoringGranted();
+        var granted = MacAccessibility.IsProcessTrusted();
 
         var running = IsRunning;
         var action = CaptureWatchdogPolicy.Decide(new WatchdogObservation(

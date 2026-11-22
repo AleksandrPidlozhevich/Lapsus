@@ -182,16 +182,10 @@
     <value>Az indítás bejelentkezéskor nem frissült: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>A billentyűzet rögzítése nem indult el. Adjon a Lapsusnak kisegítő lehetőségek hozzáférést itt: Rendszerbeállítások → Adatvédelem és biztonság → Kisegítő lehetőségek (és Beviteli figyelés, ha szerepel), majd indítsa újra az alkalmazást.</value>
+    <value>Nem sikerült elindítani a billentyűzetfigyelést. Kapcsolja be a Lapsust: Rendszerbeállítások → Adatvédelem és biztonság → Kisegítő lehetőségek; a figyelés magától elindul.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>A Lapsusnak ezekre az engedélyekre van szüksége, hogy lássa és javítsa, amit gépel. Adja meg őket alább, majd térjen ide vissza.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Kisegítő lehetőségek engedélyezése</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Beviteli figyelés engedélyezése</value>
+    <value>A Lapsusnak szüksége van ezekre az engedélyekre. Minden gomb megjeleníti a macOS párbeszédablakát, vagy megnyitja a megfelelő listát itt: Rendszerbeállítások → Adatvédelem és biztonság, ahol bekapcsolja a Lapsust. Az állapot magától frissül.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Javítva: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Kijelölés: a vágólapot nem sikerült használni ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>A billentyűzetfigyelés rövid időre leállt, majd újraindult. Ha ez ismétlődik, zárjon be egy leterhelt Accessibility-klienst, vagy adja meg a Lapsusnak az Input Monitoring engedélyt.</value>
+    <value>A billentyűzetfigyelés rövid időre megakadt, és újraindult. Ha ez ismétlődik, zárja be a Kisegítő lehetőségeket erősen használó alkalmazást.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>A billentyűzet-rögzítés ismét fut.</value>
@@ -302,7 +296,7 @@
     <value>A(z) {0} kiosztás nincs telepítve ezen a Macen (elérhető: {1}). Adja hozzá itt: Rendszerbeállítások → Billentyűzet → Beviteli források.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>A billentyűleütéseket nem sikerült elküldeni az aktív alkalmazásnak ({0}). Ellenőrizze a Lapsus kisegítő lehetőségek és beviteli figyelés engedélyeit.</value>
+    <value>Nem sikerült billentyűleütéseket küldeni az aktív alkalmazásnak ({0}). Ellenőrizze a Lapsus Kisegítő lehetőségek engedélyét.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Gyorsbillentyű: figyelmen kívül hagyva — a fókusz másik ablakra vagy alkalmazásra került ({0}). Gépelje be újra a célmezőben.</value>
@@ -713,7 +707,7 @@
     <value>A jelszómezőket nem érinti: amíg jelszót gépelsz, a macOS elrejti a billentyűket a többi alkalmazás, így a Lapsus elől is.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>A macOS most két engedélyt kér: Bevitelfigyelés, hogy lássa a billentyűket, és Kisegítő lehetőségek, hogy begépelje a javított szöveget.</value>
+    <value>Engedélyezze alább mindegyik engedélyt. A gomb megjeleníti a macOS párbeszédablakát, vagy megnyitja a megfelelő listát itt: Rendszerbeállítások, ahol bekapcsolja a Lapsust. Az állapot magától zöldre vált.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Tovább</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>A Beállításokban több is van: billentyűk a kijelölt szöveghez (kis- és nagybetű, átírás), diktálás, helyi MI-modell. A tálcaikon nyitja meg őket.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>A Beállításokban több is van: billentyűk a kijelölt szöveghez (kis- és nagybetű, átírás), kivételek alkalmazásokhoz és szavakhoz. A tálcaikon nyitja meg őket.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>A bevezető újbóli megjelenítése</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>A kifejezéseket gépeléskor sem javítja ki: az itt felvett nevet soha nem „javítja”.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Kisegítő lehetőségek</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Hogy begépelje a javított szöveget és megtalálja a kurzort.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>A hangalapú bevitelhez. Csak diktálás közben figyel.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Engedélyezve</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Nincs engedélyezve</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Kikapcsolva</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Engedélyezés…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Rendszerbeállítások megnyitása</value>
   </data>
 </root>

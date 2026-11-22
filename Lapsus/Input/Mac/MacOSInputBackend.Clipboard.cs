@@ -1,16 +1,3 @@
-using Avalonia.Threading;
-using Lapsus.Core.Correction;
-using Lapsus.Core.Input;
-using Lapsus.Core.Layout;
-using Lapsus.Localization;
-using Lapsus.Startup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Lapsus.Input;
@@ -69,7 +56,8 @@ internal sealed partial class MacOSInputBackend
         return PasteInto(MacFrontmost.ProcessId(), text);
     }
 
-    private bool PasteInto(int pid, string text, bool onSession = false)
+    // pid 0 sends the paste chord through the HID tap to the key window.
+    private bool PasteInto(int pid, string text)
     {
         if (!MacClipboard.SetText(text))
         {
@@ -81,10 +69,7 @@ internal sealed partial class MacOSInputBackend
         MacClipboard.WasModified();
         _clipboardDirty = true;
         _clipboardEpoch++;
-        var pasted = onSession
-            ? MacTextInjection.SendSessionCommandChord(MacOSNativeMethods.VKeyCode)
-            : MacTextInjection.SendCommandChord(MacOSNativeMethods.VKeyCode, pid);
-        if (pasted)
+        if (MacTextInjection.SendCommandChord(MacOSNativeMethods.VKeyCode, pid))
             return true;
 
         RaiseDiagnosticFormat("Diag_ClipboardFailed", ForegroundAppName());
@@ -112,7 +97,8 @@ internal sealed partial class MacOSInputBackend
             return;
         }
 
-        MacClipboard.RestoreSnapshot(saved);
+        if (!MacClipboard.RestoreSnapshot(saved))
+            CaptureLog.Write("The clipboard could not be saved or put back; the copied text is left on it.");
         MacClipboard.WasModified();
     }
 }

@@ -182,16 +182,10 @@
     <value>Kon starten bij aanmelden niet bijwerken: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Kon de toetsenbordopname niet starten. Geef Lapsus toegang tot Toegankelijkheid via Systeeminstellingen → Privacy en beveiliging → Toegankelijkheid (en Invoerbewaking als die er staat) en start de app opnieuw.</value>
+    <value>Toetsenbordregistratie kon niet starten. Zet Lapsus aan in Systeeminstellingen → Privacy en beveiliging → Toegankelijkheid; de registratie start dan vanzelf.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus heeft deze rechten nodig om te zien en te corrigeren wat u typt. Geef ze hieronder en kom dan hier terug.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Toegang tot Toegankelijkheid geven</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Toegang tot Invoerbewaking geven</value>
+    <value>Lapsus heeft deze machtigingen nodig. Elke knop toont het macOS-venster of opent de juiste lijst in Systeeminstellingen → Privacy en beveiliging, waar je Lapsus inschakelt. De status hier werkt zichzelf bij.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Gecorrigeerd: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Selectie: het klembord kon niet worden gebruikt ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Het onderscheppen van het toetsenbord haperde even en is opnieuw gestart. Als dit blijft gebeuren, sluit dan een zwaarbelaste Accessibility-client of geef Lapsus de machtiging Input Monitoring.</value>
+    <value>Toetsenbordregistratie liep even vast en is opnieuw gestart. Gebeurt dit vaker, sluit dan een app die Toegankelijkheid zwaar belast.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Toetsenbordregistratie draait weer.</value>
@@ -302,7 +296,7 @@
     <value>Indeling {0} is niet geïnstalleerd op deze Mac (beschikbaar: {1}). Voeg die toe via Systeeminstellingen → Toetsenbord → Invoerbronnen.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Kon geen toetsaanslagen naar de actieve app sturen ({0}). Controleer de rechten voor Toegankelijkheid en Invoerbewaking van Lapsus.</value>
+    <value>Toetsaanslagen konden niet naar de actieve app worden gestuurd ({0}). Controleer de toestemming Toegankelijkheid voor Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Sneltoets: genegeerd — de focus is naar een ander venster of programma gegaan ({0}). Typ opnieuw in het beoogde veld.</value>
@@ -713,7 +707,7 @@
     <value>Wachtwoordvelden blijven onaangeroerd: terwijl je erin typt, verbergt macOS de toetsen voor andere apps, ook voor Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS vraagt nu om twee machtigingen: Invoermonitoring, om de toetsen te zien, en Toegankelijkheid, om de verbeterde tekst te typen.</value>
+    <value>Sta hieronder elke machtiging toe. De knop toont het macOS-venster of opent de juiste lijst in Systeeminstellingen, waar je Lapsus inschakelt. De status wordt vanzelf groen.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Doorgaan</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>In Instellingen staat meer: toetsen voor geselecteerde tekst (hoofdletters, transliteratie), typen met je stem, een lokaal AI-model. Het pictogram in het systeemvak opent ze.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>In Instellingen staat meer: toetsen voor geselecteerde tekst (hoofdletters, transliteratie), uitzonderingen voor apps en woorden. Het pictogram in het systeemvak opent ze.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Introductie opnieuw tonen</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>De termen blijven ook onaangetast als je ze typt: een hier toegevoegde naam wordt nooit “verbeterd”.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Toegankelijkheid</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Microfoon</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Om de verbeterde tekst te typen en de cursor te vinden.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Voor spraakinvoer. Luistert alleen terwijl spraakinvoer loopt.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Toegestaan</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Niet toegestaan</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Uitgeschakeld</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Sta toe…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Open Systeeminstellingen</value>
   </data>
 </root>

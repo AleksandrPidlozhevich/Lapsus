@@ -182,16 +182,10 @@
     <value>Zagona ob prijavi ni bilo mogoče posodobiti: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Zajema tipkovnice ni bilo mogoče zagnati. Lapsusu dodelite dostop do pripomočkov za ljudi s posebnimi potrebami v Sistemske nastavitve → Zasebnost in varnost → Dostopnost (in Nadzor vnosa, če je naveden), nato znova zaženite aplikacijo.</value>
+    <value>Zajemanja tipkovnice ni bilo mogoče zagnati. Vklopite Lapsus v Sistemske nastavitve → Zasebnost in varnost → Dostopnost; zajemanje se bo zagnalo samo.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus potrebuje ta dovoljenja, da vidi in popravlja, kar tipkate. Dodelite jih spodaj in se nato vrnite sem.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Dodeli dostop do dostopnosti</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Dodeli nadzor vnosa</value>
+    <value>Lapsus potrebuje ta dovoljenja. Vsak gumb prikaže okno macOS ali odpre pravi seznam v »Sistemske nastavitve« → »Zasebnost in varnost«, kjer vklopite Lapsus. Stanje se tukaj posodablja samo.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Popravljeno: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Izbor: odložišča ni bilo mogoče uporabiti ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Zajem tipkovnice se je za hip ustavil in se je znova zagnal. Če se to ponavlja, zaprite obremenjenega odjemalca Accessibility ali Lapsusu dodelite dovoljenje Input Monitoring.</value>
+    <value>Zajemanje tipkovnice je za hip obstalo in je bilo znova zagnano. Če se to ponavlja, zaprite aplikacijo, ki obremenjuje Dostopnost.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Zajemanje tipkovnice spet deluje.</value>
@@ -302,7 +296,7 @@
     <value>Razporeditev {0} na tem Macu ni nameščena (na voljo: {1}). Dodajte jo v Sistemske nastavitve → Tipkovnica → Viri vnosa.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Pritiskov tipk ni bilo mogoče poslati aktivni aplikaciji ({0}). Preverite dovoljenji za dostopnost in nadzor vnosa za Lapsus.</value>
+    <value>Pritiskov tipk ni bilo mogoče poslati aktivni aplikaciji ({0}). Preverite dovoljenje Dostopnost za Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Bližnjica: prezrto — fokus se je premaknil v drugo okno ali aplikacijo ({0}). Znova vtipkajte v ciljno polje.</value>
@@ -713,7 +707,7 @@
     <value>Polja za gesla ostanejo nedotaknjena: ko tipkate vanje, macOS skrije tipke pred drugimi aplikacijami, tudi pred Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS bo zdaj zahteval dve dovoljenji: »Spremljanje vnosa«, da vidi tipke, in »Dostopnost«, da vnaša popravljeno besedilo.</value>
+    <value>Dovolite vsako dovoljenje spodaj. Gumb prikaže okno macOS ali odpre pravi seznam v »Sistemske nastavitve«, kjer vklopite Lapsus. Stanje samo postane zeleno.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Nadaljuj</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>V nastavitvah je še več: tipke za izbrano besedilo (velike in male črke, prečrkovanje), narekovanje, lokalni model UI. Odpre jih ikona v opravilni vrstici.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>V nastavitvah je še več: tipke za izbrano besedilo (velike in male črke, prečrkovanje), izjeme za aplikacije in besede. Odpre jih ikona v opravilni vrstici.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Znova pokaži uvod</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Izrazov se prav tako ne popravlja, ko jih tipkate: ime, dodano tukaj, se nikoli ne »popravi«.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Dostopnost</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Da vnaša popravljeno besedilo in najde kazalec.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Za glasovno vnašanje. Posluša le med nareko.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Dovoljeno</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Ni dovoljeno</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Izklopljeno</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Dovoli…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Odpri Sistemske nastavitve</value>
   </data>
 </root>

@@ -44,12 +44,16 @@ public sealed partial class AboutViewModel : ObservableObject
         new("Noto Sans Armenian", "SIL Open Font License 1.1", "https://github.com/notofonts/armenian"),
         new("CommunityToolkit.Mvvm 8.4.2", "MIT", "https://github.com/CommunityToolkit/dotnet"),
         new("Svg.Controls.Skia.Avalonia 12.0.0.17", "MIT", "https://github.com/wieslawsoltes/Svg.Skia"),
+#if !MAS
         new("Velopack 1.2.0", "MIT", "https://github.com/velopack/velopack"),
         new(OnnxGenAiCredit, "MIT", "https://github.com/microsoft/onnxruntime-genai"),
+#endif
         new("SymSpell 6.7.3", "MIT", "https://github.com/wolfgarbe/symspell"),
+#if !MAS
         new("Whisper.net 1.9.1", "MIT", "https://github.com/sandrohanea/whisper.net"),
         new("whisper.cpp", "MIT", "https://github.com/ggml-org/whisper.cpp"),
         new("NAudio 2.2.1", "MIT", "https://github.com/naudio/NAudio"),
+#endif
         new("WeCantSpell.Hunspell 7.0.1", "MPL 1.1", "https://github.com/aarondandy/WeCantSpell.Hunspell")
     ];
 

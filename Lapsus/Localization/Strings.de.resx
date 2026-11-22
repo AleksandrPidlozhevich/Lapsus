@@ -182,16 +182,10 @@
     <value>Autostart konnte nicht aktualisiert werden: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Tastaturerfassung konnte nicht gestartet werden. Erteilen Sie Lapsus den Bedienungshilfen-Zugriff unter Systemeinstellungen → Datenschutz &amp; Sicherheit → Bedienungshilfen (und Eingabeüberwachung, falls aufgeführt), und starten Sie die App neu.</value>
+    <value>Die Tastaturerfassung konnte nicht starten. Schalten Sie Lapsus unter Systemeinstellungen → Datenschutz &amp; Sicherheit → Bedienungshilfen ein; die Erfassung startet dann von selbst.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus braucht diese Berechtigungen, um Ihre Eingaben zu sehen und zu korrigieren. Erteilen Sie sie unten und kommen Sie dann hierher zurück.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Bedienungshilfen-Zugriff erteilen</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Eingabeüberwachung erlauben</value>
+    <value>Lapsus braucht diese Berechtigungen. Jede Taste zeigt den macOS-Dialog oder öffnet die passende Liste unter Systemeinstellungen → Datenschutz &amp; Sicherheit, wo Sie Lapsus einschalten. Der Status hier aktualisiert sich von selbst.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Korrigiert: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Auswahl: Die Zwischenablage konnte nicht verwendet werden ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Die Tastaturerfassung stockte kurz und wurde neu gestartet. Wenn das häufiger vorkommt, schließen Sie einen ausgelasteten Accessibility-Client oder erteilen Sie Lapsus die Berechtigung Input Monitoring.</value>
+    <value>Die Tastaturerfassung stockte kurz und wurde neu gestartet. Wenn das öfter passiert, beenden Sie eine App, die die Bedienungshilfen stark beansprucht.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Die Tastaturerfassung läuft wieder.</value>
@@ -302,7 +296,7 @@
     <value>Layout {0} ist auf diesem Mac nicht installiert (verfügbar: {1}). Fügen Sie es unter Systemeinstellungen → Tastatur → Eingabequellen hinzu.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Tastenanschläge konnten nicht an die aktive App gesendet werden ({0}). Prüfen Sie die Berechtigungen für Bedienungshilfen und Eingabeüberwachung von Lapsus.</value>
+    <value>Tastenanschläge konnten nicht an die aktive App gesendet werden ({0}). Prüfen Sie die Berechtigung „Bedienungshilfen“ für Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Tastenkürzel: ignoriert — der Fokus ist zu einem anderen Fenster oder Programm gewechselt ({0}). Tippen Sie im Zielfeld erneut.</value>
@@ -713,7 +707,7 @@
     <value>Passwortfelder bleiben unberührt: Während du darin tippst, verbirgt macOS die Tasten vor anderen Apps, auch vor Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS fragt jetzt nach zwei Berechtigungen: Eingabeüberwachung, um die Tasten zu sehen, und Bedienungshilfen, um den korrigierten Text einzutippen.</value>
+    <value>Erlauben Sie unten jede Berechtigung. Die Taste zeigt den macOS-Dialog oder öffnet die passende Liste in den Systemeinstellungen, wo Sie Lapsus einschalten. Der Status wird von selbst grün.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Weiter</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>In den Einstellungen gibt es mehr: Tasten für markierten Text (Groß-/Kleinschreibung, Transliteration), Diktieren, ein lokales KI-Modell. Das Symbol im Infobereich öffnet sie.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>In den Einstellungen gibt es mehr: Tasten für markierten Text (Groß-/Kleinschreibung, Transliteration), Ausnahmen für Apps und Wörter. Das Symbol im Infobereich öffnet sie.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Einführung erneut anzeigen</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Die Begriffe bleiben auch beim Tippen unangetastet: ein hier eingetragener Name wird nie „korrigiert“.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Bedienungshilfen</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>Um den korrigierten Text einzutippen und den Cursor zu finden.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>Für die Spracheingabe. Es hört nur zu, während die Spracheingabe läuft.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Erlaubt</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Nicht erlaubt</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Ausgeschaltet</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Erlauben…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Systemeinstellungen öffnen</value>
   </data>
 </root>

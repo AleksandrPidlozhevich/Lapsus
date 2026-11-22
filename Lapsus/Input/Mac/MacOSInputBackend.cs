@@ -3,15 +3,12 @@ using Lapsus.Core.Correction;
 using Lapsus.Core.Input;
 using Lapsus.Core.Layout;
 using Lapsus.Localization;
-using Lapsus.Startup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Lapsus.Input;
 
@@ -22,6 +19,8 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
     private static readonly TimeSpan TapThreadJoin = TimeSpan.FromSeconds(2);
 
     private const long RestartBackoffMs = 10_000;
+
+    private const double RunLoopSliceSeconds = 0.25;
 
     private readonly MacOSNativeMethods.EventTapCallback _callback;
 
@@ -111,7 +110,8 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
             {
                 _tapReady.Reset();
                 _startError = null;
-                _tapThread = new Thread(RunTapThread)
+                var sessionEpoch = Volatile.Read(ref _tapEpoch);
+                _tapThread = new Thread(() => RunTapThread(sessionEpoch))
                 {
                     IsBackground = true,
                     Name = "Lapsus CGEventTap"
@@ -259,37 +259,37 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
     protected override bool TryInject(int backspaces, string text)
     {
         var replacement = MacTextInjection.ReplaceTrailing(backspaces, text);
-        switch (replacement.Result)
-        {
-            case MacTextInjection.AxReplace.Replaced:
-                return true;
-            // The trailing characters are already highlighted. Backspacing would delete that whole
-            // run on the first key. A paste or a Unicode event replaces the highlight.
-            case MacTextInjection.AxReplace.Selected:
-                if (replacement.Engine != MacCaretProbe.WebEngineKind.None)
-                    return TryPasteOverTrailing(0, text);
+        if (replacement.Result == MacTextInjection.AxReplace.Replaced)
+            return true;
 
-                if (MacTextInjection.TypeOver(0, text))
-                    return true;
+        // Already highlighted: backspacing would delete that whole run on the first key, while a
+        // paste or a Unicode event replaces the highlight.
+        var count = replacement.Result == MacTextInjection.AxReplace.Selected ? 0 : backspaces;
+        return replacement.Engine != MacCaretProbe.WebEngineKind.None
+            ? TryPasteOverTrailing(count, text)
+            : TypeOver(count, text);
+    }
 
-                RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
-                return false;
-            default:
-                if (replacement.Engine != MacCaretProbe.WebEngineKind.None)
-                    return TryPasteOverTrailing(backspaces, text);
+    private bool TypeOver(int count, string text)
+    {
+        if (MacTextInjection.TypeOver(count, text))
+            return true;
 
-                if (MacTextInjection.TypeOver(backspaces, text))
-                    return true;
-
-                RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
-                return false;
-        }
+        RaiseDiagnosticFormat("Diag_InjectFailed", ForegroundAppName());
+        return false;
     }
 
     private bool TryPasteOverTrailing(int count, string text)
     {
         if (!_clipboardDirty)
-            _savedClipboard = MacClipboard.CaptureSnapshot();
+        {
+            var snapshot = MacClipboard.CaptureSnapshot();
+            // A paste would cost the user a clipboard that cannot be put back (a large screenshot).
+            if (!snapshot.Complete)
+                return TypeOver(count, text);
+
+            _savedClipboard = snapshot;
+        }
 
         // Deletes and Cmd+V are one HID sequence. A Delete posted to the pid is dropped, and the
         // paste still inserts, which leaves the old word in front of the correction.
@@ -299,7 +299,7 @@ internal sealed partial class MacOSInputBackend : InputBackendBase<MacTypingFocu
             return false;
         }
 
-        if (!PasteInto(0, text, onSession: true))
+        if (!PasteInto(0, text))
         {
             if (_clipboardDirty)
                 _ = RestoreClipboardAsync();

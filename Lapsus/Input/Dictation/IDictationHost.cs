@@ -10,8 +10,8 @@ internal interface IDictationHost
     // modifiers alone (Ctrl+Win, ⌃⌥: a combo whose key is 0), which are meant to be held.
     int DictationHotkey { get; set; }
 
-    // While true the hook takes Esc for itself (it cancels the recording) instead of passing it on.
-    bool DictationListening { get; set; }
+    // While true the hook takes Esc for itself (it cancels the dictation, recording or recognition) instead of passing it on.
+    bool DictationActive { get; set; }
 
     // A double tap raises both this and the release at once.
     event Action? DictationHotkeyPressed;

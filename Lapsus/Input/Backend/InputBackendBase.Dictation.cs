@@ -20,8 +20,8 @@ internal abstract partial class InputBackendBase<TFocus>
 
     public int DictationHotkey { get; set; }
 
-    // Read on the key hook's thread: Esc cancels a recording while this is true.
-    public bool DictationListening { get; set; }
+    // Read on the key hook's thread: Esc cancels the dictation while this is true.
+    public bool DictationActive { get; set; }
 
     public event Action? DictationHotkeyPressed;
 

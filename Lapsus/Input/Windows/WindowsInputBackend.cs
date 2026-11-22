@@ -359,7 +359,7 @@ internal sealed class WindowsInputBackend : InputBackendBase<TypingFocus>
         {
             NoteNonModifierInput();
 
-            if (vk == VK_ESCAPE && DictationListening)
+            if (vk == VK_ESCAPE && DictationActive)
             {
                 _swallowedKeyDown = vk;
                 _pendingHotkeyAction = RaiseDictationCancel;

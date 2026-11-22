@@ -121,7 +121,26 @@ internal sealed class DictationSession : IDisposable
         }
     }
 
-    public State Current { get; private set; } = State.Idle;
+    private State _current = State.Idle;
+
+    // Esc cancels until the dictation is over, recognition included; the model stays loaded as long, so an idle
+    // unload never lands between its parts.
+    public State Current
+    {
+        get => _current;
+        private set
+        {
+            _current = value;
+            _host.DictationActive = value != State.Idle;
+            if (value == State.Idle)
+            {
+                _modelHold?.Dispose();
+                _modelHold = null;
+            }
+        }
+    }
+
+    private IDisposable? _modelHold;
 
     public DictationHistory History { get; }
 
@@ -182,7 +201,6 @@ internal sealed class DictationSession : IDisposable
             case State.Listening:
                 _audio.Stop();
                 _dictation?.Cancel();
-                _host.DictationListening = false;
                 Current = State.Idle;
                 _indicator.Hide();
                 break;
@@ -416,7 +434,8 @@ internal sealed class DictationSession : IDisposable
         }
 
         // The microphone is open: the model may now take its time, the speech is being kept.
-        _engine.Prepare(_language);
+        _modelHold?.Dispose();
+        _modelHold = _engine.Hold(_language);
 
         _startedAt = _now();
         _lastCut = _startedAt;
@@ -438,7 +457,6 @@ internal sealed class DictationSession : IDisposable
         _peak = 0;
         _recentPeak = 0;
         Current = State.Listening;
-        _host.DictationListening = true;
         _indicator.ShowListening();
     }
 
@@ -452,7 +470,6 @@ internal sealed class DictationSession : IDisposable
         // After an early part only the pause is left, unless a soft word hides in it.
         if (early is not null && Loudest(pcm) < SpeechLevel)
             pcm = [];
-        _host.DictationListening = false;
         Current = State.Transcribing;
         _indicator.ShowWorking();
 
@@ -554,7 +571,6 @@ internal sealed class DictationSession : IDisposable
     private void Fail(string message)
     {
         Current = State.Idle;
-        _host.DictationListening = false;
         _host.ReportDictation(message);
         _indicator.ShowMessage(message);
     }
@@ -569,5 +585,7 @@ internal sealed class DictationSession : IDisposable
         if (Current == State.Listening)
             _audio.Stop();
         _dictation?.Cancel();
+        _modelHold?.Dispose();
+        _modelHold = null;
     }
 }

@@ -184,16 +184,10 @@
     <value>Couldn't update login startup: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Couldn't start keyboard capture. Grant Accessibility access to Lapsus in System Settings → Privacy &amp; Security → Accessibility (and Input Monitoring if listed), then restart the app.</value>
+    <value>Couldn't start keyboard capture. Switch Lapsus on in System Settings → Privacy &amp; Security → Accessibility; capture starts by itself.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus needs these permissions to see and correct what you type. Grant them below, then switch back here.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Grant Accessibility Access</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Grant Input Monitoring Access</value>
+    <value>Lapsus needs these permissions. Each button shows the macOS dialog, or opens the right list in System Settings → Privacy &amp; Security, where you switch Lapsus on. The status here updates by itself.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Corrected: {0} → {1}</value>
@@ -285,7 +279,7 @@
     <value>Selection: the clipboard could not be used ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Keyboard capture briefly stalled and was restarted. If this keeps happening, close a busy Accessibility client or grant Lapsus Input Monitoring.</value>
+    <value>Keyboard capture briefly stalled and was restarted. If this keeps happening, close a busy Accessibility client.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Keyboard capture is running again.</value>
@@ -306,7 +300,7 @@
     <value>Layout {0} is not installed on this Mac (available: {1}). Add it under System Settings → Keyboard → Input Sources.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Couldn't inject keystrokes into the active app ({0}). Check Accessibility and Input Monitoring permissions for Lapsus.</value>
+    <value>Couldn't inject keystrokes into the active app ({0}). Check the Accessibility permission for Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Hotkey: ignored — focus moved to another window/app ({0}). Type again in the target field.</value>
@@ -718,7 +712,7 @@
     <value>Password fields are left alone: while you type in one, macOS hides the keys from other apps, Lapsus included.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS will now ask for two permissions: Input Monitoring, to see the keys, and Accessibility, to type the corrected text.</value>
+    <value>Allow each permission below. The button shows the macOS dialog, or opens the right list in System Settings, where you switch Lapsus on. The status turns green by itself.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Continue</value>
@@ -838,10 +832,10 @@
     <value>Voice typing is part of Lapsus Plus.</value>
   </data>
     <data name="Diag_MicDenied" xml:space="preserve">
-    <value>Lapsus may not use the microphone. Allow it in System Settings → Privacy &amp; Security → Microphone.</value>
+    <value>Microphone access is turned off. Switch Lapsus on in System Settings → Privacy &amp; Security → Microphone.</value>
   </data>
     <data name="Diag_MicAsk" xml:space="preserve">
-    <value>Allow Lapsus to use the microphone in the dialog, then start voice typing again.</value>
+    <value>Allow Lapsus to use the microphone in the macOS dialog, then start voice typing again.</value>
   </data>
     <data name="Tab_Voice" xml:space="preserve">
     <value>Voice</value>
@@ -981,6 +975,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>There is more in Settings: keys for a selection (case, transliteration), typing by voice, a local AI model. The tray icon opens it.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>There is more in Settings: keys for a selection (case, transliteration), exceptions for apps and words. The tray icon opens it.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Show the introduction again</value>
   </data>
@@ -1022,5 +1019,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>The terms are also left alone when you type them: a name taught here is never “corrected”.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Accessibility</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>To type the corrected text and find the cursor.</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Microphone</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>For voice typing. It listens only while voice typing runs.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Allowed</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Not allowed</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Turned off</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Allow…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Open System Settings</value>
   </data>
 </root>

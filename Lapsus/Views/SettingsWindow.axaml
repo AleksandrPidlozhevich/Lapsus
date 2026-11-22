@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Lapsus.ViewModels"
+        xmlns:views="using:Lapsus.Views"
         xmlns:settings="using:Lapsus.Settings"
         xmlns:input="using:Lapsus.Input"
         xmlns:models="using:Lapsus.Core.Models"
@@ -430,22 +431,14 @@
         </Border>
 
         <Border DockPanel.Dock="Bottom"
-                IsVisible="{Binding PermissionsNeeded}"
+                IsVisible="{Binding Permissions.AnyMissing}"
                 Background="{DynamicResource LapsusRowBrush}"
                 BorderBrush="{DynamicResource LapsusBorderBrush}" BorderThickness="0,1,0,0"
-                Padding="20,10">
-            <StackPanel Spacing="8">
+                Padding="20,12">
+            <StackPanel Spacing="10">
                 <TextBlock Text="{Binding L[Perm_Explain]}" FontSize="11" Opacity="0.8"
                            TextWrapping="Wrap" />
-
-                <WrapPanel Orientation="Horizontal" ItemSpacing="8" LineSpacing="8">
-                    <Button Content="{Binding L[Perm_OpenAccessibility]}"
-                            Command="{Binding OpenAccessibilitySettingsCommand}"
-                            IsVisible="{Binding !AccessibilityGranted}" />
-                    <Button Content="{Binding L[Perm_OpenInputMonitoring]}"
-                            Command="{Binding OpenInputMonitoringSettingsCommand}"
-                            IsVisible="{Binding !InputMonitoringGranted}" />
-                </WrapPanel>
+                <views:PermissionsPanel DataContext="{Binding Permissions}" />
             </StackPanel>
         </Border>
 
@@ -550,7 +543,8 @@
                                     <StackPanel Grid.Column="0" Spacing="2" Margin="0,0,12,0">
                                         <TextBlock Text="{Binding L[SkipPasswords]}"
                                                    VerticalAlignment="Center" TextWrapping="Wrap" />
-                                        <TextBlock Classes="hint" Text="{Binding L[SkipPasswords_Hint]}" />
+                                        <TextBlock Classes="hint" Text="{Binding L[SkipPasswords_Hint]}"
+                                                   IsVisible="{Binding ShowSkipPasswordsHint}" />
                                     </StackPanel>
                                     <ToggleSwitch Grid.Column="1" Classes="bare"
                                                   IsChecked="{Binding SkipPasswordFields}" />
@@ -890,7 +884,7 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem>
+            <TabItem IsVisible="{Binding HasPaidModules}">
                 <TabItem.Header>
                     <StackPanel Spacing="4">
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconAi}" Width="20" Height="20"
@@ -1325,7 +1319,7 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem>
+            <TabItem IsVisible="{Binding Backup.IsSupported}">
                 <TabItem.Header>
                     <StackPanel Spacing="4">
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconBackup}" Width="20" Height="20"
@@ -1352,7 +1346,7 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem>
+            <TabItem IsVisible="{Binding ShowLicenseTab}">
                 <TabItem.Header>
                     <StackPanel Spacing="4">
                         <PathIcon Classes="tabIcon" Data="{StaticResource TabIconLicense}" Width="20" Height="20"

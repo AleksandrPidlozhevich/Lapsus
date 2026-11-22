@@ -182,16 +182,10 @@
     <value>Kunde inte uppdatera start vid inloggning: {0}</value>
   </data>
     <data name="Status_AccessibilityRequired" xml:space="preserve">
-    <value>Kunde inte starta tangentbordsinsamlingen. Ge Lapsus åtkomst till Hjälpmedel i Systeminställningar → Integritet och säkerhet → Hjälpmedel (och Indatabevakning om den finns med), och starta sedan om appen.</value>
+    <value>Tangentbordsavlyssningen kunde inte starta. Slå på Lapsus i Systeminställningar → Integritet och säkerhet → Hjälpmedel; avlyssningen startar av sig själv.</value>
   </data>
     <data name="Perm_Explain" xml:space="preserve">
-    <value>Lapsus behöver de här behörigheterna för att se och rätta det du skriver. Ge dem nedan och kom sedan tillbaka hit.</value>
-  </data>
-    <data name="Perm_OpenAccessibility" xml:space="preserve">
-    <value>Ge åtkomst till Hjälpmedel</value>
-  </data>
-    <data name="Perm_OpenInputMonitoring" xml:space="preserve">
-    <value>Ge åtkomst till Indatabevakning</value>
+    <value>Lapsus behöver de här behörigheterna. Varje knapp visar macOS-dialogen eller öppnar rätt lista i Systeminställningar → Integritet och säkerhet, där du slår på Lapsus. Statusen här uppdateras av sig själv.</value>
   </data>
     <data name="Status_Corrected" xml:space="preserve">
     <value>Rättat: {0} → {1}</value>
@@ -281,7 +275,7 @@
     <value>Markering: urklipp kunde inte användas ({0}).</value>
   </data>
     <data name="Diag_TapReenabled" xml:space="preserve">
-    <value>Tangentbordsavlyssningen stannade upp en kort stund och startades om. Om det fortsätter, stäng en hårt belastad Accessibility-klient eller ge Lapsus behörigheten Input Monitoring.</value>
+    <value>Tangentbordsavlyssningen stannade kort och startades om. Om det upprepas, stäng en app som belastar Hjälpmedel.</value>
   </data>
   <data name="Diag_CaptureRestored" xml:space="preserve">
     <value>Tangentbordsfångsten körs igen.</value>
@@ -302,7 +296,7 @@
     <value>Layouten {0} är inte installerad på den här Macen (tillgängliga: {1}). Lägg till den under Systeminställningar → Tangentbord → Indatakällor.</value>
   </data>
     <data name="Diag_InjectFailed" xml:space="preserve">
-    <value>Kunde inte skicka tangenttryckningar till den aktiva appen ({0}). Kontrollera behörigheterna Hjälpmedel och Indatabevakning för Lapsus.</value>
+    <value>Tangenttryckningar kunde inte skickas till den aktiva appen ({0}). Kontrollera behörigheten Hjälpmedel för Lapsus.</value>
   </data>
     <data name="Diag_FocusChanged" xml:space="preserve">
     <value>Snabbtangent: ignorerad — fokus flyttades till ett annat fönster eller program ({0}). Skriv igen i det avsedda fältet.</value>
@@ -713,7 +707,7 @@
     <value>Lösenordsfält lämnas i fred: medan du skriver i ett döljer macOS tangenterna för andra appar, även Lapsus.</value>
   </data>
     <data name="Onb_Permissions" xml:space="preserve">
-    <value>macOS frågar nu efter två behörigheter: Inmatningsövervakning, för att se tangenterna, och Hjälpmedel, för att skriva den rättade texten.</value>
+    <value>Tillåt varje behörighet nedan. Knappen visar macOS-dialogen eller öppnar rätt lista i Systeminställningar, där du slår på Lapsus. Statusen blir grön av sig själv.</value>
   </data>
     <data name="Onb_Continue" xml:space="preserve">
     <value>Fortsätt</value>
@@ -976,6 +970,9 @@
     <data name="Onb_More" xml:space="preserve">
     <value>Det finns mer i Inställningar: tangenter för markerad text (versaler och gemener, translitterering), diktering, en lokal AI-modell. Ikonen i meddelandefältet öppnar dem.</value>
   </data>
+    <data name="Onb_More_Store" xml:space="preserve">
+      <value>Det finns mer i Inställningar: tangenter för markerad text (versaler och gemener, translitterering), undantag för appar och ord. Ikonen i meddelandefältet öppnar dem.</value>
+    </data>
     <data name="Onb_Again" xml:space="preserve">
     <value>Visa introduktionen igen</value>
   </data>
@@ -1017,5 +1014,32 @@
   </data>
     <data name="Voice_GlossaryAlsoLeftAlone" xml:space="preserve">
     <value>Termerna lämnas också ifred när du skriver dem: ett namn som läggs till här “rättas” aldrig.</value>
+  </data>
+  <data name="Perm_Accessibility" xml:space="preserve">
+    <value>Hjälpmedel</value>
+  </data>
+  <data name="Perm_Microphone" xml:space="preserve">
+    <value>Mikrofon</value>
+  </data>
+  <data name="Perm_Accessibility_Why" xml:space="preserve">
+    <value>För att skriva den rättade texten och hitta markören.</value>
+  </data>
+  <data name="Perm_Microphone_Why" xml:space="preserve">
+    <value>För röstinmatning. Lyssnar bara medan röstinmatningen pågår.</value>
+  </data>
+  <data name="Perm_Granted" xml:space="preserve">
+    <value>Tillåten</value>
+  </data>
+  <data name="Perm_NotGranted" xml:space="preserve">
+    <value>Inte tillåten</value>
+  </data>
+  <data name="Perm_Denied" xml:space="preserve">
+    <value>Avstängd</value>
+  </data>
+  <data name="Perm_Allow" xml:space="preserve">
+    <value>Tillåt…</value>
+  </data>
+  <data name="Perm_OpenSettings" xml:space="preserve">
+    <value>Öppna Systeminställningar</value>
   </data>
 </root>

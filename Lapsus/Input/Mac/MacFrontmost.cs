@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 namespace Lapsus.Input;
@@ -9,44 +8,31 @@ namespace Lapsus.Input;
 [SupportedOSPlatform("macos")]
 internal static class MacFrontmost
 {
+    private static readonly IntPtr Workspace = ObjC.Class("NSWorkspace");
+    private static readonly IntPtr SharedWorkspace = ObjC.Selector("sharedWorkspace");
+    private static readonly IntPtr FrontmostApplication = ObjC.Selector("frontmostApplication");
+    private static readonly IntPtr ProcessIdentifier = ObjC.Selector("processIdentifier");
+
     public static int ProcessId()
     {
         // The caret sampler asks from a pool thread, which has no autorelease pool of its own.
-        var pool = objc_autoreleasePoolPush();
+        var pool = ObjC.PushPool();
         try
         {
-            var workspace = objc_msgSend_IntPtr(objc_getClass("NSWorkspace"), sel_registerName("sharedWorkspace"));
+            var workspace = ObjC.Send(Workspace, SharedWorkspace);
             if (workspace == IntPtr.Zero)
                 return 0;
 
-            var app = objc_msgSend_IntPtr(workspace, sel_registerName("frontmostApplication"));
+            var app = ObjC.Send(workspace, FrontmostApplication);
             if (app == IntPtr.Zero)
                 return 0;
 
-            var pid = objc_msgSend_int(app, sel_registerName("processIdentifier"));
+            var pid = ObjC.SendReturningInt(app, ProcessIdentifier);
             return pid > 0 ? pid : 0;
         }
         finally
         {
-            objc_autoreleasePoolPop(pool);
+            ObjC.PopPool(pool);
         }
     }
-
-    [DllImport("/usr/lib/libobjc.dylib")]
-    private static extern IntPtr objc_autoreleasePoolPush();
-
-    [DllImport("/usr/lib/libobjc.dylib")]
-    private static extern void objc_autoreleasePoolPop(IntPtr pool);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_getClass")]
-    private static extern IntPtr objc_getClass(string name);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "sel_registerName")]
-    private static extern IntPtr sel_registerName(string name);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-    private static extern IntPtr objc_msgSend_IntPtr(IntPtr receiver, IntPtr selector);
-
-    [DllImport("/usr/lib/libobjc.dylib", EntryPoint = "objc_msgSend")]
-    private static extern int objc_msgSend_int(IntPtr receiver, IntPtr selector);
 }

@@ -28,7 +28,8 @@
 
     <!--
       Mac App Store build (scripts/package-mas.sh passes -p:MacAppStore=true). The store updates the
-      app itself (guideline 2.4.5(vii)), so the self-updater is not shipped; everything else that
+      app itself (guideline 2.4.5(vii)), so the self-updater is not shipped. It is the free edition:
+      neural correction and voice typing are not compiled in (see AppEdition). Everything else that
       differs is decided at run time by MacSandbox.IsSandboxed.
     -->
     <PropertyGroup Condition="'$(MacAppStore)' == 'true'">
@@ -56,8 +57,13 @@
     <!-- The ONNX Runtime GenAI package, and which one each OS takes, lives in Lapsus.Neural; Whisper's in Lapsus.Speech. -->
     <ItemGroup>
         <ProjectReference Include="..\Lapsus.Core\Lapsus.Core.csproj" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(MacAppStore)' != 'true'">
         <ProjectReference Include="..\Lapsus.Neural\Lapsus.Neural.csproj" />
         <ProjectReference Include="..\Lapsus.Speech\Lapsus.Speech.csproj" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(MacAppStore)' == 'true'">
+        <Compile Remove="Speech\DictationEngine.cs" />
     </ItemGroup>
 
     <!--
