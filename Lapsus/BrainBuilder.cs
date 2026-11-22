@@ -32,7 +32,12 @@ internal sealed class BrainBuilder(
     public SettingsViewModel? Settings { get; set; }
 
     // The neural brain's model while it is loaded, for dictation to judge doubtful terms with; it serializes its runs.
+    // The App Store edition has no neural brain, so dictation never asks it to rank terms.
+#if MAS
+    public ILocalLlm? LoadedModel => null;
+#else
     public ILocalLlm? LoadedModel => _llm is { IsLoaded: true } llm ? llm : null;
+#endif
 
     public async Task RebuildAsync()
     {
