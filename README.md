@@ -7,50 +7,75 @@
 
 ### Types the word you meant, not the keys you hit.
 
-Wrong-layout and typo corrector for Windows and macOS. Lives in the tray, works over any app,
-runs entirely on your machine.
+Wrong-layout and typo corrector for Windows and macOS. Works in any app, runs only on your machine.
 
 [![Website](https://img.shields.io/badge/website-getlapsus.com-2f6fed)](https://getlapsus.com/)
 [![Release](https://img.shields.io/github/v/release/AleksandrPidlozhevich/Lapsus?label=download&color=2f6fed)](https://github.com/AleksandrPidlozhevich/Lapsus/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-2f6fed)](#install)
-[![.NET](https://img.shields.io/badge/.NET-10-512bd4)](https://dotnet.microsoft.com/)
-[![UI](https://img.shields.io/badge/UI-Avalonia-8b5cf6)](https://avaloniaui.net/)
 [![Telemetry](https://img.shields.io/badge/telemetry-none-16a34a)](#privacy)
-[![License](https://img.shields.io/badge/license-BSL%201.1-64748b)](LICENSE)
 
 </div>
 
 ---
 
-The keys were right and the layout was wrong. Press one key and the line is
-repaired in place — no retyping, and no waiting on the OS to switch layout.
+Press one hotkey — the line is fixed in place. No retyping, no waiting for the OS to switch layout.
 
-| You typed | You get | What that takes |
-|-----------|---------|-----------------|
-| `dsnfyyz` | `вітання` | positional remap between installed layouts |
-| `kalhmera` | `καλημέρα` | remap **plus** a typo fix (SymSpell, edit distance ≤ 2) |
-| `akuo` | `שלום` | a final letter on its own key |
-| `lvpfh` | `مرحبا` | positional remap, right to left |
-| `ghbdtn` | `привет` | positional remap on the Russian layout |
-| `;ovek` | `čovek` | č on the semicolon key, Serbian Latin |
-| `gamarjoba` | `გამარჯობა` | a phonetic layout, letters reached through Shift |
-| `dkssud` | `안녕` | six letter keys gathered into two syllables |
-| `sch;n` | `schön` | one mistyped key between two Latin layouts |
-| `n'rcn` in `прывітанне, свет n'rcn` | `тэкст` | only the tail is wrong; the rest is left alone |
-| `hello,` | `hello,` | a real word stays a real word |
+| You typed | You get |
+|-----------|---------|
+| `dsnfyyz` | `вітання` |
+| `ghbdtn` | `привет` |
+| `kalhmera` | `καλημέρα` |
+| `akuo` | `שלום` |
+| `lvpfh` | `مرحبا` |
+| `gamarjoba` | `გამარჯობა` |
+| `ba8ev` | `բարև` |
+| `dkssud` | `안녕` |
+| `sch;n` | `schön` |
+| `hello,` | `hello,` |
 
-Eight writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian, Armenian, Korean**.
+**Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian, Armenian, Korean.**
 
-## Who it is for
+## Install
 
-- **Anyone who types in two or more languages** and keeps starting a sentence on the wrong layout —
-  Ukrainian and English, Greek and English, Hebrew and Russian, any pair of installed layouts.
-- **People who write a lot and fast**: support agents, translators, developers, students. A typo or
-  a wrong-layout word is repaired where it stands, in whatever program you are in.
-- **People who care where their text goes.** Everything runs on your computer; there is no account
-  and nothing you type is sent anywhere.
-- **Companies** that want the same on managed computers: an MSI for deployment tools, and a
-  per-seat license.
+<p>
+  <a href="https://github.com/AleksandrPidlozhevich/Lapsus/releases/latest/download/Lapsus-win-Setup.exe"><img src="https://img.shields.io/badge/Windows-Installer%20(.exe)-2f6fed?style=for-the-badge&logo=windows&logoColor=white" alt="Windows Installer (.exe)"></a>
+  <a href="https://github.com/AleksandrPidlozhevich/Lapsus/releases/latest/download/Lapsus-win-Portable.zip"><img src="https://img.shields.io/badge/Windows-Portable%20(.zip)-64748b?style=for-the-badge&logo=windows&logoColor=white" alt="Windows Portable (.zip)"></a>
+  <a href="https://github.com/AleksandrPidlozhevich/Lapsus/releases/latest/download/Lapsus-win.msi"><img src="https://img.shields.io/badge/Windows-MSI%20(IT)-0f172a?style=for-the-badge&logo=windows&logoColor=white" alt="Windows MSI"></a>
+</p>
+<p>
+  <a href="https://github.com/AleksandrPidlozhevich/Lapsus/releases/latest/download/Lapsus-osx.dmg"><img src="https://img.shields.io/badge/macOS-Apple%20silicon%20(.dmg)-111827?style=for-the-badge&logo=apple&logoColor=white" alt="macOS Apple silicon (.dmg)"></a>
+</p>
+
+Also on [getlapsus.com](https://getlapsus.com/) and the [latest release](https://github.com/AleksandrPidlozhevich/Lapsus/releases/latest).
+
+- **Windows** — `Setup.exe` installs per-user (no admin). If SmartScreen warns, *More info* → *Run anyway*. Portable `.zip` needs no installer. MSI is for IT ([msiexec notes](#msi-for-it)).
+- **macOS** — Apple silicon `.dmg`. Grant **Accessibility** and **Input Monitoring** on first run.
+
+Updates come from the tray menu. Nothing else to install.
+
+## What it can do
+
+- **Fix the current line** on a hotkey. Press again to cycle other readings, again to restore exactly what you typed.
+- **Fix a word after Space** (opt-in). Leaves `myVar`, URLs, ALL-CAPS and very short words alone — unless the line has already switched, then `d` follows as `в`. Out of the box only layouts switch; typo fixing on the fly is a second switch (a name one letter from a dictionary word is not a typo). Backspace right after a fix restores what you typed; a word you put back three times is left alone from then on.
+- **Undo Caps Lock / Shift slips**: `hELLO HOW ARE YOU` → `Hello how are you`, `HEllo` → `Hello`. Same hotkey; with typo fixing on, also after Space. `iPhone`, `mRNA`, `IDs` stay as they are.
+- **Fix a selection** — any text, any age, even after a mouse click. Clipboard is borrowed and handed back exactly as it was.
+- **Three more selection keys** (no dictionary needed): cycle **case** (UPPER → lower → Sentence → Every Word, Greek final sigma included); **transliterate** Cyrillic/Greek ⇄ Latin (Ukrainian 2010, Bulgarian 2009, Belarusian, Macedonian, Russian, ELOT 743 for Greek); turn a **visually reversed** Hebrew or Arabic line the right way round.
+- **Layout badge** (opt-in) next to the caret — so the mistake does not happen. In browsers and Electron apps the badge flashes by the pointer when the layout changes; it also flashes blue where a word was fixed without being asked.
+- **Voice typing** (opt-in): hold Ctrl+Win (⌃⌥ on Mac) while you speak and let go; a short press records until the next one. English terms stay Latin (`pull request`, `GitHub`); a glossary teaches your own names. [More below.](#voice-typing-optional)
+- **Stay out of the way**: skip named apps entirely, or “Hotkey only” (hotkey + selection keys, no Space fix — for editors/terminals). Password fields never reach the buffer. Chinese / Japanese / Korean IME typing is left to the IME; with the English layout on, `dkssud` still fixes on the hotkey, and a selection fixes either way round.
+- **Pause** from the tray (15 min, an hour, or until you bring it back). On Windows it steps aside during a full-screen game.
+- **New layout notice**: if a layout has no dictionary yet, Library offers it in one click — nothing downloads until you ask.
+- **Export / import** settings, leave-alone words and excluded apps to another computer.
+- **First launch** walks through what Lapsus does, downloads word lists for your layouts, and gives a field to try the hotkey. Settings can show it again and keeps a count of fixes.
+- **26 UI languages**, right-to-left included.
+
+### Three brains, one hotkey
+
+| Brain | Needs | What it does |
+|-------|-------|--------------|
+| **Dictionary** (default) | a word list | Ranks every reading — as typed, remapped through each layout, each also typo-fixed — and switches only past a confidence threshold. |
+| **Layout switch only** | nothing | One character for another. No word list, no threshold. |
+| **Neural** (opt-in) | a local model | A small LLM picks among the same readings in context; the dictionary brain advises when a word list is installed, and stands in while the model is not loaded. |
 
 ## Screenshots
 
@@ -60,297 +85,57 @@ Eight writing systems: **Latin, Cyrillic, Greek, Hebrew, Arabic, Georgian, Armen
     <td width="50%"><img src="docs/images/settings-hotkeys.png" alt="Hotkeys"></td>
   </tr>
   <tr>
-    <td align="center"><b>General</b> — capture, auto-correct, what a key does to a line</td>
-    <td align="center"><b>Hotkeys</b> — the main key, plus keys for a selection</td>
-  </tr>
-  <tr>
     <td><img src="docs/images/settings-apps.png" alt="Excluded applications"></td>
     <td><img src="docs/images/settings-library.png" alt="Dictionaries"></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Apps</b> — programs Lapsus stays out of entirely</td>
-    <td align="center"><b>Library</b> — downloadable word lists, tie-break language</td>
   </tr>
   <tr>
     <td><img src="docs/images/settings-ai.png" alt="Local models"></td>
     <td><img src="docs/images/settings-voice.png" alt="Voice typing"></td>
   </tr>
-  <tr>
-    <td align="center"><b>AI</b> — optional local model, CPU or GPU, your choice</td>
-    <td align="center"><b>Voice</b> — type by voice, speech model, on-screen microphone button</td>
-  </tr>
 </table>
-
-The Mac App Store edition has the same window plus a Plus tab; its screenshots are in
-[`docs/images/appstore`](docs/images/appstore).
-
-## What it can do
-
-- **Fix the current line** on a hotkey. Press again to cycle the other readings, and again to get
-  back exactly what you typed.
-- **Fix a word automatically** after Space (opt-in), behind a filter that leaves `myVar`, URLs,
-  ALL-CAPS and very short words alone — unless the line has already switched, in which case `d`
-  follows it as `в`. Out of the box it only switches layouts; fixing typos on the fly is a second
-  switch, because a name one letter from a dictionary word is not a typo. Backspace right after a
-  fix puts back what you typed, and a word you put back three times is left alone from then on.
-- **Undo a slip of Caps Lock or Shift**: `hELLO HOW ARE YOU` becomes `Hello how are you` and `HEllo`
-  becomes `Hello`, on the same hotkey and, with typo fixing on, after Space. `iPhone`, `mRNA` and
-  `IDs` are left as they are.
-- **Fix a selection** — any text, any age, even after a mouse click, through a borrowed clipboard
-  that is handed back exactly as it was.
-- **Three more things a key can do to a selection**, each with its own hotkey and none of them
-  needing a dictionary: cycle **case** (UPPER → lower → Sentence → Every Word, Greek final sigma included),
-  **transliterate** Cyrillic or Greek ⇄ Latin in each language's own romanisation — Ukrainian's 2010
-  rules (Київ → Kyiv), Bulgaria's 2009 Streamlined System (Търново → Tarnovo), Belarusian, Macedonian,
-  Russian, and ELOT 743 for Greek, the one on Greek passports — and turn a **visually reversed**
-  Hebrew or Arabic line back the right way round.
-- **Show which layout is active** right next to the text cursor (opt-in), so the mistake
-  does not happen in the first place. Where an app shows no cursor of its own to Lapsus — a browser,
-  an Electron app — the badge appears by the mouse pointer for a moment when the layout changes. The
-  same badge flashes blue where a word was fixed without being asked.
-- **Type by voice** (opt-in): hold Ctrl+Win (⌃⌥ on a Mac) while you speak and let go, and what you
-  said is typed at the cursor; a short press records hands-free until the next one. English terms in Russian or Ukrainian speech come
-  out as *pull request* and *GitHub*, not spelled out in Cyrillic, and a glossary teaches it your own
-  names — which the correction then leaves alone when you type them, as it does the words on the
-  leave-alone list. [More below.](#voice-typing-optional)
-- **Stay out of the way**: named applications are skipped entirely — or, ticked “Hotkey only”, keep
-  the hotkey and the selection keys but get no fix after Space, which suits an editor or a terminal —
-  password fields never reach the
-  buffer, and IME input (Chinese / Japanese / Korean) is left to the IME. Korean is the one of the
-  three Lapsus can read: with the English layout on, `dkssud` is fixed on the hotkey like any other
-  wrong-layout word, and a selection is fixed either way round whichever keyboard is on.
-- **Take a break**: the tray menu pauses Lapsus for fifteen minutes, an hour, or until you bring it
-  back, and on Windows it steps aside by itself while a full-screen game is running.
-- **Notice a new layout**: when your keyboard has a layout whose language has no dictionary yet,
-  the Library tab offers it in one click — nothing is downloaded until you ask.
-- **Move with you**: settings, the leave-alone word list and excluded apps export to one file and
-  import on another computer.
-- **Introduce itself**: a first launch walks through what Lapsus does, downloads the word lists for
-  your layouts, and gives you a field to try the hotkey in. Settings can show it again, and keeps a
-  count of what has been fixed.
-- **Speak your language**: the interface ships in 26 languages, right-to-left ones included.
-
-### Three brains, one hotkey
-
-| Brain | Needs | What it does |
-|-------|-------|--------------|
-| **Dictionary** (default) | a word list | Ranks every reading — as typed, remapped through each installed layout, each also typo-fixed — and switches only past a confidence threshold. |
-| **Layout switch only** | nothing at all | One character for another. No word list, no threshold: you pressed the key, and that is the whole decision. |
-| **Neural** (opt-in) | a local model | A small LLM reads every word's possible readings in context and picks one, with the dictionary brain riding along as its adviser when a word list is installed — and standing in for it while the model is not loaded. |
-
-## Install
-
-From [getlapsus.com](https://getlapsus.com/) or the [latest GitHub release](https://github.com/AleksandrPidlozhevich/Lapsus/releases):
-
-- **Windows** — `Lapsus-win-Setup.exe`. Per-user install into `%LocalAppData%\Lapsus`: no admin, no
-  UAC prompt. If SmartScreen says *"Windows protected your PC"*, choose *More info* → *Run anyway*.
-  `Lapsus-win-Portable.zip` is published too.
-- **Windows, managed deployment** — `Lapsus-win.msi`, for Group Policy / Intune / SCCM.
-  [See below.](#deploying-the-msi)
-- **macOS** — the installer from the same release. Grant **Accessibility** and **Input Monitoring**
-  on first run (System Settings → Privacy & Security); both are required for capture.
-
-Nothing else to install: the builds are self-contained. Updates are checked in the background and
-applied from the tray menu when you ask for them — the app never restarts itself mid-sentence.
-
-### Deploying the MSI
-
-Double-clicked, the MSI asks whether to install for this user or for the machine. Silently, it
-installs **per-user** and — ordinary Windows Installer behaviour, not a Lapsus quirk — picks the
-fixed drive with the most free space, so `/qn` alone can land the app in `D:\Lapsus`. Always name
-the location:
-
-```cmd
-:: per-machine, into Program Files (requires elevation)
-msiexec /i Lapsus-win.msi /qn ALLUSERS=1 VELOPACK_INSTALLDIR="C:\Program Files\Lapsus"
-
-:: per-user, no elevation
-msiexec /i Lapsus-win.msi /qn VELOPACK_INSTALLDIR="%LocalAppData%\Lapsus"
-```
-
-The MSI hides its own Add/Remove Programs entry so the app's is the only one visible, and
-uninstalling runs the same cleanup hook `Setup.exe` does — the autostart entry goes with it, while
-`%APPDATA%\Lapsus` (settings, dictionaries, models) is deliberately kept for a reinstall.
-
-Individuals should take `Setup.exe`: a per-machine install lives somewhere the app cannot write to,
-so in-app updates would need elevation. Under a deployment tool updates are the tool's job anyway —
-push the next MSI.
-
-## How it works
-
-1. **Capture** — the platform backend tracks the current line in its own buffer
-   (`WH_KEYBOARD_LL` on Windows, `CGEventTap` on macOS).
-2. **Hypotheses** — the text as typed; remapped through every installed layout; each of those also
-   typo-fixed.
-3. **Score** — a dictionary hit wins outright; otherwise a character-trigram model built from the
-   installed word lists judges how natural the word looks, times an edit penalty, and a switch happens
-   only past a threshold. Scripts that cannot be scored honestly — Hebrew, Arabic, Georgian, Armenian, Korean — are
-   dictionary-only by design.
-4. **Inject** — the backspaces and the replacement go out as **one** `SendInput` call, as Unicode.
-   Nothing waits on an OS layout switch, which is the lag every switcher of this kind is known for.
-5. **Optionally** — ask the OS once, afterwards, to switch to the target layout so that continued
-   typing matches.
 
 ## Dictionaries
 
-Not bundled, and no network traffic until you click Download. In **Settings → Library**, pick from
-**35** languages across the eight scripts:
-
-- a frequency list — [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) for most
-  languages, Unicode Unilex for Belarusian, Georgian and Armenian;
-- for most of them also a Hunspell dictionary, so a rare word form no frequency list reaches still counts as a
-  word — from [LibreOffice](https://github.com/LibreOffice/dictionaries) or
-  [wooorm/dictionaries](https://github.com/wooorm/dictionaries); Hebrew's word forms come from Wiktionary
-  ([kaikki.org](https://kaikki.org/dictionary/Hebrew/)) and [UniMorph](https://github.com/unimorph/heb) instead.
-
-Sources are pinned to a commit, and every one, with its authors and license, is listed in
-[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md) and in the tooltip of an installed language. Word lists are
-pooled by script, so a word counts as real if any loaded dictionary of its script knows it. Files live in
-`%APPDATA%\Lapsus\dictionaries` (platform-equivalent on macOS) — outside the install folder, so an update never
-wipes them.
+Not bundled — nothing downloads until you click Download in **Settings → Library**. **35** languages across the eight scripts: a frequency list, and for most of them also Hunspell so a rare word form still counts. Sources and licenses are in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Files live in `%APPDATA%\Lapsus\dictionaries` (platform-equivalent on macOS), outside the install folder.
 
 ## Local models (optional)
 
-**Settings → AI** turns the neural brain on and manages models. Four curated ONNX Runtime GenAI
-packs — Qwen3 0.6B (the default), Qwen2.5 0.5B, Qwen3 1.7B, Phi-3.5 mini — plus a search box that
-takes either words or a pasted `org/name` from Hugging Face and keeps only the repos that really
-hold a runnable pack.
-
-The **device is your choice** (Auto / CPU / GPU), and the picker offers only what the machine can
-really drive: DirectML on Windows, WebGPU on Apple Silicon, CUDA where a pack ships it, always with
-a fall back to CPU. A short correction costs roughly a third of a second on a small pack, because
-the prompt is built to stay identical from press to press and is rewound instead of re-fed.
-
-Files land in `%APPDATA%\Lapsus\models\{id}`, beside the dictionaries and equally safe from an
-update.
+**Settings → AI** turns the neural brain on. Four curated packs — Qwen3 0.6B (default), Qwen2.5 0.5B, Qwen3 1.7B, Phi-3.5 mini — plus a Hugging Face search that keeps only runnable ONNX GenAI packs. Pick **Auto / CPU / GPU** (DirectML on Windows, WebGPU on Apple Silicon, CUDA where a pack ships it; always falls back to CPU). A short correction is roughly a third of a second on a small pack. Files: `%APPDATA%\Lapsus\models\{id}`.
 
 ## Voice typing (optional)
 
-**Settings → Voice** turns it on and downloads the speech model; the hotkey is on the Hotkeys tab with
-the others. Hold it while you speak and let go, or tap it once to talk hands-free and tap again to finish —
-Esc throws the recording away. A badge with a microphone sits at the cursor while it listens, saying how to
-finish for the first few seconds, and a short tone marks the start and the end (it can be turned off).
-On Windows a small microphone button waits at the bottom of the screen, labelled with the hotkey: a click
-starts or finishes a dictation without taking focus from the field you are in. The password-field setting
-does not apply here — dictation reads nothing from the field, it only types into it.
+**Settings → Voice** downloads the speech model; the hotkey is on the Hotkeys tab. Hold while you speak and let go, or tap once for hands-free and tap again to finish — Esc throws it away. A microphone badge sits at the cursor; a short tone marks start and end (can be turned off). On Windows a small button at the bottom of the screen starts or finishes without taking focus. The password-field setting does not apply — dictation only types into the field.
 
-- **Recognition** is OpenAI's [Whisper](https://github.com/openai/whisper) large-v3-turbo through
-  [whisper.cpp](https://github.com/ggml-org/whisper.cpp), on the graphics card where there is one
-  (Vulkan on Windows: NVIDIA, AMD and Intel alike; Metal on Apple Silicon) and on the processor
-  otherwise. A phrase takes a fraction of a second on a graphics card and a few seconds on a
-  processor. Four builds are offered — large-v3-turbo (834 MB, the default), the same model as a
-  smaller download (547 MB), the full large-v3 (1031 MB: more accurate, and noticeably slower), and
-  Whisper small (181 MB), the smallest download.
-- **Without a graphics card, NVIDIA's [Parakeet TDT v3](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3)**
-  (640 MB, CC BY 4.0) is the suggested model: about a third of a second a phrase on the processor, where
-  large-v3-turbo takes two to three. It hears 25 European languages (Russian and Ukrainian among them), adds
-  punctuation itself and writes nothing over silence, but spells English terms in the local alphabet more often
-  than Whisper. Where a layout's language is not among the 25, Whisper stays the suggestion. Where every layout
-  is English, the suggestion is [Parakeet TDT v2](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2) (630 MB,
-  CC BY 4.0) instead: the same speed, English only, and more accurate at it.
-- **Where Hebrew is the main layout, [ivrit.ai](https://www.ivrit.ai)'s fine-tune of large-v3-turbo** (834 MB,
-  Apache 2.0) is the suggestion, with a graphics card or without: about half the stock turbo's errors in Hebrew
-  on a graphics card and a third on the processor, but it reads every phrase as Hebrew, English ones included.
-- **Where Georgian or Armenian is the main layout, NVIDIA's FastConformer for that language**
-  ([ka](https://huggingface.co/nvidia/stt_ka_fastconformer_hybrid_large_pc),
-  [hy](https://huggingface.co/nvidia/stt_hy_fastconformer_hybrid_large_pc); 439 MB each, CC BY 4.0) is the
-  suggestion. Whisper hardly knows either language (on Georgian it writes something else altogether); these
-  take about a fifth of a second a phrase on the processor and hear only their own language.
-- **The model follows the layout.** Each dictation runs on a downloaded model made for the active layout's
-  language, else on the chosen model if it hears that language, else on another downloaded model that does. With
-  Georgian and Russian layouts, say, the Georgian model and Parakeet each take their own language; the voice card
-  lists each layout's model and offers the download it lacks. With 16 GB of memory two models stay loaded, so
-  switching layouts does not wait for a reload, and each unloads after its own idle time.
-- **Long dictations are typed as you go.** Once a few seconds have been said, the next pause sends that
-  part to recognition and it is typed while you keep talking; the earlier parts are Whisper's context for
-  the next. While the hotkey is held the parts wait (letters typed with Ctrl down would act as shortcuts)
-  and go in the moment you let go, so only the last part is waited for.
-- **English terms stay English.** Whisper is shown a sentence that mixes your language with English the
-  way people speak, then a second pass puts terms it still spelled out back into Latin by how they sound
-  (`пулл реквест` → `pull request`, `гитхаб` → `GitHub`), using the English word list and a built-in list
-  of tech names. Words your dictionary knows (`компьютер`, `файл`) and inflected forms (`задеплоил`) are
-  left alone. The glossary takes your own: one per line, `Kubernetes|кубер` when it sounds unusual. It also
-  learns: a misheard word you backspace over and retype in Latin right after dictating («Кубнетис» →
-  `Kubernetes`) is added as `Kubernetes|кубнетис`, read from the keys you type, as the correction hotkey already
-  reads them; a different word, or one retyped after the caret moved, teaches nothing.
-- **With the AI model on, it judges the doubtful terms too.** A word no dictionary knows that sounds near a known
-  term (Parakeet's «стегинг», «Кубнетис», «Слэк») is read by the neural brain's model both ways, and the term goes
-  in only when it reads clearly likelier. On the 22 recorded Russian phrases Parakeet's terms went from 12 of 25
-  to 16, at about a fifth of a second a doubtful word; the model never writes text of its own.
-- **Silence stays silent.** Speech is cut out with [Silero VAD](https://github.com/snakers4/silero-vad)
-  before recognition, and the subtitle credits Whisper likes to invent over quiet audio are filtered out.
-- **The language** is your active keyboard layout's, or another of your layouts' languages when the
-  speech is clearly in it — never one you do not use. It can also be fixed.
-- **Memory**: the model (about 1 GB) loads when a dictation starts — the microphone opens at once, so no
-  word is lost while it loads — and is freed after five idle minutes, or whenever you choose.
-- **On a Mac** the first dictation asks for the microphone (System Settings → Privacy & Security →
-  Microphone).
-
-Models land in `%APPDATA%\Lapsus\speech`, each pinned to a commit and checked against its SHA-256.
+- **Whisper** large-v3-turbo (default), a smaller download of the same, full large-v3, or Whisper small — GPU where available (Vulkan / Metal), else CPU.
+- **No GPU?** Parakeet TDT v3 is suggested (~⅓ s/phrase on CPU, 25 European languages). English-only layouts get Parakeet TDT v2; Hebrew gets ivrit.ai’s turbo fine-tune; Georgian / Armenian get NVIDIA FastConformer for that language.
+- **The model follows the layout** — each dictation picks a downloaded model for that language. Long speech is typed in chunks as you pause. English terms stay Latin (`пулл реквест` → `pull request`); the glossary takes your own (`Kubernetes|кубер`) and can learn from a backspace-and-retype right after dictating. Silence is cut with Silero VAD before recognition.
+- On a Mac the first dictation asks for the microphone. Models land in `%APPDATA%\Lapsus\speech`.
 
 ## Privacy
 
-Correction runs locally, the neural model included, and so does voice typing: the recording stays in
-memory until its text is typed and is never written to disk or sent anywhere. There is no telemetry, no
-analytics and no account, and what you type never leaves your computer. Password fields are skipped wherever the OS
-lets us see them, the typing buffer is overwritten when it is dropped, and it is thrown away after
-one minute of silence.
+Everything runs on your computer. No telemetry, no account, no cloud for your text. Voice stays in memory until it is typed.
 
-The app goes online for exactly these, and nothing else:
+Online only when you download dictionaries or models, check for updates, or activate a license. Full policy: [getlapsus.com/en/privacy/app](https://getlapsus.com/en/privacy/app/).
 
-| When | Where | What it sends |
-|------|-------|---------------|
-| You install or update a dictionary | `raw.githubusercontent.com`, `kaikki.org` | an ordinary download request |
-| You search for or download a neural model, or download the speech model | `huggingface.co` | the search text you typed; an ordinary download request |
-| At launch (not in the Microsoft Store version, which the Store updates) | GitHub Releases | an update check |
-| You enter a license key, and about once a month after that | the license server (Supabase) | the key, and a salted SHA-256 hash of the machine's ID — the raw ID never leaves the computer |
+## Price
 
-The machine hash cannot be reversed into a serial number and is salted per product, so it correlates
-with nothing outside Lapsus; a free install never contacts the license server at all. If it is
-unreachable, nothing breaks — the app keeps correcting text.
+**Free for private use** (freelancers included). Organisations need a per-seat license after a 30-day trial — [pricing](https://getlapsus.com/en/pricing/). Reminder only on managed PCs; nothing is locked.
 
-Every one of those servers sees your IP address, as any download does. Settings, the leave-alone word
-list, excluded apps, the license key, dictionaries, models, the crash log and the count of fixes shown
-in Settings (numbers per day, never the words) stay on your computer in
-the app-data folder (`%APPDATA%\Lapsus` on Windows); the Microsoft Store version keeps
-them in its own package folder and deletes them when it is uninstalled. Full policy:
-[getlapsus.com/en/privacy/app](https://getlapsus.com/en/privacy/app/).
+## MSI for IT
 
-## Free for private people, paid for companies
+```cmd
+msiexec /i Lapsus-win.msi /qn ALLUSERS=1 VELOPACK_INSTALLDIR="C:\Program Files\Lapsus"
+msiexec /i Lapsus-win.msi /qn VELOPACK_INSTALLDIR="%LocalAppData%\Lapsus"
+```
 
-**Private people use Lapsus for free — freelancers included.** Companies pay, per seat, after thirty
-days to evaluate. The line is who uses it, not what for: no feature is locked behind a key, nothing
-expires, and there is no copy protection.
+Always set `VELOPACK_INSTALLDIR`. Individuals should use `Setup.exe` (in-app updates without elevation).
 
-At launch Lapsus checks whether the computer is administered by an organisation (an Active Directory
-domain, Entra ID, or an MDM server). If it is and no key is installed, a small window says a license is
-needed. It is a reminder, not a gate: nothing is disabled.
+## License & building
 
-A license is tied to one computer. Editions, prices and a 30-day trial key are on the
-[pricing page](https://getlapsus.com/en/pricing/); for a site license or a written agreement, write to
-<info@getlapsus.com>.
-
-## License
-
-[Business Source License 1.1](LICENSE), unmodified apart from the Parameters block. Its **Additional
-Use Grant** makes production use free for natural persons, and for private use of a work computer
-where the organisation allows it; organisations need a paid, per-seat license. Four years after each
-version is published, that version converts to the **Mozilla Public License 2.0**.
-[COMMERCIAL-USE.md](COMMERCIAL-USE.md) explains the line in plain language; where the two differ,
-`LICENSE` governs.
-
-The components Lapsus ships keep their own licenses, reproduced in
-[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Dictionary and model packs are not bundled and keep
-their upstream licenses.
-
-## Building from source
-
-Lapsus is written in C# on .NET 10 with [Avalonia](https://avaloniaui.net/). With the
-[.NET 10 SDK](https://dotnet.microsoft.com/download) installed:
+[Business Source License 1.1](LICENSE) — see [COMMERCIAL-USE.md](COMMERCIAL-USE.md). Third-party notices: [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 ```bash
 dotnet run --project Lapsus/Lapsus.csproj
 ```
 
-Building the installers is walked through step by step in
-**[scripts/BUILDING.md](scripts/BUILDING.md)**.
+Installers: **[scripts/BUILDING.md](scripts/BUILDING.md)**.

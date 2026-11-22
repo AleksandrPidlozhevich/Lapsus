@@ -28,6 +28,7 @@ public static class SpeechPromptBuilder
         ["ar"] = "فتحت pull request على GitHub، وبعد الـ code review سأعمل deploy على staging وأحدّث README.",
         ["ka"] = "GitHub-ზე pull request გავხსენი, code review-ს შემდეგ staging-ზე deploy გავაკეთებ.",
         ["hy"] = "GitHub-ում pull request բացեցի, code review-ից հետո staging-ում deploy կանեմ և կթարմացնեմ README-ն։",
+        ["ko"] = "GitHub에 pull request 올렸고, code review 후에 staging에 deploy하고 README를 업데이트할게.",
         ["en"] = "Opened a pull request on GitHub; after code review I'll deploy to staging and update the README.",
     };
 

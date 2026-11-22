@@ -36,7 +36,9 @@ public sealed partial class OnboardingViewModel : ObservableObject
         ["he"] = "akuo",
         ["ar"] = "lvpfh",
         ["ka"] = "gamarjoba",
-        ["ko"] = "dkssud"
+        ["ko"] = "dkssud",
+        // ր sits on the 8 key of Windows Armenian Phonetic (բարև).
+        ["hy"] = "ba8ev"
     };
 
     // With Latin layouts only there is no other layout to cross into; a typo shows the same key at work.

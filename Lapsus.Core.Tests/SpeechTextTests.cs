@@ -95,6 +95,17 @@ public class SpeechTextTests
         Assert.Equal("Lapsus.", SpeechPromptBuilder.Build("tr", ["Lapsus"]));
     }
 
+    [Theory]
+    [InlineData("ko")]
+    [InlineData("hy")]
+    public void Korean_and_Armenian_have_a_mixed_english_sample(string language)
+    {
+        var sample = SpeechPromptBuilder.SampleFor(language);
+        Assert.False(string.IsNullOrWhiteSpace(sample));
+        Assert.Contains("pull request", sample, StringComparison.Ordinal);
+        Assert.Contains("GitHub", sample, StringComparison.Ordinal);
+    }
+
     [Fact]
     public void Detection_chooses_only_among_the_user_languages_main_first()
     {

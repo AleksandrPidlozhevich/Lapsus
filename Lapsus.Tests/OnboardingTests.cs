@@ -20,6 +20,7 @@ public sealed class OnboardingTests
     [InlineData("dsnfyyz", "en", "uk")]
     [InlineData("ghbdtn", "en", "ru", "uk")]
     [InlineData("dkssud", null, "en", "ko")]
+    [InlineData("ba8ev", "en", "hy")]
     [InlineData("helo", "en", "de")]
     [InlineData("helo")]
     public void The_field_to_try_asks_for_keys_that_spell_a_word_on_the_users_own_layout(
