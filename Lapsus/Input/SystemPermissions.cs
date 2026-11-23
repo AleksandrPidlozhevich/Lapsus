@@ -46,8 +46,11 @@ internal static class SystemPermissions
     // opens at the list instead. The request can wait on the system, so it stays off the UI thread.
     public static void Request(PermissionKind kind)
     {
-        if (OperatingSystem.IsMacOS())
-            Task.Run(() => RequestOnMac(kind));
+        Task.Run(() =>
+        {
+            if (OperatingSystem.IsMacOS())
+                RequestOnMac(kind);
+        });
     }
 
     [SupportedOSPlatform("macos")]
