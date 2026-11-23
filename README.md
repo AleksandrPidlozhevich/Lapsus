@@ -48,8 +48,8 @@ Press one hotkey — the line is fixed in place. No retyping, no waiting for the
 
 Also on [getlapsus.com](https://getlapsus.com/) and the [latest release](https://github.com/AleksandrPidlozhevich/Lapsus/releases/latest).
 
-- **Windows** — `Setup.exe` installs per-user (no admin). If SmartScreen warns, *More info* → *Run anyway*. Portable `.zip` needs no installer. MSI is for IT ([msiexec notes](#msi-for-it)).
-- **macOS** — Apple silicon `.dmg`. Grant **Accessibility** and **Input Monitoring** on first run.
+- **Windows** — `Setup.exe` installs per-user (no admin). Not code-signed, so SmartScreen may warn — *More info* → *Run anyway*. Portable `.zip` needs no installer. MSI is for IT ([msiexec notes](#msi-for-it)).
+- **macOS** — Apple silicon `.dmg`, notarized by Apple. Grant **Accessibility** and **Input Monitoring** on first run.
 
 Updates come from the tray menu. Nothing else to install.
 
